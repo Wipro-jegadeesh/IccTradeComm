@@ -222,7 +222,7 @@ rejectQustionTwo = {
     this.smeBiddingServices.getBiddingDetails(this.id).subscribe(resp => {
       console.log(resp,"resp")
       if(resp){
-        this.smeBiddingServices.getInvoiceGoodsDetails(resp[0].id).subscribe(resp => {
+        this.smeBiddingServices.getInvoiceGoodsDetails(resp[0] && resp[0].invoiceId).subscribe(resp => {
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails)
           this.dataSourceInvoiceDetails = new MatTableDataSource([
             { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status ,'smeId' : resp.smeId}
@@ -322,7 +322,7 @@ rejectQustionTwo = {
       this.smeBiddingServices.saveFinBid(element).subscribe(resp => {
         console.log(resp,"resp")
         if(resp){
-          this.smeBiddingServices.updateFinBid(resp.id).subscribe(resp => {
+          this.smeBiddingServices.updateFinBid(data.filteredData[0].id).subscribe(resp => {
           })
           this.toastr.success("Accepted successfully")
         this.modalRef.hide()
