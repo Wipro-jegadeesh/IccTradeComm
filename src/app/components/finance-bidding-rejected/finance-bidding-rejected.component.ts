@@ -8,7 +8,8 @@ import { FinanceBiddingRejectedServices } from './finance-bidding-rejected-servi
 import { FinanceBiddingService } from '../../service/finance_bidding/finance-bidding.service';
 import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Options } from '@angular-slider/ngx-slider';
+import { Options,LabelType } from '@angular-slider/ngx-slider';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-finance-bidding-rejected',
@@ -53,6 +54,7 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   isOpen = '';
   bidpanelOpenState = false;
   id = ""
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   dashboardTooltip = FINANCIERDASHBOARDCONSTANTS;
@@ -64,7 +66,17 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   highValue: number = 60;
   options: Options = {
     floor: 0,
-    ceil: 100
+    ceil: 100,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
   };
   rejectQustionOne = {
     subrejectQustionOne: [
@@ -90,6 +102,8 @@ rejectQustionTwo = {
     this.FinanceBiddingRejectedServices.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
     })
   }
  
