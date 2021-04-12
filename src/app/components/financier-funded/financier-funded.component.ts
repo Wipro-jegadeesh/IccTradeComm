@@ -25,6 +25,8 @@ import { ThemePalette } from '@angular/material/core';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { FinancierFundedServices } from './financier-funded-service'
 import * as moment from 'moment';
+import { MatPaginator } from '@angular/material/paginator';
+import { Options,LabelType } from '@angular-slider/ngx-slider';
 
 // const ELEMENT_DATA: any[] = [
 //   {
@@ -104,7 +106,32 @@ export class FinancierFundedComponent implements OnInit {
     'baseCcyNetAmtPayable', 'annualYeild' ]
   // ['financierRef', 'financier', 'invoiceAmt',  'marginPercent',   'financierAmt',   'discRate', 'discAmt',  'netAmtDisc',    'fundedAmt', 'fxRate', 'dateOfFunding', 'tenorDays', 
   //   'dueDate', 'paymentDate', 'relInvRef',  'relBidRef'];
-
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
 
   isOpen = ""
   mobileScreen = false;
@@ -119,9 +146,11 @@ export class FinancierFundedComponent implements OnInit {
   bidpanelOpenState = false;
   moment: any = moment;
 
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
+   filterDivOpen: boolean;
+   searchDivOpen: boolean;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -183,6 +212,8 @@ export class FinancierFundedComponent implements OnInit {
 
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
     })
 
 
@@ -191,7 +222,25 @@ export class FinancierFundedComponent implements OnInit {
     
 
   }
-
+  SearchAPI(){
+    console.log(this.SearchModel,"SearchModel")
+  }
+  searchDiv(){
+    if(this.filterDivOpen === true){
+    this.searchDivOpen = !this.searchDivOpen
+    this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv(){
+    if(this.searchDivOpen === true){
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =

@@ -921,5 +921,39 @@ input.custom-autofill {
                 background-color:white;
                 padding-left: 20px!important;
             }
+            .mat-form-field-infix{
+                font-size: small;
+            }
         }
     }
+    .custom-slider {
+        width: 100% !important;
+        .ngx-slider {
+             .ngx-slider-pointer{
+                cursor: pointer;
+                width: 13px;
+                height: 13px;
+                top: -5px;
+                background-color:#664dcd!important;
+                z-index: 3;
+                border-radius: 16px;
+                &::after{
+                    content: '';
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        border-radius: 4px;
+        background:#664dcd!important;
+                }
+             }
+             .ngx-slider-bubble{
+                font-size: 14px; 
+           }
+           .ngx-slider-selection{
+            background: #664dcd !important; 
+           }
+        }
+        
+      }

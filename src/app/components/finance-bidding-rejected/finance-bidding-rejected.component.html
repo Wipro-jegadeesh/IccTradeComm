@@ -82,45 +82,49 @@
               <div *ngIf="searchDivOpen">
                 <mat-form-field>
                   <mat-label>bidid</mat-label>
-                  <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
+                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
                     search
-                    </span>
+                    </span> -->
                   <input type="text" matInput />
                 </mat-form-field>
                 </div>
              </th>
           </ng-container>
           <ng-container matColumnDef="Invoice Amount1">
-            <th mat-header-cell *matHeaderCellDef> 
+            <th [ngClass]="{'class1':searchDivOpen,'class2': filterDivOpen }"mat-header-cell *matHeaderCellDef> 
               <div *ngIf="searchDivOpen">
                 <mat-form-field >
                   <mat-label>Invoice Amount</mat-label>
-                  <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
+                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
                     search
-                    </span>
+                    </span> -->
                   <input type="text" matInput  />
                 </mat-form-field>
                 </div>
                 <div *ngIf="filterDivOpen">
                   <label>InvoiceAmount</label>
+                  <div class="custom-slider">
                   <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                </div>
                 </div>
              </th>
           </ng-container>
           <ng-container matColumnDef="BIDing Amount1">
-            <th mat-header-cell *matHeaderCellDef> 
+            <th [ngClass]="{'class1':searchDivOpen,'class2': filterDivOpen }" mat-header-cell *matHeaderCellDef> 
               <div *ngIf="searchDivOpen">
                 <mat-form-field>
                   <mat-label>Biding Amount</mat-label>
-                  <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
+                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
                     search
-                    </span>
+                    </span> -->
                   <input type="text" matInput />
                 </mat-form-field>
                 </div>
-                <div *ngIf="filterDivOpen">
+                <div *ngIf="filterDivOpen" >
                   <label>Biding Amount</label>
-                  <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                  <div class="custom-slider">
+                    <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                  </div>
                 </div>
              </th>
           </ng-container>
@@ -129,9 +133,9 @@
               <div *ngIf="searchDivOpen">
                 <mat-form-field>
                   <mat-label>offer Expires</mat-label>
-                  <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
+                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
                     search
-                    </span>
+                    </span> -->
                   <input type="text" matInput  />
                 </mat-form-field>
                 </div>
@@ -147,12 +151,16 @@
           </ng-container>
           <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef> 
-                <div *ngIf="filterDivOpen">
-                  <button mat-raised-button color="accent" (click)="openModalsecond($event,Rejecttemplate,'')">
+                <div>
+                  <button *ngIf="filterDivOpen" mat-raised-button style="color: #5e52a1;" >
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Apply
                   </button>&nbsp;
-                  <button mat-raised-button color="accent" (click)="openModalsecond($event,Rejecttemplate,'')">
+                  <button *ngIf="searchDivOpen" mat-raised-button style="color: #5e52a1;">
+                    <mat-icon #tooltip="matTooltip"
+                    matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                  </button>&nbsp;
+                  <button *ngIf="searchDivOpen || filterDivOpen" mat-raised-button style="color: #5e52a1;">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                   </button>

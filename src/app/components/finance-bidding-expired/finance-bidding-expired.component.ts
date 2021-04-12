@@ -24,6 +24,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import {FinanceBiddingExpiryServices} from './finance-bidding-expiry-service' 
 import {FinanceBiddingService} from '../../service/finance_bidding/finance-bidding.service';
 import { FINANCIERDASHBOARDCONSTANTS} from '../../shared/constants/constants';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -49,6 +50,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     'action'
   ]
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   modalRef: BsModalRef;
   isHover: boolean = false;
@@ -66,7 +68,8 @@ export class FinanceBiddingExpiredComponent implements OnInit {
       
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
-     
+      this.dataSource.paginator = this.paginator
+
      
     })
 
