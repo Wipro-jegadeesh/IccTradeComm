@@ -1,0 +1,9 @@
+<div class="card-form-container">
+    <div class="dynamic-radio-btn file-input" #tooltip="matTooltip"
+    matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
+      <h6>{{questionDatas && questionDatas.label}}</h6>
+        <!-- <mat-file-upload></mat-file-upload> -->
+        <input type="file" class="dynamic-file-upload form" (change)="onChange($event)"
+        accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf,.csv" />
+    </div>
+</div>

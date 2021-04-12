@@ -1,0 +1,20 @@
+<div class="card-form-container"  >
+    <label>Label</label>
+    <div class="dynamicForm-textarea">
+        <mat-form-field>
+            <mat-label>{{questionDatas && questionDatas.label}}</mat-label>
+            <textarea matInput
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="5" (change)="onChange($event)" [(ngModel)]="textAreaValue"
+                      ></textarea>
+          </mat-form-field>
+
+          <!-- <mat-form-field>
+            <mat-label>Label</mat-label>
+
+            <textarea matInput  placeholder="Label" name="questionText" cols="35" (change)="onChange($event)" rows="8" [(ngModel)]="textAreaValue" ></textarea>
+               </mat-form-field> -->
+    </div>
+  </div>

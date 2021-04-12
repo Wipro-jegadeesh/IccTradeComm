@@ -1,0 +1,19 @@
+<div class="card-form-container" >
+    <div class="dynamic-radio-btn" >
+      <h6>{{questionDatas && questionDatas.label}}</h6>
+        <!-- <label id="example-radio-group-label">{{questionDatas && questionDatas.label}}</label> -->
+        <mat-radio-group #tooltip="matTooltip" 
+        matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'"
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group form"
+          [(ngModel)]="radioChecked" (change)="radioChange($event)"
+        >
+          <mat-radio-button class="example-radio-button" style="padding-right:14px" value="true">
+            Yes
+          </mat-radio-button>
+          <mat-radio-button class="example-radio-button" style="padding-right:14px" value="false">
+            No
+          </mat-radio-button>
+        </mat-radio-group>
+    </div>
+</div>

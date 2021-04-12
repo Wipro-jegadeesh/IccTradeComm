@@ -1,0 +1,574 @@
+<!-- <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated">
+  <button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="uxg-logo" dense></div>
+  <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
+    <button mat-icon-button color="accent" class="uxg-breadcrumb-back">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <li class="uxg-h6">New Invoice Entry</li>
+    <li class="curs-pointer" (click)="goHome()">Home</li>
+  </ul>
+  <span class="fill-remaining-space"></span>
+  <div class="uxg-toolbar-actions">
+    <button mat-icon-button color="neutral">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-icon-button color="neutral">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button color="neutral">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+    <button mat-icon-button color="neutral">
+      <mat-icon>apps</mat-icon>
+    </button>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="menuHero">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button class="uxg-toolbar-icon-menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #menuHero="matMenu" class="uxg-user-profile s">
+  <div class="uxg-menu-header">
+    <div class="uxg-avatar-hero-block">
+      <div class="uxg-avatar">U</div>
+      <h6 class="uxg-h6">User</h6>
+      <span class="uxg-caption"></span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="uxg-menu-footer">
+    <button mat-flat-button color="primary" dense (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Logout
+    </button>
+    <button mat-button color="primary" dense>
+      View profile
+    </button>
+  </div>
+</mat-menu>
+<mat-sidenav #sidenav mode="over">
+  <div class="uxg-nav-header">
+    <mat-card class="uxg-card-product" extra-dense>
+      <span class="uxg-h5 uxg-card-product-name">PRO</span>
+    </mat-card>
+  </div>
+  <mat-nav-list class="uxg-nav-list">
+    <a mat-list-item class="uxg-list-item-selected">
+      <mat-icon mat-list-icon>home</mat-icon>
+      <p>Home</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">Applications</p>
+      <mat-icon>chevron_right</mat-icon>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>notifications</mat-icon>
+      <p>Notifications</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>extension</mat-icon>
+      <p>Tools</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>settings</mat-icon>
+      <p>Settings</p>
+    </a>
+    <mat-divider></mat-divider>
+  </mat-nav-list>
+  <mat-nav-list class="uxg-link-list">
+    <a mat-list-item>
+      <mat-icon mat-list-icon>help</mat-icon>
+      <p>Help</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>power_settings_new</mat-icon>
+      <p>Sign out</p>
+    </a>
+  </mat-nav-list>
+</mat-sidenav> -->
+
+
+<div class="app-content {{isOpen}} ">
+  <header>
+    <div class="data-section">
+      <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
+      <mat-card>
+        <mat-card-content>
+          <table  class="table-responsive inv-table">
+            <tbody>
+            
+              <tr>
+                <!-- <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Invoice Reference Number</mat-label>
+                    <input (input)="tcode=$event.target.value" type="text" matInput value="" />
+           <mat-hint>Please enter Invoice Reference Number</mat-hint>
+                  </mat-form-field>
+                </td> -->
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Invoice No</mat-label>
+                    <input type="text" matInput formControlName="invId" (keyup)="updateInvoiceId($event)"/>
+                    <!-- <mat-hint>Please enter Invoice ID</mat-hint> -->
+                  </mat-form-field>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <!-- <span class="col-md-6 invoice_amt_field">
+                  <mat-form-field dense class=" field1">
+                    <mat-label>Invoice Amount</mat-label>
+                    <input type="text" matInput value="" formControlName="invAmt"/>
+                    <mat-hint>Please enter the Invoice Amount</mat-hint>
+                  </mat-form-field>
+                </span>
+                <span class="col-md-6  multiselect-dropdown" >
+                  <ng-multiselect-dropdown
+                      [placeholder]="'Currency'"
+                      [settings]="dropdownSettings"
+                      [data]="currencyDropdownList"
+                      formControlName="currency"
+                      (onSelect)="onItemSelect($event)"
+                      class="invoice_amt_field" >
+                  </ng-multiselect-dropdown>
+                </span> -->
+                <!-- <div class="row col-md-12">
+                  <div class="col-md-6">
+                <mat-form-field dense class="spilt-input" >
+                  <mat-label>Funding Request Amount</mat-label>
+                  <input type="number" matInput value="" autocomplete="on" formControlName="invAmt"/>
+                <mat-hint>Please enter the Invoice Amount</mat-hint> 
+                </mat-form-field>
+              </div>
+              <div class="col-md-6" style="margin-left:-25px">
+                <mat-form-field dense class="select-split-input">
+                  <mat-label>Currency</mat-label>
+                  <select matNativeControl [disabled]="disableSelect.value" formControlName="invCcy" (change)="updateCurrency($event)">
+                    <option value=""></option>
+                    <option value="SGD">SGD</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                    <option value="EUR">EUR</option>
+                    <option value="JPY">JPY</option>
+                  </select>
+                </mat-form-field>
+            <form class="example-form">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Number</mat-label>
+                    <input type="text"
+                           placeholder="Pick one"
+                           aria-label="Number"
+                           matInput
+                           [formControl]="myControl"
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form> 
+                </div>
+              </div> -->
+
+<table class="fun-table">
+  <tr>
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="spilt-input" >
+        <mat-label>Funding Request Amount</mat-label>
+        <input type="number" matInput value="" autocomplete="on" formControlName="invAmt"/>
+        <!-- <mat-hint>Please enter the Invoice Amount</mat-hint> -->
+      </mat-form-field>
+    </td>
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="select-split-input">
+        <mat-label>Currency</mat-label>
+        <select matNativeControl [disabled]="disableSelect.value" formControlName="invCcy" (change)="updateCurrency($event)">
+          <option value=""></option>
+          <option value="SGD">SGD</option>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+        </select>
+      </mat-form-field>
+    </td>
+  </tr>
+</table>
+                </td>
+                <!-- formControlName="currency" -->
+
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Buyer Name</mat-label>
+                    <input type="text" matInput value="" formControlName="buyerName"/>
+                    <!-- <mat-hint>Please enter Buyer Name</mat-hint> -->
+                  </mat-form-field>
+                </td>
+               
+              </tr>
+              <tr>
+                  
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Funding Request Date</mat-label>
+                    <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate" (dateInput)="updateInvoicedate($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Funding Request Due Date</mat-label>
+                    <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" />
+                    <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                    <mat-datepicker #pickers></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Buyer Location</mat-label>
+                    <input type="text" matInput value="" formControlName="buyerAddr" />
+                    <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
+                  </mat-form-field>
+                </td>
+                
+              </tr>
+              <tr>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <!-- <mat-icon dense color="primary" matPrefix>person_outline</mat-icon> -->
+                    <mat-label>BL/Roadway Bill No</mat-label>
+                    <input type="text" matInput value="" formControlName="billNo" />
+                    <!-- <mat-hint>Please enter the BL/Roadway Bill No</mat-hint> -->
+                    <mat-icon class="info_icon" matSuffix  #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.billInfo}}"
+                    [matTooltipPosition]="'below'">info</mat-icon>
+                  </mat-form-field>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>Date of Dispatch</mat-label>
+                    <input readonly="true" matInput [matDatepicker]="picker1" formControlName="dispDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </td>
+              </tr>
+           
+            </tbody>
+          </table>
+          <!-- <mat-card-actions class="ebtn">
+            <span class="fill-remaining-space"></span>
+            <button mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+            matTooltip="{{fundingTooltip.addGoods}}"
+            [matTooltipPosition]="tooltipPosition">
+              Add Goods 
+            </button>
+          </mat-card-actions> -->
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+          <mat-card-content>
+            <div id="container">
+              <span class="uxg-h6" id=grid>Goods Details </span>
+              <div class="mat-elevation-z8">
+                <form [formGroup]="invoiceForm">
+                 <table  class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;" formArrayName="goodsDetails">
+                  <ng-container matColumnDef="ID" >
+                    <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.id}}"
+                    [matTooltipPosition]="tooltipPosition"> ID</th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="text" 
+                      formControlName="ID" 
+                      placeholder="ID" 
+                      readonly
+                      value="{{invoiceID}}"
+                      >
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="DescGoods">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.desc}}"
+                    [matTooltipPosition]="tooltipPosition">Description of Goods</th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="desc-goods">
+                      <input matInput 
+                      type="text" 
+                      formControlName="descGoods" 
+                      placeholder="Description of Goods" 
+                      required>
+                    </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="IdNo">
+                    <th mat-header-cell *matHeaderCellDef scope="column">ID No</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      formControlName="idNo" 
+                      placeholder="ID No" 
+                      required>
+                    </td>
+                  </ng-container> -->
+
+                  <!-- <ng-container matColumnDef="DateOfInvoice">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.invoiceDate}}"
+                    [matTooltipPosition]="tooltipPosition">Date Of Invoice</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      formControlName="dateOfInvoice" 
+                      placeholder="Date of Invoice" 
+                      readonly>
+                    </td>
+                  </ng-container> -->
+
+                  <ng-container matColumnDef="Quantity">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.quantity}}"
+                    [matTooltipPosition]="tooltipPosition">Quantity</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                   
+                     <input matInput 
+                     min="0"
+                      type="number" 
+                      formControlName="quantity" 
+                      placeholder="Quantity" 
+                      required (keyup)="changeRowgrid(index)">
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Rate">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.rate}}"
+                    [matTooltipPosition]="tooltipPosition">Rate %</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      min="0"
+                      type="number" 
+                      formControlName="rate" 
+                      placeholder="Rate" 
+                      required (keyup)="changeRowgrid(index)">
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Amt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.amount}}"
+                    [matTooltipPosition]="tooltipPosition">Amount</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="number" 
+                      formControlName="amt" 
+                      placeholder="Amount" 
+                      value="{{element.amt}}"
+                      required readonly>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Ccy">
+                    <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.ccy}}"
+                    [matTooltipPosition]="tooltipPosition">Ccy</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="text" 
+                      formControlName="amtCcy" 
+                      placeholder="CCY" 
+                      readonly
+                      value="{{currencyName}}"
+                      required >
+                      <!-- {{"SGD"}} -->
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="DiscAmt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.discAmount}}"
+                    [matTooltipPosition]="tooltipPosition">Disc Amount</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      min="0"
+                      type="number" 
+                      formControlName="discAmt" 
+                      placeholder="Disc Amount" 
+                       required (keyup)="changeRowgrid(index)">
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="NetAmtPay">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.netAmount}}"
+                    [matTooltipPosition]="tooltipPosition">Net Amount</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="number" 
+                      formControlName="netAmtPay" 
+                      placeholder="Net Amount" 
+                      required readonly>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="TaxRate">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.taxRate}}"
+                    [matTooltipPosition]="tooltipPosition">Tax Rate %</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      min="0"
+                      type="number" 
+                      formControlName="taxRate" 
+                      placeholder="Tax Rate" 
+                      required  (keyup)="changeRowgrid(index)"
+                      >
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="TaxAmount">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.taxAmount}}"
+                    [matTooltipPosition]="tooltipPosition">Tax Amount</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="number" 
+                      formControlName="taxAmt" 
+                      placeholder="Tax Amount" 
+                      required readonly>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Total">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.total}}"
+                    [matTooltipPosition]="tooltipPosition">Total 
+                    <span *ngIf="!UpdateInvoiceLable" class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.addGoods}}" [matTooltipPosition]="tooltipPosition">+</span> </th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                      <input matInput 
+                      type="number" 
+                      formControlName="total" 
+                      placeholder="Total" 
+                      required readonly>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+              
+              </table>
+            </form>
+              </div>
+            </div>
+            <mat-card-actions class="ebtn">
+              <span class="fill-remaining-space"></span>
+              <button  mat-flat-button color="primary"id=grid #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.saveGoods}}"
+              [matTooltipPosition]="tooltipPosition">
+                <div *ngIf="!UpdateInvoiceLable">
+                  Add Invoice
+                </div>
+                <div *ngIf="UpdateInvoiceLable">
+                  Update Invoice
+                </div>
+              </button>
+            </mat-card-actions>
+          </mat-card-content>
+      
+      </mat-card>
+    </form>
+
+      <div id="container">
+        <span class="uxg-h6" id=grid>Invoice Details </span>
+        <div class="mat-elevation-z8">
+          <table class="table-responsive inv-detail-table" mat-table matSort [dataSource]="dataSource" summary="table of APIs" style="width: 100%;">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.select}}" [matTooltipPosition]="tooltipPosition"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" color="primary">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)" color="primary">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="StatusCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column">Ref No </th>
+              <td mat-cell *matCellDef="let element">{{element.invId}}</td>
+            </ng-container> -->
+            <ng-container matColumnDef="DateTime">
+              <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.invoiceNumber}}"
+              [matTooltipPosition]="tooltipPosition">Invoice No</th>
+              
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list>
+                  <mat-chip color="primary" selected (click)="UpdateInvoice(element)">{{element.invId}} </mat-chip>
+              </mat-chip-list>
+              </td>
+            </ng-container>
+            <mat-checkbox name="box"></mat-checkbox>
+            <ng-container matColumnDef="InvoiceRefNo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.refno}}" [matTooltipPosition]="tooltipPosition">Invoice Ref No</th>
+              <td mat-cell *matCellDef="let element">{{element.invoiceDetailsSequenceNumber && element.invoiceDetailsSequenceNumber.invoice_ref}}</td>
+            </ng-container>
+            <ng-container matColumnDef="DateOfInvoice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.invoiceCreateDate}}" [matTooltipPosition]="tooltipPosition">Invoice Date</th>
+              <td mat-cell *matCellDef="let element">{{element.invDate  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Seller">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.seller}}" [matTooltipPosition]="tooltipPosition">Seller</th>
+              <td mat-cell *matCellDef="let element">{{element.smeId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="buyerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.buyer}}" [matTooltipPosition]="tooltipPosition">Buyer</th>
+              <td mat-cell *matCellDef="let element">{{element.buyerName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="InvoiceAmount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.invoiceAmount}}" [matTooltipPosition]="tooltipPosition">Invoice Amount </th>
+              <td mat-cell *matCellDef="let element">{{ element.invAmt }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Ccy">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" >Ccy </th>
+              <td mat-cell *matCellDef="let element">{{ element.invCcy }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+              matTooltip="{{fundingTooltip.status}}" [matTooltipPosition]="tooltipPosition">Status </th>
+              <td mat-cell *matCellDef="let element" style="color: green;">
+               <mat-icon>exit_to_app</mat-icon><span style="float: left;">&nbsp;Initiated</span></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+          </table>
+        </div>
+      </div>
+      <mat-card-actions class="ebtn">
+        <span class="fill-remaining-space"></span>
+        <button mat-flat-button color="primary" #tooltip="matTooltip"
+        matTooltip="{{fundingTooltip.submit}}" [matTooltipPosition]="tooltipPosition" disabled>
+          Submit
+        </button>
+        <!-- <button mat-flat-button color="primary" #tooltip="matTooltip"
+        matTooltip="{{fundingTooltip.pendingInvoice}}" [matTooltipPosition]="tooltipPosition">
+          Pend
+        </button> -->
+        <button mat-flat-button color="primary" (click)="authoriseInvoice()" #tooltip="matTooltip"
+        matTooltip="{{fundingTooltip.invoiceAuthorise}}" [matTooltipPosition]="tooltipPosition">
+          Authorise
+        </button>
+      </mat-card-actions>
+    </div>
+  </header>
+</div>

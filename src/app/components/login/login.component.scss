@@ -1,0 +1,146 @@
+@import "@ffdc/uxg-angular-theme/lib/core/style/spacing";
+
+a {
+  text-decoration: none;
+}
+
+.uxg-login-page {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+
+  .uxg-illustration-container {
+    display: none;
+  }
+}
+
+.uxg-login-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px + (2 * $uxg-spacing-5);
+  min-width: 220px;
+  width: 80vw;
+  height: 100%;
+  align-items: flex-start;
+  padding: $uxg-spacing-2 $uxg-spacing-5 $uxg-spacing-5;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.alert {
+  color: red;
+}
+
+.uxg-logo {
+  margin-bottom: $uxg-spacing-1 * 15;
+}
+
+.uxg-product-name {
+  margin-bottom: $uxg-spacing-1;
+}
+
+.uxg-corporate-name {
+  margin-top: $uxg-spacing-0;
+  margin-bottom: $uxg-spacing-5 * 2;
+  margin-left: $uxg-spacing-2 * 12;
+}
+
+mat-form-field {
+  align-self: stretch;
+  margin-bottom: $uxg-spacing-5;
+}
+
+// To remove when filled input are ready
+mat-icon[matPrefix] {
+  // opacity: 0.5;
+  padding-bottom: 13px;
+  padding-right: 8px;
+}
+
+.mat-flat-button {
+  align-self: stretch;
+  margin-top: $uxg-spacing-3;
+  margin-bottom: $uxg-spacing-3;
+}
+
+.login-actions {
+  align-self: center;
+
+  .mat-checkbox {
+    margin-right: $uxg-spacing-3;
+  }
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.login-footer {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  flex-direction: row;
+  margin-top: $uxg-spacing-5;
+  bottom: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .uxg-login-page {
+    grid-template-columns: 1fr 1.2fr;
+    .uxg-illustration-container {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('/assets/img/TradeCom-Image.jfif');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: right top;
+    }
+  }
+}
+@media only screen and (max-width: 550px)
+{
+.uxg-login-container
+{
+ width: 100vw;
+}
+}
+
+@media only screen and (max-width: 1030px)
+{
+.uxg-illustration-container{
+   background-size: contain!important;
+   background-position: center!important;}
+}
+
+
+@media only screen and (max-width: 770) and (min-width: 600)
+{
+.uxg-login-container
+{
+ width: 48vw!important;
+}
+}
+
+@media only screen and (max-width: 550px)
+{
+.uxg-login-container
+{
+ width: 100vw!important;
+}
+}
+
+@media only screen and (max-width: 1030px)
+{
+.uxg-illustration-container{
+   background-size: contain;
+   background-position: center;}
+}
