@@ -356,8 +356,8 @@ chartColors = [
     borderColor: "rgba(0, 10, 130, .7)",
     },
 {
-backgroundColor: "rgba(0, 137, 132, .3)",
-borderColor: "rgba(0, 10, 130, .7)",
+backgroundColor: "#2ca92c",
+borderColor:  "green",
 },
 {
   backgroundColor: "rgba(0, 137, 132, .3)",
