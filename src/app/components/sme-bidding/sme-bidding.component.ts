@@ -225,7 +225,7 @@ export class SmeBiddingComponent implements OnInit {
        this.dataSourceTwo = new MatTableDataSource(resp);
        this.bidDetails = resp;
       }) 
-      this.smeBiddingServices.getInvoiceGoodsDetails(element.id).subscribe(resp => {
+      this.smeBiddingServices.getInvoiceGoodsDetails(element.invoiceId).subscribe(resp => {
         this.dataSourceOne = new MatTableDataSource(resp.goodsDetails)
         this.dataSourceInvoiceDetails = new MatTableDataSource([
           { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status ,'smeId' : resp.smeId}

@@ -180,7 +180,7 @@ export class IccFinanceTodayComponent implements OnInit {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
    
-    this.IccFinanceTodayServices.getInvoiceRequestLists(data.INV_ID).subscribe(resp => {
+    this.IccFinanceTodayServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
       let status = "";
       if (resp.status == "I") {
         status = "Initiated"
@@ -208,7 +208,7 @@ export class IccFinanceTodayComponent implements OnInit {
     // this.dataSourceThree = new MatTableDataSource([
     //   {'financeOfferAmt' : 'financeOfferAmt', 'ccy' : 'ccy', 'fxRate' : 'fxRate', 'margin' : 'margin', 'netAmtDisc' : 'netAmtDisc','discAmt' : 'discAmt','discRate' : 'discRate','offerExpPeriod' : 'offerExpPeriod'}]);
 
-    this.IccFinanceTodayServices.getFinanceBiddingLists(data.INV_ID).subscribe(resp => {
+    this.IccFinanceTodayServices.getFinanceBiddingLists(data.invoiceId).subscribe(resp => {
       if(resp){
         this.dataSourceThree = new MatTableDataSource(resp);
       }
