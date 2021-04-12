@@ -1,0 +1,214 @@
+$icon-width: 24px;
+$icon-height: 24px;
+$icon-path: url(../assets/images/sprite-image.svg);
+$icon-display: inline-block;
+$icon-size: 490px 4210px;
+//424px 4210px;
+$i-position: -60px;
+$arrow-icon: url(../assets/images/down.svg);
+$attachment-size: 960px 6147px;
+
+
+.icon {
+    width: $icon-width;
+    height: $icon-height;
+    background-image: $icon-path;
+    display: $icon-display;
+    background-size: $icon-size;
+    cursor: pointer;
+    background-repeat: repeat;
+}
+
+.icon-lg {
+    width: $icon-width + 10;
+    height: $icon-height + 10;
+    background-image: $icon-path;
+    display: $icon-display;
+    background-size: $icon-size;
+    cursor: pointer
+}
+
+.icon-sort {
+    width: $icon-width + -6;
+    height: $icon-width + -6;
+    background-image: $icon-path;
+    display: $icon-display;
+    background-size: $icon-size;
+    cursor: pointer
+}
+
+.icon-max {
+    width: $icon-width + 4;
+    height: $icon-width + 4;
+    background-image: $icon-path;
+    display: $icon-display;
+    background-size: $icon-size;
+    cursor: pointer
+}
+
+.icon-bar{
+    background-position: $i-position*1-11 $i-position*5-27; 
+}
+.icon-message{
+    background-position: $i-position*1-11 $i-position*6-29; 
+}
+.icon-bell{
+    background-position: $i-position*1-7 $i-position*8+19; 
+}
+.icon-profile{
+    background-position: $i-position*1-14 $i-position*9-1; 
+}
+.icon-search{
+    background-position: $i-position*1-11 $i-position*35-49; 
+    // -71px -2149px 2519
+}
+
+.icon-dashboard{
+    background-position: $i-position*1-7 $i-position*10-19; 
+}
+.icon-user{
+    background-position: $i-position*1-11 $i-position*11-23; 
+}
+.icon-product{
+    //background-position: $i-position*1-11 $i-position*12-28; 
+    background-position: $i-position*1-9 $i-position*16+19;
+}
+.icon-report{
+    background-position: $i-position*7-2 $i-position*8+8; 
+}
+.icon-chat{
+    background-position: $i-position*1-8 $i-position*16-45; 
+}
+.icon-purchase{
+    background-position: $i-position*1-9 $i-position*13-32; 
+}
+.icon-feedback{
+    background-position: $i-position*1-9 $i-position*18+9; 
+}
+.icon-contact{
+    background-position: $i-position*1-11 $i-position*12-27; 
+}
+.icon-order{
+    background-position: $i-position*1-8 $i-position*15+24; 
+}
+.icon-master{
+    background-position: $i-position*7-4 $i-position*9+9;
+}
+.icon-dashboard-hover{
+    background-position: $i-position*1-7 $i-position*19 + 5; 
+}
+.icon-user-hover{
+    background-position: $i-position*1-11 $i-position*20 + 1;  
+}
+.icon-product-hover{
+    background-position: $i-position*1-9 $i-position*24 - 17; 
+}
+.icon-report-hover{
+    background-position: $i-position*7-2 $i-position*10-2;
+}
+.icon-chathistory-hover{
+    background-position: $i-position*1-8 $i-position*25-21; 
+}
+.icon-purchase-hover{
+    background-position: $i-position*1-9 $i-position*22-8; 
+}
+.icon-feedback-hover{
+    background-position: $i-position*1-9 $i-position*26-27; 
+}
+.icon-contact-hover{
+    background-position: $i-position*1-11 $i-position*21 - 3; 
+}
+.icon-orders-hover{
+    background-position: $i-position*1-8 $i-position*23-12; 
+}
+.icon-master-hover{
+    background-position: $i-position*7-4 $i-position*11-1;
+}
+.icon-tryon{
+    background-position: $i-position*7-3 $i-position*12-2;
+}
+.icon-tryon-hover{
+    background-position: $i-position*7-3 $i-position*13-3;
+
+}
+.icon-upload{
+    background-position: $i-position*7-3 $i-position*14-5;
+}
+.icon-bulk-hover{
+    background-position: $i-position*7-3 $i-position*15-6;
+
+}
+.icon-notification{
+    background-position: $i-position*7-3 $i-position*16-7;
+}
+.icon-notification-hover{
+    background-position: $i-position*7-3 $i-position*17-8;
+
+}
+
+.icon-arrow-down{
+    background-position: $i-position*1 $i-position*38+17; 
+}
+.icon-logout{
+    background-position: $i-position*1-16 $i-position*29-20; 
+}
+
+.icon-delete{
+    background-position: $i-position*1-11 $i-position*42+1; 
+}
+.icon-edit{
+    background-position: $i-position*1-11 $i-position*40-43; 
+}
+.icon-view{
+    background-position: $i-position*1-11 $i-position*39-38; 
+}
+.icon-plus{
+    background-position: $i-position*1-10 $i-position*38-39; 
+}
+.icon-filter{
+    background-position: $i-position*1-4 ($i-position*37)+15; 
+        
+}
+
+.icon-sender{
+    background-position: $i-position*1+11 $i-position*68; 
+    width: 45px;
+    height: 40px;
+}
+.icon-paper{
+    background-position: $i-position*1+10 $i-position*67+5; 
+}
+.icon-sm{
+    background-size: $attachment-size ;
+    width: $icon-width;
+    height: $icon-height;
+    background-image: $icon-path;
+    display: $icon-display;
+    cursor: pointer;
+    background-repeat: repeat;
+    vertical-align: middle;
+}
+.icon-file{
+    background-position: $i-position*12-30 $i-position*2+12;
+    // background-position: -750px -106px;
+    
+    
+
+}
+.icon-image{
+    background-position: $i-position*12-37 $i-position*3-9; 
+
+}
+// .icon-image{
+//     background-position: $i-position*12-30 $i-position*67+5; 
+// }
+.icon-record{
+    background-position: $i-position*12-34 $i-position*7-19; 
+}
+.icon-stop{
+    background-position: $i-position*12-33 $i-position*6+3; 
+}
+.icon-play{
+    background-position: $i-position*12-30 $i-position*4-32;
+}
+

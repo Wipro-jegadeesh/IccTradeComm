@@ -1,0 +1,89 @@
+<mat-toolbar class=" uxg-toolbar-elevated ">
+  <!-- <div class="uxg-logo" dense></div> -->
+  <!-- <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
+    <li class="uxg-h3">SME ONBOARDING</li>
+  </ul> -->
+</mat-toolbar>
+
+<div class="row col-md-12 col-12">
+  <div class="col-md-3 col-3 ques-sec" >
+    <!-- <div *ngFor="let sections of questionnaireSections;let secIndex=index" style="text-align: center;">
+    <button class="ques-sec-btn section-title" [ngClass]="{'selbut': secIndex == sectionIndex}" type="button" (click)="onSectionClick(secIndex)">{{sections.label}}</button>
+  </div> -->
+
+  <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" (click)="onSectionClick(secIndex)">
+    <div>
+      <div class="circle" *ngIf="!checkFormComp(secIndex)">{{secIndex+1}} </div>
+      <div class="circle sec-cmlp" *ngIf="checkFormComp(secIndex)"><mat-icon>check_circle</mat-icon> </div>
+    </div>
+    <div>
+      <div class="title" *ngIf="!checkFormComp(secIndex)">{{sections.label}}</div>
+      <div class="title sec-cmlp" *ngIf="checkFormComp(secIndex)">{{sections.label}}</div>
+      <!-- <div class="caption" [ngClass]="{subSecSel: !subSection}" *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('personal')"> 1.1  Personal Details</div>
+      <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
+    </div>
+  </div>
+  <!-- <div class="step step-active">
+    <div>
+      <div class="circle">2</div>
+    </div>
+    <div>
+      <div class="title">Second Step</div>
+    </div>
+  </div>
+  <div class="step">
+    <div>
+      <div class="circle">3</div>
+    </div>
+    <div>
+      <div class="title">Third Step</div>
+    </div>
+  </div> -->
+  <!-- <mat-form-field class="example-chip-list">
+    <mat-label>Favorite Fruits</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+      *ngFor="let fruit of fruits"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(fruit)">
+      {{fruit}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+    placeholder="New fruit..."
+    #fruitInput
+    formControlName="fruitCtrl"
+    [matChipInputFor]="chipList"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field> -->
+  </div>
+  <div class="col-md-9 col-9 ques-col">
+    <!-- <div class="row" *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index"> -->
+      <perfect-scrollbar class="pft-scrollbar" >
+          <div class="row" >
+          <div *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index">
+            <span class="form-group" *ngIf="questionType.show">
+              <textBox  [questionDatas]="questionType" (formChange)="onTextBoxChange($event,sectionIndex,questionIndex)" *ngIf="(questionType.type == 'QuestionTextDto' || 'QuestionNumberDto')"></textBox>
+              <multiSelectDropdown [questionDatas]="questionType" (formChange)="onDropdownChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionMultipleChoiceDto'" ></multiSelectDropdown>
+              <radioButton  [questionDatas]="questionType" [sectionIndex]="sectionIndex" [questionIndex]="questionIndex" (formChange)="onRadioChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionBoolDto'"></radioButton>
+              <DateField  [questionDatas]="questionType" (formChange)="onDateChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionDateDto'"></DateField>
+              <fileUpload [questionDatas]="questionType" (formChange)="onFileChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionFileListDto'"></fileUpload>
+              <textList [questionDatas]="questionType" (formChange)="onTextListChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionTextListDto'"></textList>
+
+            </span>
+          </div>
+          </div>
+        </perfect-scrollbar>
+
+  </div>
+</div>
+
+<div class="submit">
+  <button mat-flat-button  color="primary" [disabled]="disableSubbtn" type="button" (click)="onSubmit()">
+    <mat-icon>arrow_right_alt</mat-icon>
+    Submit
+  </button>
+</div>

@@ -1,0 +1,108 @@
+<div class="app-content {{isOpen}} ">
+    <header *ngIf="!AllFundingOpen" class="m0p0">
+        <br>
+        <h5>Offer For Acceptance</h5>
+        <div class="mat-elevation-z8">
+          <div class="table-res">
+           <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
+        (mouseleave)="isHover=false">
+          <ng-container matColumnDef="invNo">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> Invoice Id  </th>
+            <td mat-cell *matCellDef="let element"> 
+              <!-- <mat-chip-list>
+                     <mat-chip> </mat-chip>
+                 </mat-chip-list> -->
+                 {{element.invoiceNo}}
+             </td>
+          </ng-container>
+
+          <ng-container matColumnDef="invAmt">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> Invoice Amount  </th>
+            <td mat-cell *matCellDef="let element"> 
+              <!-- <mat-chip-list>
+                     <mat-chip >{{element.invoiceAmt}} </mat-chip>
+                 </mat-chip-list> -->
+                 {{element.invoiceAmt}}
+             </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="smeId">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.smeName}}" [matTooltipPosition]="'below'"> SME Name </th>
+            <td mat-cell *matCellDef="let element"> 
+              <!-- <mat-chip-list>
+                     <mat-chip> </mat-chip>
+                 </mat-chip-list> -->
+                 {{element.smeId}}
+             </td>
+          </ng-container>
+          
+        
+          <ng-container matColumnDef="buyerName">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> Buyer Name </th>
+            <td mat-cell *matCellDef="let element"> 
+               <!-- <mat-chip-list>
+                      <mat-chip></mat-chip>
+                  </mat-chip-list> -->
+                  {{element.buyerName}} 
+              </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="invDate">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Inv Date  </th>
+            <td mat-cell *matCellDef="let element"> 
+               <!-- <mat-chip-list>
+                      <mat-chip>{{ element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}} </mat-chip>
+                  </mat-chip-list> -->
+                  {{ element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
+              </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="invDueDate">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.invoiceDueDate}}" [matTooltipPosition]="'below'"> Inv Due date </th>
+            <td mat-cell *matCellDef="let element"> 
+               <!-- <mat-chip-list>
+                      <mat-chip>{{element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}} </mat-chip>
+                  </mat-chip-list> -->
+                  {{element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}}
+              </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+              matTooltip="{{biddingTooltip.status}}" [matTooltipPosition]="'below'"> Status </th>
+              <td mat-cell *matCellDef="let element"> 
+                 <!-- <mat-chip-list>
+                        <mat-chip> </mat-chip>
+                    </mat-chip-list> -->
+                    {{element.status == "I" ? "Initiated" : 'Authorized'}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <!-- <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.invoiceId,'edit')">
+                      <mat-icon>edit</mat-icon>
+                    </a>&nbsp; -->
+                  <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.smeId,'view')" >
+                      <mat-icon #tooltip="matTooltip"
+                      matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
+                  </a>
+                   </td>
+              </ng-container>                     
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+          <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+        <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+        </div>
+    </header>
+  </div>
+  
+  
+  

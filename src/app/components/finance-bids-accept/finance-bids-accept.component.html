@@ -1,0 +1,73 @@
+
+<div class="app-content {{isOpen}}">
+  <header>
+      <br>
+      <!-- <div class="table-section"> -->
+        <div class="uxg-h4" style="text-align: center">Bids to be Accepted</div>
+        <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
+        (mouseleave)="isHover=false" class="table-responsive" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>BID ID</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip > </mat-chip>
+            </mat-chip-list> -->
+            {{ element.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="invoiceAmt">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice Amount</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip>  </mat-chip>
+            </mat-chip-list> -->
+            {{ element.invoiceAmt }}
+              </td>
+          </ng-container>
+     
+          <ng-container matColumnDef="baseCcyNetAmtPayable">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>Bidding Amount</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip> </mat-chip>
+            </mat-chip-list> -->
+            {{ element.baseCcyNetAmtPayable }} 
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="offerExpDateTime">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>Offer Expires</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip>  </mat-chip>
+            </mat-chip-list> -->
+            {{ element.offerExpDateTime | date}}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+              <!-- <a href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'edit')">
+                  <mat-icon>edit</mat-icon>
+                </a>&nbsp; -->
+              <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'view')">
+                  <mat-icon  #tooltip="matTooltip"
+                  matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
+              </a>
+               </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+          <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>  
+        <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+      </div>
+  </header>
+</div>
+  
+  
