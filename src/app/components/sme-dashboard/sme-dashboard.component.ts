@@ -315,6 +315,8 @@ export class SmeDashboardComponent implements OnInit {
     })
     }
     getFunded(){
+      this.getsumOfFunded = {INVCCY: "SGD",
+      INVTOTALAMT: 144}
       this.smeDashboardServices.getFunded().subscribe(resp => {
       this.getsumOfFunded = resp;
     })
