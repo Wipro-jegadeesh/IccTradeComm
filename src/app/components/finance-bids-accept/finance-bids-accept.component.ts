@@ -8,6 +8,7 @@ import {FinanceBiddingService} from '../../service/finance_bidding/finance-biddi
 import { FINANCIERDASHBOARDCONSTANTS} from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import { Options,LabelType } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-finance-bids-accept',
@@ -21,6 +22,8 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices,private FinanceBiddingService:FinanceBiddingService) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @HostListener('window:resize', ['$event'])
+  @ViewChild('accountList', { read: ElementRef })
   dataSource ;//data
   displayedColumns: string[] = [
     'id',
@@ -29,6 +32,34 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
     'offerExpDateTime',
     'action'
   ];
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   modalRef: BsModalRef;
   mobileScreen = false;
   end = false;
@@ -39,10 +70,8 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   isOpen = '';
   bidpanelOpenState = false;
   id = ""
-  @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   dashboardTooltip=FINANCIERDASHBOARDCONSTANTS;
-  @HostListener('window:resize', ['$event'])
   isHover: boolean = false;
   ngOnInit() {
     if (window.innerWidth < 415) {
@@ -54,11 +83,25 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
       this.dataSource.sort = this.sort;
     })
   }
-
-  // ngAfterViewInit() {
-  //   this.dataSource.sort = this.sort;
-  // }
-
+  SearchAPI(){
+    console.log(this.SearchModel,"SearchModel")
+  }
+  searchDiv(){
+    if(this.filterDivOpen === true){
+    this.searchDivOpen = !this.searchDivOpen
+    this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv(){
+    if(this.searchDivOpen === true){
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

@@ -9,6 +9,7 @@ import { IccInvoiceMasterServices } from './icc-invoice-master-service';
 import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
+import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 // const ELEMENT_DATA: any[] = [
 //   {
@@ -93,7 +94,34 @@ export class IccInvoiceMasterComponent implements OnInit {
   bidpanelOpenState = false;
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
-
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;

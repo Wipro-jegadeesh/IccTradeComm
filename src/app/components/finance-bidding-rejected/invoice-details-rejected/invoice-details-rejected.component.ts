@@ -436,13 +436,13 @@ rejectQustionTwo = {
     // })
     this.Rejectform = this.fb.group({
       Inv_Discount_Low: [false],
-      Annual_Yield: [false],
+      Annual_Yield: [true],
       Fundable_percentage_low: [false],
       Funding_Amount_High: [false],
       Net_payable: [false],
       Base_Amount: [false],
       invoiceAmt: [false],
-      Repayment_Date: [false],
+      Repayment_Date: [true],
       Funding_CCY: [false],
       Off_date:[false],
       Others:[false],

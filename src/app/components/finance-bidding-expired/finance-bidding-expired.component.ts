@@ -1,97 +1,124 @@
-// import { Component, OnInit } from '@angular/core';
 
-// @Component({
-//   selector: 'app-finance-bidding-expired',
-//   templateUrl: './finance-bidding-expired.component.html',
-//   styleUrls: ['./finance-bidding-expired.component.scss']
-// })
-// export class FinanceBiddingExpiredComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
-
-import { Component, OnInit, ElementRef, HostListener, ViewChild,Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import {InvoiceDetailsExpiredComponent} from './invoice-details-expired/invoice-details-expired.component'
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import {FinanceBiddingExpiryServices} from './finance-bidding-expiry-service' 
-import {FinanceBiddingService} from '../../service/finance_bidding/finance-bidding.service';
-import { FINANCIERDASHBOARDCONSTANTS} from '../../shared/constants/constants';
-import { MatPaginator } from '@angular/material/paginator';
-
-
-
- 
+import { Component, OnInit, ElementRef, HostListener, ViewChild, Input} from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { AuthenticationService } from "../../service/authentication/authentication.service";
+import { InvoiceDetailsExpiredComponent } from "./invoice-details-expired/invoice-details-expired.component";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { FinanceBiddingExpiryServices } from "./finance-bidding-expiry-service";
+import { FinanceBiddingService } from "../../service/finance_bidding/finance-bidding.service";
+import { FINANCIERDASHBOARDCONSTANTS } from "../../shared/constants/constants";
+import { MatPaginator } from "@angular/material/paginator";
+import { Options,LabelType } from '@angular-slider/ngx-slider';
 
 @Component({
-   selector: 'app-finance-bidding-expired',
-  templateUrl: './finance-bidding-expired.component.html',
-  styleUrls: ['./finance-bidding-expired.component.scss']
+  selector: "app-finance-bidding-expired",
+  templateUrl: "./finance-bidding-expired.component.html",
+  styleUrls: ["./finance-bidding-expired.component.scss"],
 })
 export class FinanceBiddingExpiredComponent implements OnInit {
   @Input() InvoiceDetailsExpiredComponent: InvoiceDetailsExpiredComponent;
-  ELEMENT_DATA1: any[] ;
-  constructor(public router: Router, public authenticationService:AuthenticationService,
-    private modalService: BsModalService,private FinanceBiddingExpiryServices : FinanceBiddingExpiryServices,private FinanceBiddingService:FinanceBiddingService) { }
+  constructor(
+    public router: Router,
+    public authenticationService: AuthenticationService,
+    private modalService: BsModalService,
+    private FinanceBiddingExpiryServices: FinanceBiddingExpiryServices,
+    private FinanceBiddingService: FinanceBiddingService
+  ) { }
 
-  dataSource ;//data
+  dataSource; //data
   displayedColumns: string[] = [
-    'BIDID',
-    'Invoice Amount',
-    'BIDing Amount', 
-    'offer Expires',
-    'action'
+    "BIDID",
+    "Invoice Amount",
+    "BIDing Amount",
+    "offer Expires",
+    "action",
+  ];
+  displayedColumnsload: string[] = [
+    'TopBar',
   ]
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {
+    invoiceId : '',
+    invoiceAmt : '',
+    smeId : '',
+    buyerName : '' 
+  }
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
   modalRef: BsModalRef;
   isHover: boolean = false;
-
-  ngOnInit() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    }
-
-    let obj = {
-      finId : localStorage.getItem("userId")
-    }
-
-    this.FinanceBiddingExpiryServices.getInvoiceDetails(obj).subscribe(resp => {
-      
-      console.log(resp);
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-
-     
-    })
-
-    
-
-  }
   mobileScreen = false;
   end = false;
   start = true;
   currentPage = 0;
   pageCount = 1;
   limit = 7;
-  isOpen = '';
+  isOpen = "";
   bidpanelOpenState = false;
-  id = ""
+  id = "";
 
-
-  @ViewChild('accountList', { read: ElementRef })
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild("accountList", { read: ElementRef })
+  @HostListener("window:resize", ["$event"])
   public accountList: ElementRef<any>;
-  dashboardTooltip=FINANCIERDASHBOARDCONSTANTS;
+  dashboardTooltip = FINANCIERDASHBOARDCONSTANTS;
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   
-  @HostListener('window:resize', ['$event'])
+  ngOnInit() {
+    if (window.innerWidth < 415) {
+      this.mobileScreen = true;
+    }
+    let obj = {
+      finId: localStorage.getItem("userId"),
+    };
+    this.FinanceBiddingExpiryServices.getInvoiceDetails(obj).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.dataSource = new MatTableDataSource(resp);
+        this.dataSource.paginator = this.paginator;
+      }
+    );
+  }
+  SearchAPI(){
+    console.log(this.SearchModel,"SearchModel")
+  }
+  searchDiv(){
+    if(this.filterDivOpen === true){
+    this.searchDivOpen = !this.searchDivOpen
+    this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv(){
+    if(this.searchDivOpen === true){
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -99,8 +126,6 @@ export class FinanceBiddingExpiredComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-
-  
 
   public scrollRight(): void {
     this.start = false;
@@ -113,7 +138,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     } else {
       this.accountList.nativeElement.scrollTo({
         left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   }
@@ -125,24 +150,25 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     }
     this.accountList.nativeElement.scrollTo({
       left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 
-  isOpenHandle(isTrue){
-    this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
-    }
-    navigateFinanceBidding(){
-      this.router.navigateByUrl('/finance-bidding');
+  isOpenHandle(isTrue) {
+    this.isOpen = isTrue === "inActive" ? "active" : "inActive";
   }
-  logout(){
-  this.authenticationService.logout()
+  navigateFinanceBidding() {
+    this.router.navigateByUrl("/finance-bidding");
   }
-  goHome(){
-    this.router.navigateByUrl('/financier-dashboard');
+  logout() {
+    this.authenticationService.logout();
   }
-  navigateFinanceDetails(id,type){
-    this.router.navigateByUrl('/finance-bidding-expired-details/'+type+'/'+id);
+  goHome() {
+    this.router.navigateByUrl("/financier-dashboard");
+  }
+  navigateFinanceDetails(id, type) {
+    this.router.navigateByUrl(
+      "/finance-bidding-expired-details/" + type + "/" + id
+    );
   }
 }
-
