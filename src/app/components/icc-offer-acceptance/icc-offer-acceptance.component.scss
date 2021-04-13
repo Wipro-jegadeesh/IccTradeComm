@@ -256,4 +256,22 @@ mat-card-content[_ngcontent-njk-c181]
        margin: 1.75rem auto;
    }
    }
+   .searchInput{
+    th{
+        padding-top: 10px;
+        .mat-form-field-infix{
+            width: 110px;
+        }
+        .mat-form-field-flex{
+            max-width: 110px!important;
+        }
+    }
+}
+.class2{
+    min-width: 233px;
+    vertical-align: middle;
+    position: relative;
+    padding-top:30px !important;
+  
+  }
 

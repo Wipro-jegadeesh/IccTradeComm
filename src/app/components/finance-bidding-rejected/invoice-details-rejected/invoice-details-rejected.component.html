@@ -91,15 +91,6 @@
                                 <input matInput [readonly]="isView" formControlName="fundingCcy"  placeholder="Funding CCY"  >
                               </td>
                             </ng-container>
-                            <!-- <ng-container matColumnDef="Invoice Amount(Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column">Invoice Amount(Inv CCY)</th>
-                                <td mat-cell *matCellDef="let element;let row; let index = index">
-                                <input matInput 
-                                formControlName="ccy" 
-                                placeholder="Invoice Amount(Inv CCY)" 
-                                required>
-                              </td>
-                            </ng-container> -->
                             <ng-container matColumnDef="FX rate Base CCY">
                               <th mat-header-cell *matHeaderCellDef scope="column" >FX rate Base CCY %</th>
                               <td mat-cell style="border-right: 1px solid grey;
@@ -127,7 +118,9 @@
           
                             <ng-container matColumnDef="Fundable percentage">
                               <th mat-header-cell *matHeaderCellDef scope="column" >Fundable percentage %</th>
-                              <td mat-cell style="border-right: 1px solid grey;
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Fundable_percentage_low}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Fundable_percentage_low === true ? 'Fundable percentage Less' : ''"
+                              style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                 <input matInput [readonly]="isView"
@@ -137,8 +130,10 @@
                               </td>
                             </ng-container>
                             <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
-                              <th mat-header-cell *matHeaderCellDef  scope="column" >Funding Amount / Repay Amount (Base CCY)</th>
-                              <td mat-cell style="border-right: 1px solid grey;
+                              <th mat-header-cell *matHeaderCellDef  scope="column" >Funding Amount <br>/ Repay Amount (Base CCY)</th>
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Funding_Amount_High}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Funding_Amount_High === true ? 'Funding Amount Less' : ''"
+                              style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                 <input matInput [readonly]="isView"
@@ -148,7 +143,7 @@
                               </td>
                             </ng-container>
                             <ng-container matColumnDef="Funding Amount / Repay Amount (Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >Funding Amount / Repay Amount (Inv CCY)</th>
+                              <th mat-header-cell *matHeaderCellDef scope="column" >Funding Amount <br>/ Repay Amount (Inv CCY)</th>
                               <td mat-cell style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -161,16 +156,15 @@
           
                             <ng-container matColumnDef="Repayment Date">
                               <th mat-header-cell *matHeaderCellDef scope="column" >Repayment Date</th>
-                              <td mat-cell style="border-right: 1px solid grey;
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Repayment_Date}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Repayment_Date === true ? 'Repayment Date Less' : ''"
+                              style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                   <input matInput [readonly]="isView"
                                   formControlName="repaymentDate" 
                                   placeholder="RepaymentDate" 
                                   required>
-                                <!-- <input matInput [matDatepicker]="picker" formControlName="RepaymentDate">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker> -->
                               </td>
                             </ng-container>
                       <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
@@ -182,7 +176,9 @@
                      <table mat-table [dataSource]="dataSourceTwo">
                       <ng-container matColumnDef="Inv Discount  Rate">
                           <th mat-header-cell *matHeaderCellDef scope="column" >Inv Discount  Rate%</th>
-                          <td mat-cell style="border-right: 1px solid grey;
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Inv_Discount_Low}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Inv_Discount_Low === true ? 'Inv Discount Rate High' : ''"
+                          style="border-right: 1px solid grey;
                           align-self: stretch;
                           text-align: center" *matCellDef="let element;let row; let index = index"  >
                             <input matInput [readonly]="isView"
@@ -216,10 +212,10 @@
                           </td>
                         </ng-container>
                         <ng-container matColumnDef="Annual Yield (Basis a360)">
-                          <th mat-header-cell *matHeaderCellDef scope="column" >Annual Yield <br>(Basis a360) %</th>
-                          <td mat-cell style="border-right: 1px solid grey;
-                          align-self: stretch;
-                          text-align: center" *matCellDef="let element;let row; let index = index"  >
+                          <th mat-header-cell  *matHeaderCellDef scope="column" >Annual Yield <br>(Basis a360) %</th>
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Annual_Yield}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Annual_Yield === true ? 'Annual Yield (Basis a360) Too High' : ''" 
+                          style="border-right: 1px solid grey; align-self: stretch; text-align: center;" *matCellDef="let element;let row; let index = index"  >
                             <input matInput (keyup)="changeRowgrid()"[readonly]="isView"
                             formControlName="annualYeild" 
                             placeholder="Annual Yield Basis a360" 
@@ -241,7 +237,9 @@
                           <th mat-header-cell *matHeaderCellDef scope="column" >
                                    Net Amt
                            <br> payable (Base CCY)</th>
-                          <td mat-cell style="border-right: 1px solid grey;
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Net_payable}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Net_payable === true ? 'Net Amt payable (Base CCY) Low' : ''"
+                          style="border-right: 1px solid grey;
                           align-self: stretch;
                           text-align: center" *matCellDef="let element;let row; let index = index"  >
                             <input matInput [readonly]="isView"
@@ -263,7 +261,9 @@
                           </ng-container>
                             <ng-container matColumnDef="Offer Exp period">
                                 <th mat-header-cell *matHeaderCellDef scope="column" >Offer Exp period</th>
-                                <td mat-cell style="border-right: 1px solid grey;
+                                <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Off_date}" 
+                                #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Off_date === true ? 'Off Exp date /time Less' : ''"
+                                style="border-right: 1px solid grey;
                                 align-self: stretch;
                                 text-align: center" *matCellDef="let element;let row; let index = index"  >
                                   <input matInput [readonly]="isView"
@@ -303,75 +303,7 @@
         </form>
             <br>
           </mat-tab>
-      <mat-tab label="Invoice Details Section"> 
-        <!-- <div class="uxg-h4" style="text-align: center">BIDDING</div> -->
-        <!-- Inovice Details -->
-        <!-- <mat-accordion>
-            <mat-expansion-panel>
-            </mat-expansion-panel>
-            <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Invoice Details
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-    
-        <div class="container-fluid">
-            <div class="row">
-                <table class="invoice-table" mat-table [dataSource]="displayInvDatas">
-    
-                    <ng-container matColumnDef="billNo">
-                        <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceRefNo}}" [matTooltipPosition]="'below'">Invoice Ref No</th>
-                        <td mat-cell *matCellDef="let element">{{ element.billNo }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="invId">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceId}}" [matTooltipPosition]="'below'">Invoice ID</th>
-                        <td mat-cell *matCellDef="let element">{{ element.invId }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="invDate">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Invoice Date</th>
-                        <td mat-cell *matCellDef="let element">{{ element.invDate }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="invDueDate">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceDueDate}}" [matTooltipPosition]="'below'">Invoice Due Date</th>
-                        <td mat-cell *matCellDef="let element">{{ element.invDueDate }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="invAmt">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceAmount}}" [matTooltipPosition]="'below'">Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.invAmt }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="buyerName">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.buyerName}}" [matTooltipPosition]="'below'">Buyer</th>
-                        <td mat-cell *matCellDef="let element">{{ element.buyerName }}</td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="smeId">
-                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.sellerName}}" [matTooltipPosition]="'below'">Seller</th>
-                        <td mat-cell *matCellDef="let element">{{ element.smeId }}</td>
-                    </ng-container>
-                
-                
-                    <tr mat-header-row *matHeaderRowDef="displayedInvoiceFormsColumns" style="background-color:#B4A6EA"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedInvoiceFormsColumns"></tr>
-                </table>
-            </div>            
-        </div>
-    
-    </mat-expansion-panel>
-    </mat-accordion> -->
-      
+     <mat-tab label="Invoice Details Section"> 
         <div class="table-section">
             <mat-accordion>
                 <mat-expansion-panel>
@@ -389,15 +321,7 @@
                 matTooltip="{{detailsTooltip.goodDesc}}" [matTooltipPosition]="'below'">Description of Goods</th>
                 <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="idNo">
-                <th mat-header-cell *matHeaderCellDef scope="column">ID No</th>
-                <td mat-cell *matCellDef="let element">{{ element.idNo }}</td>
-                </ng-container> -->
-                <!-- <ng-container matColumnDef="dateOfInvoice">
-                <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                matTooltip="{{detailsTooltip.dateInvoice}}" [matTooltipPosition]="'below'">Date Of Invoice</th>
-                <td mat-cell *matCellDef="let element">{{ element.dateOfInvoice }}</td>
-                </ng-container> -->
+             
                 <ng-container matColumnDef="quantity">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                 matTooltip="{{detailsTooltip.quantity}}" [matTooltipPosition]="'below'">Quantity</th>
@@ -413,11 +337,7 @@
                 matTooltip="{{detailsTooltip.amount}}" [matTooltipPosition]="'below'">Amount</th>
                 <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="netAmtPay">
-                <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
-                <td mat-cell *matCellDef="let element">{{ element.netAmtPay }}</td>
-                </ng-container>
-                -->
+    
                 <ng-container matColumnDef="taxRate">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                 matTooltip="{{detailsTooltip.taxRate}}" [matTooltipPosition]="'below'">Tax Rate %</th>
@@ -433,16 +353,7 @@
                 matTooltip="{{detailsTooltip.ccyTaxAmount}}" [matTooltipPosition]="'below'">Tax Amt Ccy</th>
                 <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="taxAmountccy">
-                <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                matTooltip="{{detailsTooltip.ccyTaxAmount}}" [matTooltipPosition]="'below'">Tax Amt Ccy</th>
-                <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
-                </ng-container> -->
-                <!-- <ng-container matColumnDef="totalccy">
-                <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                matTooltip="{{detailsTooltip.totalCcy}}" [matTooltipPosition]="'below'">Total Ccy</th>
-                <td mat-cell *matCellDef="let element">{{ element.totalCcy }}</td>
-                </ng-container> -->
+    
                 
                 <ng-container matColumnDef="total">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
@@ -548,28 +459,22 @@
           <div class="table-res">
             <table mat-table [dataSource]="launchBid_Popup" class="mat-elevation-z8">
 
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-              
-                <!-- Position Column -->
+               
                 <ng-container matColumnDef="Inv Discount Rate">
                   <th mat-header-cell *matHeaderCellDef>Inv Discount  Rate%</th>
                   <td mat-cell *matCellDef="let element"> {{element?.invDiscRate || '' }} </td>
                 </ng-container>
               
-                <!-- Name Column -->
                 <ng-container matColumnDef="Disc Amt (Base CCY)">
                   <th mat-header-cell *matHeaderCellDef>Disc Amt (Base CCY) </th>
                   <td mat-cell *matCellDef="let element"> {{element?.baseCcyDiscAmt || '' }}   </td>
                 </ng-container>
               
-                <!-- Weight Column -->
                 <ng-container matColumnDef="Net Amt payable (Base CCY)">
                   <th mat-header-cell *matHeaderCellDef> Net Amt payable (Base CCY) </th>
                   <td mat-cell *matCellDef="let element" style="color:red"> {{element?.baseCcyNetAmtPayable || '' }}   </td>
                 </ng-container>
               
-                <!-- Symbol Column -->
                 <ng-container matColumnDef="Annual Yield (Basis a360)">
                   <th mat-header-cell *matHeaderCellDef> Annual Yield (Basis a360) %</th>
                   <td mat-cell *matCellDef="let element"> {{element?.annualYeild || '' }}   </td>

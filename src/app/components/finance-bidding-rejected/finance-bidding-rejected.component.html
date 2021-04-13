@@ -70,106 +70,87 @@
                </td>
           </ng-container>
           <ng-container matColumnDef="TopBar">
-            <th colspan="6" mat-header-cell *matHeaderCellDef> 
+            <th colspan="8" mat-header-cell *matHeaderCellDef> 
               <div style="justify-content:flex-end;cursor: pointer;">
               <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
               <span (click)="filterDiv()" class="material-icons">filter_list</span>
                 </div>
              </th>
           </ng-container>
-          <ng-container matColumnDef="BIDID1">
-            <th mat-header-cell *matHeaderCellDef> 
-              <div *ngIf="searchDivOpen">
-                <mat-form-field>
-                  <mat-label>bidid</mat-label>
-                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
-                    search
-                    </span> -->
-                  <input type="text" matInput />
-                </mat-form-field>
-                </div>
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="Invoice Amount1">
-            <th [ngClass]="{'class1':searchDivOpen,'class2': filterDivOpen }"mat-header-cell *matHeaderCellDef> 
-              <div *ngIf="searchDivOpen">
-                <mat-form-field >
-                  <mat-label>Invoice Amount</mat-label>
-                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
-                    search
-                    </span> -->
-                  <input type="text" matInput  />
-                </mat-form-field>
-                </div>
-                <div *ngIf="filterDivOpen">
-                  <label>InvoiceAmount</label>
-                  <div class="custom-slider">
-                  <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
-                </div>
-                </div>
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="BIDing Amount1">
-            <th [ngClass]="{'class1':searchDivOpen,'class2': filterDivOpen }" mat-header-cell *matHeaderCellDef> 
-              <div *ngIf="searchDivOpen">
-                <mat-form-field>
-                  <mat-label>Biding Amount</mat-label>
-                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
-                    search
-                    </span> -->
-                  <input type="text" matInput />
-                </mat-form-field>
-                </div>
-                <div *ngIf="filterDivOpen" >
-                  <label>Biding Amount</label>
-                  <div class="custom-slider">
-                    <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+          <ng-container matColumnDef="Search">
+            <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                <h6>Search By</h6>
+              <div class="row">
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>BID ID</mat-label>
+                        <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
+                      </mat-form-field>
                   </div>
-                </div>
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="offer Expires1">
-            <th mat-header-cell *matHeaderCellDef> 
-              <div *ngIf="searchDivOpen">
-                <mat-form-field>
-                  <mat-label>offer Expires</mat-label>
-                  <!-- <span style="position: relative;left: -23px;top: -5px;" class="material-icons">
-                    search
-                    </span> -->
-                  <input type="text" matInput  />
-                </mat-form-field>
-                </div>
-                <div *ngIf="filterDivOpen">
-                  <mat-form-field dense>
-                    <mat-label>Offer Expires</mat-label>
-                    <input  matInput [matDatepicker]="picker1"  />
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="Action">
-            <th mat-header-cell *matHeaderCellDef> 
-                <div>
-                  <button *ngIf="filterDivOpen" mat-raised-button style="color: #5e52a1;" >
-                    <mat-icon #tooltip="matTooltip"
-                    matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Apply
-                  </button>&nbsp;
-                  <button *ngIf="searchDivOpen" mat-raised-button style="color: #5e52a1;">
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>invoiceAmt</mat-label>
+                        <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Bidding Amount</mat-label>
+                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
                   </button>&nbsp;
-                  <button *ngIf="searchDivOpen || filterDivOpen" mat-raised-button style="color: #5e52a1;">
+                  <button  mat-raised-button style="color: #5e52a1;">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                   </button>
-                </div>
+              </div>
+             
              </th>
           </ng-container>
+          <ng-container matColumnDef="Filter">
+            <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>InvoiceAmount</label>
+                        <div class="custom-slider">
+                        <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                      </div>
+                      </div>
+                      <div class="col-sm-3" style="padding-top: 22px;">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Offer Expier </mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate placeholder="Start date">
+                              <input matEndDate placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
+                      </div>
+                </div>
+                  <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                    <button  mat-raised-button style="color: #5e52a1;">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                      </button>&nbsp;
+                      <button  mat-raised-button style="color: #5e52a1;">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                      </button>
+                  </div>
+             </th>
+          </ng-container>
+
           <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-          <tr  mat-header-row class="searchInput"  *matHeaderRowDef="displayedColumnsearch"></tr>
-          <tr mat-header-row  class="searchInputable" *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+          <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+          <tr mat-header-row  *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
           <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns"></tr>
         </table>  
       </div>

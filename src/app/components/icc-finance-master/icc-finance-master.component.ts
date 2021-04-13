@@ -9,6 +9,7 @@ import { IccFinanceMasterServices } from './icc-finance-master-service';
 import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
+import { Options,LabelType } from '@angular-slider/ngx-slider';
 
 // const ELEMENT_DATA: any[] = [
 //   {
@@ -105,7 +106,34 @@ export class IccFinanceMasterComponent implements OnInit {
     }
   }
     @ViewChild(MatPaginator) paginator: MatPaginator;
-
+    displayedColumnsload: string[] = [
+      'TopBar',
+    ]
+    displayedColumnsearch: string[] = [
+      'Search',
+    ]
+    displayedColumnFilter: string[] = [
+      'Filter',
+    ]
+    SearchModel = {}
+    value: number = 0;
+    highValue: number = 50;
+    options: Options = {
+      floor: 0,
+      ceil: 5000,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          case LabelType.Low:
+            return "<b>Min</b> $" + value;
+          case LabelType.High:
+            return "<b>Max</b> $" + value;
+          default:
+            return "$" + value;
+        }
+      }
+    };
+    filterDivOpen: boolean;
+    searchDivOpen: boolean;
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
     private authenticationService: AuthenticationService, private IccFinanceMasterServices: IccFinanceMasterServices) { }
 
@@ -131,7 +159,25 @@ export class IccFinanceMasterComponent implements OnInit {
     })
 
   }
-
+  SearchAPI(){
+    console.log(this.SearchModel,"SearchModel")
+  }
+  searchDiv(){
+    if(this.filterDivOpen === true){
+    this.searchDivOpen = !this.searchDivOpen
+    this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv(){
+    if(this.searchDivOpen === true){
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    }else{
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =

@@ -18,11 +18,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class FinanceBiddingRejectedComponent implements OnInit {
   @Input() InvoiceDetailsRejectedComponent: InvoiceDetailsRejectedComponent;
-  ELEMENT_DATA1: any[];
-  TextAreaDiv: boolean;
-  FinancebiddingDetails: any;
-  searchDivOpen: boolean;
-  filterDivOpen: boolean;
+ 
   constructor(private fb: FormBuilder,public router: Router, public authenticationService: AuthenticationService,
     private modalService: BsModalService, private FinanceBiddingRejectedServices: FinanceBiddingRejectedServices, private FinanceBiddingService: FinanceBiddingService) { }
 
@@ -35,16 +31,10 @@ export class FinanceBiddingRejectedComponent implements OnInit {
     'remark',
     'action'
   ]
-  displayedColumnsload: string[] = [
-    'TopBar',
-  ]
-  displayedColumnsearch: string[] = [
-    'BIDID1',
-    'Invoice Amount1',
-    'BIDing Amount1',
-    'offer Expires1',
-    'Action'
-  ]
+  TextAreaDiv: boolean;
+  FinancebiddingDetails: any;
+  searchDivOpen: boolean;
+  filterDivOpen: boolean;
   mobileScreen = false;
   end = false;
   start = true;
@@ -62,11 +52,21 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   modalRef: BsModalRef;
   isHover: boolean = false;
   Rejectform: FormGroup;
-  value: number = 10;
-  highValue: number = 60;
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
   options: Options = {
     floor: 0,
-    ceil: 100,
+    ceil: 5000,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
@@ -107,6 +107,9 @@ rejectQustionTwo = {
     })
   }
  
+  SearchAPI(){
+    console.log(this.SearchModel,"SearchModel")
+  }
   searchDiv(){
     if(this.filterDivOpen === true){
     this.searchDivOpen = !this.searchDivOpen
