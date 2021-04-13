@@ -28,6 +28,9 @@ export class TextListComponent implements OnInit {
   constructor() { }
 
     ngOnInit() {
+      if(this.questionDatas.response.length){
+      this.listData=this.questionDatas.response
+      }
      }
 
     add(event: MatChipInputEvent): void {

@@ -13,12 +13,14 @@
 
   <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" (click)="onSectionClick(secIndex)">
     <div>
-      <div class="circle" *ngIf="!checkFormComp(secIndex)">{{secIndex+1}} </div>
-      <div class="circle sec-cmlp" *ngIf="checkFormComp(secIndex)"><mat-icon>check_circle</mat-icon> </div>
+      <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}} </div>
+      <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div>
+      <div class="circle sec-cmlp" *ngIf="sections.itHasValue"><mat-icon>check_circle</mat-icon> </div>
     </div>
     <div>
-      <div class="title" *ngIf="!checkFormComp(secIndex)">{{sections.label}}</div>
-      <div class="title sec-cmlp" *ngIf="checkFormComp(secIndex)">{{sections.label}}</div>
+      <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange">{{sections.label}}</div>
+      <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange">{{sections.label}}</div>
+      <div class="title sec-cmlp" *ngIf="sections.itHasValue ">{{sections.label}}</div>
       <!-- <div class="caption" [ngClass]="{subSecSel: !subSection}" *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('personal')"> 1.1  Personal Details</div>
       <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
     </div>

@@ -1,6 +1,6 @@
 <div class="card-form-container" >
     <div class="dynamic-radio-btn" >
-      <h6>{{questionDatas && questionDatas.label}}</h6>
+      <h6>{{questionDatas && questionDatas.label}} {{questionDatas.required ? '*' : ''}}</h6>
         <!-- <label id="example-radio-group-label">{{questionDatas && questionDatas.label}}</label> -->
         <mat-radio-group #tooltip="matTooltip" 
         matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'"

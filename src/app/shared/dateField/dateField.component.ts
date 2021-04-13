@@ -14,6 +14,7 @@ export class DateFieldComponent implements OnInit {
     constructor(public datePipe:DatePipe) { }
 
     ngOnInit() { 
+        this.date=this.questionDatas.response ? this.questionDatas.response : ''
     }
 
     onChange(event){

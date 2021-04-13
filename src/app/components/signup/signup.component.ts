@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-
+import { ToastrService } from 'ngx-toastr';
+import {COUNTRYNAMES} from '../../shared/constants/Country'
+import { SignupService } from './signup.service';
 
 interface ICity{
   item_id: number;
@@ -24,68 +27,34 @@ export class SignupComponent implements OnInit {
   showCountSignBtn =false;
   closeDropDownOnSelection
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private signupService:SignupService,
+    private toastr: ToastrService) { }
 
   
-  name = "Angular";
-  cities: Array<ICity> = [];
-  selectedItems: Array<ICity> = [];
-  dropdownSettings: IDropdownSettings = {
-    allowSearchFilter: true,
-    closeDropDownOnSelection:true
-    
-  };
+  name = "";
+  optionDatas=[]
+  dropdownSettings:any={}
+  selectedItems=[]
+
 
   ngOnInit() {
-this.cities = [
-{ item_id: 1, item_text: "Singapore" },
-{ item_id: 2, item_text: "Ecuador" },
-{ item_id: 3, item_text: "Turkey" },
-{ item_id: 4, item_text: "Mexico" },
-{ item_id: 5, item_text: "Sri Lanka" }
-  ];
-    this.selectedItems = [
-      { item_id: 4, item_text: "Pune" },
-      { item_id: 6, item_text: "Navsari" }
-    ];
+this.optionDatas = COUNTRYNAMES
     this.dropdownSettings = {
-      singleSelection: true,
+      singleSelection: true ,
       defaultOpen: false,
       idField: "item_id",
       textField: "item_text",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 10,
       allowSearchFilter: true,
-      closeDropDownOnSelection:true
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Country'
     };
+    this.selectedItems=[]
    
   }
-  onItemSelect(item: any) {
-    this.selectedItem = item.item_id;
-    let CountryPinLabel = ""
-    if(item.item_id == 1 ){
-      CountryPinLabel = "UEN"
-    }
-    else if(item.item_id == 2){
-      CountryPinLabel = "RUC"
-    }
-    else if(item.item_id == 3){
-      CountryPinLabel = "TIN"
-    }
-    else if(item.item_id == 4){
-      CountryPinLabel = "MEX"
-    }
-    else if(item.item_id == 5){
-      CountryPinLabel = "SRI"
-    }
-    this.showCountSignBtn = true
-    this.CountryPinLabel = CountryPinLabel;
-    console.log('onItemSelect', item);
-  }
-  onItemDeSelect(item: any) {
+  onDeSelect(event) {
     this.showCountSignBtn = false
-    console.log('onItem DeSelect', item);
+    this.CountryPinLabel=''
   }
   onSelectAll(items: any) {
     console.log('onSelectAll', items);
@@ -93,35 +62,33 @@ this.cities = [
   onDropDownClose() {
     console.log('dropdown closed');
   }
-
-  signup() {
+  onChange(event){
+   this.showCountSignBtn= this.selectedItems.length ? true : false
+   this.CountryPinLabel=event.regNo ? event.regNo : 'No'
+  }
+  signup(form:NgForm) {
     // if (this.country.valueOf() !== '' || this.CountryPin.valueOf() !== '') {
     //   this.router.navigate(['sme-onboarding'])
     //   this.invalidLogin = false
     // } else
     //   this.invalidLogin = false
     
-    if (this.CountryPin.valueOf() !== '' || this.selectedItem != "" ) {
+    // if (this.CountryPin.valueOf() !== '' || this.selectedItem != "" ) {
+    //   this.router.navigate(['sme-onboarding'])
+    //   this.invalidLogin = false
+    // } else
+    //  { this.invalidLogin = true }
+
+    if(this.name && this.CountryPin && this.selectedItems.length){
       this.router.navigate(['sme-onboarding'])
-      this.invalidLogin = false
-    } else
-     { this.invalidLogin = true }
-  
+      // this.signupService.signup(form.value).subscribe(resp=>{
+      //   if(resp){
+      //     this.router.navigate(['sme-onboarding'])
+      //   }
+      // })
+    }
+    else{
+      this.toastr.error('Error')
+    }
   }
-
-  
-  
-
-  // onSubmit() {
-  //   this.router.navigate(['sme-onboarding']);
-  //   alert(this.selectedRole);
-  //   console.log(this.selectedRole)  //Will give you the role selected;
-  //   if (this.selectedRole == "SME") {
-  //     this.router.navigate(['sme-onboarding'])
-  //   }
-  //   else if (this.selectedRole == "ICC User") {
-  //     this.router.navigate(['financier-onboarding'])
-  //   }
-  // }
-
 }
