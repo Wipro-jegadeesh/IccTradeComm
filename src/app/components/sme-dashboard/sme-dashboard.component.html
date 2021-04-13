@@ -133,7 +133,7 @@
                 
                 <uxg-account-card class="curs-pointer" name="Funded" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.acceptedDetails}}"
-                [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVCCY}} {{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVTOTALAMT : 'SGD 0'}}" ></uxg-account-card>
+                [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : 'SGD 0'}}" ></uxg-account-card>
                
                 <uxg-account-card class="curs-pointer" name="Repayments Due Today" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.todayDue}}"
