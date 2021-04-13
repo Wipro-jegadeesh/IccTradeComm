@@ -4426,19 +4426,25 @@ export class SmeOnboardingComponent implements OnInit {
           if((quesItem.number - Math.floor(quesItem.number)) !== 0 && this.checkParentresp(secIndex,parseInt(quesItem.number))){
             quesItem.show=false
             quesItem.parentNumber=parseInt(quesItem.number)
+            quesItem.response=''
+            // quesItem.itHasValue=quesItem.required ? false : true
+            quesItem.itHasValue=true
           }
           else{
             quesItem.show=true
             quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
+            quesItem.response=''
+            quesItem.itHasValue=quesItem.required ? false : true
           }
          quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
       })
+      secItem.itHasValue=false
     })
     console.log(this.questionnaireSections)
-    if(this.sectionIndex == 0){
-        let tempArr=this.questionnaireSections[0].questions
-        this.questions= tempArr.slice(0,11)
-    }
+    // if(this.sectionIndex == 0){
+    //     let tempArr=this.questionnaireSections[0].questions
+    //     this.questions= tempArr.slice(0,11)
+    // }
   }
 //   ngDoCheck(){
 //        this.checkForm()
@@ -4513,6 +4519,8 @@ export class SmeOnboardingComponent implements OnInit {
         }
     })
     this.questionnaireSections[secIndex].questions[quesIndex]['response']=data.value
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value ? true : false
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
   }
   onDropdownChange(data,secIndex,quesIndex){
     this.questionnaireSections[secIndex].questions.map((item)=>{
@@ -4525,6 +4533,9 @@ export class SmeOnboardingComponent implements OnInit {
         respArr.push(selItem.id)
     })
     this.questionnaireSections[secIndex].questions[quesIndex].response=respArr
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=respArr && respArr.length ? true : false
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+
   }
   checkDropdownCond(selectedItems,conditionAlias){
       let returnValue=false
@@ -4544,11 +4555,13 @@ export class SmeOnboardingComponent implements OnInit {
 
      this.questionnaireSections[secIndex].questions.map((item)=>{
       if(data.questionDatas.number == item.parentNumber && (item.number - Math.floor(item.number)) !== 0){
-        item.show = data.condition 
+        item.show = data.condition == "true" ? true : false
         return true;
       }
     })
-    this.questionnaireSections[secIndex].questions[quesIndex].response=data.condition ? "true" : "false"
+    this.questionnaireSections[secIndex].questions[quesIndex].response=data.condition == "true" ? "true" : "false"
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=true
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
     //  this.radioChecked && this.radioChecked['isTrue'] && this.checkCon(data,data.secIndex,data.quesIndex)
 }
   onFileChange(data,secIndex,quesIndex){
@@ -4556,6 +4569,8 @@ export class SmeOnboardingComponent implements OnInit {
   }
   onDateChange(data,secIndex,quesIndex){
     this.questionnaireSections[secIndex].questions[quesIndex].response=data
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data ? true : false
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
   }
   checkCon(data,secIndex,questionIndex){
     let number=parseFloat(data.number)
@@ -4581,16 +4596,31 @@ export class SmeOnboardingComponent implements OnInit {
   }
 
   onSectionClick(index){
+    //   let questionLength=this.questionnaireSections[index].questions.length
+    //   if(index == 0 && !this.subSection){
+    //     this.questions= this.questionnaireSections[0].questions.slice(0,11)
+    //   }
+    //   else if(index !=0){
+    //       this.subSection=false
+    //     this.questions=this.questionnaireSections[this.sectionIndex].questions
+    //   }
+    if(this.sectionIndex < index){
+    for(let i=0;i<this.questionnaireSections.length;i++){
+        if(index > i){
+            this.questionnaireSections[i]['isStepChange']=true
+        }
+    }
+    }
+    else{
+        for(let i=0;i<this.questionnaireSections.length;i++){
+            if(index <= i){
+                this.questionnaireSections[i]['isStepChange']=false
+            }
+        }
+    }
+
     this.sectionIndex=index
-      let questionLength=this.questionnaireSections[index].questions.length
-      if(index == 0 && !this.subSection){
-        this.questions= this.questionnaireSections[0].questions.slice(0,11)
-      }
-      else if(index !=0){
-          this.subSection=false
-        this.questions=this.questionnaireSections[this.sectionIndex].questions
-      }
-      console.log(this.questions)
+      console.log(this.questionnaireSections)
 
   }
   checkForm(){
@@ -4606,17 +4636,42 @@ export class SmeOnboardingComponent implements OnInit {
       })
   }
   onTextListChange(event,secIndex,quesIndex){
+    this.questionnaireSections[secIndex].questions[quesIndex].response=event.value
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=true
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
   }
 
   checkFormComp(sectionIndex){
       let isFormComp = false
     // if(this.sectionIndex == sectionIndex){
-    this.questionnaireSections[sectionIndex].questions.map((item,index)=>{
-        if(item.required){
-            isFormComp = item.response && item.response.length ?  true : false
+    // this.questionnaireSections[sectionIndex].questions.map((item,index)=>{
+    //     if(item.required &&  item.response.length ){
+    //         isFormComp = true
+    //     }
+    //     else{
+    //         isFormComp = false
+    //     }
+    // })
+    let cond= this.questionnaireSections[sectionIndex].questions
+    for(let i=0;i<cond.length;i++){
+        if(!cond[i].itHasValue){
+            isFormComp=false
+            break;
         }
-    })
-    return isFormComp 
+        // if(cond[i].required && cond[i].response.length || (!cond[i].required)){
+        //      isFormComp=true
+        // }
+        // else if(!cond[i].required){
+        //      isFormComp=true
+        // }
+        else{
+            isFormComp=true
+        }
+    }
+    return isFormComp
+  }
+  checkData(){
+
   }
   onSubSection(type){
       if(type == 'personal'){

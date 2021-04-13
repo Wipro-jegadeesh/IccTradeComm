@@ -23,7 +23,15 @@ export class MultiSelectDropdown implements OnInit {
             }
             this.optionDatas.push(obj)
         })
-
+        if(this.questionDatas.response.length > 0){
+      this.questionDatas.response.map((item)=>{
+            this.optionDatas.map((optionItem)=>{
+                if(optionItem.id == item){
+                    this.selectedItems.push(optionItem)
+                }
+            })
+        })
+    }
         this.dropdownSettings = {
             singleSelection: this.questionDatas.allowMultiple ? false : true,
             defaultOpen: false,

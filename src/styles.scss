@@ -380,11 +380,6 @@ cursor: pointer;
     }
 }
 
-.sign-select{
-    .multiselect-dropdown{
-        margin-left: 0;
-    }
-}
 // 15/10/2021 Temp Css
 table.mat-table.cdk-table {
     width: 100%;
@@ -561,6 +556,15 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     label{
         font-size: 14px;
     }
+}
+.mat-chips-set{
+    .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex{
+        height: unset;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-label{
+        font-size: 14px;
+    font-weight: 400;
+    } 
 }
 .dyn-Formmultiselect-dropdown-dsgn{
     width: 400px;
