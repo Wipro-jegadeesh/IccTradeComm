@@ -77,8 +77,11 @@ import { FinancierOnboardingService } from './components/financier-onboarding/fi
 import { FinanceBiddingAcceptsComponent } from './components/finance-bids-accept/finance-bids-accept.component';
 import { FinancebidsRequestServices } from './components/finance-bids-accept/finance-bids-accept';
 import { FinanceBiddingAcceptsDetailsComponent } from './components/finance-bids-accept/finance-bids-accept-details/finance-bids-accept-details.component';
+import { Repayment_todayServices } from './components/sme-repayment-today/sme-repayment-today-service';
+import { Repayment_todayComponent } from './components/sme-repayment-today/sme-repayment-today.component';
 
-
+import { Repayment_overdueServices } from './components/sme-repayment-overdue/sme-repayment-overdue-service';
+import { Repayment_overdueComponent } from './components/sme-repayment-overdue/sme-repayment-overdue.component';
 import { FinanceBiddingComponent } from './components/finance-bidding/finance-bidding.component';
 import { InvoiceDetailsComponent } from './components/finance-bidding/invoice-details/invoice-details.component';
 import { FinanceBiddingExpiredComponent } from './components/finance-bidding-expired/finance-bidding-expired.component';
@@ -150,6 +153,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FileUploadComponent,
     TextAreaComponent,
     TextListComponent,
+    Repayment_todayComponent,
+    Repayment_overdueComponent,
     FinanceBiddingExpiredComponent,
     InvoiceDetailsExpiredComponent,
     FinanceBiddingRejectedComponent,
@@ -213,7 +218,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
-    FinancierFundedServices,SignupService,
+    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {

@@ -136,10 +136,10 @@
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : 'SGD 0'}}" ></uxg-account-card>
                
                 <uxg-account-card class="curs-pointer" name="Repayments Due Today" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.todayDue}}"
+                matTooltip="{{dashboardTooltips.todayDue}}" (click)="this.navigateAcceptedRepayment()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
                 <uxg-account-card class="curs-pointer" name="Repayments Overdue" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.pastDue}}"
+                matTooltip="{{dashboardTooltips.pastDue}}" (click)="this.navigateRepaymentOverDue()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
             </div>
         </ng-container>

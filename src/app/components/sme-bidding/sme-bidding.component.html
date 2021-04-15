@@ -1,105 +1,11 @@
-<!-- <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated">
-    <button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <div class="uxg-logo" dense></div>
-    <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
-        <button mat-icon-button color="accent" class="uxg-breadcrumb-back">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-        <li class="uxg-h6">SME Bidding</li>
-        <li class="curs-pointer" (click)="goHome()">Home</li>
-    </ul>
-    <span class="fill-remaining-space"></span>
-    <div class="uxg-toolbar-actions">
-        <button mat-icon-button color="neutral">
-            <mat-icon>search</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>notifications</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>help_outline</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>apps</mat-icon>
-        </button>
-    </div>
-    <button mat-icon-button [matMenuTriggerFor]="menuHero">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-    <button mat-icon-button class="uxg-toolbar-icon-menu">
-        <mat-icon>more_vert</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-menu #menuHero="matMenu" class="uxg-user-profile s">
-    <div class="uxg-menu-header">
-        <div class="uxg-avatar-hero-block">
-            <div class="uxg-avatar">U</div>
-            <h6 class="uxg-h6">User</h6>
-            <span class="uxg-caption"></span>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="uxg-menu-footer">
-        <button mat-flat-button color="primary" dense (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon >
-            Logout
-        </button>
-        <button mat-button color="primary" dense>
-            View profile
-        </button>
-    </div>
-</mat-menu>
-<mat-sidenav #sidenav mode="over">
-    <div class="uxg-nav-header">
-        <mat-card class="uxg-card-product" extra-dense>
-            <span class="uxg-h5 uxg-card-product-name">PRO</span>
-        </mat-card>
-    </div>
-    <mat-nav-list class="uxg-nav-list">
-        <a mat-list-item class="uxg-list-item-selected">
-            <mat-icon mat-list-icon>home</mat-icon>
-            <p>Home</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Applications</p>
-            <mat-icon>chevron_right</mat-icon>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>notifications</mat-icon>
-            <p>Notifications</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>extension</mat-icon>
-            <p>Tools</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>settings</mat-icon>
-            <p>Settings</p>
-        </a>
-        <mat-divider></mat-divider>
-    </mat-nav-list>
-    <mat-nav-list class="uxg-link-list">
-        <a mat-list-item>
-            <mat-icon mat-list-icon>help</mat-icon>
-            <p>Help</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>Sign out</p>
-        </a>
-    </mat-nav-list>
-</mat-sidenav> -->
 <div class="app-content {{isOpen}} ">
     <header>
         <br>
         <h5 class="mmt20">Funding Bids</h5>
         <div class="mat-elevation-z8 table-res">
-        <table mat-table [dataSource]="dataSource" >
-            <ng-container matColumnDef="refNo">
-              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="INV_NO">
+              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
               matTooltip="{{financierTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
               <td mat-cell *matCellDef="let element"> 
                 <!-- <mat-chip-list>
@@ -111,7 +17,7 @@
             </ng-container>
           
             <ng-container matColumnDef="invoiceId">
-              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
               matTooltip="{{financierTooltip.invoiceId}}" [matTooltipPosition]="'below'"> Invoice ID </th>
               <td mat-cell *matCellDef="let element"> 
                 <!-- <mat-chip-list>
@@ -123,7 +29,7 @@
             </ng-container>
           
             <ng-container matColumnDef="invoiceAmt">
-              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
               matTooltip="{{financierTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> Invoice Amount </th>
               <td mat-cell *matCellDef="let element"> 
                  <!-- <mat-chip-list>
@@ -160,7 +66,7 @@
             </ng-container>
     
             <ng-container matColumnDef="buyer">
-                <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                 matTooltip="{{financierTooltip.buyerName}}" [matTooltipPosition]="'below'"> Buyer Name </th>
                 <td mat-cell *matCellDef="let element"> 
                    <!-- <mat-chip-list>
@@ -195,7 +101,106 @@
                   </a>
                    </td>
               </ng-container>
-          
+              <ng-container matColumnDef="TopBar">
+                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                  <div style="justify-content:flex-end;cursor: pointer;">
+                  <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+                  <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                    </div>
+                 </th>
+              </ng-container>
+              <ng-container matColumnDef="Search">
+                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                    <h6>Search By</h6>
+                  <div class="row">
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>ICC Tradecomm Ref</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoice Id</mat-label>
+                            <input type="text"  matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoice Amt</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                  
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoiceDate</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invDueDate</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>buyerName</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                    <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                      </button>&nbsp;
+                      <button  mat-raised-button style="color: #5e52a1;">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                      </button>
+                  </div>
+                 
+                 </th>
+              </ng-container>
+              <ng-container matColumnDef="Filter">
+                <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>InvoiceAmount</label>
+                            <div class="custom-slider">
+                            <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                          </div>
+                          </div>
+                          <div class="col-sm-3" style="padding-top: 22px;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>InvoiceDate</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                  <input matStartDate placeholder="Start date">
+                                  <input matEndDate placeholder="End date">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                              </mat-form-field>
+                          </div>
+                       
+                    </div>
+                      <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                        <button  mat-raised-button style="color: #5e52a1;">
+                            <mat-icon #tooltip="matTooltip"
+                            matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                          </button>&nbsp;
+                          <button  mat-raised-button style="color: #5e52a1;">
+                            <mat-icon #tooltip="matTooltip"
+                            matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                          </button>
+                      </div>
+                 </th>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+              <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+              <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> 
             <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>

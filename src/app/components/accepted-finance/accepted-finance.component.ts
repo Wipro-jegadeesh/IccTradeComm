@@ -1,20 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-accepted-finance',
-//   templateUrl: './accepted-finance.component.html',
-//   styleUrls: ['./accepted-finance.component.scss']
-// })
-// export class AcceptedFinanceComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
-
 
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -26,16 +9,9 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import { AcceptedFinanceServices } from './accepted-finance-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
+import { Options, LabelType } from '@angular-slider/ngx-slider';
+import {MatSort} from '@angular/material/sort';
 
-// const ELEMENT_DATA: any[] = [
-//   {
-//     Name: '',
-//     Position: '',
-//     Address: '',
-//     TelephoneNo: '',
-//     Email: ''
-//   }
-// ];
 
 export interface financeForBiddingData {
   invId: String;
@@ -72,22 +48,14 @@ export interface biddingDetails {
   'financeOfferAmt' : String, 'ccy' : String, 'fxRate' : String, 'margin' : String, 'netAmtDisc' : String,'discAmt' : String,'discRate' : String,'offerExpPeriod' : String}
 const BIDDING_DATA: biddingDetails[] = [];
 
-// @Component({
-//   selector: 'app-sme-financefor-bidding',
-//   templateUrl: './sme-financefor-bidding.component.html',
-//   styleUrls: ['./sme-financefor-bidding.component.scss']
-// })
-
-// export class SmeFinanceforBiddingComponent implements OnInit {
-
-  @Component({
+@Component({
   selector: 'app-accepted-finance',
   templateUrl: './accepted-finance.component.html',
   styleUrls: ['./accepted-finance.component.scss']
 })
 export class AcceptedFinanceComponent implements OnInit {
 
-  displayedColumns: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 
@@ -103,9 +71,8 @@ export class AcceptedFinanceComponent implements OnInit {
   displayedColumnsThree: string[] = [
     'id','finId','invoiceId','fxRate','baseCcyAmt' ,'fundablePercent' ,'baseCcyFundingAmt' ,'repaymentDate' ,
     'baseCcyNetAmtPayable', 'annualYeild' ]
-  // ['financierRef', 'financier', 'invoiceAmt',  'marginPercent',   'financierAmt',   'discRate', 'discAmt',  'netAmtDisc',    'fundedAmt', 'fxRate', 'dateOfFunding', 'tenorDays', 
-  //   'dueDate', 'paymentDate', 'relInvRef',  'relBidRef'];
 
+    @ViewChild(MatSort) sort: MatSort;
 
   isOpen = ""
   mobileScreen = false;
@@ -126,13 +93,35 @@ export class AcceptedFinanceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
     }
-  }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
+  
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
     private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
@@ -159,6 +148,7 @@ export class AcceptedFinanceComponent implements OnInit {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
     })
 
 
@@ -167,7 +157,32 @@ export class AcceptedFinanceComponent implements OnInit {
     
 
   }
-
+  onResize() {
+    if (window.innerWidth < 415) {
+      this.mobileScreen = true;
+    } else {
+      this.mobileScreen = false;
+    }
+  }
+  SearchAPI() {
+    console.log(this.SearchModel, "SearchModel")
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =
