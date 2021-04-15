@@ -301,6 +301,12 @@ export class SmeDashboardComponent implements OnInit {
     navigateAcceptedFinance(){
       this.router.navigateByUrl('/accepted-finance');
     }
+    navigateAcceptedRepayment(){
+      this.router.navigateByUrl('/repayment_today');
+    }
+    navigateRepaymentOverDue(){
+      this.router.navigateByUrl('/repayment_overdue');
+    }
     logout(){
       this.authenticationService.logout()
     }

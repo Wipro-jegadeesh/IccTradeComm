@@ -1,21 +1,22 @@
 <div class="app-content ">
     <header class="mm0p0">
         <br>
-        <h5 class="mmt20">Accepted Finance</h5>
+        <h5>Repayment Due Today</h5>
         <div class="table-res mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
-          <ng-container matColumnDef="invoiceRef">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Id  </th>
+            <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="invId">
+            <th mat-header-cell *matHeaderCellDef> Invoice Id  </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip color="primary" selected (click)="openModal($event,template,element)"> -->
-                         {{element.invoiceRef}} 
+                         {{element.invoiceNo}} 
                         <!-- </mat-chip>
                  </mat-chip-list> -->
              </td>
           </ng-container>
-          <ng-container matColumnDef="invoiceAmt">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Amount  </th>
+
+          <ng-container matColumnDef="invAmt">
+            <th mat-header-cell *matHeaderCellDef> Invoice Amount  </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip >  -->
@@ -24,8 +25,9 @@
                  </mat-chip-list> -->
              </td>
           </ng-container>
+        
           <ng-container matColumnDef="smeId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> SME Name </th>
+            <th mat-header-cell *matHeaderCellDef> SME Name </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip> -->
@@ -34,8 +36,10 @@
                  </mat-chip-list> -->
              </td>
           </ng-container>
+          
+        
           <ng-container matColumnDef="buyerName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </th>
+            <th mat-header-cell *matHeaderCellDef> Buyer Name </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -44,7 +48,9 @@
                   </mat-chip-list> -->
               </td>
           </ng-container>
-          <ng-container matColumnDef="invoiceDate">
+        
+        
+          <ng-container matColumnDef="invDate">
             <th mat-header-cell *matHeaderCellDef> Inv Date  </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
@@ -54,6 +60,7 @@
                   </mat-chip-list> -->
               </td>
           </ng-container>
+        
           <ng-container matColumnDef="invDueDate">
             <th mat-header-cell *matHeaderCellDef> Inv Due date </th>
             <td mat-cell *matCellDef="let element"> 
@@ -64,6 +71,7 @@
                   </mat-chip-list> -->
               </td>
           </ng-container>
+  
           <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef> Status </th>
               <td mat-cell *matCellDef="let element"> 
@@ -73,8 +81,9 @@
                         <!-- </mat-chip>
                     </mat-chip-list> -->
                 </td>
-          </ng-container>   
-          <ng-container matColumnDef="action">
+            </ng-container>   
+            
+            <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let element"> 
                   <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
@@ -85,103 +94,58 @@
                       matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
                   </a>
                    </td>
-          </ng-container>
-          <ng-container matColumnDef="TopBar">
-            <th colspan="8" mat-header-cell *matHeaderCellDef> 
-              <div style="justify-content:flex-end;cursor: pointer;">
-              <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-              <span (click)="filterDiv()" class="material-icons">filter_list</span>
-                </div>
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="Search">
-            <th colspan="8" mat-header-cell *matHeaderCellDef> 
-                <h6>Search By</h6>
-              <div class="row">
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>invoiceRef</mat-label>
-                        <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>invoiceAmt</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>smeId</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>buyerName</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.buyerName" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>invoiceDate</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>invDueDate</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invDueDate" matInput />
-                      </mat-form-field>
-                  </div>
-              </div>
-              <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
-                    <mat-icon #tooltip="matTooltip"
-                    matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
-                  </button>&nbsp;
-                  <button  mat-raised-button style="color: #5e52a1;">
-                    <mat-icon #tooltip="matTooltip"
-                    matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
-                  </button>
-              </div>
-             
-             </th>
-          </ng-container>
-          <ng-container matColumnDef="Filter">
-            <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label>InvoiceAmount</label>
-                        <div class="custom-slider">
-                        <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
-                      </div>
-                      </div>
-                      <div class="col-sm-3" style="padding-top: 22px;">
-                        <mat-form-field appearance="fill">
-                            <mat-label>InvoiceDate</mat-label>
-                            <mat-date-range-input [rangePicker]="picker">
-                              <input matStartDate placeholder="Start date">
-                              <input matEndDate placeholder="End date">
-                            </mat-date-range-input>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker #picker></mat-date-range-picker>
+              </ng-container>
+              <ng-container matColumnDef="TopBar">
+                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                  <div style="justify-content:flex-end;cursor: pointer;">
+                  <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+                  <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                    </div>
+                 </th>
+              </ng-container>
+              <ng-container matColumnDef="Search">
+                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                    <h6>Search By</h6>
+                  <div class="row">
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoiceRef</mat-label>
+                            <input type="text"matInput />
                           </mat-form-field>
                       </div>
-                      <div class="col-sm-3" style="padding-top: 22px;">
-                        <mat-form-field appearance="fill">
-                            <mat-label>InvDueDate</mat-label>
-                            <mat-date-range-input [rangePicker]="picker">
-                              <input matStartDate placeholder="Start date">
-                              <input matEndDate placeholder="End date">
-                            </mat-date-range-input>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker #picker></mat-date-range-picker>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoiceAmt</mat-label>
+                            <input type="text"  matInput />
                           </mat-form-field>
                       </div>
-                </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>smeId</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>buyerName</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invoiceDate</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-sm-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>invDueDate</mat-label>
+                            <input type="text"matInput />
+                          </mat-form-field>
+                      </div>
+                  </div>
                   <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                    <button  mat-raised-button style="color: #5e52a1;">
+                    <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                         <mat-icon #tooltip="matTooltip"
                         matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
                       </button>&nbsp;
@@ -190,19 +154,53 @@
                         matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                       </button>
                   </div>
-             </th>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
-          <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+                 
+                 </th>
+              </ng-container>
+              <ng-container matColumnDef="Filter">
+                <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>InvoiceAmount</label>
+                            <div class="custom-slider">
+                            <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                          </div>
+                          </div>
+                          <div class="col-sm-3" style="padding-top: 22px;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>InvoiceDate</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                  <input matStartDate placeholder="Start date">
+                                  <input matEndDate placeholder="End date">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                              </mat-form-field>
+                          </div>
+                       
+                    </div>
+                      <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                        <button  mat-raised-button style="color: #5e52a1;">
+                            <mat-icon #tooltip="matTooltip"
+                            matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                          </button>&nbsp;
+                          <button  mat-raised-button style="color: #5e52a1;">
+                            <mat-icon #tooltip="matTooltip"
+                            matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                          </button>
+                      </div>
+                 </th>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+              <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+              <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> 
+          <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>
   </div>
-
   <div>   
     <ng-template #template>
        <div class="modal-header">
@@ -384,7 +382,16 @@
                         <th mat-header-cell *matHeaderCellDef scope="column">Description of Goods</th>
                         <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                     </ng-container>
-    
+        
+                    <!-- <ng-container matColumnDef="idNo">
+                        <th mat-header-cell *matHeaderCellDef scope="column">ID No</th>
+                        <td mat-cell *matCellDef="let element">{{ element.idNo }}</td>
+                    </ng-container> -->
+        
+                    <!-- <ng-container matColumnDef="dateOfInvoice">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Date Of Invoice</th>
+                        <td mat-cell *matCellDef="let element">{{ element.dateOfInvoice }}</td>
+                    </ng-container> -->
         
                     <ng-container matColumnDef="quantity">
                         <th mat-header-cell *matHeaderCellDef scope="column">Quantity</th>
@@ -401,6 +408,13 @@
                         <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                     </ng-container>
         
+                   
+        
+                    <!-- <ng-container matColumnDef="netAmtPay">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
+                        <td mat-cell *matCellDef="let element">{{ element.netAmtPay }}</td>
+                    </ng-container>
+         -->
                     <ng-container matColumnDef="taxRate">
                         <th mat-header-cell *matHeaderCellDef scope="column">Tax Rate</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
@@ -414,6 +428,15 @@
                         <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                     </ng-container>
+                    <!-- <ng-container matColumnDef="taxAmountccy">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
+                        <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="totalccy">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Total Ccy</th>
+                        <td mat-cell *matCellDef="let element">{{ element.totalCcy }}</td>
+                    </ng-container> -->
 
                     <ng-container matColumnDef="total">
                         <th mat-header-cell *matHeaderCellDef scope="column">Total</th>
@@ -423,72 +446,6 @@
         
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#B4A6EA"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
-                </table>
-                </div>
-        </mat-expansion-panel>
-        </mat-accordion>
-
-
-
-
-        <!-- //////////////////////////////////////////////////////// -->
-
-
-        <mat-accordion>
-            <mat-expansion-panel>
-            </mat-expansion-panel>
-            <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Payment Details
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div style="overflow-x:auto;">
-                <table mat-table [dataSource]="dataSourcePayment">
-        
-                    <ng-container matColumnDef="paymentRef">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Id</th>
-                        <td mat-cell *matCellDef="let element">{{ element.paymentRef }}</td>
-                    </ng-container>
-    
-        
-                    <ng-container matColumnDef="paymentType">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Type</th>
-                        <td mat-cell *matCellDef="let element">{{ element.paymentType }}</td>
-                    </ng-container>
-        
-                    <ng-container matColumnDef="paymentDate">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Date</th>
-                        <td mat-cell *matCellDef="let element">{{ element.paymentDate }}</td>
-                    </ng-container>
-        
-                    <ng-container matColumnDef="paymentAmount">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.paymentAmount }}</td>
-                    </ng-container>
-        
-                    <ng-container matColumnDef="benName">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Ben Name</th>
-                        <td mat-cell *matCellDef="let element">{{ element.benName }}</td>
-                    </ng-container>
-        
-                    <ng-container matColumnDef="benAccount">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Ben Account</th>
-                        <td mat-cell *matCellDef="let element">{{ element.benAccount }}</td>
-                    </ng-container>
-                    <ng-container matColumnDef="benIfsc">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Ben IFSC</th>
-                        <td mat-cell *matCellDef="let element">{{ element.benIfsc }}</td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="netAmount">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.netAmount }}</td>
-                    </ng-container>
-                    
-        
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsPayment" style="background-color:#B4A6EA"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsPayment"></tr>
                 </table>
                 </div>
         </mat-expansion-panel>

@@ -240,51 +240,24 @@ mat-card-content[_ngcontent-njk-c181]
     background:"";
     font-size: 16px;
   }
-
-  //7-Apr css
-  @media only screen and (max-width: 1025px)
-   {
-       header{margin: 0px;padding: 0px;}
-       .res-top
-       {
-          top: 0px!important;
-       }
-       .table-res
-       {
-           overflow-x: auto;height: 100%;
-       }
-       .mmt20{margin-top: 45px;}
-   }
-  
-   @media only screen and (max-width: 768px)
-   {
-     
-      .table-res table
-      {
-          margin: 11px 10px 18px 5px;
-      }
-      .app-content
-      {
-          padding: 20px;
-      }  
-  
-   }
-
-   .searchInput{
-    th{
-        padding-top: 10px;
-        .mat-form-field-infix{
-            width: 110px;
-        }
-        .mat-form-field-flex{
-            max-width: 110px!important;
-        }
-    }
+  @media only screen and (max-width: 1030px)
+{
+.mmt20{margin-top: 20px;}
+.mm0p0
+{
+    margin: 0px!important;
+    padding: 0px!important;
 }
-.class2{
-    min-width: 233px;
-    vertical-align: middle;
-    position: relative;
-    padding-top:30px !important;
-  
-  }
+.table-res
+{
+    overflow-x: auto;
+    height: 100%;
+} 
+.table-res table
+{
+    margin: 11px 10px 18px 5px!important;
+    // top: 30px!important;
+}
+
+}
+

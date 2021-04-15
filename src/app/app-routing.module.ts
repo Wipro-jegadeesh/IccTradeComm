@@ -9,6 +9,7 @@ import { FinancierOnboardingComponent } from './components/financier-onboarding/
 import { FinancierOnboardingListComponent } from './components/financier-onboarding/financier-onboarding-list/financier-onboarding-list.component';
 import { FinancierDashboardComponent } from './components/financier-dashboard/financier-dashboard.component';
 import { SmeBiddingComponent } from './components/sme-bidding/sme-bidding.component';
+import { Repayment_todayComponent } from './components/sme-repayment-today/sme-repayment-today.component';
 import { SmeBiddingDetailsComponent } from './components/sme-bidding/sme-bidding-details/sme-bidding-details.component';
 import { InvoiceRequestComponent } from './components/invoice-request/invoice-request.component';
 import { FinanceBiddingComponent } from './components/finance-bidding/finance-bidding.component';
@@ -42,8 +43,9 @@ const routes: Routes = [
   { path: 'sme-finance-for-bidding', component: SmeFinanceforBiddingComponent , data : {"HeaderName" : "Finance For Bidding", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'accepted-finance', component: AcceptedFinanceComponent , data : {"HeaderName" : "Accepted Finance", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'invoice-request', component: InvoiceRequestComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
-
-
+  { path: 'repayment_today', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Today", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+  { path: 'repayment_overdue', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Over Due", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+  
   { path: 'financier-onboarding', component: FinancierOnboardingComponent ,  data : {"HeaderName" : "Financier Onboarding","headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'financier-onboarding-list', component: FinancierOnboardingListComponent ,  data : {"HeaderName" : "Financier Onboarding","headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'financier-onboarding/:edit/:id', component: FinancierOnboardingComponent ,  data : {"HeaderName" : "Financier Onboarding","headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},

@@ -10,6 +10,7 @@ import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
 import { MatPaginator } from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-finance-bidding-rejected',
@@ -44,6 +45,7 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   isOpen = '';
   bidpanelOpenState = false;
   id = ""
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
@@ -103,7 +105,7 @@ rejectQustionTwo = {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
-
+      this.dataSource.sort = this.sort;
     })
   }
  

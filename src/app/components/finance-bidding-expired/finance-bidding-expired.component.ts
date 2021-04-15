@@ -10,6 +10,7 @@ import { FinanceBiddingService } from "../../service/finance_bidding/finance-bid
 import { FINANCIERDASHBOARDCONSTANTS } from "../../shared/constants/constants";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options,LabelType } from '@angular-slider/ngx-slider';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: "app-finance-bidding-expired",
@@ -76,7 +77,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
   isOpen = "";
   bidpanelOpenState = false;
   id = "";
-
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild("accountList", { read: ElementRef })
   @HostListener("window:resize", ["$event"])
@@ -97,6 +98,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
         console.log(resp);
         this.dataSource = new MatTableDataSource(resp);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     );
   }

@@ -14,88 +14,10 @@ import { SmeBiddingServices } from './sme-bidding-services';
 import {INVOICEDETAILSCONSTANTS} from '../../shared/constants/constants';
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
+import { Options, LabelType } from '@angular-slider/ngx-slider';
+import {MatSort} from '@angular/material/sort';
 
-const ELEMENT_DATA: any[] = [
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-];
-const DATA_ONE: any[] = [
-  {
-    SNo: 1,
-    DescGoods: 'Steel Rod',
-    IdNo: 'a456',
-    Qty: '100t',
-    Rate: '678.0',
-    Amt: 67800,
-    DiscAmt: '-',
-    NetAmt: 67800,
-    TaxRate: 2,
-    TaxAmt: 1356,
-    Total: 63156
-  },
-  {
-    SNo: 2,
-    DescGoods: 'Nuts',
-    IdNo: 'D435',
-    Qty: '25t',
-    Rate: '876.0',
-    Amt: 21900,
-    DiscAmt: 900,
-    NetAmt: 21000,
-    TaxRate: 2,
-    TaxAmt: 420,
-    Total: 21420
-  }
-];
-const DATA_TWO: any[] = [
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A',
-  },
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A'
-  }
-];
-const DATA_INV_DETAILS: any[] = [
-  {
-    InvoiceDate: "13/12/2025",
-    InvoiceID: 'SGD01',
-    Buyer: "Jega",
-    Amount: 300,
-    Seller:'jega'
-  }
-];
+
 @Component({
   selector: 'app-sme-bidding',
   templateUrl: './sme-bidding.component.html',
@@ -104,13 +26,13 @@ const DATA_INV_DETAILS: any[] = [
 
 export class SmeBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
-  tabledataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['INV_NO', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
+  tabledataSource;
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','position1','name1'];
   dataSource ;
-    isOpen = ""
-    mobileScreen = false;
+  isOpen = ""
+  mobileScreen = false;
   end = false;
   start = true;
   currentPage = 0;
@@ -125,6 +47,7 @@ export class SmeBiddingComponent implements OnInit {
   public accountList: ElementRef<any>;
   moment: any = moment;
 
+  @ViewChild(MatSort) sort: MatSort;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -139,9 +62,9 @@ export class SmeBiddingComponent implements OnInit {
   
   constructor(public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService
     ,private financierService: FinancierService,private smeBiddingServices : SmeBiddingServices) { }
-  dataSourceOne = new MatTableDataSource(DATA_ONE); //data
+  dataSourceOne; //data
   dataSourceTwo; //data
-  dataSourceInvoiceDetails = new MatTableDataSource(DATA_INV_DETAILS); //data
+  dataSourceInvoiceDetails; //data
 
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
 
@@ -173,6 +96,35 @@ export class SmeBiddingComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   goods_array : object [];
+
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {}
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -181,9 +133,28 @@ export class SmeBiddingComponent implements OnInit {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
     })
   }
-
+  SearchAPI() {
+    console.log(this.SearchModel, "SearchModel")
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =
@@ -231,12 +202,7 @@ export class SmeBiddingComponent implements OnInit {
           { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status ,'smeId' : resp.smeId}
         ]);
        })
-     
-      // this.SmeFinancierForBiddingServices.getFinanceBiddingLists(data.invId).subscribe(resp => {
-      //   if(resp){
-      //     this.dataSourceThree = new MatTableDataSource(resp);
-      //   }
-      // })
+    
     }
     saveFinBid(){
       this.bidDetails[0]['smeId'] = localStorage.getItem("userId")

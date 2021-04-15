@@ -1,19 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-financier-funded',
-//   templateUrl: './financier-funded.component.html',
-//   styleUrls: ['./financier-funded.component.scss']
-// })
-// export class FinancierFundedComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
 
 
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
@@ -27,16 +11,7 @@ import { FinancierFundedServices } from './financier-funded-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
-
-// const ELEMENT_DATA: any[] = [
-//   {
-//     Name: '',
-//     Position: '',
-//     Address: '',
-//     TelephoneNo: '',
-//     Email: ''
-//   }
-// ];
+import {MatSort} from '@angular/material/sort';
 
 export interface financeForBiddingData {
   invoiceRef: String;
@@ -174,7 +149,7 @@ export class FinancierFundedComponent implements OnInit {
   ischecked = "true"
   bidpanelOpenState = false;
   moment: any = moment;
-
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
@@ -222,6 +197,7 @@ export class FinancierFundedComponent implements OnInit {
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
 
     })
 

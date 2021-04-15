@@ -3,11 +3,11 @@
       <br>
         <div class="uxg-h4" style="text-align: center">Offer Expired</div>
         <div class="mat-elevation-z8 table-res">
-          <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
+          <table mat-table [dataSource]="dataSource" matSort (mouseenter)="isHover=true" 
           (mouseleave)="isHover=false">
             <ng-container matColumnDef="BIDID">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-              matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'">BID ID</th>
+              matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>BID ID</th>
               <td mat-cell *matCellDef="let element">
               {{ element.id }}
               </td>
@@ -15,7 +15,7 @@
 
             <ng-container matColumnDef="Invoice Amount">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-              matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'">Invoice Amount</th>
+              matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice Amount</th>
               <td mat-cell *matCellDef="let element">
               {{ element.invoiceAmt }} 
                 </td>
@@ -23,7 +23,7 @@
       
             <ng-container matColumnDef="BIDing Amount">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-              matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Bidding Amount</th>
+              matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>Bidding Amount</th>
               <td mat-cell *matCellDef="let element">
               {{ element.baseCcyNetAmtPayable }}
                 </td>
