@@ -217,14 +217,10 @@ export class FinancierFundedComponent implements OnInit {
 
     })
 
-
-   
-
-    
-
   }
   SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+    this.FinancierFundedServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){
