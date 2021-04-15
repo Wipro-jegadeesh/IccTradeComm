@@ -11,18 +11,22 @@
     <button class="ques-sec-btn section-title" [ngClass]="{'selbut': secIndex == sectionIndex}" type="button" (click)="onSectionClick(secIndex)">{{sections.label}}</button>
   </div> -->
 
-  <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" (click)="onSectionClick(secIndex)">
+  <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" >
     <div>
-      <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}} </div>
-      <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div>
+      <div class="circle" *ngIf="!sections.itHasValue ">{{secIndex+1}} </div>
+      <!-- <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div> -->
       <div class="circle sec-cmlp" *ngIf="sections.itHasValue"><mat-icon>check_circle</mat-icon> </div>
     </div>
     <div>
-      <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange">{{sections.label}}</div>
-      <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange">{{sections.label}}</div>
-      <div class="title sec-cmlp" *ngIf="sections.itHasValue ">{{sections.label}}</div>
-      <!-- <div class="caption" [ngClass]="{subSecSel: !subSection}" *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('personal')"> 1.1  Personal Details</div>
-      <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
+      <div class="title" *ngIf="!sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+      <!-- <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div> -->
+      <div class="title sec-cmlp" *ngIf="sections.itHasValue " (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+
+      <!-- SUB SECTIONS -->
+      <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
+        <div class="caption" *ngFor="let subSection of sections.subSections;let subIndex=index"  (click)="onSubSection(secIndex,'subSection')">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</div>
+      </div>
+      <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
     </div>
   </div>
   <!-- <div class="step step-active">
@@ -84,7 +88,8 @@
 </div>
 
 <div class="submit">
-  <button mat-flat-button  color="primary" [disabled]="disableSubbtn" type="button" (click)="onSubmit()">
+  <button mat-flat-button  color="primary" [disabled]="checkSectionComp()"  type="button" (click)="onSubmit()">
+    <!-- [disabled]="disableSubbtn" -->
     <mat-icon>arrow_right_alt</mat-icon>
     Submit
   </button>
