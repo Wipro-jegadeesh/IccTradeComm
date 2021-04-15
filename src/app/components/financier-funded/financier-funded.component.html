@@ -9,7 +9,7 @@
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip color="primary" selected (click)="openModal($event,template,element)"> -->
-                         {{element.invoiceRef}} 
+                         {{element.invoiceNo}} 
                         <!-- </mat-chip>
                  </mat-chip-list> -->
              </td>
@@ -104,14 +104,14 @@
                         <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
                       </mat-form-field>
                   </div>
-                  <div class="col-sm-2">
+                  <!-- <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>invoiceAmt</mat-label>
                         <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
                       </mat-form-field>
-                  </div>
+                  </div> -->
                   <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline"> 
                         <mat-label>smeId</mat-label>
                         <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
                       </mat-form-field>
@@ -123,15 +123,27 @@
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field  appearance="outline">
                         <mat-label>invoiceDate</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                        <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>invoiceDate</mat-label>
+                        <input type="text" [(ngModel)]="SearchModel.invoiceDate" matInput />
+                      </mat-form-field> -->
                   </div>
                   <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
+                    <!-- <mat-form-field appearance="outline">
                         <mat-label>invDueDate</mat-label>
                         <input type="text" [(ngModel)]="SearchModel.invDueDate" matInput />
+                      </mat-form-field> -->
+                      <mat-form-field  appearance="outline">
+                        <mat-label>invoice Date</mat-label>
+                        <input matInput readonly="true"  [matDatepicker]="picker1"  [(ngModel)]="SearchModel.invDueDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
                       </mat-form-field>
                   </div>
               </div>
@@ -140,7 +152,7 @@
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
                   </button>&nbsp;
-                  <button  mat-raised-button style="color: #5e52a1;">
+                  <button  mat-raised-button style="color: #5e52a1;"  (click)="ResetAPI()">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                   </button>
