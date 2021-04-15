@@ -556,6 +556,11 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     label{
         font-size: 14px;
     }
+    .number-field{
+    .mat-form-field-label-wrapper{
+        height: 50px !important;
+    }
+}
 }
 .mat-chips-set{
     .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex{
@@ -973,3 +978,55 @@ input.custom-autofill {
         }
         
       }
+
+
+// CUSTOM FILE UPLOAD BUTTON
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .filebtn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .upload-btn-wrapper input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+.file-upload{
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+  .file-label{
+      width: 260px;
+  display: flex;
+  overflow-x: auto;
+  margin-left: 10px;
+  label{
+    padding: 5px 9px;
+    background: #e6e1f9;
+    font-size: 12px;
+    border-radius: 7px;
+    margin-right: 8px;
+    white-space: nowrap;
+    span{
+        cursor: pointer;
+        i{
+            color:red;
+        }
+    }
+  }
+  }
+}
