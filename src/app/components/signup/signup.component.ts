@@ -47,7 +47,10 @@ this.optionDatas = COUNTRYNAMES
       allowSearchFilter: true,
       showCheckbox: false,
       position:'bottom',
-      text:'Select Country'
+      text:'Select Country',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
     };
     this.selectedItems=[]
    

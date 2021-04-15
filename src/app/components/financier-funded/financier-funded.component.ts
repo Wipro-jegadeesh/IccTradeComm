@@ -65,17 +65,14 @@ export interface goodsDetails {
 const GOODS_DATA: goodsDetails[] = [];
 
 export interface paymentDetails {
-  descGoods: String;
-  idNo: String;
-  dateOfInvoice: String;
-  quantity: String;
-  rate: String;
-  amt: String;
-  discAmt: String;
-  netAmtPay: String;
-  taxRate: String;
-  taxAmount: String;
-  total: String;
+  paymentRef: String;
+  paymentType: String;
+  paymentDate : String;
+  paymentAmount: String;
+  benName: String;
+  benAccount: String;
+  benIfsc: String;     
+  netAmount: String;
 }
 const PAYMENT_DATA: paymentDetails[] = [];
 
@@ -150,7 +147,18 @@ export class FinancierFundedComponent implements OnInit {
     }
   };
 
-  displayedColumnsPayment: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
+  displayedColumnsPayment: string[] = [  
+     "paymentRef",
+  "paymentType",
+  "paymentDate" ,
+  "paymentAmount",
+  "benName",
+  "benAccount",
+  "benIfsc",     
+  "netAmount",
+
+    // 'descGoods', 'quantity','taxRate','amt','rate','total'
+  ];
   dataSourcePayment = new MatTableDataSource(PAYMENT_DATA); //data
 
 
@@ -296,25 +304,24 @@ export class FinancierFundedComponent implements OnInit {
     })
 
 
-    this.FinancierFundedServices.getInvoiceRequestLists(data.id).subscribe(resp => {
-      let status = "";
-      if (resp.status == "I") {
-        status = "Initiated"
-      }
-      else if (resp.status == "A") {
-        status = "Waiting for bid"
-      }
-      else if (resp.status == "B") {
-        status = "Bid Created"
-      }
-      else {
-        status = "Financed Successfully"
-      }
-    
+   
+    this.dataSourcePayment = new MatTableDataSource( [{
+      "paymentRef": "PAY123",
+      "paymentType": "online",
+      "paymentDate": "1-4-2021" ,
+      "paymentAmount": "2000",
+      "benName": "test",
+      "benAccount":"AC1234" ,
+      "benIfsc":"123TY132",     
+      "netAmount": "200"
+  }])
+   
 
-      this.dataSourcePayment = new MatTableDataSource(resp.goodsDetails);
+    // this.FinancierFundedServices.getInvoiceRequestLists(data.id).subscribe(resp => {
+
+    //   this.dataSourcePayment = new MatTableDataSource(resp.goodsDetails);
       
-    })
+    // })
 
 
     

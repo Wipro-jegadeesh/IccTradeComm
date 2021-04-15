@@ -446,44 +446,44 @@
                 <div style="overflow-x:auto;">
                 <table mat-table [dataSource]="dataSourcePayment">
         
-                    <ng-container matColumnDef="descGoods">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Description of Goods</th>
-                        <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
+                    <ng-container matColumnDef="paymentRef">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Id</th>
+                        <td mat-cell *matCellDef="let element">{{ element.paymentRef }}</td>
                     </ng-container>
     
         
-                    <ng-container matColumnDef="quantity">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Quantity</th>
-                        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+                    <ng-container matColumnDef="paymentType">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Type</th>
+                        <td mat-cell *matCellDef="let element">{{ element.paymentType }}</td>
                     </ng-container>
         
-                    <ng-container matColumnDef="rate">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Amt Ccy</th>
-                        <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
+                    <ng-container matColumnDef="paymentDate">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Date</th>
+                        <td mat-cell *matCellDef="let element">{{ element.paymentDate }}</td>
                     </ng-container>
         
-                    <ng-container matColumnDef="amt">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
+                    <ng-container matColumnDef="paymentAmount">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Payment Amount</th>
+                        <td mat-cell *matCellDef="let element">{{ element.paymentAmount }}</td>
                     </ng-container>
         
-                    <ng-container matColumnDef="taxRate">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Rate</th>
-                        <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
+                    <ng-container matColumnDef="benName">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Ben Name</th>
+                        <td mat-cell *matCellDef="let element">{{ element.benName }}</td>
                     </ng-container>
         
-                    <ng-container matColumnDef="taxAmount">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
+                    <ng-container matColumnDef="benAccount">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Ben Account</th>
+                        <td mat-cell *matCellDef="let element">{{ element.benAccount }}</td>
                     </ng-container>
-                    <ng-container matColumnDef="discAmt">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
-                        <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
+                    <ng-container matColumnDef="benIfsc">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Ben IFSC</th>
+                        <td mat-cell *matCellDef="let element">{{ element.benIfsc }}</td>
                     </ng-container>
                     
-                    <ng-container matColumnDef="total">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Total</th>
-                        <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+                    <ng-container matColumnDef="netAmount">
+                        <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
+                        <td mat-cell *matCellDef="let element">{{ element.netAmount }}</td>
                     </ng-container>
                     
         
