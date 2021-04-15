@@ -204,8 +204,19 @@ export class FinancierFundedComponent implements OnInit {
   }
   SearchAPI(){
     this.FinancierFundedServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
     })
   }
+  ResetAPI(){
+    this.SearchModel={};
+    this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
+  }
+
   searchDiv(){
     if(this.filterDivOpen === true){
     this.searchDivOpen = !this.searchDivOpen
