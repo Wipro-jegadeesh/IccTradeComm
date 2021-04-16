@@ -5,27 +5,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
-const ELEMENT_DATA: any[] = [
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-];
-
-interface ICity{
-  item_id: number;
-  item_text: string;
-}
 @Component({
   selector: 'app-sme-onboarding',
   templateUrl: './sme-onboarding.component.html',
@@ -33,14 +12,6 @@ interface ICity{
 })
 export class SmeOnboardingComponent implements OnInit {
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  displayedColumns: string[] = ['Name', 'Position', 'Address', 'TelephoneNo', 'Email'];
-
-  sName: string;
-  taxId: string;
-  
-  state: string;
-  country: string;
   invalidLogin = false
   getFormInput
   questions=[]
@@ -49,24 +20,12 @@ export class SmeOnboardingComponent implements OnInit {
   smeForm1:FormGroup
   disableSubbtn=true
   subSection=false
-  // smeForm2:FormGroup
-  // smeForm3:FormGroup
-  // smeForm4:FormGroup
-  // smeForm5:FormGroup
-  // smeForm6:FormGroup
-  // smeForm7:FormGroup
-  // smeForm8:FormGroup
 
   smeForm:FormGroup
 
   constructor(private router: Router,
     private fb:FormBuilder,private toastr: ToastrService) { }
 
-  
-  name = "Angular";
-  cities: Array<ICity> = [];
-  selectedItems: Array<ICity> = [];
-  dropdownSettings: IDropdownSettings = {};
   radioChecked={}
 
   ngOnInit() {
@@ -4062,7 +4021,7 @@ export class SmeOnboardingComponent implements OnInit {
                     "questions": [
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 1,
                             "alias": "customer-business-name",
                             "label": "Customer business name",
                             "description": null,
@@ -4077,7 +4036,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 2,
                             "alias": "address-line-1",
                             "label": "Address line 1",
                             "description": null,
@@ -4092,7 +4051,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 3,
                             "alias": "address-line-2",
                             "label": "Address line 2",
                             "description": null,
@@ -4107,7 +4066,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 4,
                             "alias": "city",
                             "label": "Town/city",
                             "description": null,
@@ -4122,7 +4081,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 5,
                             "alias": "postcode",
                             "label": "Postcode",
                             "description": null,
@@ -4137,7 +4096,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionMultipleChoiceDto",
-                            "number": null,
+                            "number": 6,
                             "alias": "country",
                             "label": "Country",
                             "description": null,
@@ -5141,7 +5100,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 7,
                             "alias": "contact-name",
                             "label": "Contact name",
                             "description": null,
@@ -5156,7 +5115,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 8,
                             "alias": "contact-email",
                             "label": "Contact email",
                             "description": null,
@@ -5171,7 +5130,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 9,
                             "alias": "contact-telephone",
                             "label": "Contact telephone",
                             "description": null,
@@ -5186,7 +5145,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionTextDto",
-                            "number": null,
+                            "number": 10,
                             "alias": "customer-company-registration-number",
                             "label": "Customer company registration number",
                             "description": null,
@@ -5201,7 +5160,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionFileListDto",
-                            "number": null,
+                            "number": 11,
                             "alias": "customer-company-accounts",
                             "label": "Customer company accounts",
                             "description": null,
@@ -5218,7 +5177,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionFileListDto",
-                            "number": null,
+                            "number": 12,
                             "alias": "copy-of-contract",
                             "label": "Copy of contract",
                             "description": null,
@@ -5235,7 +5194,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionFileListDto",
-                            "number": null,
+                            "number": 13,
                             "alias": "copy-of-deliverables-agreement",
                             "label": "A copy of any milestone or deliverable agreements (eg Scheme of Work, or delivery dates)",
                             "description": null,
@@ -5252,7 +5211,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionFileListDto",
-                            "number": null,
+                            "number": 14,
                             "alias": "copy-of-retainer-agreements",
                             "label": "Any retainer agreements (for example are you paid a regular maintenance fee)",
                             "description": null,
@@ -5269,7 +5228,7 @@ export class SmeOnboardingComponent implements OnInit {
                         },
                         {
                             "type": "QuestionFileListDto",
-                            "number": null,
+                            "number": 15,
                             "alias": "any-other-documentation",
                             "label": "Any other documentation (eg Memorandum of Understanding, Director details etc)",
                             "description": null,
@@ -8334,40 +8293,14 @@ export class SmeOnboardingComponent implements OnInit {
         }
     ]
     this.smeForm1=this.fb.group({'smeForm1':this.fb.array([this.buildFormData()])})
-    // this.smeForm2=this.fb.group({'smeForm2':this.fb.array([])})
-    // this.smeForm3=this.fb.group({'smeForm3':this.fb.array([])})
-    // this.smeForm4=this.fb.group({'smeForm4':this.fb.array([])})
-    // this.smeForm5=this.fb.group({'smeForm5':this.fb.array([])})
-    // this.smeForm6=this.fb.group({'smeForm6':this.fb.array([])})
-    // this.smeForm7=this.fb.group({'smeForm7':this.fb.array([])})
-    // this.smeForm8=this.fb.group({'smeForm8':this.fb.array([])})
 
     // this.smeForm=this.fb.group(this.groupForm())
       // smeFormDetails:this.fb.array([])
    
     // this.getFormInput=this.formService.render()
 
-    this.cities = [
-      { item_id: 1, item_text: "India" },
-      { item_id: 2, item_text: "Australia" },
-{ item_id: 3, item_text: "America" },
-{ item_id: 4, item_text: "Singapore" }
-      
-    ];
-    this.selectedItems = [
-      { item_id: 4, item_text: "Pune" },
-      { item_id: 6, item_text: "Navsari" }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      defaultOpen: false,
-      idField: "item_id",
-      textField: "item_text",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 3
-    };
     this.questionnaireSections.forEach((secItem,secIndex)=>{
+        // QUESTION ARRAY
       secItem && secItem.questions.map((quesItem,quesIndex)=>{
           if((quesItem.number - Math.floor(quesItem.number)) !== 0 && this.checkParentresp(secIndex,parseInt(quesItem.number))){
             quesItem.show=false
@@ -8385,6 +8318,8 @@ export class SmeOnboardingComponent implements OnInit {
          quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
       })
       secItem.itHasValue=false
+
+      //PARTIAL RESPONSE
       if(secItem.sectionResponseState == "Partial"){
             secItem.questions.map((secResp,index)=>{
                 let resp=  secItem.sectionResponse.responses.filter(x => x.questionAlias == secResp.alias)
@@ -8393,20 +8328,22 @@ export class SmeOnboardingComponent implements OnInit {
                 }
             })
       }
+
+      //SUBSECTION ARRAY
       secItem && secItem.subSections.map((subSecItem,subSecIndex)=>{
         subSecItem.questions.forEach((subQuesItem,subQuesIndex)=>{
             subQuesItem.show=true
             subQuesItem.response=''
+            subQuesItem.isSubSection=true
             subQuesItem.itHasValue=subQuesItem.required ? false : true
+            subQuesItem.subSecIndex=subSecIndex
         })
+        subSecItem.isSelected=false
       })
     })
-    // if(this.sectionIndex == 0){
-    //     let tempArr=this.questionnaireSections[0].questions
-    //     this.questions= tempArr.slice(0,11)
-    // }
-    console.log(this.questionnaireSections)
+    this.questions=this.questionnaireSections[this.sectionIndex].questions
     localStorage.setItem('questionSections',JSON.stringify(this.questionnaireSections))
+    console.log(this.questionnaireSections)
   }
   checkParentresp(secIndex,parNum){
     let itHasResp=false
@@ -8440,23 +8377,15 @@ export class SmeOnboardingComponent implements OnInit {
   // get formSections(){
   //   return this.smeForm.controls[0].value['smeSectionForm1'] as FormArray
   // }
-  onItemSelect(item: any) {
-    console.log('onItemSelect', item);
-  }
-  onItemDeSelect(item: any) {
-    console.log('onItem DeSelect', item);
-  }
-
-  onSelectAll(items: any) {
-    console.log('onSelectAll', items);
-  }
-
-  onDropDownClose() {
-    console.log('dropdown closed');
-  }
-
 
   onTextBoxChange(data,secIndex,quesIndex){
+      if(data.questionDatas.isSubSection){
+          let subIndex=data.questionDatas.subSecIndex
+        this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
+        this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value ? true : false
+        this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+      }
+      else{
     data.questionDatas.type == 'QuestionNumberDto' && this.questionnaireSections[secIndex].questions.map((item)=>{
         if(data.number == item.parentNumber && (item.conditions.length && item.conditions[0]['conditionQuestionAlias'] ==  data.questionDatas.alias) ){
             if(item.conditions[0]['operator'] == "GreaterThan"){
@@ -8469,9 +8398,21 @@ export class SmeOnboardingComponent implements OnInit {
     })
     this.questionnaireSections[secIndex].questions[quesIndex]['response']=data.value
     this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value ? true : false
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
   }
   onDropdownChange(data,secIndex,quesIndex){
+      if(data.questionDatas.isSubSection){
+        let subIndex=data.questionDatas.subSecIndex
+    let respArr=[]
+    data.selectedItems && data.selectedItems.length && data.selectedItems.map((selItem)=>{
+        respArr.push(selItem.id)
+    })
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=respArr
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=respArr && respArr.length ? true : false
+    this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+      }
+      else{
     this.questionnaireSections[secIndex].questions.map((item)=>{
         if(data.number == item.parentNumber ){
            item.show = this.checkDropdownCond(data.selectedItems,item.conditions && item.conditions.length && item.conditions[0]['optionAlias'])
@@ -8483,8 +8424,8 @@ export class SmeOnboardingComponent implements OnInit {
     })
     this.questionnaireSections[secIndex].questions[quesIndex].response=respArr
     this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=respArr && respArr.length ? true : false
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
-
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
   }
   checkDropdownCond(selectedItems,conditionAlias){
       let returnValue=false
@@ -8496,12 +8437,19 @@ export class SmeOnboardingComponent implements OnInit {
     return returnValue
   }
   onRadioChange(data,secIndex,quesIndex){
+    let subIndex=data.questionDatas.subSecIndex
+    
     this.radioChecked={
       isTrue:data.condition,
       secIndex:data.secIndex,
       quesIndex:data.quesIndex
      }
-
+     if(data.questionDatas.isSubSection){
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.condition == "true" ? "true" : "false"
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=true 
+    this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+     }
+     else{
      this.questionnaireSections[secIndex].questions.map((item)=>{
       if(data.questionDatas.number == item.parentNumber && (item.number - Math.floor(item.number)) !== 0){
         item.show = data.condition == "true" ? true : false
@@ -8510,18 +8458,36 @@ export class SmeOnboardingComponent implements OnInit {
     })
     this.questionnaireSections[secIndex].questions[quesIndex].response=data.condition == "true" ? "true" : "false"
     this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=true
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
     //  this.radioChecked && this.radioChecked['isTrue'] && this.checkCon(data,data.secIndex,data.quesIndex)
 }
   onFileChange(data,secIndex,quesIndex){
-    this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
-    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=true
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+    let subIndex=data.questionDatas.subSecIndex
+    if(data.questionDatas.isSubSection){
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
+    this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+    }
+    else{
+        this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
+        this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
+        this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
+    console.log(this.questionnaireSections)
   }
   onDateChange(data,secIndex,quesIndex){
-    this.questionnaireSections[secIndex].questions[quesIndex].response=data
-    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data ? true : false
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+    let subIndex=data.questionDatas.subSecIndex
+    if(data.questionDatas.isSubSection){
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value ? true : false
+    this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+    }
+    else{
+    this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value ? true : false
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
   }
   checkCon(data,secIndex,questionIndex){
     let number=parseFloat(data.number)
@@ -8547,46 +8513,35 @@ export class SmeOnboardingComponent implements OnInit {
   }
 
   onSectionClick(index){
-    //   let questionLength=this.questionnaireSections[index].questions.length
-    //   if(index == 0 && !this.subSection){
-    //     this.questions= this.questionnaireSections[0].questions.slice(0,11)
-    //   }
-    //   else if(index !=0){
-    //       this.subSection=false
-    //     this.questions=this.questionnaireSections[this.sectionIndex].questions
-    //   }
-    if(this.questionnaireSections[index]['subSections'].length){
-        this.questionnaireSections=JSON.parse(localStorage.getItem('questionSections'))
-    }
+      this.questionnaireSections[index].subSections && 
+       this.questionnaireSections[index].subSections.forEach((item)=>{
+        item.isSelected=false
+      })
+    this.questions=this.questionnaireSections[index].questions
     if(this.sectionIndex < index){
-    for(let i=0;i<this.questionnaireSections.length;i++){
-        if(index > i){
-            this.questionnaireSections[i]['isStepChange']=true
-        }
-    }
-    }
-    else if(this.sectionIndex == index){
         for(let i=0;i<this.questionnaireSections.length;i++){
             if(index > i){
                 this.questionnaireSections[i]['isStepChange']=true
             }
-        } 
-    }
-    else{
-        for(let i=0;i<this.questionnaireSections.length;i++){
-            if(index < i){
-                this.questionnaireSections[i]['isStepChange']=true
-            }
-            else{
-                this.questionnaireSections[i]['isStepChange']=false
+        }
+        }
+        else{
+            for(let i=0;i<this.questionnaireSections.length;i++){
+                if(index <= i){
+                    this.questionnaireSections[i]['isStepChange']=false
+                }
             }
         }
-    }
-
     this.sectionIndex=index
-      console.log(this.questionnaireSections)
-
   }
+  onSubSection(index,subIndex){
+      this.questions=this.questionnaireSections[index].subSections[subIndex].questions
+      this.questionnaireSections[index].subSections.forEach((item,secIndex)=>{
+                item.isSelected= secIndex == subIndex ? true : false
+      })
+    //   this.questionnaireSections[index].subSections[subIndex]['isSelected']=true
+  }
+
   checkSectionComp(){
     //   this.questionnaireSections.forEach((item)=>{
     //       item.questions.forEach((quesItem)=>{
@@ -8606,13 +8561,20 @@ export class SmeOnboardingComponent implements OnInit {
           return false
       }
   }
-  onTextListChange(event,secIndex,quesIndex){
-    this.questionnaireSections[secIndex].questions[quesIndex].response=event.value
-    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=true
-    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex)
+  onTextListChange(data,secIndex,quesIndex){
+    let subIndex=data.questionDatas.subSecIndex
+    if(data.questionDatas.isSubSection){
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
+    this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
+    }
+    else{
+    this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
+    this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
+    this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
+    }
   }
-
-  checkFormComp(sectionIndex){
+  checkFormComp(sectionIndex,type,subIndex){
       let isFormComp = false
     // if(this.sectionIndex == sectionIndex){
     // this.questionnaireSections[sectionIndex].questions.map((item,index)=>{
@@ -8623,7 +8585,8 @@ export class SmeOnboardingComponent implements OnInit {
     //         isFormComp = false
     //     }
     // })
-    let cond= this.questionnaireSections[sectionIndex].questions
+    let cond=type == 'mainSec' ?  this.questionnaireSections[sectionIndex].questions 
+    : this.questionnaireSections[sectionIndex].subSections[subIndex].questions
     for(let i=0;i<cond.length;i++){
         if(!cond[i].itHasValue){
             isFormComp=false
@@ -8636,33 +8599,11 @@ export class SmeOnboardingComponent implements OnInit {
         //      isFormComp=true
         // }
         else{
-            isFormComp=true
+                 isFormComp=true
         }
     }
     return isFormComp
   }
-  checkData(){
-
-  }
-  onSubSection(index,type){
-    if(type == 'subSection'){
-        this.questionnaireSections[index].questions=this.questionnaireSections[index].subSections[0].questions
-    }
-
-    //   if(type == 'personal'){
-    //       this.subSection=false
-    //     let tempArr=this.questionnaireSections[0].questions
-    //     this.questions= tempArr.slice(0,11)
-    //   }
-    //   else{
-    //       this.subSection=true
-    //     let tempArr=this.questionnaireSections[0].questions
-    //     this.questions= tempArr.slice(11)
-    //     console.log(this.questions)
-    //   }
-
-  }
-
   onSubmit() {
 
     
@@ -8687,18 +8628,26 @@ export class SmeOnboardingComponent implements OnInit {
             switch(quesItem.type){
                 case 'QuestionBoolDto':
                     questionResponses.push(this.boolRespBuild(quesItem))
+                    break;
                 case 'QuestionTextDto':
                     questionResponses.push(this.textRespBuild(quesItem))
+                    break;
                 case 'QuestionFileListDto':
                     questionResponses.push(this.filesRespBuild(quesItem))
+                    break;
                 case 'QuestionNumberDto':
                     questionResponses.push(this.numberRespBuild(quesItem))
+                    break;
                 case 'QuestionMultipleChoiceDto':
                     questionResponses.push(this.dropdownRespBuild(quesItem))
+                    break;
                 case 'QuestionDateDto':
                     questionResponses.push(this.dateRespBuild(quesItem))
+                    break;
                 case 'QuestionTextListDto':
                     questionResponses.push(this.textListRespBuild(quesItem))
+                    break;
+                default:
                 
             }
         })

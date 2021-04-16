@@ -26,7 +26,7 @@
       <!-- RANGE -->
       <div>
       <label class="form" *ngIf="questionDatas.format == 'Range'" #tooltip="matTooltip"
-      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">{{questionDatas && questionDatas.label}}</label>
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">{{questionDatas && questionDatas.label}}<span *ngIf="questionDatas.required"> *</span></label>
       </div>
       <mat-slider *ngIf="questionDatas.format == 'Range'"
         thumbLabel

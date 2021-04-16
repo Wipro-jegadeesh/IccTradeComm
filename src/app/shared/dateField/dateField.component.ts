@@ -19,7 +19,11 @@ export class DateFieldComponent implements OnInit {
 
     onChange(event){
         this.date=event.target.value
-        
-        this.change.emit(this.datePipe.transform(this.date,'MM/dd/YYYY'));
+        let obj={
+            'questionDatas':this.questionDatas,
+            'value':this.datePipe.transform(this.date,'MM/dd/YYYY'),
+            'number':this.questionDatas['number']
+        }
+        this.change.emit(obj);
     }
 }
