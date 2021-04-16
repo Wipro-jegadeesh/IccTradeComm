@@ -95,7 +95,18 @@ constructor(public router: Router, private modalService: BsModalService, private
     }
   }
   SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+    this.IccFundingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.IccFundingServices.getAllFundingList().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){

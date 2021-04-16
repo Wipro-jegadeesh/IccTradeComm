@@ -160,7 +160,18 @@ export class IccFinanceMasterComponent implements OnInit {
 
   }
   SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+    this.IccFinanceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.IccFinanceMasterServices.getFinanceMasterLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){

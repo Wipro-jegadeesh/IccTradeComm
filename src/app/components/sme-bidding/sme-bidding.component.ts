@@ -136,8 +136,19 @@ export class SmeBiddingComponent implements OnInit {
       this.dataSource.sort = this.sort;
     })
   }
-  SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+  SearchAPI(){
+    this.smeBiddingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.financierService.getInvoiceDetails().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {

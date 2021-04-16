@@ -164,8 +164,19 @@ export class AcceptedFinanceComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+  SearchAPI(){
+    this.AcceptedFinanceServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {

@@ -127,8 +127,20 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+  SearchAPI(){
+    this.SmeFinancierForBiddingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {
