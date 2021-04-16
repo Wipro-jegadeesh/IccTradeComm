@@ -165,7 +165,36 @@ export class IccInvoiceMasterComponent implements OnInit {
     })
 
   }
+  SearchAPI(){
+    // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    //   this.dataSource = new MatTableDataSource(resp);
+    //   this.dataSource.paginator = this.paginator
+    // })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
 
+    })
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =

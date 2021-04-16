@@ -104,8 +104,19 @@ export class IccOfferAcceptanceComponent implements OnInit {
     })
 
   }
-  SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+  SearchAPI(){
+    this.IccOfferAcceptServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI(){
+    this.SearchModel={};
+    this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {
