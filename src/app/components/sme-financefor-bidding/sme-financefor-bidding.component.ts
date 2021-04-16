@@ -39,7 +39,7 @@ const INVOICE_DATA: invoiceDetails[] = [];
 
 export class SmeFinanceforBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  displayedColumns: string[] = ['invoiceRef','invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource;
 
 
@@ -113,7 +113,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.mobileScreen = true;
     }
 
-    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
+    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => { 
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;

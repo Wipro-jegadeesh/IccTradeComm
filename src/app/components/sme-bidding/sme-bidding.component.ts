@@ -26,7 +26,7 @@ import {MatSort} from '@angular/material/sort';
 
 export class SmeBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['INV_NO', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
+  displayedColumns: string[] = ['invoiceRef', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
   tabledataSource;
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','position1','name1'];

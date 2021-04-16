@@ -4,7 +4,15 @@
         <h5>Finance Requests</h5>
         <div class="mat-elevation-z8 table-responsive table-post">
             <table mat-table [dataSource]="dataSource" matSort>
-                <ng-container matColumnDef="invId">
+                <ng-container matColumnDef="invoiceRef">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                    matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
+                    <td mat-cell *matCellDef="let element">
+                                 {{element.invoiceRef}}
+                     </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="invoiceNo">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> Invoice Id </th>
                     <td mat-cell *matCellDef="let element">

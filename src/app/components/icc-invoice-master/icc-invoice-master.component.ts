@@ -22,6 +22,7 @@ import { Options, LabelType } from '@angular-slider/ngx-slider';
 // ];
 
 export interface financeForBiddingData {
+  invoiceRef : String;
   invId: String;
   invAmt: String;
   smeId: String;
@@ -64,7 +65,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 
 export class IccInvoiceMasterComponent implements OnInit {
 
-  displayedColumns: string[] = ['invId','invRefNo','invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef','invId','invRefNo','invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 
@@ -143,6 +144,7 @@ export class IccInvoiceMasterComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.dataSource = new MatTableDataSource([{
+      invoiceRef : 'TR123',
       buyerAddr: "Singapore",
       buyerName: "Tata Steel",
       dispDate: "17/03/2021",

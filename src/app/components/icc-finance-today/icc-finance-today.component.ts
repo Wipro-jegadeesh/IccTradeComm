@@ -68,7 +68,7 @@ const BID_DATA: bidDetails[] = [];
 
 export class IccFinanceTodayComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceNo', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'baseCcyNetAmtPayable','smeId','action'];
+  displayedColumns: string[] = ['invoiceRef','invoiceNo', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'baseCcyNetAmtPayable','smeId','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 

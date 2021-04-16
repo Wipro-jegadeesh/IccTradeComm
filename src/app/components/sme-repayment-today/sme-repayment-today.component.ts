@@ -13,6 +13,7 @@ import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 
 export interface financeForBiddingData {
+  invoiceRef : String;
   invId: String;
   invAmt: String;
   smeId: String;
@@ -54,7 +55,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class Repayment_todayComponent implements OnInit {
 
-  displayedColumns: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef','invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 
@@ -129,6 +130,7 @@ export class Repayment_todayComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.dataSource = new MatTableDataSource([{
+      invoiceRef : '12REF',
       buyerAddr: "Singapore",
       buyerName: "Tata Steel",
       dispDate: "17/03/2021",

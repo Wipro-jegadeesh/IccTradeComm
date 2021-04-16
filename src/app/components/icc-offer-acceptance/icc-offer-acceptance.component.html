@@ -6,6 +6,16 @@
           <div class="table-res">
            <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
         (mouseleave)="isHover=false">
+
+        
+          <ng-container matColumnDef="invoiceRef">
+            <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+            matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
+            <td mat-cell *matCellDef="let element">
+                        {{element.invoiceRef}} 
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="invNo">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
             matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> Invoice Id  </th>
