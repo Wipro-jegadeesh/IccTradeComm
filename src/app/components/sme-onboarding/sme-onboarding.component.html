@@ -13,38 +13,25 @@
 
   <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" >
     <div>
-      <div class="circle" *ngIf="!sections.itHasValue ">{{secIndex+1}} </div>
-      <!-- <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div> -->
+      <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}} </div>
+      <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div>
       <div class="circle sec-cmlp" *ngIf="sections.itHasValue"><mat-icon>check_circle</mat-icon> </div>
     </div>
     <div>
-      <div class="title" *ngIf="!sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
-      <!-- <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div> -->
-      <div class="title sec-cmlp" *ngIf="sections.itHasValue " (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+      <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+      <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+      <div class="title sec-cmlp" *ngIf="sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
 
       <!-- SUB SECTIONS -->
       <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
-        <div class="caption" *ngFor="let subSection of sections.subSections;let subIndex=index"  (click)="onSubSection(secIndex,'subSection')">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</div>
+        <div *ngFor="let subSection of sections.subSections;let subIndex=index" >
+        <label class="caption " [ngClass]="{subSecSel: subSection.isSelected}" [ngClass]="{subSeccomp: subSection.itHasValue}" (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+      </div>
       </div>
       <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
     </div>
   </div>
-  <!-- <div class="step step-active">
-    <div>
-      <div class="circle">2</div>
-    </div>
-    <div>
-      <div class="title">Second Step</div>
-    </div>
-  </div>
-  <div class="step">
-    <div>
-      <div class="circle">3</div>
-    </div>
-    <div>
-      <div class="title">Third Step</div>
-    </div>
-  </div> -->
+
   <!-- <mat-form-field class="example-chip-list">
     <mat-label>Favorite Fruits</mat-label>
     <mat-chip-list #chipList aria-label="Fruit selection">
@@ -69,8 +56,10 @@
   <div class="col-md-9 col-9 ques-col">
     <!-- <div class="row" *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index"> -->
       <perfect-scrollbar class="pft-scrollbar" >
-          <div class="row" >
-          <div *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index">
+
+        <!-- QUESTIONS SECTIONS -->
+          <div class="row">
+          <div *ngFor="let questionType of questions;let questionIndex=index">
             <span class="form-group" *ngIf="questionType.show">
               <textBox  [questionDatas]="questionType" (formChange)="onTextBoxChange($event,sectionIndex,questionIndex)" *ngIf="(questionType.type == 'QuestionTextDto' || 'QuestionNumberDto')"></textBox>
               <multiSelectDropdown [questionDatas]="questionType" (formChange)="onDropdownChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionMultipleChoiceDto'" ></multiSelectDropdown>
@@ -88,7 +77,8 @@
 </div>
 
 <div class="submit">
-  <button mat-flat-button  color="primary" [disabled]="checkSectionComp()"  type="button" (click)="onSubmit()">
+  <button mat-flat-button  color="primary"   type="button" (click)="onSubmit()">
+    <!-- [disabled]="checkSectionComp()" -->
     <!-- [disabled]="disableSubbtn" -->
     <mat-icon>arrow_right_alt</mat-icon>
     Submit

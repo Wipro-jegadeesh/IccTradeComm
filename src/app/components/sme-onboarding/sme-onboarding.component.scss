@@ -123,9 +123,11 @@ mat-form-field {
     }
   }
   .caption {
-    font-size: smaller;
-    margin-left: 30px;
     margin-top: 10px;
+    font-size: 15px;
+    color: black;
+    margin-top: 10px;
+    font-weight: 500;
     &.subSecSel{
       border-radius: 3px;
     background-color: #2e70db;
@@ -133,6 +135,9 @@ mat-form-field {
     width: 130px;
     padding-left: 5px;
     display: flex;
+    }
+    &.subSeccomp{
+      color:rgb(16, 180, 16)
     }
   }
 
