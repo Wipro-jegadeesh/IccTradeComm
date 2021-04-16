@@ -5,6 +5,16 @@
     <div class="mat-elevation-z8">
       <table mat-table class="table-responsive" [dataSource]="dataSource" (mouseenter)="isHover=true"
         (mouseleave)="isHover=false" matSort>
+
+        
+        <ng-container matColumnDef="invoiceRef">
+          <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+          matTooltip="{{dashboardTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
+          <td mat-cell *matCellDef="let element">
+                      {{element.invoiceRef}} 
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="invId">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
             matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice ID</th>

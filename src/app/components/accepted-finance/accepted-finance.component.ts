@@ -55,7 +55,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class AcceptedFinanceComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef','invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 

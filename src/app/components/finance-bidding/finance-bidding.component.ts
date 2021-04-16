@@ -22,6 +22,7 @@ export class FinanceBiddingComponent implements OnInit {
 
   dataSource;//data
   displayedColumns: string[] = [
+    'invoiceRef',
     'invId',
     'invoiceAmt',
     'smeId',

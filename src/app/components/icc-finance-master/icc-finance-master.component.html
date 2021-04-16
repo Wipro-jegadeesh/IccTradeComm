@@ -4,6 +4,16 @@
         <h5>Finance Master</h5>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" >
+
+            
+<ng-container matColumnDef="invoiceRef">
+    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+    matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
+    <td mat-cell *matCellDef="let element">
+                 {{element.invoiceRef}} 
+     </td>
+  </ng-container>
+
           <ng-container matColumnDef="invoiceNo">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
             matTooltip="{{biddingTooltip.invoiceNo}}" [matTooltipPosition]="'below'"> Invoice No  </th>

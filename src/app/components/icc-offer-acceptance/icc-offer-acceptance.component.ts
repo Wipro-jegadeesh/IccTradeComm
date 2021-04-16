@@ -26,7 +26,7 @@ export class IccOfferAcceptanceComponent implements OnInit {
   public accountList: ElementRef<any>;
   @HostListener('window:resize', ['$event'])
 
-  displayedColumns: string[] = ['invNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef','invNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
   dataSource;
   displayed2Columns: string[] = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
   financierTooltip=SMEDASHBOARDCONSTANTS;
