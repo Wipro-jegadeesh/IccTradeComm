@@ -1,0 +1,38 @@
+export class Customer {
+    id: string;
+    fName: string;
+    regNum: string;
+    taxIdNum: string;
+    regDate: string;
+    fExpYears: string;
+    activity: string;
+    prnBankAcc: string;
+    prnBankBrnh: string;
+    anlScfTrnOver: string;
+    transLimit: string;
+    headAddrLine1:string;
+    headAddrLine2:string;
+    headAddrLine3:string;
+    headcity: string;
+    headstate: string;
+    headpostalCode: string;
+    headtelephoneNumber: string;
+    headcountry: string;
+    heademail: string;
+    headswiftBic: string;
+    headfaxNo: string;
+    servAddrLine1:string;
+    servAddrLine2:string;
+    servAddrLine3:string;
+    servcity: string;
+    servstate: string;
+    paymentCode:string;
+    servpostalCode: string;
+    servtelephoneNumber: string;
+    servcountry: string;
+    servemail: string;
+    servswiftBic: string;
+    servfaxNo: string;
+    headCountry:string;
+    servCountry:string;
+}

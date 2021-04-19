@@ -1,0 +1,316 @@
+<!-- <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated">
+    <button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <div class="uxg-logo" dense></div>
+    <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
+        <button mat-icon-button color="accent" class="uxg-breadcrumb-back">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+        <li class="uxg-h6">Financier Dashboard</li>
+        <li>Home</li>
+    </ul>
+    <span class="fill-remaining-space"></span>
+    <div class="uxg-toolbar-actions">
+        <button mat-icon-button color="neutral">
+            <mat-icon>search</mat-icon>
+        </button>
+            <button mat-icon-button color="neutral">
+        <mat-icon>notifications</mat-icon>
+        </button>
+            <button mat-icon-button color="neutral">
+        <mat-icon>help_outline</mat-icon>
+        </button>
+            <button mat-icon-button color="neutral">
+        <mat-icon>apps</mat-icon>
+        </button>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menuHero">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button class="uxg-toolbar-icon-menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-menu #menuHero="matMenu" class="uxg-user-profile s">
+    <div class="uxg-menu-header">
+        <div class="uxg-avatar-hero-block">
+            <div class="uxg-avatar">U</div>
+            <h6 class="uxg-h6">User</h6>
+            <span class="uxg-caption"></span>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="uxg-menu-footer">
+        <button mat-flat-button color="primary" dense (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Logout
+        </button>
+        <button mat-button color="primary" dense>
+            View profile
+        </button>
+    </div>
+</mat-menu>
+<mat-sidenav #sidenav mode="over">
+    <div class="uxg-nav-header">
+        <mat-card class="uxg-card-product" extra-dense>
+            <span class="uxg-h5 uxg-card-product-name">PRO</span>
+        </mat-card>
+    </div>
+    <mat-nav-list class="uxg-nav-list">
+        <a mat-list-item class="uxg-list-item-selected">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p>Home</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Applications</p>
+            <mat-icon>chevron_right</mat-icon>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>notifications</mat-icon>
+            <p>Notifications</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>extension</mat-icon>
+            <p>Tools</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>settings</mat-icon>
+            <p>Settings</p>
+        </a>
+        <mat-divider></mat-divider>
+    </mat-nav-list>
+    <mat-nav-list class="uxg-link-list">
+        <a mat-list-item>
+            <mat-icon mat-list-icon>help</mat-icon>
+            <p>Help</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>power_settings_new</mat-icon>
+            <p>Sign out</p>
+        </a>
+    </mat-nav-list>
+</mat-sidenav> -->
+<div class="app-content {{isOpen}} ">
+    <header>
+        <div class="account-services-headline">
+            <ng-container>
+                <div class="global-balance">
+                    <!-- <h6 class="uxg-h6">S$ 765,067.98</h6> -->
+                    <!-- <p class="font-13">Global Balance in S$</p> -->
+                    <!-- <p class="uxg-caption font-13">Rate (1.0934566)</p> -->
+                    <mat-divider></mat-divider>
+                </div>
+            </ng-container>
+            <ng-template #loadingGlobalBalance>
+                <div style="z-index: 10">
+                    <uxg-skeleton-text style="width: 300px; height: 50px;" animated></uxg-skeleton-text>
+                    <uxg-skeleton-text style="width: 300px; height: 40px;" animated></uxg-skeleton-text>
+                </div>
+            </ng-template>
+            <div class="paginator">
+                <button mat-icon-button (click)="scrollLeft()" [disabled]="start">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-icon-button (click)="scrollRight()" [disabled]="end">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <ng-container>
+            <div #accountList class="accounts-list">
+                <uxg-account-card class="curs-pointer" name="Open for Offer" number="{{getSumofgetOpenForOffer?.CCY}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+                matTooltip="{{dashboardTooltip.offerDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding')"></uxg-account-card>
+                <uxg-account-card class="curs-pointer" name="Offer Expired" number="SGD 0" balance="" #tooltip="matTooltip" number="{{getSumofexpeireOffer?.CCY}} {{getSumofexpeireOffer?.INVOICEAMT? getSumofexpeireOffer?.INVOICEAMT : 'SGD 0'}}"
+                matTooltip="{{dashboardTooltip.expiredDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-expired')" currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer" name="Financier Funded" number="SGD 0" balance="" #tooltip="matTooltip" number=" {{getSumofgetFinancierFunded?.INVTOTALAMT? (getSumofgetFinancierFunded?.INVCCY + ' ' +getSumofgetFinancierFunded?.INVTOTALAMT) : 'SGD 0'}}"
+                matTooltip="{{dashboardTooltip.expiredDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-funded')" currency=""></uxg-account-card>                
+                <uxg-account-card class="curs-pointer" name="Bids to be accepted" number="{{getSumofgetbidsToBeAccepted?.CCY}} {{getSumofgetbidsToBeAccepted?.AMOUNT? getSumofgetbidsToBeAccepted?.AMOUNT : 'SGD 0'}}" balance="" #tooltip="matTooltip"
+                matTooltip="{{dashboardTooltip.acceptedDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/financier-bids-accept')"  currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer" name="Offer Rejected" number="SGD 0" balance="" #tooltip="matTooltip"number="{{getSumofrejectrOffer?.CCY}} {{getSumofrejectrOffer?.INVOICEAMT? getSumofrejectrOffer?.INVOICEAMT : 'SGD 0'}}"
+                matTooltip="{{dashboardTooltip.rejectedDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-rejected')" currency=""></uxg-account-card>
+             </div>
+        </ng-container>
+        <div class="col-md-12" style="float:right;min-height: 50px;">
+            <!-- <button type="button" style="float:right" class="btn btn-outline" (click)="this.navigateInvoiceCreation()">+ Funding Request</button> -->
+        </div>
+        <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 col-xl-6">
+                    <div class="col-md-3">
+                        <div class="trans-table">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6>Finance Maturity</h6>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <!-- <button type="button" class="btn btn-outline">+ Add</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        <table class="table-bordered table" id="customers">
+                            <tr>
+                                <th  #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.financePeriod}}" [matTooltipPosition]="'below'">Period</th>
+                                <th  #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.financeNumber}}" [matTooltipPosition]="'below'">Number</th>
+                                <th  #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.financeAmount}}" [matTooltipPosition]="'below'">Amount</th>
+                            </tr>
+                            <tr *ngFor="let getFinMaturityDatas of getFinMaturityData" >
+                                <td>{{getFinMaturityDatas.PERIOD}}</td>
+                                <td>{{getFinMaturityDatas.NUMBER}}</td>
+                                <td>{{getFinMaturityDatas.AMOUNT}}</td>
+                              </tr>
+                              <tr *ngIf="!getFinMaturityData?.length">
+                                <td colspan="3">No Records Found</td>
+                            </tr>
+                          </table>
+                        </div>
+                    </div>
+                    <div style="clear: both; height: 20px;"></div>
+                    <div class="col-md-3">
+                        <div class="trans-table">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6> Finance Size</h6>
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                        <table class="table-bordered table" id="customers">
+                            <tr>
+                                <th #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.transactions}}" [matTooltipPosition]="'below'">Invoice size</th>
+                                <th #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.transactions}}" [matTooltipPosition]="'below'">Number</th>
+                                <th #tooltip="matTooltip"
+                                matTooltip="{{dashboardTooltip.type}}" [matTooltipPosition]="'below'">Amount</th>
+                              </tr>
+                           
+                              <tr *ngFor="let getFinnSizeDatas of getFinnSizeData" >
+                                <td>{{getFinnSizeDatas.INVOICE_SIZE}}</td>
+                                <td>{{getFinnSizeDatas.NUMBER}}</td>
+                                <td>{{getFinnSizeDatas.AMOUNT}}</td>
+                              </tr>
+                              <tr *ngIf="!getFinnSizeData?.length">
+                                <td colspan="3">No Records Found</td>
+                            </tr>
+                            
+                          </table>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-3">
+                        <div class="trans-table">
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h6> All Transactions</h6>
+                                    </div>
+                                    <div class="col-md-1">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        <table class="table-bordered table" id="customers">
+                            <tr>
+                              <th #tooltip="matTooltip"
+                              matTooltip="{{dashboardTooltip.transactions}}" [matTooltipPosition]="'below'">All Finance Transactions</th>
+                              <th #tooltip="matTooltip"
+                              matTooltip="{{dashboardTooltip.transactions}}" [matTooltipPosition]="'below'">148 (Transactions)</th>
+                              <th #tooltip="matTooltip"
+                              matTooltip="{{dashboardTooltip.type}}" [matTooltipPosition]="'below'">Type</th>
+                            </tr>
+                           
+                           <tr>
+                                <td>2020-03-10</td>
+                                <td>No Description</td>
+                                <td>Credit</td>
+                            </tr>
+                            <tr>
+                                <td>2020-03-10</td>
+                                <td>No Description</td>
+                                <td>Credit</td>
+                            </tr>
+                            <tr>
+                                <td>2020-03-10</td>
+                                <td>No Description</td>
+                                <td>Credit</td>
+                            </tr>
+                            <tr>
+                                <td>2020-03-10</td>
+                                <td>No Description</td>
+                                <td>Credit</td>
+                            </tr>
+                          </table>
+                        </div>
+                    </div> -->
+                </div>
+                    <div class="col-md-12 col-xl-6 p-0 chart-cls">
+                        <h6>Chart</h6>
+                        <ng-container>
+                            <div class="chart {{isOpen}}">
+                                <div class="col-lg-10 grid-margin stretch-card p-0">
+                                  <div class="card" >
+                                    <div class="card-body">
+                                        <div style="display: block;">
+                                            <canvas baseChart
+                                            [chartType]="chartType"
+                                            [datasets]="chartData"
+                                            [labels]="chartLabels"
+                                            [colors]="chartColors"
+                                            [options]="chartOptions"
+                                            [legend]="true"
+                                            (chartHover)="chartHovered($event)"
+                                            >
+                                            </canvas>
+                                            </div>
+                                      <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- <div class="col-md-6 p-0">
+                        <h6>Chart</h6>
+                        <ng-container>
+                            <div class="chart {{isOpen}}">
+                                <div class="col-lg-10 grid-margin stretch-card p-0">
+                                  <div class="card" >
+                                    <div class="card-body">
+                                      <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</div>
+
+  
+  
+  

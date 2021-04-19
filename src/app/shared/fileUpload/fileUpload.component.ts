@@ -41,12 +41,6 @@ export class FileUploadComponent implements OnInit {
 
     onFileRemove(index){
        this.fileNames.splice(index,1)
-       let obj={
-        questionDatas: this.questionDatas,
-        value:this.fileNames,
-        number:this.questionDatas.number
-    }
-    this.change.emit(obj)
     }
 
 }

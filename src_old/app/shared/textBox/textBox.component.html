@@ -1,0 +1,54 @@
+<div class="card-form-container"  *ngIf="questionDatas.type == 'QuestionTextDto'">
+    <div class="dynamicForm-example-full-width">
+      <mat-form-field floatLabel="never" dense appearance="fill" class="form"  #tooltip="matTooltip"
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'" >
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label style="white-space: normal;">{{questionDatas && questionDatas.label}}</mat-label>
+        <input matInput type="text" class="input-text" *ngIf="questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
+        [maxLength]="questionDatas.characterMax" [required]="questionDatas.required" />
+        <input matInput type="text" class="input-text" *ngIf="!questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
+        [maxLength]="" [required]="questionDatas.required" />
+
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="card-form-container"  *ngIf="questionDatas.type == 'QuestionNumberDto'">
+    <div class="dynamicForm-example-full-width">
+
+      <!-- Number -->
+      <mat-form-field floatLabel="never" dense appearance="fill" class="form number-field"   *ngIf="questionDatas.format == 'Number'" #tooltip="matTooltip"
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label><p style="white-space: normal;">{{questionDatas && questionDatas.label}}</p></mat-label>
+        <input matInput type="number" (change)="onChange($event)" style="padding-top: 20px;" *ngIf="questionDatas.type == 'QuestionNumberDto'" [(ngModel)]="textboxValue" 
+        [maxLength]="" [required]="questionDatas.required" />
+      </mat-form-field>
+
+      <!-- CURRENCY -->
+      <mat-form-field floatLabel="never" dense appearance="fill" class="form number-field"   *ngIf="questionDatas.format == 'Currency'" #tooltip="matTooltip"
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label><p style="white-space: normal;">{{questionDatas && questionDatas.label}}</p></mat-label>
+        <input matInput type="number" style="padding-top: 20px;"  (change)="onChange($event)" *ngIf="questionDatas.type == 'QuestionNumberDto'" [(ngModel)]="textboxValue" 
+        [maxLength]="" [required]="questionDatas.required" />
+      </mat-form-field>
+      
+      <!-- RANGE -->
+      <div>
+      <label class="form" *ngIf="questionDatas.format == 'Range'" #tooltip="matTooltip"
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">{{questionDatas && questionDatas.label}}<span *ngIf="questionDatas.required"> *</span></label>
+      </div>
+      <mat-slider *ngIf="questionDatas.format == 'Range'"
+        thumbLabel
+        [displayWith]="formatLabel"
+        [tickInterval]="getSliderTickInterval()"
+        (change)="onSliderChange($event)"
+        min="{{questionDatas && questionDatas.min}}"
+        max="{{questionDatas && questionDatas.max}}"
+        [step]="step"
+        [(ngModel)]="sliderValue"
+        class="input-slider-range" 
+        ></mat-slider>
+    </div>
+  </div>

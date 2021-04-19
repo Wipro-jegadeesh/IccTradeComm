@@ -1,0 +1,58 @@
+<!-- <p>sidebar works!</p> -->
+<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
+    <mat-icon>menu</mat-icon>
+</button>
+
+<mat-sidenav #sidenav mode="over">
+    <!-- <div class="uxg-nav-header">
+        <mat-card class="uxg-card-product" extra-dense>
+            <span class="uxg-h5 uxg-card-product-name">PRO</span>
+        </mat-card>
+    </div> -->
+    <mat-nav-list class="uxg-nav-list">
+        <a mat-list-item class="uxg-list-item-selected">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p>Home</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Applications</p>
+            <!-- <mat-icon>chevron_right</mat-icon> -->
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>notifications</mat-icon>
+            <p>Notifications</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>extension</mat-icon>
+            <p>Tools</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>settings</mat-icon>
+            <p>Settings</p>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a mat-list-item>
+            <mat-icon mat-list-icon>help</mat-icon>
+            <p>Help</p>
+        </a>
+
+        <a mat-list-item>
+            <mat-icon mat-list-icon>power_settings_new</mat-icon>
+            <p>Sign out</p>
+        </a>
+        <!-- <mat-divider></mat-divider> -->
+    </mat-nav-list>
+    <!-- <mat-nav-list class="uxg-link-list">
+        <a mat-list-item>
+            <mat-icon mat-list-icon>help</mat-icon>
+            <p>Help</p>
+        </a>
+        <a mat-list-item>
+            <mat-icon mat-list-icon>power_settings_new</mat-icon>
+            <p>Sign out</p>
+        </a>
+    </mat-nav-list> -->
+  </mat-sidenav>

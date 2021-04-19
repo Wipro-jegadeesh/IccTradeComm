@@ -63,7 +63,13 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+    'invoiceAmt': Number,
+    'smeId': String,
+    
+
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -96,6 +102,20 @@ rejectQustionTwo = {
     { name: 'Others',labelPosition:'before',formControlName:'Others'},
   ]
 }
+
+submit(){
+
+}
+
+updateAllComplete(text){
+  console.log(text,"text")
+  if(text === 'Others'){
+    console.log(text,"text")
+
+    
+  }
+}
+
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

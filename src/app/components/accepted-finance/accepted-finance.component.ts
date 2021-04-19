@@ -102,7 +102,13 @@ export class AcceptedFinanceComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+    'smeId': String,
+    'buyerName' : String,
+    'invoiceDate': String,
+    'invoiceDueDate': String
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -171,7 +177,13 @@ export class AcceptedFinanceComponent implements OnInit {
     })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.SearchModel={
+      'invoiceRef': String,
+      'smeId': String,
+      'buyerName' : String,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+    };
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

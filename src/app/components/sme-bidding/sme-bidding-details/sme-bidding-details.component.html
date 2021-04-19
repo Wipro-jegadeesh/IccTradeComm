@@ -371,7 +371,7 @@
             <ng-container matColumnDef="Off Exp date /time">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                 matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">Off Exp date /time</th>
-                <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index)">{{ financier.offerExpDateTime | date}}
+                <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.offerExpDateTime | date}}
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedsmeTwo" style="background-color:#B4A6EA">

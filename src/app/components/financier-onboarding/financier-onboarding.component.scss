@@ -1,4 +1,4 @@
-@import "@ffdc/uxg-angular-theme/lib/core/style/spacing";
+@import "~@ffdc/uxg-angular-theme/lib/core/style/spacing";
 
 table {
     font-family: Roboto, "Helvetica Neue", sans-serif !important;
@@ -39,7 +39,7 @@ mat-form-field {
     margin-left: $uxg-spacing-2 * 12;
 }
 
-@import "@ffdc/uxg-angular-theme/lib/core/style/spacing";
+@import "~@ffdc/uxg-angular-theme/lib/core/style/spacing";
 // @import "./_financier-onboarding.component";
 
 $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
