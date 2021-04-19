@@ -77,7 +77,7 @@
 </div>
 
 <div class="submit">
-  <button mat-flat-button  color="primary"   type="button" (click)="onSubmit()">
+  <button mat-flat-button  color="primary" [disabled]="checkSectionComp()"  type="button" (click)="onSubmit()">
     <!-- [disabled]="checkSectionComp()" -->
     <!-- [disabled]="disableSubbtn" -->
     <mat-icon>arrow_right_alt</mat-icon>

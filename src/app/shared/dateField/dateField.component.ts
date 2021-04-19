@@ -14,14 +14,13 @@ export class DateFieldComponent implements OnInit {
     constructor(public datePipe:DatePipe) { }
 
     ngOnInit() { 
-        this.date=this.questionDatas.response ? this.questionDatas.response : ''
-    }
+        this.date=this.questionDatas.response ? this.datePipe.transform(this.questionDatas.response,'YYYY-MM-dd') : ''    }
 
     onChange(event){
         this.date=event.target.value
         let obj={
             'questionDatas':this.questionDatas,
-            'value':this.datePipe.transform(this.date,'MM/dd/YYYY'),
+            'value':this.date,
             'number':this.questionDatas['number']
         }
         this.change.emit(obj);
