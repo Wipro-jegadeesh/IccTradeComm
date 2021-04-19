@@ -3,8 +3,7 @@
 <mat-form-field dense class="form" #tooltip="matTooltip" 
 matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
     <mat-label>{{questionDatas && questionDatas.label}}</mat-label>
-    <input matInput   [matDatepicker]="pickers" readonly="true" [(ngModel)]="date" (dateChange)="onChange($event)"  />
-     <mat-datepicker-toggle matSuffix [for]="pickers" ></mat-datepicker-toggle>
+    <input matInput   [matDatepicker]="pickers" readonly="true" name="date" [value]="date" (dateChange)="onChange($event)"  />     <mat-datepicker-toggle matSuffix [for]="pickers" ></mat-datepicker-toggle>
     <mat-datepicker #pickers ></mat-datepicker> 
 </mat-form-field>
 </div>

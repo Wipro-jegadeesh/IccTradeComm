@@ -4,7 +4,9 @@
       matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'" >
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label style="white-space: normal;">{{questionDatas && questionDatas.label}}</mat-label>
-        <input matInput type="text" class="input-text" (change)="onChange($event)" [(ngModel)]="textboxValue"
+        <input matInput type="text" class="input-text" *ngIf="questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
+        [maxLength]="questionDatas.characterMax" [required]="questionDatas.required" />
+        <input matInput type="text" class="input-text" *ngIf="!questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
         [maxLength]="" [required]="questionDatas.required" />
 
       </mat-form-field>
@@ -19,7 +21,16 @@
       matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label><p style="white-space: normal;">{{questionDatas && questionDatas.label}}</p></mat-label>
-        <input matInput type="number" (change)="onChange($event)" *ngIf="questionDatas.type == 'QuestionNumberDto'" [(ngModel)]="textboxValue" 
+        <input matInput type="number" (change)="onChange($event)" style="padding-top: 20px;" *ngIf="questionDatas.type == 'QuestionNumberDto'" [(ngModel)]="textboxValue" 
+        [maxLength]="" [required]="questionDatas.required" />
+      </mat-form-field>
+
+      <!-- CURRENCY -->
+      <mat-form-field floatLabel="never" dense appearance="fill" class="form number-field"   *ngIf="questionDatas.format == 'Currency'" #tooltip="matTooltip"
+      matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label><p style="white-space: normal;">{{questionDatas && questionDatas.label}}</p></mat-label>
+        <input matInput type="number" style="padding-top: 20px;"  (change)="onChange($event)" *ngIf="questionDatas.type == 'QuestionNumberDto'" [(ngModel)]="textboxValue" 
         [maxLength]="" [required]="questionDatas.required" />
       </mat-form-field>
       
