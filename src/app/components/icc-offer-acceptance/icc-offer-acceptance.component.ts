@@ -71,7 +71,13 @@ export class IccOfferAcceptanceComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+      'smeId': String,
+      'buyerName': String,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -111,7 +117,13 @@ export class IccOfferAcceptanceComponent implements OnInit {
     })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.SearchModel={
+      'invoiceRef': String,
+      'smeId': String,
+      'buyerName': String,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+    };
     this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

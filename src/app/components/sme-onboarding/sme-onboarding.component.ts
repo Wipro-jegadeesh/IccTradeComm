@@ -8543,18 +8543,23 @@ export class SmeOnboardingComponent implements OnInit {
   }
 
   checkSectionComp(){
-      let isCondCheck=true
-      let cond=this.questionnaireSections
-      for(let i=0;i < cond.length;i++){
-          if(!cond[i].itHasValue){
-            isCondCheck=true
-            break;
-          }
-          else{
-            isCondCheck=false 
-          }
+    //   this.questionnaireSections.forEach((item)=>{
+    //       item.questions.forEach((quesItem)=>{
+    //           if(quesItem.required && !quesItem.response){
+    //                 this.disableSubbtn=true
+    //           }
+    //           else{
+    //               this.disableSubbtn= false
+    //           }
+    //       })
+    //   })
+      let result=this.questionnaireSections.filter(x=> !x.itHasValue)
+      if(result && result.length){
+          return true
       }
-    return isCondCheck
+      else{
+          return false
+      }
   }
   onTextListChange(data,secIndex,quesIndex){
     let subIndex=data.questionDatas.subSecIndex
@@ -8571,6 +8576,15 @@ export class SmeOnboardingComponent implements OnInit {
   }
   checkFormComp(sectionIndex,type,subIndex){
       let isFormComp = false
+    // if(this.sectionIndex == sectionIndex){
+    // this.questionnaireSections[sectionIndex].questions.map((item,index)=>{
+    //     if(item.required &&  item.response.length ){
+    //         isFormComp = true
+    //     }
+    //     else{
+    //         isFormComp = false
+    //     }
+    // })
     let cond=type == 'mainSec' ?  this.questionnaireSections[sectionIndex].questions 
     : this.questionnaireSections[sectionIndex].subSections[subIndex].questions
     for(let i=0;i<cond.length;i++){
@@ -8578,13 +8592,31 @@ export class SmeOnboardingComponent implements OnInit {
             isFormComp=false
             break;
         }
+        // if(cond[i].required && cond[i].response.length || (!cond[i].required)){
+        //      isFormComp=true
+        // }
+        // else if(!cond[i].required){
+        //      isFormComp=true
+        // }
         else{
-           isFormComp=true
+                 isFormComp=true
         }
     }
     return isFormComp
   }
   onSubmit() {
+
+    
+    // this.toastr.success("Onboard Sucessfully")
+    // if (this.sName.valueOf() !== '' || this.taxId.valueOf() !== '') {
+    //   if (this.state.valueOf() !== '' || this.state.valueOf() !== '') {
+    //     this.router.navigate(['sme-dashboard']);
+    //     this.invalidLogin = false;
+    //   }
+    // } else {
+    //   this.invalidLogin = true
+    // }
+
     let onboardingResp=[]
     this.questionnaireSections.map((item)=>{
     let compSecObj={

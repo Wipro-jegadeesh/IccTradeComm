@@ -26,7 +26,7 @@ export class FinancierFundedServices {
     let invoiceDate  = params.invoiceDate == undefined ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
     let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
     
-    http://localhost:8081/api/v1/financing-details/searchFinanceFunded?finId=FIN001&invNo=1234&smeId=SME101&buyerName=steel&invoiceDate=2021-04-01&invDueDate=2021-04-17
+    https://tradecomm-userprofile.ffdcdev.fusionfabric.io/api/v1/financing-details/searchFinanceFunded?finId=FIN001&invNo=1234&smeId=SME101&buyerName=steel&invoiceDate=2021-04-01&invDueDate=2021-04-17
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/searchFinanceFunded?finId='+localStorage.getItem("userId")+'&invNo='+invoiceRef+'&smeId='+smeId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
   }

@@ -52,6 +52,8 @@ export const COMMONCONSTANTS={
 
 // SME DASHBOARD PAGE TOOLTIPS
 export const SMEDASHBOARDCONSTANTS={
+    'invoiceNo': 'Invoice No',
+    'invRefNo': 'Invoice Ref No',
     'tradecommRef':'ICC Tradecomm Ref',
     'invoiceId':'Invoice Id (Unique)',
     'invoiceAmount':'Invoice Amount',
@@ -89,6 +91,8 @@ export const SMEDASHBOARDCONSTANTS={
 
 // BIDDING PAGE TOOLTIPS
 export const BIDDINGCONSTANTS={
+    'invoiceNo': 'Invoice No',
+    'invRefNo': 'Invoice Ref No',
     'tradecommRef':'ICC Tradecomm Ref',
     'invoiceId':'Invoice Id (Unique)',
     'invoiceAmount':'Invoice Amount',
@@ -143,6 +147,8 @@ export const  FINANCEDASHBOARDCONSTANTS={
 
 // FINANCIER DASHBOARD PAGE TOOLTIPS
 export const FINANCIERDASHBOARDCONSTANTS={
+    'invoiceNo': 'Invoice No',
+    'invRefNo': 'Invoice Ref No',
     'tradecommRef':'ICC Tradecomm Ref',
     'invoiceId':'Invoice Id (Unique)',
     'invoiceAmount':'Invoice Amount',

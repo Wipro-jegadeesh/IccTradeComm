@@ -212,6 +212,20 @@ rejectQustionTwo = {
     { name: 'Others',labelPosition:'before',formControlName:'Others'},
   ]
 }
+
+submit(){
+
+}
+
+
+updateAllComplete(text){
+  console.log(text,"text")
+  if(text === 'Others'){
+    console.log(text,"text")
+
+    
+  }
+}
   ngOnInit(): void {
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");

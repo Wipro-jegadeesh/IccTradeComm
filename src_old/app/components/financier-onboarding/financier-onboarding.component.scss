@@ -1,0 +1,97 @@
+@import "@ffdc/uxg-angular-theme/lib/core/style/spacing";
+
+table {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.submit {
+    text-align: center;
+    padding-bottom: $uxg-spacing-4;
+}
+
+mat-form-field {
+    align-self: stretch;
+    margin-bottom: $uxg-spacing-4;
+    margin-left: $uxg-spacing-3 * 6;
+    width: 400px;
+}
+
+#left {
+    float: left;
+    margin-left: 40px;
+}
+#right {
+    margin-left: 40px;
+}
+#grid {
+    margin-left: 600px;
+}
+
+.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 80px;
+}
+
+.uxg-product-name {
+    font: 700 24px/28px "Futura EF", "futura-pt", "Futura", "Hind", "Verdana", "Arial Black", sans-serif;
+}
+
+.uxg-corporate-name {
+    margin-left: $uxg-spacing-2 * 12;
+}
+
+@import "@ffdc/uxg-angular-theme/lib/core/style/spacing";
+// @import "./_financier-onboarding.component";
+
+$margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
+
+header {
+    // margin: -$margin (-$margin) $uxg-spacing-0;
+    margin: -32px 30px 0;
+    padding: $margin;
+    position: relative;
+    height: 45%;
+    width: 100%;
+
+    .account-services-headline {
+        display: flex;
+        justify-content: space-between;
+        color: white;
+        .global-balance {
+            z-index: 10;
+        }
+    }
+
+    .paginator {
+        display: flex;
+        align-self: flex-end;
+        z-index: 10;
+    }
+}
+
+.app-content {
+    bottom: 0;
+    left: 0;
+    overflow-x: auto;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 33px;
+}
+.multiselect-dropdown-dsgn{
+    width: 400px;
+    margin: 2px 8px 44px 93px;
+    background-color: #f3f1fc;
+    border-bottom: 1px solid #694ed6;
+    padding-top: 5px;
+    border-radius: 3px;
+}
+
+.minus-btn{
+    // background: #ec5757;
+    // color: white;
+    padding: 3% 12% 6% 11%;
+    margin-left: -50px;
+    // border-radius: 4px;
+    // font-size: 10px;
+    // cursor: pointer;
+}

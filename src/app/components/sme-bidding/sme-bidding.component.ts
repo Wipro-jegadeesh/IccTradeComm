@@ -25,6 +25,8 @@ import {MatSort} from '@angular/material/sort';
 })
 
 export class SmeBiddingComponent implements OnInit {
+  
+
 
   displayedColumns: string[] = ['invoiceRef', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
   tabledataSource;
@@ -58,6 +60,8 @@ export class SmeBiddingComponent implements OnInit {
     }
   }
   panelOpenState = false;
+  bidpanelOpenState = false;
+  
   financierTooltip=SMEDASHBOARDCONSTANTS;
   
   constructor(public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService
@@ -65,6 +69,11 @@ export class SmeBiddingComponent implements OnInit {
   dataSourceOne; //data
   dataSourceTwo; //data
   dataSourceInvoiceDetails; //data
+  invoiceReference : string;
+  invoiceId : string;
+  buyerName : string;
+  amount: Number;
+  
 
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
 
@@ -106,7 +115,13 @@ export class SmeBiddingComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+  'invoiceId': String,
+  'invoiceDate': String,
+  'invoiceDueDate': String,
+  'buyerName': String
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -143,7 +158,13 @@ export class SmeBiddingComponent implements OnInit {
     })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.SearchModel={
+      'invoiceRef': String,
+      'invoiceId': String,
+      'invoiceDate': String,
+      'invoiceDueDate': String,
+      'buyerName': String
+    };
     this.financierService.getInvoiceDetails().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

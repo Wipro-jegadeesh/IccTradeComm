@@ -115,7 +115,14 @@ export class IccFinanceMasterComponent implements OnInit {
     displayedColumnFilter: string[] = [
       'Filter',
     ]
-    SearchModel = {}
+    SearchModel = {
+      'invoiceRef': String,
+      'smeId': String,
+      'NetAmt': Number,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+
+        }
     value: number = 0;
     highValue: number = 50;
     options: Options = {
@@ -166,7 +173,13 @@ export class IccFinanceMasterComponent implements OnInit {
     })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.SearchModel={
+      'invoiceRef': String,
+      'smeId': String,
+      'NetAmt': Number,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+    };
     this.IccFinanceMasterServices.getFinanceMasterLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

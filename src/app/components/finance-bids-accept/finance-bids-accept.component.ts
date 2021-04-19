@@ -41,7 +41,11 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+    'invoiceAmt': Number,
+    'smeId': String
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {

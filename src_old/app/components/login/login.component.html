@@ -1,0 +1,62 @@
+<div class="uxg-login-page">
+
+    <div class="uxg-login-container">
+        <span class="fill-remaining-space"></span>
+        <!-- <h5 class="uxg-h4 uxg-product-name">ICC TradeComm</h5>
+        <h5 class="uxg-display-6 uxg-corporate-name">Powered by Finastra</h5> -->
+        <img src="../../../assets/img/icctradelogo.png" class="log-logo"/>
+
+        <form>
+            <mat-form-field>
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-label>User Name</mat-label>
+                <input matInput name="username" [(ngModel)]="username" required>
+                <mat-hint>Please enter your username</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-icon matPrefix>lock</mat-icon>
+                <mat-label>Password</mat-label>
+                <input matInput name="password" [(ngModel)]="password" required [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button (click)="hide = !hide" color="primary" matSuffix  #tooltip="matTooltip"
+                matTooltip="{{loginTooltip.shwPwd}}" [matTooltipPosition]="'below'">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>Please enter your password</mat-hint>
+            </mat-form-field>
+
+            <button mat-flat-button (click)="login()" color="primary"  #tooltip="matTooltip"
+            matTooltip="{{loginTooltip.login}}" [matTooltipPosition]="'below'">
+                <!-- <mat-icon>arrow_right_alt</mat-icon> -->
+                Login
+            </button>
+        </form>
+        
+        <div class="login-actions"> 
+            <span class="uxg-body-3">Don't have an account? </span>
+            <a routerLink="/signup" color="primary"  #tooltip="matTooltip"
+            matTooltip="{{loginTooltip.signup}}" [matTooltipPosition]="'below'">
+                <!-- <mat-icon>arrow_right_alt</mat-icon> -->
+                Sign Up
+            </a>
+            </div>
+
+            <!-- <div class="login-actions">
+                <mat-checkbox color="primary"  #tooltip="matTooltip"
+                matTooltip="{{loginTooltip.select}}" [matTooltipPosition]="'below'"><span class="uxg-body-3">Remember me</span></mat-checkbox>
+                <a href="" class="uxg-body-3" >Forgot password</a>
+            </div> -->
+        
+        <span class="fill-remaining-space"></span>
+
+        <div class="login-footer">
+            <!-- <a href="https://www.finastra.com/support" class="uxg-body-3" target="_blank">Support</a>&nbsp;/&nbsp;
+            <a href="https://www.finastra.com" class="uxg-body-3" target="_blank">Finastra.com</a> -->
+        </div>
+
+    </div>
+
+    <div class="uxg-illustration-container">
+    </div>
+
+</div>

@@ -55,7 +55,12 @@ export class IccFundingRequestComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {}
+  SearchModel = {
+    'invoiceRef': String,
+    'invoiceDate': String,
+    'invoiceDueDate': String
+
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -101,7 +106,12 @@ constructor(public router: Router, private modalService: BsModalService, private
     })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.SearchModel={
+      'invoiceRef': String,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+
+    };
     this.IccFundingServices.getAllFundingList().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

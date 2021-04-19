@@ -1,0 +1,213 @@
+<div class="app-content {{isOpen}}">
+  <header class="m0p0">
+      <br>
+      <!-- <div class="table-section"> -->
+        <div class="uxg-h4" style="text-align: center">Offer Rejected</div>
+        <div class="mat-elevation-z8">
+          <div class="table-res">
+        <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
+        (mouseleave)="isHover=false" matSort>
+          <ng-container matColumnDef="BIDID">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>BID ID</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip > </mat-chip>
+            </mat-chip-list> -->
+            {{ element.id }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Invoice Amount">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice Amount</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip>  </mat-chip>
+            </mat-chip-list> -->
+            {{ element.invoiceAmt }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="BIDing Amount">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>Bidding Amount</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip>  </mat-chip>
+            </mat-chip-list> -->
+            {{ element.baseCcyNetAmtPayable }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="offer Expires">
+            <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Offer Expires</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-chip-list>
+                <mat-chip>  </mat-chip>
+            </mat-chip-list> -->
+            {{ element.offerExpDateTime | date}}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="remark">
+            <th mat-header-cell *matHeaderCellDef> Remarks </th>
+            <td mat-cell *matCellDef="let element"> 
+              <a href="javascript:void(0)" (click)="openModal($event,Rejecttemplate,element.id)">
+                <mat-icon  #tooltip="matTooltip"
+                matTooltip="Remarks" [matTooltipPosition]="'below'">mode_comment</mat-icon>
+             </a>
+               </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+              <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'edit')">
+                  <mat-icon  #tooltip="matTooltip"
+                  matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                </a>&nbsp;
+              <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'view')">
+                  <mat-icon  #tooltip="matTooltip"
+                  matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
+              </a>&nbsp;
+               </td>
+          </ng-container>
+          <ng-container matColumnDef="TopBar">
+            <th colspan="8" mat-header-cell *matHeaderCellDef> 
+              <div style="justify-content:flex-end;cursor: pointer;">
+              <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+              <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                </div>
+             </th>
+          </ng-container>
+          <ng-container matColumnDef="Search">
+            <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                <h6>Search By</h6>
+              <div class="row">
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>BID ID</mat-label>
+                        <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>invoiceAmt</mat-label>
+                        <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Bidding Amount</mat-label>
+                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
+                    <mat-icon #tooltip="matTooltip"
+                    matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                  </button>&nbsp;
+                  <button  mat-raised-button style="color: #5e52a1;">
+                    <mat-icon #tooltip="matTooltip"
+                    matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                  </button>
+              </div>
+             
+             </th>
+          </ng-container>
+          <ng-container matColumnDef="Filter">
+            <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>InvoiceAmount</label>
+                        <div class="custom-slider">
+                        <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+                      </div>
+                      </div>
+                      <div class="col-sm-3" style="padding-top: 22px;">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Offer Expier </mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate placeholder="Start date">
+                              <input matEndDate placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
+                      </div>
+                </div>
+                  <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                    <button  mat-raised-button style="color: #5e52a1;">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                      </button>&nbsp;
+                      <button  mat-raised-button style="color: #5e52a1;">
+                        <mat-icon #tooltip="matTooltip"
+                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                      </button>
+                  </div>
+             </th>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+          <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+          <tr mat-header-row  *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+          <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>  
+      </div>
+        <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+      </div>
+  </header>
+</div>
+<ng-template #Rejecttemplate>
+  <div class="modal-header">
+     <h4 class="modal-title pull-left">Reject Bid Details:</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+     </button>
+  </div>
+  <div class="modal-body">       
+     <div class="container-fluid">
+      <form [formGroup]="Rejectform" (ngSubmit)="submit()">
+         <div class="row">
+             <div class="col-sm-6"> 
+              <ul>
+                  <li *ngFor="let subskill of rejectQustionOne.subrejectQustionOne">
+                    <mat-checkbox [disabled]="true" [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" > {{subskill.name}} </mat-checkbox>
+                  </li>
+                </ul>
+             </div>
+             <div class="col-sm-6"> 
+              <mat-card class="result">
+                  <mat-card-content>
+                    <section class="example-section">
+                      <ul>
+                          <li *ngFor="let subskill of rejectQustionTwo.subrejectQustionTwo">
+                                  <mat-checkbox matInput [disabled]="true" [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateAllComplete(subskill.name)"> {{subskill.name}} </mat-checkbox>
+                          </li>
+                        </ul>
+                    </section>
+                  </mat-card-content>
+                </mat-card>
+             
+             </div>
+         </div>
+         <div class="row" *ngIf="TextAreaDiv">
+          <div class="col-sm-12"> 
+              <mat-form-field  class="col-sm-12 textarea-h">
+                  <mat-label>Remarks</mat-label>
+                  <textarea matInput readonly
+                  formControlName="OthersRemarks"
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="1000"></textarea>
+                </mat-form-field>
+          </div>
+         </div>
+      </form>
+     </div>
+  </div>
+  <div class="modal-footer" style="justify-content: center;">
+     <!-- <button type="button"  (click)="rejectBid(dataBIDDetails)"class="btn model-btn-outline">Reject</button> -->
+  </div>
+</ng-template>
