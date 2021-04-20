@@ -241,8 +241,8 @@ export class AcceptedFinanceComponent implements OnInit {
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-    this.AcceptedFinanceServices.getInvoiceRequestLists(data.id).subscribe(resp => {
+   
+    this.AcceptedFinanceServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
       let status = "";
       if (resp.status == "I") {
         status = "Initiated"

@@ -237,7 +237,7 @@ export class IccFinanceMasterComponent implements OnInit {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
    
-    this.IccFinanceMasterServices.getInvoiceRequestLists(data.id).subscribe(resp => {
+    this.IccFinanceMasterServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
       let status = "";
       if (resp.status == "I") {
         status = "Initiated"
