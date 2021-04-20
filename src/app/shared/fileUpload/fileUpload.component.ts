@@ -18,26 +18,39 @@ export class FileUploadComponent implements OnInit {
         this.fileNames=this.questionDatas.response ? this.questionDatas.response : []
      }
 
-    onChange(event){
-        let baseData=[]
-        for(let i = 0; i < event.target.files.length; i++) {
-            var reader = new FileReader();
-            reader.readAsDataURL(<File>event.target.files[i]);
-            reader.onload = function () {
-                baseData.push(reader.result)
-            };
-            this.fileNames.push(<File>event.target.files[i].name)
-        }
-
-        this.baseFileData= baseData
+ onChange(event){
+        this.getBase64(<File>event.target.files[0]).then((data) => {
+            let fileName={
+                'name':<File>event.target.files[0].name,
+                'base64data':data
+            }
+        this.fileNames.push(fileName)
+        event.target.value=''
             let obj={
                 questionDatas: this.questionDatas,
                 value:this.fileNames,
-                number:this.questionDatas.number
+                number:this.questionDatas.number,
+                base64data:data
             }
-        this.change.emit(obj)
-        event.target.value=''
+            this.change.emit(obj)
+        });
+        // for(let i = 0; i < event.target.files.length; i++) {
+        //     var reader = new FileReader();
+        //     reader.readAsDataURL(<File>event.target.files[i]);
+        //     reader.onload =function () {
+        //         baseData.push(reader.result)
+        //     };
+        //     this.fileNames.push(<File>event.target.files[i].name)
+        // }
     }  
+    getBase64(file){
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+          });
+    }
 
     onFileRemove(index){
        this.fileNames.splice(index,1)

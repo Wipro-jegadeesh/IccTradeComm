@@ -25,7 +25,11 @@
       <!-- SUB SECTIONS -->
       <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
         <div *ngFor="let subSection of sections.subSections;let subIndex=index" >
-        <label class="caption " [ngClass]="{subSecSel: subSection.isSelected}" [ngClass]="{subSeccomp: subSection.itHasValue}" (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+          <label class="caption" *ngIf="!subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+        <label class="caption subSecSel" *ngIf="subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+        <!-- [ngClass]="{subSecSel: subSection.isSelected}" -->
+        <label class="caption subSeccomp" *ngIf="subSection.itHasValue"  [ngClass]="{subSecSel: subSection.isSelected}"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+        <!-- [ngClass]="{subSeccomp: subSection.itHasValue}" -->
       </div>
       </div>
       <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->

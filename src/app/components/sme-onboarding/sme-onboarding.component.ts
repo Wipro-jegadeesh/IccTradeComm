@@ -8469,7 +8469,7 @@ export class SmeOnboardingComponent implements OnInit {
     this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
     this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
     }
-    else{
+    else{     
         this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
         this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
         this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
@@ -8600,6 +8600,7 @@ export class SmeOnboardingComponent implements OnInit {
 
         let questionResponses=[]
         item.questions.map((quesItem)=>{
+            if(quesItem.response){
             switch(quesItem.type){
                 case 'QuestionBoolDto':
                     questionResponses.push(this.boolRespBuild(quesItem))
@@ -8623,8 +8624,8 @@ export class SmeOnboardingComponent implements OnInit {
                     questionResponses.push(this.textListRespBuild(quesItem))
                     break;
                 default:
-                
             }
+        }
         })
         compSecObj['questionResponses']=questionResponses
         compSecObj['subSectionResponseDto']=subSectionResponseDto
@@ -8640,6 +8641,7 @@ export class SmeOnboardingComponent implements OnInit {
     }
     let questionResponses=[]
     Data.questions.map((quesItem)=>{
+        if(quesItem.response){
         switch(quesItem.type){
             case 'QuestionBoolDto':
                 questionResponses.push(this.boolRespBuild(quesItem))
@@ -8662,9 +8664,9 @@ export class SmeOnboardingComponent implements OnInit {
             case 'QuestionTextListDto':
                 questionResponses.push(this.textListRespBuild(quesItem))
                 break;
-            default:
-            
+            default: 
         }
+    }
     })
     obj['questionResponses']=questionResponses
     return obj
@@ -8687,11 +8689,17 @@ export class SmeOnboardingComponent implements OnInit {
       return obj
   }
   filesRespBuild(Data){
+    let fileName=[]
+    let data=[]
+   Data.response && Data.response.map((item)=>{
+        fileName.push(item.name)
+        data.push(item.base64data)
+    })
     let obj={
         "type":'QuestionResponseFileDto',
         "questionAlias":Data.alias,
-        "fileName":Data.response,
-        "data":'',
+        "fileName":fileName,
+        "data":data,
         "extension":Data.extension
     }
     return obj
