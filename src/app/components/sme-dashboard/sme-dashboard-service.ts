@@ -21,13 +21,13 @@ export class SmeDashboardServices {
     return this.apiService.generalServiceget(environment.dboardServerPath5+'getFinPastDue');
   }
   getFinMatData(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinMatData/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinMatDataForSme/'+localStorage.getItem("userId"));
   }
   getFinSizeData(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinSizeData/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinSizeDataForSme/'+localStorage.getItem("userId"));
   }
   getChartData(){
-    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/getChartData/'+localStorage.getItem("userId")); 
+    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/getSmeFundingRequestedChartData/'+localStorage.getItem("userId")); 
   }
   getActualFundingChartData(){
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/getSmeActualFundingChartData/'+localStorage.getItem("userId")); 

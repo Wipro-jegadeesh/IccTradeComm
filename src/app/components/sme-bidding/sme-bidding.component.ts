@@ -16,6 +16,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import {MatSort} from '@angular/material/sort';
+import { Validators, FormGroup ,FormBuilder} from '@angular/forms';
 
 
 @Component({
@@ -64,8 +65,8 @@ export class SmeBiddingComponent implements OnInit {
   
   financierTooltip=SMEDASHBOARDCONSTANTS;
   
-  constructor(public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService
-    ,private financierService: FinancierService,private smeBiddingServices : SmeBiddingServices) { }
+  constructor(public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService,
+    private fb: FormBuilder,private financierService: FinancierService,private smeBiddingServices : SmeBiddingServices) { }
   dataSourceOne; //data
   dataSourceTwo; //data
   dataSourceInvoiceDetails; //data
@@ -138,6 +139,7 @@ export class SmeBiddingComponent implements OnInit {
       }
     }
   };
+  Searchform: FormGroup;
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   ngOnInit() {
@@ -150,21 +152,25 @@ export class SmeBiddingComponent implements OnInit {
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
+    this.buildform()
+  }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      invoiceId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
   }
   SearchAPI(){
-    this.smeBiddingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.smeBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
   ResetAPI(){
-    this.SearchModel={
-      'invoiceRef': String,
-      'invoiceId': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String,
-      'buyerName': String
-    };
+    this.buildform();
     this.financierService.getInvoiceDetails().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

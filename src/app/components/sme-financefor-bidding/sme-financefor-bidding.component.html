@@ -92,7 +92,7 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="TopBar">
-                    <th colspan="8" mat-header-cell *matHeaderCellDef>
+                    <th colspan="9" mat-header-cell *matHeaderCellDef>
                         <div style="justify-content:flex-end;cursor: pointer;">
                             <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                             <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -100,31 +100,32 @@
                     </th>
                 </ng-container>
                 <ng-container matColumnDef="Search">
-                    <th colspan="8" mat-header-cell *matHeaderCellDef>
+                    <th colspan="9" mat-header-cell *matHeaderCellDef>
                         <h6>Search By</h6>
+                        <form [formGroup]="Searchform">
                         <div class="row">
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>invoice Id</mat-label>
-                                    <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                                    <input type="text" formControlName="invoiceRef" matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>sme Name</mat-label>
-                                    <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                                    <input type="text" formControlName="smeId"  matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>buyerName</mat-label>
-                                    <input type="text" [(ngModel)]="SearchModel.buyerName" matInput />
+                                    <input type="text" formControlName="buyerName"  matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                 <mat-label>invoiceDate</mat-label>
-                                <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
+                                <input matInput readonly="true"  formControlName="invoiceDate" [matDatepicker]="picker"  >
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                               </mat-form-field>
@@ -132,7 +133,7 @@
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>Invoice Due Date</mat-label>
-                                    <input matInput readonly="true"  [matDatepicker]="picker1"  [(ngModel)]="SearchModel.invoiceDueDate">
+                                    <input matInput readonly="true"  formControlName="invoiceDueDate" [matDatepicker]="picker1"  >
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
                                   </mat-form-field>
@@ -148,11 +149,11 @@
                                     restart_alt</mat-icon> Reset
                             </button>
                         </div>
-
+                    </form>
                     </th>
                 </ng-container>
                 <ng-container matColumnDef="Filter">
-                    <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
+                    <th class="class2" colspan="9" mat-header-cell *matHeaderCellDef>
                         <div class="row">
                             <div class="col-sm-3">
                                 <label>InvoiceAmount</label>

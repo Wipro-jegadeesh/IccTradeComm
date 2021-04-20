@@ -10,8 +10,8 @@ import { AcceptedFinanceServices } from './accepted-finance-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import {MatSort} from '@angular/material/sort';
-
+import { MatSort } from '@angular/material/sort';
+import { Validators, FormGroup ,FormBuilder} from '@angular/forms';
 
 export interface financeForBiddingData {
   invId: String;
@@ -40,12 +40,13 @@ export interface goodsDetails {
 const GOODS_DATA: goodsDetails[] = [];
 
 
-export interface invoiceDetails {'invId': String,'invDate': String,'buyerName': String,'invAmt': String,'status': String}
+export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
 const INVOICE_DATA: invoiceDetails[] = [];
 
 
 export interface biddingDetails {
-  'financeOfferAmt' : String, 'ccy' : String, 'fxRate' : String, 'margin' : String, 'netAmtDisc' : String,'discAmt' : String,'discRate' : String,'offerExpPeriod' : String}
+  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
+}
 const BIDDING_DATA: biddingDetails[] = [];
 
 @Component({
@@ -55,11 +56,11 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class AcceptedFinanceComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef','invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
- 
 
-  displayedColumnsOne: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
+
+  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
 
 
@@ -69,10 +70,10 @@ export class AcceptedFinanceComponent implements OnInit {
 
   dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
   displayedColumnsThree: string[] = [
-    'id','finId','invoiceId','fxRate','baseCcyAmt' ,'fundablePercent' ,'baseCcyFundingAmt' ,'repaymentDate' ,
-    'baseCcyNetAmtPayable', 'annualYeild' ]
+    'id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate',
+    'baseCcyNetAmtPayable', 'annualYeild']
 
-    @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   isOpen = ""
   mobileScreen = false;
@@ -105,7 +106,7 @@ export class AcceptedFinanceComponent implements OnInit {
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
-    'buyerName' : String,
+    'buyerName': String,
     'invoiceDate': String,
     'invoiceDueDate': String
   }
@@ -127,9 +128,10 @@ export class AcceptedFinanceComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  
+  Searchform: FormGroup;
+
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
+    private fb: FormBuilder,private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
 
   ngOnInit() {
@@ -156,11 +158,7 @@ export class AcceptedFinanceComponent implements OnInit {
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
-
-
-   
-
-    
+    this.buildform()
 
   }
   onResize() {
@@ -170,20 +168,23 @@ export class AcceptedFinanceComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  SearchAPI(){
-    this.AcceptedFinanceServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
+  SearchAPI() {
+    this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI(){
-    this.SearchModel={
-      'invoiceRef': String,
-      'smeId': String,
-      'buyerName' : String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
-    };
+  ResetAPI() {
+    this.buildform();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
@@ -240,7 +241,7 @@ export class AcceptedFinanceComponent implements OnInit {
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
+
     this.AcceptedFinanceServices.getInvoiceRequestLists(data.id).subscribe(resp => {
       let status = "";
       if (resp.status == "I") {
@@ -260,16 +261,15 @@ export class AcceptedFinanceComponent implements OnInit {
       ]);
 
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-      
+
     })
 
     this.AcceptedFinanceServices.getAcceptedFinanceDetails(data.invoiceId).subscribe(resp => {
-      if(resp){
+      if (resp) {
         this.dataSourceThree = new MatTableDataSource(resp);
       }
     })
 
-    // this.dataSourceThree = new MatTableDataSource([{'financeOfferAmt' : 'test', 'ccy' : 'test', 'fxRate' : 'test', 'margin' : 'test', 'netAmtDisc' : 'test','discAmt' : 'test','discRate' : 'test','offerExpPeriod' : 'test','offerExpPeriod1' : 'test','offerExpPeriod2' : 'test','offerExpPeriod3' : 'test','offerExpPeriod4' : 'test','offerExpPeriod5' : 'test','offerExpPeriod6' : 'test','offerExpPeriod7' : 'test','offerExpPeriod8' : 'test','offerExpPeriod9' : 'test','offerExpPeriod10' : 'test'}])
 
   }
 

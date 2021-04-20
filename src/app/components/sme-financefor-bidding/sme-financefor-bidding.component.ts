@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import {MatSort} from '@angular/material/sort';
+import { Validators, FormGroup ,FormBuilder} from '@angular/forms';
 
 export interface goodsDetails {
   descGoods: String;
@@ -93,6 +94,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     'invoiceDueDate': String
 
   }
+  Searchform: FormGroup;
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -112,7 +114,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+    private fb: FormBuilder, private authenticationService: AuthenticationService, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
@@ -125,7 +127,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
-
+    this.buildform()
   }
   onResize() {
     if (window.innerWidth < 415) {
@@ -134,21 +136,24 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
   SearchAPI(){
-    this.SmeFinancierForBiddingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.SmeFinancierForBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
   }
   ResetAPI(){
-    this.SearchModel={
-      'invoiceRef': String,
-    'smeId': String,
-    'buyerName' : String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
-    };
+    this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
