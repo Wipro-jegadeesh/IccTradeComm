@@ -5,13 +5,12 @@
         <div class="table-res mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
 
-                 <ng-container matColumnDef="invoiceRef">
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header
-                   > ICC Tradecomm Ref </th>
+                <ng-container matColumnDef="invoiceRef">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ICC Tradecomm Ref </th>
                     <td mat-cell *matCellDef="let element">
-                                 {{element.invoiceRef}} 
-                     </td>
-                  </ng-container> 
+                        {{element.invoiceRef}}
+                    </td>
+                </ng-container>
 
                 <ng-container matColumnDef="invoiceNo">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Id </th>
@@ -30,9 +29,7 @@
                 <ng-container matColumnDef="smeId">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> SME Name </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.smeId}}
-
                     </td>
                 </ng-container>
 
@@ -40,9 +37,7 @@
                 <ng-container matColumnDef="buyerName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.buyerName}}
-
                     </td>
                 </ng-container>
 
@@ -50,34 +45,27 @@
                 <ng-container matColumnDef="invDate">
                     <th mat-header-cell *matHeaderCellDef> Inv Date </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
-
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="invDueDate">
                     <th mat-header-cell *matHeaderCellDef> Inv Due date </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{ element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}}
-
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef> Status </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.status == "I" ? "Initiated" : 'Authorized'}}
-
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let element">
-
                         <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                             <mat-icon #tooltip="matTooltip" matTooltip="View" [matTooltipPosition]="'below'">visibility
                             </mat-icon>
@@ -85,7 +73,7 @@
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="TopBar">
-                    <th colspan="8" mat-header-cell *matHeaderCellDef>
+                    <th colspan="9" mat-header-cell *matHeaderCellDef>
                         <div style="justify-content:flex-end;cursor: pointer;">
                             <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                             <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -95,40 +83,43 @@
                 <ng-container matColumnDef="Search">
                     <th colspan="8" mat-header-cell *matHeaderCellDef>
                         <h6>Search By</h6>
+                        <form [formGroup]="Searchform">
                         <div class="row">
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>invoice Id</mat-label>
-                                    <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
+                                    <input type="text" formControlName="invoiceRef" matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>smeName</mat-label>
-                                    <input type="text"[(ngModel)]="SearchModel.smeId" matInput />
+                                    <input type="text" formControlName="smeId"  matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>buyerName</mat-label>
-                                    <input type="text"[(ngModel)]="SearchModel.buyerName" matInput />
+                                    <input type="text" formControlName="buyerName"  matInput />
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
-                                <mat-label>invoiceDate</mat-label>
-                                <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                              </mat-form-field>
+                                    <mat-label>invoiceDate</mat-label>
+                                    <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker"
+                                        >
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
                             </div>
                             <div class="col-sm-2">
                                 <mat-form-field appearance="outline">
                                     <mat-label>Invoice Due Date</mat-label>
-                                    <input matInput readonly="true"  [matDatepicker]="picker1"  [(ngModel)]="SearchModel.invoiceDueDate">
+                                    <input matInput readonly="true" formControlName="invoiceDueDate" [matDatepicker]="picker1"
+                                        >
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
-                                  </mat-form-field>
+                                </mat-form-field>
                             </div>
                         </div>
                         <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
@@ -141,7 +132,7 @@
                                     restart_alt</mat-icon> Reset
                             </button>
                         </div>
-
+                    </form>
                     </th>
                 </ng-container>
                 <ng-container matColumnDef="Filter">
@@ -198,15 +189,9 @@
             </button>
         </div>
         <div class="modal-body">
-
-
-            <!-- //Bidding Details -->
-
-
             <div style="overflow-x:auto;">
-                <!-- <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Bidding Details</p> -->
                 <table mat-table [dataSource]="dataSourceThree">
+
                     <ng-container matColumnDef="id">
                         <th mat-header-cell *matHeaderCellDef scope="column">Financie Ref No</th>
                         <td mat-cell *matCellDef="let data">{{ 'FIN00'+data.fin_id }}</td>
@@ -259,46 +244,6 @@
                         <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
                     </ng-container>
 
-                    <!-- <ng-container matColumnDef="offerExpDateTime">
-                    <th mat-header-cell *matHeaderCellDef scope="column">offer Exp Date</th>
-                    <td mat-cell *matCellDef="let data">{{ data.offerExpDateTime }}</td>
-                </ng-container>  -->
-
-                    <!-- <ng-container matColumnDef="finId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Fin Id</th>
-                    <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
-                </ng-container>  -->
-
-                    <!-- <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Status</th>
-                    <td mat-cell *matCellDef="let data">{{ data.status }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="smeId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Sme Id</th>
-                    <td mat-cell *matCellDef="let data">{{ data.smeId }}</td>
-                </ng-container>  -->
-
-                    <!-- <ng-container matColumnDef="offerExpPeriod7">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Payment Ref No</th>
-                    <td mat-cell *matCellDef="let data">{{ data.offerExpPeriod7 }}</td>
-                </ng-container>  -->
-
-                    <!-- <ng-container matColumnDef="paymentDate">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Payment Date</th>
-                    <td mat-cell *matCellDef="let data">{{ data.paymentDate }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="relInvRef">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Related Inv Ref</th>
-                    <td mat-cell *matCellDef="let data">{{ data.relInvRef }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="relBidRef">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Related Bid Ref</th>
-                    <td mat-cell *matCellDef="let data">{{ data.relBidRef }}</td>
-                </ng-container>  -->
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsThree" style="background-color:#B4A6EA"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
                 </table>
@@ -319,8 +264,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="table-res">
-                        <!-- <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Invoice Details</p> -->
+                  
                         <table mat-table [dataSource]="dataSourceTwo">
                             <ng-container matColumnDef="invId">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Invoice No</th>
@@ -377,16 +321,6 @@
                                 <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                             </ng-container>
 
-                            <!-- <ng-container matColumnDef="idNo">
-                        <th mat-header-cell *matHeaderCellDef scope="column">ID No</th>
-                        <td mat-cell *matCellDef="let element">{{ element.idNo }}</td>
-                    </ng-container> -->
-
-                            <!-- <ng-container matColumnDef="dateOfInvoice">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Date Of Invoice</th>
-                        <td mat-cell *matCellDef="let element">{{ element.dateOfInvoice }}</td>
-                    </ng-container> -->
-
                             <ng-container matColumnDef="quantity">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Quantity</th>
                                 <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
@@ -403,12 +337,6 @@
                             </ng-container>
 
 
-
-                            <!-- <ng-container matColumnDef="netAmtPay">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.netAmtPay }}</td>
-                    </ng-container>
-         -->
                             <ng-container matColumnDef="taxRate">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Tax Rate</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
@@ -422,15 +350,7 @@
                                 <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                             </ng-container>
-                            <!-- <ng-container matColumnDef="taxAmountccy">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
-                        <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
-                    </ng-container>
-        
-                    <ng-container matColumnDef="totalccy">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Total Ccy</th>
-                        <td mat-cell *matCellDef="let element">{{ element.totalCcy }}</td>
-                    </ng-container> -->
+                
 
                             <ng-container matColumnDef="total">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Total</th>
@@ -449,7 +369,6 @@
 
         </div>
         <div class="modal-footer">
-            <!-- <button type="button" class="btn model-btn-outline">Submit</button> -->
             <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
         </div>
     </ng-template>
