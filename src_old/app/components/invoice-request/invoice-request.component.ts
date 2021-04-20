@@ -290,6 +290,7 @@ private _filter(value: string): string[] {
     let reqParams=[]
     this.dataSource.data.map((item)=>{
       if(invoiceIds.includes(item.id)){
+        console.log('item value--',item);
         let obj={
           "invoiceId":item.id,
           "invoiceNo":item.invId,

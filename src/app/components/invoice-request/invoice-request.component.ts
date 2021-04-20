@@ -63,6 +63,7 @@ const ELEMENT_DATA: any[] = [
 // const NAMES = ['', '', '', '', '', '',];
 
 export interface invoiceData {
+  invref: any;
   invDueDate: any;
   invId: any;
   id: String;
@@ -96,7 +97,8 @@ export class InvoiceRequestComponent implements OnInit {
     invoiceDate: "",
     buyerName: "",
     InvoiceAmount: "",
-    invDueDate:""
+    invDueDate:"",
+    invref:""
   };
 
   hide = true;
@@ -290,10 +292,11 @@ private _filter(value: string): string[] {
     let reqParams=[]
     this.dataSource.data.map((item)=>{
       if(invoiceIds.includes(item.id)){
+        console.log(item,'tem');
         let obj={
           "invoiceId":item.id,
           "invoiceNo":item.invId,
-          "invoiceRef":item['invoiceDetailsSequenceNumber'] && item['invoiceDetailsSequenceNumber'].invoice_ref ? item['invoiceDetailsSequenceNumber'].invoice_ref : '',
+          "invoiceRef":item.invref,
           "invoiceDate":item['invDate'],
           "smeId":item['smeId'],
           "invoiceAmt":item['invAmt'],

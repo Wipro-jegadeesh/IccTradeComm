@@ -230,7 +230,7 @@ export class IccInvoiceMasterComponent implements OnInit {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
    
-    this.IccInvoiceMasterServices.getInvoiceRequestLists(data.id).subscribe(resp => {
+    this.IccInvoiceMasterServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
       let status = "";
       if (resp.status == "I") {
         status = "Initiated"
