@@ -872,6 +872,12 @@ input.custom-autofill {
             font-size: 12px;
             font-weight: 400;
         }
+        .file-upload{
+            display: unset!important;
+        }
+        .file-label{
+            width: unset !important;
+        }
   }
   @media screen and (min-width: 992px) and (max-width: 1199px){
     .dynamicForm-example-full-width {

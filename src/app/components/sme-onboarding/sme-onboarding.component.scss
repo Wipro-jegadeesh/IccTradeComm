@@ -128,19 +128,32 @@ mat-form-field {
     color: black;
     margin-top: 10px;
     font-weight: 500;
-    &.subSecSel{
-      border-radius: 3px;
-    background-color: #2e70db;
-    color: white;
-    width: 130px;
-    padding-left: 5px;
-    display: flex;
-    }
-    &.subSeccomp{
-      color:rgb(16, 180, 16)
-    }
+      &.subSecSel{
+        border-radius: 3px;
+      background-color: #2e70db;
+      color: white;
+      width: 130px;
+      padding-left: 5px;
+      display: flex;
+      }
+      &.subSeccomp{
+        color:rgb(16, 180, 16)
+      }
   }
-
+  
+  .subSecSel{
+    border-radius: 3px;
+  background-color: #2e70db;
+  color: white;
+  width: 130px;
+  padding-left: 5px;
+  display: flex;
+  
+  &.subSeccomp{
+    color: white;
+    background-color: #2ab414;
+  }
+  }
   
   @media(max-width:767px) {
     .section-title {
@@ -164,7 +177,7 @@ mat-form-field {
   }
   .caption{
     width: 80px!important;
-    margin-left: 0px;
+    margin-left: -40px;
     &.subSecSel{
       padding-left: 3px;
     }
