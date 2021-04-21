@@ -2,19 +2,19 @@
     <header>
       <div class="data-section">
         <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitgroupsForm()">
-        <h5 class="text-center">Groups</h5>
+        <h5 class="text-center">Authorization Matrix</h5>
             <mat-card>
           <mat-card-content>
             <table  class="table-responsive inv-table">
               <tbody>
-
-<tr>
+  
+  <tr>
                   
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Group Code</mat-label>
-        <input type="text" matInput value="" formControlName="groupCode" />
-
+        <mat-label>SME/FIN</mat-label>
+        <input type="text" matInput value="" formControlName="smeFin" />
+  
         <!-- <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate"> -->
         <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker> -->
@@ -22,65 +22,77 @@
     </td>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Group Name</mat-label>
-        <input type="text" matInput value="" formControlName="group" />
-
+        <mat-label>Currency</mat-label>
+        <input type="text" matInput value="" formControlName="currency" />
+  
         <!-- <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" /> -->
         <!-- <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
         <mat-datepicker #pickers></mat-datepicker> -->
       </mat-form-field>
     </td>
-    <td rowspan="1" colspan="1">
+    <!-- <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>Group Description</mat-label>
         <input type="text" matInput value="" formControlName="groupDescription" />
-        <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
       </mat-form-field>
-    </td>
-
+    </td> -->
+  
     <td rowspan="1" colspan="1">      
         <button  mat-flat-button color="primary"id=grid>Add</button>
-        <!-- #tooltip="matTooltip"
-        matTooltip="{{biddingTooltip.invoiceAmount}}"
-        [matTooltipPosition]="'below'" -->
         </td>
     
   </tr>
-
-</tbody>
-</table>
-</mat-card-content>
-</mat-card>
-
-</form>
-
-<br>
+  
+  </tbody>
+  </table>
+  </mat-card-content>
+  </mat-card>
+  
+  </form>
+  
+  <br>
         <div class="mat-elevation-z8 table-responsive table-post">
             <table mat-table [dataSource]="dataSource" matSort>
-                <ng-container matColumnDef="groupCode">
+                <ng-container matColumnDef="slab">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{groupTooltip.groupCode}}" [matTooltipPosition]="'below'"> Group Code </th>
+                    matTooltip="{{groupTooltip.slab}}" [matTooltipPosition]="'below'"> Slab </th>
                     <td mat-cell *matCellDef="let element">
-                                 {{element.groupCode}}
+                                 {{element.slab}}
                      </td>
                   </ng-container>
-
-                <ng-container matColumnDef="group">
+  
+                <ng-container matColumnDef="fromAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.group}}" [matTooltipPosition]="'below'"> Group </th>
-                    <td mat-cell *matCellDef="let element">
-                        {{element.group}}
+                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'"> From Amount </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.fromAmt}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="groupDescription">
+                <ng-container matColumnDef="toAmt">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> From Amount </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.toAmt}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="noOfPersons">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.noOfPersons}}" [matTooltipPosition]="'below'"> No of persons </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.noOfPersons}}
+                    </td>
+                </ng-container>
+  
+                <!-- <ng-container matColumnDef="groupDescription">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> Group Description
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.groupDescription}}
                     </td>
-                </ng-container>
+                </ng-container> -->
                 <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr> -->
                 <!-- <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
                     *matHeaderRowDef="displayedColumnsearch"></tr> -->
@@ -89,6 +101,6 @@
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
             </table>
             </div>
-</div>
-</header>
-</div>
+  </div>
+  </header>
+  </div>
