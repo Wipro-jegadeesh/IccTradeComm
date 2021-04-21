@@ -152,6 +152,11 @@ export class IccDashboardComponent implements OnInit {
   logout(){
     this.authenticationService.logout()
     }
+    
+    navigatePages(path){
+      this.router.navigateByUrl(path);
+    }
+
     navigateFinancierOnboard(){
       this.router.navigateByUrl('/financier-onboarding');
     }

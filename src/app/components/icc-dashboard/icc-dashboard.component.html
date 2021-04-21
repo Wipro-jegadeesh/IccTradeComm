@@ -151,15 +151,21 @@
                 </mat-tab>
                 <mat-tab label="Static Data Maintenance">
                   <div class="links">
-                    <a routerLink="#">Creation</a>
+                    <!-- <a routerLink="#">Creation</a>
                     <a routerLink="#">Edit</a>
-                    <a routerLink="#">View</a>
+                    <a routerLink="#">View</a> -->
+                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-group')">Groups</button> 
+                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-roles')">Roles</button>
+                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-authorize')">Authorization Matrix</button>
                   </div>
                 </mat-tab>
                 <mat-tab label="Financier Maintenence">
                   <div class="links">
-                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="onboard-btn"
-                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigateFinancierOnboard()">Onboarding</button>
+                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="onboard-btn" 
+                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/financier-onboarding')">Onboarding</button>
                   </div>
                   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="financierId">

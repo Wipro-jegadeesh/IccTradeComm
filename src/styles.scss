@@ -1036,3 +1036,18 @@ input.custom-autofill {
   }
   }
 }
+
+.single_drp_dsgn{
+.pure-checkbox input[type=checkbox]+label:before{
+    border-radius: 15px!important;
+}
+.pure-checkbox input[type=checkbox]+label:after{
+    background-color: #060606f7 !important;
+    top: 50% !important;
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50% !important;
+    border-width: 0 !important;
+    margin-top: -6px !important;
+}
+}

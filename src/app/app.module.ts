@@ -119,12 +119,15 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { FinancierFundedComponent } from './components/financier-funded/financier-funded.component';
-import { SignupService } from './components/signup/signup.service';
 import { IccUserCreationComponent } from './components/icc-user-creation/icc-user-creation.component';
 import { IccUserDetailsComponent } from './components/icc-user-creation/icc-user-details/icc-user-details.component';
 import {IccUserCreationService} from './components/icc-user-creation/icc-user-creation.service'
 
 
+import { SignupService } from './components/signup/signup.service';
+import { IccGroupsComponent } from './components/icc-groups/icc-groups.component';
+import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
+import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -172,7 +175,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccOfferAcceptanceComponent,
     FinancierFundedComponent,
     IccUserCreationComponent,
-    IccUserDetailsComponent
+    IccUserDetailsComponent,
+    IccGroupsComponent,
+    IccRolesComponent,
+    IccAuthorizMatrixComponent
   ],
   imports: [
     BrowserModule,

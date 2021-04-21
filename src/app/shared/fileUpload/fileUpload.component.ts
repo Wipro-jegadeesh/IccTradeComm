@@ -19,6 +19,8 @@ export class FileUploadComponent implements OnInit {
      }
 
  onChange(event){
+
+        if(this.fileNames.length < this.questionDatas.filesMax){
         this.getBase64(<File>event.target.files[0]).then((data) => {
             let fileName={
                 'name':<File>event.target.files[0].name,
@@ -34,6 +36,7 @@ export class FileUploadComponent implements OnInit {
             }
             this.change.emit(obj)
         });
+    }
         // for(let i = 0; i < event.target.files.length; i++) {
         //     var reader = new FileReader();
         //     reader.readAsDataURL(<File>event.target.files[i]);

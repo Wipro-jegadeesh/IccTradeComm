@@ -32,6 +32,10 @@ import {IccFinanceTodayComponent} from './components/icc-finance-today/icc-finan
 import {FinancierFundedComponent} from './components/financier-funded/financier-funded.component'
 import {IccUserCreationComponent} from './components/icc-user-creation/icc-user-creation.component'
 import {IccUserDetailsComponent} from './components/icc-user-creation/icc-user-details/icc-user-details.component'
+import {IccGroupsComponent} from './components/icc-groups/icc-groups.component'
+import {IccRolesComponent} from './components/icc-roles/icc-roles.component'
+import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-authoriz-matrix.component'
+
 
 
 const routes: Routes = [
@@ -78,6 +82,11 @@ const routes: Routes = [
   { path: 'icc-offer-acceptance-details/:type/:id', component: ICCacceptancedetailsComponent , data : {"HeaderName" : "ICC Offer Acceptance Details" ,"headerPaths" : [{ path : "/icc-offer-acceptance",pathName : "ICC Offer Acceptance"},{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-user-creation', component: IccUserCreationComponent , data : {"HeaderName" : "User-List","headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-user-details/:id', component: IccUserDetailsComponent , data : {"HeaderName" : "User Details" ,"headerPaths" : [{ path : "/icc-user-creation",pathName : "User List"},{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-group', component: IccGroupsComponent , data : {"HeaderName" : "Group" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-roles', component: IccRolesComponent , data : {"HeaderName" : "Roles" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
+  
 
 ];
 
