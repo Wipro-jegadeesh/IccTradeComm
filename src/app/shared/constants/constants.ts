@@ -196,5 +196,10 @@ export const INVOICEDETAILSCONSTANTS={
 export const StaicDataMaintenance={
     'groupCode' : 'Group Code',
     'group' : 'Group',
-    'groupDescription' : 'Group Description'
+    'groupDescription' : 'Group Description',
+    'roleDescription' : 'Role Description',
+    'slab' : 'Slab',
+    'fromAmt' : 'From Amount',
+    'toAmt' : 'To Amount',
+    'noOfPersons' : 'No of Persons'
 }
