@@ -38,7 +38,8 @@ export class MultiSelectDropdown implements OnInit {
             idField: "item_id",
             textField: "item_text",
             allowSearchFilter: true,
-            showCheckbox:this.questionDatas.allowMultiple ? true : false,
+            // showCheckbox:this.questionDatas.allowMultiple ? true : false,
+            showCheckbox:true,
             position:'bottom',
             enableSearchFilter:true
           };
