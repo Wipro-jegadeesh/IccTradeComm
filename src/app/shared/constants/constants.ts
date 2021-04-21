@@ -192,3 +192,9 @@ export const INVOICEDETAILSCONSTANTS={
     'invoiceDueDate':'Invoice Due Date',
     'authorize':'Authorize Invoice'
 }
+
+export const StaicDataMaintenance={
+    'groupCode' : 'Group Code',
+    'group' : 'Group',
+    'groupDescription' : 'Group Description'
+}

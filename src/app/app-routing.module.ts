@@ -30,6 +30,7 @@ import {IccFinanceMasterComponent} from './components/icc-finance-master/icc-fin
 import {IccInvoiceMasterComponent} from './components/icc-invoice-master/icc-invoice-master.component';
 import {IccFinanceTodayComponent} from './components/icc-finance-today/icc-finance-today.component';
 import {FinancierFundedComponent} from './components/financier-funded/financier-funded.component'
+import {IccGroupsComponent} from './components/icc-groups/icc-groups.component'
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -73,6 +74,9 @@ const routes: Routes = [
   { path: 'icc-funding-request', component: IccFundingRequestComponent , data : {"HeaderName" : "ICC Open Funding" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},  
   { path: 'icc-offer-acceptance', component: IccOfferAcceptanceComponent , data : {"HeaderName" : "ICC Offer Acceptance" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-offer-acceptance-details/:type/:id', component: ICCacceptancedetailsComponent , data : {"HeaderName" : "ICC Offer Acceptance Details" ,"headerPaths" : [{ path : "/icc-offer-acceptance",pathName : "ICC Offer Acceptance"},{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-group', component: IccGroupsComponent , data : {"HeaderName" : "ICC-Group" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
+  
 
 ];
 
