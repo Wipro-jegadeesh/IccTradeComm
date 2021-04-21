@@ -120,6 +120,11 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { FinancierFundedComponent } from './components/financier-funded/financier-funded.component';
 import { SignupService } from './components/signup/signup.service';
+import { IccUserCreationComponent } from './components/icc-user-creation/icc-user-creation.component';
+import { IccUserDetailsComponent } from './components/icc-user-creation/icc-user-details/icc-user-details.component';
+import {IccUserCreationService} from './components/icc-user-creation/icc-user-creation.service'
+
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -165,7 +170,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccInvoiceMasterComponent,
     IccFundingRequestComponent,
     IccOfferAcceptanceComponent,
-    FinancierFundedComponent
+    FinancierFundedComponent,
+    IccUserCreationComponent,
+    IccUserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -218,7 +225,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
-    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,
+    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {
