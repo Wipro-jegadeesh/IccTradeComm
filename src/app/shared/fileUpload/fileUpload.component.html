@@ -2,10 +2,12 @@
     <div class="dynamic-radio-btn file-input" #tooltip="matTooltip"
     matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'">
       <h6>{{questionDatas && questionDatas.label}}</h6>
+        <!-- .&nbsp;<span style="color: red;">(Upto {{questionDatas.filesMax}} files)</span></h6> -->
         <!-- <mat-file-upload></mat-file-upload> -->
         <div class="file-upload">
         <div class="upload-btn-wrapper">
-          <button class="filebtn">Upload a file</button>
+          <!-- [disabled]="questionDatas.filesMax == fileNames.length" -->
+          <button class="filebtn" >Upload a file</button>
         <input type="file" class="dynamic-file-upload form" (change)="onChange($event)"
         accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf,.csv" />
         </div>
