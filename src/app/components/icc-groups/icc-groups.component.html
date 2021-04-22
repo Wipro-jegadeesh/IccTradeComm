@@ -13,27 +13,19 @@
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>Group Code</mat-label>
-        <input type="text" matInput value="" formControlName="groupCode" />
-
-        <!-- <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate"> -->
-        <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker> -->
+        <input type="text" matInput formControlName="groupCode" />
       </mat-form-field>
     </td>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>Group Name</mat-label>
-        <input type="text" matInput value="" formControlName="group" />
-
-        <!-- <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" /> -->
-        <!-- <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
-        <mat-datepicker #pickers></mat-datepicker> -->
+        <input type="text" matInput formControlName="groupName" />
       </mat-form-field>
     </td>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>Group Description</mat-label>
-        <input type="text" matInput value="" formControlName="groupDescription" />
+        <input type="text" matInput formControlName="groupDescription" />
         <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
       </mat-form-field>
     </td>
@@ -65,11 +57,11 @@
                      </td>
                   </ng-container>
 
-                <ng-container matColumnDef="group">
+                <ng-container matColumnDef="groupName">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.group}}" [matTooltipPosition]="'below'"> Group </th>
+                        matTooltip="{{groupTooltip.groupName}}" [matTooltipPosition]="'below'"> Group </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.group}}
+                        {{element.groupName}}
                     </td>
                 </ng-container>
 

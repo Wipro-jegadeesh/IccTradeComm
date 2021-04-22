@@ -21,7 +21,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-// import { InvoiceRequestServices } from './invoice-service';
+import { IccRolesServices } from './icc-roles-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -44,7 +44,7 @@ export class IccRolesComponent implements OnInit {
   groupTooltip = StaicDataMaintenance;
 
 
-  constructor(public router: Router, private authenticationService: AuthenticationService, 
+  constructor(public router: Router, private IccRolesServices: IccRolesServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
@@ -63,8 +63,24 @@ export class IccRolesComponent implements OnInit {
 
   }
 
-  onSubmitgroupsForm(){
-
+  onSubmitRoleForm(){
+    // this.IccGroupServices.getParticularGroups(1).subscribe(resp => { })
+    if(this.groupsForm.value && this.groupsForm.status == "VALID"){
+      let value = this.groupsForm.value
+      this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
+        if(resp){
+          this.toastr.success("Saved Successfully")
+          this.groupsForm.reset();
+          this.IccRolesServices.getAllRoles().subscribe(listResp => {
+            if(listResp){
+              this.dataSource = new MatTableDataSource(listResp);
+            }
+          })
+        }
+      })
+    }else{
+      this.toastr.error("Mandatory fields are missing")
+    }
   }
 
 }

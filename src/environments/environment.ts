@@ -24,20 +24,20 @@
 
 
 //General Service
-let BASE_PATH = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
+let BASE_PATH = "http://localhost:8080/";
 
 // Invoice Service Url 8080
-let serviePath_1 = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
+let serviePath_1 = "http://localhost:8080/";
 
 // Bidding Service Url 8081
-let serviePath_2 = "https://tradecomm-userprofile.ffdcdev.fusionfabric.io/";
+let serviePath_2 = "http://localhost:8081/";
 
 //Financier onboard path
 let financierServicePath="http://localhost:8082/"
 
 //Dashboard  Service Url
 let dboardServerPath1 = "http://dboardServPath1/";
-let getSumOfOpenFinBidding = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
+let getSumOfOpenFinBidding = "http://localhost:8080/";
 let dboardServerPath3 ="http://dboardServPath3/";
 let dboardServerPath4 ="http://dboardServPath4/";
 let dboardServerPath5 ="http://dboardServPath5/";
@@ -65,3 +65,4 @@ export const environment = {
 * on performance if an error is thrown.
 */
 // import 'zone.js/dist/zone-error'; // Included with Angular CLI.
+// .js/dist/zone-error'; // Included with Angular CLI.
