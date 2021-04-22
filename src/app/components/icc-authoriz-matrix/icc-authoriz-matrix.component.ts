@@ -22,7 +22,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-// import { InvoiceRequestServices } from './invoice-service';
+import { IccAuthorizeServices } from './icc-authorize-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -40,32 +40,56 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
 export class IccAuthorizMatrixComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['slab','fromAmt','toAmt','noOfPersons'];
+  displayedColumns: string[] = ['slab','smefin','currency','fromAmt','toAmt','noofPersons'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
 
 
-  constructor(public router: Router, private authenticationService: AuthenticationService, 
+  constructor(public router: Router, private IccAuthorizeServices: IccAuthorizeServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'slab' : '1','fromAmt' : '20','toAmt' : '100','noOfPersons' : 2}]);
+    this.dataSource = new MatTableDataSource([{'slab' : '1','smefin' : 'sme123','currency' : '212', 'fromAmt' : '20','toAmt' : '100','noofPersons' : 2}]);
 
   }
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
+      slab: ['', Validators.required],
       smeFin: ['', Validators.required],
-      currency: ['', Validators.required]
+      currency: ['', Validators.required],
+      fromAmt: ['', Validators.required],
+      toAmt: ['', Validators.required],
+      noofPersons: ['', Validators.required]
     });
 
   }
 
-  onSubmitgroupsForm(){
+  // onSubmitgroupsForm(){
+  //   IccAuthorizeServices
+  // }
 
+  onSubmitgroupsForm(){
+    // this.IccGroupServices.getParticularAuthorizeMatrix(1).subscribe(resp => { })
+    if(this.groupsForm.value && this.groupsForm.status == "VALID"){
+      let value = this.groupsForm.value
+      this.IccAuthorizeServices.submitIccAuthorizeMatrix(value).subscribe(resp => {
+        if(resp){
+          this.toastr.success("Saved Successfully")
+          this.groupsForm.reset();
+          this.IccAuthorizeServices.getAllAuthorizeMatrix().subscribe(listResp => {
+            if(listResp){
+              this.dataSource = new MatTableDataSource(listResp);
+            }
+          })
+        }
+      })
+    }else{
+      this.toastr.error("Mandatory fields are missing")
+    }
   }
 
 }
