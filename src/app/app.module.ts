@@ -108,8 +108,8 @@ import { IccInvoiceMasterComponent } from './components/icc-invoice-master/icc-i
 import { IccInvoiceMasterServices } from './components/icc-invoice-master/icc-invoice-master-service';
 import { IccFundingRequestComponent } from './components/icc-funding-request/icc-funding-request.component';
 import { IccOfferAcceptanceComponent } from './components/icc-offer-acceptance/icc-offer-acceptance.component';
-
 import {FinancierFundedServices} from './components/financier-funded/financier-funded-service'
+import {IccGroupServices} from './components/icc-groups/icc-groups-services'
 
 import { TextAreaComponent } from './shared/textArea/textArea.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
@@ -119,11 +119,14 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { FinancierFundedComponent } from './components/financier-funded/financier-funded.component';
+<<<<<<< Updated upstream
 import { IccUserCreationComponent } from './components/icc-user-creation/icc-user-creation.component';
 import { IccUserDetailsComponent } from './components/icc-user-creation/icc-user-details/icc-user-details.component';
 import {IccUserCreationService} from './components/icc-user-creation/icc-user-creation.service'
 
 
+=======
+>>>>>>> Stashed changes
 import { SignupService } from './components/signup/signup.service';
 import { IccGroupsComponent } from './components/icc-groups/icc-groups.component';
 import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
@@ -231,7 +234,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
-    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,
+    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {
