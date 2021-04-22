@@ -34,13 +34,17 @@
         
         <div class="login-actions"> 
             <span class="uxg-body-3">Don't have an account? </span>
-            <a routerLink="/signup" color="primary"  #tooltip="matTooltip"
+            <a style="text-decoration:underline" routerLink="/signup" color="primary"  #tooltip="matTooltip"
             matTooltip="{{loginTooltip.signup}}" [matTooltipPosition]="'below'">
                 <!-- <mat-icon>arrow_right_alt</mat-icon> -->
                 Sign Up
             </a>
             </div>
 
+            <!-- <a style="text-decoration:underline" (click)="openModal($event,template)" #tooltip="matTooltip"
+            matTooltip="{{loginTooltip.signup}}" [matTooltipPosition]="'below'">
+                Sign Up
+            </a> -->
             <!-- <div class="login-actions">
                 <mat-checkbox color="primary"  #tooltip="matTooltip"
                 matTooltip="{{loginTooltip.select}}" [matTooltipPosition]="'below'"><span class="uxg-body-3">Remember me</span></mat-checkbox>
@@ -48,6 +52,30 @@
             </div> -->
         
         <span class="fill-remaining-space"></span>
+        <!-- <ng-template #template>
+            <div class="modal-header">
+                <h4 class="modal-title">Signup</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;">
+                    <h5>Are you existing coriolis customer</h5>
+                    <div class="row">
+                        <div class="col-sm-6" style="text-align: end;">
+                            <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">Yes</button>
+                        </div>
+                        <div>
+                            <button type="button" mat-flat-button color="primary" (click)="signUpPage('no')"> No</button>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+            </div>
+        </ng-template> -->
 
         <div class="login-footer">
             <!-- <a href="https://www.finastra.com/support" class="uxg-body-3" target="_blank">Support</a>&nbsp;/&nbsp;

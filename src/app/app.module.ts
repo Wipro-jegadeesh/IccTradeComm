@@ -127,6 +127,7 @@ import {IccUserCreationService} from './components/icc-user-creation/icc-user-cr
 import { SignupService } from './components/signup/signup.service';
 import { IccGroupsComponent } from './components/icc-groups/icc-groups.component';
 import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
+import { SignUpDetailsComponent } from './components/signup/sign-up-details/sign-up-details.component';
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 import {IccRolesServices} from './components/icc-roles/icc-roles-services'
 import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
@@ -180,7 +181,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccUserDetailsComponent,
     IccGroupsComponent,
     IccRolesComponent,
-    IccAuthorizMatrixComponent
+    IccAuthorizMatrixComponent,
+    SignUpDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 // import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import {COUNTRYNAMES} from '../../shared/constants/Country'
 import { SignupService } from './signup.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { IccUserCreationService } from '../icc-user-creation/icc-user-creation.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 interface ICity{
   item_id: number;
@@ -26,8 +29,12 @@ export class SignupComponent implements OnInit {
   CountryPinLabel;
   showCountSignBtn =false;
   closeDropDownOnSelection
+  type: string;
+  signUpDiv: boolean;
+  signUpDetails:any;
+  modalRef: BsModalRef;
 
-  constructor(private router: Router,private signupService:SignupService,
+  constructor(private modalService: BsModalService,private IccUserCreationssService: IccUserCreationService,private fb: FormBuilder,private activatedRoute: ActivatedRoute,private router: Router,private signupService:SignupService,
     private toastr: ToastrService) { }
 
   
@@ -69,6 +76,7 @@ this.optionDatas = COUNTRYNAMES
    this.showCountSignBtn= this.selectedItems.length ? true : false
    this.CountryPinLabel=event.regNo ? event.regNo : 'No'
   }
+ 
   signup(form:NgForm) {
     // if (this.country.valueOf() !== '' || this.CountryPin.valueOf() !== '') {
     //   this.router.navigate(['sme-onboarding'])
@@ -83,7 +91,17 @@ this.optionDatas = COUNTRYNAMES
     //  { this.invalidLogin = true }
 
     if(this.name && this.CountryPin && this.selectedItems.length){
-      this.router.navigate(['sme-onboarding'])
+      let signUpDetailss = {
+        companyName : this.name,
+        nationalId : this.CountryPin,
+        country : this.selectedItems,
+      }
+      localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
+       
+      
+      // this.router.navigateByUrl('/signup');
+
+
       // this.signupService.signup(form.value).subscribe(resp=>{
       //   if(resp){
       //     this.router.navigate(['sme-onboarding'])
@@ -92,6 +110,25 @@ this.optionDatas = COUNTRYNAMES
     }
     else{
       this.toastr.error('Error')
+    }
+  }
+  openModal(event, template) {
+    event.preventDefault();
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+  signUpPage(type){
+    this.modalRef.hide();
+    localStorage.setItem("existingCUS",type);
+    let signUpDetailss = {
+      companyName : this.name,
+      nationalId : this.CountryPin,
+      country : this.selectedItems,
+    }
+    localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
+    if(type === 'yes'){
+          this.router.navigate(['sme-onboarding'])
+    }else{
+      this.router.navigateByUrl('/signup-details');
     }
   }
 }
