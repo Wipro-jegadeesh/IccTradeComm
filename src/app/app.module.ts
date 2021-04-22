@@ -128,6 +128,8 @@ import { SignupService } from './components/signup/signup.service';
 import { IccGroupsComponent } from './components/icc-groups/icc-groups.component';
 import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
+import {IccRolesServices} from './components/icc-roles/icc-roles-services'
+import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -231,7 +233,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
-    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,
+    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {

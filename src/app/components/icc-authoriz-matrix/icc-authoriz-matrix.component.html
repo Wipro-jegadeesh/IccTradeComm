@@ -9,38 +9,56 @@
               <tbody>
   
   <tr>
-                  
+         
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>Slab</mat-label>
+        <input type="text" matInput value="" formControlName="slab" />
+      </mat-form-field>
+    </td>
+
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>SME/FIN</mat-label>
         <input type="text" matInput value="" formControlName="smeFin" />
-  
-        <!-- <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate"> -->
-        <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker> -->
       </mat-form-field>
     </td>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>Currency</mat-label>
         <input type="text" matInput value="" formControlName="currency" />
-  
-        <!-- <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" /> -->
-        <!-- <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
-        <mat-datepicker #pickers></mat-datepicker> -->
       </mat-form-field>
     </td>
-    <!-- <td rowspan="1" colspan="1">
+
+    <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Group Description</mat-label>
-        <input type="text" matInput value="" formControlName="groupDescription" />
+        <mat-label>From Amount</mat-label>
+        <input type="number" matInput value="" formControlName="fromAmt" />
       </mat-form-field>
-    </td> -->
+    </td>
+
+   
+    
+  </tr>
+
+  <tr>
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>To Amount</mat-label>
+        <input type="number" matInput value="" formControlName="toAmt" />
+      </mat-form-field>
+    </td>
+
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>No of persons</mat-label>
+        <input type="number" matInput value="" formControlName="noofPersons" />
+      </mat-form-field>
+    </td>
   
     <td rowspan="1" colspan="1">      
         <button  mat-flat-button color="primary"id=grid>Add</button>
         </td>
-    
   </tr>
   
   </tbody>
@@ -60,6 +78,22 @@
                                  {{element.slab}}
                      </td>
                   </ng-container>
+
+                  <ng-container matColumnDef="smefin">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'"> Sme/Fin </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.smefin}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="currency">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> Currency </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        {{element.currency}}
+                    </td>
+                </ng-container>
   
                 <ng-container matColumnDef="fromAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
@@ -77,11 +111,11 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="noOfPersons">
+                <ng-container matColumnDef="noofPersons">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.noOfPersons}}" [matTooltipPosition]="'below'"> No of persons </th>
+                        matTooltip="{{groupTooltip.noofPersons}}" [matTooltipPosition]="'below'"> No of persons </th>
                     <td mat-cell *matCellDef="let element"> 
-                        {{element.noOfPersons}}
+                        {{element.noofPersons}}
                     </td>
                 </ng-container>
   

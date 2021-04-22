@@ -1,7 +1,7 @@
 <div class="app-content">
   <header>
     <div class="data-section">
-      <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitgroupsForm()">
+      <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()">
       <h5 class="text-center">Roles</h5>
           <mat-card>
         <mat-card-content>
@@ -23,7 +23,7 @@
   <td rowspan="1" colspan="1">
     <mat-form-field dense class="icc-mat">
       <mat-label>Role Description</mat-label>
-      <input type="text" matInput value="" formControlName="group" />
+      <input type="text" matInput value="" formControlName="roleDescription" />
 
       <!-- <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" /> -->
       <!-- <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
