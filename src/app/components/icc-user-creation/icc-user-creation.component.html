@@ -15,7 +15,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                     matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> User Id </th>
                     <td mat-cell *matCellDef="let element">
-                                {{element.invoiceRef}}
+                                {{element.userId}}
                     </td>
                 </ng-container>
                 
@@ -23,7 +23,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> First Name </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.invoiceNo}}
+                        {{element.firstName}}
                     </td>
                 </ng-container>
 
@@ -32,7 +32,7 @@
                         matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> Last Name 
                     </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.invoiceAmt}}
+                        {{element.lastName}}
                     </td>
                 </ng-container>
 
@@ -40,7 +40,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
                         [matTooltipPosition]="'below'"> Company Name </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.smeId}}
+                        {{element.companyName}}
                     </td>
                 </ng-container>
 
@@ -48,7 +48,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> Email Id  </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.buyerName}}
+                        {{element.email}}
                     </td>
                 </ng-container>
 
@@ -56,7 +56,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Phone Number  </th>
                     <td mat-cell *matCellDef="let element">
-                        {{ element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
+                        {{ element.contactNo }}
                     </td>
                 </ng-container>
 
@@ -64,7 +64,7 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let element">
-                        <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id)">
+                        <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.userKey)">
                             <mat-icon  #tooltip="matTooltip"
                             matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
                           </a>&nbsp;
