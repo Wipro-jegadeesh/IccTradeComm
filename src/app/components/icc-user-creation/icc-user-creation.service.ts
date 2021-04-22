@@ -20,7 +20,7 @@ export class IccUserCreationService {
     return this.apiService.post(environment.api_url+'/smeuser', body);
   }
   getUserDetails(id) {
-    return this.apiService.tempGet(environment.api_url+'/sme-userprofile'+id);
+    return this.apiService.tempGet(environment.api_url+'/sme-userprofile/'+id);
   }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);

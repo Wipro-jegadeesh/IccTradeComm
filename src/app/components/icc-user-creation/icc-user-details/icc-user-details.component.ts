@@ -124,15 +124,24 @@ export class IccUserDetailsComponent implements OnInit {
       if (this.userForm.status === "INVALID"){
         throw { "mes": "Please fill mendatory  fields" }
       }
-      let params = {
-        "UserDetails": this.userForm.value,
-      }
-      console.log(params,"params");
-      this.IccUserCreationssService.Usersave(params).subscribe(resp => {
-        this.invoiceFormBuild();
-       
-      }, error => {
-      })
+     
+      
+                 this.router.navigateByUrl('/icc-user-creation');
+                 if(this.id){
+                  this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
+                    this.invoiceFormBuild();
+                    this.router.navigateByUrl('/icc-user-creation');
+          
+                  }, error => {
+                  })
+                }else{
+                  this.IccUserCreationssService.Usersave(this.userForm.value).subscribe(resp => {
+                    this.invoiceFormBuild();
+                    this.router.navigateByUrl('/icc-user-creation');
+                  }, error => {
+                  })
+                }
+     
     } catch (err) {
     }
   }
@@ -144,7 +153,7 @@ export class IccUserDetailsComponent implements OnInit {
           userId: resp.userId,
       nationalId: resp.nationalId,
       firstName: resp.firstName,
-      emailId: resp.emailId ,
+      email: resp.email ,
       lastName: resp.lastName,
       contactNo: resp.contactNo,
       companyName: resp.companyName, 
@@ -166,7 +175,7 @@ export class IccUserDetailsComponent implements OnInit {
       userId: ['', Validators.required],
       nationalId: ['', Validators.required],
       firstName: ['', Validators.required],
-      emailId: ['', Validators.required],
+      email: ['', Validators.required],
       lastName: ['', Validators.required],
       contactNo: ['', Validators.required],
       companyName: ['', Validators.required], 

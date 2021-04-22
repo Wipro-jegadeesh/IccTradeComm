@@ -171,10 +171,10 @@ constructor(public router: Router, private modalService: BsModalService, private
 
   }
   userClick() {
-    this.router.navigateByUrl('/icc-user-details/add');
+    this.router.navigateByUrl('/icc-user-details/');
   }
   navigateFinanceDetails(id) {
-    this.router.navigateByUrl('/icc-user-details/+',id);
+    this.router.navigateByUrl('/icc-user-details/'+id);
   }
   logout() {
     this.authenticationService.logout()
