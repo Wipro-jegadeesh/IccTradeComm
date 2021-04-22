@@ -35,6 +35,7 @@ import {IccUserDetailsComponent} from './components/icc-user-creation/icc-user-d
 import {IccGroupsComponent} from './components/icc-groups/icc-groups.component'
 import {IccRolesComponent} from './components/icc-roles/icc-roles.component'
 import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-authoriz-matrix.component'
+import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-up-details.component'
 
 
 
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'signup-details', component: SignUpDetailsComponent },
 
   { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Onboarding ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
   { path: 'sme-dashboard', component: SmeDashboardComponent,  data : {"HeaderName" : "Seller Dashboard"} },

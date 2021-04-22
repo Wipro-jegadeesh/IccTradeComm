@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { LOGINCONSTANTS } from '../../shared/constants/constants'
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,9 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   hide = true;
   loginTooltip = LOGINCONSTANTS;
-  
-  constructor(private router: Router, private authService: AuthenticationService,private toastr: ToastrService) { }
+  modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService,private router: Router, private authService: AuthenticationService,private toastr: ToastrService) { }
   ngOnInit(): void {
   }
   // tslint:disable-next-line: typedef
@@ -36,6 +38,15 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
       this.toastr.error("Invalid username or password")
     }
+  }
+  openModal(event, template) {
+    event.preventDefault();
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+  signUpPage(type){
+    this.modalRef.hide();
+    localStorage.setItem("existingCUS",type);
+    this.router.navigateByUrl('/signup');
   }
 
 }

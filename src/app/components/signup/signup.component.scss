@@ -118,3 +118,400 @@ mat-icon[matPrefix] {
   background-color: #f3f1fc;
   margin-bottom: 20px;
 }
+@import "~@ffdc/uxg-angular-theme/lib/core/style/spacing";
+@import "~@ffdc/uxg-angular-theme/lib/core/style/spacing";
+
+table {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    td{
+        padding-right: 12px;
+    }
+}
+
+.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 60px;
+}
+
+.table-section {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-4 * 2;
+    
+}
+
+$margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
+
+header {
+    // margin: -$margin (-$margin) $uxg-spacing-0;
+    // margin: -32px 30px 0;
+    // padding: $margin;
+    position: relative;
+    height: 45%;
+    width: 100%;
+
+    .account-services-headline {
+        display: flex;
+        justify-content: space-between;
+        color: white;
+        .global-balance {
+            z-index: 10;
+        }
+    }
+
+    .paginator {
+        display: flex;
+        align-self: flex-end;
+        z-index: 10;
+    }
+}
+
+.app-content {
+    bottom: 0;
+    left: 0;
+    overflow-x: auto;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: -53px;
+}
+
+.accounts-list {
+    // float: left;
+    // position: relative;
+    // overflow: auto;
+    // z-index: 10;
+    // width: 100%;
+    // white-space: nowrap;
+    // padding-right: $margin * 2;
+    // margin-left: -$margin;
+    // padding-bottom: 3px;
+    float: left;
+    position: relative;
+    overflow: auto;
+    z-index: 10;
+    width: 100%;
+    white-space: nowrap;
+    padding-right: 50px;
+    margin-left: -30px;
+    padding-bottom: 27px;
+
+    uxg-account-card,
+    uxg-account-card-skeleton {
+        display: inline-grid;
+        margin-left: $margin;
+    }
+}
+
+.uxg-breadcrumb {
+    margin-left: 50px !important;
+}
+
+.wave {
+    margin: $uxg-spacing-0 (-$margin) -5px;
+    position: absolute;
+    width: 100%;
+    top: $uxg-spacing-0;
+    bottom: $uxg-spacing-0;
+    z-index: 1;
+}
+
+table.fun-table{
+    margin: 0;
+    padding-bottom: 0;
+    td{
+        padding-right: 0;
+    }
+    .spilt-input{
+        right: 0;
+    }
+}
+table{
+    margin-top: 0;
+    &.table-responsive{
+        display: inline-table;
+    }
+}
+
+@media only screen and (min-width: 377px) and (max-width: 415px) {
+    header {
+        height: 35%;
+
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 200px;
+            }
+        }
+
+        .account-services-headline {
+            font-size: $margin;
+
+            .global-balance {
+                .uxg-h3,
+                p {
+                    font-size: $uxg-spacing-4;
+                }
+            }
+        }
+    }
+}
+
+/* Mobile Styles Small Screen */
+@media only screen and (max-width: 376px) {
+    header {
+        margin-bottom: $uxg-spacing-5;
+        height: 35%;
+
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 200px;
+            }
+        }
+
+        .account-services-headline {
+            font-size: $margin;
+
+            .global-balance {
+                .uxg-h3,
+                p {
+                    font-size: $uxg-spacing-4;
+                }
+            }
+        }
+    }
+    table{
+        &.table-responsive{
+            display: block;
+        }
+    }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 500px) and (max-width: 1024px) {
+    // mat-form-field{
+    //     width: 300px !important;
+    // }
+    // .spilt-input{
+    //     width: 140px !important;
+        
+    // }
+    // .select-split-input{
+    //     width: 155px !important;   
+    // }
+    header {
+        margin-bottom: $margin;
+        height: 30%;
+
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 300px;
+            }
+        }
+    }
+
+    .accounts-list {
+        overflow: hidden;
+        padding-top: $margin;
+    }
+    table{
+        &.table-responsive{
+            display: block;
+        }
+    }
+}
+.app-content.active{
+    @media only screen and (min-width: 1025px) {
+        .wave {
+            top: -65%;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    table.table-responsive.inv-detail-table{
+        display: inline-table;
+    }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 1025px) {
+    .wave {
+        // top: -10%;
+        top: -22%;
+        height: 100px;
+    }
+
+    .content {
+        padding: $margin $margin * 2 $uxg-spacing-0 $margin;
+    }
+
+    .accounts-list {
+        overflow: hidden;
+        // padding-top: $margin;
+        // padding-top: $margin;
+    }
+}
+
+.uxg-nav {
+    position: absolute;
+    // height: 850px;
+    border: 1px solid #eaeaea;
+}
+
+.mat-drawer-container {
+    width: 100%;
+    // height: 100%;
+    background-color: white;
+}
+
+.uxg-nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px !important;
+}
+
+.finastra-logo {
+    width: 150px;
+    height: auto;
+}
+mat-sidenav-container {
+    padding: 0;
+    position: relative;
+}
+
+.uxg-toolbar {
+    z-index: 15;
+    position: absolute;
+}
+
+
+.app-content.inActive
+{
+// margin-left: 300px;
+}
+
+.chart.inActive{
+   margin-left: auto;
+}
+
+.tableView.inActive{
+    margin-left: 300px;
+}
+mat-card-content[_ngcontent-njk-c181]
+{
+    display: grid;
+     grid-template-columns: 0fr 0fr 0fr 0fr !important;
+    grid-column-gap: 8px;
+    grid-template-areas:
+        "icon name name menu"
+        "icon balance balance balance";
+}
+.btn-outline {
+    color: #7c49cb;
+    background-color: transparent; 
+    background-image: none;
+    border-color: #7c49cb;
+    padding: "";
+    margin-left: -11px;
+}
+table {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    // margin-top: $uxg-spacing-2;
+    margin-top: 0;
+    padding-bottom: $uxg-spacing-4;
+}
+
+
+button + button{
+    margin-left: $uxg-spacing-3;
+}
+
+
+mat-form-field {
+    align-self: stretch;
+    margin-bottom: $uxg-spacing-2;
+    // margin-left: $uxg-spacing-3 * 6;
+    width: 400px;
+}
+
+.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 60px;
+}
+
+.data-section {
+    // width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-5;
+}
+
+.table-section {
+    // width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-4;
+}
+::ng-deep .cdk-overlay-container {
+    z-index: 1200 !important;
+}
+
+.ebtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.info_icon{
+    cursor: pointer;
+}
+
+.invoice_amt_field{
+    & .field1{
+        width: 195px;
+        left: -14px;
+    }
+    & .field2{
+        width: 198px;
+    }
+}
+.multiselect-dropdown{
+    position: absolute;
+    width: 233px;
+    left:6px;
+ }
+
+ .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .spilt-input{
+    width: 195px;
+    right: 14px;
+    // top: 7px;
+  }
+  .select-split-input{
+    width: 200px;
+
+  }
+  .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
+    height: 48px !important;
+    padding-top: 7px;
+    padding-left: 1em;
+}
+.log-logoss{
+  width: 55%;
+  margin-bottom: 21px;
+}
