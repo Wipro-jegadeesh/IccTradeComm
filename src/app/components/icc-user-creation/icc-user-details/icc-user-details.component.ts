@@ -124,9 +124,6 @@ export class IccUserDetailsComponent implements OnInit {
       if (this.userForm.status === "INVALID"){
         throw { "mes": "Please fill mendatory  fields" }
       }
-     
-      
-                 this.router.navigateByUrl('/icc-user-creation');
                  if(this.id){
                   this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();

@@ -10,6 +10,9 @@ export class SignupService {
         let params='/' + data.CountryPin +  '/' + data.name + '/' + data.country[0].id 
         return this.apiService.generalServiceget(params)
     }
+    singUpCheck(body: any){
+        return this.apiService.post(environment.api_url+'/sme-userprofile/checkUser', body);
+    }
     Usersave(body: any) {
         return this.apiService.post(environment.api_url+'/smeonboard', body);
       }
