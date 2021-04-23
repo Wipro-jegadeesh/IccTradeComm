@@ -24,7 +24,7 @@
 
 
 //General Service
-let BASE_PATH = "http://localhost:8080/";
+let BASE_PATH = "http://localhost:3030/";
 
 // Invoice Service Url 8080
 let serviePath_1 = "http://localhost:8080/";
