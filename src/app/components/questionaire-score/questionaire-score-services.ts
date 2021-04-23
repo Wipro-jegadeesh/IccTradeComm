@@ -8,7 +8,7 @@ export class QuestionaireScoreServices  {
 
 
   getScore(){
-    return this.apiService.get('getScore?companyID=80f5590c-2c9b-49a2-a3f2-08d8ff5bb864');
+    return this.apiService.generalServiceget('http://localhost:3030/getScore?companyID=80f5590c-2c9b-49a2-a3f2-08d8ff5bb864');
   }
   
   submitIccGroups(body: any) {

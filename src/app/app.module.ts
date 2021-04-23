@@ -185,7 +185,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccRolesComponent,
     IccAuthorizMatrixComponent,
     SignUpDetailsComponent,
-    QuestionaireScoreComponent
+    QuestionaireScoreComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
