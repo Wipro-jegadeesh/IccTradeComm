@@ -131,6 +131,7 @@ import { SignUpDetailsComponent } from './components/signup/sign-up-details/sign
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 import {IccRolesServices} from './components/icc-roles/icc-roles-services'
 import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
+import { AuthConfigModule } from '../app/service/auth.config.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -229,7 +230,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSliderModule,
     PerfectScrollbarModule,
     MatSelectModule,
-    MatSortModule
+    MatSortModule,
+    AuthConfigModule
   ],
 
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
