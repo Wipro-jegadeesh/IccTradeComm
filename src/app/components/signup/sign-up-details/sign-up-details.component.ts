@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SignupService } from '../signup.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up-details',
@@ -12,7 +13,7 @@ export class SignUpDetailsComponent implements OnInit {
   userForm: FormGroup;
   signUpDetails:any;
 
-  constructor(private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
+  constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
@@ -98,6 +99,7 @@ export class SignUpDetailsComponent implements OnInit {
        
     this.SignupServices.Usersave(smeboards).subscribe(resp => {
                     this.invoiceFormBuild();
+                    this.toastr.success("SME create succesfully kindly login with your credentials")
                     this.router.navigateByUrl('/login');
           },error => {
       })
