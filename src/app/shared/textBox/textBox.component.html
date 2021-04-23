@@ -5,10 +5,10 @@
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label style="white-space: normal;">{{questionDatas && questionDatas.label}}</mat-label>
         <input matInput type="text" class="input-text" *ngIf="questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
-        [maxLength]="questionDatas.characterMax" [required]="questionDatas.required" />
+        [maxLength]="questionDatas.characterMax" [required]="questionDatas.required"  />
         <input matInput type="text" class="input-text" *ngIf="!questionDatas.characterMax" (change)="onChange($event)" [(ngModel)]="textboxValue"
         [maxLength]="" [required]="questionDatas.required" />
-
+        <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit,EventEmitter,Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,7 @@ import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   @Output() isOpenSidebar = new EventEmitter();
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +21,9 @@ export class SidebarComponent implements OnInit {
   isOpenHandle(isTrue){
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
     this.isOpenSidebar.emit(this.isOpen);
+    }
+    smeOnboard(){
+      this.router.navigateByUrl('/sme-onboarding')
     }
 
 }

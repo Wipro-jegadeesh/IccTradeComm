@@ -26,20 +26,29 @@
                       (onDeSelect)="onItemDeSelect($event)" 
                   >
                   </ng-multiselect-dropdown> -->
-      <mat-form-field style="margin-bottom:unset">
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-label>Name</mat-label>
-        <input matInput name="name" [(ngModel)]="name" required>
-        <!-- <mat-hint>Please enter UEN</mat-hint> -->
-      </mat-form-field>
-
-      <angular2-multiselect [data]="optionDatas" class="sign-select" name='country' (onDeSelectAll)="onDeSelect($event)"
-        [(ngModel)]="selectedItems" (onSelect)="onChange($event)" [settings]="dropdownSettings"></angular2-multiselect>
-      <mat-form-field *ngIf="showCountSignBtn">
+                  <mat-form-field floatLabel="never"  style="margin-bottom:unset" dense appearance="fill"  >
+                    <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                    <mat-label >Name</mat-label>
+                    <input matInput type="text" name="name" class="input-text"  [(ngModel)]="name"
+                     required  />
+                    <!-- <mat-error>InValid Email</mat-error> -->
+                  </mat-form-field>
+                  <angular2-multiselect  [data]="optionDatas"  class="sign-select"
+                  name='country'  (onDeSelectAll)="onDeSelect($event)" 
+                 [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
+                 [settings]="dropdownSettings" ></angular2-multiselect>
+                    <!-- <mat-form-field *ngIf="showCountSignBtn">
         <mat-icon matPrefix>person</mat-icon>
         <mat-label>{{CountryPinLabel}}</mat-label>
         <input matInput name="CountryPin" [(ngModel)]="CountryPin" required>
         <mat-hint>Please enter {{CountryPinLabel}}</mat-hint>
+      </mat-form-field> -->
+      <mat-form-field *ngIf="showCountSignBtn" floatLabel="never"  style="margin-bottom:unset" dense appearance="fill"  >
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label >{{CountryPinLabel}}</mat-label>
+        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required
+         required  />
+        <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
 
       <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">Sign Up</button>
