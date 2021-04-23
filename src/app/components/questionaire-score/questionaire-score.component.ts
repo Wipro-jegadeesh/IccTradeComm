@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { IccGroupServices } from './icc-groups-services';
+import { QuestionaireScoreServices } from './questionaire-score-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -16,40 +16,84 @@ import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 
 @Component({
-  selector: 'app-icc-groups',
-  templateUrl: './icc-groups.component.html',
-  styleUrls: ['./icc-groups.component.scss']
+  selector: 'app-questionaire-score',
+  templateUrl: './questionaire-score.component.html',
+  styleUrls: ['./questionaire-score.component.scss']
 })
-export class IccGroupsComponent implements OnInit {
+export class QuestionaireScoreComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['groupCode','groupName', 'groupDescription','action'];
-  dataSource;
+  displayedColumns: string[] = ['scoreName', 'score','information'];
+  dataSource : any;
   groupTooltip = StaicDataMaintenance;
   isEdit : boolean
   groupId : any
 
-  constructor(public router: Router, private IccGroupServices: IccGroupServices, 
+
+  constructor(public router: Router, private QuestionaireScoreServices: QuestionaireScoreServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'groupId' : '1' ,'groupCode' : 'CODE123','groupName' : 'test', 'groupDescription' : 'description of group'}]);
+    let staticResp =   {
+      "companyId": "80f5590c-2c9b-49a2-a3f2-08d8ff5bb864",
+      "state": "PartialScore",
+      "score": 98.0,
+      "scores": [
+          {
+              "scoreAlias": "business-planning",
+              "scoreName": "Business Planning",
+  
+              "score": 60,
+  
+              "information": [
+                  {
+                      "type": "Warning",
+                      "message": "Not enough questions answered"
+                  }   
+              ]
+          },
+          {
+              "scoreAlias": "contractual-planning",
+              "scoreName": "Contractual Planning",
+              "score": 70,
+              "information": []
+          },
+  
+          {
+              "scoreAlias": "financial-planning",
+              "scoreName": "Financial Planning",
+              "score": 88,
+              "information": []
+          }
+      ]        
+}
 
-    this.IccGroupServices.getAllGroups().subscribe(listResp => {
-      if(listResp){
-        this.dataSource = new MatTableDataSource(listResp);
-      }
+    this.dataSource = new MatTableDataSource(staticResp.scores)
+
+    this.groupsForm.patchValue({  
+      state : staticResp.state,
+      score : staticResp.score
     })
-  }
+
+  this.QuestionaireScoreServices.getScore().subscribe(listResp => {
+    if(listResp){
+      this.dataSource = new MatTableDataSource(listResp.scores);
+       this.groupsForm.patchValue({  
+        state : listResp.state,
+        score : listResp.score
+      })
+    }
+  })
+}
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
-      groupCode: ['', Validators.required], 
-      groupName: ['', Validators.required],
-      groupDescription: ['', Validators.required]
+      state: ['', Validators.required], 
+      score: ['', Validators.required],
+      // groupDescription: ['', Validators.required]
     });
 
   }
@@ -67,13 +111,13 @@ export class IccGroupsComponent implements OnInit {
       if(this.isEdit){
         value.groupId = this.groupId
       }
-      this.IccGroupServices.submitIccGroups(value).subscribe(resp => {
+      this.QuestionaireScoreServices.submitIccGroups(value).subscribe(resp => {
         if(resp){
           this.toastr.success("Saved Successfully")
           this.groupsForm.reset();
           this.groupId = "";
           this.isEdit = false
-          this.IccGroupServices.getAllGroups().subscribe(listResp => {
+          this.QuestionaireScoreServices.getScore().subscribe(listResp => {
             if(listResp){
               this.dataSource = new MatTableDataSource(listResp);
             }
@@ -99,7 +143,7 @@ export class IccGroupsComponent implements OnInit {
     // **** End Need to hide  *****
    
 
-        this.IccGroupServices.getParticularGroups(data.groupId).subscribe(resp => { 
+        this.QuestionaireScoreServices.getParticularGroups(data.groupId).subscribe(resp => { 
           if(resp && resp[0]){
             let respData = resp[0];
             this.groupsForm.patchValue({  

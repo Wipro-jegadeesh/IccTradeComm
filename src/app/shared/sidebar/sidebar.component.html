@@ -15,9 +15,13 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p>Home</p>
         </a>
-        <a mat-list-item (click)="smeOnboard()" >
+        <a mat-list-item (click)="navigatePage('/sme-onboarding')" >
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Questionnaire Details</p>
+        </a>
+        <a mat-list-item (click)="navigatePage('/score-received')" >
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Score Received</p>
         </a>
         <!-- <a mat-list-item>
             <mat-icon mat-list-icon>dashboard</mat-icon>

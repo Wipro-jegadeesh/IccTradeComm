@@ -22,8 +22,8 @@ export class SidebarComponent implements OnInit {
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
     this.isOpenSidebar.emit(this.isOpen);
     }
-    smeOnboard(){
-      this.router.navigateByUrl('/sme-onboarding')
+    navigatePage(path){
+      this.router.navigateByUrl(path)
     }
 
 }
