@@ -14,10 +14,10 @@ export class IccUserCreationService {
     return this.apiService.tempGet(environment.api_url+'/sme-userprofile/allUserProfileDetails');
   }
   UpdateUser(id,body: any) {
-    return this.apiService.put(environment.api_url+'/sme-userprofile'+id,body);
+    return this.apiService.put(environment.api_url+'/user-profile/updateUserProfile/'+id,body);
   }
   Usersave(body: any) {
-    return this.apiService.post(environment.api_url+'/smeuser', body);
+    return this.apiService.post(environment.api_url+'/adduser', body);
   }
   getUserDetails(id) {
     return this.apiService.tempGet(environment.api_url+'/sme-userprofile/'+id);
