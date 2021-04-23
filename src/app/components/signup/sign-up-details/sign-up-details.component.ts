@@ -55,7 +55,7 @@ export class SignUpDetailsComponent implements OnInit {
       
       let addrlst = [{
           addressLine1: this.userForm.value.address,
-          addressLine2: this.userForm.value.addressLine1,
+          addressLine2: this.userForm.value.address1,
           addressLine3:'',
           addressLine4: '',
           city: this.userForm.value.city,
@@ -89,7 +89,7 @@ export class SignUpDetailsComponent implements OnInit {
         taxNo: '',
         rating: '',
         addrlst :addrlst,
-        userList : userList
+        userlst : userList
       };
       let smeboards = {
         smeboard:smeboard

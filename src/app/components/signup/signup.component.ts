@@ -114,7 +114,25 @@ this.optionDatas = COUNTRYNAMES
   }
   openModal(event, template) {
     event.preventDefault();
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    let signUpDetailss = {
+      companyName : this.name,
+      nationalId : this.CountryPin,
+      country : this.selectedItems,
+    }
+    let RegisteNo = {
+      name : this.name,
+      registrationNumber : this.CountryPin,
+    }
+    localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
+    this.signupService.singUpCheck(RegisteNo).subscribe(resp=>{
+        if(resp.status === "true"){
+          this.toastr.error("This company already exists in Icc tradecomm Market place");
+        }else{
+          // this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+          this.router.navigateByUrl('/signup-details');
+        }
+
+      })
   }
   signUpPage(type){
     this.modalRef.hide();
