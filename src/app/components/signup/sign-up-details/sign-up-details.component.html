@@ -143,6 +143,27 @@
                 </div>
               </div>
           </div>
+          <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <fieldset class="form-group">
+                        <label>Profile Image</label>
+                        {{imageError}}
+                        <div class="custom-file fileInputProfileWrap">
+                            <input type="file" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                            <div class="img-space">
+                                <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                    <img [src]="cardImageBase64" />
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+               
+              </div>
+          </div>
 
           <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
             <button mat-raised-button color="primary">Submit</button>
