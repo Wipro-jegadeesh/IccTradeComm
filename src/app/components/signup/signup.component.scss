@@ -28,6 +28,7 @@ a {
   height: 100%;
   align-items: flex-start;
   padding: $uxg-spacing-2 $uxg-spacing-5 $uxg-spacing-5;
+  
 }
 
 form {
@@ -113,6 +114,11 @@ mat-icon[matPrefix] {
   }
 }
 
+@media screen and (max-width: 575px) {
+  .uxg-signup-container{
+    width: 100vw;
+  }
+}
 
 .sign-select{
   background-color: #f3f1fc;
