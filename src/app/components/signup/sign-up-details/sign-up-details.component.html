@@ -11,7 +11,7 @@
         </div>
         <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
   
-            <div class="row">
+            <div class="row dis-block">
                 <div class="col-sm-4">
                     <div class="form-group">
                       <label for="National ID​">Company Register ID​
@@ -45,7 +45,7 @@
                     </div>
                   </div>
             </div>
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
                   <label for="National ID​">Email Id
@@ -81,11 +81,10 @@
   
             </div>
           </div>
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="National ID​">Phone Number
-                </label>
+                <label for="National ID​">Phone Number</label>
                 <mat-form-field dense>
                   <mat-icon matPrefix>call</mat-icon>
                   <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
@@ -94,24 +93,27 @@
               </div>
             </div>
             <div class="col-sm-4">
-                <label for="First name​">Address 1</label>
+                <label for="Address">Address 1</label>
+                <div class="form-group">
                 <mat-form-field dense>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput placeholder="Address" formControlName="address" />
                   <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
                 </mat-form-field>
+            </div>
               </div>
               <div class="col-sm-4">
-                <label for="First name​">Address 2</label>
+                <label for="Address">Address 2</label>
+                <div class="form-group">
                 <mat-form-field dense>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput placeholder="Address 2" formControlName="address1" />
                   <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
                 </mat-form-field>
+            </div>
               </div>
           </div>
-  
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
                   <label for="Locale">State</label>
@@ -143,7 +145,7 @@
                 </div>
               </div>
           </div>
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
                     <fieldset class="form-group">
