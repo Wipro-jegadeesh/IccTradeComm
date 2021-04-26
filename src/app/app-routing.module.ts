@@ -37,6 +37,7 @@ import {IccRolesComponent} from './components/icc-roles/icc-roles.component'
 import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-authoriz-matrix.component'
 import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-up-details.component'
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
+import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
 
-  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Onboarding ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
+  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Sme Dashboard"}] } },
   { path: 'sme-dashboard', component: SmeDashboardComponent,  data : {"HeaderName" : "Seller Dashboard"} },
   { path: 'sme-bidding', component: SmeBiddingComponent ,  data : {"HeaderName" : "SME Bidding ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}] }},
   { path: 'sme-bidding/:id', component: SmeBiddingDetailsComponent ,  data : {"HeaderName" : "SME Bidding", "headerPaths" : [{ path : "/sme-bidding",pathName : "SME Bidding Details"},{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
@@ -90,7 +91,8 @@ const routes: Routes = [
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
 
-  
+  { path: 'invoice-request/bulk', component: InvoiceBulkUploadComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+
   
   // questionaire-scorePage
 ];
