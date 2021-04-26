@@ -5,7 +5,7 @@
   </ul> -->
 </mat-toolbar>
 
-<div class="row col-md-12 col-12">
+<div class="row col-md-12 col-12" *ngIf="questionnaireSections.length">
   <div class="col-md-3 col-3 ques-sec" >
     <!-- <div *ngFor="let sections of questionnaireSections;let secIndex=index" style="text-align: center;">
     <button class="ques-sec-btn section-title" [ngClass]="{'selbut': secIndex == sectionIndex}" type="button" (click)="onSectionClick(secIndex)">{{sections.label}}</button>
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<div class="submit">
+<div class="submit" *ngIf="questionnaireSections.length">
   <button mat-flat-button  color="primary"   type="button" (click)="onSubmit()">
     <!-- [disabled]="checkSectionComp()" -->
     <!-- [disabled]="disableSubbtn" -->

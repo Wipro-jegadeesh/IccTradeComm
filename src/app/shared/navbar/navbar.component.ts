@@ -62,7 +62,8 @@ export class NavbarComponent implements OnInit {
     }
 
     backNavigation() {
-     !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    //  !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    this._location.back()
     }
 
     navigationHeadersPath(path){
