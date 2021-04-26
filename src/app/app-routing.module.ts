@@ -89,7 +89,7 @@ const routes: Routes = [
   { path: 'icc-roles', component: IccRolesComponent , data : {"HeaderName" : "Roles" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
-  { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
+  { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Sme Dashboard"}] } },
 
   { path: 'invoice-request/bulk', component: InvoiceBulkUploadComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
