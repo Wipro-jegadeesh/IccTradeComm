@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
 
-  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Sme Dashboard"}] } },
+  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
   { path: 'sme-dashboard', component: SmeDashboardComponent,  data : {"HeaderName" : "Seller Dashboard"} },
   { path: 'sme-bidding', component: SmeBiddingComponent ,  data : {"HeaderName" : "SME Bidding ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}] }},
   { path: 'sme-bidding/:id', component: SmeBiddingDetailsComponent ,  data : {"HeaderName" : "SME Bidding", "headerPaths" : [{ path : "/sme-bidding",pathName : "SME Bidding Details"},{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
@@ -89,7 +89,7 @@ const routes: Routes = [
   { path: 'icc-roles', component: IccRolesComponent , data : {"HeaderName" : "Roles" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
-  { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Sme Dashboard"}] } },
+  { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
 
   { path: 'invoice-request/bulk', component: InvoiceBulkUploadComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
