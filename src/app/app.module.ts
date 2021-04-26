@@ -131,7 +131,8 @@ import { SignUpDetailsComponent } from './components/signup/sign-up-details/sign
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 import {IccRolesServices} from './components/icc-roles/icc-roles-services'
 import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services';
-import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component'
+import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
+import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component'
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -186,7 +187,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccAuthorizMatrixComponent,
     SignUpDetailsComponent,
     QuestionaireScoreComponent,
-    ModalComponent
+    ModalComponent,
+    InvoiceBulkUploadComponent
   ],
   imports: [
     BrowserModule,
