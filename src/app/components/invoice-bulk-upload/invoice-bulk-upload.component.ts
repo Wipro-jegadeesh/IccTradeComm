@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import * as XLSX from "xlsx";
+import * as Papa from 'papaparse';
+import { InvoiceRequestServices } from '../invoice-request/invoice-service';
+import * as moment from 'moment';
+
+import { ToastrService } from 'ngx-toastr';
 
 export interface invoiceData {
   invref: any;
@@ -31,10 +37,15 @@ export class InvoiceBulkUploadComponent implements OnInit {
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
   fileNames=[]
   isOpen=''
-  
-  constructor() { }
+  name = "This is XLSX TO JSON CONVERTER";
+  willDownload = false;
+  fileReaded: any;
+  invoicedata: any;
+
+  constructor(private toastr: ToastrService,private invoiceRequestServices: InvoiceRequestServices) { }
 
   ngOnInit(): void {
+    this.getInvDetailsLists()
   }
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
@@ -72,7 +83,149 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.selection.selected.forEach(s =>
       invoiceIds.push(s.id)
     );
-    // this.updateInvoice(invoiceIds)
+    this.updateInvoice(invoiceIds)
     console.log("invoiceIds", invoiceIds);
   }
+  updateInvoice(invoiceIds) {
+    let invIdparams = {
+      "invoiceIds": invoiceIds,
+    }
+
+    this.toastr.success("Selected Invoices has been Authorized !");
+    this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
+      this.getInvDetailsLists();
+    }, error => {
+    })
+
+    let reqParams=[]
+    this.dataSource.data.map((item)=>{
+      if(invoiceIds.includes(item.id)){
+        console.log(item,'tem');
+        let obj={
+          "invoiceId":item.id,
+          "invoiceNo":item.invId,
+          "invoiceRef":item.invref,
+          "invoiceDate":item['invDate'],
+          "smeId":item['smeId'],
+          "invoiceAmt":item['invAmt'],
+          "invoiceCcy":item['invCcy'],
+          "status" : "A", 
+          "buyerName": item.buyerName,
+          "buyerAddr":item['buyerAddr'],
+          "dispDate":item['dispDate'],
+           "invDueDate":item.invDueDate
+        }
+        reqParams.push(obj)
+      }
+    })
+    this.invoiceRequestServices.updateInvoiceDetails(reqParams).subscribe(resp =>{
+      this.getInvDetailsLists();
+    })
+  }
+  onFileChange(ev) {
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    console.log(file,"file")
+    if(file.type === "text/csv"){
+     this.onChangess(file)
+    }else{
+      reader.onload = event => {
+        const data = reader.result;
+        workBook = XLSX.read(data, { type: "binary" });
+        console.log(workBook);
+        jsonData = workBook.SheetNames.reduce((initial, name) => {
+          console.log(name)
+          const sheet = workBook.Sheets[name];
+          console.log(sheet,"sheet")
+          initial['invoice'] = XLSX.utils.sheet_to_json(sheet);
+          return initial;
+        }, {});
+        console.log(jsonData,"jsonData")
+        this.invoicedata = jsonData.invoice[0]
+        this.InvoiceAPI()
+      };
+      reader.readAsBinaryString(file);
+    }
+    
+  }
+  InvoiceAPI(){
+    let invoiceDetails = {
+      invId : this.invoicedata.Invoicenumber,
+      invAmt:this.invoicedata.Fundingamount,
+      invCcy:this.invoicedata.Currency,
+      invDate:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+      invDueDate:this.invoicedata.Fundingreqduedate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+      smeId: "SME",
+      invoiceDetailsSequenceNumber: {},
+      dispDate:this.invoicedata.Datedispatch = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+      buyerName:this.invoicedata.Buyername,
+      buyerAddr:this.invoicedata.Buyerlocation,
+      billNo:this.invoicedata.Billingnumber,
+      goodsDetails:[{
+        ID:this.invoicedata.Invoicenumber,
+        amtCcy:this.invoicedata.Currency,
+        descGoods:this.invoicedata.Descriptiongoods,
+        dateOfInvoice:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        
+        discAmt:this.invoicedata.Discountamount,
+        goodsId:"GD101",
+        amt:Number(this.invoicedata.Quality)*Number(this.invoicedata.Rate),
+        netAmtPay:Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount) , //discountamount
+        quantity:this.invoicedata.Quality,
+        rate:this.invoicedata.Rate,
+        taxAmt: (Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount)) * Number(this.invoicedata.Taxrate) /100 ,
+        taxRate:Number(this.invoicedata.Taxrate),
+        total: Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) 
+      }]
+    }
+    let json = {
+      invoiceDetails : invoiceDetails
+    }
+    console.log(invoiceDetails,"invoiceDetails")
+    console.log(json,"json")
+    this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
+      this.getInvDetailsLists()
+    }, error => {
+    })
+  }
+  
+getInvDetailsLists() {
+  let tempInvArray;
+  this.invoiceRequestServices.getInvDetailsLists().subscribe(resp => {
+    const INVOICE_ARRAY: invoiceData[] = resp;
+    this.dataSource = new MatTableDataSource(INVOICE_ARRAY);
+  }, error => {
+  })
+}
+  sampleDown(){
+    let link = document.createElement("a");
+    link.download = "FundingInvoice";
+    link.href = "assets/sampleinvoice.xlsx";
+    link.click();
+  }
+  samplecsvDown(){
+    let link = document.createElement("a");
+    link.download = "FundingInvoiceCSV";
+    link.href = "assets/sampleinvoiceCSV.csv";
+    link.click();
+  }
+  onChangess(files: File[]){
+    console.log(files,"files")
+    if(files){
+      console.log(files);
+      Papa.parse(files, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (result,file) => {
+          console.log(result);
+          this.dataSource = new MatTableDataSource(result);
+          // this.dataList = result.data;
+        }
+      });
+    }
+  }
+ 
+ 
 }
