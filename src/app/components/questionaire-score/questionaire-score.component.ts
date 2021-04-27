@@ -77,8 +77,8 @@ export class QuestionaireScoreComponent implements OnInit {
 //       state : staticResp.state,
 //       score : staticResp.score
 //     })
-
-  this.QuestionaireScoreServices.getScore().subscribe(listResp => {
+    let data=JSON.parse(localStorage.getItem('userCred'))
+  this.QuestionaireScoreServices.getScore(data).subscribe(listResp => {
     if(listResp){
       this.dataSource = new MatTableDataSource(listResp.scores);
        this.groupsForm.patchValue({  
@@ -117,7 +117,8 @@ export class QuestionaireScoreComponent implements OnInit {
           this.groupsForm.reset();
           this.groupId = "";
           this.isEdit = false
-          this.QuestionaireScoreServices.getScore().subscribe(listResp => {
+          let data=JSON.parse(localStorage.getItem('userCred'))
+          this.QuestionaireScoreServices.getScore(data.companyId).subscribe(listResp => {
             if(listResp){
               this.dataSource = new MatTableDataSource(listResp);
             }

@@ -8304,7 +8304,9 @@ export class SmeOnboardingComponent implements OnInit {
   }
 
   getQuestionnaireSection(){
-    this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
+    let data=JSON.parse(localStorage.getItem('userCred'))
+    // this.apiService.generalServiceget(' http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
+    this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
         if(resp){
             this.questionnaireSections=resp.sectionDtoList
             localStorage.setItem('uuid',resp.uuid)
@@ -8616,7 +8618,10 @@ export class SmeOnboardingComponent implements OnInit {
     }
     return isFormComp
   }
-  onSubmit() {
+  onSubmit(){
+    this.router.navigateByUrl('/sme-dashboard')
+  }
+  onSave() {
     let onboardingResp=[]
     this.questionnaireSections.map((item)=>{
     let compSecObj={
@@ -8669,7 +8674,8 @@ export class SmeOnboardingComponent implements OnInit {
     }
     this.apiService.post('http://localhost:3030/submitquestionaire',obj).subscribe(resp=>{
         if(resp){
-            alert('Questionnaire Section Submitted Successfully')
+            // alert('Questionnaire Section Submitted Successfully')
+            this.toastr.success('Questionnaire Section Submitted Successfully')
         }
     })
     console.log(onboardingResp)

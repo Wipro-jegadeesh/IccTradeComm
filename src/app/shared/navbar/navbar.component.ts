@@ -48,9 +48,12 @@ export class NavbarComponent implements OnInit {
     const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
+    let userData=JSON.parse(localStorage.getItem('userCred'))
+    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
+      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }
+    else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
-    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received'){
-      this.isHide=true
     }
   }
 

@@ -5,6 +5,7 @@ import { LOGINCONSTANTS } from '../../shared/constants/constants'
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/service/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +32,8 @@ private modalRef: TemplateRef<any>;
   login() {
      localStorage.setItem("userId",this.username);
     if (this.authService.loginAsSme(this.username, this.password)) {
-        this.checkQuesCompl(this.username)
       // this.router.navigate(['sme-dashboard']);
+        this.checkQuesCompl(this.username)
       this.invalidLogin = false;
     } else if (this.authService.loginAsFinancier(this.username, this.password)) {
       this.router.navigate(['financier-dashboard']);
@@ -62,21 +63,29 @@ private modalRef: TemplateRef<any>;
     this.mymodal = this.modalService.hide();
   }
   checkQuesCompl(userId){
-    // this.apiService.generalServiceget('').subscribe(resp=>{
-    //   if(resp){
-    //     !resp.state ? this.router.navigateByUrl('/sme-onboarding') :
-    //      this.router.navigateByUrl('/sme-dashboard')
-    //   }
-    // })
-    // this.modalRef = this.modalService.show('template', { class: 'modal-lg' });
-    if(userId == 'SME105'){
-    this.mymodal = this.modalService.show(this.modalRef);
-    }
-    else if(userId == 'SME104'){
-      this.router.navigateByUrl('/sme-onboarding')
-    }
-    else{
-      this.router.navigateByUrl('/sme-dashboard')
-    }
+    this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+userId).subscribe(resp=>{
+      if(resp.length){
+        let userObj={
+          'companyName':resp[0].companyname,
+          'userId':userId,
+          'companyId':resp[0].nationalid,
+          'country':'SGP',
+          'role':resp[0].role
+        }
+        let isQuesSucc=resp[0].questionnaire
+        let status=resp[0].status
+        if(status == 'P'){
+          this.mymodal = this.modalService.show(this.modalRef);
+        }
+        else if(isQuesSucc == 'N'){
+          this.router.navigateByUrl('/sme-onboarding')
+        }
+        else{
+          this.router.navigateByUrl('/sme-dashboard')
+          userObj['questionnaire']=resp[0].questionnaire
+        }
+        localStorage.setItem('userCred',JSON.stringify(userObj))
+      }
+    })
   }
 }
