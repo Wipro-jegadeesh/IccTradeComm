@@ -144,17 +144,18 @@
             </div>
         </ng-container>
         <div class="col-md-12" style="float:right;z-index:12">
-        <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
+        <!-- <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
         matTooltip="{{dashboardTooltips.fundingRequest}}"
-        [matTooltipPosition]="tooltipPosition"  (click)="this.navigateInvoiceCreation()">+ Funding Request</button>
-        <!-- <mat-form-field appearance="fill" class="fundreq-btn" (change)="onRequestChange($event)">
+        [matTooltipPosition]="tooltipPosition"  (click)="this.navigateInvoiceCreation()">+ Funding Request</button> -->
+
+        <mat-form-field class="fundreq-btn" (change)="onRequestChange($event)">
             <mat-label>Funding Request</mat-label>
             <select matNativeControl >
-              <option value="" selected></option>
-              <option value="manual">Add Manual</option>
-              <option value="bulk">Bulk Upload</option>
+              <option value="">select</option>
+              <option value="manual">Invoice Request manual</option>
+              <option value="bulk">Invoice Request Bulk Upload</option>
             </select>
-          </mat-form-field> -->
+          </mat-form-field>
         </div>
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
     <div class="container-fluid">
