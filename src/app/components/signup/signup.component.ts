@@ -149,4 +149,9 @@ this.optionDatas = COUNTRYNAMES
       this.router.navigateByUrl('/signup-details');
     }
   }
+  GotoLogin(){
+    window.location.href = "/"
+    // this.router.navigateByUrl('/'); 
+  }
+
 }
