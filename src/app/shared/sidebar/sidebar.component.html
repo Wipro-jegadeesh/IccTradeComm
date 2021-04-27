@@ -15,11 +15,11 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p>Home</p>
         </a>
-        <a mat-list-item (click)="navigatePage('/sme-onboarding')" >
+        <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Questionnaire Details</p>
         </a>
-        <a mat-list-item (click)="navigatePage('/score-received')" >
+        <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Score Received</p>
         </a>

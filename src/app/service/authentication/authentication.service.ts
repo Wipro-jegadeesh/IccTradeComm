@@ -32,6 +32,7 @@ export class AuthenticationService {
   }
   logout(){
     localStorage.removeItem("userId");
+    localStorage.removeItem("userCred");
     this.router.navigateByUrl('/');
   }
   loginAsICCUser(username: string, password: string) {
