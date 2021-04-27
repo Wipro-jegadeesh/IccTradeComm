@@ -34,7 +34,7 @@ export class AuthConfigService {
         // continue initializing app or redirect to login-page
         
         this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
-          if (isLoggedIn) {
+          if (isLoggedIn) { 
             this.oauthService.setupAutomaticSilentRefresh();
             resolveFn();
             let claims = this.oauthService.getIdentityClaims();

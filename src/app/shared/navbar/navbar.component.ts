@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
-    if(this.router.url == '/sme-onboarding'){
+    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received'){
       this.isHide=true
     }
   }
@@ -65,7 +65,8 @@ export class NavbarComponent implements OnInit {
     }
 
     backNavigation() {
-     !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    //  !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    this._location.back()
     }
 
     navigationHeadersPath(path){

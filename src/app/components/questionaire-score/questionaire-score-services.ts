@@ -3,19 +3,21 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from "../../service/api.service"
 import { environment } from '../../../environments/environment';
 @Injectable()
-export class IccGroupServices  {
+export class QuestionaireScoreServices  {
   constructor(private apiService: ApiService) { }
 
 
+  getScore(){
+    return this.apiService.generalServiceget('http://localhost:3030/getScore?companyID=80f5590c-2c9b-49a2-a3f2-08d8ff5bb864');
+  }
+  
   submitIccGroups(body: any) {
-    return this.apiService.post(environment.financierServicePath+'groupinfo', body);
+    return this.apiService.post(environment.serviePath_1+'groupinfo', body);
   }
 
-  getAllGroups(){
-    return this.apiService.tempGet(environment.financierServicePath+'groups-profile/allgroupsDetails');
-  }
+ 
 
   getParticularGroups(id){
-    return this.apiService.tempGet(environment.financierServicePath+'groups-profile/'+id);
+    return this.apiService.get('groups-profile/'+id);
   }
 }

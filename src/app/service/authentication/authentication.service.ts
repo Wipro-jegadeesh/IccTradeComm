@@ -3,9 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
-export class AuthenticationService {
+export class AuthenticationService { 
 
   constructor(private router:Router,private toastr: ToastrService) { }
 

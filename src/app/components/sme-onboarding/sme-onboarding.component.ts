@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-sme-onboarding',
@@ -20,17 +21,18 @@ export class SmeOnboardingComponent implements OnInit {
   smeForm1:FormGroup
   disableSubbtn=true
   subSection=false
-
+  dynamicquestionnaireSections=[]
   smeForm:FormGroup
 
-  constructor(private router: Router,
+  constructor(private router: Router,private apiService:ApiService,
     private fb:FormBuilder,private toastr: ToastrService) { }
 
   radioChecked={}
-
+  
   ngOnInit() {
+      this.getQuestionnaireSection()
     this.sectionIndex=0
-    this.questionnaireSections=[
+    this.dynamicquestionnaireSections=[
         {
             "questions": [
                 {
@@ -8299,52 +8301,81 @@ export class SmeOnboardingComponent implements OnInit {
    
     // this.getFormInput=this.formService.render()
 
-    this.questionnaireSections.forEach((secItem,secIndex)=>{
-        // QUESTION ARRAY
-      secItem && secItem.questions.map((quesItem,quesIndex)=>{
-          if((quesItem.number - Math.floor(quesItem.number)) !== 0 && this.checkParentresp(secIndex,parseInt(quesItem.number))){
-            quesItem.show=false
-            quesItem.parentNumber=parseInt(quesItem.number)
-            quesItem.response=''
-            // quesItem.itHasValue=quesItem.required ? false : true
-            quesItem.itHasValue=true
-          }
-          else{
-            quesItem.show=true
-            quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
-            quesItem.response=''
-            quesItem.itHasValue=quesItem.required ? false : true
-          }
-         quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
-      })
-      secItem.itHasValue=false
+  }
 
-      //PARTIAL RESPONSE
-      if(secItem.sectionResponseState == "Partial"){
-            secItem.questions.map((secResp,index)=>{
-                let resp=  secItem.sectionResponse.responses.filter(x => x.questionAlias == secResp.alias)
-                if(resp && resp.length){
-                this.questionnaireSections[secIndex].questions[index].response=resp[0].optionAliases
+  getQuestionnaireSection(){
+    this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
+        if(resp){
+            this.questionnaireSections=resp.sectionDtoList
+            localStorage.setItem('uuid',resp.uuid)
+            
+  this.questionnaireSections.forEach((secItem,secIndex)=>{
+      // QUESTION ARRAY
+    secItem && secItem.questions.map((quesItem,quesIndex)=>{
+        if((quesItem.number - Math.floor(quesItem.number)) !== 0 && this.checkParentresp(secIndex,parseInt(quesItem.number))){
+          quesItem.show=false
+          quesItem.parentNumber=parseInt(quesItem.number)
+          quesItem.response=''
+          // quesItem.itHasValue=quesItem.required ? false : true
+          quesItem.itHasValue=true
+        }
+        else{
+          quesItem.show=true
+          quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
+          quesItem.response=''
+          quesItem.itHasValue=quesItem.required ? false : true
+        }
+       quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
+    })
+    secItem.itHasValue=false
+
+    //PARTIAL RESPONSE
+    if(secItem.sectionResponseState == "Partial"){
+          secItem.questions.map((secResp,index)=>{
+            secItem.sectionResponse.responses.map((item)=>{
+                if(item.questionAlias == secResp.alias){
+                    if(item.optionAliases){
+
+                        secResp.response=item.optionAliases
+
+                    }
+                    else{
+                    secResp.response=item.value
+                    }
+                    secResp.itHasValue=true
                 }
             })
-      }
+            //   this.questionnaireSections.map((questionItem)=>{
+            //     questionItem.questions.map((item)=>{
+            //         if(item.alias ==)
+            //     })
+            //   })
 
-      //SUBSECTION ARRAY
-      secItem && secItem.subSections.map((subSecItem,subSecIndex)=>{
-        subSecItem.questions.forEach((subQuesItem,subQuesIndex)=>{
-            subQuesItem.show=true
-            subQuesItem.response=''
-            subQuesItem.isSubSection=true
-            subQuesItem.itHasValue=subQuesItem.required ? false : true
-            subQuesItem.subSecIndex=subSecIndex
-        })
-        subSecItem.isSelected=false
+            //   let resp=  secItem.sectionResponse.responses.filter(x => x.questionAlias == secResp.alias)
+            //   if(resp && resp.length){
+            //   this.questionnaireSections[secIndex].questions[index].response=resp[0].optionAliases
+            //   }
+          })
+    }
+
+    //SUBSECTION ARRAY
+    secItem && secItem.subSections.map((subSecItem,subSecIndex)=>{
+      subSecItem.questions.forEach((subQuesItem,subQuesIndex)=>{
+          subQuesItem.show=true
+          subQuesItem.response=''
+          subQuesItem.isSubSection=true
+          subQuesItem.itHasValue=subQuesItem.required ? false : true
+          subQuesItem.subSecIndex=subSecIndex
       })
+      subSecItem.isSelected=false
     })
-    this.questions=this.questionnaireSections[this.sectionIndex].questions
-    localStorage.setItem('questionSections',JSON.stringify(this.questionnaireSections))
-    console.log(this.questionnaireSections)
-  }
+  })
+  this.questions=this.questionnaireSections[this.sectionIndex].questions
+  localStorage.setItem('questionSections',JSON.stringify(this.questionnaireSections))
+  console.log(this.questionnaireSections)
+        }
+    })
+}
   checkParentresp(secIndex,parNum){
     let itHasResp=false
    this.questionnaireSections[secIndex].questions.forEach((item) => { 
@@ -8426,6 +8457,7 @@ export class SmeOnboardingComponent implements OnInit {
     this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=respArr && respArr.length ? true : false
     this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
     }
+    console.log(this.questionnaireSections)
   }
   checkDropdownCond(selectedItems,conditionAlias){
       let returnValue=false
@@ -8589,7 +8621,7 @@ export class SmeOnboardingComponent implements OnInit {
     this.questionnaireSections.map((item)=>{
     let compSecObj={
         "sectionAlias":item.alias,
-        "companyId":"",
+        "companyId":localStorage.getItem('uuid'),
     }
     let subSectionResponseDto=[]
     if(item.subSections && item.subSections.length){
@@ -8631,8 +8663,15 @@ export class SmeOnboardingComponent implements OnInit {
         compSecObj['subSectionResponseDto']=subSectionResponseDto
         onboardingResp.push(compSecObj)
     })
-
-
+    let obj={
+        'sectionList':onboardingResp,
+        'uuid':localStorage.getItem('uuid')
+    }
+    this.apiService.post('http://localhost:3030/submitquestionaire',obj).subscribe(resp=>{
+        if(resp){
+            alert('Questionnaire Section Submitted Successfully')
+        }
+    })
     console.log(onboardingResp)
   }
   buildSubSecResp(Data){

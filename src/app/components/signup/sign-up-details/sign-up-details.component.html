@@ -6,12 +6,12 @@
             <img src="../../../assets/img/icctradelogo.png" class="log-logoss" />
           </div>
           <div class="col-sm-6" style="padding: 14px 29px;">
-            <h4>Welcome TO ICC Trade Comm</h4>
+            <h4>Welcome TO ICC TradeComm</h4>
           </div>
         </div>
         <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
   
-            <div class="row">
+            <div class="row dis-block">
                 <div class="col-sm-4">
                     <div class="form-group">
                       <label for="National ID​">Company Register ID​
@@ -45,7 +45,7 @@
                     </div>
                   </div>
             </div>
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
                   <label for="National ID​">Email Id
@@ -81,11 +81,10 @@
   
             </div>
           </div>
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="National ID​">Phone Number
-                </label>
+                <label for="National ID​">Phone Number</label>
                 <mat-form-field dense>
                   <mat-icon matPrefix>call</mat-icon>
                   <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
@@ -94,27 +93,30 @@
               </div>
             </div>
             <div class="col-sm-4">
-                <label for="First name​">address 1</label>
+                <label for="Address">Address 1</label>
+                <div class="form-group">
                 <mat-form-field dense>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="address" formControlName="address" />
+                  <input type="text" matInput placeholder="Address" formControlName="address" />
                   <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
                 </mat-form-field>
+            </div>
               </div>
               <div class="col-sm-4">
-                <label for="First name​">address 2</label>
+                <label for="Address">Address 2</label>
+                <div class="form-group">
                 <mat-form-field dense>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="address" formControlName="address1" />
+                  <input type="text" matInput placeholder="Address 2" formControlName="address1" />
                   <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
                 </mat-form-field>
+            </div>
               </div>
           </div>
-  
-          <div class="row">
+          <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">State </label>
+                  <label for="Locale">State</label>
                   <mat-form-field dense>
                     <mat-icon matPrefix>add_location</mat-icon>
                     <input type="text" matInput placeholder="State" formControlName="state" />
@@ -124,28 +126,49 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">City </label>
+                  <label for="Locale">City</label>
                   <mat-form-field dense>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="city" formControlName="city" />
+                    <input type="text" matInput placeholder="City" formControlName="city" />
                     <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">postalCode </label>
+                  <label for="Locale">Postal Code</label>
                   <mat-form-field dense>
                     <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput placeholder="postalCode" formControlName="postalCode" />
+                    <input type="text" matInput placeholder="Postal Code" formControlName="postalCode" />
                     <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
                   </mat-form-field>
                 </div>
               </div>
           </div>
+          <div class="row dis-block">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <fieldset class="form-group">
+                        <label>Profile Image</label>
+                        {{imageError}}
+                        <div class="custom-file fileInputProfileWrap">
+                            <input type="file" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                            <div class="img-space">
+                                <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                    <img [src]="cardImageBase64" />
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+               
+              </div>
+          </div>
 
           <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-            <button mat-raised-button color="primary" >Submit</button>
+            <button mat-raised-button color="primary">Submit</button>
             <button type="button" mat-raised-button color="warn" routerLink='/login'>Cancel</button>
           </div>
         </form>

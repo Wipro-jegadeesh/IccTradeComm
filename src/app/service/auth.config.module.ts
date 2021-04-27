@@ -8,7 +8,6 @@ import { authConfig, OAuthModuleConfig } from './auth.config';
 export function init_app(authConfigService: AuthConfigService) {
     return () => authConfigService.initAuth();
 }
-
 @NgModule({
   imports: [ HttpClientModule, OAuthModule.forRoot() ],
   providers: [
