@@ -66,8 +66,8 @@ export class IccRolesComponent implements OnInit {
    
 
         this.IccRolesServices.getParticularRoles(data.roleId).subscribe(resp => { 
-          if(resp && resp[0]){
-            let respData = resp[0];
+          if(resp){
+            let respData = resp;
             this.groupsForm.patchValue({  
               code : respData.code,
               roleDescription : respData.roleDescription

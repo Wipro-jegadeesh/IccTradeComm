@@ -8,7 +8,12 @@ export class IccAuthorizeServices  {
 
 
   submitIccAuthorizeMatrix(body: any) {
-    return this.apiService.post(environment.financierServicePath+'authorize', body);
+    if(body.id){
+      return this.apiService.put(environment.financierServicePath+'authorization-details/updateAuthorizationDetails/'+body.id, body);
+    }else{
+      return this.apiService.post(environment.financierServicePath+'authorize', body);
+
+    }
   }
 
   getAllAuthorizeMatrix(){

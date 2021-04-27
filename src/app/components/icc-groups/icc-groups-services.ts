@@ -8,7 +8,11 @@ export class IccGroupServices  {
 
 
   submitIccGroups(body: any) {
-    return this.apiService.post(environment.financierServicePath+'groupinfo', body);
+    if(body.groupId){
+      return this.apiService.put(environment.financierServicePath+'groups-details/updateGroupsDetails/'+body.groupId, body);
+    }else{
+      return this.apiService.post(environment.financierServicePath+'groupinfo', body);
+    }
   }
 
   getAllGroups(){
