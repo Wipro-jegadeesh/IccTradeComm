@@ -18,6 +18,12 @@ export class AuthConfigService {
     ) {}
 
     async initAuth(): Promise<any> {
+      let url=window.location.pathname;
+      if(url== "/signup"){
+        this.router.navigateByUrl('/signup');
+        return false;
+       }
+  else{
       return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
@@ -69,6 +75,7 @@ export class AuthConfigService {
         });
         
       });
+    }
     }
   
     private handleNewToken() {
