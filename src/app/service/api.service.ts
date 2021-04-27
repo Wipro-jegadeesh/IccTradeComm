@@ -89,9 +89,9 @@ export class ApiService {
 
 	put(path: string, body: any): Observable<any> {
 		this.loaderService.showLoadingIcon(true);
-		this.setToken();
+		// this.setToken();
 		return this.http
-			.put(`${path}`, (body), { headers: headers })
+			.put(`${path}`, body, { headers: headers })
 			.pipe(
 				map((res: Response) => {
 					this.loaderService.showLoadingIcon(false);

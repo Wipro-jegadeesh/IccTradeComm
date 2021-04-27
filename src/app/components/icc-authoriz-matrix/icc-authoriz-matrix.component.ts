@@ -92,8 +92,8 @@ export class IccAuthorizMatrixComponent implements OnInit {
     // **** End Need to hide  *****
    
         this.IccAuthorizeServices.getParticularAuthorizeMatrix(data.id).subscribe(resp => { 
-          if(resp && resp[0]){
-            let respData = resp[0];
+          if(resp){
+            let respData = resp;
             this.groupsForm.patchValue({
               slab : respData.slab,
               smefin : respData.smefin,
