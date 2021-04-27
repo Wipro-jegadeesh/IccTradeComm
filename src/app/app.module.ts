@@ -79,7 +79,6 @@ import { FinancebidsRequestServices } from './components/finance-bids-accept/fin
 import { FinanceBiddingAcceptsDetailsComponent } from './components/finance-bids-accept/finance-bids-accept-details/finance-bids-accept-details.component';
 import { Repayment_todayServices } from './components/sme-repayment-today/sme-repayment-today-service';
 import { Repayment_todayComponent } from './components/sme-repayment-today/sme-repayment-today.component';
-
 import { Repayment_overdueServices } from './components/sme-repayment-overdue/sme-repayment-overdue-service';
 import { Repayment_overdueComponent } from './components/sme-repayment-overdue/sme-repayment-overdue.component';
 import { FinanceBiddingComponent } from './components/finance-bidding/finance-bidding.component';
@@ -110,11 +109,9 @@ import { IccFundingRequestComponent } from './components/icc-funding-request/icc
 import { IccOfferAcceptanceComponent } from './components/icc-offer-acceptance/icc-offer-acceptance.component';
 import {FinancierFundedServices} from './components/financier-funded/financier-funded-service'
 import {IccGroupServices} from './components/icc-groups/icc-groups-services'
-
 import { TextAreaComponent } from './shared/textArea/textArea.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { TextListComponent } from './shared/textList/textList.component';
-
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -123,18 +120,16 @@ import { IccUserCreationComponent } from './components/icc-user-creation/icc-use
 import { IccUserDetailsComponent } from './components/icc-user-creation/icc-user-details/icc-user-details.component';
 import {IccUserCreationService} from './components/icc-user-creation/icc-user-creation.service'
 import {QuestionaireScoreServices} from './components/questionaire-score/questionaire-score-services'
-
 import { SignupService } from './components/signup/signup.service';
 import { IccGroupsComponent } from './components/icc-groups/icc-groups.component';
 import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
 import { SignUpDetailsComponent } from './components/signup/sign-up-details/sign-up-details.component';
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 import {IccRolesServices} from './components/icc-roles/icc-roles-services'
-import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services';
+import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
+import { AuthConfigModule } from '../app/service/auth.config.module';
 import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component'
-
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -235,9 +230,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSliderModule,
     PerfectScrollbarModule,
     MatSelectModule,
-    MatSortModule
+    MatSortModule,
+    AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
-
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,

@@ -24,24 +24,25 @@
 
 
 //General Service
-let BASE_PATH = "http://localhost:3030/";
+let BASE_PATH = "http://2a088c457b03.ngrok.io/";
 
 // Invoice Service Url 8080
-let serviePath_1 = "http://localhost:8080/";
+let serviePath_1 = "http://2a088c457b03.ngrok.io/";
 
 // Bidding Service Url 8081
-let serviePath_2 = "http://localhost:8081/";
+let serviePath_2 = "http://2a088c457b03.ngrok.io/";
 
 //Financier onboard path
 let financierServicePath="http://localhost:8082/"
 
 //Dashboard  Service Url
 let dboardServerPath1 = "http://dboardServPath1/";
-let getSumOfOpenFinBidding = "http://localhost:8080/";
+let getSumOfOpenFinBidding = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
 let dboardServerPath3 ="http://dboardServPath3/";
 let dboardServerPath4 ="http://dboardServPath4/";
 let dboardServerPath5 ="http://dboardServPath5/";
 let dboardServerPath6 ="http://dboardServPath6/";
+
 
 export const environment = {
   production: false,
@@ -54,7 +55,36 @@ export const environment = {
   dboardServerPath4: `${dboardServerPath4}`,
   dboardServerPath5: `${dboardServerPath5}`,
   dboardServerPath6: `${dboardServerPath6}`,
-  financierServicePath: `${financierServicePath}`
+  financierServicePath: `${financierServicePath}`,
+  keycloak : {
+    // Url of the Identity Provider
+    issuer: 'http://localhost:8080/auth/realms/Icctradecomm',
+  
+    // URL of the SPA to redirect the user to after login
+    // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
+  
+    // The SPA's id. 
+    // The SPA is registerd with this id at the auth-serverß
+    // clientId: 'finanicer-dashboard',
+      redirectUri:  localStorage.getItem("redirectUri") ?  localStorage.getItem("redirectUri") : "http://localhost:4200",
+      clientId:  "Iccmarketplace",
+  
+    responseType: 'code',
+    // set the scope for the permissions the client should request
+    // The first three are defined by OIDC.
+    // scope: 'openid profile email',
+    // scope: 'openid profile email',
+    scope: 'openid profile email',
+
+    // Remove the requirement of using Https to simplify the demo
+    // THIS SHOULD NOT BE USED IN PRODUCTION
+    // USE A CERTIFICATE FOR YOUR IDP
+    // IN PRODUCTION
+    requireHttps: false,
+    // at_hash is not present in JWT token
+    showDebugInformation: true,
+    disableAtHashCheck: true
+  }
 };
 
 /*
@@ -65,4 +95,3 @@ export const environment = {
 * on performance if an error is thrown.
 */
 // import 'zone.js/dist/zone-error'; // Included with Angular CLI.
-// .js/dist/zone-error'; // Included with Angular CLI.
