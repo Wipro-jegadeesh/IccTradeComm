@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,NavigationEnd, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import {Location} from '@angular/common';
-import { OAuthService } from 'angular-oauth2-oidc';
+// import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   headerPaths = [];
   isHide=false;
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,private oauthService: OAuthService) { }
+  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location) { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
@@ -62,9 +62,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    this.oauthService.logOut();
+    // this.oauthService.logOut();
     // localStorage.clear();
-    // this.authenticationService.logout()
+    this.authenticationService.logout()
     }
 
     backNavigation() {
