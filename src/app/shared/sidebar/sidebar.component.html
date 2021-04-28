@@ -1,9 +1,9 @@
 <!-- <p>sidebar works!</p> -->
-<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
+<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen,'open') ]">
     <mat-icon>menu</mat-icon>
 </button>
 
-<mat-sidenav #sidenav mode="over">
+<mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <!-- <div class="uxg-nav-header">
         <mat-card class="uxg-card-product" extra-dense>
             <span class="uxg-h5 uxg-card-product-name">PRO</span>
@@ -15,11 +15,11 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p>Home</p>
         </a>
-        <a mat-list-item (click)="navigatePage('/sme-onboarding')" >
+        <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Questionnaire Details</p>
         </a>
-        <a mat-list-item (click)="navigatePage('/score-received')" >
+        <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Score Received</p>
         </a>

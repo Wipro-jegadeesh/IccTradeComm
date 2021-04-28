@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,NavigationEnd, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import {Location} from '@angular/common';
-import { OAuthService } from 'angular-oauth2-oidc';
+// import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   headerPaths = [];
   isHide=false;
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,private oauthService: OAuthService) { }
+  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location) { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
@@ -48,9 +48,12 @@ export class NavbarComponent implements OnInit {
     const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
+    let userData=JSON.parse(localStorage.getItem('userCred'))
+    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
+      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }
+    else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
-    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received'){
-      this.isHide=true
     }
   }
 
@@ -59,9 +62,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    this.oauthService.logOut();
+    // this.oauthService.logOut();
     // localStorage.clear();
-    // this.authenticationService.logout()
+    this.authenticationService.logout()
     }
 
     backNavigation() {
