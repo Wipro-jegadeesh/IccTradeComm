@@ -38,6 +38,7 @@ import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-a
 import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-up-details.component'
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
+import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 
 
 const routes: Routes = [
@@ -72,7 +73,9 @@ const routes: Routes = [
   { path: 'finance-bidding-rejected', component: FinanceBiddingRejectedComponent, data : {"HeaderName" : "Financier Offer Rejected","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
   { path: 'finance-bidding-rejected/:type/:id', component: InvoiceDetailsRejectedComponent , data : {"HeaderName" : "Invoice Details","headerPaths" : [{ path : "/finance-bidding-rejected",pathName : "Financier Offer Rejected"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-funded', component: FinancierFundedComponent, data : {"HeaderName" : "Financier Funded","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
+  { path: 'limit-maintanance', component: FinancierLimitMaintanaceComponent, data : {"HeaderName" : "Financier Limit Maintance Component","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
 
+ 
   
 
   { path: 'icc-dashboard', component: IccDashboardComponent , data : {"HeaderName" : "ICC TradeComm Administrator Dashboard"}},

@@ -14,9 +14,10 @@ export class NavbarComponent implements OnInit {
   userName
   homePath = "";
   headerPaths = [];
-  isHide=false;
+  isHide=false; 
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location) { }
+  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,)//private oauthService: OAuthService
+   { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
@@ -63,8 +64,8 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     // this.oauthService.logOut();
-    // localStorage.clear();
-    this.authenticationService.logout()
+    localStorage.clear();
+  this.authenticationService.logout()
     }
 
     backNavigation() {
