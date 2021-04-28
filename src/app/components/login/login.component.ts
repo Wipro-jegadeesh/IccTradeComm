@@ -18,20 +18,20 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
   hide = true;
   loginTooltip = LOGINCONSTANTS;
-  // modalRef: BsModalRef;
-  @ViewChild('template')
-private modalRef: TemplateRef<any>;
-  mymodal
+  modalRef: BsModalRef;
+  // @ViewChild('template')
+// private modalRef: TemplateRef<any>;
+  // mymodal
 
   constructor(private modalService: BsModalService,private router: Router,private apiService:ApiService,
     private authService: AuthenticationService,private toastr: ToastrService) { }
   ngOnInit(): void {
   }
   // tslint:disable-next-line: typedef
-  login() {
+  login(event,template) {
      localStorage.setItem("userId",this.username);
     if (this.authService.loginAsSme(this.username, this.password)) {
-        this.checkQuesCompl(this.username)
+        this.checkQuesCompl(event,template)
       // this.router.navigate(['sme-dashboard']);
       this.invalidLogin = false;
     } else if (this.authService.loginAsFinancier(this.username, this.password)) {
@@ -55,13 +55,17 @@ private modalRef: TemplateRef<any>;
     this.router.navigateByUrl('/signup');
   }
   dashboardNavigate(){
-    this.mymodal = this.modalService.hide();
+    this.modalRef.hide();
+    // this.mymodal = this.modalService.hide();
     this.router.navigateByUrl('/score-received')
   }
   modalhide(){
-    this.mymodal = this.modalService.hide();
+    this.modalRef.hide();
+    // this.mymodal = this.modalService.hide();
   }
-  checkQuesCompl(userId){
+  checkQuesCompl(event,template){
+    event.preventDefault();
+
     // this.apiService.generalServiceget('').subscribe(resp=>{
     //   if(resp){
     //     !resp.state ? this.router.navigateByUrl('/sme-onboarding') :
@@ -69,10 +73,11 @@ private modalRef: TemplateRef<any>;
     //   }
     // })
     // this.modalRef = this.modalService.show('template', { class: 'modal-lg' });
-    if(userId == 'SME105'){
-    this.mymodal = this.modalService.show(this.modalRef);
+    if(this.username == 'SME105'){
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    // this.mymodal = this.modalService.show(this.modalRef);
     }
-    else if(userId == 'SME104'){
+    else if(this.username == 'SME104'){
       this.router.navigateByUrl('/sme-onboarding')
     }
     else{
