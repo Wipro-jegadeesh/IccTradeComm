@@ -26,6 +26,8 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   dataSource ;//data
   displayedColumns: string[] = [
+    'invoiceRef',
+    'invoiceNo',
     'id',
     'invoiceAmt',
     'baseCcyNetAmtPayable', 
@@ -81,10 +83,22 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+    this.dataSource = new MatTableDataSource([
+      {
+      'invoiceRef' : 'INV101',
+    'invoiceNo' : '2','id' : '2',
+    'invoiceAmt' : '5',
+    'baseCcyNetAmtPayable' : '2', 
+    'offerExpDateTime' : ''}]);
+          this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
+
    this.FinanceBiddingService.getBidingAcceptDetails().subscribe(resp => {
+     if(resp){
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
+     }
     })
   }
   SearchAPI(){

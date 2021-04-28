@@ -696,6 +696,11 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
       }
     }
 }
+.toast-container .ngx-toastr{
+    width: fit-content !important;
+    min-width: 300px;
+    max-width: 500px;
+}
 
 //iphonex
 @media screen and (max-width: 575px) {
