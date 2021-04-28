@@ -218,10 +218,10 @@ export class InvoiceBulkUploadComponent implements OnInit {
     }
     console.log(invoiceDetailss,"invoiceDetailss")
     console.log(json,"json")
-    // this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
-    //   this.getInvDetailsLists()
-    // }, error => {
-    // })
+    this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
+      this.getInvDetailsLists()
+    }, error => {
+    })
   }
   
 getInvDetailsLists() {
