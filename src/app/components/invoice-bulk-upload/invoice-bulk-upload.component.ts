@@ -219,8 +219,10 @@ getInvDetailsLists() {
         header: true,
         skipEmptyLines: true,
         complete: (result,file) => {
-          console.log(result);
-          this.dataSource = new MatTableDataSource(result);
+          console.log(result,"sksksk");
+          this.invoicedata = result.data[0]
+          this.InvoiceAPI()
+          // this.dataSource = new MatTableDataSource(result);
           // this.dataList = result.data;
         }
       });

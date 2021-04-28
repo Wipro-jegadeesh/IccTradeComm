@@ -4,13 +4,13 @@
         <form>
         <mat-card>
             <mat-card-content>
-                <h4>Invoice Bulk Upload</h4>
+                <h4>Invoice Upload</h4>
 
                 <div class="card-form-container">
                     <div class="bulk-file-upload file-input">
                       <!-- <h6>{{questionDatas && questionDatas.label}}</h6> -->
                         <div class="file-upload row col-md-12">
-                        <div class="upload-btn-wrapper col-md-6 ">
+                        <div class="upload-btn-wrapper col-md-9 ">
                           <!-- [disabled]="questionDatas.filesMax == fileNames.length" -->
                           <button class="filebtn" >Upload a file</button>
                         <!-- <input type="file" class="dynamic-file-upload form" (change)="onChange($event)"
@@ -19,19 +19,29 @@
 
                         </div>
                         <div class="upload-btn-wrapper col-md-3 ">
-                          <button class="filebtn" (click)="sampleDown();" ><span>
+                          <!-- <button class="filebtn" (click)="sampleDown();" ><span>
                             Sample XLSX File Download
                           </span> <span class="material-icons">
                             file_download
                             </span>
+                          </button> -->
+
+                          <button type="button" class="btn btn-outline fundreq-btn" [matMenuTriggerFor]="menu"> Sample File Download
+                            <span class="material-icons">
+                              file_download
+                              </span>
                           </button>
+                            <mat-menu #menu="matMenu">
+                            <button (click)="sampleDown();"  mat-menu-item>Download as XLSX </button>
+                            <button (click)="samplecsvDown();" mat-menu-item>Download as CSV </button>
+                            </mat-menu>
                         </div>
-                        <div class="upload-btn-wrapper col-md-3 ">
+                        <!-- <div class="upload-btn-wrapper col-md-3 ">
                           <button class="filebtn" (click)="samplecsvDown();" >Sample CSV File Download<span class="material-icons">
                             file_download
                             </span>
                           </button>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="file-label col-md-3">
                           <label *ngFor="let file of fileNames;let i=index" >{{file}}<span (click)="onFileRemove(i)"><i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label>
