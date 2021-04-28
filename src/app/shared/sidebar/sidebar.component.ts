@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
 
   @Output() isOpenSidebar = new EventEmitter();
   checkRolesPer
+  opened=false
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -21,9 +22,12 @@ export class SidebarComponent implements OnInit {
   isOpen = 'inActive';
 
 
-  isOpenHandle(isTrue){
+  isOpenHandle(isTrue,type){
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
+    this.opened = isTrue === 'inActive' ? true : false ;
+    if(type == 'open'){
     this.isOpenSidebar.emit(this.isOpen);
+    }
     }
     navigatePage(path){
       this.router.navigateByUrl(path)
