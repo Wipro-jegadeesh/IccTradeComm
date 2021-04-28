@@ -143,7 +143,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
           return initial;
         }, {});
         console.log(jsonData,"jsonData")
-        this.invoicedata = jsonData.invoice[0]
+        this.invoicedata = jsonData.invoice
         this.InvoiceAPI()
       };
       reader.readAsBinaryString(file);
@@ -151,44 +151,77 @@ export class InvoiceBulkUploadComponent implements OnInit {
     
   }
   InvoiceAPI(){
-    let invoiceDetails = {
-      invId : this.invoicedata.Invoicenumber,
-      invAmt:this.invoicedata.Fundingamount,
-      invCcy:this.invoicedata.Currency,
-      invDate:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
-      invDueDate:this.invoicedata.Fundingreqduedate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
-      smeId: "SME",
-      invoiceDetailsSequenceNumber: {},
-      dispDate:this.invoicedata.Datedispatch = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
-      buyerName:this.invoicedata.Buyername,
-      buyerAddr:this.invoicedata.Buyerlocation,
-      billNo:this.invoicedata.Billingnumber,
-      goodsDetails:[{
-        ID:this.invoicedata.Invoicenumber,
-        amtCcy:this.invoicedata.Currency,
-        descGoods:this.invoicedata.Descriptiongoods,
-        dateOfInvoice:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
-        
-        discAmt:this.invoicedata.Discountamount,
+    let invoiceDetailss
+    let goodsDetails = []
+    this.invoicedata.forEach(element => {
+      goodsDetails.push({
+        ID:element.Invoicenumber,
+        amtCcy:element.Currency,
+        descGoods:element.Descriptiongoods,
+        dateOfInvoice:element.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        discAmt:element.Discountamount,
         goodsId:"GD101",
-        amt:Number(this.invoicedata.Quality)*Number(this.invoicedata.Rate),
-        netAmtPay:Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount) , //discountamount
-        quantity:this.invoicedata.Quality,
-        rate:this.invoicedata.Rate,
-        taxAmt: (Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount)) * Number(this.invoicedata.Taxrate) /100 ,
-        taxRate:Number(this.invoicedata.Taxrate),
-        total: Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) 
-      }]
+        amt:Number(element.Quality)*Number(element.Rate),
+        netAmtPay:Number(element.Quality) * Number(element.Rate) - Number(element.Discountamount) , //discountamount
+        quantity:element.Quality,
+        rate:element.Rate,
+        taxAmt: (Number(element.Quality) * Number(element.Rate) - Number(element.Discountamount)) * Number(element.Taxrate) /100 ,
+        taxRate:Number(element.Taxrate),
+        total:(Number(element.Quality) * Number(element.Rate) - Number(element.Discountamount)) + ((Number(element.Quality) * Number(element.Rate) - Number(element.Discountamount)) * Number(element.Taxrate) /100)
+      })
+    });
+    invoiceDetailss = {
+        invId : this.invoicedata[0].Invoicenumber,
+        invAmt:this.invoicedata[0].Fundingamount,
+        invCcy:this.invoicedata[0].Currency,
+        invDate:this.invoicedata[0].Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        invDueDate:this.invoicedata[0].Fundingreqduedate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        smeId: "SME",
+        invoiceDetailsSequenceNumber: {},
+        dispDate:this.invoicedata[0].Datedispatch = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        buyerName:this.invoicedata[0].Buyername,
+        buyerAddr:this.invoicedata[0].Buyerlocation,
+        billNo:this.invoicedata[0].Billingnumber,
+        goodsDetails:goodsDetails
     }
+    // let invoiceDetails = {
+    //   invId : this.invoicedata.Invoicenumber,
+    //   invAmt:this.invoicedata.Fundingamount,
+    //   invCcy:this.invoicedata.Currency,
+    //   invDate:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+    //   invDueDate:this.invoicedata.Fundingreqduedate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+    //   smeId: "SME",
+    //   invoiceDetailsSequenceNumber: {},
+    //   dispDate:this.invoicedata.Datedispatch = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+    //   buyerName:this.invoicedata.Buyername,
+    //   buyerAddr:this.invoicedata.Buyerlocation,
+    //   billNo:this.invoicedata.Billingnumber,
+    //   goodsDetails:[{
+    //     ID:this.invoicedata.Invoicenumber,
+    //     amtCcy:this.invoicedata.Currency,
+    //     descGoods:this.invoicedata.Descriptiongoods,
+    //     dateOfInvoice:this.invoicedata.Fundingreqdate = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
+        
+    //     discAmt:this.invoicedata.Discountamount,
+    //     goodsId:"GD101",
+    //     amt:Number(this.invoicedata.Quality)*Number(this.invoicedata.Rate),
+    //     netAmtPay:Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount) , //discountamount
+    //     quantity:this.invoicedata.Quality,
+    //     rate:this.invoicedata.Rate,
+    //     taxAmt: (Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) - Number(this.invoicedata.Discountamount)) * Number(this.invoicedata.Taxrate) /100 ,
+    //     taxRate:Number(this.invoicedata.Taxrate),
+    //     total: Number(this.invoicedata.Quality) * Number(this.invoicedata.Rate) 
+    //   }]
+    // }
     let json = {
-      invoiceDetails : invoiceDetails
+      invoiceDetails : invoiceDetailss
     }
-    console.log(invoiceDetails,"invoiceDetails")
+    console.log(invoiceDetailss,"invoiceDetailss")
     console.log(json,"json")
-    this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
-      this.getInvDetailsLists()
-    }, error => {
-    })
+    // this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
+    //   this.getInvDetailsLists()
+    // }, error => {
+    // })
   }
   
 getInvDetailsLists() {
@@ -202,13 +235,13 @@ getInvDetailsLists() {
   sampleDown(){
     let link = document.createElement("a");
     link.download = "FundingInvoice";
-    link.href = "assets/sampleinvoice.xlsx";
+    link.href = "assets/sampleinvoiceexecl.xlsx";
     link.click();
   }
   samplecsvDown(){
     let link = document.createElement("a");
     link.download = "FundingInvoiceCSV";
-    link.href = "assets/sampleinvoiceCSV.csv";
+    link.href = "assets/sampleinovoicecsv.csv";
     link.click();
   }
   onChangess(files: File[]){

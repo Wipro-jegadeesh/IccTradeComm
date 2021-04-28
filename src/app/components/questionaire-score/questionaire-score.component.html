@@ -57,8 +57,7 @@
                   </ng-container> -->
 
                 <ng-container matColumnDef="scoreName">
-                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupName}}" [matTooltipPosition]="'below'"> Score Name </th>
+                    <th mat-header-cell *matHeaderCellDef  mat-sort-header > Score Name </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.scoreName}}
                     </td>
