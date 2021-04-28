@@ -12,10 +12,13 @@ export class SidebarComponent implements OnInit {
   @Output() isOpenSidebar = new EventEmitter();
   checkRolesPer
   opened=false
+  roleName
   constructor(private router:Router) { }
 
   ngOnInit(): void {
     this.checkRolesPer=JSON.parse(localStorage.getItem('userCred'))
+    this.roleName = localStorage.getItem('roleName');
+    
 
   }
 

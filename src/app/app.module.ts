@@ -129,7 +129,8 @@ import {IccRolesServices} from './components/icc-roles/icc-roles-services'
 import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
 import { AuthConfigModule } from '../app/service/auth.config.module';
 import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
-import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component'
+import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
+import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -183,7 +184,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SignUpDetailsComponent,
     QuestionaireScoreComponent,
     ModalComponent,
-    InvoiceBulkUploadComponent
+    InvoiceBulkUploadComponent,
+    FinancierLimitMaintanaceComponent
   ],
   imports: [
     BrowserModule,

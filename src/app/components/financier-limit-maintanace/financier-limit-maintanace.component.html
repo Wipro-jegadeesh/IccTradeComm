@@ -1,0 +1,108 @@
+<div class="app-content">
+    <header>
+        <div class="data-section">
+            <h5 class="text-center">Limit Maintanance</h5>
+            <form [formGroup]="limitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
+                <!-- <h5 class="text-center">Groups</h5> -->
+                <mat-card>
+                    <mat-card-content>
+                        <table class="table-responsive inv-table" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Exposure</mat-label>
+                                            <input type="text" matInput formControlName="exposureAmt" (keyup)="changeExposure($event,'exposureAmt')" [readonly]="enableReadonly"/>
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1" *ngIf="isOk">
+                                        <mat-form-field dense  class="icc-mat">
+                                            <mat-label>Choose Modify Exposure </mat-label>
+                                           <mat-select formControlName="modifyExpoOptions" (selectionChange)="changeExposure($event,'modifyExpoOptions')" [readonly]="enableReadonly">
+                                            <!-- (change)="changeExposure($event,'modifyExpoOptions')" -->
+                                             <mat-option value="+">Enhance</mat-option>
+                                             <mat-option value="-">Reduce</mat-option>
+                                           </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1" *ngIf="isOk">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Modify Exposure</mat-label>
+                                            <input type="text" matInput formControlName="modifyExposureAmt" (keyup)="changeExposure($event,'modifyExposureAmt')" [readonly]="enableReadonly"/>
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Available score</mat-label>
+                                            <input type="text" matInput formControlName="avblExposureAmt" readonly/>
+                                        </mat-form-field>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+                <div class="finaddbtns">
+                    <ul class="finaddbtns-ul">
+                        <li><button type="submit" *ngIf="!isEdit" mat-flat-button color="primary" id=grid (click)="clickadd()" >Add</button>
+                        </li>
+                        <li><button *ngIf="isEdit && !isOk" mat-flat-button color="primary" id=grid (click)="clickedit()">Edit</button></li>
+                        <li><button *ngIf="isOk" mat-flat-button color="primary" id=grid >OK</button></li>
+                        <!-- <li> <button *ngIf="!isEdit" mat-flat-button color="primary" id=grid *ngIf="isEdit">Cancel</button></li> -->
+                    </ul>
+                </div>
+            </form>
+
+            <br>
+           <div class="mat-elevation-z8 table-responsive table-post">
+            <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+           <ng-container matColumnDef="Exposure">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                    matTooltip="{{groupTooltip.groupCode}}" [matTooltipPosition]="'below'"> Exposure </th>
+                    <td mat-cell *matCellDef="let element">
+                                 {{element.exposureAmt}}
+                     </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="Available Exposure">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.groupName}}" [matTooltipPosition]="'below'"> Available Exposure </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.avblExposureAmt}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Created">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.groupName}}" [matTooltipPosition]="'below'"> Created </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- {{element.scoreName}} -->
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Modified">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.groupName}}" [matTooltipPosition]="'below'"> Modified </th>
+                    <td mat-cell *matCellDef="let element">
+                        <!-- {{element.scoreName}} -->
+                    </td>
+                </ng-container>
+
+              <!-- <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element">
+                    <a  href="javascript:void(0)" (click)="getEditData(element)">
+                      <mat-icon  #tooltip="matTooltip"
+                      matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                    </a>&nbsp;
+                     </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+              <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+                    *matHeaderRowDef="displayedColumnsearch"></tr> 
+            <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+                <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
+            </table>
+            </div>
+        </div>
+    </header>
+</div>
