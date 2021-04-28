@@ -148,14 +148,21 @@
         matTooltip="{{dashboardTooltips.fundingRequest}}"
         [matTooltipPosition]="tooltipPosition"  (click)="this.navigateInvoiceCreation()">+ Funding Request</button> -->
 
-        <mat-form-field class="fundreq-btn" (change)="onRequestChange($event)">
+        <!-- <mat-form-field class="fundreq-btn" (change)="onRequestChange($event)">
             <mat-label>Funding Request</mat-label>
             <select matNativeControl >
               <option value="">select</option>
               <option value="manual">Invoice Request manual</option>
               <option value="bulk">Invoice Request Bulk Upload</option>
             </select>
-          </mat-form-field>
+          </mat-form-field> -->
+          <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
+          matTooltip="{{dashboardTooltips.fundingRequest}}"
+          [matTooltipPosition]="tooltipPosition" [matMenuTriggerFor]="menu"> + Funding Request</button>
+            <mat-menu #menu="matMenu">
+            <button (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>Invoice Request Manual</button>
+            <button (click)="onRequestChange('')" style="color: #7c49cb;" mat-menu-item>Invoice Request Upload</button>
+            </mat-menu>
         </div>
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
     <div class="container-fluid">

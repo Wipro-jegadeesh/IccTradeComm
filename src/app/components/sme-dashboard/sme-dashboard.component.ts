@@ -394,10 +394,9 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
     }
 
     onRequestChange(event){
-      if(event.target.value && event.target.value == 'manual'){
+      if(event == 'manual'){
         this.navigateInvoiceCreation()
-      }
-      else{
+      }else{
         this.router.navigateByUrl('/invoice-request/bulk')
       }
     }
