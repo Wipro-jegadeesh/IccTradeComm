@@ -75,7 +75,12 @@ export class LoginComponent implements OnInit {
           'userId':this.username,
           'companyId':resp[0].nationalid,
           'country':'SGP',
-          'role':resp[0].role
+          'role':resp[0].role,
+          'name':resp[0].name,
+          'address':resp[0].address,
+          'mobile':resp[0].contactnum,
+          'email':resp[0].email,
+          'city':resp[0].locale
         }
         let isQuesSucc=resp[0].questionnaire
         let status=resp[0].status
@@ -90,6 +95,9 @@ export class LoginComponent implements OnInit {
           userObj['questionnaire']=resp[0].questionnaire
         }
         localStorage.setItem('userCred',JSON.stringify(userObj))
+      }
+      else{
+        this.toastr.error('User Not Found')
       }
     })
   }

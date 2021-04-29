@@ -33,7 +33,10 @@ let serviePath_1 = "http://2a088c457b03.ngrok.io/";
 let serviePath_2 = "http://2a088c457b03.ngrok.io/";
 
 //Financier onboard path
-let financierServicePath="http://localhost:8082/"
+let financierServicePath="http://localhost:8080/"
+
+// Coriolis service path
+let coriolisServicePath="http://localhost:3030/"
 
 //Dashboard  Service Url
 let dboardServerPath1 = "http://dboardServPath1/";
@@ -56,6 +59,8 @@ export const environment = {
   dboardServerPath5: `${dboardServerPath5}`,
   dboardServerPath6: `${dboardServerPath6}`,
   financierServicePath: `${financierServicePath}`,
+  coriolisServicePath:`${coriolisServicePath}`,
+
   keycloak : {
     // Url of the Identity Provider
     issuer: 'http://localhost:8080/auth/realms/Icctradecomm',
