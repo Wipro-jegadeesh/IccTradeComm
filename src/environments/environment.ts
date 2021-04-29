@@ -63,7 +63,9 @@ export const environment = {
 
   keycloak : {
     // Url of the Identity Provider
-    issuer: 'http://localhost:8080/auth/realms/Icctradecomm',
+    issuer: 'http://localhost:8080/auth/realms/Icctradecomm', //local
+    // issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", //live
+
   
     // URL of the SPA to redirect the user to after login
     // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
@@ -71,10 +73,17 @@ export const environment = {
     // The SPA's id. 
     // The SPA is registerd with this id at the auth-serverß
     // clientId: 'finanicer-dashboard',
-      redirectUri:  localStorage.getItem("redirectUri") ?  localStorage.getItem("redirectUri") : "http://localhost:4200",
-      clientId:  "Iccmarketplace",
+      redirectUri: "http://localhost:4200",
+      clientId:  "Iccmarketplace", //local
+      // clientId:  "IccMarketplace", //live
   
-    responseType: 'code',
+      // URL of the SPA to redirect the user to after login
+      // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
+    
+      // The SPA's id. 
+      // The SPA is registerd with this id at the auth-serverß
+      // clientId: 'finanicer-dashboard',
+     responseType: 'code',
     // set the scope for the permissions the client should request
     // The first three are defined by OIDC.
     // scope: 'openid profile email',
