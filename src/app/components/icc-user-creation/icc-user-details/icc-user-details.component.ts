@@ -117,8 +117,26 @@ export class IccUserDetailsComponent implements OnInit {
     this.authenticationService.logout()
   }
   
-  
-  
+  blurFunction(){
+    console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
+    this.IccUserCreationssService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
+      console.log(resp)
+      this.userForm.patchValue({
+    firstName: resp[0].fname,
+    email: resp[0].email ,
+    lastName: resp[0].lname,
+    contactNo: resp[0].contactnum,
+    companyName: resp[0].companyname, 
+    locale: resp[0].locale,
+    address:resp[0].address,
+    country:resp[0].country,
+    role:resp[0].role,
+    profileType:resp[0].profiletype,
+
+      });
+
+    })
+  }
   onSubmitInvoiceForm() {
     try {
       if (this.userForm.status === "INVALID"){
@@ -147,7 +165,6 @@ export class IccUserDetailsComponent implements OnInit {
       if(resp){
         // this.FinancebiddingDetails = resp
         this.userForm.patchValue({
-          userId: resp.userId,
       nationalId: resp.nationalId,
       firstName: resp.firstName,
       email: resp.email ,
@@ -169,7 +186,6 @@ export class IccUserDetailsComponent implements OnInit {
   }
   invoiceFormBuild() {
     this.userForm = this.fb.group({
-      userId: ['', Validators.required],
       nationalId: ['', Validators.required],
       firstName: ['', Validators.required],
       email: ['', Validators.required],
@@ -177,9 +193,12 @@ export class IccUserDetailsComponent implements OnInit {
       contactNo: ['', Validators.required],
       companyName: ['', Validators.required], 
       locale: ['', Validators.required],
-      // ICCId: localStorage.getItem("userId"),
       address:['',Validators.required],
+      address1:['',Validators.required],
       country:['',Validators.required],
+      state:['',Validators.required],
+      city:['',Validators.required],
+      postalCode:['',Validators.required],
       // groupname:['',Validators.required],
       role:['',Validators.required],
       profileType:['',Validators.required],
@@ -188,7 +207,6 @@ export class IccUserDetailsComponent implements OnInit {
 
     });
   
-    
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
