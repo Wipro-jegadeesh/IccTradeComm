@@ -20,7 +20,6 @@ export class SignupService {
         return this.apiService.generalServiceget(environment.coriolisServicePath + 'getCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
     }
     getUserDetails(data){
-        debugger
         return this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
     }
 }
