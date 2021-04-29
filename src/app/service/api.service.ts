@@ -171,7 +171,7 @@ export class ApiService {
 	}
 
 	setToken() {
-		this.token = localStorage.getItem("token");
+		this.token = localStorage.getItem("accessToken");
 		if (this.token) {
 			headers = headers.set("Authorization", "Bearer " + this.token);
 		}
