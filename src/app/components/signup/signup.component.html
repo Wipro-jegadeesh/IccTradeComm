@@ -33,7 +33,7 @@
                      required  />
                     <!-- <mat-error>InValid Email</mat-error> -->
                   </mat-form-field>
-                  <angular2-multiselect  [data]="optionDatas"  class="sign-select"
+                  <angular2-multiselect  [data]="optionDatas"  class="sign-select" style="margin-bottom:10px"
                   name='country'  (onDeSelectAll)="onDeSelect($event)" 
                  [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
                  [settings]="dropdownSettings" ></angular2-multiselect>
@@ -43,7 +43,7 @@
         <input matInput name="CountryPin" [(ngModel)]="CountryPin" required>
         <mat-hint>Please enter {{CountryPinLabel}}</mat-hint>
       </mat-form-field> -->
-      <mat-form-field *ngIf="showCountSignBtn" floatLabel="never"  style="margin-bottom:unset" dense appearance="fill"  >
+      <mat-form-field *ngIf="showCountSignBtn" floatLabel="never"  style="margin-bottom:10px" dense appearance="fill"  >
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label >{{CountryPinLabel}}</mat-label>
         <input matInput name="CountryPin" [(ngModel)]="CountryPin" required
@@ -54,8 +54,8 @@
       <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">Sign Up</button>
     </form>
     <div class="login-actions">
-      <a routerLink="/login" class="uxg-body-2">Back to Login Page</a>
-    </div>
+      <br>
+      <a  class="uxg-body-2" (click)="GotoLogin()" style="cursor: pointer;font-weight: bold;color: #8c0ed4;text-transform: uppercase;">Back to Login Page</a>    </div>
 
     <span class="fill-remaining-space"></span>
 

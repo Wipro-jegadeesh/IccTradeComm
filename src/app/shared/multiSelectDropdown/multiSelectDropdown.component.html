@@ -1,7 +1,7 @@
 <div class="card-form-container">
-    <div class="dyn-Formmultiselect-dropdown-dsgn" #tooltip="matTooltip"
+    <div class="dyn-Formmultiselect-dropdown-dsgn" [ngClass]="{single_drp_dsgn: !questionDatas.allowMultiple}"  #tooltip="matTooltip"
     matTooltip="{{questionDatas.description}}" [matTooltipPosition]="'below'"> 
-        <angular2-multiselect [data]="optionDatas" (onSelect)="onChange($event)" class="dropdown-cls" [ngClass]="{single_drp_dsgn: !questionDatas.allowMultiple}"
+        <angular2-multiselect [data]="optionDatas" (onSelect)="onChange($event)" class="dropdown-cls" 
          (onDeSelect)="onChange($event)"  (onSelectAll)="onChange($event)"  (onDeSelectAll)="onChange($event)" [(ngModel)]="selectedItems"
         [settings]="dropdownSettings" ></angular2-multiselect>
     </div>

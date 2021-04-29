@@ -8,14 +8,20 @@ export class IccRolesServices  {
 
 
   submitIccRoles(body: any) {
-    return this.apiService.post(environment.serviePath_1+'userroles', body);
+    if(body.roleId){
+      return this.apiService.put(environment.financierServicePath+'roles-details/updateRolesDetails/'+body.roleId, body);
+} else{
+  return this.apiService.post(environment.financierServicePath+'userroles', body);
+
+}
+   return this.apiService.post(environment.financierServicePath+'userroles', body);
   }
 
   getAllRoles(){
-    return this.apiService.get('roles-profile/allrolesDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'roles-profile/allrolesDetails');
   }
 
   getParticularRoles(id){
-    return this.apiService.get('roles-profile/'+id);
+    return this.apiService.tempGet(environment.financierServicePath+'roles-profile/'+id);
   }
 }

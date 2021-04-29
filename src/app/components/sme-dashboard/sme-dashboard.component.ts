@@ -392,5 +392,13 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
     //   { data:Object.values(AFresp) , label: "Actual Funding" },
     //  ]
     }
+
+    onRequestChange(event){
+      if(event == 'manual'){
+        this.navigateInvoiceCreation()
+      }else{
+        this.router.navigateByUrl('/invoice-request/bulk')
+      }
+    }
 }
 

@@ -1,0 +1,38 @@
+.app-content {
+    bottom: 0;
+    left: 0;
+    overflow-x: auto;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 33px;
+}
+.icc-mat{
+    padding-right: 10px;
+    width: 300px;
+    margin-top: 10px;
+}
+.data-section{
+    margin-top: 15px;
+}
+.green-text{
+    color: #32CD32;
+}
+.finaddbtns
+{
+    position: relative;
+    margin-left: 27%;
+}
+.finaddbtns-ul
+{
+    display: inline-flex;
+    list-style: none;
+}
+.finaddbtns-ul{
+    li{
+padding: 15px;
+    }
+}
+.cdk-overlay-pane {
+    top: 156px !important;
+}

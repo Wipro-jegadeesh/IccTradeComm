@@ -1,0 +1,88 @@
+.app-content {
+    bottom: 0;
+    left: 0;
+    overflow-x: auto;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 33px;
+}
+
+.bulk-file-upload{
+    // background: #f3f1fc;
+    // border-bottom: 1px solid #694ed6;
+    // width: 400px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    h6{
+        color: #616065;
+    font: 500 16px/24px Roboto, roboto, "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding-left: 10px;
+    }
+    & .mat-radio-group {
+        padding-left: 10px;
+    }
+    &.file-input{
+        margin-bottom: 10px;
+    }
+}
+
+table.fun-table{
+    margin: 0;
+    padding-bottom: 0;
+    td{
+        padding-right: 0;
+    }
+    .spilt-input{
+        right: 0;
+    }
+}
+table{
+    margin-top: 0;
+    &.table-responsive{
+        display: inline-table;
+    }
+}
+
+table {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    td{
+        padding-right: 12px;
+    }
+}
+
+.ebtn {
+    display: flex;
+    justify-content: flex-end;
+}
+.file-upload{
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+  .file-label{
+      width: 260px;
+  display: flex;
+  overflow-x: auto;
+  margin-left: 10px;
+  label{
+    padding: 5px 9px;
+    background: #e6e1f9;
+    font-size: 12px;
+    border-radius: 7px;
+    margin-right: 8px;
+    white-space: nowrap;
+    span{
+        cursor: pointer;
+        i{
+            color:red;
+        }
+    }
+  }
+  }
+}

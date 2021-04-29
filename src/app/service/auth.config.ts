@@ -12,7 +12,8 @@ export const authConfig: AuthConfig = {
     // The SPA's id. 
     // The SPA is registerd with this id at the auth-serverß
     clientId: environment.keycloak.clientId,
-
+ 
+    
     responseType: environment.keycloak.responseType,
     // set the scope for the permissions the client should request
     // The first three are defined by OIDC.

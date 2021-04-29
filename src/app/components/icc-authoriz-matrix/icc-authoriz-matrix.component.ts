@@ -40,9 +40,11 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
 export class IccAuthorizMatrixComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['slab','smefin','currency','fromAmt','toAmt','noofPersons'];
+  displayedColumns: string[] = ['slab','smefin','currency','fromAmt','toAmt','noofPersons','action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
+  isEdit : boolean
+  id : any
 
 
   constructor(public router: Router, private IccAuthorizeServices: IccAuthorizeServices, 
@@ -52,14 +54,18 @@ export class IccAuthorizMatrixComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'slab' : '1','smefin' : 'sme123','currency' : '212', 'fromAmt' : '20','toAmt' : '100','noofPersons' : 2}]);
-
+    this.dataSource = new MatTableDataSource([{'id' : '1','slab' : '1','smefin' : 'sme123','currency' : '212', 'fromAmt' : '20','toAmt' : '100','noofPersons' : 2}]);
+    this.IccAuthorizeServices.getAllAuthorizeMatrix().subscribe(listResp => {
+      if(listResp){
+        this.dataSource = new MatTableDataSource(listResp);
+      }
+    })
   }
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
       slab: ['', Validators.required],
-      smeFin: ['', Validators.required],
+      smefin: ['', Validators.required],
       currency: ['', Validators.required],
       fromAmt: ['', Validators.required],
       toAmt: ['', Validators.required],
@@ -68,18 +74,62 @@ export class IccAuthorizMatrixComponent implements OnInit {
 
   }
 
-  // onSubmitgroupsForm(){
-  //   IccAuthorizeServices
-  // }
+  
+  getEditData(data){
+
+    // **** Start Need to hide *****
+    // this.isEdit = true
+    // this.id = 1
+    // let respData = {'id' : '1','slab' : '1','smefin' : 'sme123','currency' : '212', 'fromAmt' : '20','toAmt' : '100','noofPersons' : 2}
+    // this.groupsForm.patchValue({  
+    //   slab : respData.slab,
+    //   smefin : respData.smefin,
+    //   currency : respData.currency,
+    //   fromAmt : respData.fromAmt,
+    //   toAmt : respData.toAmt,
+    //   noofPersons : respData.noofPersons,
+    // })
+    // **** End Need to hide  *****
+   
+        this.IccAuthorizeServices.getParticularAuthorizeMatrix(data.id).subscribe(resp => { 
+          if(resp){
+            let respData = resp;
+            this.groupsForm.patchValue({
+              slab : respData.slab,
+              smefin : respData.smefin,
+              currency : respData.currency,
+              fromAmt : respData.fromAmt,
+              toAmt : respData.toAmt,
+              noofPersons : respData.noofPersons,
+            })
+            this.isEdit = true
+            this.id = respData.id
+
+          }
+
+        })
+ 
+}
 
   onSubmitgroupsForm(){
-    // this.IccGroupServices.getParticularAuthorizeMatrix(1).subscribe(resp => { })
+
+     // **** Start Need to hide *****
+    //  this.id = "";
+    //  this.isEdit = false
+    //  this.groupsForm.reset();
+     // End Need to hide **********
+
     if(this.groupsForm.value && this.groupsForm.status == "VALID"){
       let value = this.groupsForm.value
+      if(this.isEdit){
+        value.id = this.id
+      }
       this.IccAuthorizeServices.submitIccAuthorizeMatrix(value).subscribe(resp => {
         if(resp){
           this.toastr.success("Saved Successfully")
           this.groupsForm.reset();
+          this.id = "";
+          this.isEdit = false
           this.IccAuthorizeServices.getAllAuthorizeMatrix().subscribe(listResp => {
             if(listResp){
               this.dataSource = new MatTableDataSource(listResp);

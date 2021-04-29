@@ -10,20 +10,30 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
 
   @Output() isOpenSidebar = new EventEmitter();
+  checkRolesPer
+  opened=false
+  roleName
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+    this.checkRolesPer=JSON.parse(localStorage.getItem('userCred'))
+    this.roleName = localStorage.getItem('roleName');
+    
+
   }
 
   isOpen = 'inActive';
 
 
-  isOpenHandle(isTrue){
+  isOpenHandle(isTrue,type){
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
+    this.opened = isTrue === 'inActive' ? true : false ;
+    if(type == 'open'){
     this.isOpenSidebar.emit(this.isOpen);
     }
-    smeOnboard(){
-      this.router.navigateByUrl('/sme-onboarding')
+    }
+    navigatePage(path){
+      this.router.navigateByUrl(path)
     }
 
 }

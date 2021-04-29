@@ -18,6 +18,12 @@ export class AuthConfigService {
     ) {}
 
     async initAuth(): Promise<any> {
+      let url=window.location.pathname;
+      if(url== "/signup"){
+        this.router.navigateByUrl('/signup');
+        return false;
+       }
+  else{
       return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
@@ -34,25 +40,33 @@ export class AuthConfigService {
         // continue initializing app or redirect to login-page
         
         this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
-          if (isLoggedIn) {
+          if (isLoggedIn) { 
             this.oauthService.setupAutomaticSilentRefresh();
             resolveFn();
             let claims = this.oauthService.getIdentityClaims();
             let scope = this.oauthService.scope;
             console.log("scope",scope);
             localStorage.setItem("userId",claims['name']);
+            localStorage.setItem("accessToken",this.oauthService.getAccessToken());
             console.log("222222",claims);
-            if(claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "sme"){
-                this.router.navigateByUrl('/sme-dashboard');
-                localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
-               }else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
-                   this.router.navigateByUrl('/financier-dashboard');
-                   localStorage.setItem("redirectUri","http://localhost:4200/financier-dashboard");  
-               }
-               else{
-                this.router.navigateByUrl('/icc-dashboard');
-                localStorage.setItem("redirectUri","http://localhost:4200/icc-dashboard");  
-               }
+            const sameCaseArray = claims['realm_access']['roles'].map(value => value.toLowerCase());
+            sameCaseArray.map(item =>{
+              if (item.match(/^.*sme$/) || item.match(/^sme.*$/)){
+                // if(claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "sme"){
+                    this.router.navigateByUrl('/sme-dashboard');
+                    localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
+                   }
+                  if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){
+                  //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
+                       this.router.navigateByUrl('/financier-dashboard');
+                       localStorage.setItem("redirectUri","http://localhost:4200/financier-dashboard");  
+                   }
+                   if(item.match(/^.*icc$/) || item.match(/^icc.*$/)){
+                    this.router.navigateByUrl('/icc-dashboard');
+                    localStorage.setItem("redirectUri","http://localhost:4200/icc-dashboard");  
+                   }
+            }) 
+          
             // localStorage.setItem("clientId",this.oauthService.clientId);
             // if (!claims) return null;
             // let loadUserProfile = this.oauthService
@@ -69,6 +83,7 @@ export class AuthConfigService {
         });
         
       });
+    }
     }
   
     private handleNewToken() {

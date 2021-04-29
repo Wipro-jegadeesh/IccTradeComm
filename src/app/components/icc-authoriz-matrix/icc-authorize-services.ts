@@ -8,14 +8,19 @@ export class IccAuthorizeServices  {
 
 
   submitIccAuthorizeMatrix(body: any) {
-    return this.apiService.post(environment.serviePath_1+'authorize', body);
+    if(body.id){
+      return this.apiService.put(environment.financierServicePath+'authorization-details/updateAuthorizationDetails/'+body.id, body);
+    }else{
+      return this.apiService.post(environment.financierServicePath+'authorize', body);
+
+    }
   }
 
   getAllAuthorizeMatrix(){
-    return this.apiService.get('authorize-matrix/allmatrixDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'authorize-matrix/allmatrixDetails');
   }
 
   getParticularAuthorizeMatrix(id){
-    return this.apiService.get('authorize-matrix/'+id);
+    return this.apiService.tempGet(environment.financierServicePath+'authorize-matrix/'+id);
   }
 }

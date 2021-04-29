@@ -11,16 +11,19 @@ export class IccUserCreationService {
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   
   getAllFundingList(){
-    return this.apiService.tempGet(environment.api_url+'/sme-userprofile/allUserProfileDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allUserProfileDetails');
   }
   UpdateUser(id,body: any) {
-    return this.apiService.put(environment.api_url+'/user-profile/updateUserProfile/'+id,body);
+    return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
   }
   Usersave(body: any) {
-    return this.apiService.post(environment.api_url+'/adduser', body);
+    return this.apiService.post(environment.financierServicePath+'adduser', body);
   }
   getUserDetails(id) {
-    return this.apiService.tempGet(environment.api_url+'/sme-userprofile/'+id);
+    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/'+id);
+  }
+  getUserSMEDetails(id) {
+    return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
   }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);

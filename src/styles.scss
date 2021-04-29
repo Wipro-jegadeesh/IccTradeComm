@@ -619,6 +619,40 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         }
         }
     }
+    
+    .selected-list{
+        .c-btn{
+            border-bottom: none;
+            color:#616065;
+            font-size: 14px;
+            span{
+                span{
+                background-color: #7e63eceb;
+                padding: 5px 10px 6px 8px;
+                color: white;
+                border-radius: 5px;
+                margin-right: 30px;
+                display: flex;
+                }
+            }    
+            .c-token{
+                background-color: #7e63eceb;
+                padding: 5px 23px 6px 8px;
+                color: white;
+                border-radius: 5px;
+                margin-right: 15px;
+            }
+        }
+    } 
+    .dropdown-list{
+        position: absolute!important;
+        top: 30px!important;
+        left:0px!important;
+        
+    .arrow-down,.arrow-up{
+        display: none;
+    }
+    }
 }
 .pure-checkbox input[type=checkbox]+label:before{
     border: 1px solid black;
@@ -653,6 +687,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
 .fundreq-btn{
     float: right;
     margin-right: 100px;
+    font: 400 12px/18px Roboto, roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+
 }
 .toast-top-right {
     top: 12px;
@@ -692,6 +729,11 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         margin-bottom: 1px;
       }
     }
+}
+.toast-container .ngx-toastr{
+    width: fit-content !important;
+    min-width: 300px;
+    max-width: 500px;
 }
 
 //iphonex
@@ -1067,4 +1109,11 @@ input.custom-autofill {
     border-width: 0 !important;
     margin-top: -6px !important;
 }
+}
+
+table{
+width:100%
+}
+.cdk-overlay-pane {
+    top: 156px !important;
 }

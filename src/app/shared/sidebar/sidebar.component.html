@@ -1,9 +1,9 @@
 <!-- <p>sidebar works!</p> -->
-<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
+<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen,'open') ]">
     <mat-icon>menu</mat-icon>
 </button>
 
-<mat-sidenav #sidenav mode="over">
+<mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <!-- <div class="uxg-nav-header">
         <mat-card class="uxg-card-product" extra-dense>
             <span class="uxg-h5 uxg-card-product-name">PRO</span>
@@ -15,11 +15,19 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p>Home</p>
         </a>
-        <a mat-list-item (click)="smeOnboard()" >
+        <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Questionnaire Details</p>
         </a>
-        <!-- <a mat-list-item>
+        <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Score Received</p>
+        </a>
+        <a *ngIf="roleName == 'financier'" mat-list-item (click)="navigatePage('/limit-maintanance')" >
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Limit Maintanance</p>
+        </a>
+        <a mat-list-item>
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Applications</p>
         </a>
@@ -34,11 +42,11 @@
         <a mat-list-item>
             <mat-icon mat-list-icon>settings</mat-icon>
             <p>Settings</p>
-        </a> -->
+        </a>
 
         <mat-divider></mat-divider>
 
-        <!-- <a mat-list-item>
+        <a mat-list-item>
             <mat-icon mat-list-icon>help</mat-icon>
             <p>Help</p>
         </a>
@@ -46,7 +54,7 @@
         <a mat-list-item>
             <mat-icon mat-list-icon>power_settings_new</mat-icon>
             <p>Sign out</p>
-        </a> -->
+        </a>
         <!-- <mat-divider></mat-divider> -->
     </mat-nav-list>
     <!-- <mat-nav-list class="uxg-link-list">

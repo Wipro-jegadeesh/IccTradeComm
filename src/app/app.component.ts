@@ -1,7 +1,8 @@
-import { Component, OnInit ,ChangeDetectorRef, Renderer2} from '@angular/core';
+import { Component, OnInit ,ChangeDetectorRef, Renderer2, ViewChild} from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, ActivatedRoute, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { LoaderService } from "../../src/app/service/loader.service";
 import { Subscription } from "rxjs";
+import {SidebarComponent} from './shared/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,9 @@ export class AppComponent {
   showFooter: boolean = false;
   private subscription: Subscription
   showLoadingIcon = false;
+
+  @ViewChild(SidebarComponent) sidebar:SidebarComponent
+
   constructor(private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,private renderer: Renderer2) {
   }
 
@@ -50,6 +54,14 @@ export class AppComponent {
       this.showFooter = true;
     }
   }
+  screenClicked(event){
+
+    if(this.isOpen == 'active'  && this.showSidebar){
+      // this.emitIsOpen('inActive')
+      this.sidebar.isOpenHandle('active','disable')
+    }
+  }
+
 }
 
 

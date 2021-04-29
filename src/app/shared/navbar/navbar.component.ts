@@ -14,9 +14,10 @@ export class NavbarComponent implements OnInit {
   userName
   homePath = "";
   headerPaths = [];
-  isHide=false;
+  isHide=false; 
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,private oauthService: OAuthService) { }
+  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,private oauthService: OAuthService)
+   { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
@@ -48,9 +49,12 @@ export class NavbarComponent implements OnInit {
     const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
+    let userData=JSON.parse(localStorage.getItem('userCred'))
+    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
+      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }
+    else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
-    if(this.router.url == '/sme-onboarding'){
-      this.isHide=true
     }
   }
 
@@ -60,12 +64,13 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.oauthService.logOut();
-    // localStorage.clear();
-    // this.authenticationService.logout()
+    localStorage.clear();
+  // this.authenticationService.logout()
     }
 
     backNavigation() {
-     !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    //  !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
+    this._location.back()
     }
 
     navigationHeadersPath(path){
