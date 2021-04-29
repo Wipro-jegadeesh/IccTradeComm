@@ -22,6 +22,9 @@ export class IccUserCreationService {
   getUserDetails(id) {
     return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/'+id);
   }
+  getUserSMEDetails(id) {
+    return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
+  }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);
     let invoiceRef  = params.invoiceRef == undefined ? "" : params.invoiceRef;
