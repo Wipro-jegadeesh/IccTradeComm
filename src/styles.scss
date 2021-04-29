@@ -619,6 +619,40 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         }
         }
     }
+    
+    .selected-list{
+        .c-btn{
+            border-bottom: none;
+            color:#616065;
+            font-size: 14px;
+            span{
+                span{
+                background-color: #7e63eceb;
+                padding: 5px 10px 6px 8px;
+                color: white;
+                border-radius: 5px;
+                margin-right: 30px;
+                display: flex;
+                }
+            }    
+            .c-token{
+                background-color: #7e63eceb;
+                padding: 5px 23px 6px 8px;
+                color: white;
+                border-radius: 5px;
+                margin-right: 15px;
+            }
+        }
+    } 
+    .dropdown-list{
+        position: absolute!important;
+        top: 30px!important;
+        left:0px!important;
+        
+    .arrow-down,.arrow-up{
+        display: none;
+    }
+    }
 }
 .pure-checkbox input[type=checkbox]+label:before{
     border: 1px solid black;

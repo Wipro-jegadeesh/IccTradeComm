@@ -16,4 +16,10 @@ export class SignupService {
     Usersave(body: any) {
         return this.apiService.post(environment.financierServicePath+'smeonboard', body);
       }
+      companyCheck(data){
+        return this.apiService.generalServiceget(environment.coriolisServicePath + 'getCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
+    }
+    getUserDetails(data){
+        return this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
+    }
 }

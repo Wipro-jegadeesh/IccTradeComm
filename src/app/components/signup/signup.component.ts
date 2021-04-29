@@ -128,8 +128,24 @@ this.optionDatas = COUNTRYNAMES
         if(resp.status === "true"){
           this.toastr.error("This company already exists in Icc tradecomm Market place");
         }else{
+          let data={
+            'companyId':this.CountryPin,
+            'country':this.selectedItems[0].id,
+            'companyName':this.name
+          }
           // this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-          this.router.navigateByUrl('/signup-details');
+          this.signupService.companyCheck(data).subscribe(resp =>{
+            if(resp && resp.registrationnumber){
+              this.router.navigateByUrl('/signup-details');
+            }
+            else{
+              this.router.navigateByUrl('/signup-details')
+            }
+          },
+          err=>{
+            this.toastr.error('Error')
+          })
+          
         }
 
       })

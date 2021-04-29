@@ -16,15 +16,17 @@ export class SignUpDetailsComponent implements OnInit {
   imageError: string;
   isImageSaved: boolean;
   cardImageBase64: string;
+  
 
   constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
-    this.invoiceFormBuild()
+    this.signupFormBuild()
 
   }
-  invoiceFormBuild() {
+  signupFormBuild() {
+    
     this.userForm = this.fb.group({
       userId: [''],
       nationalId: [this.signUpDetails ? this.signUpDetails.nationalId : '' , Validators.required],
@@ -42,12 +44,41 @@ export class SignUpDetailsComponent implements OnInit {
       role:[''],
       profileType:['SME',Validators.required],
     });
-  
+    let obj={
+      'registrationId':this.signUpDetails.nationalId,
+      'companyName':this.signUpDetails.companyName,
+      'country':this.signUpDetails.country[0].id
+    }
+    this.SignupServices.getUserDetails(obj).subscribe(resp=>{
+      if(resp){
+        resp.sectionDtoList[0].sectionResponse && resp.sectionDtoList[0].sectionResponse.responses.map((item,index)=>{
+           switch(item.questionAlias){
+             case 'name':
+               this.userForm.get("firstName").setValue(item.value);
+               break;
+             case 'email':
+              this.userForm.get("email").setValue(item.value);
+              break;
+             case 'address-line-1':
+              this.userForm.get("address").setValue(item.value);
+              break;
+            case 'telephone-mobile':
+              this.userForm.get("contactNo").setValue(item.value);
+              break;
+            case 'city':
+            this.userForm.get("city").setValue(item.value);
+            break;
+            default:
+           }
+         })
+      }
+    })
     
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
   }
+
  fileChangeEvent(fileInput: any) {
         this.imageError = null;
         if (fileInput.target.files && fileInput.target.files[0]) {
@@ -158,7 +189,7 @@ export class SignUpDetailsComponent implements OnInit {
       console.log(smeboards,"smeboards")
        
     this.SignupServices.Usersave(smeboards).subscribe(resp => {
-                    this.invoiceFormBuild();
+                    this.signupFormBuild();
                     this.toastr.success("SME create succesfully kindly login with your credentials")
                     this.router.navigateByUrl('/login');
           },error => {
