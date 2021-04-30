@@ -63,8 +63,8 @@ export const environment = {
 
   keycloak : {
     // Url of the Identity Provider
-    issuer: 'http://localhost:8080/auth/realms/Icctradecomm', //local
-    // issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", //live
+    // issuer: 'http://localhost:8080/auth/realms/Icctradecomm', //local
+    issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", //live
 
   
     // URL of the SPA to redirect the user to after login
@@ -74,8 +74,8 @@ export const environment = {
     // The SPA is registerd with this id at the auth-serverß
     // clientId: 'finanicer-dashboard',
       redirectUri: "http://localhost:4200",
-      clientId:  "Iccmarketplace", //local
-      // clientId:  "IccMarketplace", //live
+      // clientId:  "Iccmarketplace", //local
+      clientId:  "IccMarketplace", //live
   
       // URL of the SPA to redirect the user to after login
       // redirectUri: 'http://localhost:4200/finanicer-dashboard/',

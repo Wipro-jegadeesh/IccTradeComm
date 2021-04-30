@@ -39,10 +39,11 @@ import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-u
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
 import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
+import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  // { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
@@ -96,7 +97,10 @@ const routes: Routes = [
 
   { path: 'invoice-request/bulk', component: InvoiceBulkUploadComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
-  
+  { path: 'sme-user-creation', component: SmeUserCreationComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+
+  { path: 'sme-user-details', component: SmeUserCreationComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+
   // questionaire-scorePage
 ];
 
