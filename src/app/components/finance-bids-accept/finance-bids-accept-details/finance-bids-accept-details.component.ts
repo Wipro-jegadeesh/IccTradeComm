@@ -318,7 +318,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
           this.toastr.success("Bid Accepted successfully")
           this.buildfinBidform();
           this.modalRef.hide()
-          this.router.navigateByUrl('/financier-dashboard');
+          this.router.navigateByUrl('/financier-bids-accept');
         }, error => {
         })
       }
@@ -327,29 +327,32 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     }
   }
   changeRowgrid(){
-  //   console.log(this.finBidform,"finnnn");
-  //  this.finBidform.value.baseCcyAmt = Number(this.invoiceDetails.invAmt) * Number(this.finBidform.value.fxRate)
+    console.log(this.finBidform,"finnnn");
+    if(this.isView === true){
+    }else{
+    this.finBidform.value.baseCcyAmt = Number(this.invoiceDetails.invAmt) * Number(this.finBidform.value.fxRate)
 
-  //  this.finBidform.value.baseCcyFundingAmt = Number(this.finBidform.value.baseCcyAmt)*Number(this.finBidform.value.fundablePercent) / 100;
+    this.finBidform.value.baseCcyFundingAmt = Number(this.finBidform.value.baseCcyAmt)*Number(this.finBidform.value.fundablePercent) / 100;
 
-  //  this.finBidform.value.baseCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
+    this.finBidform.value.baseCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
 
-  //  this.finBidform.value.invDiscRate = Number(this.finBidform.value.baseCcyDiscAmt) / Number(this.finBidform.value.baseCcyFundingAmt)*100;
-
-
-  //  this.finBidform.value.invCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
-
-  //  this.finBidform.value.baseCcyNetAmtPayable = this.finBidform.value.baseCcyFundingAmt - (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
+    this.finBidform.value.invDiscRate = Number(this.finBidform.value.baseCcyDiscAmt) / Number(this.finBidform.value.baseCcyFundingAmt)*100;
 
 
-  //  this.finBidform.patchValue({baseCcyAmt: this.finBidform.value.baseCcyAmt,
-  //    baseCcyFundingAmt: this.finBidform.value.baseCcyFundingAmt,
-  //    invCcyFundingAmt:this.finBidform.value.baseCcyFundingAmt,
-  //    baseCcyDiscAmt:this.finBidform.value.baseCcyDiscAmt.toFixed(2),
-  //    invCcyDiscAmt:this.finBidform.value.invCcyDiscAmt.toFixed(2),
-  //    invDiscRate:this.finBidform.value.invDiscRate.toFixed(2),
-  //    baseCcyNetAmtPayable:this.finBidform.value.baseCcyNetAmtPayable.toFixed(2),
-  //    invCcyNetAmtPayable:this.finBidform.value.baseCcyNetAmtPayable.toFixed(2)
-  //  });
+    this.finBidform.value.invCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
+
+    this.finBidform.value.baseCcyNetAmtPayable = this.finBidform.value.baseCcyFundingAmt - (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild/100) /360)
+
+
+    this.finBidform.patchValue({baseCcyAmt: this.finBidform.value.baseCcyAmt,
+      baseCcyFundingAmt: this.finBidform.value.baseCcyFundingAmt,
+      invCcyFundingAmt:this.finBidform.value.baseCcyFundingAmt,
+      baseCcyDiscAmt:this.finBidform.value.baseCcyDiscAmt.toFixed(2),
+      invCcyDiscAmt:this.finBidform.value.invCcyDiscAmt.toFixed(2),
+      invDiscRate:this.finBidform.value.invDiscRate.toFixed(2),
+      baseCcyNetAmtPayable:this.finBidform.value.baseCcyNetAmtPayable.toFixed(2),
+      invCcyNetAmtPayable:this.finBidform.value.baseCcyNetAmtPayable.toFixed(2)
+    });
+  }
 }
 }
