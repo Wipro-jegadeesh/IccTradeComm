@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AuthConfig, NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import { filter } from 'rxjs/operators';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { ApiService } from './api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthConfigService {
@@ -14,7 +17,9 @@ export class AuthConfigService {
     constructor(
       private readonly oauthService: OAuthService,
       private readonly authConfig: AuthConfig,
-      private router: Router
+      private router: Router,
+      private apiService:ApiService,
+      public toastr:ToastrService
     ) {}
 
     async initAuth(): Promise<any> {
@@ -52,9 +57,44 @@ export class AuthConfigService {
             const sameCaseArray = claims['realm_access']['roles'].map(value => value.toLowerCase());
             sameCaseArray.map(item =>{
               if (item.match(/^.*sme$/) || item.match(/^sme.*$/)){
+                this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+claims['preferred_username']).subscribe(resp=>{
+                  if(resp.length){
+                    let userObj={
+                      'companyName':resp[0].companyname,
+                      'userId':claims['preferred_username'],
+                      'companyId':resp[0].nationalid,
+                      'country':'SGP',
+                      'role':resp[0].role,
+                      'name':resp[0].name,
+                      'address':resp[0].address,
+                      'mobile':resp[0].contactnum,
+                      'email':resp[0].email,
+                      'city':resp[0].locale
+                    }
+                    let isQuesSucc=resp[0].questionnaire
+                    let status=resp[0].status
+                    if(status == 'P'){
+                      this.router.navigateByUrl('/score-received')
+                      // this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+                    }
+                    else if(isQuesSucc == 'N'){
+                      this.router.navigateByUrl('/sme-onboarding')
+                    }
+                    else{
+                      this.router.navigateByUrl('/sme-dashboard')
+                      userObj['questionnaire']=resp[0].questionnaire
+                    }
+                    localStorage.setItem('userCred',JSON.stringify(userObj))
+                  }
+                  else{
+                    // this.toastr.error('User Not Found')
+                    this.oauthService.logOut()
+                  }
+                })
+
                 // if(claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "sme"){
-                    this.router.navigateByUrl('/sme-dashboard');
-                    localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
+                    // this.router.navigateByUrl('/sme-dashboard');
+                    // localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
                    }
                   if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){
                   //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){

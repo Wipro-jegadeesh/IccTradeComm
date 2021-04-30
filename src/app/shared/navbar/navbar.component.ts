@@ -16,7 +16,9 @@ export class NavbarComponent implements OnInit {
   headerPaths = [];
   isHide=false; 
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location,private oauthService: OAuthService)
+  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
+    ,private oauthService: OAuthService
+    )
    { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")

@@ -23,6 +23,10 @@
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Score Received</p>
         </a>
+        <a mat-list-item (click)="navigatePage('/sme-user-creation')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">User Creation</p>
+        </a>
         <a *ngIf="roleName == 'financier'" mat-list-item (click)="navigatePage('/limit-maintanance')" >
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Limit Maintanance</p>
