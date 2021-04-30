@@ -284,10 +284,10 @@
                   </div>
                 </mat-card-content>
             </mat-card>
-            <!-- <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn model-btn-outline"  style="background-color: #4CAF50;color: white;" 
-                 (click)="openModal($event,template)" >Launch Bid</button>
-             </div> -->
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" *ngIf="!isView" class="btn model-btn-outline"  style="background-color: #4CAF50;color: white;" 
+                 (click)="openModal($event,template)">Modify</button>
+             </div>
           </form>
               <br>
             </mat-tab>
