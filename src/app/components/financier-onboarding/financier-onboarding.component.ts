@@ -88,8 +88,9 @@ export class FinancierOnboardingComponent implements OnInit {
     };
     this.activatedRoute.params.subscribe((params: Params) => {
       // this.financierId=params.id
-      let id = params.id && params.id.split('FIN')
-      this.financierId = id && id[1] ? id[1] : ''
+      // let id = params.id && params.id.split('FIN')
+      // this.financierId = id && id[1] ? id[1] : ''
+      this.financierId = params.id
       this.isView = params.edit == 'view' ? true : false
     })
     this.buildFinancierForm()
@@ -132,8 +133,8 @@ export class FinancierOnboardingComponent implements OnInit {
         regDate: [respObj.registerDate],
         fExpYears: [respObj.financeexpyears, Validators.required],
         activity: [respObj.typeofact],
-        prnBankAcc: [respObj.principalBankAccount],
-        prnBankBrnh: [respObj.prncbankbranch],
+        principalBankAccount: [respObj.principalBankAccount],
+        prncbankbranch: [respObj.prncbankbranch],
         anlScfTrnOver: [respObj.annualSCFTurnOver],
         transLimit: [respObj.transactionLimit],
 
@@ -258,8 +259,8 @@ export class FinancierOnboardingComponent implements OnInit {
       regDate: ['',Validators.required],
       fExpYears: ['', Validators.required],
       activity: [''],
-      prnBankAcc: [''],
-      prnBankBrnh: [''],
+      principalBankAccount: [''],
+      prncbankbranch: [''],
       anlScfTrnOver: [''],
       transLimit: [''],
       headAddrLine1: ['',Validators.required],
@@ -413,8 +414,8 @@ export class FinancierOnboardingComponent implements OnInit {
       'financeexpyears': formValues.fExpYears,
       'registerDate': formValues.regDate,
       'typeofact': formValues.activity,
-      'principalBankAccount': formValues.prnBankAcc,
-      'prncbankbranch': formValues.prnBankBrnh,
+      'principalBankAccount': formValues.principalBankAccount,
+      'prncbankbranch': formValues.prncbankbranch,
       'annualSCFTurnOver': formValues.anlScfTrnOver,
       'transactionLimit': formValues.transLimit,
       'addrlst': addrlst,

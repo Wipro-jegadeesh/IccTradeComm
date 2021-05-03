@@ -6,8 +6,8 @@ export class Customer {
     regDate: string;
     fExpYears: string;
     activity: string;
-    prnBankAcc: string;
-    prnBankBrnh: string;
+    principalBankAccount: string;
+    prncbankbranch: string;
     anlScfTrnOver: string;
     transLimit: string;
     headAddrLine1:string;
