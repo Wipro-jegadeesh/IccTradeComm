@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 import {COUNTRYNAMES} from '../../shared/constants/Country'
+import {SIGNUPSECTORS} from '../../shared/constants/signUpSectors'
+
 import { SignupService } from './signup.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
@@ -42,10 +44,12 @@ export class SignupComponent implements OnInit {
   optionDatas=[]
   dropdownSettings:any={}
   selectedItems=[]
-
+  sectorOptionsDatas=[]
+  sectordropdownSettings:any={}
 
   ngOnInit() {
-this.optionDatas = COUNTRYNAMES
+    this.optionDatas = COUNTRYNAMES
+    this.sectorOptionsDatas = SIGNUPSECTORS
     this.dropdownSettings = {
       singleSelection: true ,
       defaultOpen: false,
@@ -55,6 +59,19 @@ this.optionDatas = COUNTRYNAMES
       showCheckbox: false,
       position:'bottom',
       text:'Select Country',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
+    };
+    this.sectordropdownSettings = {
+      singleSelection: true ,
+      defaultOpen: false,
+      idField: "sector_id",
+      textField: "sector_text",
+      allowSearchFilter: true,
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Sector',
       enableSearchFilter : true,
       autoPosition : false,
       maxHeight	: 170
