@@ -10,7 +10,7 @@ import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
-// import { IccUserCreationService } from './icc-user-creation.service'
+import { SmeUserCreationService } from './sme-user-creation.service'
 
 
 @Component({
@@ -75,18 +75,33 @@ export class SmeUserCreationComponent implements OnInit {
   searchDivOpen: boolean;
 constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
       private authenticationService: AuthenticationService
-      // , private IccUserCreationsService: IccUserCreationService
+      , private smeUserCreationService: SmeUserCreationService
       ) { }
 
 
   ngOnInit() {
+    // this.dataSource = new MatTableDataSource([{'userId':1,
+    // 'firstName':"11",
+    // 'lastName':"980",
+    // 'companyName':"lkjlk",
+    // 'emailId':"jklk",
+    // 'phoneNumber':"ipoip"
+    // }])
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    // this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
+          let respArr=[]
+          
+        let userCred=JSON.parse(localStorage.getItem('userCred'))
+    this.smeUserCreationService.getAlUserList().subscribe(resp => {
+      resp.map((item)=>{
+        if(userCred.companyName == item.companyName){
+        respArr.push(item)
+        }
+      })
+      this.dataSource = new MatTableDataSource(respArr);
+      this.dataSource.paginator = this.paginator
+    })
   }
   onResize() {
     if (window.innerWidth < 415) {
@@ -177,8 +192,8 @@ constructor(public router: Router, private modalService: BsModalService, private
   userClick() {
     this.router.navigateByUrl('/sme-user-details/');
   }
-  navigateFinanceDetails(id) {
-    this.router.navigateByUrl('/icc-user-details/'+id);
+  navigateUserDetails(id) {
+    this.router.navigateByUrl('/sme-user-details/'+id);
   }
   logout() {
     this.authenticationService.logout()
