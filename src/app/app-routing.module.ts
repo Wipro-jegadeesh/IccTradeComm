@@ -40,6 +40,7 @@ import {QuestionaireScoreComponent} from './components/questionaire-score/questi
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
 import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
+import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
 
 
 const routes: Routes = [
@@ -99,7 +100,7 @@ const routes: Routes = [
 
   { path: 'sme-user-creation', component: SmeUserCreationComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
-  { path: 'sme-user-details', component: SmeUserCreationComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+  { path: 'sme-user-details/:id', component: SmeUserDetailsComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
   // questionaire-scorePage
 ];
