@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemePalette } from '@angular/material/core';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { IccInvoiceMasterServices } from '../icc-invoice-master/icc-invoice-master-service';
+import { IccListSmeServices } from './icc-list-smes.service';
 import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
@@ -136,7 +136,7 @@ export class IccListSmesComponent implements OnInit {
     }
   }
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private IccInvoiceMasterServices: IccInvoiceMasterServices) { }
+    private authenticationService: AuthenticationService, private iccListSmeServices: IccListSmeServices) { }
 
 
   ngOnInit() {
@@ -158,7 +158,7 @@ export class IccListSmesComponent implements OnInit {
       status: "I"
     }]);
 
-    this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
+    this.iccListSmeServices.getallSmeProfileDetails("101").subscribe(resp => {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
@@ -171,14 +171,7 @@ export class IccListSmesComponent implements OnInit {
     //   this.dataSource.paginator = this.paginator
     // })
   }
-  ResetAPI(){
-    this.SearchModel={};
-    this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-
-    })
-  }
+ 
   searchDiv() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -226,48 +219,11 @@ export class IccListSmesComponent implements OnInit {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
 
-  openModal(event, template, data) {
-    event.preventDefault();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
-    this.IccInvoiceMasterServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      let status = "";
-      if (resp.status == "I") {
-        status = "Initiated"
-      }
-      else if (resp.status == "A") {
-        status = "Waiting for bid"
-      }
-      else if (resp.status == "B") {
-        status = "Bid Created"
-      }
-      else {
-        status = "Financed Successfully"
-      }
-      this.dataSourceTwo = new MatTableDataSource([
-        { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status }
-      ]);
-
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-      
-    })
-
-    // this.dataSourceThree = new MatTableDataSource([
-    //   {'financeOfferAmt' : 'financeOfferAmt', 'ccy' : 'ccy', 'fxRate' : 'fxRate', 'margin' : 'margin', 'netAmtDisc' : 'netAmtDisc','discAmt' : 'discAmt','discRate' : 'discRate','offerExpPeriod' : 'offerExpPeriod'}]);
-
-    this.IccInvoiceMasterServices.getFinanceBiddingLists(data.invoiceId).subscribe(resp => {
-      if(resp){
-        this.dataSourceThree = new MatTableDataSource(resp);
-      }
-    })
-  }
-
   handleToggle(e, status) {
     this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
     })
 
   }
-
   goHome() {
     this.router.navigateByUrl('/sme-dashboard');
   }
