@@ -194,9 +194,9 @@
                           </div> 
                      </th>
                   </ng-container> -->
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+                  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
                   <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
-                  <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+                  <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
