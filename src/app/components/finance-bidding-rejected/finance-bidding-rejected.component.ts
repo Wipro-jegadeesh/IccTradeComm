@@ -88,18 +88,18 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   };
   rejectQustionOne = {
     subrejectQustionOne: [
-      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'Inv_Discount_Low'},
-      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'Annual_Yield'},
-      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'Fundable_percentage_low'},
-      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'Funding_Amount_High' },
+      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'invDiscountLow'},
+      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'annualYield'},
+      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'fundablepercentagelow'},
+      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'fundingAmountHigh' },
     ]
 };
 rejectQustionTwo = {
   subrejectQustionTwo: [
-    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'Net_payable'},
-    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'Repayment_Date'},
-    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'Off_date'},
-    { name: 'Others',labelPosition:'before',formControlName:'Others'},
+    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'netPayable'},
+    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'repaymentDate'},
+    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'offDate'},
+    { name: 'others',labelPosition:'before',formControlName:'others'},
   ]
 }
 
@@ -109,7 +109,7 @@ submit(){
 
 updateAllComplete(text){
   console.log(text,"text")
-  if(text === 'Others'){
+  if(text === 'others'){
     console.log(text,"text")
 
     
@@ -120,7 +120,7 @@ updateAllComplete(text){
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.buildform()
+    this.buildfromReload()
     this.FinanceBiddingRejectedServices.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
@@ -198,9 +198,11 @@ updateAllComplete(text){
     this.router.navigateByUrl('/finance-bidding-rejected/' + type + '/' + id);
   }
   openModal(event,template,id) {
-    this.FinanceBiddingRejectedServices.getInvDetailsLists_ForFinanceBidding(id).subscribe(resp => {
+    this.FinanceBiddingRejectedServices.getRemarkFinanceBidding(id).subscribe(resp => {
       if(resp){
-        this.FinancebiddingDetails = resp ? resp : ''
+        let response = resp ? resp[0].remarkValue : ''
+        let response2 = JSON.parse(response)
+        this.FinancebiddingDetails = response2[0]
         this.TextAreaDiv = true;
         this.buildform()
       }
@@ -209,33 +211,36 @@ updateAllComplete(text){
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
   buildform() {
-    // this.Rejectform = this.fb.group({
-    //   Inv_Discount_Low: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Inv_Discount_Low : false],
-    //   Annual_Yield: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Annual_Yield : false],
-    //   Fundable_percentage_low: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Fundable_percentage_low : false],
-    //   Funding_Amount_High: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Funding_Amount_High : false],
-    //   Net_payable: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Net_payable : false],
-    //   Base_Amount: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Base_Amount : false],
-    //   invoiceAmt: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.invoiceAmt : false],
-    //   Repayment_Date: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Repayment_Date : false],
-    //   Funding_CCY: [this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Funding_CCY : false],
-    //   Off_date:[this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Off_date : false],
-    //   Others:[this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.Others : false],
-    //   OthersRemarks:[this.FinancebiddingDetails ? this.FinancebiddingDetails.remarks.OthersRemarks : '']
-    // })
+    // console.log(this.FinancebiddingDetails.remarks[0],"this.FinancebiddingDetails.remarks[0]")
     this.Rejectform = this.fb.group({
-      Inv_Discount_Low: [false],
-      Annual_Yield: [false],
-      Fundable_percentage_low: [false],
-      Funding_Amount_High: [false],
-      Net_payable: [false],
-      Base_Amount: [false],
+      invDiscountLow: [this.FinancebiddingDetails ? this.FinancebiddingDetails.invDiscountLow : false],
+      annualYield: [this.FinancebiddingDetails ? this.FinancebiddingDetails.annualYield : false],
+      fundablepercentagelow: [this.FinancebiddingDetails ? this.FinancebiddingDetails.fundablepercentagelow : false],
+      fundingAmountHigh: [this.FinancebiddingDetails ? this.FinancebiddingDetails.fundingAmountHigh : false],
+      netPayable: [this.FinancebiddingDetails ? this.FinancebiddingDetails.netPayable : false],
+      baseAmount: [this.FinancebiddingDetails ? this.FinancebiddingDetails.baseAmount : false],
+      invoiceAmt: [this.FinancebiddingDetails ? this.FinancebiddingDetails.invoiceAmt : false],
+      repaymentDate: [this.FinancebiddingDetails ? this.FinancebiddingDetails.repaymentDate : false],
+      fundingCCY: [this.FinancebiddingDetails ? this.FinancebiddingDetails.fundingCCY : false],
+      offDate:[this.FinancebiddingDetails ? this.FinancebiddingDetails.offDate : false],
+      others:[this.FinancebiddingDetails ? this.FinancebiddingDetails.others : false],
+      othersRemarks:[this.FinancebiddingDetails ? this.FinancebiddingDetails.othersRemarks : '']
+    })
+  }
+  buildfromReload(){
+    this.Rejectform = this.fb.group({
+      invDiscountLow: [false],
+      annualYield: [false],
+      fundablepercentagelow: [false],
+      fundingAmountHigh: [false],
+      netPayable: [false],
+      baseAmount: [false],
       invoiceAmt: [false],
-      Repayment_Date: [false],
-      Funding_CCY: [false],
-      Off_date:[false],
-      Others:[false],
-      OthersRemarks:['']
+      repaymentDate: [false],
+      fundingCCY: [false],
+      offDate:[false],
+      others:[false],
+      othersRemarks:['']
     })
   }
 }

@@ -10,5 +10,8 @@ export class FinancebidsRequestServices {
     getFinancierBidding(params : any){
         return this.apiService.get('/financing-details/allInitatedBids/{finId}', params);
     }
-
+    CancelBidingAccept(id,params) {
+       return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/cancelBidStatus/'+id,params);
+    }
+  
 }

@@ -199,20 +199,21 @@ export class SmeBiddingDetailsComponent implements OnInit {
  
   rejectQustionOne = {
     subrejectQustionOne: [
-      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'Inv_Discount_Low'},
-      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'Annual_Yield'},
-      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'Fundable_percentage_low'},
-      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'Funding_Amount_High' },
+      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'invDiscountLow'},
+      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'annualYield'},
+      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'fundablepercentagelow'},
+      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'fundingAmountHigh' },
     ]
 };
 rejectQustionTwo = {
   subrejectQustionTwo: [
-    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'Net_payable'},
-    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'Repayment_Date'},
-    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'Off_date'},
-    { name: 'Others',labelPosition:'before',formControlName:'Others'},
+    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'netPayable'},
+    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'repaymentDate'},
+    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'offDate'},
+    { name: 'Others',labelPosition:'before',formControlName:'others'},
   ]
 }
+ 
   goods_array : object [];
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -235,25 +236,25 @@ rejectQustionTwo = {
   }
   buildform() {
     this.Rejectform = this.fb.group({
-      Inv_Discount_Low: [false],
-      Annual_Yield: [false],
-      Fundable_percentage_low: [false],
-      Funding_Amount_High: [false],
-      Net_payable: [false],
-      Base_Amount: [false],
+      invDiscountLow: [false],
+      annualYield: [false],
+      fundablepercentagelow: [false],
+      fundingAmountHigh: [false],
+      netPayable: [false],
+      baseAmount: [false],
       invoiceAmt: [false],
-      Repayment_Date: [false],
-      Funding_CCY: [false],
-      Off_date:[false],
-      Others:[false],
-      OthersRemarks:['']
+      repaymentDate: [false],
+      fundingCCY: [false],
+      offDate:[false],
+      others:[false],
+      othersRemarks:['']
     })
   }
   updateAllComplete(text){
     console.log(text,"text")
     if(text === 'Others'){
-      this.Rejectform.get('OthersRemarks').setValidators([Validators.required]);
-      this.Rejectform.get('OthersRemarks').updateValueAndValidity();
+      this.Rejectform.get('othersRemarks').setValidators([Validators.required]);
+      this.Rejectform.get('othersRemarks').updateValueAndValidity();
       this.TextAreaDiv = !this.TextAreaDiv
     }
   }
@@ -332,7 +333,7 @@ rejectQustionTwo = {
     }
     
     rejectBid(data){
-      console.log(data.filteredData[0].id,"usus")
+      console.log(data,"usus")
       console.log(this.Rejectform.value,"this.finBidform.value")
       console.log(this.Rejectform,"this.Rejectform")
       this.issubmitTrue = true;
@@ -340,11 +341,23 @@ rejectQustionTwo = {
         alert("Please fill Mandatory fields")
         return;
       }
+      // let params = this.Rejectform.value
+      // params.invoiceId = data.filteredData[0].invoiceId,
+      // params.invNo = data.filteredData[0].invNo,
+      // params.bidId = data.filteredData[0].bidId,
+      // params.finId = data.filteredData[0].finId
+      var ddatae = new Date();
+      let array = []
+      array.push(this.Rejectform.value)
       let obj = {
-        Remarks : this.Rejectform.value
+        remarkValue : JSON.stringify(array),
+        invoiceId : data.filteredData[0].invoiceId,
+        invNo :data.filteredData[0].invNo,
+        bidId :data.filteredData[0].bidId,
+        updatedTime:ddatae.setDate(ddatae.getDate() + 1)
       }
       if (this.Rejectform.valid){
-      this.smeBiddingServices.rejectFinBid(data.filteredData[0].id,'').subscribe(resp => {
+      this.smeBiddingServices.rejectFinBid(data.filteredData[0].id,obj).subscribe(resp => {
         this.toastr.success("Rejected successfully")
           this.issubmitTrue = false;
           this.modalRef.hide()

@@ -118,8 +118,8 @@
           
                             <ng-container matColumnDef="Fundable percentage">
                               <th mat-header-cell *matHeaderCellDef scope="column" >Fundable percentage %</th>
-                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Fundable_percentage_low}" 
-                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Fundable_percentage_low === true ? 'Fundable percentage Less' : ''"
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.fundablepercentagelow}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.fundablepercentagelow === true ? 'Fundable percentage Less' : ''"
                               style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -131,8 +131,8 @@
                             </ng-container>
                             <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
                               <th mat-header-cell *matHeaderCellDef  scope="column" >Funding Amount <br>/ Repay Amount (Base CCY)</th>
-                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Funding_Amount_High}" 
-                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Funding_Amount_High === true ? 'Funding Amount Less' : ''"
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.fundingAmountHigh}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.fundingAmountHigh === true ? 'Funding Amount Less' : ''"
                               style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -156,8 +156,8 @@
           
                             <ng-container matColumnDef="Repayment Date">
                               <th mat-header-cell *matHeaderCellDef scope="column" >Repayment Date</th>
-                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Repayment_Date}" 
-                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Repayment_Date === true ? 'Repayment Date Less' : ''"
+                              <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.repaymentDate}" 
+                              #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.repaymentDate === true ? 'Repayment Date Less' : ''"
                               style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -176,8 +176,8 @@
                      <table mat-table [dataSource]="dataSourceTwo">
                       <ng-container matColumnDef="Inv Discount  Rate">
                           <th mat-header-cell *matHeaderCellDef scope="column" >Inv Discount  Rate%</th>
-                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Inv_Discount_Low}" 
-                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Inv_Discount_Low === true ? 'Inv Discount Rate High' : ''"
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.invDiscountLow}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.invDiscountLow === true ? 'Inv Discount Rate High' : ''"
                           style="border-right: 1px solid grey;
                           align-self: stretch;
                           text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -213,8 +213,8 @@
                         </ng-container>
                         <ng-container matColumnDef="Annual Yield (Basis a360)">
                           <th mat-header-cell  *matHeaderCellDef scope="column" >Annual Yield <br>(Basis a360) %</th>
-                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Annual_Yield}" 
-                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Annual_Yield === true ? 'Annual Yield (Basis a360) Too High' : ''" 
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.annualYield}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.annualYield === true ? 'Annual Yield (Basis a360) Too High' : ''" 
                           style="border-right: 1px solid grey; align-self: stretch; text-align: center;" *matCellDef="let element;let row; let index = index"  >
                             <input matInput (keyup)="changeRowgrid()"[readonly]="isView"
                             formControlName="annualYeild" 
@@ -237,8 +237,8 @@
                           <th mat-header-cell *matHeaderCellDef scope="column" >
                                    Net Amt
                            <br> payable (Base CCY)</th>
-                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Net_payable}" 
-                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Net_payable === true ? 'Net Amt payable (Base CCY) Low' : ''"
+                          <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.netPayable}" 
+                          #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.netPayable === true ? 'Net Amt payable (Base CCY) Low' : ''"
                           style="border-right: 1px solid grey;
                           align-self: stretch;
                           text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -261,8 +261,8 @@
                           </ng-container>
                             <ng-container matColumnDef="Offer Exp period">
                                 <th mat-header-cell *matHeaderCellDef scope="column" >Offer Exp period</th>
-                                <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.Off_date}" 
-                                #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.Off_date === true ? 'Off Exp date /time Less' : ''"
+                                <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.offDate}" 
+                                #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.offDate === true ? 'Off Exp date /time Less' : ''"
                                 style="border-right: 1px solid grey;
                                 align-self: stretch;
                                 text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -538,7 +538,7 @@
               <mat-form-field  class="col-sm-12 textarea-h">
                   <mat-label>Remarks</mat-label>
                   <textarea matInput readonly
-                  formControlName="OthersRemarks"
+                  formControlName="othersRemarks"
                             cdkTextareaAutosize
                             #autosize="cdkTextareaAutosize"
                             cdkAutosizeMinRows="1"
