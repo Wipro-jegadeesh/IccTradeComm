@@ -24,7 +24,7 @@
 
 
 //General Service
-let BASE_PATH = "http://2a088c457b03.ngrok.io/";
+let BASE_PATH = "http://localhost:8080/";
 
 // Invoice Service Url 8080
 let serviePath_1 = "http://2a088c457b03.ngrok.io/";
