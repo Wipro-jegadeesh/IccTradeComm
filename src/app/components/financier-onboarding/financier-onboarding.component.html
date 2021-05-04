@@ -7,7 +7,7 @@
   </ul>
 </mat-toolbar> -->
 
-    <form (ngSubmit)="onSubmit()"
+    <form 
           [formGroup]="financierForm">
       <mat-horizontal-stepper linear="true"
                               selectedIndex="0"
@@ -239,16 +239,232 @@
 
         </mat-step>
 
+
+
+        <!-- ======================== -->
+        
+        <!-- <mat-step>
+
+          <ng-template matStepLabel>User</ng-template>
+          <mat-card>
+            <mat-card-content>
+              <table style="width: 100%;">
+                <tbody>
+
+                  <tr class="form-group"
+                      data-always-visible="false">
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>Address Line 1</mat-label>
+                            <input type="text"
+                                   matInput
+                                   formControlName="userName"
+                                   [readonly]="isView" />
+                            <mat-hint>User Name</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="T1"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
+                                      dense
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>Email</mat-label>
+                        <input type="email"
+                               matInput
+                               formControlName="email"
+                               [readonly]="isView" />
+                        <mat-hint>Please enter your email</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+                  </tr>
+                  <tr class="form-group"
+                      data-always-visible="false">
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>Contact Number</mat-label>
+                            <input type="text"
+                                   matInput
+                                   formControlName="contactNo"
+                                   [readonly]="isView" />
+                            <mat-hint>Contact Number</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>Company Name</mat-label>
+                            <input type="number"
+                                   matInput
+                                   formControlName="companyName"
+                                   [readonly]="isView" />
+                            <mat-hint>Company Name</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="form-group"
+                      data-always-visible="false">
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>UserCreation Date</mat-label>
+                            <input type="date"
+                                   matInput
+                                   formControlName="userCreationDate"
+                                   [readonly]="isView" />
+                            <mat-hint>UserCreation Date</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>Address</mat-label>
+                            <input type="number"
+                                   matInput
+                                   formControlName="address"
+                                   [readonly]="isView" />
+                            <mat-hint>Address</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="form-group"
+                      data-always-visible="false">
+                    <td class="T1"
+                        rowspan="1"
+                        colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never"
+                                          dense
+                                          appearance="fill"
+                                          class="example-full-width">
+                            <mat-icon color="primary"
+                                      dense
+                                      matPrefix>person_outline</mat-icon>
+                            <mat-label>Language</mat-label>
+                            <input type="text"
+                                   matInput
+                                   formControlName="language"
+                                   [readonly]="isView" />
+                            <mat-hint>Please enter Language</mat-hint>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                  
+                    <td class="T1"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div class="multiselect-dropdown-dsgn">                   
+                      <angular2-multiselect [data]="cities"
+                                            formControlName="headcountry"
+                                            [settings]="dropdownSettings"></angular2-multiselect>                         
+                    </div>
+                  </div>
+                </td>
+
+
+                  </tr>
+                  
+                </tbody>
+              </table>
+              <mat-card-actions>
+                <span class="fill-remaining-space"></span>
+                <button type="button"
+                        mat-stroked-button
+                        color="primary"
+                        matStepperPrevious>
+                  <mat-icon>arrow_back</mat-icon>
+                  Back to Financiar Onboarding
+                </button>
+                <button mat-flat-button
+                        color="primary"
+                        type="button"
+                        matStepperNext>
+                  <mat-icon>arrow_forward</mat-icon>
+                  Next
+                </button>
+              </mat-card-actions>
+            </mat-card-content>
+
+
+          </mat-card>
+        </mat-step> -->
+        <!-- ======================= -->
+
+
         <mat-step>
 
           <ng-template matStepLabel>Financier Registered Head Quarters</ng-template>
           <mat-card>
-
             <mat-card-content>
-              <!-- <mat-card-title>
-              <h4 class="uxg-h4"></h4>
-            </mat-card-title> -->
-
               <table style="width: 100%;">
                 <tbody>
 
@@ -1082,7 +1298,8 @@
       <div class="submit">
         <button mat-flat-button
                 color="primary"
-                [disabled]="!check">
+                (click)="check()"                
+                >
           <!-- [disabled]="!check" -->
           <mat-icon>arrow_right_alt</mat-icon>
           Submit
