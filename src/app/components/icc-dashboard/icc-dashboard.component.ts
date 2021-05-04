@@ -64,7 +64,7 @@ export class IccDashboardComponent implements OnInit {
 
 
     
-    this.dataSource = new MatTableDataSource([{profileID : "4","financierName" : "Praj","regNumber" : "TT$%$%"}
+    this.dataSource = new MatTableDataSource([{profileID : "4","financierType" : "Praj","regNumber" : "TT$%$%"}
     // ,{profileID : "5","financierName" : "Praj","regNumber" : "TT$%$%"}
     // ,{profileID : "4","financierName" : "Praj","regNumber" : "TT$%$%"} 
   ]);
