@@ -1,24 +1,42 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-financier-user-creation',
+//   templateUrl: './financier-user-creation.component.html',
+//   styleUrls: ['./financier-user-creation.component.scss']
+// })
+// export class FinancierUserCreationComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+//   }
+
+// }
+
+
+
 
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
+import { ModalDialogService } from '../../../service/modal-dialog.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
+import { AuthenticationService } from '../../../service/authentication/authentication.service';
+import { BIDDINGCONSTANTS } from '../../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
-import { SmeUserCreationService } from './sme-user-creation.service'
+import { FinancierUserCreationService } from './financier-user-creation.service'
 
 
 @Component({
-  selector: 'app-sme-user-creation',
-  templateUrl: './sme-user-creation.component.html',
-  styleUrls: ['./sme-user-creation.component.scss']
+  selector: 'app-financier-user-creation',
+  templateUrl: './financier-user-creation.component.html',
+  styleUrls: ['./financier-user-creation.component.scss']
 })
-export class SmeUserCreationComponent implements OnInit {
+export class FinancierUserCreationComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
@@ -75,7 +93,7 @@ export class SmeUserCreationComponent implements OnInit {
   searchDivOpen: boolean;
 constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
       private authenticationService: AuthenticationService
-      , private smeUserCreationService: SmeUserCreationService
+      , private FinancierUserCreationService: FinancierUserCreationService
       ) { }
 
 
@@ -93,13 +111,13 @@ constructor(public router: Router, private modalService: BsModalService, private
           let respArr=[]
           
         let userCred=JSON.parse(localStorage.getItem('userCred'))
-    this.smeUserCreationService.getAlUserList('hondacompany').subscribe(resp => {
+    this.FinancierUserCreationService.getAlUserList().subscribe(resp => {
       resp.map((item)=>{
         if(userCred.companyName == item.companyName){
         respArr.push(item)
         }
       })
-      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource = new MatTableDataSource(respArr);
       this.dataSource.paginator = this.paginator
     })
   }
@@ -190,15 +208,22 @@ constructor(public router: Router, private modalService: BsModalService, private
 
   }
   userClick() {
-    this.router.navigateByUrl('/sme-user-details/');
+    this.router.navigateByUrl('/financier-user-details/');
   }
   navigateUserDetails(id) {
-    this.router.navigateByUrl('/sme-user-details/'+id);
+    this.router.navigateByUrl('/financier-user-details/'+id);
   }
   logout() {
     this.authenticationService.logout()
   }
 }
+
+
+
+
+
+
+
 
 
 

@@ -3,12 +3,11 @@ import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class SmeUserCreationService {
-    constructor(private apiService:ApiService) { }
+export class FinancierUserCreationService {
+    constructor(private apiService:ApiService) { } 
 
-    getAlUserList(companyName){
-        return this.apiService.generalServiceget(environment.financierServicePath+'company-details/' +companyName);
-            // 'sme-userprofile/allUserProfileDetails');
+    getAlUserList(){
+        return this.apiService.generalServiceget(environment.financierServicePath+'sme-userprofile/allUserProfileDetails');
       }
     
       getUserSMEDetails(id) {
@@ -18,10 +17,9 @@ export class SmeUserCreationService {
         return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
       }
       Usersave(body: any) {
-        return this.apiService.post(environment.financierServicePath+'smeonboard', body);
+        return this.apiService.post(environment.financierServicePath+'adduser', body);
       }
       getUserDetails(id) {
-        return this.apiService.tempGet(environment.financierServicePath+'sme-fetchdetails/' + id)
-            // 'sme-userprofile/'+id);
+        return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/'+id);
       }
 }

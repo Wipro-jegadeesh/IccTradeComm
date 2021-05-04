@@ -31,5 +31,7 @@ export class InvoiceRequestServices {
   updateInvoiceDetails(data){
     return this.apiService.post(environment.serviePath_2+'api/v1/invoice-details',data)
   }
-
+  UpdateBiddingSave(id,body: any) {
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatusInitiated/'+id,body);
+  }
 }

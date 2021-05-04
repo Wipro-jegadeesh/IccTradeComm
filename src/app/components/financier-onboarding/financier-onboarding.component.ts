@@ -123,6 +123,99 @@ export class FinancierOnboardingComponent implements OnInit {
     }
   }
   getSpecificFinancier() {
+
+   
+    
+
+let respObj = {​​​​​​​​
+"profileID": 2,
+"namedPKKey": 1,
+"companyid": 1,
+"financierNameConstitution": 1,
+"taxIdentificationNumber": 1,
+"principalBankAccount": 1,
+"registerDate": 1,
+"financierType": 1,
+"annualSCFTurnOver": 50000,
+"annualSCFTurnOverCCY": 1,
+"transactionLimit": 1,
+"transactionLimitCCY": 1,
+"hQLimit": 1,
+"serviceAddress": 1,
+"financeexpyears": 1,
+"locregno": 1,
+"typeofact": 1,
+"prncbankbranch": 1,
+"finseq": 1,
+"asocpartylst": [
+        {​​​​​​​​
+"partyKey": 3,
+"profileID": 7654,
+"name": "preethi",
+"position": "gtyu",
+"assocType": "type",
+"addressType": "S",
+"addressLine1": "add1",
+"addressLine2": "add2",
+"addressLine3": "add3",
+"addressLine4": "add4",
+"city": "cit1",
+"state": "state1",
+"postalCode": "ha37td",
+"telephoneNumber": "123456",
+"country": "countr1",
+"email": "email1",
+"swiftBic": "swftbic1",
+"faxno": 765
+        }​​​​​​​​,
+        {​​​​​​​​
+"partyKey": 4,
+"profileID": 7654,
+"name": "preethi",
+"position": "gtyu",
+"assocType": "type",
+"addressType": "H",
+"addressLine1": "add1",
+"addressLine2": "add2",
+"addressLine3": "add3",
+"addressLine4": "add4",
+"city": "cit1",
+"state": "state1",
+"postalCode": "ha37td",
+"telephoneNumber": "123456",
+"country": "countr1",
+"email": "email1",
+"swiftBic": "swftbic1",
+"faxno": 765
+        }​​​​​​​​
+    ],
+"userlst": [
+        {​​​​​​​​
+"userKey": 5,
+"userId": "SMEUSER5",
+"nationalId": "7865",
+"firstName": "priya",
+"lastName": "reddy",
+"companyName": "xyz",
+"address": "fdrew",
+"locale": "ghtyr",
+"role": "admin",
+"profileType": "rtew",
+"identifierKey": "frew",
+"userName": "ayisha",
+"userCreationDate": "2020-03-04",
+"email": "fgrte",
+"contactNo": 9765433452,
+"country": "india",
+"language": "tamil",
+"groupname": "sme"
+        }​​​​​​​​
+    ]
+}​​​​​​​​
+
+
+
+
     this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
       let respObj = resp
       this.financierForm = this.fb.group({
@@ -137,6 +230,10 @@ export class FinancierOnboardingComponent implements OnInit {
         prncbankbranch: [respObj.prncbankbranch],
         anlScfTrnOver: [respObj.annualSCFTurnOver],
         transLimit: [respObj.transactionLimit],
+
+        // userName : [respObj.userlst[0] && respObj.userlst[0].userName], email : [respObj.userlst[0] && respObj.userlst[0].email],contactNo: [respObj.userlst[0] && respObj.userlst[0].contactNo], 
+        // companyName : [respObj.userlst[0] && respObj.userlst[0].companyName],userCreationDate: [respObj.userlst[0] && respObj.userlst[0].userCreationDate],
+        //  address: [respObj.userlst[0] && respObj.userlst[0].address], language: [respObj.userlst[0] && respObj.userlst[0].language], country: [respObj.userlst[0] && respObj.userlst[0].country],
 
         headAddrLine1: [''],
         headAddrLine2: [''],
@@ -165,6 +262,7 @@ export class FinancierOnboardingComponent implements OnInit {
         authSign: this.fb.array([]),
         entityAdmin: this.fb.array([])
       })
+
       //head & service address 
       respObj.addrlst && respObj.addrlst.length && respObj.addrlst.map((item) => {
         if (item.addressType == 'H') {
@@ -218,9 +316,9 @@ export class FinancierOnboardingComponent implements OnInit {
           let partnerRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            email: [ item.email ? item.email : '']
           })
           this.partnerFormArray.push(partnerRow);
           this.dataSource1.data = this.partnerFormArray.controls;
@@ -229,9 +327,9 @@ export class FinancierOnboardingComponent implements OnInit {
           let authRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            email: [ item.email ? item.email : '']
           })
           this.authoriseFormArray.push(authRow);
           this.dataSource2.data = this.authoriseFormArray.controls;
@@ -240,9 +338,9 @@ export class FinancierOnboardingComponent implements OnInit {
           let entityRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            email: [ item.email ? item.email : '']
           })
           this.entityFormArray.push(entityRow)
           this.dataSource3.data = this.entityFormArray.controls;
@@ -263,6 +361,12 @@ export class FinancierOnboardingComponent implements OnInit {
       prncbankbranch: [''],
       anlScfTrnOver: [''],
       transLimit: [''],
+
+      // userName : ['',Validators.required], email : ['',[Validators.email,Validators.required]],contactNo: ['',Validators.required], 
+      // companyName : [''],userCreationDate: [''],
+      //  address: [''], language: [''], country: [''],
+
+
       headAddrLine1: ['',Validators.required],
       headAddrLine2: [''],
       headAddrLine3: [''],
@@ -295,21 +399,21 @@ export class FinancierOnboardingComponent implements OnInit {
       position: [""],
       address: [""],
       phoneNo: [""],
-      email: ["",Validators.email]
+      email: [""]
     })
     const authRow = this.fb.group({
       name: [""],
       position: [""],
       address: [""],
       phoneNo: [""],
-      email: ["",Validators.email]
+      email: [""]
     })
     const entityRow = this.fb.group({
       name: [""],
       position: [""],
       address: [""],
       phoneNo: [""],
-      email: ["",Validators.email]
+      email: [""]
     })
     this.partnerFormArray.push(partnerRow);
     this.authoriseFormArray.push(authRow);
@@ -342,12 +446,25 @@ export class FinancierOnboardingComponent implements OnInit {
   onDropDownClose() {
     console.log('dropdown closed');
   }
-  get check() {
-    return this.financierForm.valid
+
+   check() {
+    // return 
+    if(this.financierForm.valid){
+      this.onSubmit()
+    }else{
+      this.toastr.error("Please Enter All Mandatory Fields")
+    }
   }
 
-  onSubmit() {
+  onSubmit() {    
+
     let formValues = this.financierForm.value
+
+    // let userlst = [{
+    //   userName : formValues.userName, email : formValues.email,contactNo : formValues.contactNo,companyName : formValues.companyName,
+    //   userCreationDate : formValues.userCreationDate,address : formValues.address,language : formValues.language,country: formValues.country,
+    // }]
+
     let associatePartyArr = []
     let headAddr = {
       'addressLine1': formValues.headAddrLine1,
@@ -382,7 +499,10 @@ export class FinancierOnboardingComponent implements OnInit {
         'name': item.name,
         'position': item.position,
         'assocType': "Director/Partner",
-        'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
+        'addressLine1': item.address,
+        'telephoneNumber': item.phoneNo,
+        'email': item.email
+        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
@@ -392,7 +512,11 @@ export class FinancierOnboardingComponent implements OnInit {
         'name': item.name,
         'position': item.position,
         'assocType': "Authorised Signat",
-        'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
+        'addressLine1': item.address,
+        'telephoneNumber': item.phoneNo,
+        'email': item.email
+
+        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
@@ -402,12 +526,17 @@ export class FinancierOnboardingComponent implements OnInit {
         'name': item.name,
         'position': item.position,
         'assocType': "Entity Admin",
-        'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
+        'addressLine1': item.address,
+        'telephoneNumber': item.phoneNo,
+        'email': item.email
+
+        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
     let addrlst = [headAddr, serviceAddr]
     let findetobj = {
+      // 'userlst' : userlst,
       'locregno': formValues.regNum,
       'financierNameConstitution': formValues.fName,
       'taxIdentificationNumber': formValues.taxIdNum,
@@ -434,6 +563,8 @@ export class FinancierOnboardingComponent implements OnInit {
       this.toastr.success('Financier details updated Sucessfully')
       this.gotoPage();
     })
+
+    this.router.navigateByUrl('/financier-user-creation');
   }
 
   gotoPage() {

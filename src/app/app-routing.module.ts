@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component'; 
 import { SignupComponent } from './components/signup/signup.component';
 import { SmeOnboardingComponent } from './components/sme-onboarding/sme-onboarding.component';
 import { SmeDashboardComponent } from './components/sme-dashboard/sme-dashboard.component';
@@ -43,8 +43,9 @@ import { SmeUserCreationComponent } from './components/sme-user-creation/sme-use
 import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
 import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
 import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component';
-
-
+import {FinancierUserCreationComponent} from './components/financier-onboarding/financier-user-creation/financier-user-creation.component'
+import {FinancierUserDetailsComponent} from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component'
+ 
 
 const routes: Routes = [
   // { path: '', component: LoginComponent },
@@ -109,6 +110,10 @@ const routes: Routes = [
 
   { path: 'sme-user-details/:id', component: SmeUserDetailsComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
+
+  { path: 'financier-user-creation', component: FinancierUserCreationComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
+  { path: 'financier-user-details/:id', component: FinancierUserDetailsComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   // questionaire-scorePage
 ];
 

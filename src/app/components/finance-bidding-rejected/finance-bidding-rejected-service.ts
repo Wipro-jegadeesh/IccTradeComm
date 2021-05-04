@@ -19,5 +19,7 @@ export class FinanceBiddingRejectedServices {
     getInvDetailsLists_ForFinanceBidding(id){
       return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id); 
     }
-
+    getRemarkFinanceBidding(id){
+      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getRemarksHistory/'+id); 
+    }
 }

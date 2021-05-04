@@ -92,6 +92,7 @@ import { InvoiceDetailsRejectedComponent } from './components/finance-bidding-re
 import {FinanceBiddingRejectedServices} from './components/finance-bidding-rejected/finance-bidding-rejected-service'
 import {IccFundingServices} from './components/icc-funding-request/icc-funding-service'
 import {IccOfferAcceptServices} from './components/icc-offer-acceptance/icc-offer-accept-service'
+import {FinancierUserCreationService} from './components/financier-onboarding/financier-user-creation/financier-user-creation.service'
 
 // import { DynamicFormService } from './shared/constants/dynamicForm';
 import { TextboxComponent } from './shared/textBox/textBox.component';
@@ -137,6 +138,8 @@ import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.c
 import { IccListSmeServices } from './components/icc-list-smes/icc-list-smes.service';
 
 import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component'
+import { FinancierUserCreationComponent } from './components/financier-onboarding/financier-user-creation/financier-user-creation.component';
+import { FinancierUserDetailsComponent } from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -195,7 +198,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SmeUserCreationComponent,
     SmeUserDetailsComponent,
     IccListSmesComponent,
-    IccSmeDetailsComponent
+    IccSmeDetailsComponent,
+    FinancierUserCreationComponent,
+    FinancierUserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -248,7 +253,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
-    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,
+    FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {

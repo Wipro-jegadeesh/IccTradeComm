@@ -314,7 +314,9 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
         this.toastr.error("Please fill Mandatory fields")
       } else {
         let params = this.finBidform.value
-        this.invoiceRequestServices.finbidSave(params).subscribe(resp => {
+        params.repaymentDate = this.invoiceDetails.invDueDate;
+        params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z";
+        this.invoiceRequestServices.UpdateBiddingSave(this.id,params).subscribe(resp => {
           this.toastr.success("Bid Accepted successfully")
           this.buildfinBidform();
           this.modalRef.hide()

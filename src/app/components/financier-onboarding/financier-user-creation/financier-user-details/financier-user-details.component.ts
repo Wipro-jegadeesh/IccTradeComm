@@ -1,28 +1,45 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-financier-user-details',
+//   templateUrl: './financier-user-details.component.html',
+//   styleUrls: ['./financier-user-details.component.scss']
+// })
+// export class FinancierUserDetailsComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+//   }
+
+// }
+
+
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../../service/authentication/authentication.service';
+import { AuthenticationService } from '../../../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { FUNDINGREQUESTCONSTANTS } from '../../../shared/constants/constants';
+import { FUNDINGREQUESTCONSTANTS } from '../../../../shared/constants/constants';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { SmeUserCreationService } from '../sme-user-creation.service';
+import { FinancierUserCreationService } from '../financier-user-creation.service';
 
 
 
 
 @Component({
-  selector: 'app-sme-user-details',
-  templateUrl: './sme-user-details.component.html',
-  styleUrls: ['./sme-user-details.component.scss']
+  selector: 'app-financier-user-details',
+  templateUrl: './financier-user-details.component.html',
+  styleUrls: ['./financier-user-details.component.scss']
 })
-export class SmeUserDetailsComponent implements OnInit {
+export class FinancierUserDetailsComponent implements OnInit {
   userForm: FormGroup;
  
  
@@ -59,7 +76,7 @@ export class SmeUserDetailsComponent implements OnInit {
  
 
   constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
-    private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
+    private FinancierUserCreationService: FinancierUserCreationService, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
     this.invoiceFormBuild()
   }
@@ -118,7 +135,7 @@ export class SmeUserDetailsComponent implements OnInit {
   
   blurFunction(){
     console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
-    this.smeUserCreationService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
+    this.FinancierUserCreationService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
       console.log(resp)
       this.userForm.patchValue({
     firstName: resp[0].fname,
@@ -142,16 +159,16 @@ export class SmeUserDetailsComponent implements OnInit {
         throw { "mes": "Please fill mendatory  fields" }
       }
                  if(this.id){
-                  this.smeUserCreationService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
+                  this.FinancierUserCreationService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/sme-user-creation');
+                    this.router.navigateByUrl('/financier-user-creation');
           
                   }, error => {
                   })
                 }else{
-                  this.smeUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
+                  this.FinancierUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/sme-user-creation');
+                    this.router.navigateByUrl('/financier-user-creation');
                   }, error => {
                   })
                 }
@@ -160,29 +177,24 @@ export class SmeUserDetailsComponent implements OnInit {
     }
   }
   UserEditFormBuild(){
-    this.smeUserCreationService.getUserDetails(this.id).subscribe(resp => {
+    this.FinancierUserCreationService.getUserDetails(this.id).subscribe(resp => {
       if(resp){
         // this.FinancebiddingDetails = resp
-        let data=resp.userlst[0]
-        let addr=resp.addrlst[0]
         this.userForm.patchValue({
-      nationalId: data.nationalId,
-      firstName: data.firstName,
-      email: data.email ,
-      lastName: data.lastName,
-      contactNo: data.contactNo,
-      companyName: data.companyName, 
-      city: addr.city,
-      state:addr.state,
+      nationalId: resp.nationalId,
+      firstName: resp.firstName,
+      email: resp.email ,
+      lastName: resp.lastName,
+      contactNo: resp.contactNo,
+      companyName: resp.companyName, 
+      city: resp.locale,
       // ICCId: localStorage.getItem("userId"),
-      postalCode:addr.postalCode,
-      address:addr.addressLine1,
-      address1:addr.addressLine2,
-      country:data.country,
+      address:resp.address,
+      country:resp.country,
       // groupname:['',Validators.required],
-      role:data.role,
-      profileType:data.profileType,
-      userId:data.userId 
+      role:resp.role,
+      profileType:resp.profileType,
+      userId:resp.userId 
         });
       }
     })
@@ -217,4 +229,5 @@ export class SmeUserDetailsComponent implements OnInit {
   }
 
 }
+
 
