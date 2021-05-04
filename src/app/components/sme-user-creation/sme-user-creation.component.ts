@@ -93,13 +93,13 @@ constructor(public router: Router, private modalService: BsModalService, private
           let respArr=[]
           
         let userCred=JSON.parse(localStorage.getItem('userCred'))
-    this.smeUserCreationService.getAlUserList().subscribe(resp => {
+    this.smeUserCreationService.getAlUserList('hondacompany').subscribe(resp => {
       resp.map((item)=>{
         if(userCred.companyName == item.companyName){
         respArr.push(item)
         }
       })
-      this.dataSource = new MatTableDataSource(respArr);
+      this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }

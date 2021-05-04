@@ -15,7 +15,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                     matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> User Id </th>
                     <td mat-cell *matCellDef="let element">
-                                {{element.userId}}
+                                {{element.usersid}}
                     </td>
                 </ng-container>
                 
@@ -23,7 +23,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> First Name </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.firstName}}
+                        {{element.fname}}
                     </td>
                 </ng-container>
 
@@ -32,7 +32,7 @@
                         matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> Last Name 
                     </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.lastName}}
+                        {{element.lname}}
                     </td>
                 </ng-container>
 
@@ -40,7 +40,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
                         [matTooltipPosition]="'below'"> Company Name </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.companyName}}
+                        {{element.companyname}}
                     </td>
                 </ng-container>
 
@@ -56,7 +56,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Phone Number  </th>
                     <td mat-cell *matCellDef="let element">
-                        {{ element.contactNo }}
+                        {{ element.contactnum }}
                     </td>
                 </ng-container>
 
@@ -64,7 +64,7 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let element">
-                        <a  href="javascript:void(0)" (click)="navigateUserDetails(element.userKey)">
+                        <a  href="javascript:void(0)" (click)="navigateUserDetails(element.smeprofileid)">
                             <mat-icon  #tooltip="matTooltip"
                             matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
                           </a>&nbsp;

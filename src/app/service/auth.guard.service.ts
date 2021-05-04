@@ -87,7 +87,7 @@ export class AuthConfigService {
                     localStorage.setItem('userCred',JSON.stringify(userObj))
                   }
                   else{
-                    // this.toastr.error('User Not Found')
+                    this.toastr.error('User Not Found')
                     this.oauthService.logOut()
                   }
                 })
