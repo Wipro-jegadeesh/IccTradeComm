@@ -1,5 +1,5 @@
 
-<div class="app-content {{isOpen}}">
+<div *ngIf="!canceldiv" class="app-content {{isOpen}}">
   <header>
       <br>
         <div class="uxg-h4" style="text-align: center">Bids to be Accepted</div>
@@ -11,7 +11,7 @@
           <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
           matTooltip="{{dashboardTooltip.invRefNo}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
           <td mat-cell *matCellDef="let element">
-                      {{element.invoiceRef}} 
+                      <!-- {{element.invoiceRef}}  -->
           </td>
         </ng-container>
 
@@ -58,11 +58,21 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let element"> 
-
+              <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'edit')">
+                <mat-icon  #tooltip="matTooltip"
+                matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+              </a>&nbsp;
               <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'view')">
                   <mat-icon  #tooltip="matTooltip"
                   matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
-              </a>
+              </a>&nbsp;
+              <a  href="javascript:void(0)" (click)="openModal($event,Rejecttemplate,'reject',element)">
+                <mat-icon  #tooltip="matTooltip"
+                matTooltip="Cancel" [matTooltipPosition]="'below'">
+                  cancel_presentation
+                  </mat-icon>
+            </a>
+              
                </td>
           </ng-container>
           <ng-container matColumnDef="TopBar">
@@ -76,7 +86,7 @@
           <ng-container matColumnDef="Search">
             <th colspan="8" mat-header-cell *matHeaderCellDef> 
                 <h6>Search By</h6>
-              <div class="row">
+              <!-- <div class="row">
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>BID ID</mat-label>
@@ -95,7 +105,7 @@
                         <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
                       </mat-form-field>
                   </div>
-              </div>
+              </div> -->
               <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                 <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                     <mat-icon #tooltip="matTooltip"
@@ -152,5 +162,119 @@
       </div>
   </header>
 </div>
-  
-  
+
+
+<div *ngIf="canceldiv" class="app-content {{isOpen}}">
+  <header>
+    <br>
+      <!-- <div class="uxg-h4" >Cancel to Bids</div> -->
+      <div class="modal-header">
+      <div class="uxg-h4" >Cancel to Bids</div>
+      <button  type="button"  (click)="backtolist()"  class="btn model-btn-outline"> <-- Back To list Page</button>
+     </div>
+      <div class="modal-body">       
+        <div class="container-fluid">
+         <form [formGroup]="Rejectform" (ngSubmit)="submit()">
+            <div class="row">
+                <div class="col-sm-6"> 
+                 <ul>
+                     <li *ngFor="let subskill of rejectQustionOne.subrejectQustionOne">
+                       <mat-checkbox [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" > {{subskill.name}} </mat-checkbox>
+                     </li>
+                   </ul>
+                </div>
+                <div class="col-sm-6"> 
+                 <mat-card class="result">
+                     <mat-card-content>
+                       <section class="example-section">
+                         <ul>
+                             <li *ngFor="let subskill of rejectQustionTwo.subrejectQustionTwo">
+                                     <mat-checkbox matInput [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateAllComplete(subskill.name)"> {{subskill.name}} </mat-checkbox>
+                             </li>
+                           </ul>
+                       </section>
+                     </mat-card-content>
+                   </mat-card>
+                
+                </div>
+            </div>
+            <div class="row" *ngIf="TextAreaDiv">
+             <div class="col-sm-12"> 
+                 <mat-form-field  class="col-sm-12 textarea-h">
+                     <mat-label>Remarks</mat-label>
+                     <textarea matInput 
+                     formControlName="OthersRemarks"
+                               cdkTextareaAutosize
+                               #autosize="cdkTextareaAutosize"
+                               cdkAutosizeMinRows="1"
+                               cdkAutosizeMaxRows="1000"></textarea>
+                               <mat-error *ngIf="errorHandling('OthersRemarks', 'required')">
+                                 You must provide a <strong>Remarks</strong>
+                              </mat-error>
+                   </mat-form-field>
+             </div>
+            </div>
+         </form>
+        </div>
+     </div>
+     <div class="modal-footer" >
+        <button type="button"  (click)="rejectBid(dataBIDDetails)"class="btn model-btn-outline">Cancel To Bid</button>
+     </div>
+  </header>
+</div>
+<!-- <ng-template #Rejecttemplate>
+  <div class="modal-header">
+     <h4 class="modal-title pull-left">Cancel Bid Details:</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+     </button>
+  </div>
+  <div class="modal-body">       
+     <div class="container-fluid">
+      <form [formGroup]="Rejectform" (ngSubmit)="submit()">
+         <div class="row">
+             <div class="col-sm-6"> 
+              <ul>
+                  <li *ngFor="let subskill of rejectQustionOne.subrejectQustionOne">
+                    <mat-checkbox [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" > {{subskill.name}} </mat-checkbox>
+                  </li>
+                </ul>
+             </div>
+             <div class="col-sm-6"> 
+              <mat-card class="result">
+                  <mat-card-content>
+                    <section class="example-section">
+                      <ul>
+                          <li *ngFor="let subskill of rejectQustionTwo.subrejectQustionTwo">
+                                  <mat-checkbox matInput [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateAllComplete(subskill.name)"> {{subskill.name}} </mat-checkbox>
+                          </li>
+                        </ul>
+                    </section>
+                  </mat-card-content>
+                </mat-card>
+             
+             </div>
+         </div>
+         <div class="row" *ngIf="TextAreaDiv">
+          <div class="col-sm-12"> 
+              <mat-form-field  class="col-sm-12 textarea-h">
+                  <mat-label>Remarks</mat-label>
+                  <textarea matInput 
+                  formControlName="OthersRemarks"
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="1000"></textarea>
+                            <mat-error *ngIf="errorHandling('OthersRemarks', 'required')">
+                              You must provide a <strong>Remarks</strong>
+                           </mat-error>
+                </mat-form-field>
+          </div>
+         </div>
+      </form>
+     </div>
+  </div>
+  <div class="modal-footer" style="justify-content: center;">
+     <button type="button"  (click)="rejectBid(dataBIDDetails)"class="btn model-btn-outline">Reject</button>
+  </div>
+</ng-template> -->

@@ -9,6 +9,10 @@ import { FINANCIERDASHBOARDCONSTANTS} from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { SmeBiddingServices } from '../sme-bidding/sme-bidding-services';
 
 @Component({
   selector: 'app-finance-bids-accept',
@@ -17,13 +21,6 @@ import { Options,LabelType } from '@angular-slider/ngx-slider';
 })
 export class FinanceBiddingAcceptsComponent implements OnInit {
 
-
-  constructor(public router: Router, public authenticationService:AuthenticationService,
-  private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices,private FinanceBiddingService:FinanceBiddingService) { }
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @HostListener('window:resize', ['$event'])
-  @ViewChild('accountList', { read: ElementRef })
   dataSource ;//data
   displayedColumns: string[] = [
     'invoiceRef',
@@ -43,11 +40,21 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {
-    'invoiceRef': String,
-    'invoiceAmt': Number,
-    'smeId': String
-  }
+  datafinancier: any;
+  canceldiv: boolean;
+  constructor(private smeBiddingServices : SmeBiddingServices,private toastr: ToastrService,private fb: FormBuilder,public router: Router, public authenticationService:AuthenticationService,
+  private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices,private FinanceBiddingService:FinanceBiddingService) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @HostListener('window:resize', ['$event'])
+  @ViewChild('accountList', { read: ElementRef })
+ 
+  
+  // SearchModel = {
+  //   'invoiceRef': String,
+  //   'invoiceAmt': Number,
+  //   'smeId': String
+  // }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -79,19 +86,38 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   public accountList: ElementRef<any>;
   dashboardTooltip=FINANCIERDASHBOARDCONSTANTS;
   isHover: boolean = false;
+  Rejectform: FormGroup;
+  rejectQustionOne = {
+    subrejectQustionOne: [
+      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'Inv_Discount_Low'},
+      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'Annual_Yield'},
+      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'Fundable_percentage_low'},
+      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'Funding_Amount_High' },
+    ]
+};
+rejectQustionTwo = {
+  subrejectQustionTwo: [
+    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'Net_payable'},
+    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'Repayment_Date'},
+    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'Off_date'},
+    { name: 'Others',labelPosition:'before',formControlName:'Others'},
+  ]
+}
+TextAreaDiv: boolean;
+public issubmitTrue: boolean = false;
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.dataSource = new MatTableDataSource([
-      {
-      'invoiceRef' : 'INV101',
-    'invoiceNo' : '2','id' : '2',
-    'invoiceAmt' : '5',
-    'baseCcyNetAmtPayable' : '2', 
-    'offerExpDateTime' : ''}]);
-          this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort;
+    // this.dataSource = new MatTableDataSource([
+    //   {
+    //   'invoiceRef' : 'INV101',
+    // 'invoiceNo' : '2','id' : '2',
+    // 'invoiceAmt' : '5',
+    // 'baseCcyNetAmtPayable' : '2', 
+    // 'offerExpDateTime' : ''}]);
+    //   this.dataSource.paginator = this.paginator
+    //   this.dataSource.sort = this.sort;
 
    this.FinanceBiddingService.getBidingAcceptDetails().subscribe(resp => {
      if(resp){
@@ -102,7 +128,7 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
     })
   }
   SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+    // console.log(this.SearchModel,"SearchModel")
   }
   searchDiv(){
     if(this.filterDivOpen === true){
@@ -169,4 +195,74 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   navigateFinanceDetails(id,type){
     this.router.navigateByUrl('/financier-bids-accept-Details/'+type+'/'+id);
   }
+  backtolist(){
+    this.canceldiv = false
+    this.ngOnInit()
+  }
+  openModal(event, template,index,financier) {
+    console.log(template,"template")
+    console.log(financier,"financier")
+    console.log(index,"index")
+    console.log(event,"event")
+    if(index === 'reject'){
+      this.TextAreaDiv = false
+      this.canceldiv = true
+      this.buildform()
+      event.preventDefault();
+      this.datafinancier = financier
+      // this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+    }
+  }
+  buildform() {
+    this.Rejectform = this.fb.group({
+      Inv_Discount_Low: [false],
+      Annual_Yield: [false],
+      Fundable_percentage_low: [false],
+      Funding_Amount_High: [false],
+      Net_payable: [false],
+      Base_Amount: [false],
+      invoiceAmt: [false],
+      Repayment_Date: [false],
+      Funding_CCY: [false],
+      Off_date:[false],
+      Others:[false],
+      OthersRemarks:['']
+    })
+  }
+  updateAllComplete(text){
+    console.log(text,"text")
+    if(text === 'Others'){
+      this.Rejectform.get('OthersRemarks').setValidators([Validators.required]);
+      this.Rejectform.get('OthersRemarks').updateValueAndValidity();
+      this.TextAreaDiv = !this.TextAreaDiv
+    }
+  }
+  public errorHandling = (control: string, error: string) => {
+    return this.Rejectform.controls[control].hasError(error);
+  }
+  rejectBid(data){
+    console.log(this.datafinancier.id,"usus")
+    console.log(this.Rejectform.value,"this.finBidform.value")
+    console.log(this.Rejectform,"this.Rejectform")
+    this.issubmitTrue = true;
+    if (this.Rejectform.invalid) {
+      alert("Please fill Mandatory fields")
+      return;
+    }
+    let obj = {
+      Remarks : this.Rejectform.value
+    }
+    if (this.Rejectform.valid){
+    this.smeBiddingServices.rejectFinBid(this.datafinancier.id,'').subscribe(resp => {
+      this.toastr.success("Cancel successfully")
+        this.issubmitTrue = false;
+        this.modalRef.hide()
+        this.Rejectform.reset();
+        this.canceldiv = false
+        this.ngOnInit()
+        this.router.navigateByUrl('/financier-bids-accept');
+      })
+ 
+  }
+}
 }

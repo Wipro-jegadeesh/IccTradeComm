@@ -130,7 +130,11 @@ import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authori
 import { AuthConfigModule } from '../app/service/auth.config.module';
 import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
-import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component'
+import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
+import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
+import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
+import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
+import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -185,7 +189,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionaireScoreComponent,
     ModalComponent,
     InvoiceBulkUploadComponent,
-    FinancierLimitMaintanaceComponent
+    FinancierLimitMaintanaceComponent,
+    SmeUserCreationComponent,
+    SmeUserDetailsComponent,
+    IccListSmesComponent,
+    IccSmeDetailsComponent
   ],
   imports: [
     BrowserModule,

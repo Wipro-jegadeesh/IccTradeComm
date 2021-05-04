@@ -39,10 +39,15 @@ import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-u
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
 import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
+import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
+import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
+import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
+import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component';
+
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  // { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
@@ -91,12 +96,19 @@ const routes: Routes = [
   { path: 'icc-group', component: IccGroupsComponent , data : {"HeaderName" : "Group" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-roles', component: IccRolesComponent , data : {"HeaderName" : "Roles" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-list-smes', component: IccListSmesComponent , data : {"HeaderName" : "Icc List Smes" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-sme-details/:id', component: IccSmeDetailsComponent , data : {"HeaderName" : "Icc Sme Details" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
+  
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
 
   { path: 'invoice-request/bulk', component: InvoiceBulkUploadComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
-  
+  { path: 'sme-user-creation', component: SmeUserCreationComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+
+  { path: 'sme-user-details/:id', component: SmeUserDetailsComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+
   // questionaire-scorePage
 ];
 

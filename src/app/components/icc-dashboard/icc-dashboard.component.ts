@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IccDashboardServices } from './icc-dashboard-services'
 import {ICCDASHBOARDCONSTANTS} from '../../shared/constants/constants'
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface FinancierDatas {
   financierId: string;
@@ -26,8 +27,8 @@ export class IccDashboardComponent implements OnInit {
   pageCount = 1;
   limit = 7;
   isOpen = "active";
-  displayedColumns: string[] = ['financierId', 'financierName', 'regNumber'];
-  dataSource = [];
+  displayedColumns: string[] = ['financierId', 'financierName', 'regNumber','action'];
+  dataSource;
   @ViewChild("accountList", { read: ElementRef })
   public accountList: ElementRef<any>;
   fundingRequestObj;
@@ -54,15 +55,36 @@ export class IccDashboardComponent implements OnInit {
     }
     this.getIccDashDetails()
     this.getDashboardDetailsDetails()
-    this.dataSource=[]
+    // this.dataSource=[]
     // this.getFinancierDetails()
-    this.dataSource=[];
+    // this.dataSource=[];
     this.getInvoiceMasterCount();
     this.getAllfinTdyCount();
     this.getFinanceMasterCount();
+
+
+    
+    this.dataSource = new MatTableDataSource([{profileID : "4","financierType" : "Praj","regNumber" : "TT$%$%"}
+    // ,{profileID : "5","financierName" : "Praj","regNumber" : "TT$%$%"}
+    // ,{profileID : "4","financierName" : "Praj","regNumber" : "TT$%$%"} 
+  ]);
+ 
+    this.getFinancierDetails()
     
 
   }
+
+  getFinancierDetails(){
+    this.iccDashboardServices.getFinancierList().subscribe(resp=>{
+      if(resp){
+        this.dataSource = new MatTableDataSource(resp);
+        // this.dataSource.paginator = this.paginator
+        // console.log(this.dataSource,"this.dataSource")
+      }
+    })
+  }
+
+  
   getDashboardDetailsDetails(){
     // this.iccDashboardServices.getFundingRequestTileList().subscribe(resp=>{
     //   if(resp){
@@ -80,6 +102,8 @@ export class IccDashboardComponent implements OnInit {
     //       }))
     //   }
     // })
+
+
 
         this.iccDashboardServices.getFundingRequestTileList().subscribe(resp=>{
           this.fundingRequestObj = resp
@@ -160,12 +184,13 @@ export class IccDashboardComponent implements OnInit {
     navigateFinancierOnboard(){
       this.router.navigateByUrl('/financier-onboarding');
     }
-    getIccDashDetails(){
+    getIccDashDetails(){     
       // this.iccDashboardServices.getIccDashDetails().subscribe(resp => {
       //   // const ELEMENT_DATA: financeForBiddingData[] = resp;
       //   // this.dataSource = new MatTableDataSource(resp);
       // })
     }
+  
     editFinancier(id,type){
       if(type == 'edit'){
         this.router.navigateByUrl('/financier-onboarding/edit/' + id)
@@ -174,6 +199,7 @@ export class IccDashboardComponent implements OnInit {
         this.router.navigateByUrl('/financier-onboarding/view/' + id)
       }
     }
+
     financierOnBoardingList(){
       this.router.navigateByUrl('/financier-onboarding-list')
     }

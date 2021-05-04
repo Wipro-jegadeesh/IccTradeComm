@@ -9,10 +9,10 @@ export class FinancierOnboardingService {
      }
     getSpecificFinancierData(id){
         let params=environment.financierServicePath
-       return this.apiService.generalServiceget(params+'finonb/get/' + id)
+       return this.apiService.generalServiceget(params+'financier-details/' + id)
     }
     submitFinancier(data){
-    let params=environment.financierServicePath+'finonb/post'
+    let params=environment.financierServicePath+'addfinuser'
     let findetobj={
         'findetobj' : data
     }
@@ -22,7 +22,7 @@ export class FinancierOnboardingService {
         let findetobj={
             'findetobj' : data
         }
-        let params=environment.financierServicePath+'finonb/updatefindet'
+        let params=environment.financierServicePath+'financier-onboarding/updateFinancierOnboarding/4'
         return this.apiService.put(params,findetobj)
     }
 }

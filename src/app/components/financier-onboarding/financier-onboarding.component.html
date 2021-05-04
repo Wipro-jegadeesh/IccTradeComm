@@ -1,6 +1,3 @@
-
-
-
 <div class="app-content {{isOpen}} ">
   <header>
     <!-- <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated mat-primary">
@@ -156,7 +153,7 @@
                         <mat-label>Principal Bank Account</mat-label>
                         <input matInput
                                type="number"
-                               formControlName="prnBankAcc"
+                               formControlName="principalBankAccount"
                                [readonly]="isView" />
                         <mat-hint>Please Enter Principal Bank Account</mat-hint>
                       </mat-form-field>
@@ -170,7 +167,7 @@
                         <mat-label>Principal Bank Branch</mat-label>
                         <input matInput
                                type="text"
-                               formControlName="prnBankBrnh"
+                               formControlName="prncbankbranch"
                                [readonly]="isView" />
                         <mat-hint>Please Enter Principal Bank Branch</mat-hint>
                       </mat-form-field>
@@ -279,44 +276,29 @@
                         </div>
                       </div>
                     </td>
+
                     <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div class="multiselect-dropdown-dsgn">
-                          <!-- <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
-                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                          <mat-label>Country</mat-label>
-                          <input type="text" matInput value="" />
-                          <mat-hint>Please enter your country</mat-hint>
-                        </mat-form-field> -->
-
-                          <!-- <ng-multiselect-dropdown name="city" [placeholder]="'Select City'" 
-                        [data]="cities" [settings]="dropdownSettings"
-                        (onDropDownClose)="onDropDownClose()" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                      </ng-multiselect-dropdown> -->
-
-                          <!-- <ng-multiselect-dropdown
-                      formControlName="headcountry"
-                      [settings]="dropdownSettings"
-                      [data]="cities"
-                      (onSelect)="onItemSelect($event)"
-                  >
-                  </ng-multiselect-dropdown> -->
-                          <angular2-multiselect [data]="cities"
-                                                formControlName="headcountry"
-                                                [settings]="dropdownSettings"></angular2-multiselect>
-                          <!-- <mat-form-field appearance="fill">
-                    <mat-label>Country</mat-label>
-                    <mat-select [(ngModel)]="customer.headCountry" >
-                      <mat-option *ngFor="let city of cities" >
-                        {{city.item_text}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
-                        </div>
-                      </div>
-                    </td>
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
+                                      dense
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>Email / Domain</mat-label>
+                        <input type="email"
+                               matInput
+                               formControlName="heademail"
+                               [readonly]="isView" />
+                        <mat-hint>Please enter your email / domain</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
                   </tr>
                   <tr class="form-group"
                       data-always-visible="false">
@@ -436,28 +418,20 @@
                         </div>
                       </div>
                     </td>
+                  
                     <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>Email / Domain</mat-label>
-                            <input type="email"
-                                   matInput
-                                   formControlName="heademail"
-                                   [readonly]="isView" />
-                            <mat-hint>Please enter your email / domain</mat-hint>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div class="multiselect-dropdown-dsgn">                   
+                      <angular2-multiselect [data]="cities"
+                                            formControlName="headcountry"
+                                            [settings]="dropdownSettings"></angular2-multiselect>                         
+                    </div>
+                  </div>
+                </td>
+
+
                   </tr>
                   <tr class="form-group"
                       data-always-visible="false">
@@ -566,31 +540,30 @@
                       </div>
                     </div>
                   </td>
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div class="multiselect-dropdown-dsgn">
-                        <!-- <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
-                      <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                      <mat-label>Country</mat-label>
-                      <input type="text" matInput value="" />
-                      <mat-hint>Please enter your country</mat-hint>
-                    </mat-form-field> -->
-                        <!-- <ng-multiselect-dropdown
-                    formControlName="servCountry"
-                      [settings]="dropdownSettings"
-                      [data]="cities"
-                      
-                  >
-                  </ng-multiselect-dropdown> -->
 
-                        <angular2-multiselect [data]="cities"
-                                              formControlName="servCountry"
-                                              [settings]="dropdownSettings"></angular2-multiselect>
-                      </div>
-                    </div>
-                  </td>
+                  <td class="T1"
+                  rowspan="1"
+                  colspan="1">
+                <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
+                                    dense
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label>Email / Domain</mat-label>
+                      <input type="email"
+                             matInput
+                             formControlName="servemail"
+                             [readonly]="isView" />
+                      <mat-hint>Please enter your email / domain</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </td>
+                 
                 </tr>
                 <tr class="form-group"
                     data-always-visible="false">
@@ -709,29 +682,20 @@
                         </mat-form-field>
                       </div>
                     </div>
-                  </td>
+                  </td>                 
+
                   <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label>Email / Domain</mat-label>
-                          <input type="email"
-                                 matInput
-                                 formControlName="servemail"
-                                 [readonly]="isView" />
-                          <mat-hint>Please enter your email / domain</mat-hint>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
+                  rowspan="1"
+                  colspan="1">
+                <div class="card-form-container">
+                  <div class="multiselect-dropdown-dsgn">
+
+                    <angular2-multiselect [data]="cities"
+                                          formControlName="servCountry"
+                                          [settings]="dropdownSettings"></angular2-multiselect>
+                  </div>
+                </div>
+              </td>
                 </tr>
                 <tr class="form-group"
                     data-always-visible="false">

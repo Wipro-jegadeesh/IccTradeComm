@@ -81,12 +81,16 @@ export class FinancierOnboardingComponent implements OnInit {
       idField: "item_id",
       textField: "item_text",
       allowSearchFilter: true,
+      enableSearchFilter : true,
       text: 'Country',
+      autoPosition : false,
+      maxHeight	: 170
     };
     this.activatedRoute.params.subscribe((params: Params) => {
       // this.financierId=params.id
-      let id = params.id && params.id.split('FIN')
-      this.financierId = id && id[1] ? id[1] : ''
+      // let id = params.id && params.id.split('FIN')
+      // this.financierId = id && id[1] ? id[1] : ''
+      this.financierId = params.id
       this.isView = params.edit == 'view' ? true : false
     })
     this.buildFinancierForm()
@@ -129,10 +133,11 @@ export class FinancierOnboardingComponent implements OnInit {
         regDate: [respObj.registerDate],
         fExpYears: [respObj.financeexpyears, Validators.required],
         activity: [respObj.typeofact],
-        prnBankAcc: [respObj.principalBankAccount],
-        prnBankBrnh: [respObj.prncbankbranch],
+        principalBankAccount: [respObj.principalBankAccount],
+        prncbankbranch: [respObj.prncbankbranch],
         anlScfTrnOver: [respObj.annualSCFTurnOver],
         transLimit: [respObj.transactionLimit],
+
         headAddrLine1: [''],
         headAddrLine2: [''],
         headAddrLine3: [''],
@@ -254,30 +259,30 @@ export class FinancierOnboardingComponent implements OnInit {
       regDate: ['',Validators.required],
       fExpYears: ['', Validators.required],
       activity: [''],
-      prnBankAcc: [''],
-      prnBankBrnh: [''],
+      principalBankAccount: [''],
+      prncbankbranch: [''],
       anlScfTrnOver: [''],
       transLimit: [''],
-      headAddrLine1: [''],
+      headAddrLine1: ['',Validators.required],
       headAddrLine2: [''],
       headAddrLine3: [''],
       headcity: [''],
       headstate: [''],
       headpostalCode: [''],
-      headtelephoneNumber: [''],
+      headtelephoneNumber: ['',Validators.required],
       headcountry: [[]],
-      heademail: ['',Validators.email],
+      heademail: ['',[Validators.email,Validators.required]],
       headswiftBic: [''],
       headfaxNo: [''],
-      servAddrLine1: [''],
+      servAddrLine1: ['',Validators.required],
       servAddrLine2: [''],
       servAddrLine3: [''],
       servcity: [''],
       servstate: [''],
       paymentCode: [''],
       servpostalCode: [''],
-      servtelephoneNumber: [''],
-      servemail: ['',Validators.email],
+      servtelephoneNumber: ['',Validators.required],
+      servemail: ['',[Validators.email,Validators.required]],
       servswiftBic: [''],
       servfaxNo: [''],
       servCountry: [[]],
@@ -409,8 +414,8 @@ export class FinancierOnboardingComponent implements OnInit {
       'financeexpyears': formValues.fExpYears,
       'registerDate': formValues.regDate,
       'typeofact': formValues.activity,
-      'principalBankAccount': formValues.prnBankAcc,
-      'prncbankbranch': formValues.prnBankBrnh,
+      'principalBankAccount': formValues.principalBankAccount,
+      'prncbankbranch': formValues.prncbankbranch,
       'annualSCFTurnOver': formValues.anlScfTrnOver,
       'transactionLimit': formValues.transLimit,
       'addrlst': addrlst,
