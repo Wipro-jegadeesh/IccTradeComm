@@ -6,8 +6,9 @@ import { environment } from 'src/environments/environment';
 export class SmeUserCreationService {
     constructor(private apiService:ApiService) { }
 
-    getAlUserList(){
-        return this.apiService.generalServiceget(environment.financierServicePath+'sme-userprofile/allUserProfileDetails');
+    getAlUserList(companyName){
+        return this.apiService.generalServiceget(environment.financierServicePath+'company-details/' +companyName);
+            // 'sme-userprofile/allUserProfileDetails');
       }
     
       getUserSMEDetails(id) {
@@ -17,9 +18,10 @@ export class SmeUserCreationService {
         return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
       }
       Usersave(body: any) {
-        return this.apiService.post(environment.financierServicePath+'adduser', body);
+        return this.apiService.post(environment.financierServicePath+'smeonboard', body);
       }
       getUserDetails(id) {
-        return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/'+id);
+        return this.apiService.tempGet(environment.financierServicePath+'sme-fetchdetails/' + id)
+            // 'sme-userprofile/'+id);
       }
 }

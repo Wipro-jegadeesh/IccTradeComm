@@ -163,21 +163,26 @@ export class SmeUserDetailsComponent implements OnInit {
     this.smeUserCreationService.getUserDetails(this.id).subscribe(resp => {
       if(resp){
         // this.FinancebiddingDetails = resp
+        let data=resp.userlst[0]
+        let addr=resp.addrlst[0]
         this.userForm.patchValue({
-      nationalId: resp.nationalId,
-      firstName: resp.firstName,
-      email: resp.email ,
-      lastName: resp.lastName,
-      contactNo: resp.contactNo,
-      companyName: resp.companyName, 
-      city: resp.locale,
+      nationalId: data.nationalId,
+      firstName: data.firstName,
+      email: data.email ,
+      lastName: data.lastName,
+      contactNo: data.contactNo,
+      companyName: data.companyName, 
+      city: addr.city,
+      state:addr.state,
       // ICCId: localStorage.getItem("userId"),
-      address:resp.address,
-      country:resp.country,
+      postalCode:addr.postalCode,
+      address:addr.addressLine1,
+      address1:addr.addressLine2,
+      country:data.country,
       // groupname:['',Validators.required],
-      role:resp.role,
-      profileType:resp.profileType,
-      userId:resp.userId 
+      role:data.role,
+      profileType:data.profileType,
+      userId:data.userId 
         });
       }
     })
