@@ -50,7 +50,7 @@ export class AuthConfigService {
             resolveFn();
             let claims = this.oauthService.getIdentityClaims();
             let scope = this.oauthService.scope;
-            console.log("scope",scope);
+            console.log("scope",scope); 
             localStorage.setItem("userId",claims['name']);
             localStorage.setItem("accessToken",this.oauthService.getAccessToken());
             console.log("222222",claims);
@@ -102,6 +102,7 @@ export class AuthConfigService {
                        localStorage.setItem("redirectUri","http://localhost:4200/financier-dashboard");  
                    }
                    if(item.match(/^.*icc$/) || item.match(/^icc.*$/)){
+                    localStorage.setItem("roleName","icc");
                     this.router.navigateByUrl('/icc-dashboard');
                     localStorage.setItem("redirectUri","http://localhost:4200/icc-dashboard");  
                    }

@@ -41,6 +41,9 @@ import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/inv
 import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
 import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
+import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
+import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component';
+
 
 
 const routes: Routes = [
@@ -93,6 +96,10 @@ const routes: Routes = [
   { path: 'icc-group', component: IccGroupsComponent , data : {"HeaderName" : "Group" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-roles', component: IccRolesComponent , data : {"HeaderName" : "Roles" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-list-smes', component: IccListSmesComponent , data : {"HeaderName" : "Icc List Smes" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-sme-details/:id', component: IccSmeDetailsComponent , data : {"HeaderName" : "Icc Sme Details" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
+  
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
 

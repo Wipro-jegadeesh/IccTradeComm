@@ -31,6 +31,10 @@
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Limit Maintanance</p>
         </a>
+        <a *ngIf="roleName == 'icc'" mat-list-item (click)="navigatePage('/icc-list-smes')" >
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <p matBadge="6" class="uxg-side-badge">Sme's</p>
+        </a>
         <a mat-list-item>
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">Applications</p>
