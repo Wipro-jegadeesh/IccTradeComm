@@ -253,10 +253,10 @@ public issubmitTrue: boolean = false;
       Remarks : this.Rejectform.value
     }
     if (this.Rejectform.valid){
-    this.smeBiddingServices.rejectFinBid(this.datafinancier.id,'').subscribe(resp => {
+    this.FinanceRequestServices.CancelBidingAccept(this.datafinancier.id,'').subscribe(resp => {
       this.toastr.success("Cancel successfully")
         this.issubmitTrue = false;
-        this.modalRef.hide()
+        // this.modalRef.hide()
         this.Rejectform.reset();
         this.canceldiv = false
         this.ngOnInit()
