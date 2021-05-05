@@ -221,6 +221,34 @@
                       </div>
                     </td>
                   </tr>
+
+                  <!-- ============== -->
+                  <tr class="form-group"
+                  data-always-visible="false">
+                <td class="T1"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
+                                      dense
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>Currency</mat-label>
+                        <input type="text"
+                               matInput
+                               formControlName="currency"
+                               [readonly]="isView" />
+                        <mat-hint>Please enter currency</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <!-- =========== -->
                 </tbody>
               </table>
             </mat-card-content>
@@ -649,30 +677,65 @@
 
 
                   </tr>
+
+
+                  <!-- ======== -->
+
+                  <tr class="form-group"
+                  data-always-visible="false">
+                  <td class="T1"
+                  rowspan="1"
+                  colspan="1">
+                  <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
+                                    dense
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label>Postal Code</mat-label>
+                      <input type="number"
+                             matInput
+                             formControlName="headpostalCode"
+                             [readonly]="isView" />
+                      <mat-hint>Please enter postal code</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  </div>
+                  </td>
+
+                  <td class="T1"
+                  rowspan="1"
+                  colspan="1">
+                <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
+                                    dense
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label>State / Region</mat-label>
+                      <input type="text"
+                             matInput
+                             formControlName="headstate"
+                             [readonly]="isView" />
+                      <mat-hint>Please enter your state / region</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </td>
+                  </tr>
+
+
+                      <!-- ======= -->
+
                   <tr class="form-group"
                       data-always-visible="false">
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>State / Region</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headstate"
-                                   [readonly]="isView" />
-                            <mat-hint>Please enter your state / region</mat-hint>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+               
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -913,30 +976,60 @@
                 </div>
               </td>
                 </tr>
-                <tr class="form-group"
-                    data-always-visible="false">
+
+                <!-- ========== -->
+
+                  <tr class="form-group"
+                  data-always-visible="false">
                   <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width">
-                          <mat-icon color="primary"
+                  rowspan="1"
+                  colspan="1">
+                  <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
                                     dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label>Local Payment Code</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="paymentCode"
-                                 [readonly]="isView" />
-                          <mat-hint>Please enter local payment code</mat-hint>
-                        </mat-form-field>
-                      </div>
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label>Postal Code</mat-label>
+                      <input type="number"
+                             matInput
+                             formControlName="servpostalCode"
+                             [readonly]="isView" />
+                      <mat-hint>Please enter postal code</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  </div>
+                  </td>   
+
+                 
+                <td class="T1"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
+                                      dense
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>Local Payment Code</mat-label>
+                        <input type="text"
+                               matInput
+                               formControlName="paymentCode"
+                               [readonly]="isView" />
+                        <mat-hint>Please enter local payment code</mat-hint>
+                      </mat-form-field>
                     </div>
-                  </td>
+                  </div>
+                </td>
+                </tr>  
+                <tr class="form-group"
+                data-always-visible="false">               
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -997,10 +1090,24 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="partnerDetails">
-              <ng-container matColumnDef="Name">
+                   <ng-container matColumnDef="FirstName">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column">FIRST NAME</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                      <input matInput
+                             type="text"
+                             formControlName="name"
+                             placeholder="Name"
+                             [readonly]="isView">
+                    </td>
+                  </ng-container>
+              <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
-                    scope="column">NAME</th>
+                    scope="column">LAST NAME</th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
@@ -1094,10 +1201,24 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="authSign">
-              <ng-container matColumnDef="Name">
+                   <ng-container matColumnDef="FirstName">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column">FIRST NAME</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                      <input matInput
+                             type="text"
+                             formControlName="name"
+                             placeholder="Name"
+                             [readonly]="isView">
+                    </td>
+                  </ng-container>
+              <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
-                    scope="column">NAME</th>
+                    scope="column">LAST NAME</th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
@@ -1192,10 +1313,25 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="entityAdmin">
-              <ng-container matColumnDef="Name">
+                   <ng-container matColumnDef="FirstName">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column">FIRST NAME</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                      <input matInput
+                             type="text"
+                             formControlName="name"
+                             placeholder="Name"
+                             [readonly]="isView">
+                    </td>
+                  </ng-container>
+
+              <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
-                    scope="column">NAME</th>
+                    scope="column">LAST NAME</th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">

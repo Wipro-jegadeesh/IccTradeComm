@@ -42,7 +42,7 @@ export class FinancierUserCreationComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   @HostListener('window:resize', ['$event'])
-  displayedColumns: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
+  displayedColumns: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
   dataSource;
   isOpen = ""
   mobileScreen = false;
@@ -98,13 +98,13 @@ constructor(public router: Router, private modalService: BsModalService, private
 
 
   ngOnInit() {
-    // this.dataSource = new MatTableDataSource([{'userId':1,
-    // 'firstName':"11",
-    // 'lastName':"980",
+    this.dataSource = new MatTableDataSource([{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
     // 'companyName':"lkjlk",
-    // 'emailId':"jklk",
-    // 'phoneNumber':"ipoip"
-    // }])
+    'emailId':"jklk",
+    'phoneNumber':"ipoip"
+    }])
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
