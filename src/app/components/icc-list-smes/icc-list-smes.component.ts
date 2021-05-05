@@ -158,7 +158,7 @@ export class IccListSmesComponent implements OnInit {
       status: "I"
     }]);
 
-    this.iccListSmeServices.getallSmeProfileDetails("101").subscribe(resp => {
+    this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

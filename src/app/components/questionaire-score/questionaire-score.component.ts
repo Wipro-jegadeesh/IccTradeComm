@@ -91,8 +91,8 @@ export class QuestionaireScoreComponent implements OnInit {
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
-      state: ['', Validators.required], 
-      score: ['', Validators.required],
+      state: ['Singapore', Validators.required], 
+      score: ['686', Validators.required],
       // groupDescription: ['', Validators.required]
     });
 

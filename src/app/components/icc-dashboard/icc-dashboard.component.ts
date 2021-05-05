@@ -181,8 +181,8 @@ export class IccDashboardComponent implements OnInit {
       this.router.navigateByUrl(path);
     }
 
-    navigateFinancierOnboard(){
-      this.router.navigateByUrl('/financier-onboarding');
+    navigateToSmeList(path){
+      this.router.navigateByUrl(path);
     }
     getIccDashDetails(){     
       // this.iccDashboardServices.getIccDashDetails().subscribe(resp => {

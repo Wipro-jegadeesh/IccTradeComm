@@ -6,6 +6,9 @@ import { IccDashboardServices } from '../icc-dashboard/icc-dashboard-services'
 import {ICCDASHBOARDCONSTANTS} from '../../shared/constants/constants'
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
+import { MatTableDataSource } from '@angular/material/table';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+
 export interface FinancierDatas {
   financierId: string;
   financierName: string;
@@ -21,7 +24,8 @@ let FINANACIERLIST: FinancierDatas[] = [
   styleUrls: ['./icc-sme-details.component.scss']
 })
 export class IccSmeDetailsComponent implements OnInit {
-
+  dataSource1 = new MatTableDataSource();
+  dataSource2 = new MatTableDataSource();
   mobileScreen = false;
   end = false;
   start = true;
@@ -29,8 +33,11 @@ export class IccSmeDetailsComponent implements OnInit {
   pageCount = 1;
   limit = 7;
   isOpen = "active";
-  displayedColumns: string[] = ['financierId', 'financierName', 'regNumber'];
+  displayedColumns: string[] = ['scoreName', 'score', 'information'];
+  displayedColumns1: string[] = ['userId', 'userName', 'userCompName'];
+
   dataSource = [];
+  // dataSource1 = [];
   @ViewChild("accountList", { read: ElementRef })
   public accountList: ElementRef<any>;
   fundingRequestObj;
@@ -53,7 +60,8 @@ export class IccSmeDetailsComponent implements OnInit {
   sectionIndex;
   questions;
   radioChecked;
-  constructor(public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { }
+  groupsForm: FormGroup;
+  constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { }
 
   ngOnInit() {
     this.getQuestionnaireSection()
@@ -61,7 +69,28 @@ export class IccSmeDetailsComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.dataSource=[]
-    this.sectionIndex=0
+    //  this.dataSource1=[]
+    this.sectionIndex=0;
+    this.dataSource1 = new MatTableDataSource([{
+      userId : 'SME102',
+      userName: "SME102 Sme",
+      userCompName: "Tata Steel",
+    }])
+    this.dataSource2 = new MatTableDataSource([{
+      scoreName : 'Business Planning',
+      score: "586",
+      information: "Lot of Questions Not Answered",
+    }])
+    this.groupsFormBuild()
+   
+  }
+  groupsFormBuild() {
+    this.groupsForm = this.fb.group({
+      state: ['', Validators.required], 
+      score: ['', Validators.required],
+      // groupDescription: ['', Validators.required]
+    });
+
   }
  
   public scrollRight(): void {
@@ -99,8 +128,8 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-        // this.apiService.generalServiceget(' http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
-        this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+      this.apiService.generalServiceget(' http://localhost:3030/getallquestionaire/198012348G/HondaCompany/SGP').subscribe(resp=>{
+        // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList
                 localStorage.setItem('uuid',resp.uuid)
@@ -118,25 +147,25 @@ export class IccSmeDetailsComponent implements OnInit {
             else{
               quesItem.show=true
               quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
-              switch(quesItem.alias){
-                  case 'name':
-                    quesItem.response=data.name
-                    break;
-                  case 'address-line-1':
-                      quesItem.response=data.address
-                      break;
-                  case 'telephone-mobile':
-                    quesItem.response=data.mobile
-                    break;
-                  case 'email':
-                    quesItem.response=data.email
-                    break;
-                  case 'city':
-                    quesItem.response=data.city
-                    break;
-                default:
-                    quesItem.response=''
-              }
+              // switch(quesItem&&quesItem.alias){
+              //     case 'name':
+              //       quesItem.response=data.name
+              //       break;
+              //     case 'address-line-1':
+              //         quesItem.response=data.address
+              //         break;
+              //     case 'telephone-mobile':
+              //       quesItem.response=data.mobile
+              //       break;
+              //     case 'email':
+              //       quesItem.response=data.email
+              //       break;
+              //     case 'city':
+              //       quesItem.response=data.city
+              //       break;
+              //   default:
+              //       quesItem.response=''
+              // }
             //   quesItem.response=''
               quesItem.itHasValue=quesItem.required && !quesItem.response ? false :
                !quesItem.required && quesItem.response ? true : quesItem.required && quesItem.response ? true : false
