@@ -14,7 +14,8 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
-
+import { ApiService } from 'src/app/service/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-financier-limit-maintanace',
@@ -24,7 +25,7 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
   
 export class FinancierLimitMaintanaceComponent implements OnInit {
   limitMaintanceForm: FormGroup;
-  displayedColumns: string[] = ['Exposure', 'Available Exposure','Created','Modified'];
+  displayedColumns: string[] = ['Exposure','Modified', 'Available Exposure','Created'];
   dataSource : any;
   groupTooltip = StaicDataMaintenance;
   isEdit : boolean;
@@ -33,7 +34,7 @@ export class FinancierLimitMaintanaceComponent implements OnInit {
   enableReadonly = true
 
   constructor(public router: Router, 
-     private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
+     private fb: FormBuilder,private apiService:ApiService,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
 
@@ -97,39 +98,41 @@ export class FinancierLimitMaintanaceComponent implements OnInit {
       modifyExpoOptions: ['', Validators.required], 
       modifyExposureAmt: ['', Validators.required],
       avblExposureAmt: ['', Validators.required],
+      invCcy:['',Validators.required]
     });
   }
   clickedit(){
+       this.enableReadonly = true;
+     this.isEdit = true;
     this.isOk = true;
-    this.limitMaintanceForm.controls.modifyExpoOptions.enable();
-    this.limitMaintanceForm.controls.modifyExposureAmt.enable();
-    this.enableReadonly = false
+    // this.limitMaintanceForm.get('modifyExpoOptions').clearValidators();
+    // this.limitMaintanceForm.get('modifyExposureAmt').clearValidators();
+    // this.limitMaintanceForm.controls.modifyExpoOptions.enable();
+    // this.limitMaintanceForm.controls.modifyExposureAmt.enable();
+    
   }
   onSubmitLimitForm(){
     this.isOk = false;
-    // **** Start Need to hide *****
-    // this.groupId = "";
-    // this.isEdit = false
-    // this.limitMaintanceForm.reset();
-    // End Need to hide **********
-    if(!this.isEdit){
-      this.limitMaintanceForm.controls.modifyExpoOptions.disable();
-      this.limitMaintanceForm.controls.modifyExposureAmt.disable();
-    }
+  
+    // if(!this.isEdit){
+    //   this.limitMaintanceForm.controls.modifyExpoOptions.disable();
+    //   this.limitMaintanceForm.controls.modifyExposureAmt.disable();
+    // }
 
     if(this.limitMaintanceForm.value && this.limitMaintanceForm.status == "VALID"){
+      var ddatae = new Date();
       let value = this.limitMaintanceForm.value;
-      console.log(this.limitMaintanceForm.value,"this.limitMaintanceForm.value");
-    let array=[]
-    array.push(value)
+      value.created = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
+      // value.modified = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
+      console.log(value,"this.limitMaintanceForm.value");
+      let array=[]
+      array.push(value)
       this.dataSource = new MatTableDataSource(array);
-      this.limitMaintanceForm.get('modifyExpoOptions').clearValidators();
-      this.limitMaintanceForm.get('modifyExposureAmt').clearValidators();
-      this.limitMaintanceForm.controls.modifyExpoOptions.enable();
-      this.limitMaintanceForm.controls.modifyExposureAmt.enable();
-      this.enableReadonly = true;
-      this.isEdit = true;
-
+      
+      // this.apiService.post(environment.financierServicePath+'sme-custom/',this.limitMaintanceForm.value).subscribe(resp=>{
+       
+      
+      // })
       // if(this.isEdit){
       //   value.groupId = this.groupId
       // }
@@ -147,7 +150,8 @@ export class FinancierLimitMaintanaceComponent implements OnInit {
       //   }
       // })
     }else{
-      this.toastr.error("Mandatory fields are missing")
+      this.isOk = true;
+      this.toastr.error("Please Fill Mandatory fields")
     }
   }
 
@@ -194,5 +198,19 @@ changeExposure(event,type){
 }
 clickadd(){
   this.enableReadonly = false
+  var ddatae = new Date();
+  let value = this.limitMaintanceForm.value;
+  value.created = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
+  value.modified = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
+  console.log(value,"this.limitMaintanceForm.value");
+  let array=[]
+  array.push(value)
+  this.dataSource = new MatTableDataSource(array);
+  this.limitMaintanceForm.get('modifyExpoOptions').clearValidators();
+      this.limitMaintanceForm.get('modifyExposureAmt').clearValidators();
+      this.limitMaintanceForm.controls.modifyExpoOptions.enable();
+      this.limitMaintanceForm.controls.modifyExposureAmt.enable();
+      this.enableReadonly = true;
+      this.isEdit = true;
 }
 }

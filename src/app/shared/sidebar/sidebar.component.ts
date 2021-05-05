@@ -33,6 +33,7 @@ export class SidebarComponent implements OnInit {
     }
     }
     navigatePage(path){
+      this.opened = false
       this.router.navigateByUrl(path)
     }
 

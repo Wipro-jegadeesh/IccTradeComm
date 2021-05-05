@@ -205,10 +205,12 @@ public issubmitTrue: boolean = false;
     console.log(index,"index")
     console.log(event,"event")
     if(index === 'reject'){
-      this.TextAreaDiv = false
+      this.TextAreaDiv = true
       this.canceldiv = true
       this.buildform()
       event.preventDefault();
+      this.Rejectform.get('OthersRemarks').setValidators([Validators.required]);
+      this.Rejectform.get('OthersRemarks').updateValueAndValidity();
       this.datafinancier = financier
       // this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
     }
@@ -237,25 +239,26 @@ public issubmitTrue: boolean = false;
       this.TextAreaDiv = !this.TextAreaDiv
     }
   }
-  public errorHandling = (control: string, error: string) => {
-    return this.Rejectform.controls[control].hasError(error);
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.Rejectform.controls[controlName].hasError(errorName);
   }
   rejectBid(data){
     console.log(this.datafinancier.id,"usus")
     console.log(this.Rejectform.value,"this.finBidform.value")
     console.log(this.Rejectform,"this.Rejectform")
-    this.issubmitTrue = true;
-    if (this.Rejectform.invalid) {
-      alert("Please fill Mandatory fields")
-      return;
-    }
+    // if (this.Rejectform.invalid) {
+    //   alert("Please fill Mandatory fields")
+    //   return;
+    // }
+    // if (this.Rejectform.status === "INVALID"){
+    //   throw { "mes": "Please fill mendatory  fields" }
+    // }
     let obj = {
       Remarks : this.Rejectform.value
     }
     if (this.Rejectform.valid){
     this.FinanceRequestServices.CancelBidingAccept(this.datafinancier.id,'').subscribe(resp => {
       this.toastr.success("Cancel successfully")
-        this.issubmitTrue = false;
         // this.modalRef.hide()
         this.Rejectform.reset();
         this.canceldiv = false
@@ -263,6 +266,8 @@ public issubmitTrue: boolean = false;
         this.router.navigateByUrl('/financier-bids-accept');
       })
  
+  }else{
+    this.toastr.error("Please Fill Remark and Submit")
   }
 }
 }
