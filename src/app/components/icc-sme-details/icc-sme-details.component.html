@@ -1,83 +1,244 @@
 <div class="app-content {{isOpen}} ">
-    <header>
-        <br>
-        <h5>Sme 110 - Details</h5>
-      <div class="container-fluid contnr-div">
-        <div class="row">
-            <div class="col-md-12">
-              <mat-tab-group dynamicHeight>
-                <mat-tab label="Sme ID (101) Questionaire">
-                  <div class="links">
-                    <a routerLink="#" (click)="naviageTiles('/icc-user-creation')">User Creation</a>
-                    <a routerLink="#">Roles</a>
-                    <a routerLink="#">Capabilities</a>
-                    <a routerLink="#">Teams</a>
-                    <a routerLink="#">Authorisation Matrix</a>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Sme ID (101) Scored">
-                  <div class="links">
-                    <!-- <a routerLink="#">Creation</a>
-                    <a routerLink="#">Edit</a>
-                    <a routerLink="#">View</a> -->
-                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
-                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-group')">Groups</button> 
-                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
-                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-roles')">Roles</button>
-                    <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
-                    matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-authorize')">Authorization Matrix</button>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Sme ID (101) Related Users">
-                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                    <ng-container matColumnDef="financierId">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.financierId}}" [matTooltipPosition]="'below'"> User Id </th>
-                      <td mat-cell *matCellDef="let element"> {{element.financierId}} </td>
+  <header>
+      <br>
+      <h5>Sme110 - Details</h5>
+    <div class="container-fluid contnr-div">
+      <div class="row">
+          <div class="col-md-12">
+            <mat-tab-group dynamicHeight>
+              <mat-tab label="Questionaire">
+                <div class="links">
+                  <div class="row col-md-12 col-12" *ngIf="questionnaireSections">
+                      <div class="col-md-3 col-3 ques-sec" >
+                        <!-- <div *ngFor="let sections of questionnaireSections;let secIndex=index" style="text-align: center;">
+                        <button class="ques-sec-btn section-title" [ngClass]="{'selbut': secIndex == sectionIndex}" type="button" (click)="onSectionClick(secIndex)">{{sections.label}}</button>
+                      </div> -->
+                    
+                      <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" >
+                        <div>
+                          <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}} </div>
+                          <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div>
+                          <div class="circle sec-cmlp" *ngIf="sections.itHasValue"><mat-icon>check_circle</mat-icon> </div>
+                        </div>
+                        <div>
+                          <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+                          <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+                          <div class="title sec-cmlp" *ngIf="sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+                    
+                          <!-- SUB SECTIONS -->
+                          <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
+                            <div *ngFor="let subSection of sections.subSections;let subIndex=index" >
+                              <label class="caption" *ngIf="!subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+                            <label class="caption subSecSel" *ngIf="subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+                            <!-- [ngClass]="{subSecSel: subSection.isSelected}" -->
+                            <label class="caption subSeccomp" *ngIf="subSection.itHasValue"  [ngClass]="{subSecSel: subSection.isSelected}"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
+                            <!-- [ngClass]="{subSeccomp: subSection.itHasValue}" -->
+                          </div>
+                          </div>
+                          <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
+                        </div>
+                      </div>
+                    
+                      <!-- <mat-form-field class="example-chip-list">
+                        <mat-label>Favorite Fruits</mat-label>
+                        <mat-chip-list #chipList aria-label="Fruit selection">
+                          <mat-chip
+                          *ngFor="let fruit of fruits"
+                          [selectable]="selectable"
+                          [removable]="removable"
+                          (removed)="remove(fruit)">
+                          {{fruit}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input
+                        placeholder="New fruit..."
+                        #fruitInput
+                        formControlName="fruitCtrl"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                      </mat-form-field> -->
+                      </div>
+                      <div class="col-md-9 col-9 ques-col">
+                        <!-- <div class="row" *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index"> -->
+                          <perfect-scrollbar class="pft-scrollbar" >
+                    
+                            <!-- QUESTIONS SECTIONS -->
+                              <div class="row">
+                              <div *ngFor="let questionType of questions;let questionIndex=index">
+                                <span class="form-group" *ngIf="questionType.show">
+                                  <textBox  [questionDatas]="questionType" (formChange)="onTextBoxChange($event,sectionIndex,questionIndex)" *ngIf="(questionType.type == 'QuestionTextDto' || 'QuestionNumberDto')"></textBox>
+                                  <!-- <multiSelectDropdown [questionDatas]="questionType" (formChange)="onDropdownChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionMultipleChoiceDto'" ></multiSelectDropdown> -->
+                                  <radioButton  [questionDatas]="questionType" [sectionIndex]="sectionIndex" [questionIndex]="questionIndex" (formChange)="onRadioChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionBoolDto'"></radioButton>
+                                  <DateField  [questionDatas]="questionType" (formChange)="onDateChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionDateDto'"></DateField>
+                                  <fileUpload [questionDatas]="questionType" (formChange)="onFileChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionFileListDto'"></fileUpload>
+                                  <textList [questionDatas]="questionType" (formChange)="onTextListChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionTextListDto'"></textList>
+                    
+                                </span>
+                              </div>
+                              </div>
+                            </perfect-scrollbar>
+                    
+                      </div>
+                    </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Score">
+                <div class="links">
+                  <!-- <a routerLink="#">Creation</a>
+                  <a routerLink="#">Edit</a>
+                  <a routerLink="#">View</a> -->
+                  <form [formGroup]="groupsForm" autocomplete="off">
+                    <!-- <h5 class="text-center">Groups</h5> -->
+                        <mat-card>
+                      <mat-card-content>
+                        <table  class="table-responsive inv-table" style="width: 100%;">
+                          <tbody>
+                    <tr>
+                        <td rowspan="1" colspan="1">
+                            <mat-form-field dense class="icc-mat">
+                              <mat-label>Consolidated score</mat-label>
+                              <input type="text" matInput formControlName="score" />
+                            </mat-form-field>
+                          </td>
+                              
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense class="icc-mat">
+                    <mat-label>Score State</mat-label>
+                    <input type="text" matInput formControlName="state" />
+                  </mat-form-field>
+                </td>
+                
+                 <!-- <td rowspan="1" colspan="1">
+                  <mat-form-field dense class="icc-mat">
+                    <mat-label>Group Description</mat-label>
+                    <input type="text" matInput formControlName="groupDescription" />
+                  </mat-form-field>
+                </td>
+            
+                <td rowspan="1" colspan="1">      
+                    <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
+                    <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
+                    </td>  -->
+                
+              </tr>
+            
+            </tbody>
+            </table>
+            </mat-card-content>
+            </mat-card>
+            
+            </form>
+                  <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;">
+                    <!-- <ng-container matColumnDef="scoreAlias">
+                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{groupTooltip.groupCode}}" [matTooltipPosition]="'below'"> Score Alias </th>
+                        <td mat-cell *matCellDef="let element">
+                                     {{element.scoreAlias}}
+                         </td>
+                      </ng-container> -->
+    
+                    <ng-container matColumnDef="scoreName">
+                        <th mat-header-cell *matHeaderCellDef  mat-sort-header > Score Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.scoreName}}
+                        </td>
                     </ng-container>
-                  
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="financierName">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.financierName}}" [matTooltipPosition]="'below'"> Full Name </th>
-                      <td mat-cell *matCellDef="let element"> {{element.financierName}} </td>
+    
+                    <ng-container matColumnDef="score">
+                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                            matTooltip="score" [matTooltipPosition]="'below'"> Score
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.score}}
+                        </td>
                     </ng-container>
-                  
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="regNumber">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.regNo}}" [matTooltipPosition]="'below'"> companyName </th>
-                      <td mat-cell *matCellDef="let element"> {{element.regNumber}} </td>
+    
+                    <ng-container matColumnDef="information">
+                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                            matTooltip="information" [matTooltipPosition]="'below'"> Information
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.information }}
+                        </td>
                     </ng-container>
-                  
-                    <!-- Symbol Column -->
+    
                     <!-- <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef> Action </th>
-                      <td mat-cell *matCellDef="let element">  -->
-                        <!-- <button mat-button type="button" (click)="editFinancier(element.financierId,'edit')">
-                          <mat-icon aria-hidden="false" aria-label="Example home icon">mode_edit</mat-icon>
-                        </button>
-                        <button mat-button type="button" (click)="editFinancier(element.financierId,'view')">
-                          <mat-icon aria-hidden="false" aria-label="Example home icon">remove_red_eye</mat-icon>
-                        </button> -->
-                        <!-- <a href="javascript:void(0)" (click)="editFinancier(element.financierId,'edit')" #tooltip="matTooltip"
-                        matTooltip="{{dashboardTooltip.financierEdit}}" [matTooltipPosition]="'below'">Edit</a>&nbsp;
-                        <a href="javascript:void(0)" (click)="editFinancier(element.financierId,'view')" #tooltip="matTooltip"
-                        matTooltip="{{dashboardTooltip.financierView}}" [matTooltipPosition]="'below'">View</a>
+                      <td mat-cell *matCellDef="let element">
+                        <a  href="javascript:void(0)" (click)="getEditData(element)">
+                          <mat-icon  #tooltip="matTooltip"
+                          matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                        </a>&nbsp;
                          </td>
                     </ng-container> -->
-                  
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                 </mat-tab>
-               </mat-tab-group>
+    
+                    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr> -->
+                    <!-- <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+                        *matHeaderRowDef="displayedColumnsearch"></tr> -->
+                    <!-- <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> -->
+                    <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
+                </table>
+                  <!-- <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                  matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-group')">Groups</button> 
+                  <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                  matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-roles')">Roles</button>
+                  <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                  matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-authorize')">Authorization Matrix</button> -->
+                </div>
+              </mat-tab>
+              <mat-tab label="Related Users"> 
+               <table mat-table class="mat-elevation-z8"  [dataSource]="dataSource1">
+                  <ng-container matColumnDef="userId">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                    matTooltip="{{dashboardTooltip.financierId}}" [matTooltipPosition]="'below'"> User Id </th>
+                    <td mat-cell *matCellDef="let element">{{element.userId}} </td>
+                  </ng-container>
+                
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                    matTooltip="{{dashboardTooltip.financierName}}" [matTooltipPosition]="'below'"> Full Name </th>
+                    <td mat-cell *matCellDef="let element">{{element.userName}} </td>
+                  </ng-container>
+                
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="userCompName">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                    matTooltip="{{dashboardTooltip.regNo}}" [matTooltipPosition]="'below'"> companyName </th>
+                    <td mat-cell *matCellDef="let element">{{element.userCompName}}  </td>
+                  </ng-container>
+                
+                  <!-- Symbol Column -->
+                  <!-- <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let element">  -->
+                      <!-- <button mat-button type="button" (click)="editFinancier(element.financierId,'edit')">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">mode_edit</mat-icon>
+                      </button>
+                      <button mat-button type="button" (click)="editFinancier(element.financierId,'view')">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">remove_red_eye</mat-icon>
+                      </button> -->
+                      <!-- <a href="javascript:void(0)" (click)="editFinancier(element.financierId,'edit')" #tooltip="matTooltip"
+                      matTooltip="{{dashboardTooltip.financierEdit}}" [matTooltipPosition]="'below'">Edit</a>&nbsp;
+                      <a href="javascript:void(0)" (click)="editFinancier(element.financierId,'view')" #tooltip="matTooltip"
+                      matTooltip="{{dashboardTooltip.financierView}}" [matTooltipPosition]="'below'">View</a>
+                       </td>
+                  </ng-container> -->
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                </table>
+               </mat-tab>
+             </mat-tab-group>
+          </div>
+          <div class="col-md-6">
+            <div style="display: block;">
             </div>
-            <div class="col-md-6">
-              <div style="display: block;">
-              </div>
-            </div>
-        </div>
+          </div>
       </div>
-    </header>
-  </div>
+    </div>
+  </header>
+</div>

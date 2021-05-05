@@ -9,7 +9,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                     matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> SME profile ID </th>
                     <td mat-cell *matCellDef="let element">
-                                {{element.invoiceRef}} 
+                        {{element.smeprofileID}}
                     </td>
                 </ng-container>
 
@@ -17,14 +17,14 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> Company ID</th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.invoiceNo}}
+                      {{element.companyId}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="cmpName">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.invRefNo}}"
                         [matTooltipPosition]="'below'"> Company Name </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.invoiceRef}}
+                       {{element.name}}
                     </td>
                 </ng-container>
 
@@ -33,7 +33,7 @@
                         matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> SME Rating
                     </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.invoiceAmt}}
+                      {{element.rating}}
                     </td>
                 </ng-container>
 
