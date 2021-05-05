@@ -1,20 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-financier-user-details',
-//   templateUrl: './financier-user-details.component.html',
-//   styleUrls: ['./financier-user-details.component.scss']
-// })
-// export class FinancierUserDetailsComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
-
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -142,10 +125,10 @@ export class FinancierUserDetailsComponent implements OnInit {
     email: resp[0].email ,
     lastName: resp[0].lname,
     contactNo: resp[0].contactnum,
-    companyName: resp[0].companyname, 
-    city: resp[0].locale,
-    address:resp[0].address,
-    country:resp[0].country,
+    // companyName: resp[0].companyname, 
+    // city: resp[0].locale,
+    // address:resp[0].address,
+    // country:resp[0].country,
     role:resp[0].role,
     profileType:resp[0].profiletype,
 
@@ -186,11 +169,11 @@ export class FinancierUserDetailsComponent implements OnInit {
       email: resp.email ,
       lastName: resp.lastName,
       contactNo: resp.contactNo,
-      companyName: resp.companyName, 
-      city: resp.locale,
+      // companyName: resp.companyName, 
+      // city: resp.locale,
       // ICCId: localStorage.getItem("userId"),
-      address:resp.address,
-      country:resp.country,
+      // address:resp.address,
+      // country:resp.country,
       // groupname:['',Validators.required],
       role:resp.role,
       profileType:resp.profileType,
@@ -207,14 +190,14 @@ export class FinancierUserDetailsComponent implements OnInit {
       email: ['', Validators.required],
       lastName: ['', Validators.required],
       contactNo: ['', Validators.required],
-      companyName: ['', Validators.required], 
+      // companyName: ['', Validators.required], 
       // locale: ['', Validators.required],
-      address:['',Validators.required],
-      address1:[''],
-      country:['',Validators.required],
-      state:['',Validators.required],
-      city:['',Validators.required],
-      postalCode:['',Validators.required],
+      // address:['',Validators.required],
+      // address1:[''],
+      // country:['',Validators.required],
+      // state:['',Validators.required],
+      // city:['',Validators.required],
+      // postalCode:['',Validators.required],
       // groupname:['',Validators.required],
       role:['',Validators.required],
       profileType:['',Validators.required],

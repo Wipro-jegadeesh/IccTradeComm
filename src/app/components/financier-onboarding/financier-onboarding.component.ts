@@ -51,7 +51,7 @@ export class FinancierOnboardingComponent implements OnInit {
   dataSource1 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
-  displayedColumns: string[] = ['Name', 'Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumns: string[] = ['FirstName','LastName','Position', 'Address', 'TelephoneNo', 'Email'];
 
   name = "Angular";
   cities: Array<ICity> = [];
@@ -230,6 +230,8 @@ let respObj = {​​​​​​​​
         prncbankbranch: [respObj.prncbankbranch],
         anlScfTrnOver: [respObj.annualSCFTurnOver],
         transLimit: [respObj.transactionLimit],
+        currency: [respObj.currency],
+
 
         // userName : [respObj.userlst[0] && respObj.userlst[0].userName], email : [respObj.userlst[0] && respObj.userlst[0].email],contactNo: [respObj.userlst[0] && respObj.userlst[0].contactNo], 
         // companyName : [respObj.userlst[0] && respObj.userlst[0].companyName],userCreationDate: [respObj.userlst[0] && respObj.userlst[0].userCreationDate],
@@ -244,6 +246,8 @@ let respObj = {​​​​​​​​
         headtelephoneNumber: [''],
         headcountry: [[]],
         heademail: [''],
+                // postalCode: [respObj.postalCode],
+
         headswiftBic: [''],
         headfaxNo: [''],
         servAddrLine1: [''],
@@ -340,7 +344,7 @@ let respObj = {​​​​​​​​
             position: [item.position ? item.position : ''],
             address: [ item.addressLine1 ? item.addressLine1 : ''],
             phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
-            email: [ item.email ? item.email : '']
+            email: [ item.email ? item.email : ''] 
           })
           this.entityFormArray.push(entityRow)
           this.dataSource3.data = this.entityFormArray.controls;
@@ -361,6 +365,9 @@ let respObj = {​​​​​​​​
       prncbankbranch: [''],
       anlScfTrnOver: [''],
       transLimit: [''],
+      // postalCode: [''],
+      currency: [''],
+
 
       // userName : ['',Validators.required], email : ['',[Validators.email,Validators.required]],contactNo: ['',Validators.required], 
       // companyName : [''],userCreationDate: [''],
@@ -547,6 +554,8 @@ let respObj = {​​​​​​​​
       'prncbankbranch': formValues.prncbankbranch,
       'annualSCFTurnOver': formValues.anlScfTrnOver,
       'transactionLimit': formValues.transLimit,
+      // 'postalCode': formValues.postalCode,
+      'currency': formValues.currency,
       'addrlst': addrlst,
       'asocpartylst': associatePartyArr
     }

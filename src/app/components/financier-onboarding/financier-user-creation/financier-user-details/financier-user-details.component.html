@@ -11,12 +11,34 @@
                       <label for="National ID​">Company Register ID​
                       </label>
                       <mat-form-field dense>
-                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="nationalId" />
+                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="nationalId" [readonly]="true"/>
                         <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
+
                   <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="First name​">First name​
+                      </label>
+                      <mat-form-field dense>
+                        <mat-icon matPrefix>person</mat-icon>
+                        <input type="text" placeholder="First Name" matInput formControlName="firstName" />
+                        <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="First name​">Last name​
+                      </label>
+                      <mat-form-field dense>
+                        <mat-icon matPrefix>person</mat-icon>
+                        <input type="text" matInput placeholder="Last Name" formControlName="lastName" />
+                        <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  <!-- <div class="col-sm-4">
                     <div class="form-group">
                       <label for="First name​">Company name​
                       </label>
@@ -26,8 +48,8 @@
                         <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error>
                       </mat-form-field>
                     </div>
-                  </div>
-                  <div class="col-sm-4">
+                  </div> -->
+                  <!-- <div class="col-sm-4">
                     <div class="form-group">
                       <label for="Country​">Country
                       </label>
@@ -37,10 +59,13 @@
                         <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
                       </mat-form-field>
                     </div>
-                  </div>
+                  </div> -->
             </div>
           <div class="row dis-block">
-            <div class="col-sm-4">
+           
+          
+
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label for="National ID​">Email Id
                   </label>
@@ -51,42 +76,37 @@
                   </mat-form-field>
                 </div>
               </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="First name​">First name​
-                </label>
-                <mat-form-field dense>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" placeholder="First Name" matInput formControlName="firstName" />
-                  <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>
-                </mat-form-field>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="National ID​">Phone Number</label>
+                    <mat-form-field dense>
+                      <mat-icon matPrefix>call</mat-icon>
+                      <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
+                      <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>     
+                
+                <div class="col-sm-4">
+                  <div class="form-group">
+                     <label for="First name​">Group
+                     </label>
+                     <mat-form-field dense>
+                         <mat-label>Group</mat-label>
+                        <mat-select formControlName="profileType">
+                          <mat-option>None</mat-option>
+                          <mat-option value="SME">SME</mat-option>
+                          <mat-option value="ICC">ICC</mat-option>
+                          <mat-option value="FINANCE">FINANCE</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="hasError('profileType', 'required')">group is required</mat-error>
+                     </mat-form-field>
+                  </div>
               </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="First name​">Last name​
-                </label>
-                <mat-form-field dense>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" matInput placeholder="Last Name" formControlName="lastName" />
-                  <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
-                </mat-form-field>
-              </div>
-  
-            </div>
           </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="National ID​">Phone Number</label>
-                <mat-form-field dense>
-                  <mat-icon matPrefix>call</mat-icon>
-                  <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
-                  <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="col-sm-4">
+         
+            <!-- <div class="col-sm-4">
                 <label for="Address">Address 1</label>
                 <div class="form-group">
                 <mat-form-field dense>
@@ -105,9 +125,9 @@
                   <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
                 </mat-form-field>
             </div>
-              </div>
+              </div> -->
           </div>
-          <div class="row dis-block">
+          <!-- <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
                   <label for="Locale">State</label>
@@ -138,25 +158,10 @@
                   </mat-form-field>
                 </div>
               </div>
-          </div>
+          </div> -->
           <div class="row dis-block">
                  
-                     <div class="col-sm-4">
-                        <div class="form-group">
-                           <label for="First name​">Group
-                           </label>
-                           <mat-form-field dense>
-                               <mat-label>Group</mat-label>
-                              <mat-select formControlName="profileType">
-                                <mat-option>None</mat-option>
-                                <mat-option value="SME">SME</mat-option>
-                                <mat-option value="ICC">ICC</mat-option>
-                                <mat-option value="FINANCE">FINANCE</mat-option>
-                              </mat-select>
-                              <mat-error *ngIf="hasError('profileType', 'required')">group is required</mat-error>
-                           </mat-form-field>
-                        </div>
-                    </div>
+                    
                     <div class="col-sm-4">
                         <div class="form-group">
                            <label for="First name​">Role
