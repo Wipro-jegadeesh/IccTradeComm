@@ -11,7 +11,7 @@
           <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
           matTooltip="{{dashboardTooltip.invRefNo}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
           <td mat-cell *matCellDef="let element">
-                      <!-- {{element.invoiceRef}}  -->
+                      {{element.invNo}} 
           </td>
         </ng-container>
 
@@ -19,7 +19,7 @@
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
             matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice ID</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.invoiceNo }} 
+            {{ element.invoiceId }} 
           </td>
         </ng-container>
 

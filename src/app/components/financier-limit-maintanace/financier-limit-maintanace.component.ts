@@ -94,7 +94,7 @@ export class FinancierLimitMaintanaceComponent implements OnInit {
 
   groupsFormBuild() {
     this.limitMaintanceForm = this.fb.group({
-      exposureAmt: ['', Validators.required], 
+      exposureAmt: ['0', Validators.required], 
       modifyExpoOptions: ['', Validators.required], 
       modifyExposureAmt: ['', Validators.required],
       avblExposureAmt: ['', Validators.required],

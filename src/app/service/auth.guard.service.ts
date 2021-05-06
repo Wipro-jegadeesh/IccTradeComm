@@ -98,6 +98,7 @@ export class AuthConfigService {
                    }
                   if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){
                   //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
+                       localStorage.setItem("roleName","financier");
                        this.router.navigateByUrl('/financier-dashboard');
                        localStorage.setItem("redirectUri","http://localhost:4200/financier-dashboard");  
                    }
