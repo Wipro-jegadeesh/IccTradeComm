@@ -51,7 +51,7 @@ export class AuthConfigService {
             let claims = this.oauthService.getIdentityClaims();
             let scope = this.oauthService.scope;
             console.log("scope",scope); 
-            localStorage.setItem("userId",claims['name']);
+            localStorage.setItem("userId",claims['preferred_username']);
             localStorage.setItem("accessToken",this.oauthService.getAccessToken());
             console.log("222222",claims);
             const sameCaseArray = claims['realm_access']['roles'].map(value => value.toLowerCase());
