@@ -64,23 +64,31 @@ export const environment = {
   keycloak : {
     // Url of the Identity Provider
     // issuer: 'http://localhost:8080/auth/realms/Icctradecomm', //local
-    issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", //live
-
+    // issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", // old live
+    issuer:"https://tradecomm-keycloak-admin.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", // new live
+    // issuer:"https://tradecomm-keycloak-admin.ffdcdev.fusionfabric.io/auth/realms/icccloak",
+ 
   
     // URL of the SPA to redirect the user to after login
     // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
   
-    // The SPA's id. 
+    // The SPA's id.
     // The SPA is registerd with this id at the auth-serverß
     // clientId: 'finanicer-dashboard',
       redirectUri: "http://localhost:4200",
       // clientId:  "Iccmarketplace", //local
       clientId:  "IccMarketplace", //live
+ 
+      // clientId:"iccproject",
+ 
+      // "credentials": {
+      //   "secret": "c532d662-99cf-42b0-83ac-e9fee3f7a9d3"
+      // } ,
   
       // URL of the SPA to redirect the user to after login
       // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
     
-      // The SPA's id. 
+      // The SPA's id.
       // The SPA is registerd with this id at the auth-serverß
       // clientId: 'finanicer-dashboard',
      responseType: 'code',
@@ -89,7 +97,7 @@ export const environment = {
     // scope: 'openid profile email',
     // scope: 'openid profile email',
     scope: 'openid profile email',
-
+ 
     // Remove the requirement of using Https to simplify the demo
     // THIS SHOULD NOT BE USED IN PRODUCTION
     // USE A CERTIFICATE FOR YOUR IDP

@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   homePath = "";
   headerPaths = [];
   isHide=false; 
+  userDeatils: any;
 
   constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
     ,private oauthService: OAuthService
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
    { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
+    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.getModuleDependencies()

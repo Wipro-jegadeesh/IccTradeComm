@@ -199,11 +199,11 @@ public issubmitTrue: boolean = false;
     this.canceldiv = false
     this.ngOnInit()
   }
-  openModal(event, template,index,financier) {
-    console.log(template,"template")
-    console.log(financier,"financier")
-    console.log(index,"index")
-    console.log(event,"event")
+  openModal(event,index,financier) {
+    // console.log(template,"template")
+    // console.log(financier,"financier")
+    // console.log(index,"index")
+    // console.log(event,"event")
     if(index === 'reject'){
       this.TextAreaDiv = true
       this.canceldiv = true
@@ -242,7 +242,7 @@ public issubmitTrue: boolean = false;
   public hasError = (controlName: string, errorName: string) =>{
     return this.Rejectform.controls[controlName].hasError(errorName);
   }
-  rejectBid(data){
+  rejectBid(){
     console.log(this.datafinancier.id,"usus")
     console.log(this.Rejectform.value,"this.finBidform.value")
     console.log(this.Rejectform,"this.Rejectform")

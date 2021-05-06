@@ -66,7 +66,7 @@
                   <mat-icon  #tooltip="matTooltip"
                   matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
               </a>&nbsp;
-              <a  href="javascript:void(0)" (click)="openModal($event,Rejecttemplate,'reject',element)">
+              <a  href="javascript:void(0)" (click)="openModal($event,'reject',element)">
                 <mat-icon  #tooltip="matTooltip"
                 matTooltip="Cancel" [matTooltipPosition]="'below'">
                   cancel_presentation
@@ -174,7 +174,7 @@
      </div>
       <div class="modal-body">       
         <div class="container-fluid">
-         <form [formGroup]="Rejectform" (ngSubmit)="submit()">
+         <form [formGroup]="Rejectform">
             <!-- <div class="row">
                 <div class="col-sm-6"> 
                  <ul>
@@ -218,7 +218,7 @@
         </div>
      </div>
      <div class="modal-footer" >
-        <button type="button"  (click)="rejectBid(dataBIDDetails)"class="btn model-btn-outline">Cancel To Bid</button>
+        <button type="button"  (click)="rejectBid()"class="btn model-btn-outline">Cancel To Bid</button>
      </div>
   </header>
 </div>
