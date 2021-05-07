@@ -59,7 +59,15 @@
                         {{ element.contactNo }}
                     </td>
                 </ng-container>
-
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                        matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Status </th>
+                    <td mat-cell class="toggleclass" *matCellDef="let element">
+                        <mat-slide-toggle 
+                        [checked]="element.status === 'A' ? true : false"  (change)="displayMessage($event,element.nationalId)"></mat-slide-toggle><br>
+                        {{element.status === 'A' ? 'Active' : 'Deactive'}}
+                    </td>
+                </ng-container>
                
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>

@@ -139,7 +139,8 @@ import { IccListSmeServices } from './components/icc-list-smes/icc-list-smes.ser
 
 import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component'
 import { FinancierUserCreationComponent } from './components/financier-onboarding/financier-user-creation/financier-user-creation.component';
-import { FinancierUserDetailsComponent } from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component'
+import { FinancierUserDetailsComponent } from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -200,7 +201,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IccListSmesComponent,
     IccSmeDetailsComponent,
     FinancierUserCreationComponent,
-    FinancierUserDetailsComponent
+    FinancierUserDetailsComponent,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,
