@@ -73,6 +73,7 @@ export class IccUserCreationComponent implements OnInit {
   searchDivOpen: boolean;
   message: string;
   isChecked = true;
+  userValue: any;
 constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
       private authenticationService: AuthenticationService, private IccUserCreationsService: IccUserCreationService) { }
 
@@ -109,7 +110,7 @@ constructor(public router: Router, private modalService: BsModalService, private
     }
   }
 
- displayMessage(e,regNumb){
+ displayMessage(e,template,regNumb){
    console.log(e,"uii")
   if(e.checked){
     this.message = 'A'
@@ -117,18 +118,62 @@ constructor(public router: Router, private modalService: BsModalService, private
   else{
     this.message = 'R'
   }
+  // nationalId
+  this.openModal(e,template,regNumb)
+  // let obj={
+  //   status : this.message
+  // }
+
+  // this.IccUserCreationsService.statusChange(regNumb,obj).subscribe(resp => {
+  //     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
+  //       this.dataSource = new MatTableDataSource(resp);
+  //       this.dataSource.paginator = this.paginator
+  //     })
+  // })
+   
+}
+openModal(event, template, data) {
+  this.userValue = data
+  this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+
+
+}
+ActiveuserNo(){
+  this.modalRef.hide();
+  // this.dataSource = new MatTableDataSource([{'userId':1,
+  // 'firstName':"11",
+  // 'lastName':"980",
+  // 'companyName':"lkjlk",
+  // 'email':"jklk",
+  // 'contactNo':"ipoip",
+  // 'status':'A'
+  // },{'userId':1,
+  // 'firstName':"11",
+  // 'lastName':"980",
+  // 'companyName':"lkjlk",
+  // 'email':"jklk",
+  // 'contactNo':"ipoip",
+  // 'status':'R'
+  // }])
+  this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
+          this.dataSource = new MatTableDataSource(resp);
+          this.dataSource.paginator = this.paginator
+        })
+}
+Activeuser(){
   let obj={
     status : this.message
   }
-
-  this.IccUserCreationsService.statusChange(regNumb,obj).subscribe(resp => {
+  console.log(this.userValue,"this.userValue")
+  this.modalRef.hide();
+  this.IccUserCreationsService.statusChange(this.userValue.nationalId,obj).subscribe(resp => {
       this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
         this.dataSource = new MatTableDataSource(resp);
         this.dataSource.paginator = this.paginator
       })
   })
-   
 }
+
   SearchAPI(){
     this.IccUserCreationsService.searchFinanceFunded(this.SearchModel).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
@@ -196,12 +241,7 @@ constructor(public router: Router, private modalService: BsModalService, private
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
 
-  openModal(event, template, data) {
-    event.preventDefault();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-
-  }
+ 
 
   handleToggle(e, status) {
     this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
