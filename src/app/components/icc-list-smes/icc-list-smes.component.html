@@ -88,7 +88,7 @@
                         matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Status </th>
                     <td mat-cell  *matCellDef="let element">
                         <mat-slide-toggle 
-                        [checked]="element.status === 'A' ? true : false"  (change)="displayMessage($event,element.registrationNumber)"></mat-slide-toggle><br>
+                        [checked]="element.status === 'A' ? true : false"  (change)="displayMessage($event,statusActive,element)"></mat-slide-toggle><br>
                         {{element.status === 'A' ? 'Active' : 'Deactive'}}
                     </td>
                 </ng-container>
@@ -219,3 +219,20 @@
         </div>
     </header>
 </div>
+<ng-template #statusActive>
+    <div class="modal-header">
+       <h4 class="modal-title pull-left">Do you {{this.message === 'A' ? 'Active' : 'Deactive'}} this Company</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">×</span>
+       </button>
+    </div>
+    <!-- <div class="modal-body">       
+       <div class="container-fluid">
+      
+       </div>
+    </div> -->
+    <div class="modal-footer" style="justify-content: center;">
+       <button type="button"  (click)="Activeuser(this.userValue)"class="btn model-btn-outline">Yes</button>
+       <button type="button"  (click)="ActiveuserNo()"class="btn model-btn-outline">No</button>
+    </div>
+  </ng-template>

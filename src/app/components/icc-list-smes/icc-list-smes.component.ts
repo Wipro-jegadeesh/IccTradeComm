@@ -127,6 +127,7 @@ export class IccListSmesComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   message: string;
+  userValue: any;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -166,27 +167,55 @@ export class IccListSmesComponent implements OnInit {
     })
 
   }
-  displayMessage(e,regNumb){
-    console.log(e,"uii")
-   if(e.checked){
-     this.message = 'A'
-   }
-   else{
-     this.message = 'R'
-   }
-   let obj={
-     status : this.message
-   }
-   
-   this.iccListSmeServices.statusChange(regNumb,obj).subscribe(resp => {
-    this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
-      const ELEMENT_DATA: financeForBiddingData[] = resp;
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-     })
-   })
-    
+
+ displayMessage(e,template,regNumb){
+  console.log(e,"uii")
+ if(e.checked){
+   this.message = 'A'
  }
+ else{
+   this.message = 'R'
+ }
+ // nationalId
+ this.openModal(e,template,regNumb)
+ // let obj={
+ //   status : this.message
+ // }
+
+ // this.IccUserCreationsService.statusChange(regNumb,obj).subscribe(resp => {
+ //     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
+ //       this.dataSource = new MatTableDataSource(resp);
+ //       this.dataSource.paginator = this.paginator
+ //     })
+ // })
+  
+}
+openModal(event, template, data) {
+ this.userValue = data
+ this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+}
+ActiveuserNo(){
+ this.modalRef.hide();
+ this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
+  const ELEMENT_DATA: financeForBiddingData[] = resp;
+  this.dataSource = new MatTableDataSource(resp);
+  this.dataSource.paginator = this.paginator
+ })
+}
+Activeuser(){
+ let obj={
+   status : this.message
+ }
+ console.log(this.userValue,"this.userValue")
+ this.modalRef.hide();
+ this.iccListSmeServices.statusChange(this.userValue.registrationNumber,obj).subscribe(resp => {
+  this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
+    const ELEMENT_DATA: financeForBiddingData[] = resp;
+    this.dataSource = new MatTableDataSource(resp);
+    this.dataSource.paginator = this.paginator
+   })
+ })
+}
   SearchAPI(){
     // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
