@@ -45,12 +45,13 @@ import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.c
 import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component';
 import {FinancierUserCreationComponent} from './components/financier-onboarding/financier-user-creation/financier-user-creation.component'
 import {FinancierUserDetailsComponent} from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component'
- 
+import { ViewProfileComponent } from './components/view-profile/view-profile.component'
 
 const routes: Routes = [
   // { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'view-profile/:type', component: ViewProfileComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
 
   { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },

@@ -8,6 +8,9 @@ export class IccListSmeServices {
   public baseUrl: string;
   constructor(private apiService: ApiService) { }
   getallSmeProfileDetails(){
-    return this.apiService.tempGet(environment.serviePath_1+'sme-userprofile/allSmeProfileDetails'); 
+    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allSmeProfileDetails'); 
+  }
+  statusChange(regNumber,body){
+    return this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+​regNumber,body);
   }
 }

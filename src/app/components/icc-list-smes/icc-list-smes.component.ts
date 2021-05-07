@@ -65,7 +65,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 
 export class IccListSmesComponent implements OnInit {
 
-  displayedColumns: string[] = ['smeprofileID','companyId','cmpName', 'smeRating', 'status','action'];
+  displayedColumns: string[] = ['smeprofileID','registrationNumber','companyId','cmpName', 'smeRating', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 
@@ -126,6 +126,7 @@ export class IccListSmesComponent implements OnInit {
   
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
+  message: string;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -155,7 +156,7 @@ export class IccListSmesComponent implements OnInit {
       invDueDate: "17/06/2021",
       invId: "INV102",
       smeId: "SME101",
-      status: "I"
+      status: "A"
     }]);
 
     this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
@@ -165,6 +166,27 @@ export class IccListSmesComponent implements OnInit {
     })
 
   }
+  displayMessage(e,regNumb){
+    console.log(e,"uii")
+   if(e.checked){
+     this.message = 'A'
+   }
+   else{
+     this.message = 'R'
+   }
+   let obj={
+     status : this.message
+   }
+   
+   this.iccListSmeServices.statusChange(regNumb,obj).subscribe(resp => {
+    this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
+      const ELEMENT_DATA: financeForBiddingData[] = resp;
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+     })
+   })
+    
+ }
   SearchAPI(){
     // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);

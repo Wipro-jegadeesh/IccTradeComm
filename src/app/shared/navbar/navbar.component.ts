@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   headerPaths = [];
   isHide=false; 
   userDeatils: any;
+  roleName: string;
 
   constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
     ,private oauthService: OAuthService
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
    { }
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
+    this.roleName = localStorage.getItem("roleName")
     this.userDeatils = JSON.parse(localStorage.getItem('userCred'))
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
@@ -56,6 +58,12 @@ export class NavbarComponent implements OnInit {
     let userData=JSON.parse(localStorage.getItem('userCred'))
     if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
       this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }else if(this.router.url == '/view-profile/sme'){
+      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }else if(this.router.url == '/view-profile/financier'){
+      this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
+    }else if(this.router.url == '/view-profile/icc'){
+      this.headerPaths =[{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
     }
     else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
@@ -79,5 +87,8 @@ export class NavbarComponent implements OnInit {
 
     navigationHeadersPath(path){
       this.router.navigateByUrl(path);
+    }
+    profile(){
+      this.router.navigateByUrl('/view-profile/'+this.roleName)
     }
 }

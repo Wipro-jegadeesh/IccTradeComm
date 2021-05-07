@@ -22,7 +22,7 @@ export class IccUserCreationComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   @HostListener('window:resize', ['$event'])
-  displayedColumns: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
+  displayedColumns: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber','status', 'action'];
   dataSource;
   isOpen = ""
   mobileScreen = false;
@@ -71,6 +71,8 @@ export class IccUserCreationComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  message: string;
+  isChecked = true;
 constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
       private authenticationService: AuthenticationService, private IccUserCreationsService: IccUserCreationService) { }
 
@@ -79,6 +81,21 @@ constructor(public router: Router, private modalService: BsModalService, private
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+      this.dataSource = new MatTableDataSource([{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'A'
+    },{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'R'
+    }])
     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
@@ -91,6 +108,27 @@ constructor(public router: Router, private modalService: BsModalService, private
       this.mobileScreen = false;
     }
   }
+
+ displayMessage(e,regNumb){
+   console.log(e,"uii")
+  if(e.checked){
+    this.message = 'A'
+  }
+  else{
+    this.message = 'R'
+  }
+  let obj={
+    status : this.message
+  }
+
+  this.IccUserCreationsService.statusChange(regNumb,obj).subscribe(resp => {
+      this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
+        this.dataSource = new MatTableDataSource(resp);
+        this.dataSource.paginator = this.paginator
+      })
+  })
+   
+}
   SearchAPI(){
     this.IccUserCreationsService.searchFinanceFunded(this.SearchModel).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
