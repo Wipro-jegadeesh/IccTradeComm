@@ -67,7 +67,7 @@ export const environment = {
     // issuer:"https://tradecomm-keycloak.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", // old live
     issuer:"https://tradecomm-keycloak-admin.ffdcdev.fusionfabric.io/auth/realms/icctradecomm", // new live
     // issuer:"https://tradecomm-keycloak-admin.ffdcdev.fusionfabric.io/auth/realms/icccloak",
- 
+
   
     // URL of the SPA to redirect the user to after login
     // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
@@ -78,9 +78,11 @@ export const environment = {
       redirectUri: "http://localhost:4200",
       // clientId:  "Iccmarketplace", //local
       clientId:  "IccMarketplace", //live
- 
+
       // clientId:"iccproject",
- 
+
+      // clientId:"admin-spring-boot"
+
       // "credentials": {
       //   "secret": "c532d662-99cf-42b0-83ac-e9fee3f7a9d3"
       // } ,

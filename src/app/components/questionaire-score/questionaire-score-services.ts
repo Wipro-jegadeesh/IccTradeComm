@@ -8,7 +8,7 @@ export class QuestionaireScoreServices  {
 
 
   getScore(data){
-    return this.apiService.generalServiceget( environment.coriolisServicePath + 'fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
+    return this.apiService.generalServiceget( environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
   }
   
   submitIccGroups(body: any) {

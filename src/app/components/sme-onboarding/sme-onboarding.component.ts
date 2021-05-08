@@ -44,8 +44,8 @@ export class SmeOnboardingComponent implements OnInit {
 
   getQuestionnaireSection(){
     let data=JSON.parse(localStorage.getItem('userCred'))
-    // this.apiService.generalServiceget(' http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
-    this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+    // this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/198012346G/HondaCompany/SGP').subscribe(resp=>{
+    this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
         if(resp){
             this.questionnaireSections=resp.sectionDtoList
             localStorage.setItem('uuid',resp.uuid)

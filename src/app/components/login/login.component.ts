@@ -31,21 +31,29 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line: typedef
   login(event,template) {
      localStorage.setItem("userId",this.username);
-    if (this.authService.loginAsSme(this.username, this.password)) {
+      if(this.username && this.password){
         this.checkQuesCompl(event,template)
-      // this.router.navigate(['sme-dashboard']);
-        // this.checkQuesCompl(this.username)
-      this.invalidLogin = false;
-    } else if (this.authService.loginAsFinancier(this.username, this.password)) {
-      this.router.navigate(['financier-dashboard']);
-      this.invalidLogin = false;
-    }  else if (this.authService.loginAsICCUser(this.username, this.password)) {
-      this.router.navigate(['icc-dashboard']);
-      this.invalidLogin = false;
-    } else {
-      this.invalidLogin = true;
+        this.invalidLogin = false;
+      }
+      else{
+        this.invalidLogin = true;
       this.toastr.error("Invalid username or password")
-    }
+      }
+    // if (this.authService.loginAsSme(this.username, this.password)) {
+    //     this.checkQuesCompl(event,template)
+    //   // this.router.navigate(['sme-dashboard']);
+    //     // this.checkQuesCompl(this.username)
+    //   this.invalidLogin = false;
+    // } else if (this.authService.loginAsFinancier(this.username, this.password)) {
+    //   this.router.navigate(['financier-dashboard']);
+    //   this.invalidLogin = false;
+    // }  else if (this.authService.loginAsICCUser(this.username, this.password)) {
+    //   this.router.navigate(['icc-dashboard']);
+    //   this.invalidLogin = false;
+    // } else {
+    //   this.invalidLogin = true;
+    //   this.toastr.error("Invalid username or password")
+    // }
   }
   openModal(template) {
     // event.preventDefault();
@@ -68,8 +76,10 @@ export class LoginComponent implements OnInit {
  
   checkQuesCompl(event,template){
     event.preventDefault();
-    this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+this.username).subscribe(resp=>{
+    // 'sme-custom/'
+    this.apiService.generalServiceget(environment.financierServicePath+'userdata-details/'+this.username).subscribe(resp=>{
       if(resp.length){
+        if(resp[0].profiletype == 'SME'){
         let userObj={
           'companyName':resp[0].companyname,
           'userId':this.username,
@@ -95,6 +105,13 @@ export class LoginComponent implements OnInit {
           userObj['questionnaire']=resp[0].questionnaire
         }
         localStorage.setItem('userCred',JSON.stringify(userObj))
+      }
+      else if(resp[0].profiletype == 'FIN'){
+        this.router.navigateByUrl('/financier-dashboard')
+      }
+      else if(resp[0].profiletype == 'ICC'){
+        this.router.navigateByUrl('/icc-dashboard')
+      }
       }
       else{
         this.toastr.error('User Not Found')
