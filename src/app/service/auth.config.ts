@@ -12,7 +12,8 @@ export const authConfig: AuthConfig = {
     // The SPA's id. 
     // The SPA is registerd with this id at the auth-serverß
     clientId: environment.keycloak.clientId,
- 
+    dummyClientSecret:"c532d662-99cf-42b0-83ac-e9fee3f7a9d3",
+    // dummyClientSecret:'932af14e-a872-4597-8674-6977e27aa7b3',
     
     responseType: environment.keycloak.responseType,
     // set the scope for the permissions the client should request
