@@ -96,7 +96,8 @@ export class AuthConfigService {
                     // this.router.navigateByUrl('/sme-dashboard');
                     // localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
                    }
-                  if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){
+                  if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){ 
+                    localStorage.setItem("roleName","financier");
                   //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
                        localStorage.setItem("roleName","financier");
                        this.router.navigateByUrl('/financier-dashboard');
