@@ -90,19 +90,21 @@ constructor(public router: Router, private modalService: BsModalService, private
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-          let respArr=[]
+          // let respArr=[]
           
         let userCred=JSON.parse(localStorage.getItem('userCred'))
-    this.smeUserCreationService.getAlUserList('hondacompany').subscribe(resp => {
-      resp.map((item)=>{
-        if(userCred.companyName == item.companyName){
-        respArr.push(item)
-        }
-      })
+    this.smeUserCreationService.getIccRelaterUsers(userCred.companyId).subscribe(resp => {
+      // resp.map((item)=>{
+      //   if(userCred.companyName == item.companyname){
+      //   respArr.push(item)
+      //   }
+      // })
+      // console.log(respArr,"respArr")
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
+ 
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

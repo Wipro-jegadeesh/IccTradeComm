@@ -320,7 +320,8 @@ export class IccSmeDetailsComponent implements OnInit {
       this.IccUserCreationService.getIccRelaterUsers(regNo).subscribe(resp => {
         this.dataSource1 = new MatTableDataSource(resp);
         this.dataSource1.paginator = this.paginator
-      })    }
+      })    
+    }
       checkParentresp(secIndex,parNum){
         let itHasResp=false
        this.questionnaireSections[secIndex].questions.forEach((item) => { 
