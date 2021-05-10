@@ -98,8 +98,7 @@
                              <label for="First name​">Status
                              </label>
                              <mat-form-field dense>
-                                 <mat-label>Status</mat-label>
-                                <mat-select formControlName="status">
+                                <mat-select formControlName="status" >
                                   <mat-option value="A">Active</mat-option>
                                   <mat-option value="I">Inactive</mat-option>
                                   <mat-option value="D">Defaulted</mat-option>
@@ -302,7 +301,7 @@
                 </div>
               </mat-tab>
               <mat-tab label="Related Users"> 
-                <table mat-table [dataSource]="dataSource1" (mouseenter)="isHover=true" (mouseleave)="isHover=false">
+                <table mat-table [dataSource]="dataSource1" >
                 
                 
                   <ng-container matColumnDef="userId">
