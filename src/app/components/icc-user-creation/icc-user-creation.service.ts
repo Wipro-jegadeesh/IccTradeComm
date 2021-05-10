@@ -39,4 +39,7 @@ export class IccUserCreationService {
   statusChange(regNumber,body){
     return this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+​regNumber,body);
   }
+  getIccRelaterUsers(regNo){
+    return this.apiService.tempGet(environment.financierServicePath+'sme-profile/getIccSmeUserProfileDetails/'+regNo);
+  }
 }
