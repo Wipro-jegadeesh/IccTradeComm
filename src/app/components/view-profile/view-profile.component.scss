@@ -21,7 +21,21 @@ table {
     margin-top: $uxg-spacing-4 * 2;
     
 }
-
+.uxg-avatar {
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    margin: 35px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
@@ -391,6 +405,13 @@ mat-form-field {
     padding-top: 7px;
     padding-left: 1em;
 }
+
+.div2 {
+    width: 300px;
+    height: 100px;  
+    padding: 50px;
+    border: 1px solid red;
+  }
 @media only screen and (min-width: 600px) {
     /* For tablets: */
 
