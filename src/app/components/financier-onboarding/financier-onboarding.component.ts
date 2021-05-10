@@ -51,7 +51,7 @@ export class FinancierOnboardingComponent implements OnInit {
   dataSource1 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
-  displayedColumns: string[] = ['FirstName','LastName','Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumns: string[] = ['Position', 'Address', 'TelephoneNo', 'Email'];
 
   name = "Angular";
   cities: Array<ICity> = [];
@@ -268,7 +268,7 @@ let respObj = {​​​​​​​​
       })
 
       //head & service address 
-      respObj.addrlst && respObj.addrlst.length && respObj.addrlst.map((item) => {
+      respObj.finAdressLst && respObj.finAdressLst.length && respObj.finAdressLst.map((item) => {
         if (item.addressType == 'H') {
           item.faxno && this.financierForm.controls['headfaxNo'].setValue(item.faxno)
           item.addressLine1 && this.financierForm.controls['headAddrLine1'].setValue(item.addressLine1)
@@ -455,7 +455,6 @@ let respObj = {​​​​​​​​
   }
 
    check() {
-    // return 
     if(this.financierForm.valid){
       this.onSubmit()
     }else{
@@ -541,7 +540,7 @@ let respObj = {​​​​​​​​
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
-    let addrlst = [headAddr, serviceAddr]
+    let finAdressLst = [headAddr, serviceAddr]
     let findetobj = {
       // 'userlst' : userlst,
       'locregno': formValues.regNum,
@@ -556,24 +555,29 @@ let respObj = {​​​​​​​​
       'transactionLimit': formValues.transLimit,
       // 'postalCode': formValues.postalCode,
       'currency': formValues.currency,
-      'addrlst': addrlst,
+      'finAdressLst': finAdressLst,
       'asocpartylst': associatePartyArr
     }
     if (this.financierId) {
       findetobj['namedPKKey'] = parseInt(this.financierId)
     }
     !this.financierId && this.financierService.submitFinancier(findetobj).subscribe(result => {
-      //  this.toastr.success('Financier onboard Sucessfully')
-      this.toastr.success('Financier onboard Sucessfully')
-      this.gotoPage();
+      if(result){
+        this.toastr.success('Financier onboard Sucessfully')
+        // this.router.navigate(['financier-user-creation', {  finDetailId: result.profileID }]);  
+        // this.router.navigate(['/financier-user-creation'], {queryParams: {finDetailId: result.profileID}});
+        this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
+
+      }
+   
     })
     this.financierId && this.financierService.updateFinancier(findetobj).subscribe(result => {
-      // this.toastr.success('Financier Updated Sucessfully')
-      this.toastr.success('Financier details updated Sucessfully')
-      this.gotoPage();
+      if(result){
+        this.toastr.success('Financier details updated Sucessfully')
+        // this.router.navigate(['/financier-user-creation'], {queryParams: {finDetailId: result.profileID}});
+        this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
+      } 
     })
-
-    this.router.navigateByUrl('/financier-user-creation');
   }
 
   gotoPage() {

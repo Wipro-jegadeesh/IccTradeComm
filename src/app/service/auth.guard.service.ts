@@ -29,6 +29,7 @@ export class AuthConfigService {
         return false;
        }
   else{
+    // return
       return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
@@ -54,8 +55,8 @@ export class AuthConfigService {
             localStorage.setItem("userId",claims['preferred_username']);
             localStorage.setItem("accessToken",this.oauthService.getAccessToken());
             console.log("222222",claims);
-            const sameCaseArray = claims['realm_access']['roles'].map(value => value.toLowerCase());
-            sameCaseArray.map(item =>{
+            const sameCaseArray = claims['realm_access'] && claims['realm_access']['roles'].map(value => value.toLowerCase());
+            sameCaseArray && sameCaseArray.map(item =>{
               if (item.match(/^.*sme$/) || item.match(/^sme.*$/)){
                 this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+claims['preferred_username']).subscribe(resp=>{
                   if(resp.length){

@@ -13,7 +13,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { FinancierUserCreationService } from '../financier-user-creation.service';
-
+import {Location} from '@angular/common';
 
 
 
@@ -34,6 +34,7 @@ export class FinancierUserDetailsComponent implements OnInit {
   currentPage = 0;
   pageCount = 1;
   limit = 7;
+  finDetailId = "";
   tooltipPosition= "below";
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
@@ -58,18 +59,37 @@ export class FinancierUserDetailsComponent implements OnInit {
   }
  
 
-  constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
+  constructor(private _location: Location,private route: ActivatedRoute,private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private FinancierUserCreationService: FinancierUserCreationService, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
     this.invoiceFormBuild()
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.finDetailId = this.activatedRoute.snapshot.paramMap.get("finDetailId")
+    // this.finDetailId =
+    //  this.route.snapshot && this.route.snapshot.params && this.route.snapshot.params.finDetailId
+    
+
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+
+    // this.userForm.patchValue({
+    //   finDetailId : this.finDetailId,
+    //   firstName: "first",
+    //   email: "emm@mail.com" ,
+    //   lastName: "last",
+    //   contactNo: "434343",
+    //   role:"Input",
+    //   profileType:"SME",
+    //     });
     if(this.id){
       this.UserEditFormBuild()
+    }else{
+       this.userForm.patchValue({
+          finDetailId : this.finDetailId
+      })
     }
 }
 
@@ -117,10 +137,13 @@ export class FinancierUserDetailsComponent implements OnInit {
   }
   
   blurFunction(){
-    console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
-    this.FinancierUserCreationService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
+
+   
+
+    this.FinancierUserCreationService.getUserSMEDetails(this.userForm.value.finDetailId).subscribe(resp => {
       console.log(resp)
       this.userForm.patchValue({
+        finDetailId : this.finDetailId,
     firstName: resp[0].fname,
     email: resp[0].email ,
     lastName: resp[0].lname,
@@ -144,14 +167,15 @@ export class FinancierUserDetailsComponent implements OnInit {
                  if(this.id){
                   this.FinancierUserCreationService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/financier-user-creation');
-          
+                    // this.router.navigateByUrl('/financier-user-creation');
+                    this.gobackPage()
                   }, error => {
                   })
                 }else{
                   this.FinancierUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/financier-user-creation');
+                    // this.router.navigateByUrl('/financier-user-creation');
+                    this.gobackPage();
                   }, error => {
                   })
                 }
@@ -164,7 +188,7 @@ export class FinancierUserDetailsComponent implements OnInit {
       if(resp){
         // this.FinancebiddingDetails = resp
         this.userForm.patchValue({
-      nationalId: resp.nationalId,
+      finDetailId: resp.finDetailId,
       firstName: resp.firstName,
       email: resp.email ,
       lastName: resp.lastName,
@@ -185,7 +209,7 @@ export class FinancierUserDetailsComponent implements OnInit {
   }
   invoiceFormBuild() {
     this.userForm = this.fb.group({
-      nationalId: ['', Validators.required],
+      finDetailId: [''],
       firstName: ['', Validators.required],
       email: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -209,6 +233,10 @@ export class FinancierUserDetailsComponent implements OnInit {
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
+  }
+
+  gobackPage(){
+    this._location.back();
   }
 
 }

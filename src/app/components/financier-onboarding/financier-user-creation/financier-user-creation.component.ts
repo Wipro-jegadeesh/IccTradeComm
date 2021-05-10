@@ -58,6 +58,7 @@ export class FinancierUserCreationComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
   isHover: boolean = false;
+  finDetailId = "";
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -91,19 +92,31 @@ export class FinancierUserCreationComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
+constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute,public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
       private authenticationService: AuthenticationService
       , private FinancierUserCreationService: FinancierUserCreationService
       ) { }
 
 
   ngOnInit() {
+    //  this.finDetailId = this.route.snapshot && this.route.snapshot.params && this.route.snapshot.params.finDetailId
+
+    //  this.route.paramMap.subscribe( params => {
+    //   this.finDetailId = params.get('finDetailId');    
+    // });
+
+    this.finDetailId = this.activatedRoute.snapshot.paramMap.get("finDetailId")
+
+
+     
+
     this.dataSource = new MatTableDataSource([{'userId':1,
     'firstName':"11",
     'lastName':"980",
     // 'companyName':"lkjlk",
     'emailId':"jklk",
-    'phoneNumber':"ipoip"
+    'phoneNumber':"ipoip",
+    "userKey" : "21"
     }])
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -111,13 +124,14 @@ constructor(public router: Router, private modalService: BsModalService, private
           let respArr=[]
           
         let userCred=JSON.parse(localStorage.getItem('userCred'))
-    this.FinancierUserCreationService.getAlUserList().subscribe(resp => {
-      resp.map((item)=>{
-        if(userCred.companyName == item.companyName){
-        respArr.push(item)
-        }
-      })
-      this.dataSource = new MatTableDataSource(respArr);
+    this.FinancierUserCreationService.getAlUserList(this.finDetailId).subscribe(resp => {
+      // resp.map((item)=>{
+      //   if(userCred.companyName == item.companyName){
+      //   respArr.push(item)
+      //   }
+      // })
+      
+      this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
@@ -139,7 +153,6 @@ constructor(public router: Router, private modalService: BsModalService, private
       'invoiceRef': String,
       'invoiceDate': String,
       'invoiceDueDate': String
-
     };
     // this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
@@ -198,8 +211,6 @@ constructor(public router: Router, private modalService: BsModalService, private
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-
   }
 
   handleToggle(e, status) {
@@ -208,10 +219,14 @@ constructor(public router: Router, private modalService: BsModalService, private
 
   }
   userClick() {
-    this.router.navigateByUrl('/financier-user-details/');
+    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/');
+    // this.router.navigate(['/financier-user-details', { finDetailId: this.finDetailId }]);  
+
   }
   navigateUserDetails(id) {
-    this.router.navigateByUrl('/financier-user-details/'+id);
+    // this.router.navigate(['/financier-user-details/'+id, { id : id,finDetailId: this.finDetailId }]);  
+
+    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/'+id);
   }
   logout() {
     this.authenticationService.logout()
