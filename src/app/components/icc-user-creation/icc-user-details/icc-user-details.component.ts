@@ -197,7 +197,6 @@ export class IccUserDetailsComponent implements OnInit {
       address1:['',Validators.required],
       country:['',Validators.required],
       state:['',Validators.required],
-      city:['',Validators.required],
       postalCode:['',Validators.required],
       // groupname:['',Validators.required],
       role:['',Validators.required],
