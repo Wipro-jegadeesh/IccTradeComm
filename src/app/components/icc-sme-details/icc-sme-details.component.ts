@@ -65,11 +65,12 @@ export class IccSmeDetailsComponent implements OnInit {
   constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
-// console.log(Data,"Data");
+ console.log(this.smeData.smeData.queryParams,"smeDatasmeData");
   }
 
   ngOnInit() {
-   
+    // this.smeData = this.router.getCurrentNavigation().extras.state;
+    // console.log(this.smeData,"smeDatasmeData");
     this.getQuestionnaireSection()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -134,7 +135,7 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+this.smeData.companyId + '/' + this.smeData.companyName + '/' + this.smeData.country).subscribe(resp=>{
+      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
         // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList

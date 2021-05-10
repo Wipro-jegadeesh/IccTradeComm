@@ -292,12 +292,12 @@ Activeuser(){
   logout() {
     this.authenticationService.logout()
   }
-  navigateToSmeDetails(path){
+  navigateToSmeDetails(path,smeData){
     let data: NavigationExtras = {
       queryParams: {
-      "companyId":"companyId",
-      "companyName":"companyName",
-      "country":"country"
+      "companyId":smeData.registrationNumber, 
+      "companyName":smeData.name,
+      "country": "SGP"
       }
     }
     this.router.navigate([path], { state: { smeData: data } });
