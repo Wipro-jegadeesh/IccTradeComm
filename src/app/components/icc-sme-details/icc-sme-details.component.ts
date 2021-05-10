@@ -61,9 +61,11 @@ export class IccSmeDetailsComponent implements OnInit {
   questions;
   radioChecked;
   groupsForm: FormGroup;
+  smeData;
   constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
-    const Data= this.router.getCurrentNavigation().extras.state;
-console.log(Data,"Data");
+    const smeData= this.router.getCurrentNavigation().extras.state;
+    this.smeData = smeData
+// console.log(Data,"Data");
   }
 
   ngOnInit() {
@@ -132,7 +134,7 @@ console.log(Data,"Data");
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+this.smeData.companyId + '/' + this.smeData.companyName + '/' + this.smeData.country).subscribe(resp=>{
         // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList
