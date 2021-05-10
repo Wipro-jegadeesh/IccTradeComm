@@ -10,6 +10,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { IccListSmeServices } from "../icc-list-smes/icc-list-smes.service";
 import { ToastrService } from 'ngx-toastr';
+import { IccUserCreationService } from '../icc-user-creation/icc-user-creation.service'
+import { MatPaginator } from '@angular/material/paginator';
+
+import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
+
 
 export interface FinancierDatas {
   financierId: string;
@@ -26,6 +31,7 @@ let FINANACIERLIST: FinancierDatas[] = [
   styleUrls: ['./icc-sme-details.component.scss']
 })
 export class IccSmeDetailsComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource1 = new MatTableDataSource();
   dataSource2 = new MatTableDataSource();
   mobileScreen = false;
@@ -36,7 +42,7 @@ export class IccSmeDetailsComponent implements OnInit {
   limit = 7;
   isOpen = "active";
   displayedColumns: string[] = ['scoreName', 'score', 'information'];
-  displayedColumns1: string[] = ['userId', 'userName', 'userCompName'];
+  displayedColumns1: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
 
   dataSource = [];
   // dataSource1 = [];
@@ -65,7 +71,9 @@ export class IccSmeDetailsComponent implements OnInit {
   groupsForm: FormGroup;
   userForm: FormGroup;
   smeData;
-  constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
+  biddingTooltip = BIDDINGCONSTANTS;
+
+  constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService,public IccUserCreationService:IccUserCreationService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
     this.invoiceFormBuild()
@@ -76,23 +84,36 @@ export class IccSmeDetailsComponent implements OnInit {
   ngOnInit() {
     // this.smeData = this.router.getCurrentNavigation().extras.state;
     // console.log(this.smeData,"smeDatasmeData");
-    this.getQuestionnaireSection()
+   
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
     this.dataSource=[]
     //  this.dataSource1=[]
     this.sectionIndex=0;
-    this.dataSource1 = new MatTableDataSource([{
-      userId : 'SME102',
-      userName: "SME102 Sme",
-      userCompName: "Tata Steel",
+    this.dataSource1 = new MatTableDataSource([{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'A'
+    },{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'R'
     }])
     this.dataSource2 = new MatTableDataSource([{
-      scoreName : 'Business Planning',
-      score: "586",
-      information: "Lot of Questions Not Answered",
+      // scoreName : 'Business Planning',
+      // score: "586",
+      // information: "Lot of Questions Not Answered",
     }])
+    this.getQuestionnaireSection()
+    this.getscore();
+    this.getIccRelaterUsers();
     this.groupsFormBuild()
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
@@ -188,7 +209,7 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
+      this.apiService.generalServiceget(environment.coriolisServicePath +'/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
         // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList
@@ -281,6 +302,25 @@ export class IccSmeDetailsComponent implements OnInit {
             }
         })
     }
+    getscore(){
+      this.apiService.generalServiceget( environment.coriolisServicePath + '/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
+        if(listResp){
+          this.dataSource2 = new MatTableDataSource(listResp.scores);
+           this.groupsForm.patchValue({  
+            state : listResp.state,
+            score : listResp.score
+          })
+        }
+
+      })
+    }
+    getIccRelaterUsers(){
+      let regNo = this.smeData.smeData.queryParams.companyId
+      console.log("regNo",regNo);
+      this.IccUserCreationService.getIccRelaterUsers(regNo).subscribe(resp => {
+        this.dataSource1 = new MatTableDataSource(resp);
+        this.dataSource1.paginator = this.paginator
+      })    }
       checkParentresp(secIndex,parNum){
         let itHasResp=false
        this.questionnaireSections[secIndex].questions.forEach((item) => { 
@@ -661,6 +701,8 @@ textListRespBuild(Data){
   }
   return obj
 }
-
+navigateFinanceDetails(id) {
+  this.router.navigateByUrl('/icc-user-details/'+id);
+}
 }
 
