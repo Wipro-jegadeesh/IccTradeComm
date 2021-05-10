@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params,NavigationExtras,NavigationStart } from '@angular/router';
 import { ModalDialogService } from '../../service/modal-dialog.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +10,8 @@ import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { map,filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 // const ELEMENT_DATA: any[] = [
 //   {
@@ -64,6 +66,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 
 export class IccListSmesComponent implements OnInit {
+  // appstate$: Observable<object>;
 
   displayedColumns: string[] = ['smeprofileID','registrationNumber','companyId','cmpName', 'smeRating', 'status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -145,6 +148,14 @@ export class IccListSmesComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+    // this.appstate$ = this.router.events.pipe(
+    //   filter(e => e instanceof NavigationStart),
+    //   map(() => {
+    //   const currentState = this.router.getCurrentNavigation();
+    //   return currentState.extras.state;
+    //   })
+    //   );
+
     this.dataSource = new MatTableDataSource([{
       invoiceRef : 'TR123',
       buyerAddr: "Singapore",
@@ -282,7 +293,14 @@ Activeuser(){
     this.authenticationService.logout()
   }
   navigateToSmeDetails(path){
-    this.router.navigateByUrl(path);
+    let data: NavigationExtras = {
+      queryParams: {
+      "companyId":"companyId",
+      "companyName":"companyName",
+      "country":"country"
+      }
+    }
+    this.router.navigate([path], { state: { smeData: data } });
   }
 
 }

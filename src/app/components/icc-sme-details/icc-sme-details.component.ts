@@ -61,9 +61,13 @@ export class IccSmeDetailsComponent implements OnInit {
   questions;
   radioChecked;
   groupsForm: FormGroup;
-  constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { }
+  constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
+    const Data= this.router.getCurrentNavigation().extras.state;
+console.log(Data,"Data");
+  }
 
   ngOnInit() {
+   
     this.getQuestionnaireSection()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -128,7 +132,7 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget(' http://localhost:3030/getallquestionaire/198012348G/HondaCompany/SGP').subscribe(resp=>{
+      this.apiService.generalServiceget('http://localhost:3030/getallquestionaire/'+data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
         // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList
