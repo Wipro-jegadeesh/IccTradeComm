@@ -218,7 +218,7 @@ return false;
 },
 dateFormatValidation(value){
 // var dateReg = /^[0-9]{2}\-[0-9]{2}\-[0-9]{4}$/;
-// debugger;
+// 
 // if (dateReg.test(value)) {
 // let date = value.split('-');
 // if (date[0] === "00" || date[0] > 12) {

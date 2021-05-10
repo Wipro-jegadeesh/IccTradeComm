@@ -11,8 +11,8 @@
                       <label for="National ID​">Company Register ID​
                       </label>
                       <mat-form-field dense>
-                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="nationalId" [readonly]="true"/>
-                        <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error>
+                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="finDetailId" [readonly]="true"/>
+                        <mat-error *ngIf="hasError('finDetailId', 'required')">Register is required</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -181,7 +181,7 @@
           </div>
                 <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
                         <button mat-raised-button color="primary" >Submit</button>
-                        <button type="button" mat-raised-button color="warn" routerLink='/financier-user-creation'>Cancel</button>
+                        <button type="button" mat-raised-button color="warn"  (click)="gobackPage()">Cancel</button>
                 </div>
       </form>
   

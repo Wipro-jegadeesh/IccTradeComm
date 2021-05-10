@@ -6,8 +6,8 @@ import { environment } from 'src/environments/environment';
 export class FinancierUserCreationService {
     constructor(private apiService:ApiService) { } 
 
-    getAlUserList(){
-        return this.apiService.generalServiceget(environment.financierServicePath+'sme-userprofile/allUserProfileDetails');
+    getAlUserList(finDetailId){
+        return this.apiService.generalServiceget(environment.financierServicePath+'financiercompany-details/'+finDetailId);
       }
     
       getUserSMEDetails(id) {
@@ -20,6 +20,6 @@ export class FinancierUserCreationService {
         return this.apiService.post(environment.financierServicePath+'adduser', body);
       }
       getUserDetails(id) {
-        return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/'+id);
+        return this.apiService.tempGet(environment.financierServicePath+'uservaliddetails/'+id);
       }
 }
