@@ -13,4 +13,7 @@ export class IccListSmeServices {
   statusChange(regNumber,body){
     return this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+​regNumber,body);
   }
+  getUserSMEDetails(id) {
+    return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
+  }
 }

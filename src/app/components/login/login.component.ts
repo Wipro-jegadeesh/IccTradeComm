@@ -99,8 +99,7 @@ export class LoginComponent implements OnInit {
         }
         else if(isQuesSucc == 'N'){
           this.router.navigateByUrl('/sme-onboarding')
-        }
-        else{
+        }else{
           this.router.navigateByUrl('/sme-dashboard')
           userObj['questionnaire']=resp[0].questionnaire
         }

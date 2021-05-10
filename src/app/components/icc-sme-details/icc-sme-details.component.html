@@ -1,11 +1,123 @@
 <div class="app-content {{isOpen}} ">
   <header>
       <br>
-      <h5>Sme110 - Details</h5>
+      <h5>Sme110</h5>
     <div class="container-fluid contnr-div">
       <div class="row">
           <div class="col-md-12">
+           
             <mat-tab-group dynamicHeight>
+              <mat-tab label="Details">
+                <div class="links">
+                  <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
+                        <mat-card>
+                      <mat-card-content>
+                        <div class="row dis-block">
+                          <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="National ID​">Company Register ID​
+                                </label>
+                                <mat-form-field dense>
+                                  <input type="text"  placeholder="Company Register Id" matInput formControlName="nationalId" />
+                                  <!-- <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error> -->
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="First name​">Company name​
+                                </label>
+                                <mat-form-field dense>
+                                  <mat-icon matPrefix>business</mat-icon>
+                                  <input type="text" matInput placeholder="Company Number" formControlName="companyName" />
+                                  <!-- <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error> -->
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="Country​">Country
+                                </label>
+                                <mat-form-field dense>
+                                  <mat-icon matPrefix>flag</mat-icon>
+                                  <input type="text" matInput placeholder="Country" formControlName="country" />
+                                  <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
+                                </mat-form-field>
+                              </div>
+                            </div>
+                      </div>
+                        <div class="row dis-block">
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="First name​">First name​
+                              </label>
+                              <mat-form-field dense>
+                                <mat-icon matPrefix>person</mat-icon>
+                                <input type="text" placeholder="First Name" matInput formControlName="firstName" readonly/>
+                                <!-- <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error> -->
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="First name​">Last name​
+                              </label>
+                              <mat-form-field dense>
+                                <mat-icon matPrefix>person</mat-icon>
+                                <input type="text" matInput placeholder="Last Name" formControlName="lastName" readonly/>
+                                <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
+                              </mat-form-field>
+                            </div>
+                
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <label for="National ID​">Phone Number</label>
+                              <mat-form-field dense>
+                                <mat-icon matPrefix>call</mat-icon>
+                                <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" readonly/>
+                                <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
+                              </mat-form-field>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row dis-block">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label for="National ID​">Email Id
+                            </label>
+                            <mat-form-field dense>
+                              <mat-icon matPrefix>email</mat-icon>
+                              <input type="text" matInput placeholder="Email" formControlName="email" readonly/>
+                              <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                             <label for="First name​">Status
+                             </label>
+                             <mat-form-field dense>
+                                 <mat-label>Status</mat-label>
+                                <mat-select formControlName="status">
+                                  <mat-option value="Active">Active</mat-option>
+                                  <mat-option value="Inactive">Inactive</mat-option>
+                                  <mat-option value="Defaulted">Defaulted</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
+                             </mat-form-field>
+                          </div>
+                     
+                      </div>
+                    </div>
+                    <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
+                      <button mat-raised-button color="primary" >Submit</button>
+              </div>
+            </mat-card-content>
+            </mat-card>
+            </form>
+                </div>
+              </mat-tab>
               <mat-tab label="Questionaire">
                 <div class="links">
                   <div class="row col-md-12 col-12" *ngIf="questionnaireSections">

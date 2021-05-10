@@ -8,6 +8,8 @@ import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { IccListSmeServices } from "../icc-list-smes/icc-list-smes.service";
+import { ToastrService } from 'ngx-toastr';
 
 export interface FinancierDatas {
   financierId: string;
@@ -61,11 +63,14 @@ export class IccSmeDetailsComponent implements OnInit {
   questions;
   radioChecked;
   groupsForm: FormGroup;
+  userForm: FormGroup;
   smeData;
-  constructor( private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
+  constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
- console.log(this.smeData.smeData.queryParams,"smeDatasmeData");
+    this.invoiceFormBuild()
+
+//  console.log(this.smeData.smeData.queryParams,"smeDatasmeData");
   }
 
   ngOnInit() {
@@ -89,7 +94,20 @@ export class IccSmeDetailsComponent implements OnInit {
       information: "Lot of Questions Not Answered",
     }])
     this.groupsFormBuild()
-   
+    this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
+      console.log(resp)
+      this.userForm.patchValue({
+    nationalId:resp[0].nationalId,
+    firstName: resp[0].fname,
+    email: resp[0].email ,
+    lastName: resp[0].lname,
+    contactNo: resp[0].contactnum,
+    companyName: resp[0].companyname,
+    country:resp[0].country,
+    status:resp[0].status
+      });
+
+    })
   }
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
@@ -98,6 +116,41 @@ export class IccSmeDetailsComponent implements OnInit {
       // groupDescription: ['', Validators.required]
     });
 
+  }
+  invoiceFormBuild() {
+    this.userForm = this.fb.group({
+      firstName: [''],
+      lasrName:[''],
+      email: [''],
+      contactNo: [''],
+      status: ['',Validators.required],
+      country:[''],
+      companyName:[''],
+      nationalId:['']
+    });
+  
+  }
+ 
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.userForm.controls[controlName].hasError(errorName);
+  }
+  onSubmitInvoiceForm() {
+    try {
+      if (this.userForm.status === "INVALID"){
+        throw { "mes": "Please fill mendatory  fields" }
+      }
+      let obj = {
+        status: this.userForm.value.status
+      }
+      this.iccListSmeServices.statusChange(this.smeData.smeData.queryParams.companyId,obj).subscribe(resp => {
+        // this.invoiceFormBuild();
+        this.toastr.success('Update Sucessfully')
+                  }, error => {
+                  })
+                
+     
+    } catch (err) {
+    }
   }
  
   public scrollRight(): void {

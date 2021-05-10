@@ -22,7 +22,7 @@ export class ViewProfileComponent implements OnInit {
     return this.userForm.controls[controlName].hasError(errorName);
   }
   UserEditFormBuild(){
-    this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+localStorage.getItem("userId")).subscribe(resp=>{
+    this.apiService.generalServiceget(environment.financierServicePath+'userdata-details/'+localStorage.getItem("userId")).subscribe(resp=>{
       if(resp){
         this.userDeatils = resp[0]
         this.userForm.patchValue({
