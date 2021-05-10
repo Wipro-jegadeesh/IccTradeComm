@@ -68,7 +68,7 @@ const BIDDING_DATA: biddingDetails[] = [];
 export class IccListSmesComponent implements OnInit {
   // appstate$: Observable<object>;
 
-  displayedColumns: string[] = ['smeprofileID','registrationNumber','companyId','cmpName', 'smeRating','action'];
+  displayedColumns: string[] = ['smeprofileID','registrationNumber','companyId','cmpName', 'smeRating','status','action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
  
 

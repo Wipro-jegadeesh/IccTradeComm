@@ -97,9 +97,9 @@ export class IccSmeDetailsComponent implements OnInit {
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
       this.userForm.patchValue({
-    nationalId:resp[0].nationalId,
+    nationalId:resp[0].companyid,
     firstName: resp[0].fname,
-    email: resp[0].email ,
+    email: resp[0].email,
     lastName: resp[0].lname,
     contactNo: resp[0].contactnum,
     companyName: resp[0].companyname,
@@ -120,7 +120,7 @@ export class IccSmeDetailsComponent implements OnInit {
   invoiceFormBuild() {
     this.userForm = this.fb.group({
       firstName: [''],
-      lasrName:[''],
+      lastName:[''],
       email: [''],
       contactNo: [''],
       status: ['',Validators.required],
