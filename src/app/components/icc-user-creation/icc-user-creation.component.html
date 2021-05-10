@@ -183,7 +183,7 @@
 </div>
 <ng-template #statusActive>
     <div class="modal-header">
-       <h4 class="modal-title pull-left">Do you {{this.message === 'A' ? 'Active' : 'Deactive'}} this Company</h4>
+        <h4 class="modal-title pull-left">Do you want {{this.message === 'A' ? 'Active' : 'Deactive'}} {{this.userValue.name}}</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">×</span>
        </button>

@@ -2,31 +2,112 @@
     <header class="m0p0">
         <br>
         <h5>Profile</h5>
-<div class="container rounded bg-white mt-5 mb-5">
+<div class="container">
     <div class="row">
-        <div class="col-md-4 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" ><span class="font-weight-bold">Amelly</span><span class="text-black-50">amelly12@bbb.com</span><span> </span></div>
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <div style="width: 150px;" class="uxg-avatar">U</div>
+              <!-- <img class="rounded-circle mt-5"  style="width: 150px;" src="../../../assets/img/default-avatar.jpeg" > -->
+              <span class="font-weight-bold">{{this.userDeatils?.name || 'test'}}</span><span class="text-black-50">{{this.userDeatils?.email || 'test@mail.com'}}</span><span> </span></div>
         </div>
-        <div class="col-md-8 border-right">
+        <div class="col-md-9 border-right">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+                <form [formGroup]="userForm" autocomplete="off" >
+                <div class="row dis-block">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="First name​">First name​
+                            </label>
+                            <mat-form-field dense>
+                              <mat-icon matPrefix>person</mat-icon>
+                              <input type="text" placeholder="First Name" matInput formControlName="firstName" readonly/>
+                              <!-- <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="First name​">Last name​
+                            </label>
+                            <mat-form-field dense>
+                              <mat-icon matPrefix>person</mat-icon>
+                              <input type="text" matInput placeholder="Last Name" formControlName="lastName" readonly/>
+                              <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                    </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                <div class="row dis-block">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="National ID​">Phone Number</label>
+                            <mat-form-field dense>
+                              <mat-icon matPrefix>call</mat-icon>
+                              <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" readonly/>
+                              <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="National ID​">Email Id</label>
+                          <mat-form-field dense>
+                            <mat-icon matPrefix>email</mat-icon>
+                            <input type="text" matInput placeholder="Email" formControlName="email" readonly/>
+                            <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
+                          </mat-form-field>
+                        </div>
+                  </div>
+                   
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">PhoneNumber</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="enter address" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
+                <div class="row dis-block">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Address">Address 1</label>
+                    <mat-form-field dense>
+                      <mat-icon matPrefix>home</mat-icon>
+                      <input type="text" matInput placeholder="Address" formControlName="address" readonly/>
+                      <!-- <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error> -->
+                    </mat-form-field>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
+             </div>
+             <div class="col-sm-6">
+              <div class="form-group">
+                <label for="Country​">Country</label>
+                <mat-form-field dense>
+                  <mat-icon matPrefix>flag</mat-icon>
+                  <input type="text" matInput placeholder="Country" formControlName="country" readonly/>
+                  <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
+                </mat-form-field>
+              </div>
+            </div>
+                 
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="row dis-block">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Locale">State</label>
+                        <mat-form-field dense>
+                          <mat-icon matPrefix>add_location</mat-icon>
+                          <input type="text" matInput placeholder="State" formControlName="state" readonly/>
+                          <!-- <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error> -->
+                        </mat-form-field>
+                      </div>
+                </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Locale">City</label>
+                            <mat-form-field dense>
+                              <mat-icon matPrefix>add_location</mat-icon>
+                              <input type="text" matInput placeholder="City" formControlName="city" readonly/>
+                              <!-- <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                    </div>
+               
+                </div>
+                </form>
+                <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> -->
             </div>
         </div>
     </div>
