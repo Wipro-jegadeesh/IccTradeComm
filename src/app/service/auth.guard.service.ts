@@ -83,6 +83,7 @@ export class AuthConfigService {
                     }
                     else{
                       this.router.navigateByUrl('/sme-dashboard')
+                      localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");  
                       userObj['questionnaire']=resp[0].questionnaire
                     }
                     localStorage.setItem('userCred',JSON.stringify(userObj))
