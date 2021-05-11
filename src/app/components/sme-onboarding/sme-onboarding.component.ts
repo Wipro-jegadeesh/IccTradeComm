@@ -6,6 +6,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-sme-onboarding',
@@ -26,7 +27,7 @@ export class SmeOnboardingComponent implements OnInit {
   smeForm:FormGroup
 
   constructor(private router: Router,private apiService:ApiService,
-    private fb:FormBuilder,private toastr: ToastrService) { }
+    private fb:FormBuilder,private toastr: ToastrService,private datePipe:DatePipe) { }
 
   radioChecked={}
   
@@ -431,7 +432,7 @@ export class SmeOnboardingComponent implements OnInit {
         'sectionList':onboardingResp,
         'uuid':localStorage.getItem('uuid')
     }
-    this.apiService.post(environment.coriolisServicePath + 'submitquestionaire',obj).subscribe(resp=>{
+    this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire',obj).subscribe(resp=>{
         if(resp){
             // alert('Questionnaire Section Submitted Successfully')
             this.toastr.success('Questionnaire Section Submitted Successfully')
@@ -528,7 +529,8 @@ export class SmeOnboardingComponent implements OnInit {
     let obj={
         "type":'QuestionResponseDateDto',
         "questionAlias":Data.alias,
-        "value":Data.response
+        // "value":Data.response
+        "value":this.datePipe.transform(Data.response,"dd/MM/YYYY")
     }
     return obj
   }

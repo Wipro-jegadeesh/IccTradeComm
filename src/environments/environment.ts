@@ -24,7 +24,7 @@
 
 
 //General Service
-let BASE_PATH = "http://localhost:8080/";
+let BASE_PATH = "http://localhost:8082/";
 
 // Invoice Service Url 8080
 let serviePath_1 = "http://2a088c457b03.ngrok.io/";
@@ -36,7 +36,7 @@ let serviePath_2 = "http://2a088c457b03.ngrok.io/";
 let financierServicePath="http://localhost:8080/"
 
 // Coriolis service path
-let coriolisServicePath="http://localhost:3030/"
+let coriolisServicePath="http://localhost:8083/"
 
 //Dashboard  Service Url
 let dboardServerPath1 = "http://dboardServPath1/";
@@ -83,9 +83,7 @@ export const environment = {
 
       // clientId:"admin-spring-boot"
 
-      // "credentials": {
-      //   "secret": "c532d662-99cf-42b0-83ac-e9fee3f7a9d3"
-      // } ,
+     secretId:"00b11311-73bd-4527-ae4d-7889ee0fcd35",
   
       // URL of the SPA to redirect the user to after login
       // redirectUri: 'http://localhost:4200/finanicer-dashboard/',
