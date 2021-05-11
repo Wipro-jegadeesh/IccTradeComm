@@ -195,8 +195,8 @@
                               Unassign Roles
                           </mat-panel-title>
                             <mat-selection-list matInput [(ngModel)]="selectedProducts"[ngModelOptions]="{standalone: true}" (selectionChange)="selectionChange($event)">
-                              <mat-list-option *ngFor="let item of RolesType" [value]="item">
-                                {{item}}
+                              <mat-list-option *ngFor="let item of RolesType" [value]="item.code">
+                                {{item.code}}
                               </mat-list-option>
                             </mat-selection-list>
                           <!-- <mat-error *ngIf="hasError('role', 'required')">role is required</mat-error> -->

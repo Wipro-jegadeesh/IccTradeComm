@@ -83,6 +83,8 @@ export class IccUserDetailsComponent implements OnInit {
     if(this.id){
       this.UserEditFormBuild()
     }
+    // this.RolesType = [{"roleId":1,"code":"Maker","roleDescription":"Maker"},{"roleId":2,"code":"Checker","roleDescription":"Checker"}]
+
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if(listResp){
         console.log(listResp)
