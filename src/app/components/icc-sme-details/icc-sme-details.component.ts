@@ -209,7 +209,7 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget(environment.coriolisServicePath +'/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
+      this.apiService.generalServiceget(environment.coriolisServicePath +'coriolis/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
         // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp){
                 this.questionnaireSections=resp.sectionDtoList
@@ -303,7 +303,7 @@ export class IccSmeDetailsComponent implements OnInit {
         })
     }
     getscore(){
-      this.apiService.generalServiceget( environment.coriolisServicePath + '/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
+      this.apiService.generalServiceget( environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
         if(listResp){
           this.dataSource2 = new MatTableDataSource(listResp.scores);
            this.groupsForm.patchValue({  
@@ -593,7 +593,7 @@ onSave() {
       'sectionList':onboardingResp,
       'uuid':localStorage.getItem('uuid')
   }
-  this.apiService.post(environment.coriolisServicePath + 'submitquestionaire',obj).subscribe(resp=>{
+  this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire',obj).subscribe(resp=>{
       if(resp){
           // alert('Questionnaire Section Submitted Successfully')
           // this.toastr.success('Questionnaire Section Submitted Successfully')
