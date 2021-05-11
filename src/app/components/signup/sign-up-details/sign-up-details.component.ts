@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SignupService } from '../signup.service';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
+import {SIGNUPSECTORS} from '../../../shared/constants/signUpSectors'
 
 @Component({
   selector: 'app-sign-up-details',
@@ -17,15 +18,40 @@ export class SignUpDetailsComponent implements OnInit {
   isImageSaved: boolean;
   cardImageBase64: string;
   bidpanelOpenState = false;
+  sectorOptionsDatas=[]
+  sectordropdownSettings:any={}
+  selectedItems=[]
 
 
   constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
+    this.sectorOptionsDatas = SIGNUPSECTORS
     this.signupFormBuild()
-
+    this.sectordropdownSettings = {
+      singleSelection: true ,
+      defaultOpen: false,
+      idField: "sector_id",
+      textField: "sector_text",
+      allowSearchFilter: true,
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Sector',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
+    };
   }
+  onDeSelect(event) {
+  
+  }
+  onSelectAll(items: any) {
+    console.log('onSelectAll', items);
+  }
+  onChange(event){
+   
+   }
   signupFormBuild() {
     
     this.userForm = this.fb.group({
@@ -46,9 +72,9 @@ export class SignUpDetailsComponent implements OnInit {
       profileType:['SME',Validators.required],
     });
     let obj={
-      'registrationId':this.signUpDetails.nationalId,
-      'companyName':this.signUpDetails.companyName,
-      'country':this.signUpDetails.country[0].id
+      'registrationId':this.signUpDetails  ? this.signUpDetails.nationalId : '',
+      'companyName':this.signUpDetails ? this.signUpDetails.companyName: '',
+      'country':this.signUpDetails ? this.signUpDetails.country[0].id:''
     }
     this.SignupServices.getUserDetails(obj).subscribe(resp=>{
       if(resp){

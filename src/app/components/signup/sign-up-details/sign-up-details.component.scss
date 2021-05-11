@@ -55,7 +55,7 @@ header {
     padding: 2rem;
     position: absolute;
     right: 0;
-    top: -40px;
+    top: -60px;
 }
 
 .accounts-list {
@@ -320,7 +320,7 @@ mat-form-field {
     align-self: stretch;
     margin-bottom: $uxg-spacing-2;
     // margin-left: $uxg-spacing-3 * 6;
-    width: 400px;
+    width: 380px;
 }
 
 .uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
@@ -455,3 +455,10 @@ mat-form-field {
           td{display: block;}           
       }
   }
+  .row {
+   
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: auto;
+    margin-left:auto;
+}
