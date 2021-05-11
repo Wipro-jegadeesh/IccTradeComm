@@ -8,9 +8,10 @@
             <div class="row dis-block">
                 <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="National ID​">Company Register ID​
-                      </label>
+                      <!-- <label for="National ID​">Company Register ID​
+                      </label> -->
                       <mat-form-field dense>
+                        <mat-label>Company Register ID </mat-label>
                         <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="nationalId" />
                         <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error>
                       </mat-form-field>
@@ -18,9 +19,10 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="First name​">Company name​
-                      </label>
+                      <!-- <label for="First name​">Company name​
+                      </label> -->
                       <mat-form-field dense>
+                        <mat-label>Company Name </mat-label>
                         <mat-icon matPrefix>business</mat-icon>
                         <input type="text" matInput placeholder="Company Number" formControlName="companyName" />
                         <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error>
@@ -32,6 +34,7 @@
                       <label for="Country​">Country
                       </label>
                       <mat-form-field dense>
+                        <mat-label>Country</mat-label>
                         <mat-icon matPrefix>flag</mat-icon>
                         <input type="text" matInput placeholder="Country" formControlName="country" />
                         <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
@@ -42,9 +45,10 @@
           <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="National ID​">Email Id
-                  </label>
+                  <!-- <label for="National ID​">Email Id
+                  </label> -->
                   <mat-form-field dense>
+                    <mat-label>Email Id </mat-label>
                     <mat-icon matPrefix>email</mat-icon>
                     <input type="text" matInput placeholder="Email" formControlName="email" />
                     <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
@@ -53,9 +57,10 @@
               </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="First name​">First name​
-                </label>
+                <!-- <label for="First name​">First name​
+                </label> -->
                 <mat-form-field dense>
+                  <mat-label>First Name </mat-label>
                   <mat-icon matPrefix>person</mat-icon>
                   <input type="text" placeholder="First Name" matInput formControlName="firstName" />
                   <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>
@@ -64,9 +69,10 @@
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="First name​">Last name​
-                </label>
+                <!-- <label for="First name​">Last name​
+                </label> -->
                 <mat-form-field dense>
+                  <mat-label>Last Name </mat-label>
                   <mat-icon matPrefix>person</mat-icon>
                   <input type="text" matInput placeholder="Last Name" formControlName="lastName" />
                   <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
@@ -78,8 +84,9 @@
           <div class="row dis-block">
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="National ID​">Phone Number</label>
+                <!-- <label for="National ID​">Phone Number</label> -->
                 <mat-form-field dense>
+                  <mat-label>Phone Number</mat-label>
                   <mat-icon matPrefix>call</mat-icon>
                   <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
                   <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error>
@@ -87,9 +94,10 @@
               </div>
             </div>
             <div class="col-sm-4">
-                <label for="Address">Address 1</label>
+                <!-- <label for="Address">Address 1</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
+                  <mat-label>Address 1</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput placeholder="Address" formControlName="address" />
                   <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
@@ -97,9 +105,10 @@
             </div>
               </div>
               <div class="col-sm-4">
-                <label for="Address">Address 2</label>
+                <!-- <label for="Address">Address 2</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
+                  <mat-label>Address 2</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput placeholder="Address 2" formControlName="address1" />
                   <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
@@ -110,8 +119,9 @@
           <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">State</label>
+                  <!-- <label for="Locale">State</label> -->
                   <mat-form-field dense>
+                    <mat-label>State</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
                     <input type="text" matInput placeholder="State" formControlName="state" />
                     <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
@@ -120,8 +130,9 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">City</label>
+                  <!-- <label for="Locale">City</label> -->
                   <mat-form-field dense>
+                    <mat-label>City</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
                     <input type="text" matInput placeholder="City" formControlName="city" />
                     <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error>
@@ -130,8 +141,9 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">Postal Code</label>
+                  <!-- <label for="Locale">Postal Code</label> -->
                   <mat-form-field dense>
+                    <mat-label>Postal Code</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
                     <input type="text" matInput placeholder="Postal Code" formControlName="postalCode" />
                     <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
@@ -143,8 +155,8 @@
                  
                      <div class="col-sm-4">
                         <div class="form-group">
-                           <label for="First name​">Group
-                           </label>
+                           <!-- <label for="First name​">Group
+                           </label> -->
                            <mat-form-field dense>
                                <mat-label>Group</mat-label>
                               <mat-select formControlName="profileType">
@@ -159,8 +171,8 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                           <label for="First name​">Role
-                           </label>
+                           <!-- <label for="First name​">Role
+                           </label> -->
                            <mat-form-field dense>
                                <mat-label>Role</mat-label>
                               <mat-select formControlName="role">

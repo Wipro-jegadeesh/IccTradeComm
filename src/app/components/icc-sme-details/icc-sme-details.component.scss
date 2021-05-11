@@ -442,5 +442,8 @@ mat-form-field {
   box-shadow: -11px 0px 10px -9px #ccc7c7;
 }
 .mat-form-field{
-  width: 300px;
-  margin-left:10px}
+  align-self: stretch;
+  width: 350px;
+  margin-bottom: $uxg-spacing-2;
+  margin-left:10px
+}

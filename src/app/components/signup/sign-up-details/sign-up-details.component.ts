@@ -16,7 +16,8 @@ export class SignUpDetailsComponent implements OnInit {
   imageError: string;
   isImageSaved: boolean;
   cardImageBase64: string;
-  
+  bidpanelOpenState = false;
+
 
   constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
 

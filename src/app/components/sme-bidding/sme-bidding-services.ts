@@ -23,6 +23,9 @@ export class SmeBiddingServices {
   updateFinBid(id){
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatus/'+id,'');
   }
+  updateFinStatusBid(id){
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatus/'+id,'');
+  }
   rejectFinBid(id,body){
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/rejectBidStatus/'+id,body);
   }

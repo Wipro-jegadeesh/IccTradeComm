@@ -316,7 +316,7 @@ rejectQustionTwo = {
     saveFinBid(data){
       console.log(data.filteredData,"usus")
       data.filteredData[0]['smeId'] = localStorage.getItem("userId")
-      data.filteredData[0]['status'] = 'A'
+      data.filteredData[0]['status'] = 'FIN'
       data.filteredData[0]['invoiceId'] = data.filteredData[0].invoiceId
       data.filteredData[0]['invoiceNo'] = data.filteredData[0].invNo
       var element =  data.filteredData[0];
@@ -324,6 +324,8 @@ rejectQustionTwo = {
         console.log(resp,"resp")
         if(resp){
           this.smeBiddingServices.updateFinBid(data.filteredData[0].id).subscribe(resp => {
+          })
+          this.smeBiddingServices.updateFinStatusBid(data.filteredData[0].id).subscribe(resp => {
           })
           this.toastr.success("Accepted successfully")
         this.modalRef.hide()

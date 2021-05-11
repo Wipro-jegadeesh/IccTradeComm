@@ -10,36 +10,47 @@
           </div>
         </div>
         <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
-  
+          <mat-accordion>
+            <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight:500;color: #a899e4;">
+                        Basic Details
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+
             <div class="row dis-block">
                 <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="National ID​">Company Register ID​
-                      </label>
+                      <!-- <label for="National ID​">Company Register ID​
+                      </label> -->
                       <mat-form-field dense>
-                        <input type="text" placeholder="National Id" matInput formControlName="nationalId" />
+                        <mat-label>Company Register ID​ </mat-label>
+                        <input type="text"  matInput formControlName="nationalId" />
                         <mat-error *ngIf="hasError('nationalId', 'required')">nationalId is required</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="First name​">Company name​
-                      </label>
+                      <!-- <label for="First name​">Company name​
+                      </label> -->
                       <mat-form-field dense>
+                        <mat-label>Company name​</mat-label>
                         <mat-icon matPrefix>business</mat-icon>
-                        <input type="text" matInput placeholder="Company Number" formControlName="companyName" />
+                        <input type="text" matInput  formControlName="companyName" />
                         <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="Country​">Country
-                      </label>
+                      <!-- <label for="Country​">Country
+                      </label> -->
                       <mat-form-field dense>
+                        <mat-label>Country</mat-label>
                         <mat-icon matPrefix>flag</mat-icon>
-                        <input type="text" matInput placeholder="Country" formControlName="country" />
+                        <input type="text" matInput  formControlName="country" />
                         <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
                       </mat-form-field>
                     </div>
@@ -48,33 +59,36 @@
           <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="National ID​">Email Id
-                  </label>
+                  <!-- <label for="National ID​">Email Id
+                  </label> -->
                   <mat-form-field dense>
+                    <mat-label>Email Id</mat-label>
                     <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="Email" formControlName="email" />
+                    <input type="text" matInput  formControlName="email" />
                     <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
                   </mat-form-field>
                 </div>
               </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="First name​">First name​
-                </label>
+                <!-- <label for="First name​">First name​
+                </label> -->
                 <mat-form-field dense>
+                  <mat-label>First name</mat-label>
                   <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" placeholder="First Name" matInput formControlName="firstName" />
+                  <input type="text"  matInput formControlName="firstName" />
                   <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>
                 </mat-form-field>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="First name​">Last name​
-                </label>
+                <!-- <label for="First name​">Last name​
+                </label> -->
                 <mat-form-field dense>
+                  <mat-label>Last name​ </mat-label>
                   <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" matInput placeholder="Last Name" formControlName="lastName" />
+                  <input type="text" matInput  formControlName="lastName" />
                   <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
                 </mat-form-field>
               </div>
@@ -84,30 +98,33 @@
           <div class="row dis-block">
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="National ID​">Phone Number</label>
+                <!-- <label for="National ID​">Phone Number</label> -->
                 <mat-form-field dense>
+                  <mat-label>Phone Number</mat-label>
                   <mat-icon matPrefix>call</mat-icon>
-                  <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
+                  <input type="text" matInput  formControlName="contactNo" />
                   <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error>
                 </mat-form-field>
               </div>
             </div>
             <div class="col-sm-4">
-                <label for="Address">Address 1</label>
+                <!-- <label for="Address">Address 1</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
+                  <mat-label>Address 1</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="Address" formControlName="address" />
+                  <input type="text" matInput formControlName="address" />
                   <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
                 </mat-form-field>
             </div>
               </div>
               <div class="col-sm-4">
-                <label for="Address">Address 2</label>
+                <!-- <label for="Address">Address 2</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
+                  <mat-label>Address 2</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="Address 2" formControlName="address1" />
+                  <input type="text" matInput  formControlName="address1" />
                   <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
                 </mat-form-field>
             </div>
@@ -116,10 +133,11 @@
           <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="Locale">State</label>
+                  <!-- <label for="Locale">State</label> -->
                   <mat-form-field dense>
+                    <mat-label>State</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="State" formControlName="state" />
+                    <input type="text" matInput formControlName="state" />
                     <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
                   </mat-form-field>
                 </div>
@@ -128,8 +146,9 @@
                 <div class="form-group">
                   <label for="Locale">City</label>
                   <mat-form-field dense>
+                    <mat-label>City</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="City" formControlName="city" />
+                    <input type="text" matInput  formControlName="city" />
                     <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error>
                   </mat-form-field>
                 </div>
@@ -138,35 +157,80 @@
                 <div class="form-group">
                   <label for="Locale">Postal Code</label>
                   <mat-form-field dense>
+                    <mat-label>Postal Code</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput placeholder="Postal Code" formControlName="postalCode" />
+                    <input type="text" matInput  formControlName="postalCode" />
                     <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
                   </mat-form-field>
                 </div>
               </div>
           </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <fieldset class="form-group">
-                        <label>Profile Image</label>
-                        {{imageError}}
-                        <div class="custom-file fileInputProfileWrap">
-                            <input type="file" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" class="fileInputProfile">
-                            <div class="img-space">
-                                <ng-container *ngIf="isImageSaved; else elseTemplate">
-                                    <img [src]="cardImageBase64" />
-                                </ng-container>
-                                <ng-template #elseTemplate>
-                                </ng-template>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-               
+         
+ 
+            </mat-expansion-panel>
+          </mat-accordion>
+          <mat-accordion>
+            <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight:500;color: #a899e4;">
+                        Upload
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row dis-block">
+                  <div class="col-sm-4">
+  
+                <div class="card-form-container">
+                  <div class="dynamic-radio-btn file-input" >
+                    <h6>Profile Image</h6>
+                      <div class="file-upload">
+                      <div class="upload-btn-wrapper">
+                        <button class="filebtn" >Upload a file</button>
+                      <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
+                      </div>
+                      <div class="file-label">
+                        <div class="img-space">
+                          <ng-container *ngIf="isImageSaved; else elseTemplate">
+                              <img [src]="cardImageBase64" />
+                          </ng-container>
+                          <ng-template #elseTemplate>
+                          </ng-template>
+                      </div>
+                        <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
+                          <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
+                      </div>
+                      </div>
+                  </div>
               </div>
+            </div>
+              <div class="col-sm-4">
+  
+              <div class="card-form-container">
+                <div class="dynamic-radio-btn file-input" >
+                  <h6>KYC Image</h6>
+                    <div class="file-upload">
+                    <div class="upload-btn-wrapper">
+                      <button class="filebtn" >Upload a file</button>
+                    <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
+                    </div>
+                    <div class="file-label">
+                      <div class="img-space">
+                        <ng-container *ngIf="isImageSaved; else elseTemplate">
+                            <img [src]="cardImageBase64" />
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                        </ng-template>
+                    </div>
+                      <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
+                        <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
+                    </div>
+                    </div>
+                </div>
+            </div>
           </div>
-
+                </div>
+              
+          </mat-expansion-panel>
+          </mat-accordion>
           <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
             <button mat-raised-button color="primary">Submit</button>
             <button type="button" mat-raised-button color="warn" routerLink='/login'>Cancel</button>
