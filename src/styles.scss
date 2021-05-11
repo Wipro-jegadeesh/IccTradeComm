@@ -575,6 +575,13 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         height: 50px !important;
     }
 }
+.step-min{
+    margin: -14px 0px 0px 0px;
+}
+.step-max{
+    margin: -14px 0px 0px 0px;
+    left: 50%;
+}
 }
 .mat-chips-set{
     .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex{
@@ -951,6 +958,11 @@ input.custom-autofill {
         .file-label{
             width: unset !important;
         }
+        .mat-slider{
+            margin-left: 15px;
+            width:225px!important;
+        }
+
   }
   @media screen and (min-width: 992px) and (max-width: 1199px){
     .dynamicForm-example-full-width {

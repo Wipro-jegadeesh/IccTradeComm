@@ -42,13 +42,17 @@
       <mat-slider *ngIf="questionDatas.format == 'Range'"
         thumbLabel
         [displayWith]="formatLabel"
-        [tickInterval]="getSliderTickInterval()"
+        [tickInterval]="1"
         (change)="onSliderChange($event)"
-        min="{{questionDatas && questionDatas.min}}"
+        min="{{questionDatas && questionDatas.min ? questionDatas.min : 0 }}"
         max="{{questionDatas && questionDatas.max}}"
         [step]="step"
         [(ngModel)]="sliderValue"
         class="input-slider-range" 
         ></mat-slider>
+        <div class="row col-md-12 col-12" *ngIf="questionDatas.format == 'Range'">
+        <p class="col-md-6 col-6 step-min" ><span>{{questionDatas && questionDatas.min ? questionDatas.min : 0 }}</span></p>
+        <p class="col-md-6 col-6 step-max" ><span>{{questionDatas && questionDatas.max}}</span></p>
+      </div>
     </div>
   </div>
