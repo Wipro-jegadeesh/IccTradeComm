@@ -15,9 +15,10 @@
                         <div class="row dis-block">
                           <div class="col-sm-4">
                               <div class="form-group">
-                                <label for="National ID​">Company Register ID​
-                                </label>
+                                <!-- <label for="National ID​">Company Register ID​
+                                </label> -->
                                 <mat-form-field dense>
+                                  <mat-label>Company Register ID​ </mat-label>
                                   <input type="text"  placeholder="Company Register Id" matInput formControlName="nationalId" readonly/>
                                   <!-- <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error> -->
                                 </mat-form-field>
@@ -25,9 +26,10 @@
                             </div>
                             <div class="col-sm-4">
                               <div class="form-group">
-                                <label for="First name​">Company name​
-                                </label>
+                                <!-- <label for="First name​">Company name​
+                                </label> -->
                                 <mat-form-field dense>
+                                  <mat-label>Company name​</mat-label>
                                   <mat-icon matPrefix>business</mat-icon>
                                   <input type="text" matInput placeholder="Company Number" formControlName="companyName" readonly/>
                                   <!-- <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error> -->
@@ -36,9 +38,10 @@
                             </div>
                             <div class="col-sm-4">
                               <div class="form-group">
-                                <label for="Country​">Country
-                                </label>
+                                <!-- <label for="Country​">Country
+                                </label> -->
                                 <mat-form-field dense>
+                                  <mat-label>Country</mat-label>
                                   <mat-icon matPrefix>flag</mat-icon>
                                   <input type="text" matInput placeholder="Country" formControlName="country" readonly/>
                                   <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
@@ -48,32 +51,32 @@
                       </div>
                         <div class="row dis-block">
                           <div class="col-sm-4">
+                            <!-- <label for="Address">Address 1</label> -->
                             <div class="form-group">
-                              <label for="First name​">First name​
-                              </label>
-                              <mat-form-field dense>
-                                <mat-icon matPrefix>person</mat-icon>
-                                <input type="text" placeholder="First Name" matInput formControlName="firstName" readonly/>
-                                <!-- <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error> -->
-                              </mat-form-field>
-                            </div>
+                            <mat-form-field dense>
+                              <mat-label>Address 1</mat-label>
+                              <mat-icon matPrefix>home</mat-icon>
+                              <input type="text" matInput  formControlName="address" readonly/>
+                              <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <!-- <label for="Address">Address 2</label> -->
+                            <div class="form-group">
+                            <mat-form-field dense>
+                              <mat-label>Address 2</mat-label>
+                              <mat-icon matPrefix>home</mat-icon>
+                              <input type="text" matInput  formControlName="address1" readonly/>
+                              <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
+                            </mat-form-field>
+                        </div>
                           </div>
                           <div class="col-sm-4">
                             <div class="form-group">
-                              <label for="First name​">Last name​
-                              </label>
+                              <!-- <label for="National ID​">Phone Number</label> -->
                               <mat-form-field dense>
-                                <mat-icon matPrefix>person</mat-icon>
-                                <input type="text" matInput placeholder="Last Name" formControlName="lastName" readonly/>
-                                <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
-                              </mat-form-field>
-                            </div>
-                
-                          </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label for="National ID​">Phone Number</label>
-                              <mat-form-field dense>
+                                <mat-label>Phone Number</mat-label>
                                 <mat-icon matPrefix>call</mat-icon>
                                 <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" readonly/>
                                 <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
@@ -83,10 +86,46 @@
                       </div>
                       <div class="row dis-block">
                         <div class="col-sm-4">
+                            <div class="form-group">
+                              <!-- <label for="Locale">State</label> -->
+                              <mat-form-field dense>
+                                <mat-label>State</mat-label>
+                                <mat-icon matPrefix>add_location</mat-icon>
+                                <input type="text" matInput  formControlName="state" readonly/>
+                                <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <!-- <label for="Locale">City</label> -->
+                              <mat-form-field dense>
+                                <mat-label>City</mat-label>
+                                <mat-icon matPrefix>add_location</mat-icon>
+                                <input type="text" matInput  formControlName="locale" readonly/>
+                                <mat-error *ngIf="hasError('locale', 'required')">City is required</mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="form-group">
+                              <!-- <label for="Locale">Postal Code</label> -->
+                              <mat-form-field dense>
+                                <mat-label>Postal Code</mat-label>
+                                <mat-icon matPrefix>local_shipping</mat-icon>
+                                <input type="text" matInput  formControlName="postalCode" readonly/>
+                                <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row dis-block">
+                        <div class="col-sm-4">
                           <div class="form-group">
-                            <label for="National ID​">Email Id
-                            </label>
+                            <!-- <label for="National ID​">Email Id
+                            </label> -->
                             <mat-form-field dense>
+                              <mat-label>Email Id</mat-label>
                               <mat-icon matPrefix>email</mat-icon>
                               <input type="text" matInput placeholder="Email" formControlName="email" readonly/>
                               <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
@@ -95,10 +134,10 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
-                             <label for="First name​">Status
-                             </label>
+                             <!-- <label for="Status">Status</label> -->
                              <mat-form-field dense>
-                                <mat-select formControlName="status" >
+                              <mat-label>Status</mat-label>
+                                <mat-select formControlName="status" panelClass="myPanelClass">
                                   <mat-option value="A">Active</mat-option>
                                   <mat-option value="I">Inactive</mat-option>
                                   <mat-option value="D">Defaulted</mat-option>
@@ -106,7 +145,6 @@
                                 <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
                              </mat-form-field>
                           </div>
-                     
                       </div>
                     </div>
                     <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">

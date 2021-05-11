@@ -119,13 +119,16 @@ export class IccSmeDetailsComponent implements OnInit {
       console.log(resp)
       this.userForm.patchValue({
     nationalId:resp[0].companyid,
-    firstName: resp[0].fname,
+    address: resp[0].address,
     email: resp[0].email,
-    lastName: resp[0].lname,
+    address1: resp[0].address1,
     contactNo: resp[0].contactnum,
     companyName: resp[0].companyname,
     country:resp[0].country,
-    status:resp[0].status
+    status:resp[0].status,
+    postalCode:resp[0].postalCode,
+    locale:resp[0].locale,
+    state:resp[0].state
       });
 
     })
@@ -140,14 +143,17 @@ export class IccSmeDetailsComponent implements OnInit {
   }
   invoiceFormBuild() {
     this.userForm = this.fb.group({
-      firstName: [''],
-      lastName:[''],
+      address: [''],
+      address1:[''],
       email: [''],
       contactNo: [''],
       status: ['',Validators.required],
       country:[''],
       companyName:[''],
-      nationalId:['']
+      nationalId:[''],
+      postalCode:[''],
+      locale:[''],
+      state:['']
     });
   
   }

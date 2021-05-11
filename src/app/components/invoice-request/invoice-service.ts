@@ -20,7 +20,7 @@ export class InvoiceRequestServices {
   }
   
   authoriseInvoice(body: any) {
-    return this.apiService.put(environment.api_url+'invoice-request/updateInvoiceStatus/'+body,'' );
+    return this.apiService.put(environment.api_url+'invoice-request/updateInvoiceStatusToApr/'+body,'' );
   }
   UpdateInvoice(id,body: any) {
     return this.apiService.put(environment.api_url+'invoice-request/updateInvoice/'+id,body);
