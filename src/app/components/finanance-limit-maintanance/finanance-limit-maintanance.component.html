@@ -1,0 +1,218 @@
+<div class="app-content {{isOpen}} ">
+    <header>
+      <div class="container-fluid contnr-div">
+        <div class="row">
+            <div class="col-md-12">
+              <mat-tab-group dynamicHeight>
+                <mat-tab label="SME Limit">
+                  <div class="links">
+                          <mat-card>
+                        <mat-card-content>
+                            <h5 class="text-center">SME Limit Maintanance</h5>
+            <form [formGroup]="limitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
+                <mat-card>
+                    <mat-card-content>
+                        <table class="table-responsive inv-table" style="display: contents;">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Overall Limit</mat-label>
+                                            <input type="text" matInput formControlName="overAllLimit" (keyup)="changesmelimit($event,'overAllLimit')" />
+                                          </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                          <mat-label>Currency</mat-label>
+                                          <select matNativeControl  formControlName="ccy" >
+                                            <!-- <option value=""></option> -->
+                                            <option value="SGD">SGD</option>
+                                            <!-- <option value="USD">USD</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="JPY">JPY</option> -->
+                                          </select>
+                                        </mat-form-field>
+                                      </td>
+                                </tr> 
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>SME OverAll Limit </mat-label>
+                                            <input type="text" matInput formControlName="smeoverAllLimit" (keyup)="changesmelimit($event,'smeoverAllLimit')" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                          <mat-label>Currency</mat-label>
+                                          <select matNativeControl  formControlName="ccy" >
+                                            <option value=""></option>
+                                            <option value="SGD">SGD</option>
+                                            <option value="USD">USD</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="JPY">JPY</option>
+                                          </select>
+                                        </mat-form-field>
+                                      </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                    </mat-card-content>
+                </mat-card>
+                <!-- <div style="text-align: end;">
+                    <button *ngIf="isOk" mat-flat-button color="primary" id=grid >submit</button>
+                </div> -->
+            </form>
+            <div id="container">
+              <span class="uxg-h6" id=grid>Sme Wise Limit Utilization</span>
+              <div class="mat-elevation-z8">
+              <table class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;">
+                <ng-container matColumnDef="sme" >
+                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.id}}"
+                [matTooltipPosition]="tooltipPosition">SME</th>
+                <td mat-cell *matCellDef="let element;let row; let index = index" >
+                {{element.sme}}
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.desc}}"
+                [matTooltipPosition]="tooltipPosition">Country</th>
+                <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
+                {{element.country}}
+                </td>
+                </ng-container>
+                <ng-container matColumnDef="utilizedAmt">
+                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.netAmount}}"
+                [matTooltipPosition]="tooltipPosition">Utilized Amount</th>
+                <td mat-cell *matCellDef="let element;let row; let index = index" >
+                {{element.utilizedAmt}}
+                </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="balAmt">
+                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.taxRate}}"
+                [matTooltipPosition]="tooltipPosition">Balance Amount </th>
+                <td mat-cell *matCellDef="let element;let row; let index = index" >
+                {{element.balanceAmt}}
+                </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                </table>
+              </div>
+            </div>
+                        </mat-card-content>
+              </mat-card>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Country Limit">
+                  <div class="links">
+                          <mat-card>
+                        <mat-card-content>
+                            <h5 class="text-center">Country Limit Maintanance</h5>
+              <form [formGroup]="countrylimitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
+                <mat-card>
+                    <mat-card-content>
+                        <table class="table-responsive inv-table" style="display: contents;">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Overall Limit</mat-label>
+                                            <input type="text" matInput formControlName="countryoverAllLimit" (keyup)="changecountrylimit($event,'overAllLimit')" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                          <mat-label>Currency</mat-label>
+                                          <select matNativeControl  formControlName="countryccy" >
+                                            <!-- <option value=""></option> -->
+                                            <option value="SGD">SGD</option>
+                                            <!-- <option value="USD">USD</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="JPY">JPY</option> -->
+                                          </select>
+                                        </mat-form-field>
+                                      </td>
+                                </tr> 
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>Country OverAll</mat-label>
+                                            <input type="text" matInput formControlName="countrysmeoverAllLimit" (keyup)="changecountrylimit($event,'countryoverAllLimit')" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                          <mat-label>Currency</mat-label>
+                                          <select matNativeControl  formControlName="countryccy" >
+                                            <!-- <option value=""></option> -->
+                                            <option value="SGD">SGD</option>
+                                            <!-- <option value="USD">USD</option>
+                                            <option value="GBP">GBP</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="JPY">JPY</option> -->
+                                          </select>
+                                        </mat-form-field>
+                                      </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+                <!-- <div style="text-align: end;">
+                    <button *ngIf="isOk" mat-flat-button color="primary" id=grid >submit</button>
+                </div> -->
+              </form>
+              <div id="container">
+              <span class="uxg-h6" id=grid>Country Wise Limit Utilization</span>
+              <div class="mat-elevation-z8">
+                 <table  class="table-responsive" mat-table [dataSource]="dataSourceThree" style="width: 100%;">
+                  <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.desc}}"
+                    [matTooltipPosition]="tooltipPosition">Country</th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index"  class="desc-goods">
+                        {{element.country}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="utzAmt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.netAmount}}"
+                    [matTooltipPosition]="tooltipPosition">Utilized Amount</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index"  >
+                      {{element.utzAmt}}
+                      </td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="avlAmt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                    matTooltip="{{fundingTooltip.taxRate}}"
+                    [matTooltipPosition]="tooltipPosition">Available Amount </th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index"  >
+                      {{element.avlAmt}}
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsThree" style="background-color:#B4A6EA"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
+              
+              </table>
+              </div>
+              </div>
+                        </mat-card-content>
+              </mat-card>
+                  </div>
+                </mat-tab>
+                </mat-tab-group>
+            </div>
+           </div>
+      </div>
+    </header>
+  </div>
