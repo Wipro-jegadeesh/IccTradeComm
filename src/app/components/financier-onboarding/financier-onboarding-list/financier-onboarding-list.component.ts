@@ -155,7 +155,6 @@ export class FinancierOnboardingListComponent implements OnInit {
     }
   }
   openModal(event, template,element) {
-    debugger
     this.getUserList(element.companyid)
     console.log(element,"element")
     event.preventDefault();
