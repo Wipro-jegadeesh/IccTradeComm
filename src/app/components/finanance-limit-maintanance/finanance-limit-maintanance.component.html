@@ -4,69 +4,220 @@
         <div class="row">
             <div class="col-md-12">
               <mat-tab-group dynamicHeight>
-                <mat-tab label="SME Limit">
+                <mat-tab label="Limit Maintanance">
                   <div class="links">
                           <mat-card>
                         <mat-card-content>
-                            <h5 class="text-center">SME Limit Maintanance</h5>
+                            <h5 class="tab-text">Limit Maintanance 
+                              <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                              <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z"></path>
+                              </svg>
+                            </div>
+                            </h5>
+                      <form [formGroup]="mainlimitMaintanceForm" autocomplete="off" (ngSubmit)="mainlimitMaintanceFormSubmit()">
+                      <mat-card>
+                          <mat-card-content>
+                              <table class="table-responsive inv-table" style="display: contents;">
+                                  <tbody>
+                                      <tr>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                  <mat-label>Overall Exposure</mat-label>
+                                                  <input type="text" matInput formControlName="mainoverallexposure"/>
+                                                  </mat-form-field>
+                                          </td>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                  <mat-label>Currency</mat-label>
+                                                  <select matNativeControl  formControlName="mainlimitccy" >
+                                                  <!-- <option value=""></option> -->
+                                                  <option value="SGD">SGD</option>
+                                                  <!-- <option value="USD">USD</option>
+                                                  <option value="GBP">GBP</option>
+                                                  <option value="EUR">EUR</option>
+                                                  <option value="JPY">JPY</option> -->
+                                                  </select>
+                                              </mat-form-field>
+                                              </td>
+                                      </tr> 
+                                      <tr>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                  <mat-label>Country Exposure</mat-label>
+                                                  <input type="text" matInput formControlName="maincountryexposure" (keyup)="changecountrylimit($event,'countryoverAllLimit')" />
+                                              </mat-form-field>
+                                          </td>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                <mat-label>Currency</mat-label>
+                                                <select matNativeControl  formControlName="mainlimitccy" >
+                                                  <!-- <option value=""></option> -->
+                                                  <option value="SGD">SGD</option>
+                                                  <!-- <option value="USD">USD</option>
+                                                  <option value="GBP">GBP</option>
+                                                  <option value="EUR">EUR</option>
+                                                  <option value="JPY">JPY</option> -->
+                                                </select>
+                                              </mat-form-field>
+                                            </td>
+                                      </tr>
+                                      <tr>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                  <mat-label>SME Exposure </mat-label>
+                                                  <input type="text" matInput formControlName="mainsmeexposure" (keyup)="changesmelimit($event,'smeoverAllLimit')" />
+                                              </mat-form-field>
+                                          </td>
+                                          <td rowspan="1" colspan="1">
+                                              <mat-form-field dense class="icc-mat">
+                                                <mat-label>Currency</mat-label>
+                                                <select matNativeControl  formControlName="mainlimitccy" >
+                                                  <!-- <option value=""></option> -->
+                                                  <option value="SGD">SGD</option>
+                                                  <!-- <option value="USD">USD</option>
+                                                  <option value="GBP">GBP</option>
+                                                  <option value="EUR">EUR</option>
+                                                  <option value="JPY">JPY</option> -->
+                                                </select>
+                                              </mat-form-field>
+                                            </td>
+                                      </tr>
+                                      <tr>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                                <mat-label>Sector</mat-label>
+                                                <input type="text" matInput formControlName="mainsector"/>
+                                            </mat-form-field>
+                                        </td>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                              <mat-label>Currency</mat-label>
+                                              <select matNativeControl  formControlName="mainlimitccy" >
+                                                <!-- <option value=""></option> -->
+                                                <option value="SGD">SGD</option>
+                                                <!-- <option value="USD">USD</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="JPY">JPY</option> -->
+                                              </select>
+                                            </mat-form-field>
+                                          </td>
+                                    </tr>
+                                  </tbody>
+                              </table>
+                          </mat-card-content>
+                      </mat-card>
+                      <div style="margin: 0 0 0 -40px;">
+                          <button type="submit" mat-flat-button color="primary" id=grid >submit</button>
+                      </div>
+                      </form>
+                      </mat-card-content>
+                      </mat-card>
+                  </div>
+              </mat-tab>
+                <mat-tab label="SME Wise Limit">
+                  <div class="links">
+                          <mat-card>
+                        <mat-card-content>
+                            <h5 class="tab-text">SME Limit Maintanance
+                              <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                                <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z"></path>
+                                </svg>
+                              </div>
+                            </h5>
             <form [formGroup]="limitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
-                <mat-card>
-                    <mat-card-content>
-                        <table class="table-responsive inv-table" style="display: contents;">
-                            <tbody>
-                                <tr>
-                                    <td rowspan="1" colspan="1">
-                                        <mat-form-field dense class="icc-mat">
-                                            <mat-label>Overall Limit</mat-label>
-                                            <input type="text" matInput formControlName="overAllLimit" (keyup)="changesmelimit($event,'overAllLimit')" />
-                                          </mat-form-field>
-                                    </td>
-                                    <td rowspan="1" colspan="1">
-                                        <mat-form-field dense class="icc-mat">
-                                          <mat-label>Currency</mat-label>
-                                          <select matNativeControl  formControlName="ccy" >
-                                            <!-- <option value=""></option> -->
-                                            <option value="SGD">SGD</option>
-                                            <!-- <option value="USD">USD</option>
-                                            <option value="GBP">GBP</option>
-                                            <option value="EUR">EUR</option>
-                                            <option value="JPY">JPY</option> -->
-                                          </select>
-                                        </mat-form-field>
-                                      </td>
-                                </tr> 
-                                <tr>
-                                    <td rowspan="1" colspan="1">
-                                        <mat-form-field dense class="icc-mat">
-                                            <mat-label>SME OverAll Limit </mat-label>
-                                            <input type="text" matInput formControlName="smeoverAllLimit" (keyup)="changesmelimit($event,'smeoverAllLimit')" />
-                                        </mat-form-field>
-                                    </td>
-                                    <td rowspan="1" colspan="1">
-                                        <mat-form-field dense class="icc-mat">
-                                          <mat-label>Currency</mat-label>
-                                          <select matNativeControl  formControlName="ccy" >
-                                            <option value=""></option>
-                                            <option value="SGD">SGD</option>
-                                            <option value="USD">USD</option>
-                                            <option value="GBP">GBP</option>
-                                            <option value="EUR">EUR</option>
-                                            <option value="JPY">JPY</option>
-                                          </select>
-                                        </mat-form-field>
-                                      </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                      
-                    </mat-card-content>
-                </mat-card>
+              
+                      <div class="col-md-12">
+                      <div class="col-md-6" style="width: 44%;float: right;padding: 0;">
+                        <!-- <h6 style="color:#694ed6">Chart</h6> -->
+                        <ng-container>
+                            <div class="chart">
+                                <div class="col-lg-10 grid-margin stretch-card p-0">
+                                  <div class="card" >
+                                    <div class="card-body">
+                                        <div style="display: block;">
+                                          <canvas baseChart
+                                          [datasets]="barChartData"
+                                          [labels]="barChartLabels"
+                                          [options]="barChartOptions"
+                                        
+                                          [legend]="barChartLegend"
+                                          [chartType]="barChartType">
+                                        </canvas>
+                                            </div>
+                                      <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>
+                      </div>
+                        <div class="col-md-6 col-xl-6 p-0">
+                              <table class="table-responsive inv-table" style="display: contents;">
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                                <mat-label>Overall Limit</mat-label>
+                                                <input type="text" matInput formControlName="overAllLimit" (keyup)="changesmelimit($event,'overAllLimit')"  [readonly]="true"/>
+                                              </mat-form-field>
+                                        </td>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                              <mat-label>Currency</mat-label>
+                                              <select matNativeControl  formControlName="ccy" >
+                                                <!-- <option value=""></option> -->
+                                                <option value="SGD">SGD</option>
+                                                <!-- <option value="USD">USD</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="JPY">JPY</option> -->
+                                              </select>
+                                            </mat-form-field>
+                                          </td>
+                                    </tr> 
+                                    <tr>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                                <mat-label>SME OverAll Limit </mat-label>
+                                                <input type="text" matInput formControlName="smeoverAllLimit" (keyup)="changesmelimit($event,'smeoverAllLimit')"  [readonly]="true"/>
+                                            </mat-form-field>
+                                        </td>
+                                        <td rowspan="1" colspan="1">
+                                            <mat-form-field dense class="icc-mat">
+                                              <mat-label>Currency</mat-label>
+                                              <select matNativeControl  formControlName="ccy" >
+                                                <!-- <option value=""></option> -->
+                                                <option value="SGD">SGD</option>
+                                                <!-- <option value="USD">USD</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="JPY">JPY</option> -->
+                                              </select>
+                                            </mat-form-field>
+                                          </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                       </div>
+                      </div>
                 <!-- <div style="text-align: end;">
                     <button *ngIf="isOk" mat-flat-button color="primary" id=grid >submit</button>
                 </div> -->
             </form>
-            <div id="container">
-              <span class="uxg-h6" id=grid>Sme Wise Limit Utilization</span>
+           
+            <div style="margin-top:8%;">
+              <!-- id="container"  -->
+              <h5 class="tab-text">SME Wise Limit Utilization
+                <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                  <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z"></path>
+                  </svg>
+                </div>
+              </h5>
               <div class="mat-elevation-z8">
               <table class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;">
                 <ng-container matColumnDef="sme" >
@@ -108,14 +259,20 @@
               </div>
             </div>
                         </mat-card-content>
-              </mat-card>
+                        </mat-card>
                   </div>
                 </mat-tab>
-                <mat-tab label="Country Limit">
+                <mat-tab label="Country Wise Limit">
                   <div class="links">
                           <mat-card>
                         <mat-card-content>
-                            <h5 class="text-center">Country Limit Maintanance</h5>
+                            <h5 class="tab-text">Country Limit Maintanance
+                              <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                                <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                  <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z"></path>
+                                </svg>
+                              </div>
+                            </h5>
               <form [formGroup]="countrylimitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
                 <mat-card>
                     <mat-card-content>
@@ -125,7 +282,7 @@
                                     <td rowspan="1" colspan="1">
                                         <mat-form-field dense class="icc-mat">
                                             <mat-label>Overall Limit</mat-label>
-                                            <input type="text" matInput formControlName="countryoverAllLimit" (keyup)="changecountrylimit($event,'overAllLimit')" />
+                                            <input type="text" matInput formControlName="countryoverAllLimit" (keyup)="changecountrylimit($event,'overAllLimit')"  [readonly]="true"/>
                                         </mat-form-field>
                                     </td>
                                     <td rowspan="1" colspan="1">
@@ -146,7 +303,7 @@
                                     <td rowspan="1" colspan="1">
                                         <mat-form-field dense class="icc-mat">
                                             <mat-label>Country OverAll</mat-label>
-                                            <input type="text" matInput formControlName="countrysmeoverAllLimit" (keyup)="changecountrylimit($event,'countryoverAllLimit')" />
+                                            <input type="text" matInput formControlName="countrysmeoverAllLimit" (keyup)="changecountrylimit($event,'countryoverAllLimit')"  [readonly]="true"/>
                                         </mat-form-field>
                                     </td>
                                     <td rowspan="1" colspan="1">
@@ -172,7 +329,13 @@
                 </div> -->
               </form>
               <div id="container">
-              <span class="uxg-h6" id=grid>Country Wise Limit Utilization</span>
+                <h5 class="tab-text">Country Wise Limit Utilization
+                  <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                    <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z"></path>
+                    </svg>
+                  </div>
+                </h5>
               <div class="mat-elevation-z8">
                  <table  class="table-responsive" mat-table [dataSource]="dataSourceThree" style="width: 100%;">
                   <ng-container matColumnDef="country">

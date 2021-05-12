@@ -17,6 +17,7 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-finanance-limit-maintanance',
@@ -26,6 +27,7 @@ import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 export class FinananceLimitMaintananceComponent implements OnInit {
   limitMaintanceForm: FormGroup;
   countrylimitMaintanceForm: FormGroup;
+  mainlimitMaintanceForm: FormGroup;
   displayedColumns: string[] = ['Exposure', 'Modified', 'Available Exposure', 'Created'];
   dataSource: any;
   groupTooltip = StaicDataMaintenance;
@@ -52,15 +54,226 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   smeoverAllLimit;
   countryoverLimitval;
   countrysmeoverAllLimitVal;
-  cntryoverAllLimit;
-  cntrysmeoverAllLimit
   totalExposure:number=0;
   countrytotalExposure:number=0;
   isOpen = '';
+
+  // Charts
+  lineChartData = [{
+    label: '# of Votes',
+    data: [10, 19, 3, 5, 2, 3],
+    borderWidth: 1,
+    fill: false
+  }];
+
+  lineChartLabels = ['2013', '2014', '2014', '2015', '2016', '2017'];
+
+  lineChartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    },
+    legend: {
+      display: false
+    },
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+  };
+
+  lineChartColors = [
+    {
+      borderColor: 'rgba(255,99,132,1)'
+    }
+  ];
+
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
+  areaChartData = [{
+    label: '# of Votes',
+    data: [10, 19, 3, 5, 2, 3],
+    borderWidth: 1,
+    fill: true
+  }];
+
+  areaChartLabels = ['2013', '2014', '2014', '2015', '2016', '2017'];
+
+  areaChartOptions = {};
+
+  areaChartColors = [
+    {
+      borderColor: 'rgba(255,99,132,1)',
+      backgroundColor: 'rgba(255,99,132,.2)'
+    }
+  ];
+
+
+  doughnutPieChartData = [
+    {
+      data: [30, 40, 30],
+    }
+  ];
+
+  doughnutPieChartLabels = ['Pink', 'Blue', 'Yellow'];
+
+  doughnutPieChartOptions = {
+    responsive: true,
+    animation: {
+      animateScale: true,
+      animateRotate: true
+    }
+  };
+
+  doughnutPieChartColors = [
+    {
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)'
+      ]
+    }
+  ];
+
+
+  scatterChartData = [
+    {
+      label: 'First Dataset',
+      data: [{
+          x: -10,
+          y: 0
+        },
+        {
+          x: 0,
+          y: 3
+        },
+        {
+          x: -25,
+          y: 5
+        },
+        {
+          x: 40,
+          y: 5
+        }
+      ],
+      borderWidth: 1
+    },
+    {
+      label: 'Second Dataset',
+      data: [{
+          x: 10,
+          y: 5
+        },
+        {
+          x: 20,
+          y: -30
+        },
+        {
+          x: -25,
+          y: 15
+        },
+        {
+          x: -10,
+          y: 5
+        }
+      ],
+      borderWidth: 1
+    }
+  ];
+
+  scatterChartOptions = {
+    scales: {
+      xAxes: [{
+        type: 'linear',
+        position: 'bottom'
+      }]
+    }
+  };
+
+  scatterChartColors = [
+    {
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)'      ]
+    },
+    {
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.2)'
+      ],
+      borderColor: [
+        'rgba(54, 162, 235, 1)'
+      ]
+    }
+  ];
+
+  mobileScreen = false;
+  end = false;
+  start = true;
+  currentPage = 0;
+  pageCount = 1;
+  limit = 7;
+//multiple line chart
+chartType = "bar";
+chartOptions = {
+responsive: true,
+heigh:400,
+width :700
+};
+chartData = [
+// { data: [350, 600, 260, 700, 650, 416, 400, 300, 556, 500, 600, 580], label: "Funding Requested" },
+{ data: [0,0,0,0,0,0,0,0,0,0,0,0,0], label: "Actual Funding" },
+// { data: [120, 200, 700], label: "Repayment" },
+];
+chartLabels = ["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+chartColors = [
+{
+backgroundColor: "rgba(204, 51, 0, .3)",
+borderColor: "rgba(204, 51, 0, .7)",
+},
+{
+backgroundColor: "rgba(0, 137, 132, .3)",
+borderColor: "rgba(0, 10, 130, .7)",
+},
+{
+backgroundColor: "rgba(0, 128, 43, .3)",
+borderColor: "rgba(0, 128, 43, .7)",
+}
+];
+  //Charts
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService) {
+    this.mainlimitMaintanceFormBuild()
     this.groupsFormBuild()
-    this.countrylimitMaintanceFormBuild()
+    this.countrylimitMaintanceFormBuild();
+   
   }
   ngOnInit(): void {
     this.overAllLimit = this.limitMaintanceForm.value.overAllLimit;
@@ -71,6 +284,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
     this.limitMaintance();
     this.countrylimitMaintance();
+  }
+  isOpenHandle(isTrue) {
+    this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
   }
   limitMaintance() {
     this.totalExposure=0;
@@ -130,14 +346,15 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     countrylimitMaintance.forEach(element => {
       if(element){
       this.countrytotalExposure += element.utzAmt
-      element['avlAmt'] = this.countryoverLimitval-element.utzAmt
+      element['avlAmt'] = this.countrysmeoverAllLimitVal-element.utzAmt
       }
       });
       let totalCalculation ={
       sme: "",
       country:'Total Exposure',
-      utzAmt: this.totalExposure,
+      utzAmt: this.countrytotalExposure,
       avlAmt:this.countryoverLimitval -this.countrytotalExposure
+      
       }
       countrylimitMaintance.push(totalCalculation);
       this.dataSourceThree = new MatTableDataSource(countrylimitMaintance);
@@ -168,23 +385,41 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   
   groupsFormBuild() {
     this.limitMaintanceForm = this.fb.group({
-      overAllLimit: ['500000', Validators.required],
-      smeoverAllLimit: ['400000', Validators.required],
+      overAllLimit: [this.mainlimitMaintanceForm.value.mainoverallexposure, Validators.required],
+      smeoverAllLimit: [this.mainlimitMaintanceForm.value.mainsmeexposure, Validators.required],
       ccy: ['SGD', Validators.required]
     });
 
   }
   countrylimitMaintanceFormBuild() {
     this.countrylimitMaintanceForm = this.fb.group({
-      countryoverAllLimit: ['300000', Validators.required],
-      countrysmeoverAllLimit: ['100000', Validators.required],
+      countryoverAllLimit: [this.mainlimitMaintanceForm.value.mainoverallexposure, Validators.required],
+      countrysmeoverAllLimit: [this.mainlimitMaintanceForm.value.maincountryexposure, Validators.required],
       countryccy: ['SGD', Validators.required]
+    });
+  }
+  mainlimitMaintanceFormBuild() {
+    this.mainlimitMaintanceForm = this.fb.group({
+      mainoverallexposure: ['700000', Validators.required],
+      maincountryexposure: ['400000', Validators.required],
+      mainsmeexposure: ['500000', Validators.required],
+      mainlimitccy: ['SGD', Validators.required],
+      mainsector: ['0', Validators.required]
     });
   }
   clickedit() {
     this.enableReadonly = true;
     this.isEdit = true;
     this.isOk = true;
+  }
+  mainlimitMaintanceFormSubmit(){
+    this.overAllLimit = this.mainlimitMaintanceForm.value.mainoverallexposure;
+    this.countryoverLimitval = this.mainlimitMaintanceForm.value.mainoverallexposure;
+    this.groupsFormBuild()
+    this.countrylimitMaintanceFormBuild();
+    this.limitMaintance();
+    this.countrylimitMaintance();
+    this.toastr.success("Limit Maintanance Updated Successfully")
   }
   onSubmitLimitForm() {
     this.isOk = false;
