@@ -48,6 +48,7 @@ import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-det
 import {FinancierUserCreationComponent} from './components/financier-onboarding/financier-user-creation/financier-user-creation.component'
 import {FinancierUserDetailsComponent} from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component'
 import { ViewProfileComponent } from './components/view-profile/view-profile.component'
+import { StaticPageComponent } from './components/static-page/static-page.component';
 
 const routes: Routes = [
   // { path: '', component: LoginComponent },
@@ -118,6 +119,8 @@ const routes: Routes = [
 
   { path: 'financier-user-details/:finDetailId/:id', component: FinancierUserDetailsComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   // questionaire-scorePage
+  { path: 'notActivated', component: StaticPageComponent , data : {"HeaderName" : "notActivated"}},
+
 ];
 
 @NgModule({

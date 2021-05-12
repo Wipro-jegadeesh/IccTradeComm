@@ -44,7 +44,7 @@ export class AppComponent {
   }
 
   check() {
-    if ((this.router.url == '/') || (this.router.url == '/login') || (this.router.url == '/signup') || (this.router.url == '/signup-details')) {
+    if ((this.router.url == '/') || (this.router.url == '/login') || (this.router.url == '/signup') || (this.router.url == '/signup-details') || (this.router.url == "/notActivated")) {
       this.showSidebar = false;
       this.showNavbar = false;
       this.showFooter = false;
