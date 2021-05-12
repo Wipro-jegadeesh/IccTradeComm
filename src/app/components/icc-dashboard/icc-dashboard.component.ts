@@ -77,7 +77,13 @@ export class IccDashboardComponent implements OnInit {
   getFinancierDetails(){
     this.iccDashboardServices.getFinancierList().subscribe(resp=>{
       if(resp){
-        this.dataSource = new MatTableDataSource(resp);
+        let respData = []
+        resp.map((item,index) => {
+          if(index <= 4){
+            respData.push(item)
+          }
+        })
+        this.dataSource = new MatTableDataSource(respData);
         // this.dataSource.paginator = this.paginator
         // console.log(this.dataSource,"this.dataSource")
       }

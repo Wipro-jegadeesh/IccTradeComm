@@ -19,10 +19,11 @@ export class FinancierOnboardingService {
     return this.apiService.post(params,findetobj)
     }
     updateFinancier(data){
+        debugger;
         let findetobj={
             'findetobj' : data
         }
-        let params=environment.financierServicePath+'financier-onboarding/updateFinancierOnboarding/4'
+        let params=environment.financierServicePath+'financier-onboarding/updateFinancierOnboarding/'+data.namedPKKey
         return this.apiService.put(params,findetobj)
     }
 }

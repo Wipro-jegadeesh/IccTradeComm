@@ -14,6 +14,8 @@ import { IccDashboardServices } from '../../icc-dashboard/icc-dashboard-services
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatPaginator } from '@angular/material/paginator';
+import { FinancierUserCreationService } from '../financier-user-creation/financier-user-creation.service'
+import { BIDDINGCONSTANTS } from '../../../shared/constants/constants'
 
 const ELEMENT_DATA: any[] = [
   {
@@ -43,11 +45,15 @@ export class FinancierOnboardingListComponent implements OnInit {
   isOpen = '';
   financierForm: FormGroup
   financierId = ''
+  biddingTooltip = BIDDINGCONSTANTS;
+  userDataSource = new MatTableDataSource();
+
 
   constructor(private modalService: BsModalService,private iccDashboardServices: IccDashboardServices,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
     private customerService: CustomerService, public authenticationService: AuthenticationService, private toastr: ToastrService,
-    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService) {
+    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService) {
     this.customer = new Customer();
+
   }
   dataSource:any;
 
@@ -56,6 +62,8 @@ export class FinancierOnboardingListComponent implements OnInit {
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
   displayedColumns1: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
   displayedColumns: string[] = ['Name', 'Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber'];
+
   name = "Angular";
   cities: Array<ICity> = [];
   selectedItems: Array<ICity> = [];
@@ -90,7 +98,6 @@ export class FinancierOnboardingListComponent implements OnInit {
       text: 'Country',
     };
     this.activatedRoute.params.subscribe((params: Params) => {
-      // this.financierId=params.id
       let id = params.id && params.id.split('FIN')
       this.financierId = id && id[1] ? id[1] : ''
       this.isView = params.edit == 'view' ? true : false
@@ -98,7 +105,35 @@ export class FinancierOnboardingListComponent implements OnInit {
     this.buildFinancierForm()
     this.isView && this.disableFields()
     this.financierId && this.getSpecificFinancier()
+
+    
+    this.userDataSource = new MatTableDataSource([{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'A'
+    },{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'R'
+    }])
+
+   
+
   }
+
+  getUserList(finDetailId){
+    this.FinancierUserCreationService.getAlUserList(finDetailId).subscribe(resp => {
+      this.userDataSource = new MatTableDataSource(resp);
+      // this.dataSource.paginator = this.paginator
+    })
+  }
+
   ngAfterViewInit() {
     console.log(this.paginator,"this.paginator")
   }
@@ -120,6 +155,8 @@ export class FinancierOnboardingListComponent implements OnInit {
     }
   }
   openModal(event, template,element) {
+    debugger
+    this.getUserList(element.companyid)
     console.log(element,"element")
     event.preventDefault();
     this.isView = true
