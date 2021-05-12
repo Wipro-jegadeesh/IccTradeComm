@@ -164,15 +164,19 @@
                   </mat-form-field>
                 </div>
               </div>
-              <!-- <div class="col-sm-4">
-                <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
-                name='country'  (onDeSelectAll)="onDeSelect($event)" 
-               [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-               [settings]="sectordropdownSettings" ></angular2-multiselect>
-              </div> -->
           </div>
-         
- 
+          <div class="row dis-block">
+            <div class="col-sm-4">
+             <mat-form-field appearance="fill">
+              <mat-label>Sector</mat-label>
+              <mat-select formControlName="sector">
+                <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            </div>
+          </div>
+
             </mat-expansion-panel>
           </mat-accordion>
           <mat-accordion>

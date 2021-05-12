@@ -42,4 +42,7 @@ export class IccUserCreationService {
   getIccRelaterUsers(regNo){
     return this.apiService.tempGet(environment.financierServicePath+'sme-profile/getIccSmeUserProfileDetails/'+regNo);
   }
+  getAllSector(){
+    return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+  }
 }

@@ -339,9 +339,13 @@
                 </div>
               </mat-tab>
               <mat-tab label="Related Users"> 
+                <div class="row" >
+                  <div class="col-sm-12" style="text-align: end; top: 5px;">
+                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid)" > Add User </button>
+                  </div>
+              </div>
+              <div class="row col-sm-12" style="top: 13px;">
                 <table mat-table [dataSource]="dataSource1" >
-                
-                
                   <ng-container matColumnDef="userId">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                       matTooltip="UserID" [matTooltipPosition]="'below'"> User Id </th>
@@ -505,6 +509,7 @@
                       <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color:#B4A6EA"></tr>
                   <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns1;"></tr>
               </table>
+              </div>
                </mat-tab>
              </mat-tab-group>
           </div>

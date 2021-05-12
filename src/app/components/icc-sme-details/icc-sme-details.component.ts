@@ -50,6 +50,7 @@ export class IccSmeDetailsComponent implements OnInit {
   public accountList: ElementRef<any>;
   fundingRequestObj;
   OfferAcceptanceObj;
+  companyid: any;
 
   @HostListener("window:resize", ["$event"])
   onResize() {
@@ -117,6 +118,7 @@ export class IccSmeDetailsComponent implements OnInit {
     this.groupsFormBuild()
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
+      this.companyid = resp[0].companyid
       this.userForm.patchValue({
     nationalId:resp[0].companyid,
     address: resp[0].address,
