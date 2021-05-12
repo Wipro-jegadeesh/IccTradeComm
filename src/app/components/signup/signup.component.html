@@ -50,10 +50,10 @@
          required  />
         <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
-        <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
+        <!-- <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
                   name='country'  (onDeSelectAll)="onDeSelect($event)" 
                  [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-                 [settings]="sectordropdownSettings" ></angular2-multiselect>
+                 [settings]="sectordropdownSettings" ></angular2-multiselect> -->
 
       <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">Sign Up</button>
     </form>
