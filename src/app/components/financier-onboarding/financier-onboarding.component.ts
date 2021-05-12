@@ -11,6 +11,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinancierOnboardingService } from './financier-onboarding.service';
 import { ToastrService } from 'ngx-toastr';
 import {Validation} from '../../service/Validation'
+import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
+import { FinancierUserCreationService } from './financier-user-creation/financier-user-creation.service'
 
 const ELEMENT_DATA: any[] = [
   {
@@ -41,17 +43,23 @@ export class FinancierOnboardingComponent implements OnInit {
   financierForm: FormGroup
   financierId = ''
   validation: any = Validation;
+  biddingTooltip = BIDDINGCONSTANTS;
+  userDataSource = new MatTableDataSource();
+  companyid;
 
   constructor(private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
     private customerService: CustomerService, public authenticationService: AuthenticationService, private toastr: ToastrService,
-    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService) {
+    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService) {
     this.customer = new Customer();
   }
 
   dataSource1 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
+
   displayedColumns: string[] = ['Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
+
 
   name = "Angular";
   cities: Array<ICity> = [];
@@ -86,17 +94,52 @@ export class FinancierOnboardingComponent implements OnInit {
       autoPosition : false,
       maxHeight	: 170
     };
-    this.activatedRoute.params.subscribe((params: Params) => {
-      // this.financierId=params.id
-      // let id = params.id && params.id.split('FIN')
-      // this.financierId = id && id[1] ? id[1] : ''
-      this.financierId = params.id
-      this.isView = params.edit == 'view' ? true : false
-    })
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   // this.financierId=params.id
+    //   // let id = params.id && params.id.split('FIN')
+    //   // this.financierId = id && id[1] ? id[1] : ''
+    //   debugger
+    //   this.financierId = params.id
+    //   this.isView = params.edit == 'view' ? true : false
+    // })
+
+
+    this.financierId = this.activatedRoute.snapshot.paramMap.get("id")
+    this.isView = this.activatedRoute.snapshot.paramMap.get("edit") == 'view' ? true : false
+
+
     this.buildFinancierForm()
     this.isView && this.disableFields()
-    this.financierId && this.getSpecificFinancier()
+     this.getSpecificFinancier()
+
+    this.userDataSource = new MatTableDataSource([{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'A'
+    },{'userId':1,
+    'firstName':"11",
+    'lastName':"980",
+    'companyName':"lkjlk",
+    'email':"jklk",
+    'contactNo':"ipoip",
+    'status':'R'
+    }])
+
   }
+
+  getUserList(finDetailId){
+    this.FinancierUserCreationService.getAlUserList(finDetailId).subscribe(resp => {
+      this.userDataSource = new MatTableDataSource(resp);
+      // this.dataSource.paginator = this.paginator
+    })
+  }
+
+
+
+
   disableFields() {
     // this.financierForm.controls['fName'].disable();
     this.dropdownSettings['disabled'] = true
@@ -214,10 +257,10 @@ let respObj = {​​​​​​​​
 }​​​​​​​​
 
 
-
-
     this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
       let respObj = resp
+       this.getUserList(respObj.companyid)
+       this.companyid = respObj.companyid
       this.financierForm = this.fb.group({
         financierId: [respObj.namedPKKey],
         fName: [respObj.financierNameConstitution, Validators.required],
@@ -237,30 +280,32 @@ let respObj = {​​​​​​​​
         // companyName : [respObj.userlst[0] && respObj.userlst[0].companyName],userCreationDate: [respObj.userlst[0] && respObj.userlst[0].userCreationDate],
         //  address: [respObj.userlst[0] && respObj.userlst[0].address], language: [respObj.userlst[0] && respObj.userlst[0].language], country: [respObj.userlst[0] && respObj.userlst[0].country],
 
-        headAddrLine1: [''],
-        headAddrLine2: [''],
-        headAddrLine3: [''],
-        headcity: [''],
-        headstate: [''],
-        headpostalCode: [''],
-        headtelephoneNumber: [''],
+        headAddrLine1: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine1,Validators.required],
+        headAddrLine2: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine2],
+        headAddrLine3: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine3],
+        headcity: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].city],
+        headstate: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].state],
+        headpostalCode: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].postalCode],
+        headtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneNumber,Validators.required],
         headcountry: [[]],
-        heademail: [''],
-                // postalCode: [respObj.postalCode],
+        heademail: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].email,Validators.required],
+           
+        // postalCode: [respObj.postalCode],
 
-        headswiftBic: [''],
-        headfaxNo: [''],
-        servAddrLine1: [''],
-        servAddrLine2: [''],
-        servAddrLine3: [''],
-        servcity: [''],
-        servstate: [''],
+        headswiftBic: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].swiftBic],
+        headfaxNo: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].faxno],
+
+        servAddrLine1: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine1,Validators.required],
+        servAddrLine2: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine2],
+        servAddrLine3: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine3],
+        servcity: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].city],
+        servstate: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].state],
         paymentCode: [''],
-        servpostalCode: [''],
-        servtelephoneNumber: [''],
-        servemail: [''],
-        servswiftBic: [''],
-        servfaxNo: [''],
+        servpostalCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].postalCode],
+        servtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].telephoneNumber,Validators.required],
+        servemail: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].email,Validators.required],
+        servswiftBic: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].swiftBic],
+        servfaxNo: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].faxno],
         servCountry: [[]],
         partnerDetails: this.fb.array([]),
         authSign: this.fb.array([]),
@@ -574,8 +619,8 @@ let respObj = {​​​​​​​​
     this.financierId && this.financierService.updateFinancier(findetobj).subscribe(result => {
       if(result){
         this.toastr.success('Financier details updated Sucessfully')
-        // this.router.navigate(['/financier-user-creation'], {queryParams: {finDetailId: result.profileID}});
-        this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
+        this.gotoPage()
+        // this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
       } 
     })
   }
@@ -584,9 +629,18 @@ let respObj = {​​​​​​​​
     this.router.navigate(['/icc-dashboard']);
   }
 
+  navigateUserAdd(){
+     this.router.navigateByUrl('/financier-user-details/'+this.financierId+'/'+this.companyid +'/');
+  }
+
+  navigateUserEdit(data){
+    this.router.navigateByUrl('/financier-user-details/'+this.financierId+'/'+this.companyid +'/'+data.userId);
+ }
+
   isOpenHandle(isTrue) {
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
   }
+
 
   logout() {
     this.authenticationService.logout()

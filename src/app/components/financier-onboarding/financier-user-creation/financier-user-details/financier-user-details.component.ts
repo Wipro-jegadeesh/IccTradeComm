@@ -35,6 +35,7 @@ export class FinancierUserDetailsComponent implements OnInit {
   pageCount = 1;
   limit = 7;
   finDetailId = "";
+  nationalId;
   tooltipPosition= "below";
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
@@ -67,6 +68,8 @@ export class FinancierUserDetailsComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.finDetailId = this.activatedRoute.snapshot.paramMap.get("finDetailId")
+    this.nationalId = this.activatedRoute.snapshot.paramMap.get("nationalId")
+
     // this.finDetailId =
     //  this.route.snapshot && this.route.snapshot.params && this.route.snapshot.params.finDetailId
     
@@ -164,15 +167,21 @@ export class FinancierUserDetailsComponent implements OnInit {
       if (this.userForm.status === "INVALID"){
         throw { "mes": "Please fill mendatory  fields" }
       }
+
+      let values = this.userForm.value
+      values.nationalId = this.nationalId
+
+      
+
                  if(this.id){
-                  this.FinancierUserCreationService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
+                  this.FinancierUserCreationService.UpdateUser(this.id,values).subscribe(resp => {
                     this.invoiceFormBuild();
                     // this.router.navigateByUrl('/financier-user-creation');
                     this.gobackPage()
                   }, error => {
                   })
                 }else{
-                  this.FinancierUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
+                  this.FinancierUserCreationService.Usersave(values).subscribe(resp => {
                     this.invoiceFormBuild();
                     // this.router.navigateByUrl('/financier-user-creation');
                     this.gobackPage();
