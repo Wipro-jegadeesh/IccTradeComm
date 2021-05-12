@@ -116,7 +116,7 @@ const routes: Routes = [
   { path: 'sme-user-details/:id', component: SmeUserDetailsComponent , data : {"HeaderName" : "Sme User Creation", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
 
 
-  { path: 'financier-user-creation/:finDetailId', component: FinancierUserCreationComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'financier-user-creation/:finDetailId/:nationalId', component: FinancierUserCreationComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
 
   { path: 'financier-user-details/:finDetailId/:nationalId/', component: FinancierUserDetailsComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
 

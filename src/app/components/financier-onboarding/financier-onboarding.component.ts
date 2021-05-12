@@ -611,7 +611,7 @@ let respObj = {​​​​​​​​
         this.toastr.success('Financier onboard Sucessfully')
         // this.router.navigate(['financier-user-creation', {  finDetailId: result.profileID }]);  
         // this.router.navigate(['/financier-user-creation'], {queryParams: {finDetailId: result.profileID}});
-        this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
+        this.router.navigateByUrl('/financier-user-creation/'+result.profileID+'/'+result.companyid);
 
       }
    
@@ -620,7 +620,6 @@ let respObj = {​​​​​​​​
       if(result){
         this.toastr.success('Financier details updated Sucessfully')
         this.gotoPage()
-        // this.router.navigateByUrl('/financier-user-creation/'+result.profileID);
       } 
     })
   }
