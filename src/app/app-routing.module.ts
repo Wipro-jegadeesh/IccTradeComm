@@ -118,6 +118,8 @@ const routes: Routes = [
 
   { path: 'financier-user-creation/:finDetailId', component: FinancierUserCreationComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
 
+  { path: 'financier-user-details/:finDetailId/:nationalId/', component: FinancierUserDetailsComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
   { path: 'financier-user-details/:finDetailId/:nationalId/:id', component: FinancierUserDetailsComponent , data : {"HeaderName" : "Financier User Creation", "headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   // questionaire-scorePage
   { path: 'notActivated', component: StaticPageComponent , data : {"HeaderName" : "notActivated"}},

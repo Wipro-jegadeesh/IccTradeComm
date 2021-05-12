@@ -273,8 +273,8 @@
                   
                     <ng-container matColumnDef="financierName">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.financierName}}" [matTooltipPosition]="'below'"> Financier Type </th>
-                      <td mat-cell *matCellDef="let element"> {{element.financierType}} </td>
+                      matTooltip="{{dashboardTooltip.financierName}}" [matTooltipPosition]="'below'"> Financier Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.financierNameConstitution}} </td>
                     </ng-container>
                   
                     <ng-container matColumnDef="regNumber">
@@ -298,8 +298,8 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
-                  <div style="text-align: center">
-                      <a href="javascript:void(0)"  (click)="financierOnBoardingList()">See More</a>
+                  <div style="text-align: center;margin-top: 16px">
+                      <a href="javascript:void(0)"  (click)="financierOnBoardingList()">View All Financier's</a>
                   </div>
                 </mat-tab>
                 <mat-tab label="SME Maintenence">

@@ -19,7 +19,6 @@ export class FinancierOnboardingService {
     return this.apiService.post(params,findetobj)
     }
     updateFinancier(data){
-        debugger;
         let findetobj={
             'findetobj' : data
         }

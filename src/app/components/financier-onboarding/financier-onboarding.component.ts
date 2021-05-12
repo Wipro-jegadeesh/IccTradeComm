@@ -634,7 +634,7 @@ let respObj = {​​​​​​​​
   }
 
   navigateUserEdit(data){
-    this.router.navigateByUrl('/financier-user-details/'+this.financierId+'/'+this.companyid +'/'+data.userId);
+    this.router.navigateByUrl('/financier-user-details/'+this.financierId+'/'+this.companyid +'/'+data.usersKey);
  }
 
   isOpenHandle(isTrue) {
