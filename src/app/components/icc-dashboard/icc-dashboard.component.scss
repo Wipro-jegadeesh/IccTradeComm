@@ -27,7 +27,74 @@ header {
     z-index: 10;
   }
 }
-
+.uxg-avatar {
+  height: 150px;
+  width: 150px;
+  // border-radius: 100%;
+  margin: 35px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+// .topbar_item{
+//        a {
+//               background: url("/assets/round_trans.svg")  no-repeat 134% 15% / 52% 140%,linear-gradient(to bottom right, #e2d6e2, #7a05e4) !important;
+//           }
+            
+// }
+// .topbar_item{
+//   &:nth-child(3n + 1) {
+//       a{
+//           background: url("/assets/round_trans.svg")  no-repeat 134% 15% / 52% 140%,linear-gradient(to bottom right, #e2d6e2, #7a05e4) !important;
+//       }
+//   }
+//   &:nth-child(3n + 2) {
+//       a{
+//           background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%,linear-gradient(to bottom right, #e2d6e2, #7a05e4) !important;
+//       }
+//   }
+//   &:nth-child(3n + 3) {
+//       a{
+//           background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%,linear-gradient(to bottom right, #e2d6e2, #7a05e4) !important;
+//       }
+//   }
+//   .list-group-item{
+//       border: unset;
+//       color: white;
+//   }
+// }
+// variables 
+.topbar_item{
+  &:nth-child(3n + 1) {
+      a{
+          background: url("/assets/round_trans.svg")  no-repeat 134% 15% / 52% 140%, linear-gradient(180deg, #C694F9, #AB64F4);
+      }
+  }
+  &:nth-child(3n + 2) {
+      a{
+          background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#6AA5E3, #6866E9);
+      }
+  }
+  &:nth-child(3n + 3) {
+      a{
+          background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#FEB683, #FF8993);
+      }
+  } &:nth-child(3n + 4) {
+    a{
+        background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#bea5d8, #ff89ca);
+    }
+ }
+  .list-group-item{
+      border: unset;
+      color: white;
+  }
+}
 .app-content {
   bottom: 0;
   left: 0;

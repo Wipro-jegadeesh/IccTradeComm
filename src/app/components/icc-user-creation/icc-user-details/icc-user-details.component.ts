@@ -49,6 +49,7 @@ export class IccUserDetailsComponent implements OnInit {
   assignRoles=[];
   cardImageKYCBase64: any;
   isImageSavedKYC: boolean;
+  sectors: any;
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -89,6 +90,11 @@ export class IccUserDetailsComponent implements OnInit {
       if(listResp){
         console.log(listResp)
         this.RolesType = listResp
+      }
+    })
+    this.IccUserCreationssService.getAllSector().subscribe(listResp => {
+      if(listResp){
+        this.sectors = listResp
       }
     })
 }
@@ -228,14 +234,14 @@ removeImage() {
                  if(this.id){
                   this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/icc-user-creation');
+                    this.router.navigateByUrl('/icc-sme-details');
           
                   }, error => {
                   })
                 }else{
                   this.IccUserCreationssService.Usersave(this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/icc-user-creation');
+                    this.router.navigateByUrl('/icc-sme-details');
                   }, error => {
                   })
                 }
@@ -263,6 +269,23 @@ removeImage() {
       profileType:resp.profileType,
 
         });
+      }else{
+        this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
+          console.log(resp)
+          this.userForm.patchValue({
+        firstName: resp[0].fname,
+        email: resp[0].email ,
+        lastName: resp[0].lname,
+        contactNo: resp[0].contactnum,
+        companyName: resp[0].companyname, 
+        locale: resp[0].locale,
+        address:resp[0].address,
+        country:resp[0].country,
+        role:resp[0].role,
+        profileType:resp[0].profiletype,
+    
+          });
+        })
       }
     })
    
@@ -281,6 +304,7 @@ removeImage() {
       country:['',Validators.required],
       state:['',Validators.required],
       postalCode:['',Validators.required],
+      sector:[''],
       // groupname:['',Validators.required],
       role:['',Validators.required],
       profileType:['',Validators.required],

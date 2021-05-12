@@ -34,6 +34,7 @@ import {IccUserCreationComponent} from './components/icc-user-creation/icc-user-
 import {IccUserDetailsComponent} from './components/icc-user-creation/icc-user-details/icc-user-details.component'
 import {IccGroupsComponent} from './components/icc-groups/icc-groups.component'
 import {IccRolesComponent} from './components/icc-roles/icc-roles.component'
+import {IccSectorComponent} from './components/icc-sector/icc-sector.component'
 import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-authoriz-matrix.component'
 import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-up-details.component'
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
@@ -103,7 +104,7 @@ const routes: Routes = [
   { path: 'icc-authorize', component: IccAuthorizMatrixComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-list-smes', component: IccListSmesComponent , data : {"HeaderName" : "Icc List Smes" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-sme-details/:id', component: IccSmeDetailsComponent , data : {"HeaderName" : "Icc Sme Details" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
-
+  { path: 'icc-sector', component: IccSectorComponent , data : {"HeaderName" : "Sector" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },

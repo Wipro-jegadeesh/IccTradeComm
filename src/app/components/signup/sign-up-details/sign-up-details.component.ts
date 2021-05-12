@@ -21,6 +21,7 @@ export class SignUpDetailsComponent implements OnInit {
   sectorOptionsDatas=[]
   sectordropdownSettings:any={}
   selectedItems=[]
+  sectors: any;
 
 
   constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
@@ -42,6 +43,11 @@ export class SignUpDetailsComponent implements OnInit {
       autoPosition : false,
       maxHeight	: 170
     };
+    this.SignupServices.getAllRoles().subscribe(listResp => {
+      if(listResp){
+        this.sectors = listResp
+      }
+    })
   }
   onDeSelect(event) {
   
@@ -67,6 +73,7 @@ export class SignUpDetailsComponent implements OnInit {
       state:['',Validators.required],
       city:['',Validators.required],
       postalCode:['',Validators.required],
+      sector:[''],
       country:[this.signUpDetails ? this.signUpDetails.country[0].itemName : '' ,Validators.required],
       role:[''],
       profileType:['SME',Validators.required],
@@ -180,6 +187,7 @@ export class SignUpDetailsComponent implements OnInit {
           city: this.userForm.value.city,
           state: this.userForm.value.state,
           postalCode: this.userForm.value.postalCode,
+          sector:this.userForm.value.sector,
           country: this.userForm.value.country,
           telephoneno: this.userForm.value.contactNo,
           email: this.userForm.value.email,

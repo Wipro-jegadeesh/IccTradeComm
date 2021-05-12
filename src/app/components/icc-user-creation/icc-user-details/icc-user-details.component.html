@@ -173,6 +173,14 @@
                              </mat-form-field>
                           </div>
                       </div>
+                      <div class="col-sm-4">
+                        <mat-form-field appearance="fill">
+                         <mat-label>Sector</mat-label>
+                         <mat-select formControlName="sector">
+                           <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                       </div>
                     
             </div>
      
@@ -288,7 +296,7 @@
                 justify-content: flex-end;
                 padding-top: 38px;">
                         <button mat-raised-button color="primary" >Submit</button>
-                        <button type="button" mat-raised-button color="warn" routerLink='/icc-user-creation'>Cancel</button>
+                        <button type="button" mat-raised-button color="warn" routerLink='/icc-sme-details'>Cancel</button>
                 </div>
       </form>
   

@@ -127,6 +127,8 @@ import { IccRolesComponent } from './components/icc-roles/icc-roles.component';
 import { SignUpDetailsComponent } from './components/signup/sign-up-details/sign-up-details.component';
 import { IccAuthorizMatrixComponent } from './components/icc-authoriz-matrix/icc-authoriz-matrix.component';
 import {IccRolesServices} from './components/icc-roles/icc-roles-services'
+import { IccSectorComponent } from './components/icc-sector/icc-sector.component';
+import {IccSectorServices} from './components/icc-sector/icc-sector-services'
 import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authorize-services'
 import { AuthConfigModule } from '../app/service/auth.config.module';
 import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
@@ -209,7 +211,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ViewProfileComponent,
     FinananceLimitMaintananceComponent,
     StaticPageComponent,
-    NotActivatedPopup
+    NotActivatedPopup,
+    IccSectorComponent
   ],
   imports: [
     BrowserModule,
@@ -261,7 +264,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
-    FinanceRequestServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
+    FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
     FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
