@@ -56,6 +56,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   cntrysmeoverAllLimit
   totalExposure:number=0;
   countrytotalExposure:number=0;
+  isOpen = '';
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService) {
     this.groupsFormBuild()

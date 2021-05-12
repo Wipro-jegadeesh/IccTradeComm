@@ -75,7 +75,7 @@ export class AuthConfigService {
                     let isQuesSucc=resp[0].questionnaire
                     let status=resp[0].status
                     if(status == 'P'){
-                      this.router.navigateByUrl('/score-received')
+                      this.router.navigateByUrl('/notActivated')
                       // this.modalRef = this.modalService.show(template, { class: 'modal-md' });
                     }
                     else if(isQuesSucc == 'N'){

@@ -142,7 +142,9 @@ import { FinancierUserCreationComponent } from './components/financier-onboardin
 import { FinancierUserDetailsComponent } from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component';
-import { StaticPageComponent } from './components/static-page/static-page.component'
+import { NotActivatedPopup, StaticPageComponent } from './components/static-page/static-page.component'
+import {MatDialogModule} from '@angular/material/dialog';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -206,7 +208,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinancierUserDetailsComponent,
     ViewProfileComponent,
     FinananceLimitMaintananceComponent,
-    StaticPageComponent
+    StaticPageComponent,
+    NotActivatedPopup
   ],
   imports: [
     BrowserModule,
@@ -254,6 +257,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     MatSelectModule,
     MatSortModule,
+    MatDialogModule,
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
@@ -273,6 +277,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     schemas: [
       CUSTOM_ELEMENTS_SCHEMA
     ],
-    entryComponents: [ModalComponent]
+    entryComponents: [ModalComponent,NotActivatedPopup]
 })
 export class AppModule { }

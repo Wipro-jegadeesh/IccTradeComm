@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-static-page',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./static-page.component.scss']
 })
 export class StaticPageComponent implements OnInit {
+  
+  
+  constructor(private router: Router,public dialog: MatDialog) { }
 
-  constructor() { }
+  ngOnInit():void{
+    const dialogRef = this.dialog.open(NotActivatedPopup);
 
-  ngOnInit(): void {
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigateByUrl('/score-received')
+    });
   }
-
+  openDialog() {
+  
+  }
+ 
 }
+
+@Component({
+  selector: 'not-activated-popup',
+  templateUrl: './notActivated-popup.html',
+})
+export class NotActivatedPopup {}
