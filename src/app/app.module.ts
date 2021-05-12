@@ -141,7 +141,8 @@ import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-det
 import { FinancierUserCreationComponent } from './components/financier-onboarding/financier-user-creation/financier-user-creation.component';
 import { FinancierUserDetailsComponent } from './components/financier-onboarding/financier-user-creation/financier-user-details/financier-user-details.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
-import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component'
+import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component';
+import { StaticPageComponent } from './components/static-page/static-page.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -204,7 +205,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinancierUserCreationComponent,
     FinancierUserDetailsComponent,
     ViewProfileComponent,
-    FinananceLimitMaintananceComponent
+    FinananceLimitMaintananceComponent,
+    StaticPageComponent
   ],
   imports: [
     BrowserModule,
