@@ -59,6 +59,7 @@ export class FinancierUserCreationComponent implements OnInit {
   moment: any = moment;
   isHover: boolean = false;
   finDetailId = "";
+  companyId;
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -106,6 +107,7 @@ constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute
     // });
 
     this.finDetailId = this.activatedRoute.snapshot.paramMap.get("finDetailId")
+    this.companyId = this.activatedRoute.snapshot.paramMap.get("nationalId")
 
 
      
@@ -219,14 +221,14 @@ constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute
 
   }
   userClick() {
-    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/');
+    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/'+this.companyId+'/');
     // this.router.navigate(['/financier-user-details', { finDetailId: this.finDetailId }]);  
 
   }
   navigateUserDetails(id) {
     // this.router.navigate(['/financier-user-details/'+id, { id : id,finDetailId: this.finDetailId }]);  
 
-    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/'+id);
+    this.router.navigateByUrl('/financier-user-details/'+this.finDetailId+'/'+this.companyId+'/'+id);
   }
   logout() {
     this.authenticationService.logout()
