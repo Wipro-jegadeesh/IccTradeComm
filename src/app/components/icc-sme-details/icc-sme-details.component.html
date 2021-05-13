@@ -1,7 +1,7 @@
 <div class="app-content {{isOpen}} ">
   <header>
       <br>
-      <h5>Sme110</h5>
+      <h5>SME - {{this.smeData?.smeData?.queryParams?.companyId || ''}}</h5>
     <div class="container-fluid contnr-div">
       <div class="row">
           <div class="col-md-12">
@@ -131,6 +131,16 @@
                               <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
                             </mat-form-field>
                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                          <mat-form-field dense>
+                           <mat-label>Sector</mat-label>
+                           <mat-select formControlName="sector">
+                             <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
+                           </mat-select>
+                         </mat-form-field>
+                         </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">

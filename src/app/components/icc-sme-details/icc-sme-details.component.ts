@@ -75,7 +75,7 @@ export class IccSmeDetailsComponent implements OnInit {
   userForm: FormGroup;
   smeData;
   biddingTooltip = BIDDINGCONSTANTS;
-
+  sectors: any;
   constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,private iccDashboardServices: IccDashboardServices ,private apiService:ApiService,public IccUserCreationService:IccUserCreationService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
@@ -118,6 +118,11 @@ export class IccSmeDetailsComponent implements OnInit {
     this.getscore();
     this.getIccRelaterUsers();
     this.groupsFormBuild()
+    this.iccListSmeServices.getAllSector().subscribe(listResp => {
+      if(listResp){
+        this.sectors = listResp
+      }
+    })
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
       this.companyid = resp[0].companyid
@@ -132,10 +137,12 @@ export class IccSmeDetailsComponent implements OnInit {
     status:resp[0].status,
     postalCode:resp[0].postalCode,
     locale:resp[0].locale,
-    state:resp[0].state
+    state:resp[0].state,
+    sector:'3711'
       });
 
     })
+   
   }
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
@@ -157,7 +164,8 @@ export class IccSmeDetailsComponent implements OnInit {
       nationalId:[''],
       postalCode:[''],
       locale:[''],
-      state:['']
+      state:[''],
+      sector:['3711']
     });
   
   }
