@@ -87,6 +87,9 @@ export class SmeOnboardingComponent implements OnInit {
           quesItem.itHasValue=quesItem.required && !quesItem.response ? false :
            !quesItem.required && quesItem.response ? true : quesItem.required && quesItem.response ? true : false
         //    quesItem.itHasValue=quesItem.required ? false : true
+        if(quesItem.type == "QuestionSubSectionListDto"){
+          quesItem.itHasValue=true
+        }
                 }
        quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
     })
@@ -379,6 +382,12 @@ export class SmeOnboardingComponent implements OnInit {
     return isFormComp
   }
   onSubmit(){
+    // this.onSave()
+    this.toastr.success('Questionnaire Section Submitted Successfully')
+    let data=JSON.parse(localStorage.getItem('userCred'))
+      this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
+
+      })
     this.router.navigateByUrl('/sme-dashboard')
   }
   onSave() {
