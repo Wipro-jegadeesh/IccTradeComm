@@ -29,26 +29,71 @@ export class AuthConfigService {
         return false;
        }
   else{
-    // return
+     // For Token Expire Check
+    this.oauthService.events
+      .pipe(
+        filter(e => e.type == 'token_expires')
+        )
+      .subscribe(e => {
+        this.oauthService.silentRefresh();
+        alert("Your Token has been Expired, Please Reload the Page");
+        location.reload();
+        // return false;
+        // tslint:disable-next-line:no-console
+        console.log('received token_expires event', e);
+        // this.oauthService.silentRefresh();
+      });
+       // For Token Expire Check
+ 
+      // return
       return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
         this.oauthService.setStorage(localStorage);
         this.oauthService.tokenValidationHandler = new NullValidationHandler();
+
+        // this.oauthService.events
+        // .pipe(
+        //   filter(e => e.type == 'token_expires')
+        //   )
+        // .subscribe(e => {
+        //   this.oauthService.silentRefresh();
+        //   alert("Token Expired");
+        //   return false;
+        //   // tslint:disable-next-line:no-console
+        //   console.debug('received token_expires event', e);
+        //   // this.oauthService.silentRefresh();
+        // });
+
   
         // subscribe to token events
-        this.oauthService.events
-          .pipe(filter((e: any) => {
-            return e.type === 'token_received';
-          }))
-          .subscribe(() => this.handleNewToken());
+        // this.oauthService.events
+        //   .pipe(filter((e: any) => {
+        //     return e.type === 'token_received';
+        //   }))
+        //   .subscribe(() => this.handleNewToken());
           
         // continue initializing app or redirect to login-page
         
         this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
+          // this.oauthService.events
+          // .pipe(
+          //   filter(e => e.type == 'token_expires')
+          //   )
+          // .subscribe(e => {
+          //   this.oauthService.silentRefresh();
+          //   alert("Token Expired");
+          //   return false;
+          //   // tslint:disable-next-line:no-console
+          //   console.debug('received token_expires event', e);
+          //   // this.oauthService.silentRefresh();
+          // });
+  
           if (isLoggedIn) { 
+            // For Token Expire Check
             this.oauthService.setupAutomaticSilentRefresh();
             resolveFn();
+          // For Token Expire Check
             let claims = this.oauthService.getIdentityClaims();
             let scope = this.oauthService.scope;
             console.log("scope",scope); 
