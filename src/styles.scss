@@ -1159,3 +1159,30 @@ width:100%
 .mat-slider-horizontal .mat-slider-wrapper {
     left: 20px!important;
 }
+
+.fin-stepper{
+    .mat-step-label{
+        min-width: 80px;
+    }
+    .links{
+        margin-bottom: 13px;
+        text-align: right;
+    }
+
+    .mat-form-field {
+        align-self: stretch;
+        margin-bottom: 24px;
+        margin-left: 14px;
+        width: 351px;
+    }
+
+    // .multiselect-dropdown-dsgn{
+    //     width: 351px;
+    //     margin-left: 14px;
+    // margin: 2px 8px 44px 93px;
+    // background-color: #f3f1fc;
+    // border-bottom: 1px solid #694ed6;
+    // padding-top: 5px;
+    // border-radius: 3px;
+    // }
+}

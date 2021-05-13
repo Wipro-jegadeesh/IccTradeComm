@@ -10,9 +10,9 @@
     <form 
           [formGroup]="financierForm">
       <mat-horizontal-stepper linear="true"
-                              selectedIndex="0"
-                              #stepper>
-        <mat-step>
+                              #stepper
+                              class="fin-stepper">
+        <mat-step completed="true">
 
           <ng-template matStepLabel>Financier OnBoarding</ng-template>
           <mat-card>
@@ -78,24 +78,26 @@
                         <mat-hint>Please Enter Local Registration Number</mat-hint>
                       </mat-form-field>
                     </td>
+
+                    <td rowspan="1"
+                    colspan="1">
+                  <mat-form-field dense>
+                    <mat-icon dense
+                              color="primary"
+                              matPrefix>person_outline</mat-icon>
+                    <mat-label>Tax Identification No</mat-label>
+                    <input matInput
+                           type="number"
+                           formControlName="taxIdNum"
+                           [readonly]="isView"
+                           required />
+                    <mat-hint>Please Enter Tax Identification Number</mat-hint>
+                  </mat-form-field>
+                </td>
                   </tr>
 
                   <tr>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense>
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>Tax Identification No</mat-label>
-                        <input matInput
-                               type="number"
-                               formControlName="taxIdNum"
-                               [readonly]="isView"
-                               required />
-                        <mat-hint>Please Enter Tax Identification Number</mat-hint>
-                      </mat-form-field>
-                    </td>
+                  
                     <td rowspan="1"
                         colspan="1">
                       <mat-form-field dense>
@@ -109,9 +111,7 @@
                         <mat-datepicker #pickers></mat-datepicker>
                       </mat-form-field>
                     </td>
-                  </tr>
-
-                  <tr>
+                 
                     <td rowspan="1"
                         colspan="1">
                       <mat-form-field dense>
@@ -172,10 +172,7 @@
                         <mat-hint>Please Enter Principal Bank Branch</mat-hint>
                       </mat-form-field>
                     </td>
-                  </tr>
-
-                  <tr class="form-group"
-                      data-always-visible="false">
+                  
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -198,6 +195,9 @@
                         </div>
                       </div>
                     </td>
+                    </tr>
+
+                    <tr>
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -220,12 +220,9 @@
                         </div>
                       </div>
                     </td>
-                  </tr>
+                
 
-                  <!-- ============== -->
-                  <tr class="form-group"
-                  data-always-visible="false">
-                <td class="T1"
+                    <td class="T1"
                     rowspan="1"
                     colspan="1">
                   <div class="card-form-container">
@@ -247,6 +244,11 @@
                     </div>
                   </div>
                 </td>
+
+                  <!-- ============== -->
+                  <!-- <tr class="form-group"
+                  data-always-visible="false"> -->
+              
               </tr>
               <!-- =========== -->
                 </tbody>
@@ -488,7 +490,7 @@
         <!-- ======================= -->
 
 
-        <mat-step>
+        <mat-step completed="true">
 
           <ng-template matStepLabel>Financier Registered Head Quarters</ng-template>
           <mat-card>
@@ -543,9 +545,7 @@
                     </div>
                   </div>
                 </td>
-                  </tr>
-                  <tr class="form-group"
-                      data-always-visible="false">
+                 
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -568,6 +568,11 @@
                         </div>
                       </div>
                     </td>
+
+
+                    <tr class="form-group"
+                    data-always-visible="false">
+
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -590,9 +595,7 @@
                         </div>
                       </div>
                     </td>
-                  </tr>
-                  <tr class="form-group"
-                      data-always-visible="false">
+                 
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -638,6 +641,8 @@
                       </div>
                     </td>
                   </tr>
+
+
                   <tr class="form-group"
                       data-always-visible="false">
                     <td class="T1"
@@ -676,13 +681,6 @@
                 </td>
 
 
-                  </tr>
-
-
-                  <!-- ======== -->
-
-                  <tr class="form-group"
-                  data-always-visible="false">
                   <td class="T1"
                   rowspan="1"
                   colspan="1">
@@ -706,6 +704,8 @@
                   </div>
                   </td>
 
+                  <tr class="form-group"
+                  data-always-visible="false">
                   <td class="T1"
                   rowspan="1"
                   colspan="1">
@@ -728,14 +728,7 @@
                   </div>
                 </div>
               </td>
-                  </tr>
-
-
-                      <!-- ======= -->
-
-                  <tr class="form-group"
-                      data-always-visible="false">
-               
+            
                     <td class="T1"
                         rowspan="1"
                         colspan="1">
@@ -784,7 +777,7 @@
           </mat-card>
         </mat-step>
 
-        <mat-step>
+        <mat-step completed="true">
           <ng-template matStepLabel>Financier's TradeComm Service Branch</ng-template>
           <mat-card>
             <!-- <mat-card-title>
@@ -843,9 +836,7 @@
                 </div>
               </td>
                  
-                </tr>
-                <tr class="form-group"
-                    data-always-visible="false">
+           
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -868,6 +859,9 @@
                       </div>
                     </div>
                   </td>
+
+                  <tr class="form-group"
+                  data-always-visible="false">
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -890,9 +884,7 @@
                       </div>
                     </div>
                   </td>
-                </tr>
-                <tr class="form-group"
-                    data-always-visible="false">
+         
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -975,12 +967,7 @@
                   </div>
                 </div>
               </td>
-                </tr>
-
-                <!-- ========== -->
-
-                  <tr class="form-group"
-                  data-always-visible="false">
+               
                   <td class="T1"
                   rowspan="1"
                   colspan="1">
@@ -1004,8 +991,10 @@
                   </div>
                   </td>   
 
+                  <tr class="form-group"
+                  data-always-visible="false">
                  
-                <td class="T1"
+                <!-- <td class="T1"
                     rowspan="1"
                     colspan="1">
                   <div class="card-form-container">
@@ -1026,10 +1015,8 @@
                       </mat-form-field>
                     </div>
                   </div>
-                </td>
-                </tr>  
-                <tr class="form-group"
-                data-always-visible="false">               
+                </td> -->
+                             
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -1079,7 +1066,7 @@
         </mat-step>
 
 
-        <mat-step>
+        <mat-step completed="true">
           <ng-template matStepLabel>More Details</ng-template>
           <mat-card>
 
@@ -1090,7 +1077,7 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="partnerDetails">
-                   <ng-container matColumnDef="FirstName">
+                   <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
                         scope="column">NAME</th>
@@ -1201,7 +1188,7 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="authSign">
-                   <ng-container matColumnDef="FirstName">
+                   <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
                         scope="column">NAME</th>
@@ -1313,7 +1300,7 @@
                    style="width: 90%;"
                    id=right
                    formArrayName="entityAdmin">
-                   <ng-container matColumnDef="FirstName">
+                   <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
                         scope="column"> NAME</th>
@@ -1434,7 +1421,7 @@
 
         
                 <!-- ===================== -->
-                <mat-step>
+                <mat-step completed="true">
                   <ng-template matStepLabel>User Details</ng-template>
                   <mat-card>
                     <!-- <mat-tab-group dynamicHeight>

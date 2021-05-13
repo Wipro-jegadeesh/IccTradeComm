@@ -57,7 +57,7 @@ export class FinancierOnboardingComponent implements OnInit {
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
 
-  displayedColumns: string[] = ['Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumns: string[] = ['name','Position', 'Address', 'TelephoneNo', 'Email'];
   displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
 
 
@@ -98,7 +98,7 @@ export class FinancierOnboardingComponent implements OnInit {
     //   // this.financierId=params.id
     //   // let id = params.id && params.id.split('FIN')
     //   // this.financierId = id && id[1] ? id[1] : ''
-    //   debugger
+    //   
     //   this.financierId = params.id
     //   this.isView = params.edit == 'view' ? true : false
     // })
@@ -289,7 +289,7 @@ let respObj = {​​​​​​​​
         headtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneNumber,Validators.required],
         headcountry: [[]],
         heademail: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].email,Validators.required],
-           
+      
         // postalCode: [respObj.postalCode],
 
         headswiftBic: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].swiftBic],
@@ -300,7 +300,7 @@ let respObj = {​​​​​​​​
         servAddrLine3: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine3],
         servcity: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].city],
         servstate: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].state],
-        paymentCode: [''],
+        paymentCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].paymentCode],
         servpostalCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].postalCode],
         servtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].telephoneNumber,Validators.required],
         servemail: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].email,Validators.required],
@@ -360,6 +360,7 @@ let respObj = {​​​​​​​​
         }
       })
       //more details datas
+      if( respObj.asocpartylst && respObj.asocpartylst.length >= 1){      
       respObj.asocpartylst && respObj.asocpartylst.length && respObj.asocpartylst.map((item) => {
         if (item.assocType == "Director/Partner") {
           let partnerRow = this.fb.group({
@@ -395,6 +396,35 @@ let respObj = {​​​​​​​​
           this.dataSource3.data = this.entityFormArray.controls;
         }
       })
+    }else{
+      const partnerRow = this.fb.group({
+        name: [""],
+        position: [""],
+        address: [""],
+        phoneNo: [""],
+        email: [""]
+      })
+      const authRow = this.fb.group({
+        name: [""],
+        position: [""],
+        address: [""],
+        phoneNo: [""],
+        email: [""]
+      })
+      const entityRow = this.fb.group({
+        name: [""],
+        position: [""],
+        address: [""],
+        phoneNo: [""],
+        email: [""]
+      })
+      this.partnerFormArray.push(partnerRow);
+      this.authoriseFormArray.push(authRow);
+      this.entityFormArray.push(entityRow)
+      this.dataSource1.data = this.partnerFormArray.controls;
+      this.dataSource2.data = this.authoriseFormArray.controls;
+      this.dataSource3.data = this.entityFormArray.controls;
+    }
     })
   }
   buildFinancierForm() {
@@ -527,6 +557,7 @@ let respObj = {​​​​​​​​
       'telephoneNumber': formValues.headtelephoneNumber,
       'email': formValues.heademail,
       'faxno': formValues.headfaxNo,
+      'postalCode':formValues.headpostalCode,
       'swiftBic': formValues.headswiftBic,
       "addressType": "H",
     }
@@ -540,11 +571,16 @@ let respObj = {​​​​​​​​
       'telephoneNumber': formValues.servtelephoneNumber,
       'email': formValues.servemail,
       'faxNo': formValues.servfaxNo,
+      'postalCode':formValues.servpostalCode, 
+      'paymentCode' : formValues.paymentCode, 
       'swiftBic': formValues.servswiftBic,
       "addressType": "S"
     }
     //Parter details
+    ;
+
     formValues.partnerDetails && formValues.partnerDetails.map((item => {
+      ;
       let hasValue = Object.values(item).filter(x => x)
       let partnerObj = {
         'name': item.name,
@@ -558,6 +594,7 @@ let respObj = {​​​​​​​​
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
     formValues.authSign && formValues.authSign.map((item => {
+      ;
       let hasValue = Object.values(item).filter(x => x)
       let partnerObj = {
         'name': item.name,
@@ -572,6 +609,7 @@ let respObj = {​​​​​​​​
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
     formValues.entityAdmin && formValues.entityAdmin.map((item => {
+      ;
       let hasValue = Object.values(item).filter(x => x)
       let partnerObj = {
         'name': item.name,
