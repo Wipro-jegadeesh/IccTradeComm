@@ -144,6 +144,13 @@
             </div>
         </ng-container>
         <div class="col-md-12" style="float:right;z-index:12">
+            <!-- <mat-tab-group dynamicHeight>
+                 <mat-tab label="DashBoard Over View">
+
+                 </mat-tab>
+                 <mat-tab label="Funding Request">
+
+                </mat-tab> -->
         <!-- <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
         matTooltip="{{dashboardTooltips.fundingRequest}}"
         [matTooltipPosition]="tooltipPosition"  (click)="this.navigateInvoiceCreation()">+ Funding Request</button> -->
@@ -156,12 +163,46 @@
               <option value="bulk">Invoice Request Bulk Upload</option>
             </select>
           </mat-form-field> -->
-          <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
+            <div class="row topbar_main">
+                <div  class="col-md-3 my-2 topbar_item">
+                    <a [routerLinkActive]="['router-link-active']"  [matMenuTriggerFor]="menu" class="list-group-item text-center tablecolour">
+                        <i class="fas fa-2x fa-file-invoice"></i>
+                        <p class="mb-0 mt-1"><span>+ Funding Request</span></p>
+                    </a>
+                </div>
+            </div>
+          <!-- <button type="button" class="btn btn-outline fundreq-btn topbar_main"  #tooltip="matTooltip"
           matTooltip="{{dashboardTooltips.fundingRequest}}"
-          [matTooltipPosition]="tooltipPosition" [matMenuTriggerFor]="menu"> + Funding Request</button>
+          [matTooltipPosition]="tooltipPosition" [matMenuTriggerFor]="menu"> + Funding Request</button> -->
             <mat-menu #menu="matMenu">
-            <button (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>Invoice Request Manual</button>
-            <button (click)="onRequestChange('')" style="color: #7c49cb;" mat-menu-item>Invoice Request Upload</button>
+                <!-- <div  class="col-md-3 my-2 topbar_item">
+                    <a [routerLinkActive]="['router-link-active']"  class="list-group-item text-center tablecolour">
+                        <i class="fas fa-2x fa-file-invoice"></i>
+                        <p class="mb-0 mt-1"><span>Invoice Request Manual</span></p>
+                    </a>
+                </div>
+                <div  class="col-md-3 my-2 topbar_item">
+                    <a [routerLinkActive]="['router-link-active']"  class="list-group-item text-center tablecolour">
+                        <i class="fas fa-2x fa-file-invoice"></i>
+                        <p class="mb-0 mt-1"><span>Invoice Request Upload</span></p>
+                    </a>
+                </div> -->
+
+            <button (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
+                <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
+                <span>
+                    Invoice Request Manual
+                </span>
+                <!-- Invoice Request Manual -->
+                <!-- <p class="mb-0 mt-1"><span></span></p> -->
+                </button>
+            <button (click)="onRequestChange('')" style="color: #7c49cb;" mat-menu-item>
+                <i class="fas fa-2x fa-upload"></i>&nbsp;
+                <span>
+                    Invoice Request Upload
+                </span>
+                <!-- <p class="mb-0 mt-1"><span></span></p> -->
+            </button>
             </mat-menu>
         </div>
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>

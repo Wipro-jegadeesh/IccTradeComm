@@ -41,6 +41,8 @@ export class IccSmeDetailsComponent implements OnInit {
   pageCount = 1;
   limit = 7;
   isOpen = "active";
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   displayedColumns: string[] = ['scoreName', 'score', 'information'];
   displayedColumns1: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
 
@@ -712,6 +714,22 @@ textListRespBuild(Data){
 }
 navigateFinanceDetails(id) {
   this.router.navigateByUrl('/icc-user-details/'+id);
+}
+searchDiv(){
+  if(this.filterDivOpen === true){
+  this.searchDivOpen = !this.searchDivOpen
+  this.filterDivOpen = !this.filterDivOpen
+  }else{
+    this.searchDivOpen = !this.searchDivOpen
+  }
+}
+filterDiv(){
+  if(this.searchDivOpen === true){
+    this.searchDivOpen = !this.searchDivOpen
+    this.filterDivOpen = !this.filterDivOpen
+  }else{
+    this.filterDivOpen = !this.filterDivOpen
+  }
 }
 }
 
