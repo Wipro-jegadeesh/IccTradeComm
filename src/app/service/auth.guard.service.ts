@@ -29,6 +29,9 @@ export class AuthConfigService {
         return false;
        }
   else{
+    const keycloakAuth = this.oauthService.getAccessTokenExpiration();
+    console.log('keycloakAuth',keycloakAuth);
+  
      // For Token Expire Check
     this.oauthService.events
       .pipe(
@@ -36,11 +39,15 @@ export class AuthConfigService {
         )
       .subscribe(e => {
         this.oauthService.silentRefresh();
-        alert("Your Token has been Expired, Please Reload the Page");
-        location.reload();
+        if (confirm('Session TimeOut : Click Ok to continue with this session')) {
+          location.reload();
+         } else {
+          this.oauthService.logOut()
+        }
+        
         // return false;
         // tslint:disable-next-line:no-console
-        console.log('received token_expires event', e);
+        // console.log('received token_expires event', e);
         // this.oauthService.silentRefresh();
       });
        // For Token Expire Check
