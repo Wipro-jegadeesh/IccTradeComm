@@ -16,4 +16,7 @@ export class IccListSmeServices {
   getUserSMEDetails(id) {
     return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
   }
+  getAllSector(){
+    return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+  }
 }
