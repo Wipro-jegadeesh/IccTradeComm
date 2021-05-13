@@ -55,7 +55,7 @@
        <div class="container-fluid">
           <form (ngSubmit)="onSubmit()" [formGroup]="financierForm">
               <mat-horizontal-stepper linear="true" selectedIndex="0" #stepper>
-                <mat-step>
+                <mat-step completed="true">
                   <ng-template matStepLabel>Financier OnBoarding</ng-template>
                   <mat-card>
                     <mat-card-content>
@@ -171,7 +171,7 @@
             
                 </mat-step>
             
-                <mat-step>
+                <mat-step completed="true">
             
                   <ng-template matStepLabel>Financier Registered Head Quarters</ng-template>
                   <mat-card>
@@ -349,7 +349,7 @@
                   </mat-card>
                 </mat-step>
             
-                <mat-step>
+                <mat-step completed="true">
                   <ng-template matStepLabel>Financier's TradeComm Service Branch</ng-template>
                   <mat-card>
                     <!-- <mat-card-title>
@@ -516,7 +516,7 @@
                 </mat-step>
             
             
-                <mat-step>
+                <mat-step completed="true">
                   <ng-template matStepLabel>More Details</ng-template>
                   <mat-card>
             
@@ -699,7 +699,7 @@
 
 
                 <!-- ===================== -->
-                <mat-step>
+                <mat-step completed="true">
                   <ng-template matStepLabel>Related Users</ng-template>
                   <mat-card>
                     <!-- <mat-tab-group dynamicHeight>

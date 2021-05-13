@@ -70,22 +70,21 @@ header {
 
 .app-content {
     bottom: 0;
-    left: 0;
+    left: -50px;
     overflow-x: auto;
     padding: 2rem;
     position: absolute;
     right: 0;
     top: 33px;
 }
-.multiselect-dropdown-dsgn{
-    width: 400px;
-    margin: 2px 8px 44px 93px;
+ .multiselect-dropdown-dsgn{
+        width: 351px;
+    margin: 2px 8px 44px 14px;
     background-color: #f3f1fc;
     border-bottom: 1px solid #694ed6;
     padding-top: 5px;
     border-radius: 3px;
-}
-
+    }
 .minus-btn{
     // background: #ec5757;
     // color: white;
