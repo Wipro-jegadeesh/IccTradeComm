@@ -26,6 +26,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": ["lodash","papaparse","xlsx","chart.js","ng-inline-svg/lib_commonjs/inline-svg.module"],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -59,8 +60,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
                 }
               ]
             }

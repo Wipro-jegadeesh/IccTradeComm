@@ -221,34 +221,26 @@
               <div class="mat-elevation-z8">
               <table class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;">
                 <ng-container matColumnDef="sme" >
-                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.id}}"
-                [matTooltipPosition]="tooltipPosition">SME</th>
+                <th mat-header-cell *matHeaderCellDef scope="column" >SME</th>
                 <td mat-cell *matCellDef="let element;let row; let index = index" >
                 {{element.sme}}
                 </td>
                 </ng-container>
                 <ng-container matColumnDef="country">
-                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.desc}}"
-                [matTooltipPosition]="tooltipPosition">Country</th>
+                <th mat-header-cell *matHeaderCellDef scope="column">Country</th>
                 <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
                 {{element.country}}
                 </td>
                 </ng-container>
                 <ng-container matColumnDef="utilizedAmt">
-                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.netAmount}}"
-                [matTooltipPosition]="tooltipPosition">Utilized Amount</th>
+                <th mat-header-cell *matHeaderCellDef scope="column">Utilized Amount</th>
                 <td mat-cell *matCellDef="let element;let row; let index = index" >
                 {{element.utilizedAmt}}
                 </td>
                 </ng-container>
                 
                 <ng-container matColumnDef="balAmt">
-                <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.taxRate}}"
-                [matTooltipPosition]="tooltipPosition">Balance Amount </th>
+                <th mat-header-cell *matHeaderCellDef scope="column" >Balance Amount </th>
                 <td mat-cell *matCellDef="let element;let row; let index = index" >
                 {{element.balanceAmt}}
                 </td>
@@ -339,26 +331,20 @@
               <div class="mat-elevation-z8">
                  <table  class="table-responsive" mat-table [dataSource]="dataSourceThree" style="width: 100%;">
                   <ng-container matColumnDef="country">
-                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{fundingTooltip.desc}}"
-                    [matTooltipPosition]="tooltipPosition">Country</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column" >Country</th>
                       <td mat-cell *matCellDef="let element;let row; let index = index"  class="desc-goods">
                         {{element.country}}
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="utzAmt">
-                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{fundingTooltip.netAmount}}"
-                    [matTooltipPosition]="tooltipPosition">Utilized Amount</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column" >Utilized Amount</th>
                     <td mat-cell *matCellDef="let element;let row; let index = index"  >
                       {{element.utzAmt}}
                       </td>
                   </ng-container>
               
                   <ng-container matColumnDef="avlAmt">
-                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{fundingTooltip.taxRate}}"
-                    [matTooltipPosition]="tooltipPosition">Available Amount </th>
+                    <th mat-header-cell *matHeaderCellDef scope="column" >Available Amount </th>
                     <td mat-cell *matCellDef="let element;let row; let index = index"  >
                       {{element.avlAmt}}
                     </td>

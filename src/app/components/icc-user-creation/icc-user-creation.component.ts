@@ -160,7 +160,7 @@ ActiveuserNo(){
           this.dataSource.paginator = this.paginator
         })
 }
-Activeuser(){
+Activeuser(data){
   let obj={
     status : this.message
   }

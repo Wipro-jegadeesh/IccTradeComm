@@ -36,7 +36,52 @@ header {
     right: 0;
     top: 33px;
 }
-
+.topbar_item{
+    &:nth-child(3n + 1) {
+        a{
+            background: url("/assets/round_trans.svg")  no-repeat 134% 15% / 52% 140%, linear-gradient(180deg, #C694F9, #AB64F4);
+        }
+    }
+    &:nth-child(3n + 2) {
+        a{
+            background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#6AA5E3, #6866E9);
+        }
+    }
+    &:nth-child(3n + 3) {
+        a{
+            background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#FEB683, #FF8993);
+        }
+    } &:nth-child(3n + 4) {
+      a{
+          background: url("/assets/round_trans.svg") no-repeat 134% 15% / 52% 140%, linear-gradient(180deg,#bea5d8, #ff89ca);
+      }
+   }
+    .list-group-item{
+        border: unset;
+        color: white;
+    }
+  }
+  .mat-menu-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    line-height: 48px;
+    height: 48px;
+    padding: 0px 50px 0px 12px;
+    text-align: left;
+    text-decoration: none;
+    max-width: 300px;
+    position: relative;
+}
 .accounts-list {
     // float: left;
     // position: relative;
