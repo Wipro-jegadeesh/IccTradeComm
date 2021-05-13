@@ -576,11 +576,17 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     }
 }
 .step-min{
-    margin: -14px 0px 0px 0px;
+    margin: -36px 0px 0px 0px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
 }
 .step-max{
-    margin: -14px 0px 0px 0px;
+    margin: -36px 0px 0px 0px;
     left: 50%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
 }
 }
 .mat-chips-set{
@@ -960,7 +966,10 @@ input.custom-autofill {
         }
         .mat-slider{
             margin-left: 15px;
-            width:225px!important;
+            width:200px!important;
+        }
+        .step-max{
+            left:44%!important;
         }
 
   }
@@ -991,7 +1000,7 @@ input.custom-autofill {
 
 .mat-slider{
     margin-left: 15px;
-    width:400px;
+    width:380px;
 }
 
 .mat-form-field-appearance-fill[dense] .mat-form-field-wrapper .mat-form-field-flex {
@@ -1146,4 +1155,7 @@ width:100%
 
 .actv-popup-btn{
     margin-left: 40%;
+}
+.mat-slider-horizontal .mat-slider-wrapper {
+    left: 20px!important;
 }
