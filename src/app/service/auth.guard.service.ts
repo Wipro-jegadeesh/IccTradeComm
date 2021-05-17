@@ -83,6 +83,7 @@ export class AuthConfigService {
                 this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+claims['preferred_username']).subscribe(resp=>{
                   if(resp.length){
                     let userObj={
+                      'smeProfileId':resp[0].companyid,
                       'companyName':resp[0].companyname,
                       'userId':claims['preferred_username'],
                       'companyId':resp[0].nationalid,
@@ -121,6 +122,28 @@ export class AuthConfigService {
                     // localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");
                    }
                   if (item.match(/^.*financier$/) || item.match(/^financier.*$/)){ 
+
+                      // =============
+
+                      this.apiService.generalServiceget(environment.financierServicePath+'financier-custom/'+claims['preferred_username']).subscribe(resp=>{
+                        if(resp.length){
+                          let userObj={
+                            'financierProfileId':resp[0].companyid,
+                            // 'companyName':resp[0].companyname,
+                            'userId':claims['preferred_username'],
+                            // 'companyId':resp[0].nationalid,
+                            // 'country':'SGP',
+                            // 'role':resp[0].role,
+                            // 'name':resp[0].name,
+                            // 'address':resp[0].address,
+                            // 'mobile':resp[0].contactnum,
+                            // 'email':resp[0].email,
+                            // 'city':resp[0].locale
+                          }
+                          localStorage.setItem('userCred',JSON.stringify(userObj))
+                        }})
+
+                      // ==============
                     localStorage.setItem("roleName","financier");
                   //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
                        localStorage.setItem("roleName","financier");

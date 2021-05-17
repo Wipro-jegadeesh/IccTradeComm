@@ -370,8 +370,10 @@ export class InvoiceDetailsComponent implements OnInit {
         this.toastr.error("Please fill Mandatory fields")
       }else{
         let params = this.finBidform.value
+        let userData = JSON.parse(localStorage.getItem('userCred'))
         params.repaymentDate = this.invoiceDetails.invDueDate;
         params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z"
+        params.financierProfileId = userData['financierProfileId']
         // this.invoiceFormBuild();
         // this.dataSourceTwo.data = [];
         // this.invoiceID = "";

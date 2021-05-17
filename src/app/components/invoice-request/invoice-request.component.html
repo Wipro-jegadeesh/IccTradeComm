@@ -461,7 +461,7 @@
             </div>
             <mat-card-actions class="ebtn">
               <span class="fill-remaining-space"></span>
-              <button [disabled]="this.userDeatils.role === 'Authorise'"  mat-flat-button color="primary"id=grid #tooltip="matTooltip"
+              <button [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'"  mat-flat-button color="primary"id=grid #tooltip="matTooltip"
               matTooltip="{{fundingTooltip.saveGoods}}"
               [matTooltipPosition]="tooltipPosition">
                 <div *ngIf="!UpdateInvoiceLable"> Add Invoice </div>
@@ -553,14 +553,14 @@
       <mat-card-actions class="ebtn">
         <span class="fill-remaining-space"></span>
         <button mat-flat-button color="primary" #tooltip="matTooltip"
-        matTooltip="{{fundingTooltip.submit}}" [disabled]="this.userDeatils.role === 'Authorise'" [matTooltipPosition]="tooltipPosition" disabled>
+        matTooltip="{{fundingTooltip.submit}}" [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'" [matTooltipPosition]="tooltipPosition" disabled>
           Submit
         </button>
         <!-- <button mat-flat-button color="primary" #tooltip="matTooltip"
         matTooltip="{{fundingTooltip.pendingInvoice}}" [matTooltipPosition]="tooltipPosition">
           Pend
         </button> -->
-        <button mat-flat-button color="primary" [disabled]="this.userDeatils.role === 'Input'" (click)="authoriseInvoice()" #tooltip="matTooltip"
+        <button mat-flat-button color="primary" [disabled]="this.userDeatils && this.userDeatils.role === 'Input'" (click)="authoriseInvoice()" #tooltip="matTooltip"
         matTooltip="{{fundingTooltip.invoiceAuthorise}}" [matTooltipPosition]="tooltipPosition">
           Authorise
         </button>
