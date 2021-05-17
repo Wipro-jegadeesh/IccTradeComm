@@ -858,4 +858,35 @@ mat-form-field {
     padding: 6px;
     margin: -5px 5px 0px 1px;
   }
+  #exposureTbl{
+    width: 322px;
+  }
+  .finlim-mat{
+width: auto;
+  }
+  
+#exposureTbl {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#exposureTbl td, #exposureTbl th {
+  border: 1px solid #ddd;
+  padding: 6px;
+  font-size: 12px;
+}
+
+#exposureTbl tr:nth-child(even){background-color: #694ed630;}
+
+// #exposureTbl tr:hover {background-color: #ddd;}
+
+#exposureTbl th {
+  color: rgb(0 0 0 / 60%);
+  padding: 6px;
+  text-align: left;
+  background-color: #b1a3e6;
+  font-size: 12px;
+  font-weight: 500;
+}
   
