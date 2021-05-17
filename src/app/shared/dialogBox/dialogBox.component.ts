@@ -9,7 +9,7 @@ export class DialogDataExampleService {
   openDialog() {
       this.dialog.closeAll()
     const dialogRef = this.dialog.open(DialogDataExampleDialog, { disableClose: true })
-  }
+      }
 }
 
 @Component({
