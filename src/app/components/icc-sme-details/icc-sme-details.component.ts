@@ -138,7 +138,7 @@ export class IccSmeDetailsComponent implements OnInit {
     postalCode:resp[0].postalCode,
     locale:resp[0].locale,
     state:resp[0].state,
-    sector:'3711'
+    sector:resp[0].state
       });
 
     })
@@ -165,7 +165,7 @@ export class IccSmeDetailsComponent implements OnInit {
       postalCode:[''],
       locale:[''],
       state:[''],
-      sector:['3711']
+      sector:['']
     });
   
   }
@@ -720,8 +720,8 @@ textListRespBuild(Data){
   }
   return obj
 }
-navigateFinanceDetails(id) {
-  this.router.navigateByUrl('/icc-user-details/'+id);
+navigateFinanceDetails(id,type) {
+  this.router.navigateByUrl('/icc-user-details/'+id+'/'+type);
 }
 searchDiv(){
   if(this.filterDivOpen === true){

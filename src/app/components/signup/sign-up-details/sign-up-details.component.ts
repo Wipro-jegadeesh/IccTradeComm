@@ -187,7 +187,6 @@ export class SignUpDetailsComponent implements OnInit {
           city: this.userForm.value.city,
           state: this.userForm.value.state,
           postalCode: this.userForm.value.postalCode,
-          sector:this.userForm.value.sector,
           country: this.userForm.value.country,
           telephoneno: this.userForm.value.contactNo,
           email: this.userForm.value.email,
@@ -215,6 +214,7 @@ export class SignUpDetailsComponent implements OnInit {
         registrationNumber: this.userForm.value.nationalId,
         taxNo: '',
         rating: '',
+        sector:this.userForm.value.sector,
         addrlst :addrlst,
         userlst : userList
       };

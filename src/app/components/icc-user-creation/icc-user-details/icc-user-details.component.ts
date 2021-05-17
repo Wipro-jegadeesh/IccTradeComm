@@ -50,6 +50,7 @@ export class IccUserDetailsComponent implements OnInit {
   cardImageKYCBase64: any;
   isImageSavedKYC: boolean;
   sectors: any;
+  type: string;
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -78,13 +79,10 @@ export class IccUserDetailsComponent implements OnInit {
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.type = this.activatedRoute.snapshot.paramMap.get("type");
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    if(this.id){
-      this.UserEditFormBuild()
-    }
-    // this.RolesType = [{"roleId":1,"code":"Maker","roleDescription":"Maker"},{"roleId":2,"code":"Checker","roleDescription":"Checker"}]
 
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if(listResp){
@@ -97,12 +95,36 @@ export class IccUserDetailsComponent implements OnInit {
         this.sectors = listResp
       }
     })
+    if(this.id && this.type === 'EDIT'){
+      this.UserEditFormBuild()
+    }
+    if(this.id && this.type === 'ADD'){
+      this.UserADDFormBuild()
+    }
+}
+UserADDFormBuild(){
+  this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
+    console.log(resp)
+    this.userForm.patchValue({
+  firstName: resp[0].fname,
+  email: resp[0].email ,
+  lastName: resp[0].lname,
+  contactNo: resp[0].contactnum,
+  companyName: resp[0].companyname, 
+  locale: resp[0].locale,
+  address:resp[0].address,
+  country:resp[0].country,
+  role:resp[0].role,
+  profileType:resp[0].profiletype,
+  address1: resp[0].address1,
+  postalCode:resp[0].postalCode,
+  state:resp[0].state,
+    });
+  })
 }
 
 selectionChange(option) {
   console.log(option,this.selectedProducts,'ddd');
-
-  // this.assignRoles = option.selected
 }
 
   public scrollRight(): void {
@@ -161,6 +183,9 @@ selectionChange(option) {
     country:resp[0].country,
     role:resp[0].role,
     profileType:resp[0].profiletype,
+    address1: resp[0].address1,
+    postalCode:resp[0].postalCode,
+    state:resp[0].state,
 
       });
 
@@ -231,7 +256,7 @@ removeImage() {
         // throw { "mes": "Please fill mendatory  fields" }
         this.toastr.error("Please fill mendatory  fields")
       }        
-                 if(this.id){
+                 if(this.id && this.type === 'EDIT'){
                   this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
                     this.router.navigateByUrl('/icc-sme-details');
@@ -267,25 +292,11 @@ removeImage() {
       // groupname:['',Validators.required],
       role:resp.role,
       profileType:resp.profileType,
+      address1: resp.address1,
+      postalCode:resp.postalCode,
+      state:resp.state,
 
         });
-      }else{
-        this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
-          console.log(resp)
-          this.userForm.patchValue({
-        firstName: resp[0].fname,
-        email: resp[0].email ,
-        lastName: resp[0].lname,
-        contactNo: resp[0].contactnum,
-        companyName: resp[0].companyname, 
-        locale: resp[0].locale,
-        address:resp[0].address,
-        country:resp[0].country,
-        role:resp[0].role,
-        profileType:resp[0].profiletype,
-    
-          });
-        })
       }
     })
    
@@ -304,7 +315,7 @@ removeImage() {
       country:['',Validators.required],
       state:['',Validators.required],
       postalCode:['',Validators.required],
-      sector:[''],
+      // sector:[''],
       // groupname:['',Validators.required],
       role:['',Validators.required],
       profileType:['',Validators.required],

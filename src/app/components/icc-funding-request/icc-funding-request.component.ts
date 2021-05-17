@@ -171,21 +171,21 @@ constructor(public router: Router, private modalService: BsModalService, private
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
 
     this.IccFundingServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      let status = "";
-      if (resp.status == "I") {
-        status = "Initiated"
-      }
-      else if (resp.status == "A") {
-        status = "Waiting for bid"
-      }
-      else if (resp.status == "B") {
-        status = "Bid Created"
-      }
-      else {
-        status = "Financed Successfully"
-      }
+      // let status = "";
+      // if (resp.status == "I") {
+      //   status = "Initiated"
+      // }
+      // else if (resp.status == "A") {
+      //   status = "Waiting for bid"
+      // }
+      // else if (resp.status == "B") {
+      //   status = "Bid Created"
+      // }
+      // else {
+      //   status = "Financed Successfully"
+      // }
       this.dataSourceTwo = new MatTableDataSource([
-        { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status }
+        { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
     })
