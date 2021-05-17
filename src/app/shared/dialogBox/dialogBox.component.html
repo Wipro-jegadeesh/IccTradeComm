@@ -1,8 +1,11 @@
-<h1 mat-dialog-title>Information</h1>
-<div mat-dialog-content>Session Time Out.
-    Do you want continue this session?
+<h1 mat-dialog-title><mat-icon>access_time</mat-icon><span style="display: flex;
+    margin: -38px 0px 0px 27px;"> Session Time Out.</span></h1>
+<div mat-dialog-content>
+    <p><mat-icon>warning</mat-icon> <span style="display: flex;
+        margin: -29px 0px 0px 25px;">You will time out in 2 minutes!</span></p> 
+   <p>Do you wish to continue with the session?</p> 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onOk()" class="btn btn-primary">Ok</button>
-  <button mat-button (click)="onCancel()"  class="btn btn-primary">Cancel</button>
+  <button mat-button (click)="onOk()" class="btn btn-primary">Yes</button>
+  <button mat-button (click)="onCancel()"  class="btn btn-primary">No</button>
 </div>
