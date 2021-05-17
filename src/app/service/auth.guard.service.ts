@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthConfig, NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import { AuthConfig, NullValidationHandler, OAuthService,OAuthErrorEvent } from 'angular-oauth2-oidc';
 import { filter } from 'rxjs/operators';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -29,76 +29,38 @@ export class AuthConfigService {
         return false;
        }
   else{
-    const keycloakAuth = this.oauthService.getAccessTokenExpiration();
-    console.log('keycloakAuth',keycloakAuth);
-  
-     // For Token Expire Check
-    this.oauthService.events
-      .pipe(
-        filter(e => e.type == 'token_expires')
-        )
-      .subscribe(e => {
-        this.oauthService.silentRefresh();
-        if (confirm('Session TimeOut : Click Ok to continue with this session')) {
-          location.reload();
-         } else {
-          this.oauthService.logOut()
-        }
-        
-        // return false;
-        // tslint:disable-next-line:no-console
-        // console.log('received token_expires event', e);
-        // this.oauthService.silentRefresh();
-      });
-       // For Token Expire Check
- 
-      // return
-      return new Promise<void>((resolveFn, rejectFn) => {
+        return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
         this.oauthService.setStorage(localStorage);
         this.oauthService.tokenValidationHandler = new NullValidationHandler();
 
-        // this.oauthService.events
-        // .pipe(
-        //   filter(e => e.type == 'token_expires')
-        //   )
-        // .subscribe(e => {
-        //   this.oauthService.silentRefresh();
-        //   alert("Token Expired");
-        //   return false;
-        //   // tslint:disable-next-line:no-console
-        //   console.debug('received token_expires event', e);
-        //   // this.oauthService.silentRefresh();
-        // });
-
-  
-        // subscribe to token events
-        // this.oauthService.events
-        //   .pipe(filter((e: any) => {
-        //     return e.type === 'token_received';
-        //   }))
-        //   .subscribe(() => this.handleNewToken());
-          
-        // continue initializing app or redirect to login-page
-        
-        this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
-          // this.oauthService.events
-          // .pipe(
-          //   filter(e => e.type == 'token_expires')
-          //   )
-          // .subscribe(e => {
-          //   this.oauthService.silentRefresh();
-          //   alert("Token Expired");
-          //   return false;
-          //   // tslint:disable-next-line:no-console
-          //   console.debug('received token_expires event', e);
-          //   // this.oauthService.silentRefresh();
-          // });
-  
+        this.oauthService.events
+        .pipe(
+        ).subscribe(e => {
+          console.log(e['info'], "info");
+          console.log(e['type'], "type");
+          if (e instanceof OAuthErrorEvent) {
+            console.error(event, "error");
+          }
+          else {
+            // event.info
+            if (e['info'] == "access_token" && e['type'] == 'token_expires') {
+              if (confirm('Session TimeOut : Click Ok to continue with this session')) {
+              //  this.handleNewToken();
+                // resolveFn();
+                 this.oauthService.refreshToken();
+                // location.reload();
+              } else {
+                this.oauthService.logOut()
+              }
+            }
+          }
+        })
+         this.oauthService.loadDiscoveryDocumentAndLogin().then(isLoggedIn => {
           if (isLoggedIn) { 
             // For Token Expire Check
-            this.oauthService.setupAutomaticSilentRefresh();
+            // this.oauthService.setupAutomaticSilentRefresh();
             resolveFn();
           // For Token Expire Check
             let claims = this.oauthService.getIdentityClaims();
@@ -178,9 +140,8 @@ export class AuthConfigService {
             rejectFn();
           }
         });
-        
       });
-    }
+     }
     }
   
     private handleNewToken() {
