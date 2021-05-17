@@ -122,15 +122,15 @@
       </div>
       <ng-container>
         <div #accountList class="accounts-list">
-        <uxg-account-card  class="curs-pointer" name="Funding Request" (click)="naviageTiles('/icc-funding-request')"  number="{{fundingRequestObj?.CCY}} {{fundingRequestObj?.AMOUNT? fundingRequestObj?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+        <uxg-account-card  class="curs-pointer" name="Funding Request" (click)="naviageTiles('/icc-funding-request')"  number="{{fundingRequestObj?.CCY || 'SGD'}} {{fundingRequestObj?.AMOUNT? fundingRequestObj?.AMOUNT : '0'}}" #tooltip="matTooltip"
         matTooltip="{{dashboardTooltip.fundingRequest}}" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card  class="curs-pointer" name="Offer for Acceptance" (click)="naviageTiles('/icc-offer-acceptance')" number="{{OfferAcceptanceObj?.CCY}} {{OfferAcceptanceObj?.AMOUNT? OfferAcceptanceObj?.AMOUNT : 'SGD 0'}}"  #tooltip="matTooltip"
+        <uxg-account-card  class="curs-pointer" name="Offer for Acceptance" (click)="naviageTiles('/icc-offer-acceptance')" number="{{OfferAcceptanceObj?.CCY || 'SGD'}} {{OfferAcceptanceObj?.AMOUNT? OfferAcceptanceObj?.AMOUNT : '0'}}"  #tooltip="matTooltip"
         matTooltip="{{dashboardTooltip.offerAcceptance}}" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card  class="curs-pointer" name="Financed Today" number="{{getSumAllfinTdyCount?.FINANCECCY}} {{getSumAllfinTdyCount?.FINANCEAMT ? getSumAllfinTdyCount?.FINANCEAMT : '0'}}" #tooltip="matTooltip"
+        <uxg-account-card  class="curs-pointer" name="Financed Today" number="{{getSumAllfinTdyCount?.FINANCECCY || 'SGD'}} {{getSumAllfinTdyCount?.FINANCEAMT ? getSumAllfinTdyCount?.FINANCEAMT : '0'}}" #tooltip="matTooltip"
         matTooltip="{{dashboardTooltip.financedToday}}" (click)="this.navigatefinancedToday()" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card name="Finance Master" number="{{financeMasterCount?.CCY}} {{financeMasterCount?.AMOUNT ? financeMasterCount?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+        <uxg-account-card name="Finance Master" number="{{financeMasterCount?.CCY || 'SGD'}} {{financeMasterCount?.AMOUNT ? financeMasterCount?.AMOUNT : '0'}}" #tooltip="matTooltip"
         matTooltip="{{dashboardTooltip.financedMaster}}" (click)="this.navigatefinancedMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card  class="curs-pointer" name="Invoice Master" number="{{getSumInvoiceMasterCount?.CCY}} {{getSumInvoiceMasterCount?.AMOUNT? getSumInvoiceMasterCount?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+        <uxg-account-card  class="curs-pointer" name="Invoice Master" number="{{getSumInvoiceMasterCount?.CCY || 'SGD'}} {{getSumInvoiceMasterCount?.AMOUNT? getSumInvoiceMasterCount?.AMOUNT : '0'}}" #tooltip="matTooltip"
         matTooltip="{{dashboardTooltip.invoiceMaster}}" (click)="this.navigateinvoiceMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
         </div>
         </ng-container>
