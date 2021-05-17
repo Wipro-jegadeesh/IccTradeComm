@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
 import { ToastrService } from 'ngx-toastr';
+import { DialogDataExampleService } from '../shared/dialogBox/dialogBox.component';
 
 @Injectable()
 export class AuthConfigService {
@@ -14,12 +15,16 @@ export class AuthConfigService {
     get decodedAccessToken() { return this._decodedAccessToken; }
     get decodedIDToken() { return this._decodedIDToken; }
 
+    minutes
+    seconds
+
     constructor(
       private readonly oauthService: OAuthService,
       private readonly authConfig: AuthConfig,
       private router: Router,
       private apiService:ApiService,
-      public toastr:ToastrService
+      public toastr:ToastrService,
+      private dialogBox:DialogDataExampleService
     ) {}
 
     async initAuth(): Promise<any> {
@@ -46,14 +51,17 @@ export class AuthConfigService {
           else {
             // event.info
             if (e['info'] == "access_token" && e['type'] == 'token_expires') {
-              if (confirm('Session TimeOut : Click Ok to continue with this session')) {
-              //  this.handleNewToken();
-                // resolveFn();
-                 this.oauthService.refreshToken();
-                // location.reload();
-              } else {
-                this.oauthService.logOut()
-              }
+              this.dialogBox.openDialog();
+              
+              // if (confirm('Session TimeOut : Click Ok to continue with this session')) {
+              // //  this.handleNewToken();
+              //   // resolveFn();
+              //    this.oauthService.refreshToken();
+              //   // location.reload();
+              // } else {
+              //   this.oauthService.logOut()
+              // }
+
             }
           }
         })
@@ -149,4 +157,15 @@ export class AuthConfigService {
       this._decodedIDToken = this.oauthService.getIdToken();
     }
 
+    refreshToken(){
+      let currentTime=new Date()
+      this.minutes=currentTime.getMinutes()
+      this.seconds=currentTime.getSeconds()
+      localStorage.setItem('iniSessionMinute',this.minutes)
+      localStorage.setItem('iniSessionSecond',this.seconds)
+      this.oauthService.refreshToken();
+    }
+    logoutSession(){
+      this.oauthService.logOut()
+    }
 }
