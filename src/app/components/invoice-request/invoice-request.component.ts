@@ -311,7 +311,9 @@ private _filter(value: string): string[] {
           "buyerName": item.buyerName,
           "buyerAddr":item['buyerAddr'],
           "dispDate":item['dispDate'],
-           "invDueDate":item.invDueDate
+           "invDueDate":item.invDueDate,
+           "smeProfileId" : this.userDeatils['smeProfileId']
+
         }
         reqParams.push(obj)
       }
@@ -381,9 +383,12 @@ private _filter(value: string): string[] {
       if (this.invoiceForm.status === "INVALID"){
         throw { "mes": "Please fill mendatory  fields" }
       }
-      this.invoiceForm.value['invoiceDetailsSequenceNumber']={}
+      this.invoiceForm.value['invoiceDetailsSequenceNumber']={}     
+      this.invoiceForm.value.smeProfileId = this.userDeatils['smeProfileId']
+
       let params = {
         "invoiceDetails": this.invoiceForm.value,
+        // "smeProfileId" :  userData['smeProfileId']
       }
       console.log(params,"params");
       if(this.UpdateInvoiceLable === true){

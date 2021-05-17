@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
         if(status == 'P'){
           this.modalRef = this.modalService.show(template, { class: 'modal-md' });
         }
+        
         else if(isQuesSucc == 'N'){
           this.router.navigateByUrl('/sme-onboarding')
         }else{
