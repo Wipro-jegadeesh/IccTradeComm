@@ -3,6 +3,7 @@ import { Router, NavigationEnd, NavigationStart, ActivatedRoute, RouteConfigLoad
 import { LoaderService } from "../../src/app/service/loader.service";
 import { Subscription } from "rxjs";
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
+import { DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,16 @@ export class AppComponent {
   showSidebar: boolean = false;
   showNavbar: boolean = false;
   showFooter: boolean = false;
+  minutes
+  seconds
   private subscription: Subscription
   showLoadingIcon = false;
+  timeoutId;
 
   @ViewChild(SidebarComponent) sidebar:SidebarComponent
 
-  constructor(private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,private renderer: Renderer2) {
+  constructor(private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
+    private renderer: Renderer2,private dialogBox:DialogDataExampleService) {
   }
 
   emitIsOpen(value){
@@ -29,6 +34,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    let currentTime=new Date()
+    this.minutes=currentTime.getMinutes()
+    this.seconds=currentTime.getSeconds()
+    localStorage.setItem('iniSessionMinute',this.minutes)
+    localStorage.setItem('iniSessionSecond',this.seconds)
     this.subscription = this.loaderService.currentLoadingIconStatus.subscribe(
       value => {
         this.showLoadingIcon = value;
@@ -41,6 +51,15 @@ export class AppComponent {
 }
   ngDoCheck() {
     this.check();
+    let sessionStartTime=JSON.parse(localStorage.getItem('iniSessionMinute'))
+    let currentTime=new Date();
+    if((sessionStartTime+5) <= currentTime.getMinutes()){
+      this.minutes=currentTime.getMinutes()
+      this.seconds=currentTime.getSeconds()
+      localStorage.setItem('iniSessionMinute',this.minutes)
+      localStorage.setItem('iniSessionSecond',this.seconds)
+      this.dialogBox.openDialog()
+    }
   }
 
   check() {
@@ -52,6 +71,28 @@ export class AppComponent {
       this.showSidebar = true;
       this.showNavbar = true;
       this.showFooter = true;
+    }
+  }
+  onMouseMove(event){
+    let sessionStartMinute=JSON.parse(localStorage.getItem('iniSessionMinute'))
+    let sessionStartSecond=JSON.parse(localStorage.getItem('iniSessionSecond'))
+    let currentTime=new Date();
+    if((sessionStartMinute+5) <= currentTime.getMinutes()){
+      if(sessionStartSecond >= currentTime.getSeconds()){
+        this.minutes=currentTime.getMinutes()
+        this.seconds=currentTime.getSeconds()
+        localStorage.setItem('iniSessionMinute',this.minutes)
+        localStorage.setItem('iniSessionSecond',this.seconds)
+      }
+      else{
+        this.dialogBox.openDialog()
+      }
+    }
+    else{
+      this.minutes=currentTime.getMinutes()
+      this.seconds=currentTime.getSeconds()
+      localStorage.setItem('iniSessionMinute',this.minutes)
+      localStorage.setItem('iniSessionSecond',this.seconds)
     }
   }
   screenClicked(event){

@@ -2,6 +2,6 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 <app-sidebar *ngIf="showSidebar" (isOpenSidebar)="emitIsOpen($event)"></app-sidebar>
 <div id = "loadingImgContainer" [hidden] = "!showLoadingIcon"></div>
-<div class="main-container {{isOpen}}" (click)="screenClicked($event)" >
+<div class="main-container {{isOpen}}" (click)="screenClicked($event)" (document:mousemove)="onMouseMove($event)" (wheel)="onMouseMove($event)">
     <router-outlet></router-outlet>
 </div>

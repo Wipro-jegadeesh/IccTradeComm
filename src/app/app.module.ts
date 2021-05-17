@@ -146,6 +146,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component';
 import { NotActivatedPopup, StaticPageComponent } from './components/static-page/static-page.component'
 import {MatDialogModule} from '@angular/material/dialog';
+import { DialogDataExampleDialog, DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -212,7 +213,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinananceLimitMaintananceComponent,
     StaticPageComponent,
     NotActivatedPopup,
-    IccSectorComponent
+    IccSectorComponent,
+    DialogDataExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -267,6 +269,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
     FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
+    DialogDataExampleService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {
@@ -280,6 +283,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     schemas: [
       CUSTOM_ELEMENTS_SCHEMA
     ],
-    entryComponents: [ModalComponent,NotActivatedPopup]
+    entryComponents: [ModalComponent,NotActivatedPopup,DialogDataExampleDialog]
 })
 export class AppModule { }
