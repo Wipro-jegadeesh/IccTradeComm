@@ -53,7 +53,7 @@ export class AppComponent {
     this.check();
     let sessionStartTime=JSON.parse(localStorage.getItem('iniSessionMinute'))
     let currentTime=new Date();
-    if((sessionStartTime+5) <= currentTime.getMinutes()){
+    if((sessionStartTime+1) <= currentTime.getMinutes()){
       this.minutes=currentTime.getMinutes()
       this.seconds=currentTime.getSeconds()
       localStorage.setItem('iniSessionMinute',this.minutes)
@@ -77,7 +77,7 @@ export class AppComponent {
     let sessionStartMinute=JSON.parse(localStorage.getItem('iniSessionMinute'))
     let sessionStartSecond=JSON.parse(localStorage.getItem('iniSessionSecond'))
     let currentTime=new Date();
-    if((sessionStartMinute+5) <= currentTime.getMinutes()){
+    if((sessionStartMinute+1) <= currentTime.getMinutes()){
       if(sessionStartSecond >= currentTime.getSeconds()){
         this.minutes=currentTime.getMinutes()
         this.seconds=currentTime.getSeconds()
