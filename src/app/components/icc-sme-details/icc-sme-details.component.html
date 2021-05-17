@@ -319,7 +319,7 @@
                             matTooltip="information" [matTooltipPosition]="'below'"> Information
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            {{element.information[0]?.information[0]?.message }}
+                            {{element.information[0]?.information[0]?.message || ''}}
                         </td>
                     </ng-container>
     
@@ -351,7 +351,7 @@
               <mat-tab label="Related Users"> 
                 <div class="row" >
                   <div class="col-sm-12" style="text-align: end; top: 5px;">
-                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid)" > Add User </button>
+                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid,'ADD')" > Add User </button>
                   </div>
               </div>
               <div class="row col-sm-12" style="top: 13px;">
@@ -417,7 +417,7 @@
                   <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef> Action </th>
                       <td mat-cell *matCellDef="let element">
-                          <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.usersKey)">
+                          <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.usersKey,'EDIT')">
                               <mat-icon  #tooltip="matTooltip"
                               matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
                             </a>&nbsp;
