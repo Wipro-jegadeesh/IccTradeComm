@@ -121,15 +121,15 @@
 
         <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="Open for Offer" number="{{getSumofgetOpenForOffer?.CCY}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="Open for Offer" number="{{getSumofgetOpenForOffer?.CCY || 'SGD'}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : '0'}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltip.offerDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding')"></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="Offer Expired" number="SGD 0" balance="" #tooltip="matTooltip" number="{{getSumofexpeireOffer?.CCY}} {{getSumofexpeireOffer?.INVOICEAMT? getSumofexpeireOffer?.INVOICEAMT : 'SGD 0'}}"
+                <uxg-account-card class="curs-pointer" name="Offer Expired" number="SGD 0" balance="" #tooltip="matTooltip" number="{{getSumofexpeireOffer?.CCY || 'SGD'}} {{getSumofexpeireOffer?.INVOICEAMT? getSumofexpeireOffer?.INVOICEAMT : '0'}}"
                 matTooltip="{{dashboardTooltip.expiredDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-expired')" currency=""></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="Financier Funded" number="SGD 0" balance="" #tooltip="matTooltip" number=" {{getSumofgetFinancierFunded?.INVTOTALAMT? (getSumofgetFinancierFunded?.INVCCY + ' ' +getSumofgetFinancierFunded?.INVTOTALAMT) : 'SGD 0'}}"
+                <uxg-account-card class="curs-pointer" name="Financier Funded" number="SGD 0" balance="" #tooltip="matTooltip" number=" {{getSumofgetFinancierFunded?.INVTOTALAMT? (getSumofgetFinancierFunded?.INVCCY + ' ' +getSumofgetFinancierFunded?.INVTOTALAMT) : '0'}}"
                 matTooltip="{{dashboardTooltip.expiredDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-funded')" currency=""></uxg-account-card>                
-                <uxg-account-card class="curs-pointer" name="Bids to be accepted" number="{{getSumofgetbidsToBeAccepted?.CCY}} {{getSumofgetbidsToBeAccepted?.AMOUNT? getSumofgetbidsToBeAccepted?.AMOUNT : 'SGD 0'}}" balance="" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="Bids to be accepted" number="{{getSumofgetbidsToBeAccepted?.CCY || 'SGD'}} {{getSumofgetbidsToBeAccepted?.AMOUNT? getSumofgetbidsToBeAccepted?.AMOUNT : '0'}}" balance="" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltip.acceptedDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/financier-bids-accept')"  currency=""></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="Offer Rejected" number="SGD 0" balance="" #tooltip="matTooltip"number="{{getSumofrejectrOffer?.CCY}} {{getSumofrejectrOffer?.INVOICEAMT? getSumofrejectrOffer?.INVOICEAMT : 'SGD 0'}}"
+                <uxg-account-card class="curs-pointer" name="Offer Rejected" number="SGD 0" balance="" #tooltip="matTooltip"number="{{getSumofrejectrOffer?.CCY || 'SGD'}} {{getSumofrejectrOffer?.INVOICEAMT? getSumofrejectrOffer?.INVOICEAMT : '0'}}"
                 matTooltip="{{dashboardTooltip.rejectedDetails}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-rejected')" currency=""></uxg-account-card>
              </div>
         </ng-container>

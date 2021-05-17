@@ -122,18 +122,18 @@
         </div>
         <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="Open Funding Requests" number="{{getSumOfOpenFinBidding?.CCY}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : 'SGD 0'}}" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="Open Funding Requests" number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.bidDetails}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()"></uxg-account-card>
                 
-                <uxg-account-card class="curs-pointer" name="Funding Bids" number="{{getSumofFundingBids?.INVCURRENCY}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : 'SGD 0'}}"  #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="Funding Bids" number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"  #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.financeBidReceive}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()" ></uxg-account-card>
                 <!-- <uxg-account-card class="curs-pointer" name="Invoice Creation" number="New"(click)="this.navigateInvoiceCreation()" ></uxg-account-card> -->
                 
                 <uxg-account-card class="curs-pointer" name="Funded" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.acceptedDetails}}"
-                [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : 'SGD 0'}}" ></uxg-account-card>
+                [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}" ></uxg-account-card>
                
                 <uxg-account-card class="curs-pointer" name="Repayments Due Today" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.todayDue}}" (click)="this.navigateAcceptedRepayment()"
