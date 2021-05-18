@@ -524,32 +524,37 @@
                           </mat-expansion-panel-header>
                           <div style="overflow-x:auto;">
                               <div id="container">
-                                  
-                                  <div class="mat-elevation-z8">
+                                <div class="mat-elevation-z8">
                                     <table class="table-responsive" mat-table [dataSource]="dataSourceFour" style="width: 100%;">
-                                      <ng-container matColumnDef="name">
+                                      <ng-container matColumnDef="smeId">
                                         <th mat-header-cell *matHeaderCellDef scope="column">SME Name</th>
                                         <td mat-cell *matCellDef="let element;let row; let index = index">
-                                          {{element.name}}
+                                          {{element.smeId}}
                                         </td>
                                       </ng-container>
-                                      <ng-container matColumnDef="exposure">
+                                      <ng-container matColumnDef="utilPercent">
                                         <th mat-header-cell *matHeaderCellDef scope="column">SME Exposure</th>
                                         <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
-                                          {{element.exposure}}
+                                          {{element.utilPercent}}%
                                         </td>
-                                      </ng-container>
+                                      </ng-container> 
                                       <ng-container matColumnDef="exposureAmt">
                                         <th mat-header-cell *matHeaderCellDef scope="column">SME Exposure Amount</th>
                                         <td mat-cell *matCellDef="let element;let row; let index = index">
-                                          {{element.exposureAmt}}
+                                          {{this.newLimitGraphForm.value.newsmeLimit}}
+                                        </td>
+                                      </ng-container>
+                                      <ng-container matColumnDef="utilTotlAmt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">SME Total Utilized</th>
+                                        <td mat-cell *matCellDef="let element;let row; let index = index">
+                                          {{this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
                                         </td>
                                       </ng-container>
                   
                                       <ng-container matColumnDef="amtAvailable">
                                         <th mat-header-cell *matHeaderCellDef scope="column">SME Amount Available </th>
                                         <td mat-cell *matCellDef="let element;let row; let index = index">
-                                          {{element.amtAvailable}}
+                                          {{this.newLimitGraphForm.value.newsmeLimit - this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
                                         </td>
                                       </ng-container>
                                       <tr mat-header-row *matHeaderRowDef="displayedColumnsFour" style="background-color:#B4A6EA">

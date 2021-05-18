@@ -19,6 +19,9 @@ import { environment } from 'src/environments/environment';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { FinanceLimitMaintananceServices } from './finanance-limit-maintanance-service';
+
+
 
 @Component({
   selector: 'app-finanance-limit-maintanance',
@@ -54,9 +57,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //data source 4 start
   dataSourceFour = new MatTableDataSource();
   displayedColumnsFour: string[] = [
-    'name',
-    'exposure',
+    'smeId',
+    'utilPercent',
     'exposureAmt',
+    'utilTotlAmt',
     'amtAvailable'
   ];
   newLimit: boolean = true;
@@ -317,7 +321,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   //Charts
   constructor(public router: Router,
-    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService) {
+    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService,private financelimitMaintananceservices:FinanceLimitMaintananceServices ) {
     this.mainlimitMaintanceFormBuild()
     this.newlimitExposureFormBuild();
     this.groupsFormBuild()
@@ -334,6 +338,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
     this.newlimitExposure();
+    this.getnewLimitFinSmeDatas()
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
 
@@ -473,7 +478,20 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.countrylimitMaintanceFormBuild();
     this.limitMaintance();
     this.countrylimitMaintance();
-    this.toastr.success("Limit Maintanance Updated Successfully")
+    // this.toastr.success("Limit Maintanance Updated Successfully")
+    if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) &&  (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector))) {
+      this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+    } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) {
+      this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure")
+    } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) {
+      this.toastr.error("SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+    }
+    else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) {
+      this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure")
+    }
+    else {
+      this.toastr.success("Limit Maintanance Updated Successfully")
+    }
   }
   onSubmitLimitForm() {
     this.isOk = false;
@@ -542,7 +560,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       newglobalLimit: [10000, Validators.required],
       newsmeLimit: [30000, Validators.required],
     });
-    this.newInitalLimits = [this.newLimitGraphForm.value.newsmeLimit]
+    this.newInitalLimits = [this.newLimitGraphForm.value.newsmeLimit];
+    // this.newsmelimitVal = this.newLimitGraphForm.value.newsmeLimit
   }
 
   newLimitGraphFormSubmit() {
@@ -567,6 +586,13 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   newLimitFn() {
     this.newLimit = false;
     this.newlimitExposureFormBuild()
+  }
+  getnewLimitFinSmeDatas(){
+    this.financelimitMaintananceservices.getnewLimitFinSmeDatas().subscribe(resp => {
+        console.log("---resp---",);
+        this.dataSourceFour = new MatTableDataSource(resp);
+
+    })
   }
   //end graphical representation
 }
