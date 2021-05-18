@@ -75,7 +75,7 @@
               <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
               matTooltip="{{biddingTooltip.status}}" [matTooltipPosition]="'below'"> Status </th>
               <td mat-cell *matCellDef="let element"> 
-                {{element.status == "APR" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':'Financed'}}
+                {{element.status == "APR"  || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':'Financed'}}
               </td>
             </ng-container>
             <ng-container matColumnDef="action">
