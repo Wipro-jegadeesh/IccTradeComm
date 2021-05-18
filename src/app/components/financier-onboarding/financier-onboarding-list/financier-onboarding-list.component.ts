@@ -120,7 +120,7 @@ export class FinancierOnboardingListComponent implements OnInit {
     'companyName':"lkjlk",
     'email':"jklk",
     'contactNo':"ipoip",
-    'status':'R'
+    'status':'A'
     }])
 
    

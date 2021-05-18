@@ -267,7 +267,7 @@
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                     matTooltip="{{biddingTooltip.invoiceStatus}}" [matTooltipPosition]="'below'">Status</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">
-                        {{invoiceDetailsData.status == "APR" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
+                        {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
                     </td>
                 </ng-container>        
         

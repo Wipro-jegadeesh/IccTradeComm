@@ -307,7 +307,7 @@ private _filter(value: string): string[] {
           "smeId":item['smeId'],
           "invoiceAmt":item['invAmt'],
           "invoiceCcy":item['invCcy'],
-          "status" : "A", 
+          "status" : "APR", 
           "buyerName": item.buyerName,
           "buyerAddr":item['buyerAddr'],
           "dispDate":item['dispDate'],

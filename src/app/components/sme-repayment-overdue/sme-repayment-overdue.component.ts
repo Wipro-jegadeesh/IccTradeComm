@@ -139,7 +139,7 @@ export class Repayment_overdueComponent implements OnInit {
       invDueDate: "17/06/2021",
       invId: "INV102",
       smeId: "SME101",
-      status: "I"
+      status: "A"
     }]);
 
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
