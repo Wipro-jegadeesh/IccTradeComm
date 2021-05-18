@@ -229,7 +229,7 @@ rejectQustionTwo = {
         this.smeBiddingServices.getInvoiceGoodsDetails(resp[0] && resp[0].invoiceId).subscribe(resp => {
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails)
           this.dataSourceInvoiceDetails = new MatTableDataSource([
-            { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': status ,'smeId' : resp.smeId}
+            { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status ,'smeId' : resp.smeId}
           ]);
          })
         this.dataSourceTwo = new MatTableDataSource(resp);

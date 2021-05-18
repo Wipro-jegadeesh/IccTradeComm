@@ -155,7 +155,7 @@ export class IccInvoiceMasterComponent implements OnInit {
       invDueDate: "17/06/2021",
       invId: "INV102",
       smeId: "SME101",
-      status: "I"
+      status: "A"
     }]);
 
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
