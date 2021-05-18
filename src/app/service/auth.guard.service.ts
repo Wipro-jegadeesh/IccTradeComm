@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogDataExampleService } from '../shared/dialogBox/dialogBox.component';
+import { UserIdleService } from 'angular-user-idle';
 
 @Injectable()
 export class AuthConfigService {
@@ -15,16 +16,15 @@ export class AuthConfigService {
     get decodedAccessToken() { return this._decodedAccessToken; }
     get decodedIDToken() { return this._decodedIDToken; }
 
-    minutes
-    seconds
-
+    
     constructor(
       private readonly oauthService: OAuthService,
       private readonly authConfig: AuthConfig,
       private router: Router,
       private apiService:ApiService,
       public toastr:ToastrService,
-      private dialogBox:DialogDataExampleService
+      private dialogBox:DialogDataExampleService,
+      private userIdle: UserIdleService
     ) {}
 
     async initAuth(): Promise<any> {
@@ -181,14 +181,11 @@ export class AuthConfigService {
     }
 
     refreshToken(){
-      let currentTime=new Date()
-      this.minutes=currentTime.getMinutes()
-      this.seconds=currentTime.getSeconds()
-      localStorage.setItem('iniSessionMinute',this.minutes)
-      localStorage.setItem('iniSessionSecond',this.seconds)
+      this.userIdle.resetTimer();
       this.oauthService.refreshToken();
     }
     logoutSession(){
-      this.oauthService.logOut()
+      this.userIdle.stopWatching();
+      this.oauthService.logOut();
     }
 }

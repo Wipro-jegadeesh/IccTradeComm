@@ -30,6 +30,7 @@
     "@ngrx/store": "^11.0.1",
     "@ngrx/store-devtools": "^11.0.1",
     "angular-oauth2-oidc": "^10.0.3",
+    "angular-user-idle": "^2.2.5",
     "angular2-multiselect-dropdown": "^4.6.9",
     "chart.js": "^2.9.4",
     "lodash": "^4.17.21",

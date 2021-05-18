@@ -77,7 +77,7 @@ export class SignupComponent implements OnInit {
       maxHeight	: 170
     };
     this.selectedItems=[]
-   
+    localStorage.clear();
   }
   onDeSelect(event) {
     this.showCountSignBtn = false
