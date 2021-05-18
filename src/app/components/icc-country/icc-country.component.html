@@ -1,1 +1,100 @@
-<p>icc-country works!</p>
+<div class="app-content">
+    <header>
+      <div class="data-section">
+        <form [formGroup]="countryForm" autocomplete="off" (ngSubmit)="onSubmitcountryForm()" #formDirective="ngForm">
+        <h5 class="text-center">country</h5>
+            <mat-card>
+          <mat-card-content>
+            <table  class="table-responsive inv-table">
+              <tbody>
+
+<tr>
+       
+    <td rowspan="1" colspan="1">
+        <mat-form-field dense class="icc-mat">
+          <mat-label>country Name</mat-label>
+          <input type="text" matInput formControlName="country" />
+        </mat-form-field>
+      </td>
+
+    <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>country Code</mat-label>
+        <input type="text" matInput formControlName="countrycode" />
+      </mat-form-field>
+    </td>
+    
+    <!-- <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>country Description</mat-label>
+        <input type="text" matInput formControlName="countryDescription" />
+      </mat-form-field>
+    </td> -->
+
+    <td rowspan="1" colspan="1">      
+        <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
+        <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
+
+        <!-- #tooltip="matTooltip"
+        matTooltip="{{biddingTooltip.invoiceAmount}}"
+        [matTooltipPosition]="'below'" -->
+        </td>
+    
+  </tr>
+
+</tbody>
+</table>
+</mat-card-content>
+</mat-card>
+
+</form>
+
+<br>
+        <div class="mat-elevation-z8 table-responsive table-post">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="countrycode">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                    matTooltip="{{countryTooltip.countrycode}}" [matTooltipPosition]="'below'"> country Code </th>
+                    <td mat-cell *matCellDef="let element">
+                                 {{element.countrycode}}
+                     </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef  mat-sort-header
+                        > country </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.country}}
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="countryDescription">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                        matTooltip="{{countryTooltip.countryDescription}}" [matTooltipPosition]="'below'"> country Description
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.countryDescription}}
+                    </td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element">
+                    <a  href="javascript:void(0)" (click)="getEditData(element)">
+                      <mat-icon  #tooltip="matTooltip"
+                      matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                    </a>&nbsp;
+                     </td>
+                </ng-container>
+
+                <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr> -->
+                <!-- <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+                    *matHeaderRowDef="displayedColumnsearch"></tr> -->
+                <!-- <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> -->
+                <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
+            </table>
+            </div>
+</div>
+</header>
+</div>

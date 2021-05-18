@@ -138,6 +138,7 @@ import { SmeUserCreationComponent } from './components/sme-user-creation/sme-use
 import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
 import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
 import { IccListSmeServices } from './components/icc-list-smes/icc-list-smes.service';
+import {IccCountryServices} from './components/icc-country/icc-country.services';
 
 import { IccSmeDetailsComponent } from './components/icc-sme-details/icc-sme-details.component'
 import { FinancierUserCreationComponent } from './components/financier-onboarding/financier-user-creation/financier-user-creation.component';
@@ -276,7 +277,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
     FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
-    DialogDataExampleService,FinanceLimitMaintananceServices,
+    DialogDataExampleService,FinanceLimitMaintananceServices,IccCountryServices,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
     {
