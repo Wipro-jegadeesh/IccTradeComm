@@ -4,6 +4,7 @@ import { LoaderService } from "../../src/app/service/loader.service";
 import { Subscription } from "rxjs";
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
 import { DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
+import { UserIdleService } from 'angular-user-idle';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,7 @@ export class AppComponent {
   showSidebar: boolean = false;
   showNavbar: boolean = false;
   showFooter: boolean = false;
-  minutes
-  seconds
+
   private subscription: Subscription
   showLoadingIcon = false;
   timeoutId;
@@ -26,7 +26,7 @@ export class AppComponent {
   @ViewChild(SidebarComponent) sidebar:SidebarComponent
 
   constructor(private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
-    private renderer: Renderer2,private dialogBox:DialogDataExampleService) {
+    private renderer: Renderer2,private dialogBox:DialogDataExampleService,private userIdle: UserIdleService) {
   }
 
   emitIsOpen(value){
@@ -34,32 +34,31 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    let currentTime=new Date()
-    this.minutes=currentTime.getMinutes()
-    this.seconds=currentTime.getSeconds()
-    localStorage.setItem('iniSessionMinute',this.minutes)
-    localStorage.setItem('iniSessionSecond',this.seconds)
     this.subscription = this.loaderService.currentLoadingIconStatus.subscribe(
       value => {
         this.showLoadingIcon = value;
       }
     );
     this.check();
+     //Start watching for user inactivity.
+     if(this.showNavbar){
+     this.userIdle.startWatching();
+    
+     // Start watching when user idle is starting.
+     this.userIdle.onTimerStart().subscribe((count) =>{ 
+     });
+
+    //   // Start watch when time is up.
+    this.userIdle.onTimeout().subscribe(() =>{
+      this.dialogBox.openDialog()
+    });
+  }
   }
   ngAfterViewInit() {
     this.showLoadingIcon = false
 }
   ngDoCheck() {
     this.check();
-    let sessionStartTime=JSON.parse(localStorage.getItem('iniSessionMinute'))
-    let currentTime=new Date();
-    if((sessionStartTime+1) <= currentTime.getMinutes() && this.showNavbar){
-      this.minutes=currentTime.getMinutes()
-      this.seconds=currentTime.getSeconds()
-      localStorage.setItem('iniSessionMinute',this.minutes)
-      localStorage.setItem('iniSessionSecond',this.seconds)
-      this.dialogBox.openDialog()
-    }
   }
 
   check() {
@@ -71,28 +70,6 @@ export class AppComponent {
       this.showSidebar = true;
       this.showNavbar = true;
       this.showFooter = true;
-    }
-  }
-  onMouseMove(event){
-    let sessionStartMinute=JSON.parse(localStorage.getItem('iniSessionMinute'))
-    let sessionStartSecond=JSON.parse(localStorage.getItem('iniSessionSecond'))
-    let currentTime=new Date();
-    if((sessionStartMinute+1) <= currentTime.getMinutes() && this.showNavbar){
-      if(sessionStartSecond >= currentTime.getSeconds()){
-        this.minutes=currentTime.getMinutes()
-        this.seconds=currentTime.getSeconds()
-        localStorage.setItem('iniSessionMinute',this.minutes)
-        localStorage.setItem('iniSessionSecond',this.seconds)
-      }
-      else{
-        this.dialogBox.openDialog()
-      }
-    }
-    else{
-      this.minutes=currentTime.getMinutes()
-      this.seconds=currentTime.getSeconds()
-      localStorage.setItem('iniSessionMinute',this.minutes)
-      localStorage.setItem('iniSessionSecond',this.seconds)
     }
   }
   screenClicked(event){
