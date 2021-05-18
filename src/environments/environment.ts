@@ -27,10 +27,16 @@
 let BASE_PATH = "http://localhost:8082/";
 
 // Invoice Service Url 8080
-let serviePath_1 = "http://2a088c457b03.ngrok.io/";
+let serviePath_1 = "http://localhost:8080/";
 
 // Bidding Service Url 8081
-let serviePath_2 = "http://2a088c457b03.ngrok.io/";
+let serviePath_2 = "http://localhost:8081/";
+let serviePath_3 = "http://localhost:8082/";
+
+// Limit Path
+
+let serviePath_4 = "http://localhost:8090/";
+
 
 //Financier onboard path
 let financierServicePath="http://localhost:8080/"
@@ -46,12 +52,14 @@ let dboardServerPath4 ="http://dboardServPath4/";
 let dboardServerPath5 ="http://dboardServPath5/";
 let dboardServerPath6 ="http://dboardServPath6/";
 
-
 export const environment = {
   production: false,
   api_url: `${BASE_PATH}`,
   serviePath_1: `${serviePath_1}`,
   serviePath_2: `${serviePath_2}`,
+  serviePath_3: `${serviePath_3}`,
+  serviePath_4: `${serviePath_4}`,
+
   dboardServerPath1: `${dboardServerPath1}`,
   getSumOfOpenFinBidding: `${getSumOfOpenFinBidding}`,
   dboardServerPath3: `${dboardServerPath3}`,
