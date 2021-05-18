@@ -204,17 +204,31 @@
                       <div class="col-md-3 my-2 topbar_item">
                         <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-authorize')">
                           <i class="fa fa-fw fa-3x fa-shield"></i>&nbsp;
-                          <p class="mb-0 mt-3"><span>Authorization Matrix</span></p>
+                          <p class="mb-0 mt-3"><span>Authorization Matrix</span></p> 
                         </a>
                     </div>
+
                     <div class="col-md-3 my-2 topbar_item">
-                      <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-sector')">
-                        <i class="fa fa-fw fa-3x fa-code"></i>&nbsp;
-                        <p class="mb-0 mt-3"><span>Sector</span></p>
+                      <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-country')">
+                        <i class="fa fa-fw fa-3x fa-shield"></i>&nbsp;
+                        <p class="mb-0 mt-3"><span>Country</span></p>
                       </a>
                   </div>
+
+  
                     </div>
+
+                
+
                     <div class="row topbar_main">
+
+                      <div class="col-md-3 my-2 topbar_item">
+                        <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-sector')">
+                          <i class="fa fa-fw fa-3x fa-code"></i>&nbsp;
+                          <p class="mb-0 mt-3"><span>Sector</span></p>
+                        </a>
+                    </div>
+                    
                     <div class="col-md-3 my-2 topbar_item">
                       <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" >
                         <i class="fa fa-fw fa-3x fa-handshake-o"></i>&nbsp;

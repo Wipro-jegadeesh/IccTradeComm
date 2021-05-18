@@ -41,6 +41,7 @@ import {QuestionaireScoreComponent} from './components/questionaire-score/questi
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
 import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component';
+import {IccCountryComponent} from './components/icc-country/icc-country.component'
 
 import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
 import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
@@ -105,6 +106,8 @@ const routes: Routes = [
   { path: 'icc-list-smes', component: IccListSmesComponent , data : {"HeaderName" : "Icc List Smes" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-sme-details/:id', component: IccSmeDetailsComponent , data : {"HeaderName" : "Icc Sme Details" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'icc-sector', component: IccSectorComponent , data : {"HeaderName" : "Sector" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+  { path: 'icc-country', component: IccCountryComponent , data : {"HeaderName" : "Country" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
+
   
   // { path: 'questionaire-scorePage', component: QuestionaireScoreComponent , data : {"HeaderName" : "Authorization Matrix" ,"headerPaths" : [{ path : "/icc-dashboard",pathName : "ICC TradeComm Administrator Dashboard"}]}},
   { path: 'score-received', component: QuestionaireScoreComponent,  data : {"HeaderName" : "Score Received ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
