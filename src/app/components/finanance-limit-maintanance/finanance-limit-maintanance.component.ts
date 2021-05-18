@@ -71,6 +71,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   totalExposure: number = 0;
   countrytotalExposure: number = 0;
   isOpen = '';
+  bidpanelOpenState
 
   // Charts
   lineChartData = [{

@@ -147,6 +147,7 @@ import { FinananceLimitMaintananceComponent } from './components/finanance-limit
 import { NotActivatedPopup, StaticPageComponent } from './components/static-page/static-page.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogDataExampleDialog, DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
+import { UserIdleModule } from 'angular-user-idle';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -263,6 +264,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSelectModule,
     MatSortModule,
     MatDialogModule,
+    UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
