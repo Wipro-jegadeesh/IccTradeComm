@@ -317,6 +317,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     },
 
   ];
+  callPutMethod = false;
+  callPostMethod = false;
   //line chart end
 
   //Charts
@@ -474,6 +476,28 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   getMainlimitScreenDatas(){
     this.financelimitMaintananceservices.getMainlimitScreenDatas().subscribe(resp => {
+      if(resp){
+         this.mainlimitMaintanceForm.patchValue({
+          mainoverallexposure :resp.overallLimit,
+          mainsmeexposure :resp.smewiseMaxlimit,
+          maincountryexposure :resp.countryMaxLimit,
+          mainsector :resp.sectorLimit,
+        });
+        this.limitMaintanceForm.patchValue({
+          overAllLimit: resp.overallLimit,
+          smeoverAllLimit:resp.smewiseMaxlimit,
+        });
+        this.countrylimitMaintanceForm.patchValue({
+          countryoverAllLimit: resp.overallLimit,
+          countrysmeoverAllLimit:resp.countryMaxLimit,
+        });
+         
+          // this.diabled= true
+        this.callPutMethod = true
+      }else{
+       // this.diabled= false
+        this.callPostMethod = true
+      }
       })
   }
   mainlimitMaintanceFormSubmit() {
@@ -501,9 +525,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     }
     else {
       let userCred = JSON.parse(localStorage.getItem('userCred'))
-      let postdatas = {
-          "financierID":"222",
-          // "financierID": userCred['financierProfileId'],
+      if(this.callPostMethod){
+        let postdatas = {
+          "financierID": userCred['financierProfileId'],
           "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
           "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
           "OverallUtilizedLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
@@ -515,9 +539,27 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "LimitAudit": null
       }
       this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
+       this.toastr.success("Limit Maintanance Created Successfully")
+     })
+      }else{
+        let puttdatas = {
+          "financierID": userCred['financierProfileId'],
+          "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallUtilizedLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "smeWiseUtilized": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+          "LimitAudit": null
+      }
+      this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
        this.toastr.success("Limit Maintanance Updated Successfully")
-    })
+      })
+
     }
+  }
   }else{
       this.toastr.error("Please Fill All the Fields");
       return false;
