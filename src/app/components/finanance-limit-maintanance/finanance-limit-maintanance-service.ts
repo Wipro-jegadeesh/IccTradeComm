@@ -5,16 +5,22 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class FinanceLimitMaintananceServices {
   public baseUrl: string;
-  constructor(private apiService: ApiService) { this.baseUrl = "http://mock.com"; }
+  public userCred = JSON.parse(localStorage.getItem('userCred'))
+
+  constructor(private apiService: ApiService) { this.baseUrl = "http://mock.com"; 
+}
   getnewLimitFinSmeDatas(){
-    let userCred = JSON.parse(localStorage.getItem('userCred'))
-    return this.apiService.tempGet(environment.serviePath_3+'api/v1/limit-details/getLimitUtilizedDetails/'+userCred['financierProfileId']); 
+    return this.apiService.tempGet(environment.serviePath_3+'api/v1/limit-details/getLimitUtilizedDetails/'+this.userCred['financierProfileId']); 
   }
   getMainlimitScreenDatas(){
     let userCred = JSON.parse(localStorage.getItem('userCred'))
     return this.apiService.tempGet(environment.serviePath_4+'limit-request/allLimitsbyFinId/'+userCred['financierProfileId']); 
   }
-   postnewMainLimitForm(body: any) {
+  postnewMainLimitForm(body: any) {
     return this.apiService.post(environment.serviePath_4+'limit-initiate', body);
   }
+  putnewMainLimitForm(body: any) {
+    return this.apiService.put(environment.serviePath_4+'limit-initiate/'+this.userCred['financierProfileId'], body);
+  }
+  
 }
