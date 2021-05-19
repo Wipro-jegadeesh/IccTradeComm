@@ -319,7 +319,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   ];
   callPutMethod = false;
   callPostMethod = false;
-  callPutMethodEdit: boolean = true;
+  callPutMethodEdit: boolean = false;
   mainlimitScreenDatas
 
   //line chart end
@@ -468,6 +468,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       mainoverallexposure: ['', Validators.required],
       maincountryexposure: ['', Validators.required],
       mainsmeexposure: ['', Validators.required],
+      mainOverallAvailable: [''],
       mainlimitccy: ['SGD', Validators.required],
       mainsector: ['', Validators.required]
     });
@@ -487,7 +488,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       // this.callPutMethodEdit = true;
       // this.callPutMethod = true
     }
-  }
+  } 
   getMainlimitScreenDatas(){
     this.financelimitMaintananceservices.getMainlimitScreenDatas().subscribe(resp => {
       if(resp){
@@ -497,6 +498,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           mainsmeexposure :resp.smewiseMaxlimit,
           maincountryexposure :resp.countryMaxLimit,
           mainsector :resp.sectorLimit,
+          mainOverallAvailable : resp.OverallAvailable
         });
         this.limitMaintanceForm.patchValue({
           overAllLimit: resp.overallLimit,

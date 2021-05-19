@@ -46,7 +46,14 @@
                                     />
                                   </mat-form-field>
                                 </td>
+                                <td rowspan="1" colspan="1" *ngIf="callPutMethodEdit">
+                                  <mat-form-field dense class="icc-mat">
+                                    <mat-label>Overall Available Exposure</mat-label>
+                                    <input type="text" matInput formControlName="mainOverallAvailable"  [readonly]=true
 
+                                    />
+                                  </mat-form-field>
+                                </td>
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
@@ -85,19 +92,18 @@
                               </tr>
                                 <!-- buttons start section -->
                                 <tr>
-                                  <td></td>
                                   <td rowspan="1" colspan="1">
-                                    <div style="text-align: end;" *ngIf=callPostMethod>
+                                    <div *ngIf="callPostMethod">
                                       <button *ngIf="callPostMethod" type="submit" mat-flat-button color="primary"
                                         id=grid>Create
                                         Limit</button>
                                     </div>
-                                    <div style="text-align: end;" *ngIf=callPutMethodEdit>
+                                    <div style="text-align: end;" *ngIf="callPutMethodEdit && !callPostMethod">
                                       <button *ngIf="callPutMethodEdit" mat-flat-button color="primary"
                                         (click)="callPutMethodEditFn('edit')">Edit
                                         Limit</button>
                                     </div>
-                                    <div style="text-align: end;" *ngIf="callPutMethodEdit == false">
+                                    <div style="text-align: end;" *ngIf="callPutMethodEdit == false && !callPostMethod">
                                       <button mat-flat-button color="primary"
                                         (click)="callPutMethodEditFn('cancel')" type="button">Cancel
                                       </button>
