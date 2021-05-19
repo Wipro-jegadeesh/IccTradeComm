@@ -24,7 +24,7 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
 export class IccCountryComponent implements OnInit {
   countryForm: FormGroup;
 
-  displayedColumns: string[] = ['countrycode','country','action'];
+  displayedColumns: string[] = ['country','countrycode2','countrycode3','numeric','action'];
   dataSource;
   countryTooltip = StaicDataMaintenance;
   isEdit : boolean
@@ -39,7 +39,7 @@ export class IccCountryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'id' : '1' ,'countrycode' : 'CODE123','country' : 'test'}]);
+    this.dataSource = new MatTableDataSource([{'id' : '1' ,'countrycode2' : 'CODE123','countrycode3' : 'CODE123','numeric' : '676767','country' : 'test'}]);
 
     this.IccCountryServices.getAllcountry().subscribe(listResp => {
       if(listResp){
@@ -50,8 +50,10 @@ export class IccCountryComponent implements OnInit {
 
   countryFormBuild() {
     this.countryForm = this.fb.group({
-      countrycode: ['', Validators.required], 
       country: ['', Validators.required],
+      countrycode2: ['', Validators.required], 
+      countrycode3: ['', Validators.required], 
+      numeric: ['', Validators.required]
     });
 
   }
@@ -106,7 +108,9 @@ export class IccCountryComponent implements OnInit {
           if(resp){
             let respData = resp;
             this.countryForm.patchValue({  
-              countrycode : respData.countrycode,
+              countrycode2 : respData.countrycode2,
+              countrycode3 : respData.countrycode3,
+              numeric : respData.numeric,
               country : respData.country,
             })
             this.isEdit = true

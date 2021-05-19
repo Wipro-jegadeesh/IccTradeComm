@@ -17,7 +17,15 @@ import { IccUserCreationService } from '../icc-user-creation.service';
 import { IccRolesServices } from '../../icc-roles/icc-roles-services';
 import * as _ from 'lodash';
 import { MatListOption } from '@angular/material/list';
+import { IccCountryServices } from '../../icc-country/icc-country.services'
 
+interface ICity {
+  // item_id: number;
+  // item_text: string;
+
+  id: number;
+  itemName: string;
+}
 
 @Component({
   selector: 'app-icc-user-details',
@@ -63,26 +71,52 @@ export class IccUserDetailsComponent implements OnInit {
   fileData: any = [];
     fileNames=[]
     baseFileData
-  dropdownSettings :IDropdownSettings = {
-  singleSelection: true,
-    idField: 'item_id',
-    textField: 'item_text',
-    allowSearchFilter: true  
-  }
+  // dropdownSettings :IDropdownSettings = {
+  // singleSelection: true,
+  //   idField: 'item_id',
+  //   textField: 'item_text',
+  //   allowSearchFilter: true  
+  // }
   selectedProducts:any
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers','Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   RolesType:any;
+ 
   constructor(private IccRolesServices: IccRolesServices,private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private IccUserCreationssService: IccUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe,private toastr: ToastrService) {
+    private datePipe: DatePipe,private toastr: ToastrService,private IccCountryServices:IccCountryServices) {
     this.invoiceFormBuild()
   }
+
+  name = "Angular";
+  cities: Array<ICity> = [];
+  selectedItems: Array<ICity> = [];
+  dropdownSettings = {
+  };
+  isView = false
+
   ngOnInit() {
+
+    this.selectedItems = [];
+    this.dropdownSettings = {
+      singleSelection: true,
+      defaultOpen: false,
+      idField: "item_id",
+      textField: "item_text",
+      allowSearchFilter: true,
+      enableSearchFilter : true,
+      text: 'Select Country',
+      autoPosition : false,
+      maxHeight	: 170
+    };
+
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+
+    this.getAllCountry()
+
 
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if(listResp){
@@ -102,6 +136,21 @@ export class IccUserDetailsComponent implements OnInit {
       this.UserADDFormBuild()
     }
 }
+
+getAllCountry(){
+  this.IccCountryServices.getAllcountry().subscribe(resp => {  
+    let countryArray = []
+
+    resp && resp.map(item =>{
+      let obj =  { id: item.countrycode3, itemName: item.country }
+      countryArray.push(obj)
+    })
+  
+    this.cities = countryArray
+  
+  })
+    }
+
 UserADDFormBuild(){
   this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
     console.log(resp)
@@ -113,15 +162,17 @@ UserADDFormBuild(){
   companyName: resp[0].companyname, 
   locale: resp[0].locale,
   address:resp[0].address,
-  country:resp[0].country,
+  // country:resp[0].country,
   role:resp[0].role,
   profileType:resp[0].profiletype,
   address1: resp[0].address1,
   postalCode:resp[0].postalCode,
   state:resp[0].state,
     });
+    this.setCountryFormController(resp[0])
   })
 }
+
 
 selectionChange(option) {
   console.log(option,this.selectedProducts,'ddd');
@@ -180,7 +231,7 @@ selectionChange(option) {
     companyName: resp[0].companyname, 
     locale: resp[0].locale,
     address:resp[0].address,
-    country:resp[0].country,
+    // country:resp[0].country,
     role:resp[0].role,
     profileType:resp[0].profiletype,
     address1: resp[0].address1,
@@ -188,6 +239,7 @@ selectionChange(option) {
     state:resp[0].state,
 
       });
+      this.setCountryFormController(resp[0])
 
     })
   }
@@ -255,7 +307,11 @@ removeImage() {
       if (this.userForm.status === "INVALID"){
         // throw { "mes": "Please fill mendatory  fields" }
         this.toastr.error("Please fill mendatory  fields")
+        return
       }        
+
+      this.userForm.value['country'] = this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName
+
                  if(this.id && this.type === 'EDIT'){
                   this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
                     this.invoiceFormBuild();
@@ -288,7 +344,7 @@ removeImage() {
       locale: resp.locale,
       // ICCId: localStorage.getItem("userId"),
       address:resp.address,
-      country:resp.country,
+      // country:resp.country,
       // groupname:['',Validators.required],
       role:resp.role,
       profileType:resp.profileType,
@@ -297,6 +353,8 @@ removeImage() {
       state:resp.state,
 
         });
+        this.setCountryFormController(resp)
+
       }
     })
    
@@ -312,7 +370,7 @@ removeImage() {
       locale: ['', Validators.required],
       address:['',Validators.required],
       address1:['',Validators.required],
-      country:['',Validators.required],
+      country:[[],Validators.required],
       state:['',Validators.required],
       postalCode:['',Validators.required],
       // sector:[''],
@@ -325,6 +383,19 @@ removeImage() {
     });
   
   }
+
+  setCountryFormController(item){
+    let obj = {
+      'itemName': item.country
+    }
+    const result = this.cities && this.cities.filter(country => country.itemName == item.country);
+    obj['id'] = result['id']
+
+    this.userForm.controls['country'].setValue([obj])
+  }
+
+
+
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
   }

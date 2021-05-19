@@ -12,34 +12,37 @@
        
     <td rowspan="1" colspan="1">
         <mat-form-field dense class="icc-mat">
-          <mat-label>country Name</mat-label>
+          <mat-label>Country Name</mat-label>
           <input type="text" matInput formControlName="country" />
         </mat-form-field>
       </td>
 
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>country Code</mat-label>
-        <input type="text" matInput formControlName="countrycode" />
+        <mat-label>Country Code(2 digit)</mat-label>
+        <input type="text" matInput formControlName="countrycode2" pattern="[A-Za-z]{2}"/>
       </mat-form-field>
     </td>
-    
-    <!-- <td rowspan="1" colspan="1">
+
+    <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>country Description</mat-label>
-        <input type="text" matInput formControlName="countryDescription" />
+        <mat-label>Country Code(3 digit)</mat-label>
+        <input type="text" matInput formControlName="countrycode3" pattern="[A-Za-z]{3}"/>
       </mat-form-field>
-    </td> -->
+    </td>
+
+          <td rowspan="1" colspan="1">
+      <mat-form-field dense class="icc-mat">
+        <mat-label>Numeric</mat-label>
+        <input type="number" matInput formControlName="numeric" />
+      </mat-form-field>
+    </td>
+
 
     <td rowspan="1" colspan="1">      
         <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
         <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
-
-        <!-- #tooltip="matTooltip"
-        matTooltip="{{biddingTooltip.invoiceAmount}}"
-        [matTooltipPosition]="'below'" -->
-        </td>
-    
+        </td>    
   </tr>
 
 </tbody>
@@ -52,21 +55,40 @@
 <br>
         <div class="mat-elevation-z8 table-responsive table-post">
             <table mat-table [dataSource]="dataSource" matSort>
-                <ng-container matColumnDef="countrycode">
+
+              <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header
+                    > Country </th>
+                <td mat-cell *matCellDef="let element">
+                    {{element.country}}
+                </td>
+            </ng-container>
+
+                <ng-container matColumnDef="countrycode2">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{countryTooltip.countrycode}}" [matTooltipPosition]="'below'"> country Code </th>
+                    matTooltip="{{countryTooltip.countrycode2}}" [matTooltipPosition]="'below'"> country Code(2 digit) </th>
                     <td mat-cell *matCellDef="let element">
-                                 {{element.countrycode}}
+                                 {{element.countrycode2}}
                      </td>
                   </ng-container>
 
-                <ng-container matColumnDef="country">
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header
-                        > country </th>
+                  <ng-container matColumnDef="countrycode3">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                    matTooltip="{{countryTooltip.countrycode3}}" [matTooltipPosition]="'below'"> country Code(3 digit) </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.country}}
-                    </td>
-                </ng-container>
+                                 {{element.countrycode3}}
+                     </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="numeric">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+                    matTooltip="{{countryTooltip.numeric}}" [matTooltipPosition]="'below'"> Numeric </th>
+                    <td mat-cell *matCellDef="let element">
+                                 {{element.numeric}}
+                     </td>
+                  </ng-container>
+
+              
 
                 <!-- <ng-container matColumnDef="countryDescription">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
