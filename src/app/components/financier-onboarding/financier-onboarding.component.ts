@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import {Validation} from '../../service/Validation'
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import { FinancierUserCreationService } from './financier-user-creation/financier-user-creation.service'
+import { IccCountryServices } from '../icc-country/icc-country.services'
 
 const ELEMENT_DATA: any[] = [
   {
@@ -49,7 +50,8 @@ export class FinancierOnboardingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
     private customerService: CustomerService, public authenticationService: AuthenticationService, private toastr: ToastrService,
-    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService) {
+    private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService,
+    private IccCountryServices:IccCountryServices) {
     this.customer = new Customer();
   }
 
@@ -70,17 +72,10 @@ export class FinancierOnboardingComponent implements OnInit {
 
   ngOnInit() {
     this.cities = [
-      // { item_id: 1, item_text: "India" },
-      // { item_id: 2, item_text: "Australia" },
-      // { item_id: 3, item_text: "America" },
-      // { item_id: 4, item_text: "Singapore" }
-
-
       { id: 1, itemName: "India" },
       { id: 2, itemName: "Australia" },
       { id: 3, itemName: "America" },
       { id: 4, itemName: "Singapore" }
-
     ];
     this.selectedItems = [];
     this.dropdownSettings = {
@@ -127,8 +122,22 @@ export class FinancierOnboardingComponent implements OnInit {
     'contactNo':"ipoip",
     'status':'R'
     }])
-
+    this.getAllCountry()
   }
+
+  getAllCountry(){
+    this.IccCountryServices.getAllcountry().subscribe(resp => {    
+      let countryArray = []
+
+      resp && resp.map(item =>{
+        let obj =  { id: item.countrycode3, itemName: item.country }
+        countryArray.push(obj)
+      })
+    
+      this.cities = countryArray
+    
+    })
+      }
 
   getUserList(finDetailId){
     this.FinancierUserCreationService.getAlUserList(finDetailId).subscribe(resp => {
@@ -323,9 +332,14 @@ let respObj = {​​​​​​​​
             let obj = {
               'itemName': item.country
             }
-            item.country == 'India' ? obj['id'] = 1 :
-              item.country == 'Australia' ? obj['id'] = 2 :
-                item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+
+            const result = this.cities && this.cities.filter(country => country.itemName == item.country);
+            obj['id'] = result['id']
+
+
+            // item.country == 'India' ? obj['id'] = 1 :
+            //   item.country == 'Australia' ? obj['id'] = 2 :
+            //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
             this.financierForm.controls['headcountry'].setValue([obj])
           }
           // item.country && this.financierForm.controls['headcountry'].setValue([{'id':1,itemName:item.country}])
@@ -345,9 +359,11 @@ let respObj = {​​​​​​​​
             let obj = {
               'itemName': item.country
             }
-            item.country == 'India' ? obj['id'] = 1 :
-              item.country == 'Australia' ? obj['id'] = 2 :
-                item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+            const result = this.cities && this.cities.filter(country => country.itemName == item.country);
+            obj['id'] = result['id']
+            // item.country == 'India' ? obj['id'] = 1 :
+            //   item.country == 'Australia' ? obj['id'] = 2 :
+            //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
             this.financierForm.controls['servCountry'].setValue([obj])
           }
           // item.country && this.financierForm.controls['servCountry'].setValue([{'id':1,itemName:item.country}])
@@ -540,7 +556,6 @@ let respObj = {​​​​​​​​
   onSubmit() {    
 
     let formValues = this.financierForm.value
-
     // let userlst = [{
     //   userName : formValues.userName, email : formValues.email,contactNo : formValues.contactNo,companyName : formValues.companyName,
     //   userCreationDate : formValues.userCreationDate,address : formValues.address,language : formValues.language,country: formValues.country,

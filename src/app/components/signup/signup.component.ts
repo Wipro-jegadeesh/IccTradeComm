@@ -11,6 +11,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { IccUserCreationService } from '../icc-user-creation/icc-user-creation.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { IccCountryServices } from '../icc-country/icc-country.services'
+
 
 interface ICity{
   item_id: number;
@@ -36,7 +38,8 @@ export class SignupComponent implements OnInit {
   signUpDetails:any;
   modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService,private IccUserCreationssService: IccUserCreationService,private fb: FormBuilder,private activatedRoute: ActivatedRoute,private router: Router,private signupService:SignupService,
+  constructor(private modalService: BsModalService,private IccUserCreationssService: IccUserCreationService,private fb: FormBuilder,private activatedRoute: ActivatedRoute,private router: Router,
+    private signupService:SignupService,private IccCountryServices:IccCountryServices,
     private toastr: ToastrService) { }
 
   
@@ -48,7 +51,9 @@ export class SignupComponent implements OnInit {
   sectordropdownSettings:any={}
 
   ngOnInit() {
-    this.optionDatas = COUNTRYNAMES
+    // this.optionDatas = COUNTRYNAMES
+    this.getAllCountry()
+
     this.sectorOptionsDatas = SIGNUPSECTORS
     this.dropdownSettings = {
       singleSelection: true ,
@@ -79,6 +84,21 @@ export class SignupComponent implements OnInit {
     this.selectedItems=[]
     localStorage.clear();
   }
+
+  getAllCountry(){
+    this.IccCountryServices.getAllcountry().subscribe(resp => {    
+      let countryArray = []
+
+      resp && resp.map(item =>{
+        let obj =  { id: item.countrycode3, itemName: item.country }
+        countryArray.push(obj)
+      })
+    
+      this.optionDatas = countryArray
+    
+    })
+      }
+
   onDeSelect(event) {
     this.showCountSignBtn = false
     this.CountryPinLabel=''

@@ -61,7 +61,7 @@ export class SmeUserDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
-    this.invoiceFormBuild()
+    this.invoiceFormBuild()  
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
