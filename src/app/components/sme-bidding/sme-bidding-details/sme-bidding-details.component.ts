@@ -318,6 +318,7 @@ rejectQustionTwo = {
 
     saveFinBid(data){
 
+
       let userData = JSON.parse(localStorage.getItem('userCred'))
 
       data.filteredData[0]['smeId'] = localStorage.getItem("userId")
@@ -333,12 +334,13 @@ rejectQustionTwo = {
         if(resp){
           // this.smeBiddingServices.updateFinBid(data.filteredData[0].id).subscribe(resp => {
           // })
-let userData = JSON.parse(localStorage.getItem('userCred'))
+          let userData = JSON.parse(localStorage.getItem('userCred'))
           let obj = {
             "smeProfileId" : userData['smeProfileId'] 
           }
-
           this.smeBiddingServices.updateFinStatusBid(data.filteredData[0].id,obj).subscribe(resp => {
+          })
+          this.smeBiddingServices.updateAcceptStatusBid(data.filteredData[0].finId,data.filteredData[0].baseCcyNetAmtPayable,'').subscribe(resp => {
           })
           this.toastr.success("Accepted successfully")
         this.modalRef.hide()
