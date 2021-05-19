@@ -319,6 +319,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   ];
   callPutMethod = false;
   callPostMethod = false;
+  callPutMethodEdit: boolean = true;
+  mainlimitScreenDatas
+
   //line chart end
 
   //Charts
@@ -474,9 +477,21 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.isEdit = true;
     this.isOk = true;
   }
+  callPutMethodEditFn(value) {
+    if (value == 'edit') {
+      this.callPutMethodEdit = false;
+      this.callPutMethod = true
+    }
+    else {
+      this.getMainlimitScreenDatas()
+      // this.callPutMethodEdit = true;
+      // this.callPutMethod = true
+    }
+  }
   getMainlimitScreenDatas(){
     this.financelimitMaintananceservices.getMainlimitScreenDatas().subscribe(resp => {
       if(resp){
+        this.mainlimitScreenDatas = resp;
          this.mainlimitMaintanceForm.patchValue({
           mainoverallexposure :resp.overallLimit,
           mainsmeexposure :resp.smewiseMaxlimit,
@@ -493,7 +508,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
         });
          
           // this.diabled= true
-        this.callPutMethod = true
+        // this.callPutMethod = true
+        this.callPutMethodEdit = true
+
       }else{
        // this.diabled= false
         this.callPostMethod = true
@@ -536,26 +553,31 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
           "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
-          "LimitAudit": null
+          "LimitAudit": null,
+          "limitNumber":"3553-6736-3636-0036"
       }
       this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
        this.toastr.success("Limit Maintanance Created Successfully")
      })
       }else{
         let puttdatas = {
+          // OverallAvailable,OverallUtilizedLimit,smeWiseUtilized,CountryWiseUtilized
+
           "financierID": userCred['financierProfileId'],
           "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallUtilizedLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallAvailable":this.mainlimitScreenDatas.OverallAvailable,
+          "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
           "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-          "smeWiseUtilized": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-          "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
-          "LimitAudit": null
+          "LimitAudit": null,
+          "limitNumber":"3553-6736-3636-0036"
       }
       this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
-       this.toastr.success("Limit Maintanance Updated Successfully")
+       this.toastr.success("Limit Maintanance Updated Successfully");
+       this.callPutMethodEdit = true
       })
 
     }

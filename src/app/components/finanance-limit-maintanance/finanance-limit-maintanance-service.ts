@@ -20,7 +20,7 @@ export class FinanceLimitMaintananceServices {
     return this.apiService.post(environment.serviePath_4+'limit-initiate', body);
   }
   putnewMainLimitForm(body: any) {
-    return this.apiService.put(environment.serviePath_4+'limit-initiate/'+this.userCred['financierProfileId'], body);
+    return this.apiService.put(environment.serviePath_4+'limit-update/'+this.userCred['financierProfileId'], body);
   }
   
 }
