@@ -91,6 +91,7 @@ export class InvoiceDetailsComponent implements OnInit {
     {value: 'R', viewValue: 'R'},
   ];
   detailsTooltip=INVOICEDETAILSCONSTANTS
+  limitDetails: any;
   
   constructor(private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,
     private authenticationService:AuthenticationService,private router :Router,private modalDialogService:ModalDialogService,
@@ -226,8 +227,9 @@ export class InvoiceDetailsComponent implements OnInit {
       }
      
     })
-
-    
+    this.invoiceRequestServices.getMainlimitScreenDatas().subscribe(resp => {
+      this.limitDetails = resp
+    })
   }
   buildform() {
     this.finBidform = this.fb.group({
@@ -347,17 +349,21 @@ export class InvoiceDetailsComponent implements OnInit {
 
   }
   openModal(event, template) {
-    event.preventDefault();
-    this.finBidform.patchValue({
-      invNo : this.invoiceDetails ? this.invoiceDetails.invId:'',
-      invoiceAmt:this.invoiceDetails ? this.invoiceDetails.invAmt:''
-    });
-      let array = []
-      array.push(this.finBidform.value)
-      this.launchBid_Popup = new MatTableDataSource(array);
-      console.log(this.finBidform.value)
-      console.log(this.finBidform,"this.finBidform")
-    this.modalRef = this.modalService.show(template, {class: 'modal-lg mod-box'});
+    if(this.limitDetails.OverallAvailable < this.finBidform.value.baseCcyNetAmtPayable){
+      this.toastr.error("Could not launch the bid! Overall available is less than bidding amount")
+    }else{
+      event.preventDefault();
+      this.finBidform.patchValue({
+        invNo : this.invoiceDetails ? this.invoiceDetails.invId:'',
+        invoiceAmt:this.invoiceDetails ? this.invoiceDetails.invAmt:''
+      });
+        let array = []
+        array.push(this.finBidform.value)
+        this.launchBid_Popup = new MatTableDataSource(array);
+        console.log(this.finBidform.value)
+        console.log(this.finBidform,"this.finBidform")
+      this.modalRef = this.modalService.show(template, {class: 'modal-lg mod-box'});
+    }
   }
  
   onSubmitBidForm() {

@@ -34,4 +34,8 @@ export class InvoiceRequestServices {
   UpdateBiddingSave(id,body: any) {
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatusInitiated/'+id,body);
   }
+  getMainlimitScreenDatas(){
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
+    return this.apiService.tempGet(environment.serviePath_4+'limit-request/allLimitsbyFinId/'+userCred['financierProfileId']); 
+  }
 }
