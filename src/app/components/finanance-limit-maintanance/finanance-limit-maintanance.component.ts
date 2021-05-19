@@ -338,6 +338,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
     this.newlimitExposure();
+    this.getMainlimitScreenDatas();
     this.getnewLimitFinSmeDatas()
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -459,11 +460,11 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   mainlimitMaintanceFormBuild() {
     this.mainlimitMaintanceForm = this.fb.group({
-      mainoverallexposure: ['700000', Validators.required],
-      maincountryexposure: ['400000', Validators.required],
-      mainsmeexposure: ['500000', Validators.required],
+      mainoverallexposure: ['', Validators.required],
+      maincountryexposure: ['', Validators.required],
+      mainsmeexposure: ['', Validators.required],
       mainlimitccy: ['SGD', Validators.required],
-      mainsector: ['0', Validators.required]
+      mainsector: ['', Validators.required]
     });
   }
   clickedit() {
@@ -471,7 +472,12 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.isEdit = true;
     this.isOk = true;
   }
+  getMainlimitScreenDatas(){
+    this.financelimitMaintananceservices.getMainlimitScreenDatas().subscribe(resp => {
+      })
+  }
   mainlimitMaintanceFormSubmit() {
+    if(this.mainlimitMaintanceForm.valid){
     this.overAllLimit = this.mainlimitMaintanceForm.value.mainoverallexposure;
     this.countryoverLimitval = this.mainlimitMaintanceForm.value.mainoverallexposure;
     this.groupsFormBuild()
@@ -480,17 +486,41 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.countrylimitMaintance();
     // this.toastr.success("Limit Maintanance Updated Successfully")
     if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) &&  (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector))) {
-      this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+      this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure");
+      return false;
     } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) {
-      this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure")
+      this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure");
+      return false;
     } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) {
       this.toastr.error("SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+      return false;
     }
     else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) {
-      this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure")
+      this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure");
+      return false;
     }
     else {
-      this.toastr.success("Limit Maintanance Updated Successfully")
+      let userCred = JSON.parse(localStorage.getItem('userCred'))
+      let postdatas = {
+          "financierID":"222",
+          // "financierID": userCred['financierProfileId'],
+          "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallUtilizedLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "smeWiseUtilized": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+          "LimitAudit": null
+      }
+      this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
+       this.toastr.success("Limit Maintanance Updated Successfully")
+    })
+    }
+  }else{
+      this.toastr.error("Please Fill All the Fields");
+      return false;
     }
   }
   onSubmitLimitForm() {
