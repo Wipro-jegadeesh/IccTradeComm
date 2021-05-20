@@ -10,20 +10,32 @@
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''"  readonly/>
               </mat-form-field>
             </td>
-            <td rowspan="1" colspan="1">
+            <!-- <td rowspan="1" colspan="1">
               <mat-form-field dense>
                 <mat-label>Internal BID ID</mat-label>
                 <input type="text" matInput value="SGTR953" readonly/>
               </mat-form-field>
-            </td>
+            </td> -->
             <td rowspan="1" colspan="1">
               <mat-form-field dense>
                 <mat-label>SME Name</mat-label>
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeId : ''"   readonly/>
               </mat-form-field>
             </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense>
+                <mat-label>Buyer name</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" readonly />
+              </mat-form-field>
+            </td>
           </tr>
           <tr>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense>
+                <mat-label>Buyer UEN</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" readonly />
+              </mat-form-field>
+            </td>
               <td rowspan="1" colspan="1">
                 <mat-form-field dense>
                   <mat-label>SME Rating</mat-label>
@@ -34,12 +46,6 @@
                 <mat-form-field dense>
                   <mat-label>Transaction Rating</mat-label>
                   <input type="text" matInput value="9/10"readonly />
-                </mat-form-field>
-              </td>
-              <td rowspan="1" colspan="1">
-                <mat-form-field dense>
-                  <mat-label>Buyer name</mat-label>
-                  <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" readonly />
                 </mat-form-field>
               </td>
             </tr>

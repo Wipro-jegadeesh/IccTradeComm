@@ -310,6 +310,7 @@ private _filter(value: string): string[] {
           "status" : "APR", 
           "buyerName": item.buyerName,
           "buyerAddr":item['buyerAddr'],
+          "buyerUEN":item['buyerUEN'],
           "dispDate":item['dispDate'],
            "invDueDate":item.invDueDate,
            "smeProfileId" : this.userDeatils['smeProfileId']
@@ -330,6 +331,7 @@ private _filter(value: string): string[] {
       invDueDate: data.invDueDate.toString(),
       invId: data.invId,
       buyerAddr: data.buyerAddr,
+      buyerUEN:data.buyerUEN,
       billNo: data.billNo,
       invAmt: data.invAmt,
       invDate: data.invDate.toString(),
@@ -456,6 +458,7 @@ private _filter(value: string): string[] {
       invDueDate: ['', Validators.required],
       invId: ['', Validators.required],
       buyerAddr: ['', Validators.required],
+      buyerUEN: ['', Validators.required],
       billNo: ['', Validators.required],
       invAmt: ['', Validators.required],
       invDate: ['', Validators.required], 

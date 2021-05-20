@@ -27,7 +27,7 @@ export class SmeBiddingServices {
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatus/'+id,body);
   }
   updateAcceptStatusBid(FINID,BASEAMOUNT,body){
-    return this.apiService.put(environment.serviePath_2+'limit-update/overAmountAvailable?finId='+FINID+'&OverallUtilizedLimit='+BASEAMOUNT,{});
+    return this.apiService.put(environment.serviePath_4+'limit-update/overAmountAvailable?finId='+FINID+'&OverallUtilizedLimit='+BASEAMOUNT,{});
   }
   rejectFinBid(id,body){
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/rejectBidStatus/'+id,body);

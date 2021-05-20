@@ -18,6 +18,7 @@ export interface invoiceData {
   invoiceId: String;
   invoiceDate: String;
   buyerName: String;
+  buyerUEN:string;
   InvoiceAmount: String;
 
 }
@@ -111,6 +112,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
           "invoiceCcy":item['invCcy'],
           "status" : "A", 
           "buyerName": item.buyerName,
+          "buyerUEN":item.buyerUEN,
           "buyerAddr":item['buyerAddr'],
           "dispDate":item['dispDate'],
            "invDueDate":item.invDueDate
@@ -180,6 +182,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
         invoiceDetailsSequenceNumber: {},
         dispDate:this.invoicedata[0].Datedispatch = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z",
         buyerName:this.invoicedata[0].Buyername,
+        buyerUEN:this.invoicedata[0].buyerUEN,
         buyerAddr:this.invoicedata[0].Buyerlocation,
         billNo:this.invoicedata[0].Billingnumber,
         goodsDetails:goodsDetails
