@@ -470,7 +470,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       mainsmeexposure: ['', Validators.required],
       mainOverallAvailable: [''],
       mainlimitccy: ['SGD', Validators.required],
-      mainsector: ['', Validators.required]
+      mainsector: ['', Validators.required],
+      transactions: ['', Validators.required],
+      buyerLimit: ['', Validators.required]
+
     });
   }
   clickedit() {
@@ -498,6 +501,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           mainsmeexposure :resp.smewiseMaxlimit,
           maincountryexposure :resp.countryMaxLimit,
           mainsector :resp.sectorLimit,
+          transactions :resp.transactions,
+          buyerLimit :resp.buyerLimit,
           mainOverallAvailable : resp.OverallAvailable
         });
         this.limitMaintanceForm.patchValue({
@@ -555,6 +560,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
           "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+          "transactions": this.mainlimitMaintanceForm.value.transactions,
+          "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
           "LimitAudit": null,
           "limitNumber":"3553-6736-3636-0036"
       }
@@ -574,6 +581,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
           "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+
+          "transactions": this.mainlimitMaintanceForm.value.transactions,
+          "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
+
           "LimitAudit": null,
           "limitNumber":"3553-6736-3636-0036"
       }
