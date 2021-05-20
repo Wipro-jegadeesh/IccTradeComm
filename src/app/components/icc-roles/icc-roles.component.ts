@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl,NgForm } from '@angular/forms';
 import { IccRolesServices } from './icc-roles-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
@@ -28,6 +28,7 @@ export class IccRolesComponent implements OnInit {
   groupTooltip = StaicDataMaintenance;
   isEdit : boolean
   roleId : any
+  @ViewChild('formDirective') private formDirective: NgForm;
 
   constructor(public router: Router, private IccRolesServices: IccRolesServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
@@ -98,7 +99,8 @@ export class IccRolesComponent implements OnInit {
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
         if(resp){
           this.toastr.success("Saved Successfully")
-          this.groupsForm.reset();
+          // this.groupsForm.reset();
+          this.formDirective.resetForm();
           this.roleId = "";
           this.isEdit = false
           this.IccRolesServices.getAllRoles().subscribe(listResp => {
