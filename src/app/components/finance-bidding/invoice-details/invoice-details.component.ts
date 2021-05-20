@@ -92,7 +92,7 @@ export class InvoiceDetailsComponent implements OnInit {
   ];
   detailsTooltip=INVOICEDETAILSCONSTANTS
   limitDetails: any;
-  
+
   constructor(private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,
     private authenticationService:AuthenticationService,private router :Router,private modalDialogService:ModalDialogService,
     private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService) { }
@@ -349,7 +349,7 @@ export class InvoiceDetailsComponent implements OnInit {
 
   }
   openModal(event, template) {
-    if(this.limitDetails.OverallAvailable < this.finBidform.value.baseCcyNetAmtPayable){
+    if(this.limitDetails.OverallAvailable && this.limitDetails.transactions < this.finBidform.value.baseCcyNetAmtPayable){
       this.toastr.error("Could not launch the bid! Overall available is less than bidding amount")
     }else{
       event.preventDefault();

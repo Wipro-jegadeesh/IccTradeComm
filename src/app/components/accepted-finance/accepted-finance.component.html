@@ -84,55 +84,57 @@
                     <th colspan="8" mat-header-cell *matHeaderCellDef>
                         <h6>Search By</h6>
                         <form [formGroup]="Searchform">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>invoice Id</mat-label>
-                                    <input type="text" formControlName="invoiceRef" matInput />
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>invoice Id</mat-label>
+                                        <input type="text" formControlName="invoiceRef" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>smeName</mat-label>
+                                        <input type="text" formControlName="smeId" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>buyerName</mat-label>
+                                        <input type="text" formControlName="buyerName" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>invoiceDate</mat-label>
+                                        <input matInput readonly="true" formControlName="invoiceDate"
+                                            [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Invoice Due Date</mat-label>
+                                        <input matInput readonly="true" formControlName="invoiceDueDate"
+                                            [matDatepicker]="picker1">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
                             </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>smeName</mat-label>
-                                    <input type="text" formControlName="smeId"  matInput />
-                                </mat-form-field>
+                            <div class="row"
+                                style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="Done" [matTooltipPosition]="'below'">
+                                        done
+                                    </mat-icon> Search
+                                </button>&nbsp;
+                                <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="Done" [matTooltipPosition]="'below'">
+                                        restart_alt</mat-icon> Reset
+                                </button>
                             </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>buyerName</mat-label>
-                                    <input type="text" formControlName="buyerName"  matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>invoiceDate</mat-label>
-                                    <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker"
-                                        >
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Invoice Due Date</mat-label>
-                                    <input matInput readonly="true" formControlName="invoiceDueDate" [matDatepicker]="picker1"
-                                        >
-                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker1></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                            <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
-                                <mat-icon #tooltip="matTooltip" matTooltip="Done" [matTooltipPosition]="'below'">done
-                                </mat-icon> Search
-                            </button>&nbsp;
-                            <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
-                                <mat-icon #tooltip="matTooltip" matTooltip="Done" [matTooltipPosition]="'below'">
-                                    restart_alt</mat-icon> Reset
-                            </button>
-                        </div>
-                    </form>
+                        </form>
                     </th>
                 </ng-container>
                 <ng-container matColumnDef="Filter">
@@ -171,7 +173,8 @@
                     </th>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-                <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+                <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+                    *matHeaderRowDef="displayedColumnsearch"></tr>
                 <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
                 <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -264,7 +267,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="table-res">
-                  
+
                         <table mat-table [dataSource]="dataSourceTwo">
                             <ng-container matColumnDef="invId">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Invoice No</th>
@@ -352,7 +355,7 @@
                                 <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                             </ng-container>
-                
+
 
                             <ng-container matColumnDef="total">
                                 <th mat-header-cell *matHeaderCellDef scope="column">Total</th>

@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
-import { Validators, FormGroup ,FormBuilder} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invId: String;
@@ -131,7 +131,7 @@ export class AcceptedFinanceComponent implements OnInit {
   Searchform: FormGroup;
 
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private fb: FormBuilder,private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
+    private fb: FormBuilder, private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
 
   ngOnInit() {
@@ -241,7 +241,7 @@ export class AcceptedFinanceComponent implements OnInit {
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
+
     this.AcceptedFinanceServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
       // let status = "";
       // if (resp.status == "I") {
