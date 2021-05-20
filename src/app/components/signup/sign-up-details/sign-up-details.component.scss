@@ -15,6 +15,15 @@ table {
     height: 60px;
 }
 
+.multiselect-dropdown-dsgn{
+    width: 351px;
+margin: 2px 8px 44px 14px;
+background-color: #f3f1fc;
+border-bottom: 1px solid #694ed6;
+padding-top: 5px;
+border-radius: 3px;
+}
+
 .table-section {
     margin-left: auto;
     margin-right: auto;
@@ -362,11 +371,11 @@ mat-form-field {
         width: 198px;
     }
 }
-.multiselect-dropdown{
-    position: absolute;
-    width: 233px;
-    left:6px;
- }
+// .multiselect-dropdown{
+//     position: absolute;
+//     width: 233px;
+//     left:6px;
+//  }
 
  .example-form {
     min-width: 150px;
