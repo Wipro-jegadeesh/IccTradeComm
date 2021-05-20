@@ -203,3 +203,10 @@ export const StaicDataMaintenance={
     'toAmt' : 'To Amount',
     'noOfPersons' : 'No of Persons'
 }
+
+export const CountryModule={
+    'country' : 'Country',
+    'countrycode2' : 'countrycode(2 digit)',
+    'countrycode3' : 'countrycode(3 digit)',
+    'numeric' : 'numeric'
+}

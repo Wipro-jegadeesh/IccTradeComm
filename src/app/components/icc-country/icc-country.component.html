@@ -56,12 +56,20 @@
         <div class="mat-elevation-z8 table-responsive table-post">
             <table mat-table [dataSource]="dataSource" matSort>
 
-              <ng-container matColumnDef="country">
+              <!-- <ng-container matColumnDef="country">
                 <th mat-header-cell *matHeaderCellDef  mat-sort-header
                     > Country </th>
                 <td mat-cell *matCellDef="let element">
                     {{element.country}}
                 </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="country">
+              <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
+              matTooltip="{{countryTooltip.country}}" [matTooltipPosition]="'below'"> country Code(2 digit) </th>
+              <td mat-cell *matCellDef="let element">
+                           {{element.country}}
+               </td>
             </ng-container>
 
                 <ng-container matColumnDef="countrycode2">
