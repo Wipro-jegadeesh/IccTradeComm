@@ -44,18 +44,30 @@
                     </div>
                   </div>
                   <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="Country​">Country
-                      </label> -->
-                      <mat-form-field dense>
+                    <!-- <div class="form-group"> -->
+                     
+                      <!-- <mat-form-field dense>
                         <mat-label>Country</mat-label>
                         <mat-icon matPrefix>flag</mat-icon>
                         <input type="text" matInput  formControlName="country" />
                         <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
-                      </mat-form-field>
-                    </div>
+                      </mat-form-field> -->
+
+                      <!-- <angular2-multiselect  [data]="optionDatas"  class="sign-select" style="margin-bottom:10px"
+                      name='country'  (onDeSelectAll)="onDeSelect($event)" 
+                     [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
+                     [settings]="dropdownSettings" ></angular2-multiselect> -->
+
+                     <div class="multiselect-dropdown-dsgn">                   
+
+                     <angular2-multiselect [data]="optionDatas"
+                     formControlName="country"
+                     [settings]="dropdownSettings"></angular2-multiselect>    
+                     </div>                     
+</div>
+                    <!-- </div> -->
                   </div>
-            </div>
+            <!-- </div> -->
           <div class="row dis-block">
             <div class="col-sm-4">
                 <div class="form-group">
