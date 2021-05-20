@@ -21,7 +21,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl,NgForm } from '@angular/forms';
 import { IccAuthorizeServices } from './icc-authorize-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
@@ -46,6 +46,7 @@ export class IccAuthorizMatrixComponent implements OnInit {
   isEdit : boolean
   id : any
 
+  @ViewChild('formDirective') private formDirective: NgForm;
 
   constructor(public router: Router, private IccAuthorizeServices: IccAuthorizeServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
@@ -127,7 +128,8 @@ export class IccAuthorizMatrixComponent implements OnInit {
       this.IccAuthorizeServices.submitIccAuthorizeMatrix(value).subscribe(resp => {
         if(resp){
           this.toastr.success("Saved Successfully")
-          this.groupsForm.reset();
+          // this.groupsForm.reset();
+          this.formDirective.resetForm();
           this.id = "";
           this.isEdit = false
           this.IccAuthorizeServices.getAllAuthorizeMatrix().subscribe(listResp => {
