@@ -5,6 +5,7 @@ import { SignupService } from '../signup.service';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 import {SIGNUPSECTORS} from '../../../shared/constants/signUpSectors'
+import { IccCountryServices } from '../../icc-country/icc-country.services'
 
 @Component({
   selector: 'app-sign-up-details',
@@ -18,18 +19,39 @@ export class SignUpDetailsComponent implements OnInit {
   isImageSaved: boolean;
   cardImageBase64: string;
   bidpanelOpenState = false;
-  sectorOptionsDatas=[]
-  sectordropdownSettings:any={}
-  selectedItems=[]
+  // sectorOptionsDatas=[]
+  // sectordropdownSettings:any={}
+  // selectedItems=[]
   sectors: any;
 
 
-  constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder) { }
+  constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder,private IccCountryServices:IccCountryServices) { }
+
+  name = "";
+  optionDatas=[]
+  dropdownSettings:any={}
+  selectedItems=[]
+  sectorOptionsDatas=[]
+  sectordropdownSettings:any={}
 
   ngOnInit(): void {
+    this.getAllCountry()
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
     this.sectorOptionsDatas = SIGNUPSECTORS
     this.signupFormBuild()
+    this.dropdownSettings = {
+      singleSelection: true ,
+      defaultOpen: false,
+      idField: "item_id",
+      textField: "item_text",
+      allowSearchFilter: true,
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Country',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
+    };
     this.sectordropdownSettings = {
       singleSelection: true ,
       defaultOpen: false,
@@ -43,12 +65,29 @@ export class SignUpDetailsComponent implements OnInit {
       autoPosition : false,
       maxHeight	: 170
     };
+    this.selectedItems=[]
+
     this.SignupServices.getAllRoles().subscribe(listResp => {
       if(listResp){
         this.sectors = listResp
       }
     })
   }
+
+  getAllCountry(){
+    this.IccCountryServices.getAllcountry().subscribe(resp => {    
+      let countryArray = []
+
+      resp && resp.map(item =>{
+        let obj =  { id: item.countrycode3, itemName: item.country }
+        countryArray.push(obj)
+      })
+    
+      this.optionDatas = countryArray
+    
+    })
+      }
+
   onDeSelect(event) {
   
   }
@@ -74,10 +113,15 @@ export class SignUpDetailsComponent implements OnInit {
       city:['',Validators.required],
       postalCode:['',Validators.required],
       sector:[''],
-      country:[this.signUpDetails ? this.signUpDetails.country[0].itemName : '' ,Validators.required],
+      country:[[],Validators.required],
+      // country:[this.signUpDetails ? this.signUpDetails.country[0].itemName : '' ,Validators.required],
       role:[''],
       profileType:['SME',Validators.required],
     });
+
+    let data = this.signUpDetails ? this.signUpDetails.country[0].itemName : ''
+    this.setCountryValue(data)
+
     let obj={
       'registrationId':this.signUpDetails  ? this.signUpDetails.nationalId : '',
       'companyName':this.signUpDetails ? this.signUpDetails.companyName: '',
@@ -109,6 +153,21 @@ export class SignUpDetailsComponent implements OnInit {
     })
     
   }
+
+
+  setCountryValue(country){
+    if(country){
+    let obj = {
+      'itemName': country
+    }
+
+    const result = this.optionDatas && this.optionDatas.filter(country => country.itemName == country);
+    obj['id'] = result['id']
+    this.userForm.controls['country'].setValue([obj])
+  }
+    }
+
+
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
   }
@@ -187,7 +246,7 @@ export class SignUpDetailsComponent implements OnInit {
           city: this.userForm.value.city,
           state: this.userForm.value.state,
           postalCode: this.userForm.value.postalCode,
-          country: this.userForm.value.country,
+          country: this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName,
           telephoneno: this.userForm.value.contactNo,
           email: this.userForm.value.email,
           swiftBic: '',
@@ -206,7 +265,7 @@ export class SignUpDetailsComponent implements OnInit {
         profileType: this.userForm.value.profileType,
         email: this.userForm.value.email,
         contactNo: this.userForm.value.contactNo,
-        country: this.userForm.value.country,
+        country:  this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName,
       }]
       let smeboard = {
         corporateCode: '',

@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { StaicDataMaintenance } from '../../shared/constants/constants'
+import { CountryModule } from '../../shared/constants/constants'
 
 
 @Component({
@@ -26,7 +26,7 @@ export class IccCountryComponent implements OnInit {
 
   displayedColumns: string[] = ['country','countrycode2','countrycode3','numeric','action'];
   dataSource;
-  countryTooltip = StaicDataMaintenance;
+  countryTooltip = CountryModule;
   isEdit : boolean
   id : any
   @ViewChild('formDirective') private formDirective: NgForm;

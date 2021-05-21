@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl,NgForm } from '@angular/forms';
 import { IccGroupServices } from './icc-groups-services';
 import { DatePipe } from '@angular/common';
 // import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
@@ -28,6 +28,7 @@ export class IccGroupsComponent implements OnInit {
   groupTooltip = StaicDataMaintenance;
   isEdit : boolean
   groupId : any
+  @ViewChild('formDirective') private formDirective: NgForm;
 
   constructor(public router: Router, private IccGroupServices: IccGroupServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
@@ -70,7 +71,8 @@ export class IccGroupsComponent implements OnInit {
       this.IccGroupServices.submitIccGroups(value).subscribe(resp => {
         if(resp){
           this.toastr.success("Saved Successfully")
-          this.groupsForm.reset();
+          // this.groupsForm.reset();
+          this.formDirective.resetForm();
           this.groupId = "";
           this.isEdit = false
           this.IccGroupServices.getAllGroups().subscribe(listResp => {

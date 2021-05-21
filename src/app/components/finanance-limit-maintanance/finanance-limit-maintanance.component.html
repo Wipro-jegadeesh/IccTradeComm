@@ -36,8 +36,8 @@
                                     </select>
                                   </mat-form-field>
                                 </td>
-                              </tr>
-                              <tr>
+                              <!-- </tr>
+                              <tr> -->
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="icc-mat">
                                     <mat-label>Overall Exposure</mat-label>
@@ -46,16 +46,9 @@
                                     />
                                   </mat-form-field>
                                 </td>
-                                <td rowspan="1" colspan="1" *ngIf="callPutMethodEdit">
-                                  <mat-form-field dense class="icc-mat">
-                                    <mat-label>Overall Available Exposure</mat-label>
-                                    <input type="text" matInput formControlName="mainOverallAvailable"  [readonly]=true
-
-                                    />
-                                  </mat-form-field>
-                                </td>
-                              </tr>
-                              <tr>
+                               
+                              <!-- </tr>
+                              <tr> -->
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="icc-mat">
                                     <mat-label>Country Exposure</mat-label>
@@ -78,20 +71,52 @@
                                   </mat-form-field>
                                 </td>
 
-                              </tr>
-                              <tr>
+                              <!-- </tr>
+                              <tr> -->
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="icc-mat">
-                                    <mat-label>Sector</mat-label>
+                                    <mat-label>Sector Exposure</mat-label>
                                     <input type="text" matInput formControlName="mainsector"  [readonly]=callPutMethodEdit
 
                                     />
                                   </mat-form-field>
                                 </td>
 
+                              <!-- </tr>
+
+                              <tr> -->
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="icc-mat">
+                                    <mat-label>Transaction Exposure</mat-label>
+                                    <input type="text" matInput formControlName="transactions"  [readonly]=callPutMethodEdit
+
+                                    />
+                                  </mat-form-field>
+                                </td>
+
                               </tr>
-                                <!-- buttons start section -->
-                                <tr>
+
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="icc-mat">
+                                    <mat-label>Buyer Exposure</mat-label>
+                                    <input type="text" matInput formControlName="buyerLimit"  [readonly]=callPutMethodEdit
+
+                                    />
+                                  </mat-form-field>
+                                </td>
+
+                                <td rowspan="1" colspan="1" *ngIf="callPutMethodEdit">
+                                  <mat-form-field dense class="icc-mat">
+                                    <mat-label>Overall Available Exposure</mat-label>
+                                    <input type="text" matInput formControlName="mainOverallAvailable"  [readonly]=true
+
+                                    />
+                                  </mat-form-field>
+                                </td>
+
+                              <!-- </tr>
+                                <tr> -->
                                   <td rowspan="1" colspan="1">
                                     <div *ngIf="callPostMethod">
                                       <button *ngIf="callPostMethod" type="submit" mat-flat-button color="primary"
@@ -128,7 +153,7 @@
                 </mat-card>
               </div>
             </mat-tab>
-            <mat-tab label="SME Limit">
+            <!-- <mat-tab label="Limit Presenter">
               <div class="links">
                 <mat-card>
                   <mat-card-content>
@@ -144,7 +169,6 @@
 
                       <div class="col-md-12">
                         <div class="col-md-6" style="width: 44%;float: right;padding: 0;">
-                          <!-- <h6 style="color:#694ed6">Chart</h6> -->
                           <ng-container>
                             <div class="chart">
                               <div class="col-lg-10 grid-margin stretch-card p-0">
@@ -156,7 +180,6 @@
                                         [chartType]="barChartType">
                                       </canvas>
                                     </div>
-                                    <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
                                   </div>
                                 </div>
                               </div>
@@ -171,12 +194,7 @@
                                   <mat-form-field dense class="icc-mat">
                                     <mat-label>Currency</mat-label>
                                     <select matNativeControl formControlName="ccy">
-                                      <!-- <option value=""></option> -->
                                       <option value="SGD">SGD</option>
-                                      <!-- <option value="USD">USD</option>
-                                                <option value="GBP">GBP</option>
-                                                <option value="EUR">EUR</option>
-                                                <option value="JPY">JPY</option> -->
                                     </select>
                                   </mat-form-field>
                                 </td>
@@ -206,13 +224,9 @@
                           </table>
                         </div>
                       </div>
-                      <!-- <div style="text-align: end;">
-                    <button *ngIf="isOk" mat-flat-button color="primary" id=grid >submit</button>
-                </div> -->
                     </form>
 
                     <div style="margin-top:8%;">
-                      <!-- id="container"  -->
                       <h5 class="tab-text">SME Limit Utilization
                         <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
                           <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false"
@@ -257,8 +271,214 @@
                   </mat-card-content>
                 </mat-card>
               </div>
+            </mat-tab> -->
+
+            <mat-tab label="Overall Exposure">
+              <div class="links">
+                <mat-card>
+                  <mat-card-content>
+                    <form [formGroup]="newLimitGraphForm" autocomplete="off" (ngSubmit)="newLimitGraphFormSubmit()">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <table class="table-responsive inv-table" style="display: contents;">
+                              <tbody>
+                                <tr>
+                                  <td rowspan="1" colspan="1">
+                                    <mat-form-field dense class="finlim-mat">
+                                      <mat-label>Global Limit</mat-label>
+                                      <input type="text" matInput formControlName="newglobalLimit"
+                                        [readonly]=newLimit />
+                                    </mat-form-field>
+                                  </td>
+                                  </tr>
+                                  <!-- <tr>
+                                  <td rowspan="1" colspan="1">
+                                    <mat-form-field dense class="finlim-mat">
+                                      <mat-label>SME Limit</mat-label>
+                                      <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
+                                    </mat-form-field>
+                                  </td>
+                                </tr> -->
+                                <tr>
+                                  <td></td>
+                                  <td rowspan="1" colspan="1">
+                                    <div style="text-align: end;" *ngIf=newLimit>
+                                      <button mat-flat-button color="primary" (click)=newLimitFn()>Edit</button>
+                                    </div>
+                                    <div style="text-align: end;" *ngIf="newLimit == false">
+                                      <button mat-flat-button color="primary" (click)=newLimitFn()>Cancel</button>
+                                      <button type="submit" mat-flat-button color="primary">submit</button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-md-6">
+                            <table class="table-bordered table" id="exposureTbl">
+                              <!-- <tr>
+                                                              <th>Period</th>
+                                                              <th>Period</th>
+                                                              <th>Period</th>
+                                                            </tr>    -->
+                              <tr>
+                                <td>Exposure 100%</td>
+                                <td>100%</td>
+                                <td>5</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 95%</td>
+                                <td>95%</td>
+                                <td>7</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 75%</td>
+                                <td>75%</td>
+                                <td>12</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 50%</td>
+                                <td>50%</td>
+                                <td>11</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 25%</td>
+                                <td>27%</td>
+                                <td>27</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Under 25%</td>
+                                <td>0%</td>
+                                <td>33</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [datasets]="horizontalBarChartData" height="200px" width="300px"
+                                        [labels]="horizontalBarChartLabels" [options]="horizontalBarChartOptions"
+                                        [legend]="horizontalBarChartLegend" [chartType]="horizontalBarChartType">
+                                      </canvas>
+                                    </div>
+                                    <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" height="200px"
+                                        width="300px" [chartType]="pieChartType" [options]="pieChartOptions"
+                                        [plugins]="pieChartPlugins" [legend]="true">
+                                      </canvas>
+                                    </div>
+                                    <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [chartType]="chartType" [datasets]="chartData" height="200px"
+                                        width="300px" [labels]="chartLabels" [colors]="chartColors"
+                                        [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)">
+                                      </canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <mat-accordion>
+                      <mat-expansion-panel>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title style="font-weight:500;color: #a899e4;">
+                            <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                              <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z">
+                                </path>
+                              </svg>
+                            </div>
+                            Overall Exposure Sub Screen (Based On Exposure Slot)
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="overflow-x:auto;">
+                          <div id="container">
+                            <div class="mat-elevation-z8">
+                              <table class="table-responsive" mat-table [dataSource]="dataSourceFour"
+                                style="width: 100%;">
+                                <ng-container matColumnDef="smeId">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure Name</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.smeId}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="utilPercent">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
+                                    {{element.utilPercent}}%
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="exposureAmt">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure Amount</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="utilTotlAmt">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Overall Total Utilized</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                  </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="amtAvailable">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Amount Available </th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit -
+                                    this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                  </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsFour"
+                                  style="background-color:#B4A6EA">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsFour"></tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </mat-card-content>
+                </mat-card>
+              </div>
             </mat-tab>
-            <mat-tab label="Country Limit">
+
+
+            <mat-tab label="Country Exposure">
               <div class="links">
                 <mat-card>
                   <mat-card-content>
@@ -290,8 +510,8 @@
                                     </select>
                                   </mat-form-field>
                                 </td>
-                              </tr>
-                              <tr>
+                              <!-- </tr>
+                              <tr> -->
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="icc-mat">
                                     <mat-label>Overall Limit</mat-label>
@@ -299,11 +519,11 @@
                                       (keyup)="changecountrylimit($event,'overAllLimit')" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
-                              </tr>
-                              <tr>
+                              <!-- </tr>
+                              <tr> -->
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="icc-mat">
-                                    <mat-label>Country OverAll</mat-label>
+                                    <mat-label>Country Exposure</mat-label>
                                     <input type="text" matInput formControlName="countrysmeoverAllLimit"
                                       (keyup)="changecountrylimit($event,'countryoverAllLimit')" [readonly]="true" />
                                   </mat-form-field>
@@ -359,7 +579,7 @@
               </div>
             </mat-tab>
             <!---New  -->
-            <mat-tab label="Limit Graphical Representation">
+            <mat-tab label="Sme Exposure">
               <div class="links">
                 <mat-card>
                   <mat-card-content>
@@ -377,9 +597,11 @@
                                         [readonly]=newLimit />
                                     </mat-form-field>
                                   </td>
+                                  </tr>
+                                  <tr>
                                   <td rowspan="1" colspan="1">
                                     <mat-form-field dense class="finlim-mat">
-                                      <mat-label>SME Limit</mat-label>
+                                      <mat-label>SME Exposure Limit</mat-label>
                                       <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
                                     </mat-form-field>
                                   </td>
@@ -541,6 +763,211 @@
 
                                 <ng-container matColumnDef="amtAvailable">
                                   <th mat-header-cell *matHeaderCellDef scope="column">SME Amount Available </th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit -
+                                    this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                  </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsFour"
+                                  style="background-color:#B4A6EA">
+                                </tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsFour"></tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-tab>
+
+
+            <mat-tab label="Sector Exposure">
+              <div class="links">
+                <mat-card>
+                  <mat-card-content>
+                    <form [formGroup]="newLimitGraphForm" autocomplete="off" (ngSubmit)="newLimitGraphFormSubmit()">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-5">
+                            <table class="table-responsive inv-table" style="display: contents;">
+                              <tbody>
+                                <tr>
+                                  <td rowspan="1" colspan="1">
+                                    <mat-form-field dense class="finlim-mat">
+                                      <mat-label>Global Limit</mat-label>
+                                      <input type="text" matInput formControlName="newglobalLimit"
+                                        [readonly]=newLimit />
+                                    </mat-form-field>
+                                  </td>            
+                                  </tr>
+                                  <tr>
+                                  <td rowspan="1" colspan="1">
+                                    <mat-form-field dense class="finlim-mat">
+                                      <mat-label>Sector Exposure Limit</mat-label>
+                                      <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
+                                    </mat-form-field>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td rowspan="1" colspan="1">
+                                    <div style="text-align: end;" *ngIf=newLimit>
+                                      <button mat-flat-button color="primary" (click)=newLimitFn()>Edit</button>
+                                    </div>
+                                    <div style="text-align: end;" *ngIf="newLimit == false">
+                                      <button mat-flat-button color="primary" (click)=newLimitFn()>Cancel</button>
+                                      <button type="submit" mat-flat-button color="primary">submit</button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-md-6">
+                            <table class="table-bordered table" id="exposureTbl">
+                              <!-- <tr>
+                                                              <th>Period</th>
+                                                              <th>Period</th>
+                                                              <th>Period</th>
+                                                            </tr>    -->
+                              <tr>
+                                <td>Exposure 100%</td>
+                                <td>100%</td>
+                                <td>5</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 95%</td>
+                                <td>95%</td>
+                                <td>7</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 75%</td>
+                                <td>75%</td>
+                                <td>12</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 50%</td>
+                                <td>50%</td>
+                                <td>11</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Over 25%</td>
+                                <td>27%</td>
+                                <td>27</td>
+                              </tr>
+                              <tr>
+                                <td>Exposure Under 25%</td>
+                                <td>0%</td>
+                                <td>33</td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [datasets]="horizontalBarChartData" height="200px" width="300px"
+                                        [labels]="horizontalBarChartLabels" [options]="horizontalBarChartOptions"
+                                        [legend]="horizontalBarChartLegend" [chartType]="horizontalBarChartType">
+                                      </canvas>
+                                    </div>
+                                    <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" height="200px"
+                                        width="300px" [chartType]="pieChartType" [options]="pieChartOptions"
+                                        [plugins]="pieChartPlugins" [legend]="true">
+                                      </canvas>
+                                    </div>
+                                    <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="chart">
+                              <div class="col-lg-12 grid-margin stretch-card p-0">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div style="display: block;">
+                                      <canvas baseChart [chartType]="chartType" [datasets]="chartData" height="200px"
+                                        width="300px" [labels]="chartLabels" [colors]="chartColors"
+                                        [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)">
+                                      </canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <mat-accordion>
+                      <mat-expansion-panel>
+                      </mat-expansion-panel>
+                      <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title style="font-weight:500;color: #a899e4;">
+                            <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                              <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z">
+                                </path>
+                              </svg>
+                            </div>
+                            Sector Exposure Sub Screen (Based On Exposure Slot)
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="overflow-x:auto;">
+                          <div id="container">
+                            <div class="mat-elevation-z8">
+                              <table class="table-responsive" mat-table [dataSource]="dataSourceFour"
+                                style="width: 100%;">
+                                <ng-container matColumnDef="smeId">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector Name</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.smeId}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="utilPercent">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector Exposure</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
+                                    {{element.utilPercent}}%
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="exposureAmt">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector Exposure Amount</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="utilTotlAmt">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector Total Utilized</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                  </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="amtAvailable">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector Amount Available </th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index">
                                     {{this.newLimitGraphForm.value.newsmeLimit -
                                     this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}

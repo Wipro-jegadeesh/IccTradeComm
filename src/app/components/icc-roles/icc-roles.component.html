@@ -1,7 +1,7 @@
 <div class="app-content">
   <header>
     <div class="data-section">
-      <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()">
+      <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()" #formDirective="ngForm">
       <h5 class="text-center">Roles</h5>
           <mat-card>
         <mat-card-content>

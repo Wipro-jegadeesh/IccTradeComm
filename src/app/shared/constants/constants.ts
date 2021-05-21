@@ -206,3 +206,11 @@ export const StaicDataMaintenance={
     'countrycode3':'countrycode3',
     'numeric':'numeric'
 }
+
+
+export const CountryModule={
+    'country' : 'Country',
+    'countrycode2' : 'countrycode(2 digit)',
+    'countrycode3' : 'countrycode(3 digit)',
+    'numeric' : 'numeric'
+}
