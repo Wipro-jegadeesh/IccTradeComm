@@ -94,7 +94,6 @@ export class SmeOnboardingComponent implements OnInit {
        quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
     })
     secItem.itHasValue=false
-
     //PARTIAL RESPONSE
     if(secItem.sectionResponseState == "Partial"){
           secItem.questions.map((secResp,index)=>{
@@ -120,6 +119,21 @@ export class SmeOnboardingComponent implements OnInit {
             //   this.questionnaireSections[secIndex].questions[index].response=resp[0].optionAliases
             //   }
           })
+    }
+    else if(secItem.sectionResponseState == "Completed"){
+      secItem.questions.map((secResp,index)=>{
+        secItem.sectionResponse.responses.map((item)=>{
+            if(item.questionAlias == secResp.alias){
+                if(item.optionAliases){
+                    secResp.response=item.optionAliases
+                }
+                else{
+                secResp.response=item.value
+                }
+                secResp.itHasValue=true
+            }
+        })
+      })
     }
 
     //SUBSECTION ARRAY
@@ -538,8 +552,7 @@ export class SmeOnboardingComponent implements OnInit {
     let obj={
         "type":'QuestionResponseDateDto',
         "questionAlias":Data.alias,
-        // "value":Data.response
-        "value":this.datePipe.transform(Data.response,"dd/MM/YYYY")
+        "value":this.datePipe.transform(Data.response,"YYYY-MM-dd")
     }
     return obj
   }
