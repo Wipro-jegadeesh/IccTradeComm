@@ -93,7 +93,8 @@ export class AuthConfigService {
                       'address':resp[0].address,
                       'mobile':resp[0].contactnum,
                       'email':resp[0].email,
-                      'city':resp[0].locale
+                      'city':resp[0].locale,
+                      'language': resp[0].languages
                     }
                     let isQuesSucc=resp[0].questionnaire
                     let status=resp[0].status
@@ -131,6 +132,7 @@ export class AuthConfigService {
                             'financierProfileId':resp[0].companyid,
                             // 'companyName':resp[0].companyname,
                             'userId':claims['preferred_username'],
+                            'language': resp[0].languages
                             // 'companyId':resp[0].nationalid,
                             // 'country':'SGP',
                             // 'role':resp[0].role,

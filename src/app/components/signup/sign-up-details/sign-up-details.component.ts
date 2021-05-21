@@ -270,7 +270,6 @@ export class SignUpDetailsComponent implements OnInit {
           state: this.userForm.value.state,
           postalCode: this.userForm.value.postalCode,
           country: this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName,
-          language: this.userForm.value.language && this.userForm.value.language[0] && this.userForm.value.language[0].itemName,
           telephoneno: this.userForm.value.contactNo,
           email: this.userForm.value.email,
           swiftBic: '',
@@ -290,6 +289,7 @@ export class SignUpDetailsComponent implements OnInit {
         email: this.userForm.value.email,
         contactNo: this.userForm.value.contactNo,
         country:  this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName,
+        language: this.userForm.value.language && this.userForm.value.language[0] && this.userForm.value.language[0].itemName
       }]
       let smeboard = {
         corporateCode: '',
