@@ -227,9 +227,12 @@ export class InvoiceDetailsComponent implements OnInit {
       }
      
     })
+    
     this.invoiceRequestServices.getMainlimitScreenDatas().subscribe(resp => {
       this.limitDetails = resp
     })
+    // this.limitDetails = {"key97":24,"limitNumber":"3553-6736-3636-0036","financierID":"FINANCIER90","transactions":"1000.0","overallLimit":7000.0,"smewiseMaxlimit":2000.0,"countryMaxLimit":2000.0,"sectorLimit":1000.0,"OverallUtilizedLimit":0.0,"smeWiseUtilized":2000.0,"CountryWiseUtilized":2000.0,"OverallAvailable":7000.0,"buyerLimit":200.0,"LimitAudit":null}
+    // console.log(this.limitDetails,"this.limitDetails")
   }
   buildform() {
     this.finBidform = this.fb.group({
@@ -349,20 +352,25 @@ export class InvoiceDetailsComponent implements OnInit {
 
   }
   openModal(event, template) {
-    if(this.limitDetails ? this.limitDetails.OverallAvailable : 0 < this.finBidform.value.baseCcyNetAmtPayable && this.limitDetails ? this.limitDetails.transactions : 0 < this.finBidform.value.baseCcyNetAmtPayable){
+    console.log(this.limitDetails,"this.limitDetails")
+    if(Number(this.limitDetails.OverallAvailable) < this.finBidform.value.baseCcyNetAmtPayable){
       this.toastr.error("Could not launch the bid! Overall available is less than bidding amount")
     }else{
-      event.preventDefault();
-      this.finBidform.patchValue({
-        invNo : this.invoiceDetails ? this.invoiceDetails.invId:'',
-        invoiceAmt:this.invoiceDetails ? this.invoiceDetails.invAmt:''
-      });
-        let array = []
-        array.push(this.finBidform.value)
-        this.launchBid_Popup = new MatTableDataSource(array);
-        console.log(this.finBidform.value)
-        console.log(this.finBidform,"this.finBidform")
-      this.modalRef = this.modalService.show(template, {class: 'modal-lg mod-box'});
+      if(Number(this.limitDetails.transactions) < this.finBidform.value.baseCcyNetAmtPayable){
+        this.toastr.error("Could not launch the bid! transactions available is less than bidding amount")
+      }else{
+        event.preventDefault();
+        this.finBidform.patchValue({
+          invNo : this.invoiceDetails ? this.invoiceDetails.invId:'',
+          invoiceAmt:this.invoiceDetails ? this.invoiceDetails.invAmt:''
+        });
+          let array = []
+          array.push(this.finBidform.value)
+          this.launchBid_Popup = new MatTableDataSource(array);
+          console.log(this.finBidform.value)
+          console.log(this.finBidform,"this.finBidform")
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg mod-box'});
+      }
     }
   }
  
