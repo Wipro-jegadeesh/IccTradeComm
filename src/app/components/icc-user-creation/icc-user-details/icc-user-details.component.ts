@@ -18,6 +18,7 @@ import { IccRolesServices } from '../../icc-roles/icc-roles-services';
 import * as _ from 'lodash';
 import { MatListOption } from '@angular/material/list';
 import { IccCountryServices } from '../../icc-country/icc-country.services'
+import {LANGUAGES} from '../../../shared/constants/Languages'
 
 interface ICity {
   // item_id: number;
@@ -94,7 +95,27 @@ export class IccUserDetailsComponent implements OnInit {
   };
   isView = false
 
+  LanguagesOptions=[]
+languageDropdownSettings:any={}
+languageSelectedItems=[]
+
   ngOnInit() {
+
+    this.LanguagesOptions = LANGUAGES
+
+this.languageDropdownSettings = {
+    singleSelection: true ,
+    defaultOpen: false,
+    idField: "item_id",
+    textField: "item_text",
+    allowSearchFilter: true,
+    showCheckbox: false,
+    position:'bottom',
+    text:'Select Language',
+    enableSearchFilter : true,
+    autoPosition : false,
+    maxHeight	: 170
+  };
 
     this.selectedItems = [];
     this.dropdownSettings = {
@@ -170,6 +191,7 @@ UserADDFormBuild(){
   state:resp[0].state,
     });
     this.setCountryFormController(resp[0])
+    this.setLanguageFormController(resp[0])
   })
 }
 
@@ -240,6 +262,8 @@ selectionChange(option) {
 
       });
       this.setCountryFormController(resp[0])
+          this.setLanguageFormController(resp[0])
+
 
     })
   }
@@ -354,6 +378,8 @@ removeImage() {
 
         });
         this.setCountryFormController(resp)
+        this.setLanguageFormController(resp)
+
 
       }
     })
@@ -377,6 +403,8 @@ removeImage() {
       // groupname:['',Validators.required],
       role:['',Validators.required],
       profileType:['',Validators.required],
+       language: ['', Validators.required], 
+
 
       // language:['',Validators.required],
 
@@ -392,6 +420,16 @@ removeImage() {
     obj['id'] = result['id']
 
     this.userForm.controls['country'].setValue([obj])
+  }
+
+    setLanguageFormController(item){
+    let obj = {
+      'itemName': item.language
+    }
+    const result = this.LanguagesOptions && this.LanguagesOptions.filter(language => language.itemName == item.language);
+    obj['id'] = result['id']
+
+    this.userForm.controls['language'].setValue([obj])
   }
 
 

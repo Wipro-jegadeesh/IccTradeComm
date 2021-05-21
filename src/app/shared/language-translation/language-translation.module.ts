@@ -5,6 +5,7 @@
  */
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {LANGUAGES} from '../constants/Languages'
 
 // import ngx-translate and the http loader
 import {
@@ -12,7 +13,7 @@ import {
   TranslateModule,
   TranslateService
 } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'; 
 
 // ngx-translate - required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +41,9 @@ export class LanguageTranslationModule {
     private translate: TranslateService,
   ) {
     // Gets Default language from browser if available, otherwise set English ad default
+    // this.translate.addLangs(LANGUAGES);
     this.translate.addLangs(['en', 'es']);
+
     this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');

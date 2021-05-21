@@ -187,6 +187,14 @@
             </mat-form-field>
 
             </div>
+            <div class="col-sm-4">
+              <div class="multiselect-dropdown-dsgn">                   
+
+                <angular2-multiselect [data]="LanguagesOptions"
+                formControlName="language"
+                [settings]="languageDropdownSettings"></angular2-multiselect>    
+                </div> 
+            </div>
           </div>
 
             </mat-expansion-panel>
