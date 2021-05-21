@@ -8,12 +8,14 @@ import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@ang
 import { InvoiceRequestServices } from './invoice-service';
 import { DatePipe } from '@angular/common';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
+import { COUNTRYNAMES } from '../../shared/constants/Country';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IccCountryServices } from '../icc-country/icc-country.services'
+import {TranslateService} from '@ngx-translate/core';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -168,24 +170,28 @@ export class InvoiceRequestComponent implements OnInit {
       item_id:'SGD',item_text:'SGD'
     }
   ];
-  dropdownSettings :IDropdownSettings = {
-  singleSelection: true,
-    idField: 'item_id',
-    textField: 'item_text',
-    allowSearchFilter: true  
-  }
+  dropdownSettings
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   disableSelect = new FormControl(false);
-
-  constructor(private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
+  states = COUNTRYNAMES
+  constructor(public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
+
   ngOnInit() {
+    console.log(this.translate.get('Buyer Location'))
+    this.dropdownSettings  = {
+      text:this.translate.get('Buyer Location'),
+      singleSelection: true,
+      idField: 'id',
+      textField: 'itemName',
+      allowSearchFilter: true,
+    }
     this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -217,7 +223,17 @@ getAllCountry(){
     })
     this.optionDatas = countryArray
   })
+  // this.optionDatas = COUNTRYNAMES; 
 }
+
+onKey(value) { 
+  this.optionDatas = this.search(value);
+  }
+  
+  search(value: string) { 
+    let filter = value.toLowerCase();
+    return this.optionDatas.filter(option => option.itemName.toLowerCase().startsWith(filter));
+  }
   getInvDetailsLists() {
     let tempInvArray;
     this.invoiceRequestServices.getInvDetailsLists().subscribe(resp => {
