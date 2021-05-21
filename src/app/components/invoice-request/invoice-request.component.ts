@@ -369,7 +369,7 @@ getAllCountry(){
       rate:element.rate,
       amt: element.amt,
       amtCcy: this.currencyName,
-      discAmt: element.discAmt,
+      discAmt: element.discAmt, 
       netAmtPay: element.netAmtPay,
       taxRate: element.taxRate,
       taxAmt: element.taxAmt,

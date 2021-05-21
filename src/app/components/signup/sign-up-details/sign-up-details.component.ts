@@ -5,6 +5,7 @@ import { SignupService } from '../signup.service';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 import {SIGNUPSECTORS} from '../../../shared/constants/signUpSectors'
+import {LANGUAGES} from '../../../shared/constants/Languages'
 import { IccCountryServices } from '../../icc-country/icc-country.services'
 
 @Component({
@@ -34,10 +35,31 @@ export class SignUpDetailsComponent implements OnInit {
   sectorOptionsDatas=[]
   sectordropdownSettings:any={}
 
+
+  LanguagesOptions=[]
+  languageDropdownSettings:any={}
+  languageSelectedItems=[]
+
   ngOnInit(): void {
     this.getAllCountry()
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
     this.sectorOptionsDatas = SIGNUPSECTORS
+    this.LanguagesOptions = LANGUAGES
+    this.languageDropdownSettings = {
+      singleSelection: true ,
+      defaultOpen: false,
+      idField: "item_id",
+      textField: "item_text",
+      allowSearchFilter: true,
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Language',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
+    };
+
+
     this.signupFormBuild()
     this.dropdownSettings = {
       singleSelection: true ,
@@ -114,6 +136,7 @@ export class SignUpDetailsComponent implements OnInit {
       postalCode:['',Validators.required],
       sector:[''],
       country:[[],Validators.required],
+      language:[[],Validators.required],
       // country:[this.signUpDetails ? this.signUpDetails.country[0].itemName : '' ,Validators.required],
       role:[''],
       profileType:['SME',Validators.required],
@@ -125,7 +148,7 @@ export class SignUpDetailsComponent implements OnInit {
     let obj={
       'registrationId':this.signUpDetails  ? this.signUpDetails.nationalId : '',
       'companyName':this.signUpDetails ? this.signUpDetails.companyName: '',
-      'country':this.signUpDetails ? this.signUpDetails.country[0].id:''
+      'country':this.signUpDetails ? this.signUpDetails.country[0].id:'',
     }
     this.SignupServices.getUserDetails(obj).subscribe(resp=>{
       if(resp){
@@ -193,7 +216,7 @@ export class SignUpDetailsComponent implements OnInit {
                 return false;
             }
             const reader = new FileReader();
-            reader.onload = (e: any) => {
+            reader.onload = (e: any) => { 
                 const image = new Image();
                 image.src = e.target.result;
                 image.onload = rs => {
@@ -247,6 +270,7 @@ export class SignUpDetailsComponent implements OnInit {
           state: this.userForm.value.state,
           postalCode: this.userForm.value.postalCode,
           country: this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName,
+          language: this.userForm.value.language && this.userForm.value.language[0] && this.userForm.value.language[0].itemName,
           telephoneno: this.userForm.value.contactNo,
           email: this.userForm.value.email,
           swiftBic: '',

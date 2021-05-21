@@ -18,10 +18,22 @@
     <div class="uxg-toolbar-actions" >
         <div>
             <label>
-              <select #langSelect (change)="translate.use(langSelect.value)">
-                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-              </select>
+              <!-- <select #langSelect (change)="translate.use(langSelect.value)"> -->
+                <!-- <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option> -->
+                  <!-- <option *ngFor="let lang of this.languages" [value]="lang.id" [selected]="lang.id === translate.currentLang">{{ lang.itemName }}</option> -->
+
+              <!-- </select> -->
+                <div class="multiselect-dropdown-dsgn">
+                  <angular2-multiselect [data]="LanguagesOptions"
+                name='language'  [(ngModel)]="selectedItems"  (onSelect)="translate.use($event.id)"
+                [settings]="languageDropdownSettings"></angular2-multiselect> 
+            </div>
+
             </label>
+
+
+           
+
           </div>
         <button mat-icon-button color="neutral">
             <mat-icon>search</mat-icon>

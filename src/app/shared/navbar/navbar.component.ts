@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import {Location} from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
+import {LANGUAGES} from '../constants/Languages';
 
 @Component({
   selector: 'app-navbar',
@@ -18,11 +19,20 @@ export class NavbarComponent implements OnInit {
   isHide=false; 
   userDeatils: any;
   roleName: string;
+  languages = LANGUAGES
 
   constructor(public translate: TranslateService,public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
     ,private oauthService: OAuthService
     )
    { }
+
+   
+  LanguagesOptions=[]
+  languageDropdownSettings:any={}
+  languageSelectedItems=[]
+  selectedItems=[]
+
+
   ngOnInit(): void {
     this.userName = localStorage.getItem("userId")
     this.roleName = localStorage.getItem("roleName")
@@ -30,6 +40,25 @@ export class NavbarComponent implements OnInit {
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.getModuleDependencies()
+
+       this.LanguagesOptions = LANGUAGES
+    this.languageDropdownSettings = {
+      singleSelection: true ,
+      defaultOpen: false,
+      idField: "item_id",
+      textField: "item_text",
+      allowSearchFilter: true,
+      showCheckbox: false,
+      position:'bottom',
+      text:'Select Language',
+      enableSearchFilter : true,
+      autoPosition : false,
+      maxHeight	: 170
+    };
+
+    this.selectedItems = [{"id":"en","itemName":"English"}]
+
+    
   }
   ngDoCheck(){
     this.getModuleDependencies()
@@ -51,7 +80,7 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  getModuleDependencies(){
+  getModuleDependencies(){    
     let componentName =  this.route.firstChild && this.route.firstChild.data && this.route.firstChild.data['_value'] && this.route.firstChild.data['_value'].HeaderName ? this.route.firstChild.data['_value'].HeaderName : '';   
     const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
@@ -69,6 +98,12 @@ export class NavbarComponent implements OnInit {
     else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
     }
+  }
+
+  onChange(event){
+    // translate.use(event.id)
+  //  this.showCountSignBtn= this.selectedItems.length ? true : false
+  //  this.CountryPinLabel=event.regNo ? event.regNo : 'No'
   }
 
   goHome(){

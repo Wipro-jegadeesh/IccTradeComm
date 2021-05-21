@@ -33,6 +33,7 @@ export class ViewProfileComponent implements OnInit {
       locale: resp[0].locale,
       address:resp[0].address,
       country:resp[0].country,
+      language:resp[0].language,
       state:resp[0].state,
         });
       }
@@ -48,6 +49,7 @@ export class ViewProfileComponent implements OnInit {
       locale: [''],
       address:[''],
       country:[''],
+     language:[''],
       state:[''],
       city:[''],
     });
