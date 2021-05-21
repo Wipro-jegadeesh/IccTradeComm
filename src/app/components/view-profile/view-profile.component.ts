@@ -26,14 +26,14 @@ export class ViewProfileComponent implements OnInit {
       if(resp){
         this.userDeatils = resp[0]
         this.userForm.patchValue({
-      firstName: resp[0].name,
+      fname: resp[0].fname,
       email: resp[0].email ,
-      lastName: resp[0].lastName,
+      lname: resp[0].lname,
       contactNo: resp[0].contactnum,
       locale: resp[0].locale,
       address:resp[0].address,
       country:resp[0].country,
-      language:resp[0].language,
+      languages:resp[0].languages,
       state:resp[0].state,
         });
       }
@@ -42,14 +42,14 @@ export class ViewProfileComponent implements OnInit {
   }
   invoiceFormBuild() {
     this.userForm = this.fb.group({
-      firstName: [''],
+      fname: [''],
       email: [''],
-      lastName: [''],
+      lname: [''],
       contactNo: [''],
       locale: [''],
       address:[''],
       country:[''],
-     language:[''],
+     languages:[''],
       state:[''],
       city:[''],
     });
