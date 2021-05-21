@@ -186,6 +186,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.dataSourceTwo = new MatTableDataSource();
   }
   ngOnInit() {
+    this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
