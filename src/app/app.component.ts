@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
 import { DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
 import { UserIdleService } from 'angular-user-idle';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,15 @@ export class AppComponent {
 
   @ViewChild(SidebarComponent) sidebar:SidebarComponent
 
-  constructor(private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
+  constructor(public translate: TranslateService,private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
     private renderer: Renderer2,private dialogBox:DialogDataExampleService,private userIdle: UserIdleService) {
+      let lang = ''
+      if (lang) {
+        translate.setDefaultLang(lang);
+      }
+      else{
+        translate.setDefaultLang('en');
+      }
   }
 
   emitIsOpen(value){

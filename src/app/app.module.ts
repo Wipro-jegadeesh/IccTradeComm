@@ -35,7 +35,7 @@ import {ModalDialogService} from './service/modal-dialog.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSliderModule} from '@angular/material/slider';
@@ -43,6 +43,10 @@ import { LoaderService } from './service/loader.service';
 import {MatSelectModule} from '@angular/material/select';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { MatSortModule } from '@angular/material/sort';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
 
 import {ApiService} from './service/api.service';
 import { SignupComponent } from './components/signup/signup.component';
@@ -150,10 +154,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogDataExampleDialog, DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
 import { UserIdleModule } from 'angular-user-idle';
 import { IccCountryComponent } from './components/icc-country/icc-country.component';
+import { LanguageTranslationModule } from './shared/language-translation/language-translation.module'
 
 import { FinanceLimitMaintananceServices } from './components/finanance-limit-maintanance/finanance-limit-maintanance-service';
-
-
+export const createTranslateLoader = (http: HttpClient) => {
+  return new TranslateHttpLoader(http,"./assets/i18n/",".json");
+};
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -227,6 +236,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient]
+      }
+  }),
+  CommonModule,
+  LanguageTranslationModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -280,13 +298,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogDataExampleService,FinanceLimitMaintananceServices,IccCountryServices,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' } },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}
   ],
 
-  exports:[ MatInputModule],
+  exports:[ MatInputModule,TranslateModule],
   bootstrap: [AppComponent],
     schemas: [
       CUSTOM_ELEMENTS_SCHEMA

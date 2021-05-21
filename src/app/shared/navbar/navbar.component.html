@@ -16,6 +16,13 @@
     <span class="fill-remaining-space"></span>
     <!-- *ngIf="!isHide" -->
     <div class="uxg-toolbar-actions" >
+        <div>
+            <label>
+              <select #langSelect (change)="translate.use(langSelect.value)">
+                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+              </select>
+            </label>
+          </div>
         <button mat-icon-button color="neutral">
             <mat-icon>search</mat-icon>
         </button>
