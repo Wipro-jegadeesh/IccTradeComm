@@ -13,6 +13,7 @@ import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { IccCountryServices } from '../icc-country/icc-country.services'
 
 const ELEMENT_DATA: any[] = [
   {
@@ -142,6 +143,7 @@ export class InvoiceRequestComponent implements OnInit {
   UpdateInvoiceLable: boolean;
   invoiceDetails: any;
   userDeatils: any;
+  optionDatas: any;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -177,7 +179,7 @@ export class InvoiceRequestComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   disableSelect = new FormControl(false);
 
-  constructor(public router: Router, private authenticationService: AuthenticationService, 
+  constructor(private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
     this.invoiceFormBuild()
@@ -204,6 +206,16 @@ export class InvoiceRequestComponent implements OnInit {
 private _filter(value: string): string[] {
   const filterValue = value.toLowerCase();
   return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+}
+getAllCountry(){
+  this.IccCountryServices.getAllcountry().subscribe(resp => {    
+    let countryArray = []
+    resp && resp.map(item =>{
+      let obj =  { id: item.countrycode3, itemName: item.country }
+      countryArray.push(obj)
+    })
+    this.optionDatas = countryArray
+  })
 }
   getInvDetailsLists() {
     let tempInvArray;
