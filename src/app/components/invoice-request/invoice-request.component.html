@@ -232,7 +232,10 @@
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense>
                     <mat-label>{{'Buyer Location' | translate}}</mat-label>
-                    <input type="text" matInput value="" formControlName="buyerAddr" />
+                    <mat-select formControlName="buyerAddr">
+                      <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}</mat-option>
+                    </mat-select>
+                    <!-- <input type="text" matInput value="" formControlName="buyerAddr" /> -->
                     <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
                   </mat-form-field>
                 </td>
@@ -260,7 +263,7 @@
                 </td>
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense>
-                    <mat-label>{{'Buyer UEN' | translate}}</mat-label>
+                    <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
                     <input type="text" matInput value="" formControlName="buyerUEN" />
                     <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
                   </mat-form-field>
