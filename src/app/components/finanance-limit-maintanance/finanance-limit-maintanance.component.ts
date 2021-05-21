@@ -554,11 +554,11 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "financierID": userCred['financierProfileId'],
           "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
           "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallUtilizedLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+          "OverallUtilizedLimit": 0,
           "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-          "smeWiseUtilized": this.mainlimitMaintanceForm.value.mainsmeexposure,
+          "smeWiseUtilized": 0,
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-          "CountryWiseUtilized": this.mainlimitMaintanceForm.value.maincountryexposure,
+          "CountryWiseUtilized": 0,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
           "transactions": this.mainlimitMaintanceForm.value.transactions,
           "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
@@ -571,23 +571,20 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }else{
         let puttdatas = {
           // OverallAvailable,OverallUtilizedLimit,smeWiseUtilized,CountryWiseUtilized
-
           "financierID": userCred['financierProfileId'],
           "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
           "OverallAvailable":this.mainlimitScreenDatas.OverallAvailable,
-          "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
+          // "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
           "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-          "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
+          // "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
           "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-          "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
+          // "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
           "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
-
           "transactions": this.mainlimitMaintanceForm.value.transactions,
           "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
-
           "LimitAudit": null,
           "limitNumber":"3553-6736-3636-0036"
-      }
+       }
       this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
        this.toastr.success("Limit Maintanance Updated Successfully");
        this.callPutMethodEdit = true
