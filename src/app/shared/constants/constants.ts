@@ -201,5 +201,8 @@ export const StaicDataMaintenance={
     'slab' : 'Slab',
     'fromAmt' : 'From Amount',
     'toAmt' : 'To Amount',
-    'noOfPersons' : 'No of Persons'
+    'noOfPersons' : 'No of Persons',
+    'countrycode2':'countrycode2',
+    'countrycode3':'countrycode3',
+    'numeric':'numeric'
 }

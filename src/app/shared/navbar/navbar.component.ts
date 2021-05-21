@@ -3,6 +3,7 @@ import { Router,NavigationEnd, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import {Location} from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   userDeatils: any;
   roleName: string;
 
-  constructor(public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
+  constructor(public translate: TranslateService,public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
     ,private oauthService: OAuthService
     )
    { }

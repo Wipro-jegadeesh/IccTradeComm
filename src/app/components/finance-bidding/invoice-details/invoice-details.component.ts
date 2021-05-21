@@ -349,7 +349,7 @@ export class InvoiceDetailsComponent implements OnInit {
 
   }
   openModal(event, template) {
-    if(this.limitDetails.OverallAvailable && this.limitDetails.transactions < this.finBidform.value.baseCcyNetAmtPayable){
+    if(this.limitDetails ? this.limitDetails.OverallAvailable : 0 < this.finBidform.value.baseCcyNetAmtPayable && this.limitDetails ? this.limitDetails.transactions : 0 < this.finBidform.value.baseCcyNetAmtPayable){
       this.toastr.error("Could not launch the bid! Overall available is less than bidding amount")
     }else{
       event.preventDefault();
