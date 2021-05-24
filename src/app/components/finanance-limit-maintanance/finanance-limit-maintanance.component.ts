@@ -76,7 +76,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   countrytotalExposure: number = 0;
   isOpen = '';
   bidpanelOpenState
-
+  //transLimitUtilTableDatas
+  public transLimitUtilTableDatas: any = [];
   // Charts
   lineChartData = [{
     label: '# of Votes',
@@ -283,7 +284,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     }
   };
   public horizontalBarChartLabels = ['0%', '25%', '50%', '75%', '95%', '100%'];
-  public horizontalBarChartType: ChartType = 'horizontalBar';
+  // public horizontalBarChartType: ChartType = 'horizontalBar';
+  public horizontalBarChartType: ChartType = 'bar';
   public horizontalBarChartLegend = true;
   public horizontalBarChartData: ChartDataSets[] = [
     { data: [60, 50, 40, 30, 20, 10], label: 'Series A' },
@@ -324,16 +326,20 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   //line chart end
 
-  //Charts
+
+
+  //carousel end
   constructor(public router: Router,
-    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService,private financelimitMaintananceservices:FinanceLimitMaintananceServices ) {
+    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
     this.mainlimitMaintanceFormBuild()
     this.newlimitExposureFormBuild();
     this.groupsFormBuild()
     this.countrylimitMaintanceFormBuild();
 
   }
+
   ngOnInit(): void {
+
     this.overAllLimit = this.limitMaintanceForm.value.overAllLimit;
     this.smeoverAllLimit = this.limitMaintanceForm.value.smeoverAllLimit;
     this.countryoverLimitval = this.countrylimitMaintanceForm.value.countryoverAllLimit
@@ -344,7 +350,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     monkeyPatchChartJsLegend();
     this.newlimitExposure();
     this.getMainlimitScreenDatas();
-    this.getnewLimitFinSmeDatas()
+    this.getnewLimitFinSmeDatas();
+    this.gettransactionLimitUtilizationTable();
+
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
 
@@ -491,108 +499,115 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       // this.callPutMethodEdit = true;
       // this.callPutMethod = true
     }
-  } 
-  getMainlimitScreenDatas(){
+  }
+  gettransactionLimitUtilizationTable() {
+    this.financelimitMaintananceservices.gettransLimitUtilTableDatas().subscribe(resp => {
+      if (resp) {
+        this.transLimitUtilTableDatas = resp;
+      }
+    })
+  }
+  getMainlimitScreenDatas() {
     this.financelimitMaintananceservices.getMainlimitScreenDatas().subscribe(resp => {
-      if(resp){
+      if (resp) {
         this.mainlimitScreenDatas = resp;
-         this.mainlimitMaintanceForm.patchValue({
-          mainoverallexposure :resp.overallLimit,
-          mainsmeexposure :resp.smewiseMaxlimit,
-          maincountryexposure :resp.countryMaxLimit,
-          mainsector :resp.sectorLimit,
-          transactions :resp.transactions,
-          buyerLimit :resp.buyerLimit,
-          mainOverallAvailable : resp.OverallAvailable
+        this.mainlimitMaintanceForm.patchValue({
+          mainoverallexposure: resp.overallLimit,
+          mainsmeexposure: resp.smewiseMaxlimit,
+          maincountryexposure: resp.countryMaxLimit,
+          mainsector: resp.sectorLimit,
+          transactions: resp.transactions,
+          buyerLimit: resp.buyerLimit,
+          mainOverallAvailable: resp.OverallAvailable
         });
         this.limitMaintanceForm.patchValue({
           overAllLimit: resp.overallLimit,
-          smeoverAllLimit:resp.smewiseMaxlimit,
+          smeoverAllLimit: resp.smewiseMaxlimit,
         });
         this.countrylimitMaintanceForm.patchValue({
           countryoverAllLimit: resp.overallLimit,
-          countrysmeoverAllLimit:resp.countryMaxLimit,
+          countrysmeoverAllLimit: resp.countryMaxLimit,
         });
-         
-          // this.diabled= true
+
+        // this.diabled= true
         // this.callPutMethod = true
         this.callPutMethodEdit = true
 
-      }else{
-       // this.diabled= false
+      } else {
+        // this.diabled= false
         this.callPostMethod = true
       }
-      })
+    })
   }
   mainlimitMaintanceFormSubmit() {
-    if(this.mainlimitMaintanceForm.valid){
-    this.overAllLimit = this.mainlimitMaintanceForm.value.mainoverallexposure;
-    this.countryoverLimitval = this.mainlimitMaintanceForm.value.mainoverallexposure;
-    this.groupsFormBuild()
-    this.countrylimitMaintanceFormBuild();
-    this.limitMaintance();
-    this.countrylimitMaintance();
-    // this.toastr.success("Limit Maintanance Updated Successfully")
-    if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) &&  (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector))) {
-      this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure");
-      return false;
-    } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) {
-      this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure");
-      return false;
-    } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) {
-      this.toastr.error("SME Exposure Amount should not exceeds or equal to the Overall Exposure")
-      return false;
-    }
-    else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) {
-      this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure");
-      return false;
-    }
-    else {
-      let userCred = JSON.parse(localStorage.getItem('userCred'))
-      if(this.callPostMethod){
-        let postdatas = {
-          "financierID": userCred['financierProfileId'],
-          "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallAvailable":this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallUtilizedLimit": 0,
-          "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-          "smeWiseUtilized": 0,
-          "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-          "CountryWiseUtilized": 0,
-          "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
-          "transactions": this.mainlimitMaintanceForm.value.transactions,
-          "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
-          "LimitAudit": null,
-          "limitNumber":"3553-6736-3636-0036"
+    if (this.mainlimitMaintanceForm.valid) {
+      this.overAllLimit = this.mainlimitMaintanceForm.value.mainoverallexposure;
+      this.countryoverLimitval = this.mainlimitMaintanceForm.value.mainoverallexposure;
+      this.groupsFormBuild()
+      this.countrylimitMaintanceFormBuild();
+      this.limitMaintance();
+      this.countrylimitMaintance();
+      // this.toastr.success("Limit Maintanance Updated Successfully")
+      if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector))) {
+        this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure");
+        return false;
+      } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) {
+        this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure");
+        return false;
+      } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) {
+        this.toastr.error("SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+        return false;
       }
-      this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
-       this.toastr.success("Limit Maintanance Created Successfully")
-     })
-      }else{
-        let puttdatas = {
-          // OverallAvailable,OverallUtilizedLimit,smeWiseUtilized,CountryWiseUtilized
-          "financierID": userCred['financierProfileId'],
-          "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
-          "OverallAvailable":this.mainlimitScreenDatas.OverallAvailable,
-          // "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
-          "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-          // "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
-          "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-          // "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
-          "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
-          "transactions": this.mainlimitMaintanceForm.value.transactions,
-          "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
-          "LimitAudit": null,
-          "limitNumber":"3553-6736-3636-0036"
-       }
-      this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
-       this.toastr.success("Limit Maintanance Updated Successfully");
-       this.callPutMethodEdit = true
-      })
+      else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) {
+        this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure");
+        return false;
+      }
+      else {
+        let userCred = JSON.parse(localStorage.getItem('userCred'))
+        if (this.callPostMethod) {
+          let postdatas = {
+            "financierID": userCred['financierProfileId'],
+            "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+            "OverallAvailable": this.mainlimitMaintanceForm.value.mainoverallexposure,
+            "OverallUtilizedLimit": 0,
+            "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
+            "smeWiseUtilized": 0,
+            "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
+            "CountryWiseUtilized": 0,
+            "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+            "transactions": this.mainlimitMaintanceForm.value.transactions,
+            "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
+            "LimitAudit": null,
+            "limitNumber": "3553-6736-3636-0036"
+          }
+          this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
+            this.toastr.success("Limit Maintanance Created Successfully")
+          })
+        } else {
+          let puttdatas = {
+            // OverallAvailable,OverallUtilizedLimit,smeWiseUtilized,CountryWiseUtilized
+            "financierID": userCred['financierProfileId'],
+            "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
+            "OverallAvailable": this.mainlimitScreenDatas.OverallAvailable,
+            // "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
+            "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
+            // "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
+            "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
+            // "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
+            "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
+            "transactions": this.mainlimitMaintanceForm.value.transactions,
+            "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
+            "LimitAudit": null,
+            "limitNumber": "3553-6736-3636-0036"
+          }
+          this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
+            this.toastr.success("Limit Maintanance Updated Successfully");
+            this.callPutMethodEdit = true
+          })
 
-    }
-  }
-  }else{
+        }
+      }
+    } else {
       this.toastr.error("Please Fill All the Fields");
       return false;
     }
@@ -691,12 +706,15 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.newLimit = false;
     this.newlimitExposureFormBuild()
   }
-  getnewLimitFinSmeDatas(){
+  getnewLimitFinSmeDatas() {
     this.financelimitMaintananceservices.getnewLimitFinSmeDatas().subscribe(resp => {
-        console.log("---resp---",);
-        this.dataSourceFour = new MatTableDataSource(resp);
+      console.log("---resp---",);
+      this.dataSourceFour = new MatTableDataSource(resp);
 
     })
   }
   //end graphical representation
+
+
 }
+
