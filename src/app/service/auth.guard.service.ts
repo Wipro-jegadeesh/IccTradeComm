@@ -69,6 +69,7 @@ export class AuthConfigService {
           if (isLoggedIn) { 
             // For Token Expire Check
             // this.oauthService.setupAutomaticSilentRefresh();
+
             resolveFn();
           // For Token Expire Check
             let claims = this.oauthService.getIdentityClaims();
@@ -78,6 +79,21 @@ export class AuthConfigService {
             localStorage.setItem("accessToken",this.oauthService.getAccessToken());
             console.log("222222",claims);
             const sameCaseArray = claims['realm_access'] && claims['realm_access']['roles'].map(value => value.toLowerCase());
+           
+
+            //Set Expiry time
+            var timestamp = this.oauthService.getAccessTokenExpiration()
+            var date = new Date(timestamp);
+            var milliseconds : any = date.getMilliseconds();
+            var actualMilliSecond = (milliseconds - 120000) //less 2 mins
+
+            
+      this.userIdle.setConfigValues({idle : actualMilliSecond, timeout : actualMilliSecond, ping : 0})
+
+      
+      
+
+
             sameCaseArray && sameCaseArray.map(item =>{
               if (item.match(/^.*sme$/) || item.match(/^sme.*$/)){
                 this.apiService.generalServiceget(environment.financierServicePath+'sme-custom/'+claims['preferred_username']).subscribe(resp=>{

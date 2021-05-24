@@ -157,6 +157,11 @@ import { IccCountryComponent } from './components/icc-country/icc-country.compon
 import { LanguageTranslationModule } from './shared/language-translation/language-translation.module'
 
 import { FinanceLimitMaintananceServices } from './components/finanance-limit-maintanance/finanance-limit-maintanance-service';
+import { CountdownModule } from 'ngx-countdown';
+
+
+
+
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http,"./assets/i18n/",".json");
 };
@@ -289,6 +294,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSortModule,
     MatDialogModule,
     UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
+    CountdownModule, 
+    // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
+
+    
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,

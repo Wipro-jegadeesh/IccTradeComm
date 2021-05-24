@@ -1,5 +1,5 @@
 <!-- <p>sidebar works!</p> -->
-<button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen,'open') ]">
+<button mat-icon-button class="uxg-toolbar-menu" (click)="[this.isOpenHandle(isOpen,'open'),sidenav.toggle()]">
     <mat-icon>menu</mat-icon>
 </button>
 
@@ -76,3 +76,50 @@
         </a>
     </mat-nav-list> -->
   </mat-sidenav>
+
+
+
+
+  <!-- =============
+
+-->
+
+<!-- <mat-sidenav-container class="uxg-nav">
+    <mat-sidenav #sidenavdemo>
+      <div class="uxg-nav-header">
+        <div class="uxg-logo"></div>
+      </div>
+      <mat-nav-list class="uxg-nav-list">
+        <a mat-list-item class="uxg-list-item-selected">
+          <p>Getting Started</p>
+        </a>
+        <a mat-list-item>
+          <p matBadge="4" class="uxg-side-badge">Foundations</p>
+        </a>
+        <a mat-list-item>
+          <p matBadge="12" class="uxg-side-badge">UI Elements</p>
+        </a>
+        <a mat-list-item>
+          <p matBadge="7" class="uxg-side-badge">Components</p>
+        </a>
+        <a mat-list-item>
+          <p matBadge="2" class="uxg-side-badge">Patterns</p>
+        </a>
+        <a mat-list-item>
+          <p matBadge="1" class="uxg-side-badge">Applications</p>
+        </a>
+        <a mat-list-item>
+          <p>Tutorials</p>
+        </a>
+        <a mat-list-item>
+          <p>About</p>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <button class="uxg-nav-header-button" mat-icon-button color="primary" (click)="sidenavdemo.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-sidenav-content>
+  </mat-sidenav-container> -->
+  
