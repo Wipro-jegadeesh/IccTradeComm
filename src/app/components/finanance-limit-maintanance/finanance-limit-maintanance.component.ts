@@ -29,6 +29,8 @@ import { FinanceLimitMaintananceServices } from './finanance-limit-maintanance-s
   styleUrls: ['./finanance-limit-maintanance.component.scss']
 })
 export class FinananceLimitMaintananceComponent implements OnInit {
+  graphLimit: boolean = true;
+  tableLimit: boolean = false;
   limitMaintanceForm: FormGroup;
   newLimitGraphForm: FormGroup;
   countrylimitMaintanceForm: FormGroup;
@@ -323,6 +325,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   callPostMethod = false;
   callPutMethodEdit: boolean = false;
   mainlimitScreenDatas
+  public smetransLimitUtilTableDatas: any = [];
 
   //line chart end
 
@@ -352,6 +355,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.getMainlimitScreenDatas();
     this.getnewLimitFinSmeDatas();
     this.gettransactionLimitUtilizationTable();
+    this.getsmetransLimitUtilTableDatas()
 
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -504,6 +508,14 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.financelimitMaintananceservices.gettransLimitUtilTableDatas().subscribe(resp => {
       if (resp) {
         this.transLimitUtilTableDatas = resp;
+      }
+    })
+  }
+  
+  getsmetransLimitUtilTableDatas() {
+    this.financelimitMaintananceservices.getsmetransLimitUtilTableDatas().subscribe(resp => {
+      if (resp) {
+        this.smetransLimitUtilTableDatas = resp;
       }
     })
   }
@@ -714,7 +726,25 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     })
   }
   //end graphical representation
+  prevTable() {
+    console.log("ttt")
+    this.graphLimit = false;
+    this.tableLimit = true;
+    // if (value == 'table') {
+    //   this.graphLimit = false;
+    //   this.tableLimit = true;
 
+    // } else if (value == 'graph') {
+    //   this.tableLimit = false;
+    //   this.graphLimit = true;
+
+    // }
+  }
+  prevGraph() {
+    console.log("gg")
+    this.tableLimit = false;
+    this.graphLimit = true;
+
+  }
 
 }
-

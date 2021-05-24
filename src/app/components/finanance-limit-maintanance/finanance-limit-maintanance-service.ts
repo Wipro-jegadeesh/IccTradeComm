@@ -9,13 +9,17 @@ export class FinanceLimitMaintananceServices {
 
   constructor(private apiService: ApiService) {
     this.baseUrl = "http://mock.com";
-  } 
+  }
   getnewLimitFinSmeDatas() {
     return this.apiService.tempGet(environment.serviePath_3 + 'api/v1/limit-details/getLimitUtilizedDetails/' + this.userCred['financierProfileId']);
   }
   gettransLimitUtilTableDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
-    return this.apiService.tempGet(environment.serviePath_1 + 'limit-request/limitChartData/'+userCred['financierProfileId']);
+    return this.apiService.tempGet(environment.serviePath_1 + 'limit-request/limitChartData/'+ userCred['financierProfileId']);
+  }
+  getsmetransLimitUtilTableDatas() {
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
+    return this.apiService.tempGet(environment.serviePath_1 + 'limit-request/limitChartDataBySmeId/'+ userCred['financierProfileId']);
   }
   getMainlimitScreenDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
