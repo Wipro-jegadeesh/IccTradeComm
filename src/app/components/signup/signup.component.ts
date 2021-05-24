@@ -12,7 +12,8 @@ import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@ang
 import { IccUserCreationService } from '../icc-user-creation/icc-user-creation.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { IccCountryServices } from '../icc-country/icc-country.services'
-
+import {TranslateService} from '@ngx-translate/core';
+import {LANGUAGES} from '../../shared/constants/Languages';
 
 interface ICity{
   item_id: number;
@@ -37,8 +38,11 @@ export class SignupComponent implements OnInit {
   signUpDiv: boolean;
   signUpDetails:any;
   modalRef: BsModalRef;
+  languages = [{"id":"en","itemName":"English","nativeName":"English"},
+      {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+]
 
-  constructor(private modalService: BsModalService,private IccUserCreationssService: IccUserCreationService,private fb: FormBuilder,private activatedRoute: ActivatedRoute,private router: Router,
+  constructor(public translate: TranslateService,private modalService: BsModalService,private IccUserCreationssService: IccUserCreationService,private fb: FormBuilder,private activatedRoute: ActivatedRoute,private router: Router,
     private signupService:SignupService,private IccCountryServices:IccCountryServices,
     private toastr: ToastrService) { }
 
@@ -84,21 +88,26 @@ export class SignupComponent implements OnInit {
     this.selectedItems=[]
     localStorage.clear();
   }
-
+  setlocalstroageLanguage(value){
+    localStorage.setItem("DefultLanguage",value);
+  }
   getAllCountry(){
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
-
       resp && resp.map(item =>{
         let obj =  { id: item.countrycode3, itemName: item.country }
         countryArray.push(obj)
       })
-    
       this.optionDatas = countryArray
-    
     })
-      }
-
+  }
+  onKey(value) { 
+    this.languages = this.search(value);
+  }
+  search(value: string) { 
+      let filter = value.toLowerCase();
+      return this.languages.filter(option => option.itemName.toLowerCase().startsWith(filter));
+  }
   onDeSelect(event) {
     this.showCountSignBtn = false
     this.CountryPinLabel=''

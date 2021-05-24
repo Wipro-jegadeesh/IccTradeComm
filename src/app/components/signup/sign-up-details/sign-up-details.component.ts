@@ -7,6 +7,8 @@ import * as _ from 'lodash';
 import {SIGNUPSECTORS} from '../../../shared/constants/signUpSectors'
 import {LANGUAGES} from '../../../shared/constants/Languages'
 import { IccCountryServices } from '../../icc-country/icc-country.services'
+import {TranslateService} from '@ngx-translate/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-sign-up-details',
@@ -24,13 +26,16 @@ export class SignUpDetailsComponent implements OnInit {
   // sectordropdownSettings:any={}
   // selectedItems=[]
   sectors: any;
+  languages  = [{"id":"en","itemName":"English","nativeName":"English"},
+  {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+]
 
 
-  constructor(private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder,private IccCountryServices:IccCountryServices) { }
+  constructor(public translate: TranslateService,private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder,private IccCountryServices:IccCountryServices) { }
 
   name = "";
   optionDatas=[]
-  dropdownSettings:any={}
+  // dropdownSettings:any={}
   selectedItems=[]
   sectorOptionsDatas=[]
   sectordropdownSettings:any={}
@@ -40,11 +45,35 @@ export class SignUpDetailsComponent implements OnInit {
   languageDropdownSettings:any={}
   languageSelectedItems=[]
 
+  dropdownList = [];
+  dropdownSettings:IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'itemName',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  // languageDropdownSettings:IDropdownSettings = {
+  //   singleSelection: true,
+  //   idField: 'id',
+  //   textField: 'itemName',
+  //   selectAllText: 'Select All',
+  //   unSelectAllText: 'UnSelect All',
+  //   itemsShowLimit: 3,
+  //   allowSearchFilter: true
+  // };
   ngOnInit(): void {
+    console.log(this.translate,"translate")
+    console.log(this.translate.instant('Basic Details'));
     this.getAllCountry()
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
     this.sectorOptionsDatas = SIGNUPSECTORS
     this.LanguagesOptions = LANGUAGES
+
+    
     this.languageDropdownSettings = {
       singleSelection: true ,
       defaultOpen: false,
@@ -53,27 +82,26 @@ export class SignUpDetailsComponent implements OnInit {
       allowSearchFilter: true,
       showCheckbox: false,
       position:'bottom',
-      text:'Select Language',
+      text:this.translate.instant('Select Language'),
       enableSearchFilter : true,
       autoPosition : false,
       maxHeight	: 170
     };
-
 
     this.signupFormBuild()
-    this.dropdownSettings = {
-      singleSelection: true ,
-      defaultOpen: false,
-      idField: "item_id",
-      textField: "item_text",
-      allowSearchFilter: true,
-      showCheckbox: false,
-      position:'bottom',
-      text:'Select Country',
-      enableSearchFilter : true,
-      autoPosition : false,
-      maxHeight	: 170
-    };
+    // this.dropdownSettings = {
+    //   singleSelection: true ,
+    //   defaultOpen: false,
+    //   idField: "item_id",
+    //   textField: "item_text",
+    //   allowSearchFilter: true,
+    //   showCheckbox: false,
+    //   position:'bottom',
+    //   text:this.translate.instant('Select Country'),
+    //   enableSearchFilter : true,
+    //   autoPosition : false,
+    //   maxHeight	: 170
+    // };
     this.sectordropdownSettings = {
       singleSelection: true ,
       defaultOpen: false,
@@ -95,7 +123,12 @@ export class SignUpDetailsComponent implements OnInit {
       }
     })
   }
-
+  
+  setlocalstroageLanguage(value){
+    localStorage.setItem("DefultLanguage",value);
+    console.log(this.translate,"this.translate")
+    console.log(this.translate.instant('Select Country'),"this.translate.instant('Select Country')")
+  }
   getAllCountry(){
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
@@ -112,6 +145,13 @@ export class SignUpDetailsComponent implements OnInit {
 
   onDeSelect(event) {
   
+  }
+  onKey(value) { 
+    this.languages = this.search(value);
+  }
+  search(value: string) { 
+      let filter = value.toLowerCase();
+      return this.languages.filter(option => option.itemName.toLowerCase().startsWith(filter));
   }
   onSelectAll(items: any) {
     console.log('onSelectAll', items);

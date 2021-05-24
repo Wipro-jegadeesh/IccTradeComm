@@ -6,15 +6,26 @@
             <img src="../../../assets/img/icctradelogo.png" class="log-logoss" />
           </div>
           <div class="col-sm-6" style="padding: 14px 29px;">
-            <h4>Welcome TO ICC TradeComm</h4>
+            <h4>{{'Welcome TO ICC TradeComm' | translate}}</h4>
           </div>
+            <div class="col-sm-2 language">
+                <mat-form-field dense>
+                    <mat-label>Language</mat-label>
+                    <mat-icon matPrefix>language</mat-icon>
+                    <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+                      <mat-option *ngFor="let lang of languages" [value]="lang.id">
+                        {{ lang.itemName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
         </div>
         <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
           <mat-accordion>
             <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Basic Details
+                      {{'Basic Details' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
@@ -25,9 +36,9 @@
                       <!-- <label for="National ID​">Company Register ID​
                       </label> -->
                       <mat-form-field dense>
-                        <mat-label>Company Register ID​ </mat-label>
+                        <mat-label> {{'Company Register ID​' | translate}}</mat-label>
                         <input type="text"  matInput formControlName="nationalId" />
-                        <mat-error *ngIf="hasError('nationalId', 'required')">nationalId is required</mat-error>
+                        <mat-error *ngIf="hasError('nationalId', 'required')">{{'nationalId is required' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -36,10 +47,10 @@
                       <!-- <label for="First name​">Company name​
                       </label> -->
                       <mat-form-field dense>
-                        <mat-label>Company name​</mat-label>
+                        <mat-label>{{'Company name' | translate}}​</mat-label>
                         <mat-icon matPrefix>business</mat-icon>
                         <input type="text" matInput  formControlName="companyName" />
-                        <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error>
+                        <mat-error *ngIf="hasError('companyName', 'required')">{{'companyName is required' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -58,15 +69,19 @@
                      [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
                      [settings]="dropdownSettings" ></angular2-multiselect> -->
 
-                     <div class="multiselect-dropdown-dsgn">                   
-
-                     <angular2-multiselect [data]="optionDatas"
+                      <ng-multiselect-dropdown
+                      [placeholder]="('Select Country' | translate)"
+                      [settings]="dropdownSettings"
+                      [data]="optionDatas"
+                      formControlName="country">
+                    </ng-multiselect-dropdown>
+                     <!-- <div class="multiselect-dropdown-dsgn">              
+                      <angular2-multiselect [data]="optionDatas"
                      formControlName="country"
-                     [settings]="dropdownSettings"></angular2-multiselect>    
-                     </div>                     
-</div>
-                    <!-- </div> -->
+                     [settings]="dropdownSettings"></angular2-multiselect>  
+                    </div> -->
                   </div>
+                </div>
             <!-- </div> -->
           <div class="row dis-block">
             <div class="col-sm-4">
@@ -74,10 +89,10 @@
                   <!-- <label for="National ID​">Email Id
                   </label> -->
                   <mat-form-field dense>
-                    <mat-label>Email Id</mat-label>
+                    <mat-label>{{'Email Id' | translate}}</mat-label>
                     <mat-icon matPrefix>email</mat-icon>
                     <input type="text" matInput  formControlName="email" />
-                    <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+                    <mat-error *ngIf="hasError('email', 'required')">{{'email is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -86,10 +101,10 @@
                 <!-- <label for="First name​">First name​
                 </label> -->
                 <mat-form-field dense>
-                  <mat-label>First name</mat-label>
+                  <mat-label>{{'First name' | translate}}</mat-label>
                   <mat-icon matPrefix>person</mat-icon>
                   <input type="text"  matInput formControlName="firstName" />
-                  <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>
+                  <mat-error *ngIf="hasError('firstName', 'required')">{{'firstName is required' | translate}}</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -98,10 +113,10 @@
                 <!-- <label for="First name​">Last name​
                 </label> -->
                 <mat-form-field dense>
-                  <mat-label>Last name​ </mat-label>
+                  <mat-label>{{'Last name' | translate}}</mat-label>
                   <mat-icon matPrefix>person</mat-icon>
                   <input type="text" matInput  formControlName="lastName" />
-                  <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error>
+                  <mat-error *ngIf="hasError('lastName', 'required')">{{'lastName is required' | translate}}</mat-error>
                 </mat-form-field>
               </div>
   
@@ -112,10 +127,10 @@
               <div class="form-group">
                 <!-- <label for="National ID​">Phone Number</label> -->
                 <mat-form-field dense>
-                  <mat-label>Phone Number</mat-label>
+                  <mat-label>{{'Phone Number' | translate}}</mat-label>
                   <mat-icon matPrefix>call</mat-icon>
                   <input type="text" matInput  formControlName="contactNo" />
-                  <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error>
+                  <mat-error *ngIf="hasError('contactNo', 'required')">{{'phoneNumber is required' | translate}}</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -123,10 +138,10 @@
                 <!-- <label for="Address">Address 1</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
-                  <mat-label>Address 1</mat-label>
+                  <mat-label>{{'Address 1' | translate}}</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput formControlName="address" />
-                  <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
+                  <mat-error *ngIf="hasError('address', 'required')">{{'Address is required' | translate}}</mat-error>
                 </mat-form-field>
             </div>
               </div>
@@ -134,10 +149,10 @@
                 <!-- <label for="Address">Address 2</label> -->
                 <div class="form-group">
                 <mat-form-field dense>
-                  <mat-label>Address 2</mat-label>
+                  <mat-label>{{'Address 2' | translate}}</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
                   <input type="text" matInput  formControlName="address1" />
-                  <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
+                  <mat-error *ngIf="hasError('address1', 'required')">{{'Address is required' | translate}}</mat-error>
                 </mat-form-field>
             </div>
               </div>
@@ -147,10 +162,10 @@
                 <div class="form-group">
                   <!-- <label for="Locale">State</label> -->
                   <mat-form-field dense>
-                    <mat-label>State</mat-label>
+                    <mat-label>{{'State' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
                     <input type="text" matInput formControlName="state" />
-                    <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
+                    <mat-error *ngIf="hasError('state', 'required')">{{'State is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -158,10 +173,10 @@
                 <div class="form-group">
                   <!-- <label for="Locale">City</label> -->
                   <mat-form-field dense>
-                    <mat-label>City</mat-label>
+                    <mat-label>{{'City' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
                     <input type="text" matInput  formControlName="city" />
-                    <mat-error *ngIf="hasError('city', 'required')">City is required</mat-error>
+                    <mat-error *ngIf="hasError('city', 'required')">{{'City is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -169,10 +184,10 @@
                 <div class="form-group">
                   <!-- <label for="Locale">Postal Code</label> -->
                   <mat-form-field dense>
-                    <mat-label>Postal Code</mat-label>
+                    <mat-label>{{'Postal Code' | translate}}</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
                     <input type="text" matInput  formControlName="postalCode" />
-                    <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
+                    <mat-error *ngIf="hasError('postalCode', 'required')">{{'postalCode is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -180,16 +195,21 @@
           <div class="row dis-block">
             <div class="col-sm-4">
              <mat-form-field dense>
-              <mat-label>Sector</mat-label>
+              <mat-label>{{'Sector' | translate}}</mat-label>
               <mat-select formControlName="sector">
-                <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
+                <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             </div>
             <div class="col-sm-4">
+              <!-- <ng-multiselect-dropdown
+              [placeholder]="('Select Language' | translate)"
+              [settings]="languageDropdownSettings"
+              [data]="LanguagesOptions"
+              formControlName="language">
+            </ng-multiselect-dropdown> -->
               <div class="multiselect-dropdown-dsgn">                   
-
                 <angular2-multiselect [data]="LanguagesOptions"
                 formControlName="language"
                 [settings]="languageDropdownSettings"></angular2-multiselect>    
@@ -203,7 +223,7 @@
             <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Upload
+                      {{'Upload' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="row dis-block">
@@ -211,10 +231,10 @@
   
                 <div class="card-form-container">
                   <div class="dynamic-radio-btn file-input" >
-                    <h6>Profile Image</h6>
+                    <h6>{{'Profile Image' | translate}}</h6>
                       <div class="file-upload">
                       <div class="upload-btn-wrapper">
-                        <button class="filebtn" >Upload a file</button>
+                        <button class="filebtn" >{{'Upload a file' | translate}}</button>
                       <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
                       </div>
                       <div class="file-label">
@@ -236,10 +256,10 @@
   
               <div class="card-form-container">
                 <div class="dynamic-radio-btn file-input" >
-                  <h6>KYC Image</h6>
+                  <h6>{{'KYC Image' | translate}}</h6>
                     <div class="file-upload">
                     <div class="upload-btn-wrapper">
-                      <button class="filebtn" >Upload a file</button>
+                      <button class="filebtn" >{{'Upload a file' | translate}}</button>
                     <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
                     </div>
                     <div class="file-label">
@@ -264,8 +284,8 @@
           <div class="row" style="padding-bottom: 10px;
           justify-content: flex-end;
           padding-top: 15px;" >
-            <button mat-raised-button color="primary">Submit</button>
-            <button type="button" mat-raised-button color="warn" routerLink='/login'>Cancel</button>
+            <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
+            <button type="button" mat-raised-button color="warn" routerLink='/login'>{{'Cancel' | translate}}</button>
           </div>
         </form>
       </div>

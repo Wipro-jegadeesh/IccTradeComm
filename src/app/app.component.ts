@@ -28,12 +28,16 @@ export class AppComponent {
 
   constructor(public translate: TranslateService,private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
     private renderer: Renderer2,private dialogBox:DialogDataExampleService,private userIdle: UserIdleService) {
-      let lang = ''
-      if (lang) {
+      let lang = localStorage.getItem("DefultLanguage")
+      console.log(lang,"lang")
+      if(lang){
         translate.setDefaultLang(lang);
+        translate.use(lang);
       }
       else{
         translate.setDefaultLang('en');
+        translate.use('en');
+        localStorage.setItem("DefultLanguage",'en');
       }
   }
 

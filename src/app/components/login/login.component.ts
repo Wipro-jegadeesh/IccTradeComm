@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
-
+import {TranslateService} from '@ngx-translate/core';
+import {LANGUAGES} from '../../shared/constants/Languages';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,8 +24,10 @@ export class LoginComponent implements OnInit {
   // @ViewChild('template')
 // private modalRef: TemplateRef<any>;
   // mymodal
-
-  constructor(private modalService: BsModalService,private router: Router,private apiService:ApiService,
+  languages  = [{"id":"en","itemName":"English","nativeName":"English"},
+  {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+]
+  constructor(public translate: TranslateService,private modalService: BsModalService,private router: Router,private apiService:ApiService,
     private authService: AuthenticationService,private toastr: ToastrService) { }
   ngOnInit(): void {
   }
@@ -73,7 +76,9 @@ export class LoginComponent implements OnInit {
     this.modalRef.hide();
     // this.mymodal = this.modalService.hide();
   }
- 
+  setlocalstroageLanguage(value){
+    localStorage.setItem("DefultLanguage",value);
+  }
   checkQuesCompl(event,template){
     event.preventDefault();
     // 'sme-custom/'

@@ -376,7 +376,7 @@ cursor: pointer;
 .multiselect-dropdown{
     align-self: stretch;
     margin-bottom: 45px;
-    margin-left: 96px;
+    // margin-left: 96px;
     max-width: 400px;
     border-bottom: 1px solid transparent;
     transition: .3s ease;
@@ -1026,6 +1026,16 @@ input.custom-autofill {
             background-color: rgba(var(--color-primary),0.08);
             padding-top: 15px !important;
     
+        }
+        .dropdown-list{
+            padding-top: 6px;
+            width: 100%;
+            z-index: 9999;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background: #fff;
+            margin-top: 10px;
+            box-shadow: 0 1px 5px #959595;
         }
     }
     .dropdown-multiselect__caret{

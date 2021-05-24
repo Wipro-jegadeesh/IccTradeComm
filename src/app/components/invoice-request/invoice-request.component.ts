@@ -170,7 +170,15 @@ export class InvoiceRequestComponent implements OnInit {
       item_id:'SGD',item_text:'SGD'
     }
   ];
-  dropdownSettings
+  dropdownSettings:IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'itemName',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
@@ -184,14 +192,7 @@ export class InvoiceRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.translate.get('Buyer Location'))
-    this.dropdownSettings  = {
-      text:this.translate.get('Buyer Location'),
-      singleSelection: true,
-      idField: 'id',
-      textField: 'itemName',
-      allowSearchFilter: true,
-    }
+   
     this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -310,7 +311,11 @@ onKey(value) {
     this.selection.selected.forEach(s =>
       invoiceIds.push(s.id)
     );
-    this.updateInvoice(invoiceIds)
+    if(invoiceIds.length > 0){
+      this.updateInvoice(invoiceIds)
+    }else{
+      return this.toastr.error(this.translate.instant('Please Select Invoice Details'));
+    }
     console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
@@ -318,7 +323,7 @@ onKey(value) {
       "invoiceIds": invoiceIds,
     }
 
-    this.toastr.success("Selected Invoices has been Authorized !");
+    this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();
     }, error => {
@@ -407,7 +412,7 @@ onKey(value) {
        grandtotal += Number(element.total)
     });
     if(grandtotal != this.invoiceForm.value.invAmt){
-      return this.toastr.error("Please check Good Details !! Grant Total Should Be Equal to Funding Request Amount");
+      return this.toastr.error(this.translate.instant('Please check Good Details !! Grant Total Should Be Equal to Funding Request Amount'));
     }
 
     try {
