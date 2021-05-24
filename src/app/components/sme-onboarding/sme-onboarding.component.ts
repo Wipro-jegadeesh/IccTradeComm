@@ -276,12 +276,12 @@ export class SmeOnboardingComponent implements OnInit {
   onFileChange(data,secIndex,quesIndex){
     let subIndex=data.questionDatas.subSecIndex
     if(data.questionDatas.isSubSection){
-    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
+    this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value && data.value.length ? data.value : ''
     this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
     this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
     }
     else{     
-        this.questionnaireSections[secIndex].questions[quesIndex].response=data.value
+        this.questionnaireSections[secIndex].questions[quesIndex].response=data.value && data.value.length ? data.value : ''
         this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
         this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
     }
@@ -396,15 +396,33 @@ export class SmeOnboardingComponent implements OnInit {
     return isFormComp
   }
   onSubmit(){
-    // this.onSave()
+    this.onSave('')
     this.toastr.success('Questionnaire Section Submitted Successfully')
     let data=JSON.parse(localStorage.getItem('userCred'))
+    this.apiService.generalServiceget(environment.coriolisServicePath + 'fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+      if(resp && resp.score >= 900){
       this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
+      })
+      let obj={
+        status : 'A'
+      }
+      this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+data.companyId,obj).subscribe(resp=>{
 
       })
-    this.router.navigateByUrl('/sme-dashboard')
+      this.router.navigateByUrl('/sme-dashboard')
+    }
+    else{
+      this.toastr.info('Kindly check your questionnaire section.')
+      this.router.navigateByUrl('/score-received')
+    }
+    },error=>{
+      this.toastr.error('Error')
+    })
+ 
+
+    // this.router.navigateByUrl('/sme-dashboard')
   }
-  onSave() {
+  onSave(type) {
     let onboardingResp=[]
     this.questionnaireSections.map((item)=>{
     let compSecObj={
@@ -458,7 +476,7 @@ export class SmeOnboardingComponent implements OnInit {
     this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire',obj).subscribe(resp=>{
         if(resp){
             // alert('Questionnaire Section Submitted Successfully')
-            this.toastr.success('Questionnaire Section Submitted Successfully')
+          type && this.toastr.success('Questionnaire Section Submitted Successfully')
         }
     })
     console.log(onboardingResp)
@@ -519,7 +537,7 @@ export class SmeOnboardingComponent implements OnInit {
   filesRespBuild(Data){
     let fileName=[]
     let data=[]
-   Data.response && Data.response.map((item)=>{
+   Data.response.length && Data.response.map((item)=>{
         fileName.push(item.name)
         data.push(item.base64data)
     })
@@ -528,8 +546,9 @@ export class SmeOnboardingComponent implements OnInit {
         "questionAlias":Data.alias,
         "fileName":fileName,
         "data":data,
-        "extension":Data.extension
+        "extension":Data.extensions
     }
+    debugger
     return obj
   }
   numberRespBuild(Data){

@@ -37,46 +37,6 @@ export class QuestionaireScoreComponent implements OnInit {
 
   ngOnInit(): void {
 
-//     let staticResp =   {
-//       "companyId": "80f5590c-2c9b-49a2-a3f2-08d8ff5bb864",
-//       "state": "PartialScore",
-//       "score": 98.0,
-//       "scores": [
-//           {
-//               "scoreAlias": "business-planning",
-//               "scoreName": "Business Planning",
-  
-//               "score": 60,
-  
-//               "information": [
-//                   {
-//                       "type": "Warning",
-//                       "message": "Not enough questions answered"
-//                   }   
-//               ]
-//           },
-//           {
-//               "scoreAlias": "contractual-planning",
-//               "scoreName": "Contractual Planning",
-//               "score": 70,
-//               "information": []
-//           },
-  
-//           {
-//               "scoreAlias": "financial-planning",
-//               "scoreName": "Financial Planning",
-//               "score": 88,
-//               "information": []
-//           }
-//       ]        
-// }
-
-//     this.dataSource = new MatTableDataSource(staticResp.scores)
-
-//     this.groupsForm.patchValue({  
-//       state : staticResp.state,
-//       score : staticResp.score
-//     })
     let data=JSON.parse(localStorage.getItem('userCred'))
   this.QuestionaireScoreServices.getScore(data).subscribe(listResp => {
     if(listResp){
@@ -91,8 +51,8 @@ export class QuestionaireScoreComponent implements OnInit {
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
-      state: ['Singapore', Validators.required], 
-      score: ['686', Validators.required],
+      state: ['', Validators.required], 
+      score: [0, Validators.required],
       // groupDescription: ['', Validators.required]
     });
 
