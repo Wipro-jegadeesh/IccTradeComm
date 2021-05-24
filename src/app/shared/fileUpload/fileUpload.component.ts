@@ -11,11 +11,14 @@ export class FileUploadComponent implements OnInit {
     fileData: any = [];
     fileNames=[]
     baseFileData
+    acceptEx
 
     constructor() { }
 
     ngOnInit() {
         this.fileNames=this.questionDatas.response ? this.questionDatas.response : []
+        this.questionDatas['extension']=this.questionDatas.extensions.map((item)=> { return item='.'+item })
+        this.acceptEx=this.questionDatas.extension.toString()
      }
 
  onChange(event){
