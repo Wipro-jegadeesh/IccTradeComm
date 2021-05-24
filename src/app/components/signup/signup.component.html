@@ -3,7 +3,7 @@
     <mat-form-field dense>
       <mat-label>Language</mat-label>
       <mat-icon matPrefix>language</mat-icon>
-      <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+      <mat-select #selectedLang [value]="translate && translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
         <!-- <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search"
           (keyup)="onKey($event.target.value)"> -->
         <!-- <mat-option>None</mat-option> -->
@@ -35,8 +35,9 @@
       </mat-form-field> -->
       <mat-form-field *ngIf="showCountSignBtn" floatLabel="never" style="margin-bottom:10px" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-        <mat-label>{{CountryPinLabel}}</mat-label>
-        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required required />
+        <mat-label >{{countryId}}</mat-label>
+        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required
+         required  />
         <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
       <!-- <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"

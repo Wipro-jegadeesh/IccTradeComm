@@ -44,6 +44,7 @@
     "ng-multiselect-dropdown": "^0.2.14",
     "ng2-charts": "^2.4.2",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-countdown": "^11.0.3",
     "ngx-perfect-scrollbar": "^10.1.0",
     "ngx-toastr": "^13.2.1",
     "papaparse": "^5.3.0",

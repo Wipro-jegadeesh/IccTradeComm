@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router,NavigationEnd, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import {Location} from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
 import {LANGUAGES} from '../constants/Languages';
+import { CountdownComponent } from 'ngx-countdown';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,15 @@ export class NavbarComponent implements OnInit {
   languages  = [{"id":"en","itemName":"English","nativeName":"English"},
   {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
 ]
-  constructor(public translate: TranslateService,public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
+  // languages = LANGUAGES;
+  timestamp : any;
+  @ViewChild('cd', { static: false })
+   private countdown: CountdownComponent;
+
+
+  constructor(public translate: TranslateService,      private readonly oauthService: OAuthService,
+
+    public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
     // ,private oauthService: OAuthService
     )
    { }
@@ -35,7 +44,9 @@ export class NavbarComponent implements OnInit {
   selectedItems=[]
 
 
+
   ngOnInit(): void {
+
     this.userName = localStorage.getItem("userId")
     this.roleName = localStorage.getItem("roleName")
     this.userDeatils = JSON.parse(localStorage.getItem('userCred'))
@@ -60,7 +71,30 @@ export class NavbarComponent implements OnInit {
 
     this.selectedItems = [{"id":"en","itemName":"English"}]
 
+    this.setTime()
     
+  }
+
+
+  setTime(){
+
+    
+     let timestamp = this.oauthService.getAccessTokenExpiration()
+     var date = new Date(timestamp);
+     var millis : any = date.getMilliseconds();
+
+      // var minutes = Math.floor(millis / 60000);
+      // var seconds = ((millis % 60000) / 1000).toFixed(0);
+      // this.timestamp = minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds;
+
+      // this.timestamp = (minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    
+    
+
+    ;
+    this.countdown.begin();
+
+    ;
   }
   setlocalstroageLanguage(value){
     localStorage.setItem("DefultLanguage",value);
