@@ -15,11 +15,11 @@ export class FinanceLimitMaintananceServices {
   }
   gettransLimitUtilTableDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
-    return this.apiService.tempGet(environment.serviePath_1 + 'limit-request/limitChartData/'+ userCred['financierProfileId']);
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartData/'+ userCred['financierProfileId']);
   }
   getsmetransLimitUtilTableDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
-    return this.apiService.tempGet(environment.serviePath_1 + 'limit-request/limitChartDataBySmeId/'+ userCred['financierProfileId']);
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataBySmeId/'+ userCred['financierProfileId']);
   }
   getMainlimitScreenDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
