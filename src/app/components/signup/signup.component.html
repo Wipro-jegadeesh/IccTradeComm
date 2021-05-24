@@ -1,100 +1,82 @@
+<div class="uxg-toolbar-actions" style="height: 32px;width: 50px;padding: 8px 0px 0px 1108px;">
+  <div class="language">
+    <mat-form-field dense>
+      <mat-label>Language</mat-label>
+      <mat-icon matPrefix>language</mat-icon>
+      <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+        <!-- <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search"
+          (keyup)="onKey($event.target.value)"> -->
+        <!-- <mat-option>None</mat-option> -->
+        <mat-option *ngFor="let lang of languages" [value]="lang.id">
+          {{ lang.itemName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
 <div class="uxg-signup-page">
-
   <div class="uxg-signup-container">
     <span class="fill-remaining-space"></span>
-    <!-- <h5 class="uxg-h4 uxg-product-name">ICC TradeComm</h5>
-    <h5 class="uxg-display-6 uxg-corporate-name">Powered by Finastra</h5> -->
     <img src="../../../assets/img/icctradelogo.png" class="log-logo" />
-    <form #signupForm="ngForm" >
-      <!-- <mat-radio-group>
-        <mat-radio-button value="SME" [checked]="true"><span class="uxg-radio-name-space">SME</span></mat-radio-button>
-        <mat-radio-button value="ICC User"><span class="uxg-radio-name-space">ICC User</span></mat-radio-button> 
-      </mat-radio-group> -->
-
-      <!-- <mat-form-field>
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-label>Country</mat-label>
-        <input matInput name="country" [(ngModel)]="country" required>
-        <mat-hint>Please enter your country</mat-hint>
-      </mat-form-field> -->
-      <!-- <ng-multiselect-dropdown class="sign-select"
-                      name=""
-                      placeholder="Country"
-                      [settings]="dropdownSettings"
-                      [data]="cities"
-                      (onSelect)="onItemSelect($event)" 
-                      (onDeSelect)="onItemDeSelect($event)" 
-                  >
-                  </ng-multiselect-dropdown> -->
-                  <mat-form-field floatLabel="never"  style="margin-bottom:unset" dense appearance="fill"  >
-                    <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                    <mat-label >Name</mat-label>
-                    <input matInput type="text" name="name" class="input-text"  [(ngModel)]="name"
-                     required  />
-                    <!-- <mat-error>InValid Email</mat-error> -->
-                  </mat-form-field>
-                  <angular2-multiselect  [data]="optionDatas"  class="sign-select" style="margin-bottom:10px"
-                  name='country'  (onDeSelectAll)="onDeSelect($event)" 
-                 [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-                 [settings]="dropdownSettings" ></angular2-multiselect>
-                    <!-- <mat-form-field *ngIf="showCountSignBtn">
+    <form #signupForm="ngForm">
+      <mat-form-field floatLabel="never" style="margin-bottom:unset" dense appearance="fill">
+        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+        <mat-label>{{'Name' | translate}}</mat-label>
+        <input matInput type="text" name="name" class="input-text" [(ngModel)]="name" required />
+      </mat-form-field>
+      <angular2-multiselect [data]="optionDatas" class="sign-select" style="margin-bottom:10px" name='country'
+        (onDeSelectAll)="onDeSelect($event)" [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
+        [settings]="dropdownSettings"></angular2-multiselect>
+      <!-- <mat-form-field *ngIf="showCountSignBtn">
         <mat-icon matPrefix>person</mat-icon>
         <mat-label>{{CountryPinLabel}}</mat-label>
         <input matInput name="CountryPin" [(ngModel)]="CountryPin" required>
         <mat-hint>Please enter {{CountryPinLabel}}</mat-hint>
       </mat-form-field> -->
-      <mat-form-field *ngIf="showCountSignBtn" floatLabel="never"  style="margin-bottom:10px" dense appearance="fill"  >
+      <mat-form-field *ngIf="showCountSignBtn" floatLabel="never" style="margin-bottom:10px" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-        <mat-label >{{CountryPinLabel}}</mat-label>
-        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required
-         required  />
+        <mat-label>{{CountryPinLabel}}</mat-label>
+        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required required />
         <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
-        <!-- <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
+      <!-- <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
                   name='country'  (onDeSelectAll)="onDeSelect($event)" 
                  [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
                  [settings]="sectordropdownSettings" ></angular2-multiselect> -->
 
-      <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">Sign Up</button>
+      <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">{{'Sign Up' | translate}}</button>
     </form>
     <div class="login-actions">
       <br>
-      <a  class="uxg-body-2" (click)="GotoLogin()" style="cursor: pointer;font-weight: bold;color: #8c0ed4;text-transform: uppercase;">Back to Login Page</a>    </div>
-
+      <a class="uxg-body-2" (click)="GotoLogin()"
+        style="cursor: pointer;font-weight: bold;color: #8c0ed4;text-transform: uppercase;">{{'Back to Login Page' | translate}}</a>
+    </div>
     <span class="fill-remaining-space"></span>
-
-    <!-- <div class="signup-footer">
-      <a href="https://www.finastra.com/support" class="uxg-body-3" target="_blank">Support</a>&nbsp;/&nbsp;
-      <a href="https://www.finastra.com" class="uxg-body-3" target="_blank">Finastra.com</a>
-    </div> -->
-
   </div>
-
   <div class="uxg-illustration-container">
   </div>
-
 </div>
 <ng-template #template>
   <div class="modal-header">
-      <h4 class="modal-title">Signup</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">×</span>
-      </button>
+    <h4 class="modal-title">{{'Sign Up' | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
   </div>
   <div class="modal-body">
-      <div style="text-align: center;">
-          <h5>Are you existing coriolis customer</h5>
-          <div class="row">
-              <div class="col-sm-6" style="text-align: end;">
-                  <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">Yes</button>
-              </div>
-              <div>
-                  <button type="button" mat-flat-button color="primary" (click)="signUpPage('no')"> No</button>
-              </div>
-          </div>
+    <div style="text-align: center;">
+      <h5>{{'Are you existing coriolis customer' | translate}}</h5>
+      <div class="row">
+        <div class="col-sm-6" style="text-align: end;">
+          <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">{{'yes' | translate}}</button>
         </div>
+        <div>
+          <button type="button" mat-flat-button color="primary" (click)="signUpPage('no')"> {{'no' | translate}}</button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">{{'cancel' | translate}}</button>
   </div>
 </ng-template>

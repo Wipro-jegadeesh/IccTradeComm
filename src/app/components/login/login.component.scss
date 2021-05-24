@@ -64,7 +64,12 @@ mat-icon[matPrefix] {
   padding-bottom: 13px;
   padding-right: 8px;
 }
-
+.language{
+  .mat-form-field{
+    width: 150px;
+    // padding: 19px 0px 0px 0px;
+}
+}
 .mat-flat-button {
   align-self: stretch;
   margin-top: $uxg-spacing-3;

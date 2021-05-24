@@ -40,11 +40,7 @@ export class LanguageTranslationModule {
   constructor(
     private translate: TranslateService,
   ) {
-    // Gets Default language from browser if available, otherwise set English ad default
-    // this.translate.addLangs(LANGUAGES);
     this.translate.addLangs(['en', 'es']);
-
-    this.translate.setDefaultLang('en');
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
   }

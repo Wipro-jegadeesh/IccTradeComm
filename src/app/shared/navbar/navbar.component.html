@@ -16,25 +16,29 @@
     <span class="fill-remaining-space"></span>
     <!-- *ngIf="!isHide" -->
     <div class="uxg-toolbar-actions" >
-        <div>
+        <!-- <div>
             <label>
-              <!-- <select #langSelect (change)="translate.use(langSelect.value)"> -->
+               <select #langSelect (change)="translate.use(langSelect.value)"> -->
                 <!-- <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option> -->
                   <!-- <option *ngFor="let lang of this.languages" [value]="lang.id" [selected]="lang.id === translate.currentLang">{{ lang.itemName }}</option> -->
 
               <!-- </select> -->
-                <div class="multiselect-dropdown-dsgn">
+                <!-- <div class="multiselect-dropdown-dsgn">
                   <angular2-multiselect [data]="LanguagesOptions"
                 name='language'  [(ngModel)]="selectedItems"  (onSelect)="translate.use($event.id)"
                 [settings]="languageDropdownSettings"></angular2-multiselect> 
-            </div>
+            </div> -->
 
-            </label>
-
-
-           
-
-          </div>
+      
+        <mat-form-field dense>
+            <mat-label>Language</mat-label>
+            <mat-icon matPrefix>language</mat-icon>
+            <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+                <mat-option *ngFor="let lang of languages" [value]="lang.id">
+                  {{ lang.itemName }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field> 
         <button mat-icon-button color="neutral">
             <mat-icon>search</mat-icon>
         </button>

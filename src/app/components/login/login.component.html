@@ -1,3 +1,17 @@
+
+    <div class="uxg-toolbar-actions" style="height: 32px;width: 50px;padding: 8px 0px 0px 1108px;">
+        <div class="language">
+            <mat-form-field dense>
+                <mat-label>Language</mat-label>
+                <mat-icon matPrefix>language</mat-icon>
+                  <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+                    <mat-option *ngFor="let lang of languages" [value]="lang.id">
+                      {{ lang.itemName }}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
 <div class="uxg-login-page">
 
     <div class="uxg-login-container">
@@ -84,11 +98,12 @@
 
     </div>
 
+ 
     <div class="uxg-illustration-container">
+       
     </div>
 
 </div>
-
 <ng-template #template>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Info</h4>

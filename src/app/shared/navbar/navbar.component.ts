@@ -19,10 +19,12 @@ export class NavbarComponent implements OnInit {
   isHide=false; 
   userDeatils: any;
   roleName: string;
-  languages = LANGUAGES
-
+  // languages = LANGUAGES
+  languages  = [{"id":"en","itemName":"English","nativeName":"English"},
+  {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+]
   constructor(public translate: TranslateService,public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
-    ,private oauthService: OAuthService
+    // ,private oauthService: OAuthService
     )
    { }
 
@@ -59,6 +61,11 @@ export class NavbarComponent implements OnInit {
     this.selectedItems = [{"id":"en","itemName":"English"}]
 
     
+  }
+  setlocalstroageLanguage(value){
+    localStorage.setItem("DefultLanguage",value);
+    console.log(this.translate,"this.translate")
+    console.log(this.translate.instant('Select Country'),"this.translate.instant('Select Country')")
   }
   ngDoCheck(){
     this.getModuleDependencies()
@@ -111,9 +118,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    this.oauthService.logOut();
+    // this.oauthService.logOut();
     localStorage.clear();
-  // this.authenticationService.logout()
+  this.authenticationService.logout()
     }
 
     backNavigation() {

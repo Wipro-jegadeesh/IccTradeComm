@@ -17,7 +17,12 @@ a {
     display: none;
   }
 }
-
+.language{
+    .mat-form-field{
+      width: 150px;
+      // padding: 19px 0px 0px 0px;
+  }
+  }
 .uxg-signup-container {
   box-sizing: border-box;
   display: flex;
