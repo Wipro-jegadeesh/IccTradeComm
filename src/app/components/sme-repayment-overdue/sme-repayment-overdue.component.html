@@ -1,7 +1,7 @@
 <div class="app-content ">
     <header class="mm0p0">
         <br>
-        <h5 class="mmt20">Repayment Over Due</h5>
+        <h5 class="mmt20"> {{'Repayment Over Due' | translate}} </h5>
         <div class="table-res mat-elevation-z8">
             <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="invId">
@@ -69,7 +69,7 @@
           </ng-container>
   
           <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <th mat-header-cell *matHeaderCellDef> {{'Status' | translate}} </th>
               <td mat-cell *matCellDef="let element"> 
                  <!-- <mat-chip-list>
                         <mat-chip> -->
@@ -143,11 +143,11 @@
                   <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                     <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                         <mat-icon #tooltip="matTooltip"
-                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}}
                       </button>&nbsp;
                       <button  mat-raised-button style="color: #5e52a1;">
                         <mat-icon #tooltip="matTooltip"
-                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}}
                       </button>
                   </div>
                  
@@ -178,11 +178,11 @@
                       <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                         <button  mat-raised-button style="color: #5e52a1;">
                             <mat-icon #tooltip="matTooltip"
-                            matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                            matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}}
                           </button>&nbsp;
                           <button  mat-raised-button style="color: #5e52a1;">
                             <mat-icon #tooltip="matTooltip"
-                            matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                            matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}}
                           </button>
                       </div>
                  </th>
@@ -200,7 +200,7 @@
   <div>   
     <ng-template #template>
        <div class="modal-header">
-          <h4 class="modal-title pull-left">New Finance Details</h4>
+          <h4 class="modal-title pull-left">{{'New Finance Details' | translate}}</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
              <span aria-hidden="true">×</span>
           </button>
@@ -257,12 +257,12 @@
                 </ng-container> 
 
                 <ng-container matColumnDef="baseCcyNetAmtPayable">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Net Amount Received</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount Received' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.baseCcyNetAmtPayable }}</td>
                 </ng-container> 
 
                 <ng-container matColumnDef="annualYeild">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Annual Yield %</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Annual Yield' | translate}} %</th>
                     <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
                 </ng-container> 
 
@@ -322,7 +322,7 @@
                 <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            Invoice Details
+                            {{'Invoice Details' | translate}} 
                         </mat-panel-title>
                     </mat-expansion-panel-header>
           <div class="table-res">
@@ -330,17 +330,17 @@
             color: #a899e4;margin-left: 14px;">Invoice Details</p> -->
             <table mat-table [dataSource]="dataSourceTwo">
                 <ng-container matColumnDef="invId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice No</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice No' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="invDate">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Date' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{invoiceDetailsData.invDate && moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="buyerName">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Buyer</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Buyer' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}</td>
                 </ng-container>
         
@@ -350,7 +350,7 @@
                 </ng-container>
         
                 <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Status</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Status' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">
                         {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
                     </td>
@@ -370,7 +370,7 @@
             <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Goods Details
+                        {{'Goods Details' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div style="overflow-x:auto;">
@@ -402,7 +402,7 @@
                     </ng-container>
         
                     <ng-container matColumnDef="amt">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Amount</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column"> {{'Amount' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                     </ng-container>
         
@@ -429,7 +429,7 @@
                  
 
                     <ng-container matColumnDef="total">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Total</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column"> {{'Total' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                     </ng-container>
                     
@@ -459,7 +459,7 @@
        </div>
        <div class="modal-footer">
           <!-- <button type="button" class="btn model-btn-outline">Submit</button> -->
-          <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+          <button type="button" class="btn btn-default" (click)="modalRef.hide()"> {{'Close' | translate}}</button>
        </div>
     </ng-template>
   </div>

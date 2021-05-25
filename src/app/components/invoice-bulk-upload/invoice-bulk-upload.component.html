@@ -62,7 +62,7 @@
         </form>
 
         <div id="container">
-            <span class="uxg-h6" id=grid>Invoice Details </span>
+            <span class="uxg-h6" id=grid>{{'Invoice Details' | translate}}  </span>
             <div class="mat-elevation-z8">
               <table class="table-responsive inv-detail-table" mat-table matSort [dataSource]="dataSource" summary="table of APIs" style="width: 100%;">
                 <!-- Checkbox Column -->
@@ -88,7 +88,7 @@
                 <ng-container matColumnDef="DateTime">
                   <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                   matTooltip="{{fundingTooltip.invoiceNumber}}"
-                  [matTooltipPosition]="tooltipPosition">Invoice No</th>
+                  [matTooltipPosition]="tooltipPosition">{{'Invoice No' | translate}}</th>
                   
                   <td mat-cell *matCellDef="let element">
                     <mat-chip-list>
@@ -104,7 +104,7 @@
                  </ng-container>
                 <ng-container matColumnDef="DateOfInvoice">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.invoiceCreateDate}}" [matTooltipPosition]="tooltipPosition">Invoice Date</th>
+                  matTooltip="{{fundingTooltip.invoiceCreateDate}}" [matTooltipPosition]="tooltipPosition">{{'Invoice Date' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{element.invDate  | date: 'dd/MM/yyyy'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Seller">

@@ -16,7 +16,7 @@
   
           <ng-container matColumnDef="invoiceNo">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceNo}}" [matTooltipPosition]="'below'"> Invoice No </th>
+            matTooltip="{{biddingTooltip.invoiceNo}}" [matTooltipPosition]="'below'"> {{'Invoice No' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip color="primary" selected (click)="openModal($event,template,element)"> -->
@@ -249,17 +249,17 @@
             <!-- Table 2 -->
           <div style="overflow-x:auto;">
             <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Invoice Details</p>
+            color: #a899e4;margin-left: 14px;">{{'Invoice Details' | translate}} </p>
             <table mat-table [dataSource]="dataSourceTwo">
                 <ng-container matColumnDef="invId">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{biddingTooltip.invoiceNumber}}" [matTooltipPosition]="'below'">Invoice No</th>
+                    matTooltip="{{biddingTooltip.invoiceNumber}}" [matTooltipPosition]="'below'">{{'Invoice No' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="invDate">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Invoice Date</th>
+                    matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Invoice Date' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invDate && moment(invoiceDetailsData.invDate).format('DD/MM/YYYY') }}</td>
                 </ng-container>
         
@@ -294,7 +294,7 @@
             <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Goods Details
+                        {{'Goods Details' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <table mat-table [dataSource]="dataSourceOne">

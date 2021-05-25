@@ -207,12 +207,12 @@
         <div class="modal-body">
             <div style="overflow-x:auto;">
                 <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Invoice Details</p>
+            color: #a899e4;margin-left: 14px;">{{'Invoice Details' | translate}} </p>
                 <div class="table-res">
                     <table mat-table [dataSource]="dataSourceTwo">
                         <ng-container matColumnDef="invId">
                             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                                matTooltip="{{biddingTooltip.invoiceNumber}}" [matTooltipPosition]="'below'">Invoice No
+                                matTooltip="{{biddingTooltip.invoiceNumber}}" [matTooltipPosition]="'below'">{{'Invoice No' | translate}}
                             </th>
                             <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
                         </ng-container>
@@ -259,7 +259,7 @@
                 <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            Goods Details
+                            {{'Goods Details' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="table-res">
