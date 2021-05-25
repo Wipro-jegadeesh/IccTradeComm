@@ -321,7 +321,7 @@ export class IccSmeDetailsComponent implements OnInit {
         })
     }
     getscore(){
-      this.apiService.generalServiceget( environment.coriolisServicePath + 'fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
+      this.apiService.generalServiceget( environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
         if(listResp){
           this.dataSource2 = new MatTableDataSource(listResp.scores);
            this.groupsForm.patchValue({  

@@ -16,6 +16,9 @@ export class FileUploadComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        this.questionDatas.response=this.questionDatas.response.length > 0 &&  this.questionDatas.response.map((item)=>{
+            return {'name':item}
+        }) 
         this.fileNames=this.questionDatas.response ? this.questionDatas.response : []
         this.questionDatas['extension']=this.questionDatas.extensions.map((item)=> { return item='.'+item })
         this.acceptEx=this.questionDatas.extension.toString()
@@ -35,7 +38,7 @@ export class FileUploadComponent implements OnInit {
                 questionDatas: this.questionDatas,
                 value:this.fileNames,
                 number:this.questionDatas.number,
-                base64data:data
+                base64data:data,
             }
             this.change.emit(obj)
         });
