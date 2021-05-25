@@ -6,7 +6,7 @@
                 <mat-icon matPrefix>language</mat-icon>
                   <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
                     <mat-option *ngFor="let lang of languages" [value]="lang.id">
-                      {{ lang.itemName }}
+                      {{ lang.nativeName }}
                     </mat-option>
                   </mat-select>
               </mat-form-field>

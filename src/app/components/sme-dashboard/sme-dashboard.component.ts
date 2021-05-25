@@ -4,6 +4,8 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import { SmeDashboardServices } from './sme-dashboard-service';
 import { DASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { COMMONCONSTANTS } from '../../shared/constants/constants';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-sme-dashboard',
   templateUrl: './sme-dashboard.component.html',
@@ -243,7 +245,7 @@ export class SmeDashboardComponent implements OnInit {
     }
   }
 
-  constructor(public router: Router,public authenticationService: AuthenticationService, public smeDashboardServices: SmeDashboardServices ) { }
+  constructor(public translate: TranslateService,public router: Router,public authenticationService: AuthenticationService, public smeDashboardServices: SmeDashboardServices ) { }
 
   ngOnInit() {
     if (window.innerWidth < 415) {
@@ -353,8 +355,8 @@ heigh:400,
 width :700
 };
 chartData = [
-{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: "Funding Requested" },
-{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: "Actual Funding" },
+{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.translate.instant('Funding Requested') },
+{ data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: this.translate.instant('Actual Funding')  },
 // { data: [120, 200, 700], label: "Repayment" },
 ];
 chartLabels = ["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -380,12 +382,12 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
       this.smeDashboardServices.getChartData().subscribe(resp => {
         let FRresp = resp;
       this.chartData=[
-        { data:Object.values(resp) , label: "Funding Requested" },
+        { data:Object.values(resp) , label: this.translate.instant('Funding Requested') },
         // { data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , label: "Actual Funding" },
       ]
     })
     this.smeDashboardServices.getActualFundingChartData().subscribe(AFresp => {
-      this.chartData.push( { data:Object.values(AFresp) , label: "Actual Funding" })
+      this.chartData.push( { data:Object.values(AFresp) , label: this.translate.instant('Actual Funding') })
     })
     // this.chartData=[
     //   { data:Object.values(FRresp) , label: "Funding Requested" },

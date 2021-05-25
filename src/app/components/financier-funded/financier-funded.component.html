@@ -6,14 +6,14 @@
             <table mat-table [dataSource]="dataSource" matSort>
                     
             <ng-container matColumnDef="invoiceRef">
-                <th mat-header-cell *matHeaderCellDef  mat-sort-header> ICC Tradecomm Ref </th>
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{'ICC Tradecomm Ref' | translate}} </th>
                 <td mat-cell *matCellDef="let element">
                             {{element.invoiceRef}} 
                 </td>
             </ng-container>
 
           <ng-container matColumnDef="invoiceAmt">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Amount  </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Invoice Amount' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip >  -->
@@ -23,7 +23,7 @@
              </td>
           </ng-container>
           <ng-container matColumnDef="smeId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> SME Name </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'SME Name' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip> -->
@@ -33,7 +33,7 @@
              </td>
           </ng-container>
           <ng-container matColumnDef="buyerName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Buyer Name' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -43,7 +43,7 @@
               </td>
           </ng-container>
           <ng-container matColumnDef="invoiceDate">
-            <th mat-header-cell *matHeaderCellDef> Inv Date  </th>
+            <th mat-header-cell *matHeaderCellDef> {{'Inv Date' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -53,7 +53,7 @@
               </td>
           </ng-container>
           <ng-container matColumnDef="invDueDate">
-            <th mat-header-cell *matHeaderCellDef> Inv Due date </th>
+            <th mat-header-cell *matHeaderCellDef> {{'Inv Due date' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -73,7 +73,7 @@
                 </td>
           </ng-container>   
           <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                 <td mat-cell *matCellDef="let element"> 
                   <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                       <mat-icon>edit</mat-icon>
@@ -94,7 +94,7 @@
           </ng-container>
           <ng-container matColumnDef="Search">
             <th colspan="8" mat-header-cell *matHeaderCellDef> 
-                <h6>Search By</h6>
+                <h6>{{'Search By' | translate}}</h6>
               <div class="row">
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
@@ -116,13 +116,13 @@
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>buyerName</mat-label>
+                        <mat-label>{{'Buyer Name' | translate}}</mat-label>
                         <input type="text" [(ngModel)]="SearchModel.buyerName" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field  appearance="outline">
-                        <mat-label>invoiceDate</mat-label>
+                        <mat-label>{{'Invoice Date' | translate}}</mat-label>
                         <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -162,7 +162,7 @@
             <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
                 <div class="row">
                     <div class="col-sm-3">
-                        <label>InvoiceAmount</label>
+                        <label>{{'invoiceAmount' | translate}}</label>
                         <div class="custom-slider">
                         <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
                       </div>
@@ -242,12 +242,12 @@
                 </ng-container>
         
                 <ng-container matColumnDef="invoiceId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Id</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Id' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.invoiceId }}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="fxRate">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Fx Rate %</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Fx Rate' | translate}} %</th>
                     <td mat-cell *matCellDef="let data">{{ data.fxRate }}</td>
                 </ng-container>
         
@@ -258,7 +258,7 @@
                 
                 
                 <ng-container matColumnDef="fundablePercent">
-                    <th mat-header-cell *matHeaderCellDef scope="column">% Funded</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">% {{'Funded' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.fundablePercent }}</td>
                 </ng-container> 
 
@@ -268,7 +268,7 @@
                 </ng-container> 
 
                 <ng-container matColumnDef="repaymentDate">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Repayment Date</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Repayment Date' | translate}}</th>
                     <td mat-cell *matCellDef="let data"> {{data.repaymentDate && moment(data.repaymentDate).format('DD/MM/YYYY')}}</td>
                 </ng-container> 
 
@@ -361,7 +361,7 @@
                 </ng-container>
         
                 <ng-container matColumnDef="invAmt">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Amount</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
                 </ng-container>
         
@@ -393,18 +393,18 @@
                 <table mat-table [dataSource]="dataSourceOne">
         
                     <ng-container matColumnDef="descGoods">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Description of Goods</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Description of Goods' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                     </ng-container>
     
         
                     <ng-container matColumnDef="quantity">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Quantity</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Quantity' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
                     </ng-container>
         
                     <ng-container matColumnDef="rate">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Amt Ccy</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Amt Ccy' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
                     </ng-container>
         
@@ -414,16 +414,16 @@
                     </ng-container>
         
                     <ng-container matColumnDef="taxRate">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Rate</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Rate' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
                     </ng-container>
         
                     <ng-container matColumnDef="taxAmount">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amount</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amount' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
                     </ng-container>
                     <ng-container matColumnDef="discAmt">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Tax Amt Ccy</th>
+                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amt Ccy' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                     </ng-container>
 

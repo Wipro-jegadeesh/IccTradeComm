@@ -1,97 +1,4 @@
-<!-- <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated">
-    <button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <div class="uxg-logo" dense></div>
-    <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
-        <button mat-icon-button color="accent" class="uxg-breadcrumb-back">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-        <li class="uxg-h6">Seller Dashboard</li>
-        <li>Home</li>
-    </ul>
-    <span class="fill-remaining-space"></span>
-    <div class="uxg-toolbar-actions">
-        <button mat-icon-button color="neutral">
-            <mat-icon>search</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>notifications</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>help_outline</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>apps</mat-icon>
-        </button>
-    </div>
-    <button mat-icon-button [matMenuTriggerFor]="menuHero">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-    <button mat-icon-button class="uxg-toolbar-icon-menu">
-        <mat-icon>more_vert</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-menu #menuHero="matMenu" class="uxg-user-profile s">
-    <div class="uxg-menu-header">
-        <div class="uxg-avatar-hero-block">
-            <div class="uxg-avatar">U</div>
-            <h6 class="uxg-h6">User</h6>
-            <span class="uxg-caption"></span>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="uxg-menu-footer">
-        <button mat-flat-button color="primary" dense (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            Logout
-        </button>
-        <button mat-button color="primary" dense>
-            View profile
-        </button>
-    </div>
-</mat-menu>
-<mat-sidenav #sidenav mode="over">
-    <div class="uxg-nav-header">
-        <mat-card class="uxg-card-product" extra-dense>
-            <span class="uxg-h5 uxg-card-product-name">PRO</span>
-        </mat-card>
-    </div>
-    <mat-nav-list class="uxg-nav-list">
-        <a mat-list-item class="uxg-list-item-selected">
-            <mat-icon mat-list-icon>home</mat-icon>
-            <p>Home</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Applications</p>
-            <mat-icon>chevron_right</mat-icon>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>notifications</mat-icon>
-            <p>Notifications</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>extension</mat-icon>
-            <p>Tools</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>settings</mat-icon>
-            <p>Settings</p>
-        </a>
-        <mat-divider></mat-divider>
-    </mat-nav-list>
-    <mat-nav-list class="uxg-link-list">
-        <a mat-list-item>
-            <mat-icon mat-list-icon>help</mat-icon>
-            <p>Help</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>Sign out</p>
-        </a>
-    </mat-nav-list>
-</mat-sidenav> -->
+
 
 
 <div class="app-content {{isOpen}} ">
@@ -179,14 +86,14 @@
             <button (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
                 <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
                 <span>
-                    Invoice Request Manual
+                    {{'Invoice Request Manual' | translate}} 
                 </span>
               
                 </button>
             <button (click)="onRequestChange('')" style="color: #7c49cb;" mat-menu-item>
                 <i class="fas fa-2x fa-upload"></i>&nbsp;
                 <span>
-                    Invoice Request Upload
+                    {{'Invoice Request Upload' | translate}}
                 </span>
             </button>
             </mat-menu>
@@ -201,7 +108,7 @@
                         <div class="trans-table">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h6>Finance Maturity</h6>
+                                        <h6>{{'Finance Maturity' | translate}}</h6>
                                     </div>
                             </div>
                             <div>
@@ -209,13 +116,13 @@
                             <tr>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financePeriod}}"
-                              [matTooltipPosition]="tooltipPosition">Period</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Period' | translate}}</th>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financeNumber}}"
-                              [matTooltipPosition]="tooltipPosition">Number</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financeAmount}}"
-                              [matTooltipPosition]="tooltipPosition">Amount</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
                             </tr>   
                            <tr *ngFor="let getFinMaturityDatas of getFinMaturityData" >
                               <td>{{getFinMaturityDatas.PERIOD}}</td>
@@ -223,7 +130,7 @@
                               <td>{{getFinMaturityDatas.AMOUNT}}</td>
                             </tr>
                             <tr *ngIf="!getFinMaturityData?.length">
-                                <td colspan="3">No Records Found</td>
+                                <td colspan="3">{{'No Records Found' | translate}}</td>
                             </tr>
                           </table>
                         </div>
@@ -234,7 +141,7 @@
                             <div class="">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h6> Finance Size</h6>
+                                        <h6>{{'Finance Size' | translate}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -242,13 +149,13 @@
                             <tr>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financeNo}}"
-                              [matTooltipPosition]="tooltipPosition">Invoice size</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Invoice size' | translate}}</th>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financeMonth}}"
-                              [matTooltipPosition]="tooltipPosition">Number</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
                               <th #tooltip="matTooltip"
                               matTooltip="{{dashboardTooltips.financePeriodAmount}}"
-                              [matTooltipPosition]="tooltipPosition">Amount</th>
+                              [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
                             </tr>
                             <tr *ngFor="let getFinnSizeDatas of getFinnSizeData" >
                                 <td>{{getFinnSizeDatas.INVOICE_SIZE}}</td>
@@ -256,7 +163,7 @@
                                 <td>{{getFinnSizeDatas.AMOUNT}}</td>
                               </tr>
                               <tr *ngIf="!getFinnSizeData?.length">
-                                <td colspan="3">No Records Found</td>
+                                <td colspan="3">{{'No Records Found' | translate}}</td>
                             </tr>
                             </table>
                         </div>
@@ -267,13 +174,13 @@
                                 <div class="col-md-12 topbar_item" style="padding: 3px 49px 5px 200px;">
                                     <a [routerLinkActive]="['router-link-active']"  [matMenuTriggerFor]="menu" class="list-group-item text-center tablecolour">
                                         <i class="fas fa-2x fa-file-invoice"></i>
-                                        <p class="mb-0 mt-1"><span>+ Funding Request</span></p>
+                                        <p class="mb-0 mt-1"><span>+ {{'Funding Request' | translate}} </span></p>
                                     </a>
                                 </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" >
-                                <h6>Chart</h6>
+                                <h6>{{'Chart' | translate}}</h6>
                                 <ng-container>
                                     <div class="chart {{isOpen}}">
                                         <div class="col-lg-10 grid-margin stretch-card p-0">

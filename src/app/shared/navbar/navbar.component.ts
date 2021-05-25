@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   roleName: string;
   // languages = LANGUAGES
   languages  = [{"id":"en","itemName":"English","nativeName":"English"},
-  {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+  {"id":"es","itemName":"Espano","nativeName":"español"}
 ]
   // languages = LANGUAGES;
   timestamp : any;
