@@ -31,5 +31,9 @@ export class FinanceLimitMaintananceServices {
   putnewMainLimitForm(body: any) {
     return this.apiService.put(environment.serviePath_4 + 'limit-update/' + this.userCred['financierProfileId'], body);
   }
+  getsectorexposeTableDatas() {
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataBySector/' + userCred['financierProfileId']);
+  }
 
 }

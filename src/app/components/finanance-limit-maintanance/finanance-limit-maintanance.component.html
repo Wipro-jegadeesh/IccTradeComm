@@ -844,6 +844,7 @@
                                   ?smetransLimitUtilTableDatas[3].TRANS_COUNT:''}}</td>
                               </tr>
                               <tr>
+                               
                                 <td>100% (Full Utilization)</td>
                                 <td>{{smetransLimitUtilTableDatas[4] ?
                                   smetransLimitUtilTableDatas[4].TRANS_COUNT:' '}}</td>
@@ -1018,40 +1019,37 @@
                           </div>
                           <div class="col-md-6">
                             <table class="table-bordered table" id="exposureTbl">
-                              <!-- <tr>
-                                                              <th>Period</th>
-                                                              <th>Period</th>
-                                                              <th>Period</th>
-                                                            </tr>    -->
                               <tr>
-                                <td>Exposure 100%</td>
-                                <td>100%</td>
-                                <td>5</td>
+                                <th>Utilization Slabs</th>
+                                <th>Number of Bids</th>
                               </tr>
                               <tr>
-                                <td>Exposure Over 95%</td>
-                                <td>95%</td>
-                                <td>7</td>
+                                <td>0 to 25%</td>
+                                <!-- <td>{{checkValue(50)}}</td> -->
+
+                                <td>{{sectorTableDatas[0]
+                                  ?sectorTableDatas[0].TRANS_COUNT:''}}</td>
                               </tr>
                               <tr>
-                                <td>Exposure Over 75%</td>
-                                <td>75%</td>
-                                <td>12</td>
+                                <td>25% to 50%</td>
+                                <td>{{sectorTableDatas[1] ?
+                                  sectorTableDatas[1].TRANS_COUNT:''}}</td>
                               </tr>
                               <tr>
-                                <td>Exposure Over 50%</td>
-                                <td>50%</td>
-                                <td>11</td>
+                                <td>50% to 75%</td>
+                                <td>{{sectorTableDatas[2] ?
+                                  sectorTableDatas[2].TRANS_COUNT:''}}</td>
                               </tr>
                               <tr>
-                                <td>Exposure Over 25%</td>
-                                <td>27%</td>
-                                <td>27</td>
+                                <td>75% to 100%</td>
+                                <td>{{sectorTableDatas[3]
+                                  ?sectorTableDatas[3].TRANS_COUNT:''}}</td>
                               </tr>
                               <tr>
-                                <td>Exposure Under 25%</td>
-                                <td>0%</td>
-                                <td>33</td>
+                               
+                                <td>100% (Full Utilization)</td>
+                                <td>{{sectorTableDatas[4] ?
+                                  sectorTableDatas[4].TRANS_COUNT:' '}}</td>
                               </tr>
                             </table>
                           </div>
