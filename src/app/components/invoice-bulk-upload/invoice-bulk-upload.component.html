@@ -119,7 +119,7 @@
                 </ng-container>
                 <ng-container matColumnDef="InvoiceAmount">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.invoiceAmount}}" [matTooltipPosition]="tooltipPosition">Invoice Amount </th>
+                  matTooltip="{{fundingTooltip.invoiceAmount}}" [matTooltipPosition]="tooltipPosition">{{'Invoice Amount' | translate}} </th>
                   <td mat-cell *matCellDef="let element">{{ element.invAmt }}</td>
                 </ng-container>
                 <ng-container matColumnDef="Ccy">

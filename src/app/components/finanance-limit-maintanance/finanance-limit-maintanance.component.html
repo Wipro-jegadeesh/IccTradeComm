@@ -927,7 +927,7 @@
                               <table class="table-responsive" mat-table [dataSource]="dataSourceFour"
                                 style="width: 100%;">
                                 <ng-container matColumnDef="smeId">
-                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Name</th>
+                                  <th mat-header-cell *matHeaderCellDef scope="column">{{'SME Name' | translate}}</th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index">
                                     {{element.smeId}}
                                   </td>

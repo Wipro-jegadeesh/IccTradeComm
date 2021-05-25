@@ -184,6 +184,8 @@ export class InvoiceRequestComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   disableSelect = new FormControl(false);
   states = COUNTRYNAMES
+  // public variables = COUNTRYNAMES;
+  public variables = ['One','Two','County', 'Three', 'Zebra', 'XiOn'];
   constructor(public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService) {
@@ -222,12 +224,12 @@ getAllCountry(){
       let obj =  { id: item.countrycode3, itemName: item.country }
       countryArray.push(obj)
     })
-    this.optionDatas = countryArray
+    // this.optionDatas = countryArray
   })
-  // this.optionDatas = COUNTRYNAMES; 
+  this.optionDatas = COUNTRYNAMES; 
 }
 
-onKey(value) { 
+  onKey(value) { 
   this.optionDatas = this.search(value);
   }
   

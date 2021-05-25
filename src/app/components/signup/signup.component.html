@@ -8,7 +8,7 @@
           (keyup)="onKey($event.target.value)"> -->
         <!-- <mat-option>None</mat-option> -->
         <mat-option *ngFor="let lang of languages" [value]="lang.id">
-          {{ lang.itemName }}
+          {{ lang.nativeName }}
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -14,7 +14,7 @@
                     <mat-icon matPrefix>language</mat-icon>
                     <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
                       <mat-option *ngFor="let lang of languages" [value]="lang.id">
-                        {{ lang.itemName }}
+                        {{ lang.nativeName }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -209,11 +209,19 @@
               [data]="LanguagesOptions"
               formControlName="language">
             </ng-multiselect-dropdown> -->
-              <div class="multiselect-dropdown-dsgn">                   
+              <!-- <div class="multiselect-dropdown-dsgn">                   
                 <angular2-multiselect [data]="LanguagesOptions"
                 formControlName="language"
                 [settings]="languageDropdownSettings"></angular2-multiselect>    
-                </div> 
+                </div>  -->
+                <mat-form-field dense>
+                  <mat-label>{{'Language' | translate}}</mat-label>
+                  <mat-select formControlName="language">
+                    <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search" (keyup)="onKey($event.target.value)">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let item of LanguagesOptions" [value]="item.id">{{item.itemName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
             </div>
           </div>
 

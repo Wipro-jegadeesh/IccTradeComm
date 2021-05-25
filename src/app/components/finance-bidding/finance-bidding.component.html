@@ -1,7 +1,7 @@
 <div class="app-content {{isOpen}}">
   <header>
     <br>
-    <h5>Bidding by Financiers</h5>
+    <h5>{{'Bidding by Financiers' | translate}}</h5>
     <div class="mat-elevation-z8">
       <table mat-table class="table-responsive" [dataSource]="dataSource" (mouseenter)="isHover=true"
         (mouseleave)="isHover=false" matSort>
@@ -9,7 +9,7 @@
         
         <ng-container matColumnDef="invoiceRef">
           <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-          matTooltip="{{dashboardTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> ICC Tradecomm Ref </th>
+          matTooltip="{{dashboardTooltip.tradecommRef}}" [matTooltipPosition]="'below'">{{'ICC Tradecomm Ref' | translate}}</th>
           <td mat-cell *matCellDef="let element">
                       {{element.invoiceRef}} 
           </td>
@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="invId">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice ID</th>
+            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice ID' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.invoiceNo }}
           </td>
@@ -25,8 +25,7 @@
 
         <ng-container matColumnDef="invoiceAmt">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceAmount}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice
-            Amount</th>
+            matTooltip="{{dashboardTooltip.invoiceAmount}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Amount' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.invoiceCcy + ' ' + element.invoiceAmt }}
           </td>
@@ -34,7 +33,7 @@
 
         <ng-container matColumnDef="smeId">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceAmount}}" [matTooltipPosition]="'below'" mat-sort-header>SME Name</th>
+            matTooltip="{{dashboardTooltip.invoiceAmount}}" [matTooltipPosition]="'below'" mat-sort-header>{{'SME Name' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.smeId }}
           </td>
@@ -43,7 +42,7 @@
 
         <ng-container matColumnDef="buyerName">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>Buyer Name</th>
+            matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Buyer Name' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.buyerName }}
           </td>
@@ -51,15 +50,14 @@
 
         <ng-container matColumnDef="invDate">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>Invoice
-            Date</th>
+            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Date' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.invoiceDate | date}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             <a href="javascript:void(0)" (click)="navigateInvoiceDetails(element.invoiceId)">
               <mat-icon #tooltip="matTooltip" matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
@@ -76,29 +74,29 @@
         </ng-container>
         <ng-container matColumnDef="Search">
           <th colspan="8" mat-header-cell *matHeaderCellDef> 
-              <h6>Search By</h6>
+              <h6>{{'Search By' | translate}}</h6>
             <div class="row">
                 <div class="col-sm-2">
                   <mat-form-field appearance="outline">
-                      <mat-label>Invoice ID</mat-label>
+                      <mat-label>{{'Invoice Id' | translate}}</mat-label>
                       <input type="text" matInput />
                     </mat-form-field>
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field appearance="outline">
-                      <mat-label>invoiceAmt</mat-label>
+                      <mat-label>{{'Invoice Amount' | translate}}</mat-label>
                       <input type="text"  matInput />
                     </mat-form-field>
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field appearance="outline">
-                      <mat-label>Sme Name</mat-label>
+                      <mat-label>{{'SME Name' | translate}}</mat-label>
                       <input type="text"  matInput />
                     </mat-form-field>
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field appearance="outline">
-                      <mat-label>buyerName</mat-label>
+                      <mat-label>{{'Buyer Name' | translate}} </mat-label>
                       <input type="text"  matInput />
                     </mat-form-field>
                 </div>
@@ -106,11 +104,11 @@
             <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
               <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                   <mat-icon #tooltip="matTooltip"
-                  matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                  matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>{{'Search' | translate}}
                 </button>&nbsp;
                 <button  mat-raised-button style="color: #5e52a1;">
                   <mat-icon #tooltip="matTooltip"
-                  matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                  matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>{{'Reset' | translate}}
                 </button>
             </div>
            
@@ -120,14 +118,14 @@
           <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
               <div class="row">
                   <div class="col-sm-3">
-                      <label>InvoiceAmount</label>
+                      <label>{{'InvoiceAmount' | translate}}</label>
                       <div class="custom-slider">
                       <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
                     </div>
                     </div>
                     <div class="col-sm-3" style="padding-top: 22px;">
                       <mat-form-field appearance="fill">
-                          <mat-label>InvoiceDate</mat-label>
+                          <mat-label>{{'Invoice Date' | translate}}</mat-label>
                           <mat-date-range-input [rangePicker]="picker">
                             <input matStartDate placeholder="Start date">
                             <input matEndDate placeholder="End date">
@@ -140,11 +138,11 @@
                 <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                   <button  mat-raised-button style="color: #5e52a1;">
                       <mat-icon #tooltip="matTooltip"
-                      matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  Search
+                      matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>{{'Search' | translate}}
                     </button>&nbsp;
                     <button  mat-raised-button style="color: #5e52a1;">
                       <mat-icon #tooltip="matTooltip"
-                      matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
+                      matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>{{'Reset' | translate}}
                     </button>
                 </div>
            </th>

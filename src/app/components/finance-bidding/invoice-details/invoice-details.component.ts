@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Status {
   value: string;
@@ -93,7 +94,7 @@ export class InvoiceDetailsComponent implements OnInit {
   detailsTooltip=INVOICEDETAILSCONSTANTS
   limitDetails: any;
 
-  constructor(private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,
+  constructor(public translate: TranslateService,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,
     private authenticationService:AuthenticationService,private router :Router,private modalDialogService:ModalDialogService,
     private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService) { }
 
@@ -354,10 +355,10 @@ export class InvoiceDetailsComponent implements OnInit {
   openModal(event, template) {
     console.log(this.limitDetails,"this.limitDetails")
     if(Number(this.limitDetails.OverallAvailable) < this.finBidform.value.baseCcyNetAmtPayable){
-      this.toastr.error("Could not launch the bid! Overall available is less than bidding amount")
+      this.toastr.error(this.translate.instant('Could not launch the bid! Overall available is less than bidding amount'))
     }else{
       if(Number(this.limitDetails.transactions) < this.finBidform.value.baseCcyNetAmtPayable){
-        this.toastr.error("Could not launch the bid! transactions available is less than bidding amount")
+        this.toastr.error(this.translate.instant('Could not launch the bid! transactions available is less than bidding amount'))
       }else{
         event.preventDefault();
         this.finBidform.patchValue({
@@ -381,7 +382,7 @@ export class InvoiceDetailsComponent implements OnInit {
       //   this.invoiceForm.get(key).updateValueAndValidity();
       //   }
       if (this.finBidform.status === "INVALID"){
-        this.toastr.error("Please fill Mandatory fields")
+        this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
       }else{
         let params = this.finBidform.value
         let userData = JSON.parse(localStorage.getItem('userCred'))
@@ -397,7 +398,7 @@ export class InvoiceDetailsComponent implements OnInit {
         //   this.invoiceForm.get(key).updateValueAndValidity();
         // }
         this.invoiceRequestServices.finbidSave(params).subscribe(resp => {
-          this.toastr.success("Bid Launched successfully")
+          this.toastr.success(this.translate.instant('Bid Launched successfully'))
           this.buildfinBidform();
           this.modalRef.hide()
           this.router.navigateByUrl('/financier-dashboard');
