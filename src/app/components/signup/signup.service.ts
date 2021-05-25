@@ -17,10 +17,10 @@ export class SignupService {
         return this.apiService.post(environment.financierServicePath+'smeonboard', body);
       }
       companyCheck(data){
-        return this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/getCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
+        return this.apiService.generalServiceget(environment.coriolisServicePath + 'test/company/' + data.companyId + '/' + data.companyName + '/' + data.country);
     }
     getUserDetails(data){
-        return this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/getallquestionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
+        return this.apiService.generalServiceget(environment.coriolisServicePath + 'test/questionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
     }
     getAllRoles(){
         return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');

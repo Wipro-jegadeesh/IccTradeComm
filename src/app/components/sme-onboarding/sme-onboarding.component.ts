@@ -102,6 +102,17 @@ export class SmeOnboardingComponent implements OnInit {
                     if(item.optionAliases){
                         secResp.response=item.optionAliases
                     }
+                    else if(item.fileName){
+                      let fileNames=[]
+                      let isGetArr=item.fileName && item.fileName.split(',')
+                      if(isGetArr.length){
+                        fileNames=isGetArr
+                      }
+                      else{
+                        fileNames=[item.fileName]
+                      }
+                      secResp.response=fileNames
+                    }
                     else{
                     secResp.response=item.value
                     }
@@ -283,6 +294,7 @@ export class SmeOnboardingComponent implements OnInit {
     else{     
         this.questionnaireSections[secIndex].questions[quesIndex].response=data.value && data.value.length ? data.value : ''
         this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
+        this.questionnaireSections[secIndex].questions[quesIndex].has64Value=data.base64data ? true : false
         this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
     }
     console.log(this.questionnaireSections)
@@ -399,7 +411,7 @@ export class SmeOnboardingComponent implements OnInit {
     this.onSave('')
     this.toastr.success('Questionnaire Section Submitted Successfully')
     let data=JSON.parse(localStorage.getItem('userCred'))
-    this.apiService.generalServiceget(environment.coriolisServicePath + 'fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+    this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
       if(resp && resp.score >= 900){
       this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
       })
@@ -447,7 +459,9 @@ export class SmeOnboardingComponent implements OnInit {
                     questionResponses.push(this.textRespBuild(quesItem))
                     break;
                 case 'QuestionFileListDto':
+                  if(quesItem.has64Value){
                     questionResponses.push(this.filesRespBuild(quesItem))
+                  }
                     break;
                 case 'QuestionNumberDto':
                     questionResponses.push(this.numberRespBuild(quesItem))
@@ -539,16 +553,24 @@ export class SmeOnboardingComponent implements OnInit {
     let data=[]
    Data.response.length && Data.response.map((item)=>{
         fileName.push(item.name)
-        data.push(item.base64data)
+        if(item.base64data){
+        let validData=item.base64data.split('base64,')
+        data.push(validData[1])
+        }
     })
     let obj={
         "type":'QuestionResponseFileDto',
         "questionAlias":Data.alias,
-        "fileName":fileName,
-        "data":data,
-        "extension":Data.extensions
+        "fileName":fileName.toString(),
+        "data":data.toString(),
+        // "extension":Data.extensions.length == 1 ? "pdf" : "pdf","txt" 
     }
-    debugger
+    if(Data.extensions.length == 1){
+      obj['extension']="pdf"
+    }
+    else{
+      obj['extension']="pdf"
+    }
     return obj
   }
   numberRespBuild(Data){
