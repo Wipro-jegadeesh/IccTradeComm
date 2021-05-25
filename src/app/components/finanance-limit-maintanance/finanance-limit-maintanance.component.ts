@@ -329,7 +329,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   //line chart end
 
-
+  public sectorTableDatas: any = [];
 
   //carousel end
   constructor(public router: Router,
@@ -355,7 +355,11 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.getMainlimitScreenDatas();
     this.getnewLimitFinSmeDatas();
     this.gettransactionLimitUtilizationTable();
-    this.getsmetransLimitUtilTableDatas()
+    this.getsmetransLimitUtilTableDatas();
+    this.getsectorTableDatas()
+
+
+
 
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -746,5 +750,47 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.graphLimit = true;
 
   }
+  checkValue(value){
+    let obj = [
+      {
+          "LIMIT_PERCENT": "25",
+          "TRANS_COUNT": 3,
+          "sme_profile_id": "SME44"
+      },
+      {
+          "TRANS_COUNT": 1,
+          "LIMIT_PERCENT": "50",
+          "sme_profile_id": "SME44"
+      },
+      {
+          "LIMIT_PERCENT": "100",
+          "TRANS_COUNT": 1,
+          "sme_profile_id": "SME44"
+      },
+      {
+          "TRANS_COUNT": 1,
+          "sme_profile_id": "SME44",
+          "LIMIT_PERCENT": "FULL"
+      }
+  ]
+  obj.map((item,index) => {
+    if(item.LIMIT_PERCENT == value){
+      debugger;
+    return item.TRANS_COUNT
+    }else{
+      debugger;
+      return 0;
+    }
+  })
 
+  }
+  getsectorTableDatas() {
+    this.financelimitMaintananceservices.getsectorexposeTableDatas().subscribe(resp => {
+      if (resp) {
+        this.sectorTableDatas = resp;
+        
+  }
+})
+
+}
 }
