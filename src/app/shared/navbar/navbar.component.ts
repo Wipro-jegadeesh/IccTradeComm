@@ -71,21 +71,36 @@ export class NavbarComponent implements OnInit {
 
     this.selectedItems = [{"id":"en","itemName":"English"}]
 
-    this.setTime()
+    // this.setTime()
     
   }
 
 
   setTime(){
 
-    
-     let timestamp = this.oauthService.getAccessTokenExpiration()
-     var date = new Date(timestamp);
-     var millis : any = date.getMilliseconds();
+    var timestamp = this.oauthService.getAccessTokenExpiration()
+
+              const date1 : any = new Date();
+              var date2 : any = new Date(timestamp);
+           
+              const diffTime = Math.abs(date2 - date1);
+              
+    // var timestamp = this.oauthService.getAccessTokenExpiration()
+    // var date = new Date(timestamp);
+    // var milliseconds : any = date.getMilliseconds();
+    // var seconds : any = date.getSeconds();
+    //  let timestamp = this.oauthService.getAccessTokenExpiration()
+    //  var date = new Date(timestamp);
+    //  this.timestamp = date.getSeconds();
+    //  var millis : any = date.getMilliseconds();
 
       // var minutes = Math.floor(millis / 60000);
       // var seconds = ((millis % 60000) / 1000).toFixed(0);
       // this.timestamp = minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds;
+
+      // debugger
+      // this.timestamp = parseInt(minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds);
+
 
       // this.timestamp = (minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     
@@ -152,9 +167,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    // this.oauthService.logOut();
-    localStorage.clear();
-  this.authenticationService.logout()
+    // localStorage.clear();
+    this.oauthService.logOut();
+  // this.authenticationService.logout()
+
     }
 
     backNavigation() {

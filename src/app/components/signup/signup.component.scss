@@ -103,7 +103,17 @@ mat-icon[matPrefix] {
   margin-top: $uxg-spacing-5;
   bottom: 0;
 }
-
+.signup-lang{
+    text-align: right;
+    .uxg-toolbar-actions{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+    .mat-form-field-appearance-fill[dense] .mat-form-field-wrapper .mat-form-field-flex{
+        padding-top: 6.2px;
+    }
+}
 @media screen and (min-width: 720px) {
   .uxg-signup-page {
     grid-template-columns: 1fr 1.2fr;
@@ -122,6 +132,21 @@ mat-icon[matPrefix] {
 @media screen and (max-width: 575px) {
   .uxg-signup-container{
     width: 100vw;
+    position: absolute;
+    top: 19%;
+  }
+  .uxg-signup-page .uxg-illustration-container{
+    display: block;
+    width: 100%;
+    background-image: url('/assets/img/TradeCom-Image.jfif');
+    background-size: 100% 100%;
+    background-position: 100% 24%;
+    height: 300px;
+    position: absolute;
+    top: 15%;
+  }
+  .sign-form mat-form-field{
+      width: 100%;
   }
 }
 
@@ -346,6 +371,23 @@ table{
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     table.table-responsive.inv-detail-table{
         display: inline-table;
+    }
+    .uxg-signup-page .uxg-illustration-container{
+        background-size: 100% 62%;
+        background-position: 100% center;
+    }
+    .signup-lang .uxg-toolbar-actions{
+        top: 28px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px){
+    .uxg-signup-page .uxg-illustration-container{
+        background-size: 100% 62%;
+        background-position: 100% center;
+    }
+    .signup-lang .uxg-toolbar-actions{
+        top: 28px;
     }
 }
 

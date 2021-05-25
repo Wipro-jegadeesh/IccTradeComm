@@ -1,4 +1,5 @@
-<div class="uxg-toolbar-actions" style="height: 32px;width: 50px;padding: 8px 0px 0px 1108px;">
+<div class="signup-lang">
+  <div class="uxg-toolbar-actions" >
   <div class="language">
     <mat-form-field dense>
       <mat-label>Language</mat-label>
@@ -8,17 +9,18 @@
           (keyup)="onKey($event.target.value)"> -->
         <!-- <mat-option>None</mat-option> -->
         <mat-option *ngFor="let lang of languages" [value]="lang.id">
-          {{ lang.nativeName }}
+          {{ lang.itemName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 </div>
+</div>
 <div class="uxg-signup-page">
   <div class="uxg-signup-container">
     <span class="fill-remaining-space"></span>
     <img src="../../../assets/img/icctradelogo.png" class="log-logo" />
-    <form #signupForm="ngForm">
+    <form #signupForm="ngForm" class="sign-form">
       <mat-form-field floatLabel="never" style="margin-bottom:unset" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label>{{'Name' | translate}}</mat-label>
@@ -54,9 +56,9 @@
     </div>
     <span class="fill-remaining-space"></span>
   </div>
-  <div class="uxg-illustration-container">
-  </div>
+  <div class="uxg-illustration-container"></div>
 </div>
+
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title">{{'Sign Up' | translate}}</h4>
@@ -67,7 +69,7 @@
   <div class="modal-body">
     <div style="text-align: center;">
       <h5>{{'Are you existing coriolis customer' | translate}}</h5>
-      <div class="row">
+      <div class="row"> 
         <div class="col-sm-6" style="text-align: end;">
           <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">{{'yes' | translate}}</button>
         </div>

@@ -34,6 +34,7 @@ export class AuthConfigService {
         return false;
        }
   else{
+    // return
         return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
@@ -81,14 +82,32 @@ export class AuthConfigService {
             const sameCaseArray = claims['realm_access'] && claims['realm_access']['roles'].map(value => value.toLowerCase());
            
 
+
+
+              //chk 
+
+              var timestamp = this.oauthService.getAccessTokenExpiration()
+
+              const date1 : any = new Date();
+              var date2 : any = new Date(timestamp);
+           
+              const diffTime = Math.abs(date2 - date1);
+              // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+              var actualMilliSecond = (diffTime - 120000) //less 2 mins
+
+              this.userIdle.setConfigValues({idle : actualMilliSecond, timeout : actualMilliSecond, ping : 0})
+
+
+
             //Set Expiry time
-            var timestamp = this.oauthService.getAccessTokenExpiration()
-            var date = new Date(timestamp);
-            var milliseconds : any = date.getMilliseconds();
-            var actualMilliSecond = (milliseconds - 120000) //less 2 mins
+            debugger;
+      //       var timestamp = this.oauthService.getAccessTokenExpiration()
+      //       var date = new Date(timestamp);
+      //       var milliseconds : any = date.getMilliseconds();
+      //       var actualMilliSecond = (milliseconds - 120000) //less 2 mins
 
             
-      this.userIdle.setConfigValues({idle : actualMilliSecond, timeout : actualMilliSecond, ping : 0})
+      // this.userIdle.setConfigValues({idle : actualMilliSecond, timeout : actualMilliSecond, ping : 0})
 
       
       
