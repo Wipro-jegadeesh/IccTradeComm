@@ -98,7 +98,7 @@ export class NavbarComponent implements OnInit {
       // var seconds = ((millis % 60000) / 1000).toFixed(0);
       // this.timestamp = minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds;
 
-      // debugger
+      // 
       // this.timestamp = parseInt(minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds);
 
 

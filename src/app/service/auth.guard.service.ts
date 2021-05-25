@@ -100,7 +100,7 @@ export class AuthConfigService {
 
 
             //Set Expiry time
-            debugger;
+            ;
       //       var timestamp = this.oauthService.getAccessTokenExpiration()
       //       var date = new Date(timestamp);
       //       var milliseconds : any = date.getMilliseconds();
