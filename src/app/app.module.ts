@@ -293,7 +293,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSelectModule,
     MatSortModule,
     MatDialogModule,
-    UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
+    UserIdleModule.forRoot({}),
+    // UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
     CountdownModule, 
     // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
 
