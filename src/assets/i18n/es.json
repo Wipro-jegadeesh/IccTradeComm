@@ -232,8 +232,11 @@
     "Chart":"Chart",
     "Actual Funding":"Actual Funding",
     "Funding Requested":"Funding Requested",  
-    "for Particular Good":"for Particular Good"
-
+    "for Particular Good":"for Particular Good",
+    "Finance Requests":"Finance Requests",
+    "View all Finance Requests":"View all Finance Requests",
+    "Repayment Over Due":"Repayment Over Due",
+    "Repayment Due Today":"Repayment Due Today"
     
     
 }

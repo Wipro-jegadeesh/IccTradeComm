@@ -372,10 +372,10 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">
-                                    Invoice Date
+                                    {{'Invoice Date' | translate}}
                                 </label>
                                 <mat-form-field appearance="fill">
-                                    <mat-label>Invoice Date</mat-label>
+                                    <mat-label>{{'Invoice Date' | translate}}</mat-label>
                                     <input matInput [matDatepicker]="picker">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
@@ -409,10 +409,10 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">
-                                    Invoice Date
+                                    {{'Invoice Date' | translate}}
                                 </label>
                                 <mat-form-field appearance="fill">
-                                    <mat-label> Invoice Date</mat-label>
+                                    <mat-label> {{'Invoice Date' | translate}}</mat-label>
                                     <input matInput [matDatepicker]="picker">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
@@ -448,8 +448,8 @@
                     </div>
                 </div>
             </div>
-            <!--Invoice Details-->
-            <p style="font-weight: 500; color: #a899e4;margin-left: 14px;">Invoice Details</p>
+            <!--{{'Invoice Details' | translate}} -->
+            <p style="font-weight: 500; color: #a899e4;margin-left: 14px;">{{'Invoice Details' | translate}} </p>
             <table mat-table [dataSource]="dataSourceInvoiceDetails">
                 <ng-container matColumnDef="InvoiceID">
                     <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
@@ -458,7 +458,7 @@
                 </ng-container>
                 <ng-container matColumnDef="InvoiceDate">
                     <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                    matTooltip="{{financierTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Invoice Date</th>
+                    matTooltip="{{financierTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Invoice Date' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{ element.invDate && moment(element.invDate).format('DD/MM/YYYY')}}</td>
                 </ng-container>
                 <ng-container matColumnDef="smeId">
@@ -496,7 +496,7 @@
                     <mat-expansion-panel-header>
                         <mat-panel-title style="font-weight: 500;
                 color: #a899e4; ">
-                            Goods Details
+                            {{'Goods Details' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <table mat-table [dataSource]="dataSourceOne">

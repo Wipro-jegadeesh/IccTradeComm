@@ -52,7 +52,7 @@
             <tr>
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense>
-                    <mat-label>Invoice Date</mat-label>
+                    <mat-label>{{'Invoice Date' | translate}}</mat-label>
                     <input type="text" matInput  value="{{invoiceDetails ? invoiceDetails.invDate && moment(invoiceDetails.invDate).format('DD/MM/YYYY') : '' | date}}" readonly />
                   </mat-form-field>
                 </td>
@@ -295,7 +295,7 @@
         </form>
             <br>
           </mat-tab>
-      <mat-tab label="Invoice Details Section"> 
+      <mat-tab label="{{'Invoice Details' | translate}}  Section"> 
         <!-- <div class="uxg-h4" style="text-align: center">BIDDING</div> -->
         <!-- Inovice Details -->
         <!-- <mat-accordion>
@@ -304,7 +304,7 @@
             <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        Invoice Details
+                        {{'Invoice Details' | translate}} 
                     </mat-panel-title>
                 </mat-expansion-panel-header>
     
@@ -326,7 +326,7 @@
                 
                     <ng-container matColumnDef="invDate">
                         <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{detailsTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">Invoice Date</th>
+                        matTooltip="{{detailsTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Invoice Date' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.invDate }}</td>
                     </ng-container>
                 
@@ -371,7 +371,7 @@
                 <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
                 <mat-expansion-panel-header>
                 <mat-panel-title style="font-weight:500;color: #a899e4;">
-                Goods Details
+                {{'Goods Details' | translate}}
                 </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="table-res"> 

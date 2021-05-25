@@ -221,6 +221,11 @@
   "Funding Request":"Funding Request",
   "Chart":"Chart",
   "Actual Funding":"Actual Funding",
-  "Funding Requested":"Funding Requested"
-  
+  "Funding Requested":"Funding Requested",
+
+  "Finance Requests":"Finance Requests",
+  "View all Finance Requests":"View all Finance Requests",
+  "Repayment Over Due":"Repayment Over Due",
+  "Repayment Due Today":"Repayment Due Today"
+
 }
