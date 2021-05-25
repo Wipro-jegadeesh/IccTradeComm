@@ -825,29 +825,34 @@
                               </tr>
                               <tr>
                                 <td>0 to 25%</td>
-                                <td>{{smetransLimitUtilTableDatas[0]
-                                  ?smetransLimitUtilTableDatas[0].TRANS_COUNT:''}}</td>
+                                <td>{{checkSmeExpValue(25)}}</td>
+                                <!-- <td>{{smetransLimitUtilTableDatas[0]
+                                  ?smetransLimitUtilTableDatas[0].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>25% to 50%</td>
-                                <td>{{smetransLimitUtilTableDatas[1] ?
-                                  smetransLimitUtilTableDatas[1].TRANS_COUNT:''}}</td>
+                                <td>{{checkSmeExpValue(50)}}</td>
+                                <!-- <td>{{smetransLimitUtilTableDatas[1] ?
+                                  smetransLimitUtilTableDatas[1].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>50% to 75%</td>
-                                <td>{{smetransLimitUtilTableDatas[2] ?
-                                  smetransLimitUtilTableDatas[2].TRANS_COUNT:''}}</td>
+                                <td>{{checkSmeExpValue(75)}}</td>
+                                <!-- <td>{{smetransLimitUtilTableDatas[2] ?
+                                  smetransLimitUtilTableDatas[2].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>75% to 100%</td>
-                                <td>{{smetransLimitUtilTableDatas[3]
-                                  ?smetransLimitUtilTableDatas[3].TRANS_COUNT:''}}</td>
+                                <td>{{checkSmeExpValue(100)}}</td>
+                                <!-- <td>{{smetransLimitUtilTableDatas[3]
+                                  ?smetransLimitUtilTableDatas[3].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                
                                 <td>100% (Full Utilization)</td>
-                                <td>{{smetransLimitUtilTableDatas[4] ?
-                                  smetransLimitUtilTableDatas[4].TRANS_COUNT:' '}}</td>
+                                <td>{{checkSmeExpValue('FULL')}}</td>
+                                <!-- <td>{{smetransLimitUtilTableDatas[4] ?
+                                  smetransLimitUtilTableDatas[4].TRANS_COUNT:' '}}</td> -->
                               </tr>
                             </table>
                           </div>
@@ -1025,31 +1030,35 @@
                               </tr>
                               <tr>
                                 <td>0 to 25%</td>
-                                <!-- <td>{{checkValue(50)}}</td> -->
+                                <td>{{checkSectorExpValue(25)}}</td>
 
-                                <td>{{sectorTableDatas[0]
-                                  ?sectorTableDatas[0].TRANS_COUNT:''}}</td>
+                                <!-- <td>{{sectorTableDatas[0]
+                                  ?sectorTableDatas[0].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>25% to 50%</td>
-                                <td>{{sectorTableDatas[1] ?
-                                  sectorTableDatas[1].TRANS_COUNT:''}}</td>
+                                <td>{{checkSectorExpValue(50)}}</td>
+                                <!-- <td>{{sectorTableDatas[1] ?
+                                  sectorTableDatas[1].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>50% to 75%</td>
-                                <td>{{sectorTableDatas[2] ?
-                                  sectorTableDatas[2].TRANS_COUNT:''}}</td>
+                                <td>{{checkSectorExpValue(75)}}</td>
+                                <!-- <td>{{sectorTableDatas[2] ?
+                                  sectorTableDatas[2].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                 <td>75% to 100%</td>
-                                <td>{{sectorTableDatas[3]
-                                  ?sectorTableDatas[3].TRANS_COUNT:''}}</td>
+                                <td>{{checkSectorExpValue(100)}}</td>
+                                <!-- <td>{{sectorTableDatas[3]
+                                  ?sectorTableDatas[3].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
                                
                                 <td>100% (Full Utilization)</td>
-                                <td>{{sectorTableDatas[4] ?
-                                  sectorTableDatas[4].TRANS_COUNT:' '}}</td>
+                                <td>{{checkSectorExpValue('FULL')}}</td>
+                                <!-- <td>{{sectorTableDatas[4] ?
+                                  sectorTableDatas[4].TRANS_COUNT:' '}}</td> -->
                               </tr>
                             </table>
                           </div>

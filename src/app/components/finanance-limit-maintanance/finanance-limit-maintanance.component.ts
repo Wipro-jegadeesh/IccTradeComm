@@ -749,8 +749,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.tableLimit = false;
     this.graphLimit = true;
 
-  }
-  checkValue(value){
+  } 
+  checkSmeExpValue(value){
+    let transCount = 0;
+    let respObj = this.smetransLimitUtilTableDatas
     let obj = [
       {
           "LIMIT_PERCENT": "25",
@@ -773,22 +775,49 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           "LIMIT_PERCENT": "FULL"
       }
   ]
-  obj.map((item,index) => {
+  respObj.map((item,index) => {
     if(item.LIMIT_PERCENT == value){
-      debugger;
-    return item.TRANS_COUNT
-    }else{
-      debugger;
-      return 0;
+    transCount =  item.TRANS_COUNT
     }
   })
-
+  return transCount
+  }
+  checkSectorExpValue(value){
+    let transCount = 0;
+    let respObj = this.sectorTableDatas
+    let obj = [
+      {
+          "LIMIT_PERCENT": "25",
+          "TRANS_COUNT": 3,
+          "sme_profile_id": "SME44"
+      },
+      {
+          "TRANS_COUNT": 1,
+          "LIMIT_PERCENT": "50",
+          "sme_profile_id": "SME44"
+      },
+      {
+          "LIMIT_PERCENT": "100",
+          "TRANS_COUNT": 1,
+          "sme_profile_id": "SME44"
+      },
+      {
+          "TRANS_COUNT": 1,
+          "sme_profile_id": "SME44",
+          "LIMIT_PERCENT": "FULL"
+      }
+  ]
+  respObj.map((item,index) => {
+    if(item.LIMIT_PERCENT == value){
+    transCount =  item.TRANS_COUNT
+    }
+  })
+  return transCount
   }
   getsectorTableDatas() {
     this.financelimitMaintananceservices.getsectorexposeTableDatas().subscribe(resp => {
       if (resp) {
         this.sectorTableDatas = resp;
-        
   }
 })
 
