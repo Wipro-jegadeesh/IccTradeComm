@@ -714,10 +714,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
         "sme_profile_id": "SME75"
       }
     ]
-    this.dataSourceOverAllTransactionLimit = new MatTableDataSource(smetransApiData);
+   // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(smetransApiData);
     this.financelimitMaintananceservices.smetransApiDependDataService(item).subscribe(resp => {
 
-      // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
+       this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
     })
 
     console.log(item, "items")
