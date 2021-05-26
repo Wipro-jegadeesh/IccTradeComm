@@ -29,23 +29,23 @@
         </div>
         <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="Open Funding Requests" number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Open Funding Requests' | translate}}" number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.bidDetails}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()"></uxg-account-card>
                 
-                <uxg-account-card class="curs-pointer" name="Funding Bids" number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"  #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funding Bids' | translate}}" number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"  #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.financeBidReceive}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()" ></uxg-account-card>
                 <!-- <uxg-account-card class="curs-pointer" name="Invoice Creation" number="New"(click)="this.navigateInvoiceCreation()" ></uxg-account-card> -->
                 
-                <uxg-account-card class="curs-pointer" name="Funded" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funded' | translate}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.acceptedDetails}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}" ></uxg-account-card>
                
-                <uxg-account-card class="curs-pointer" name="Repayments Due Today" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Due Today' | translate}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.todayDue}}" (click)="this.navigateAcceptedRepayment()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="Repayments Overdue" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Overdue' | translate}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltips.pastDue}}" (click)="this.navigateRepaymentOverDue()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
             </div>
