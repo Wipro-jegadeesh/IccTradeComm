@@ -94,13 +94,11 @@ export class AuthConfigService {
               const diffTime = Math.abs(date2 - date1);
               // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
               var actualMilliSecond = (diffTime - 120000) //less 2 mins
-
               this.userIdle.setConfigValues({idle : actualMilliSecond, timeout : actualMilliSecond, ping : 0})
 
 
 
             //Set Expiry time
-            ;
       //       var timestamp = this.oauthService.getAccessTokenExpiration()
       //       var date = new Date(timestamp);
       //       var milliseconds : any = date.getMilliseconds();
