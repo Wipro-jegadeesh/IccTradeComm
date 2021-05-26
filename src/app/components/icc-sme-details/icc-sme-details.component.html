@@ -7,7 +7,7 @@
           <div class="col-md-12">
            
             <mat-tab-group dynamicHeight>
-              <mat-tab label="Details">
+              <mat-tab label="{{'IccSmeDetails.Details' | translate }}">
                 <div class="links">
                   <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
                         <mat-card>
@@ -18,8 +18,9 @@
                                 <!-- <label for="National ID​">Company Register ID​
                                 </label> -->
                                 <mat-form-field dense>
-                                  <mat-label>Company Register ID​ </mat-label>
-                                  <input type="text"  placeholder="Company Register Id" matInput formControlName="nationalId" readonly/>
+                                  <mat-label>Company Register ID</mat-label>
+                                    <!-- {{'IccSmeDetails.CompanyRegisterId' | translate​}} </mat-label> --> 
+                                  <input type="text"  placeholder="{{'Company Register Id' | translate }}" matInput formControlName="nationalId" readonly/>
                                   <!-- <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error> -->
                                 </mat-form-field>
                               </div>
@@ -29,7 +30,7 @@
                                 <!-- <label for="First name​">Company name​
                                 </label> -->
                                 <mat-form-field dense>
-                                  <mat-label>Company name​</mat-label>
+                                  <mat-label>{{'Company name​' | translate }}</mat-label>
                                   <mat-icon matPrefix>business</mat-icon>
                                   <input type="text" matInput placeholder="Company Number" formControlName="companyName" readonly/>
                                   <!-- <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error> -->
@@ -41,9 +42,9 @@
                                 <!-- <label for="Country​">Country
                                 </label> -->
                                 <mat-form-field dense>
-                                  <mat-label>Country</mat-label>
+                                  <mat-label>{{'IccSmeDetails.Country' | translate }}</mat-label>
                                   <mat-icon matPrefix>flag</mat-icon>
-                                  <input type="text" matInput placeholder="Country" formControlName="country" readonly/>
+                                  <input type="text" matInput placeholder="{{'Country' | translate }}" formControlName="country" readonly/>
                                   <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
                                 </mat-form-field>
                               </div>
@@ -54,7 +55,7 @@
                             <!-- <label for="Address">Address 1</label> -->
                             <div class="form-group">
                             <mat-form-field dense>
-                              <mat-label>Address 1</mat-label>
+                              <mat-label>{{'Address 1' | translate }}</mat-label>
                               <mat-icon matPrefix>home</mat-icon>
                               <input type="text" matInput  formControlName="address" readonly/>
                               <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
@@ -65,7 +66,7 @@
                             <!-- <label for="Address">Address 2</label> -->
                             <div class="form-group">
                             <mat-form-field dense>
-                              <mat-label>Address 2</mat-label>
+                              <mat-label>{{'Address 2' | translate }}</mat-label>
                               <mat-icon matPrefix>home</mat-icon>
                               <input type="text" matInput  formControlName="address1" readonly/>
                               <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
@@ -76,9 +77,9 @@
                             <div class="form-group">
                               <!-- <label for="National ID​">Phone Number</label> -->
                               <mat-form-field dense>
-                                <mat-label>Phone Number</mat-label>
+                                <mat-label>{{'Phone Number' | translate }}</mat-label>
                                 <mat-icon matPrefix>call</mat-icon>
-                                <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" readonly/>
+                                <input type="text" matInput placeholder="{{'Phone Number' | translate }}" formControlName="contactNo" readonly/>
                                 <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
                               </mat-form-field>
                             </div>
@@ -89,7 +90,7 @@
                             <div class="form-group">
                               <!-- <label for="Locale">State</label> -->
                               <mat-form-field dense>
-                                <mat-label>State</mat-label>
+                                <mat-label>{{'State' |  translate }}</mat-label>
                                 <mat-icon matPrefix>add_location</mat-icon>
                                 <input type="text" matInput  formControlName="state" readonly/>
                                 <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
@@ -100,7 +101,7 @@
                             <div class="form-group">
                               <!-- <label for="Locale">City</label> -->
                               <mat-form-field dense>
-                                <mat-label>City</mat-label>
+                                <mat-label>{{'City' | translate }}</mat-label>
                                 <mat-icon matPrefix>add_location</mat-icon>
                                 <input type="text" matInput  formControlName="locale" readonly/>
                                 <mat-error *ngIf="hasError('locale', 'required')">City is required</mat-error>
@@ -111,7 +112,7 @@
                             <div class="form-group">
                               <!-- <label for="Locale">Postal Code</label> -->
                               <mat-form-field dense>
-                                <mat-label>Postal Code</mat-label>
+                                <mat-label>{{'Postal Code' | translate}}</mat-label>
                                 <mat-icon matPrefix>local_shipping</mat-icon>
                                 <input type="text" matInput  formControlName="postalCode" readonly/>
                                 <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
@@ -125,9 +126,9 @@
                             <!-- <label for="National ID​">Email Id
                             </label> -->
                             <mat-form-field dense>
-                              <mat-label>Email Id</mat-label>
+                              <mat-label>{{'Email Id' | translate}}</mat-label>
                               <mat-icon matPrefix>email</mat-icon>
-                              <input type="text" matInput placeholder="Email" formControlName="email" readonly/>
+                              <input type="text" matInput placeholder="{{'Email Id' | translate}}" formControlName="email" readonly/>
                               <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
                             </mat-form-field>
                           </div>
@@ -135,7 +136,7 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                           <mat-form-field dense>
-                           <mat-label>Sector</mat-label>
+                           <mat-label>{{'Sector' | translate }}</mat-label>
                            <mat-select formControlName="sector">
                              <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
                            </mat-select>
@@ -146,26 +147,26 @@
                           <div class="form-group">
                              <!-- <label for="Status">Status</label> -->
                              <mat-form-field dense>
-                              <mat-label>Status</mat-label>
+                              <mat-label>{{'Status' | translate }}</mat-label>
                                 <mat-select formControlName="status" panelClass="myPanelClass">
                                   <mat-option value="A">Active</mat-option>
                                   <mat-option value="I">Inactive</mat-option>
                                   <mat-option value="D">Defaulted</mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
+                                <mat-error *ngIf="hasError('status', 'required')">{{'Status is Required' | translate }}</mat-error>
                              </mat-form-field>
                           </div>
                       </div>
                     </div>
                     <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-                      <button mat-raised-button color="primary" >Submit</button>
+                      <button mat-raised-button color="primary" >{{'Submit' | translate}}</button>
               </div>
             </mat-card-content>
             </mat-card>
             </form>
                 </div>
               </mat-tab>
-              <mat-tab label="Questionaire">
+              <mat-tab label="{{'IccSmeDetails.Questionaire' | translate}}">
                 <div class="links">
                   <div class="row col-md-12 col-12" *ngIf="questionnaireSections">
                       <div class="col-md-3 col-3 ques-sec" >
@@ -243,7 +244,7 @@
                     </div>
                 </div>
               </mat-tab>
-              <mat-tab label="Score">
+              <mat-tab label="{{'IccSmeDetails.Score' | translate}}">
                 <div class="links">
                   <!-- <a routerLink="#">Creation</a>
                   <a routerLink="#">Edit</a>
@@ -257,14 +258,14 @@
                     <tr>
                         <td rowspan="1" colspan="1">
                             <mat-form-field dense class="icc-mat">
-                              <mat-label>Consolidated score</mat-label>
+                              <mat-label>{{'IccSmeDetails.Consolidated score' | translate }}</mat-label>
                               <input type="text" matInput formControlName="score" />
                             </mat-form-field>
                           </td>
                               
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense class="icc-mat">
-                    <mat-label>Score State</mat-label>
+                    <mat-label>{{'IccSmeDetails.Score State'| translate}}</mat-label>
                     <input type="text" matInput formControlName="state" />
                   </mat-form-field>
                 </td>
@@ -299,7 +300,7 @@
                       </ng-container> -->
     
                     <ng-container matColumnDef="scoreName">
-                        <th mat-header-cell *matHeaderCellDef  mat-sort-header > Score Name </th>
+                        <th mat-header-cell *matHeaderCellDef  mat-sort-header >{{'IccSmeDetails.Score Name' | translate }} </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.scoreName}}
                         </td>
@@ -307,7 +308,7 @@
     
                     <ng-container matColumnDef="score">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                            matTooltip="score" [matTooltipPosition]="'below'"> Score
+                            matTooltip="score" [matTooltipPosition]="'below'"> {{'IccSmeDetails.Score' | translate}}
                         </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.score}}
@@ -316,7 +317,7 @@
     
                     <ng-container matColumnDef="information">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                            matTooltip="information" [matTooltipPosition]="'below'"> Information
+                            matTooltip="information" [matTooltipPosition]="'below'">{{'IccSmeDetails.Information' | translate}}
                         </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.information[0]?.information[0]?.message || ''}}
@@ -348,17 +349,17 @@
                   matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-authorize')">Authorization Matrix</button> -->
                 </div>
               </mat-tab>
-              <mat-tab label="Related Users"> 
+              <mat-tab label="{{'IccSmeDetails.Related Users' | translate}}"> 
                 <div class="row" >
                   <div class="col-sm-12" style="text-align: end; top: 5px;">
-                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid,'ADD')" > Add User </button>
+                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid,'ADD')" >{{ 'IccSmeDetails.Adduser' | translate}} </button>
                   </div>
               </div>
               <div class="row col-sm-12" style="top: 13px;">
                 <table mat-table [dataSource]="dataSource1" >
                   <ng-container matColumnDef="userId">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="UserID" [matTooltipPosition]="'below'"> User Id </th>
+                      matTooltip="UserID" [matTooltipPosition]="'below'">{{'IccSmeDetails.User Id' | translate }} </th>
                       <td mat-cell *matCellDef="let element">
                                   {{element.usersId}}
                       </td>
@@ -366,7 +367,7 @@
                   
                   <ng-container matColumnDef="firstName">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> First Name </th>
+                          matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> {{'First Name' | translate}} </th>
                       <td mat-cell *matCellDef="let element">
                           {{element.firstName}}
                       </td>
@@ -374,7 +375,7 @@
   
                   <ng-container matColumnDef="lastName">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> Last Name 
+                          matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'Last name' | translate }} 
                       </th>
                       <td mat-cell *matCellDef="let element">
                           {{element.lastName}}
@@ -383,7 +384,7 @@
   
                   <ng-container matColumnDef="companyName">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
-                          [matTooltipPosition]="'below'"> Company Name </th>
+                          [matTooltipPosition]="'below'"> {{'Company name' | translate }} </th>
                       <td mat-cell *matCellDef="let element">
                           {{element.companyName}}
                       </td>
@@ -391,7 +392,7 @@
   
                   <ng-container matColumnDef="emailId">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> Email Id  </th>
+                          matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">{{'Email Id' | translate}}  </th>
                       <td mat-cell *matCellDef="let element">
                           {{element.email}}
                       </td>
@@ -399,7 +400,7 @@
   
                   <ng-container matColumnDef="phoneNumber">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Phone Number  </th>
+                          matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Phone Number' | translate}}  </th>
                       <td mat-cell *matCellDef="let element">
                           {{ element.contact }}
                       </td>

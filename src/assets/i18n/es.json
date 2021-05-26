@@ -107,6 +107,7 @@
     "Buyer":"Comprador",
     "Invoice Amount":"Importe factura",
     "Status":"Estado",
+    "Status is Required":"El estado es obligatorio",
     "Initiated":"Iniciado",
     "Submit":"Enviar",
     "Authorise":"Autorizar",
@@ -299,5 +300,33 @@
       "Numeric":"Numeric",
       "Add":"Add",
       "Update":"Update"
+    },
+
+
+    "IccRoles":{
+      "Roles":"Roles",
+      "code":"código",
+      "roleDescription":"Descripción del rol",
+      "add":"Agregar",
+      "update":"Actualizar"
+    },
+    "IccSector":{
+      "SectorDescription":"Descripción del sector",
+      "add":"Agregar",
+      "update":"Actualizar"
+    },
+    "IccSmeDetails":{
+      "Details":"Detalles",
+      "Questionaire":"Cuestionario",
+      "Score":"Puntaje",
+      "Consolidated score":"Puntaje consolidado",
+      "Score State":"Estado de puntuación",
+      "Score Name":"Nombre de la partitura",
+      "Information":"Información",
+      "Adduser":"Agregar usuario",
+      "User Id":"ID de usuario",
+      "Country":"País",
+      "Related Users":"Usuarios relacionadas",
+      "CompanyRegisterId":"ID de registro de la empresa"
     }
 }

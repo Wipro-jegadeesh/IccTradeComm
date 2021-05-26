@@ -2,7 +2,7 @@
   <header>
     <div class="data-section">
       <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()" #formDirective="ngForm">
-      <h5 class="text-center">Roles</h5>
+      <h5 class="text-center">{{'IccRoles.Roles' | translate}}</h5>
           <mat-card>
         <mat-card-content>
           <table  class="table-responsive inv-table">
@@ -12,7 +12,7 @@
                 
   <td rowspan="1" colspan="1">
     <mat-form-field dense class="icc-mat">
-      <mat-label>Code</mat-label>
+      <mat-label>{{'IccRoles.code' | translate}}</mat-label>
       <input type="text" matInput value="" formControlName="code" />
 
       <!-- <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate"> -->
@@ -22,7 +22,7 @@
   </td>
   <td rowspan="1" colspan="1">
     <mat-form-field dense class="icc-mat">
-      <mat-label>Role Description</mat-label>
+      <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
       <input type="text" matInput value="" formControlName="roleDescription" />
 
       <!-- <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" /> -->
@@ -39,8 +39,8 @@
 
   <td rowspan="1" colspan="1">      
       <!-- <button  mat-flat-button color="primary"id=grid>Add</button> -->
-      <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
-      <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
+      <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>{{'IccRoles.add' | translate}}</button>
+      <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>{{'IccRoles.update' | translate}}</button>
       <!-- #tooltip="matTooltip"
       matTooltip="{{biddingTooltip.invoiceAmount}}"
       [matTooltipPosition]="'below'" -->
@@ -59,14 +59,14 @@
       <div class="mat-elevation-z8 table-responsive table-post">
           <table mat-table [dataSource]="dataSource" matSort>
               <ng-container matColumnDef="code">
-                  <th mat-header-cell *matHeaderCellDef  mat-sort-header> Code </th>
+                  <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{'IccRoles.code' | translate}} </th>
                   <td mat-cell *matCellDef="let element">
                                {{element.code}}
                    </td>
                 </ng-container>
 
               <ng-container matColumnDef="roleDescription">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Role Description </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'IccRoles.roleDescription' | translate}} </th>
                   <td mat-cell *matCellDef="let element"> 
                       {{element.roleDescription}}
                   </td>
