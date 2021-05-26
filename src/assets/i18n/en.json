@@ -1,5 +1,5 @@
 {
-  "Welcome": "testttt",
+  "Welcome": "Welcome",
   "Dashboard": "Dashboard",
   "Charts": "Charts",
   "Blank Page": "Blank Page",
@@ -237,7 +237,14 @@
   "Funding Amt (BaseCcy)":"Funding Amt (BaseCcy)",
   "Net Amt payable":"Net Amt payable",
   "SME Id":"SME Id",
-  
+
+  "SMEDashboardComponent":{
+    "Open Funding Requests":"Open Funding Requests",
+    "Funding Bids":"Funding Bids",
+    "Funded":"Funded",
+    "Repayments Due Today":"Repayments Due Today",
+    "Repayments Overdue":"Repayments Overdue"
+  },
   "FinanceDashboardComponent":{
     "Finance Maturity":"Finance Maturity",
     "Period":"Period",
