@@ -94,24 +94,32 @@ export class SmeOnboardingComponent implements OnInit {
        quesItem.sectionType = secIndex == 0 && quesIndex < 10 ? 'personal' : 'other'
     })
     secItem.itHasValue=false
-    //PARTIAL RESPONSE
-    if(secItem.sectionResponseState == "Partial"){
+    //PARTIAL RESPONSE & Completed Response
+
+        if(secItem && secItem.sectionResponse){
           secItem.questions.map((secResp,index)=>{
+            let fileAlias=[]
             secItem.sectionResponse.responses.map((item)=>{
                 if(item.questionAlias == secResp.alias){
                     if(item.optionAliases){
                         secResp.response=item.optionAliases
                     }
                     else if(item.fileName){
-                      let fileNames=[]
-                      let isGetArr=item.fileName && item.fileName.split(',')
-                      if(isGetArr.length){
-                        fileNames=isGetArr
+                      if(!fileAlias.includes(item.questionAlias)){
+                        fileAlias.push(item.questionAlias)
+                        let obj={
+                          'name':item.fileName
+                        }
+                        secResp.response=[]
+                        secResp.response.push(obj)
                       }
                       else{
-                        fileNames=[item.fileName]
+                        let resp=  secItem.questions.filter(x => x.alias == item.questionAlias)
+                        let obj={
+                          'name':item.fileName
+                        }
+                        resp[0].response.push(obj)
                       }
-                      secResp.response=fileNames
                     }
                     else{
                     secResp.response=item.value
@@ -130,25 +138,10 @@ export class SmeOnboardingComponent implements OnInit {
             //   this.questionnaireSections[secIndex].questions[index].response=resp[0].optionAliases
             //   }
           })
-    }
-    else if(secItem.sectionResponseState == "Completed"){
-      secItem.questions.map((secResp,index)=>{
-        secItem.sectionResponse.responses.map((item)=>{
-            if(item.questionAlias == secResp.alias){
-                if(item.optionAliases){
-                    secResp.response=item.optionAliases
-                }
-                else{
-                secResp.response=item.value
-                }
-                secResp.itHasValue=true
-            }
-        })
-      })
-    }
+        }
 
     //SUBSECTION ARRAY
-    secItem && secItem.subSections.map((subSecItem,subSecIndex)=>{
+    secItem.subSections.length && secItem.subSections.map((subSecItem,subSecIndex)=>{
       subSecItem.questions.forEach((subQuesItem,subQuesIndex)=>{
           subQuesItem.show=true
           subQuesItem.response=''
@@ -207,7 +200,7 @@ export class SmeOnboardingComponent implements OnInit {
         this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
       }
       else{
-    data.questionDatas.type == 'QuestionNumberDto' && this.questionnaireSections[secIndex].questions.map((item)=>{
+    data.questionDatas.type == 'QuestionNumberDto' && this.questionnaireSections[secIndex].questions.forEach((item)=>{
         if(data.number == item.parentNumber && (item.conditions.length && item.conditions[0]['conditionQuestionAlias'] ==  data.questionDatas.alias) ){
             if(item.conditions[0]['operator'] == "GreaterThan"){
                 item.show =  data.value > item.conditions[0]['value'] ? true : false
@@ -294,7 +287,6 @@ export class SmeOnboardingComponent implements OnInit {
     else{     
         this.questionnaireSections[secIndex].questions[quesIndex].response=data.value && data.value.length ? data.value : ''
         this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
-        this.questionnaireSections[secIndex].questions[quesIndex].has64Value=data.base64data ? true : false
         this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
     }
     console.log(this.questionnaireSections)
@@ -436,20 +428,20 @@ export class SmeOnboardingComponent implements OnInit {
   }
   onSave(type) {
     let onboardingResp=[]
-    this.questionnaireSections.map((item)=>{
+    this.questionnaireSections.forEach((item)=>{
     let compSecObj={
         "sectionAlias":item.alias,
         "companyId":localStorage.getItem('uuid'),
     }
     let subSectionResponseDto=[]
     if(item.subSections && item.subSections.length){
-        item.subSections.map((subItem)=>{
+        item.subSections.forEach((subItem)=>{
             subSectionResponseDto.push(this.buildSubSecResp(subItem))
         })
     }
 
         let questionResponses=[]
-        item.questions.map((quesItem)=>{
+        item.questions.forEach((quesItem)=>{
             if(quesItem.response){
             switch(quesItem.type){
                 case 'QuestionBoolDto':
@@ -459,9 +451,11 @@ export class SmeOnboardingComponent implements OnInit {
                     questionResponses.push(this.textRespBuild(quesItem))
                     break;
                 case 'QuestionFileListDto':
-                  if(quesItem.has64Value){
-                    questionResponses.push(this.filesRespBuild(quesItem))
-                  }
+                  quesItem.response.length && quesItem.response.forEach((fileItem)=>{
+                    if(fileItem.base64data){
+                      questionResponses.push(this.filesRespBuild(quesItem,fileItem))
+                    }
+                  })
                     break;
                 case 'QuestionNumberDto':
                     questionResponses.push(this.numberRespBuild(quesItem))
@@ -500,7 +494,7 @@ export class SmeOnboardingComponent implements OnInit {
         'subSectionAlias':Data.alias,
     }
     let questionResponses=[]
-    Data.questions.map((quesItem)=>{
+    Data.questions.forEach((quesItem)=>{
         if(quesItem.response){
         switch(quesItem.type){
             case 'QuestionBoolDto':
@@ -510,7 +504,11 @@ export class SmeOnboardingComponent implements OnInit {
                 questionResponses.push(this.textRespBuild(quesItem))
                 break;
             case 'QuestionFileListDto':
-                questionResponses.push(this.filesRespBuild(quesItem))
+              quesItem.response.length && quesItem.response.forEach((fileItem)=>{
+                  if(fileItem.base64data){
+                    questionResponses.push(this.filesRespBuild(quesItem,fileItem))
+                  }
+                })
                 break;
             case 'QuestionNumberDto':
                 questionResponses.push(this.numberRespBuild(quesItem))
@@ -548,28 +546,23 @@ export class SmeOnboardingComponent implements OnInit {
       }
       return obj
   }
-  filesRespBuild(Data){
-    let fileName=[]
-    let data=[]
-   Data.response.length && Data.response.map((item)=>{
-        fileName.push(item.name)
-        if(item.base64data){
-        let validData=item.base64data.split('base64,')
-        data.push(validData[1])
-        }
-    })
+  filesRespBuild(Data,fileData){
+  //   let fileName=[]
+  //   let data=[]
+  //  Data.response.length && Data.response.map((item)=>{
+  //       fileName.push(item.name)
+  //       if(item.base64data){
+  //       let validData=item.base64data.split('base64,')
+  //       data.push(validData[1])
+  //       }
+  //   })
+  let validData=fileData.base64data.split('base64,')
     let obj={
         "type":'QuestionResponseFileDto',
         "questionAlias":Data.alias,
-        "fileName":fileName.toString(),
-        "data":data.toString(),
-        // "extension":Data.extensions.length == 1 ? "pdf" : "pdf","txt" 
-    }
-    if(Data.extensions.length == 1){
-      obj['extension']="pdf"
-    }
-    else{
-      obj['extension']="pdf"
+        "fileName":fileData.name, //fileName.toString(),
+        "data":validData[1],//data.toString(),
+        "extension":fileData.fileExt
     }
     return obj
   }
