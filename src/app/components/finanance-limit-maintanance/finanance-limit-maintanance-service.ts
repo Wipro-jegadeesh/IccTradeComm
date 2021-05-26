@@ -19,7 +19,7 @@ export class FinanceLimitMaintananceServices {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
     return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartData/' + this.financierProfileId);
   }
-  smetransApiDependDataService(item) {
+  overALLtransApiDependDataService(item) {
     let minMax;
     if (item == "25") {
       minMax = "&min=0" + "&max=25"
@@ -31,11 +31,41 @@ export class FinanceLimitMaintananceServices {
       minMax = "&min=75" + "&max=100"
     }
     else {
-      minMax = "&max=FULL"
+      minMax = "&min=0" + "&max=FULL"
     }
-    // let userId = this.financierProfileId ? 'finId=' + this.financierProfileId : ''
-
     return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataList?finId=' + this.financierProfileId + minMax);
+  }
+  smeApiDependDataService(item) {
+    let minMaxValue;
+    if (item == "25") {
+      minMaxValue = "&min=0" + "&max=25"
+    } else if (item == "50") {
+      minMaxValue = "&min=25" + "&max=50"
+    } else if (item == "75") {
+      minMaxValue = "&min=50" + "&max=75"
+    } else if (item == "100") {
+      minMaxValue = "&min=75" + "&max=100"
+    }
+    else {
+      minMaxValue = "&min=0" + "&max=FULL"
+    }
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataBySmeIdList?finId=' + this.financierProfileId + minMaxValue);
+  }
+  sectorApiDependDataService(item) {
+    let minMaxValue;
+    if (item == "25") {
+      minMaxValue = "&min=0" + "&max=25"
+    } else if (item == "50") {
+      minMaxValue = "&min=25" + "&max=50"
+    } else if (item == "75") {
+      minMaxValue = "&min=50" + "&max=75"
+    } else if (item == "100") {
+      minMaxValue = "&min=75" + "&max=100"
+    }
+    else {
+      minMaxValue = "&min=0" + "&max=FULL"
+    }
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartSectorList?finId=' + this.financierProfileId + minMaxValue);
   }
   getsmetransLimitUtilTableDatas() {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
