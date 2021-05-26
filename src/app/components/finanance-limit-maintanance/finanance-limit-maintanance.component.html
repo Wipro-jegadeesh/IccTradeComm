@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-md-12">
           <mat-tab-group dynamicHeight>
+            <!--Limit Maintanance-->
             <mat-tab label="Limit Maintanance">
               <div class="links">
                 <mat-card>
@@ -145,6 +146,7 @@
                 </mat-card>
               </div>
             </mat-tab>
+            <!--Limit Maintanance-->
             <!-- <mat-tab label="Limit Presenter">
               <div class="links">
                 <mat-card>
@@ -265,7 +267,8 @@
               </div>
             </mat-tab> -->
 
-            <mat-tab label="Overall_ Transaction Limit">
+            <!--- Overall_Transaction Exposure Limit-->
+            <mat-tab label="Overall_Transaction Limit">
               <div class="links">
                 <mat-card>
                   <mat-card-content>
@@ -307,34 +310,34 @@
                               </tbody>
                             </table>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6 hover">
                             <table class="table-bordered table" id="exposureTbl">
                               <tr>
                                 <th>Utilization Slabs</th>
                                 <th>Number of Bids</th>
                               </tr>
                               <!-- <tr  *ngFor="let item of transLimitUtilTableDatas; index as i;"></tr> -->
-                              <tr>
+                              <tr (click)="overtransTableDepenData('25')">
                                 <td>0 to 25%</td>
                                 <td>{{transLimitUtilTableDatas[0]?
                                   transLimitUtilTableDatas[0].TRANS_COUNT:''}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="overtransTableDepenData('50')">
                                 <td>25% to 50%</td>
                                 <td>{{transLimitUtilTableDatas[1]
                                   ?transLimitUtilTableDatas[1].TRANS_COUNT:''}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="overtransTableDepenData('75')">
                                 <td>50% to 75%</td>
                                 <td>{{transLimitUtilTableDatas[2]?
                                   transLimitUtilTableDatas[2].TRANS_COUNT:''}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="overtransTableDepenData('100')">
                                 <td>75% to 100%</td>
                                 <td>{{transLimitUtilTableDatas[3]?
                                   transLimitUtilTableDatas[3].TRANS_COUNT:''}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="overtransTableDepenData('FULL')">
                                 <td>100% (Full Utilization)</td>
                                 <td>{{transLimitUtilTableDatas[4] ?
                                   transLimitUtilTableDatas[4].TRANS_COUNT:''}}</td>
@@ -409,45 +412,72 @@
                             <div style="overflow-x:auto;">
                               <div id="container">
                                 <div class="mat-elevation-z8">
-                                  <table class="table-responsive" mat-table [dataSource]="dataSourceFour"
-                                    style="width: 100%;">
-                                    <ng-container matColumnDef="smeId">
-                                      <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure Name</th>
+                                  <table class="table-responsive" mat-table
+                                    [dataSource]="dataSourceOverAllTransactionLimit"
+                                    style="width: 100%;margin-left: 25px;">
+                                    <ng-container matColumnDef="invoice">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
                                       <td mat-cell *matCellDef="let element;let row; let index = index">
-                                        {{element.smeId}}
+                                        {{element.invoice}}
                                       </td>
                                     </ng-container>
-                                    <ng-container matColumnDef="utilPercent">
-                                      <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure</th>
+                                    <ng-container matColumnDef="invoicedate">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
                                       <td mat-cell *matCellDef="let element;let row; let index = index"
                                         class="desc-goods">
-                                        {{element.utilPercent}}%
+                                        {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
                                       </td>
                                     </ng-container>
-                                    <ng-container matColumnDef="exposureAmt">
-                                      <th mat-header-cell *matHeaderCellDef scope="column">Overall Exposure Amount</th>
+                                    <ng-container matColumnDef="invoiceamount">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
                                       <td mat-cell *matCellDef="let element;let row; let index = index">
-                                        {{this.newLimitGraphForm.value.newsmeLimit}}
+                                        {{element.invoiceamount}}
                                       </td>
                                     </ng-container>
-                                    <ng-container matColumnDef="utilTotlAmt">
-                                      <th mat-header-cell *matHeaderCellDef scope="column">Overall Total Utilized</th>
+                                    <ng-container matColumnDef="sme_profile_id">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
                                       <td mat-cell *matCellDef="let element;let row; let index = index">
-                                        {{this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                        {{element.sme_profile_id}}
                                       </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="amtAvailable">
-                                      <th mat-header-cell *matHeaderCellDef scope="column">SME Amount Available </th>
+                                    <ng-container matColumnDef="smename">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
                                       <td mat-cell *matCellDef="let element;let row; let index = index">
-                                        {{this.newLimitGraphForm.value.newsmeLimit -
-                                        this.newLimitGraphForm.value.newsmeLimit * element.utilPercent / 100}}
+                                        {{element.smename}}
                                       </td>
                                     </ng-container>
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsFour"
+
+                                    <ng-container matColumnDef="country">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                      <td mat-cell *matCellDef="let element;let row; let index = index">
+                                        {{element.country}}
+                                      </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="sector_description">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                      <td mat-cell *matCellDef="let element;let row; let index = index">
+                                        {{element.sector_description}}
+                                      </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="LIMIT_PERCENT">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                      <td mat-cell *matCellDef="let element;let row; let index = index">
+                                        {{element.LIMIT_PERCENT}}
+                                      </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                      <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                      <td mat-cell *matCellDef="let element;let row; let index = index">
+                                        {{element.status}}
+                                      </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsOverAllTransactionLimit"
                                       style="background-color:#B4A6EA">
                                     </tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsFour"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsOverAllTransactionLimit">
+                                    </tr>
                                   </table>
                                 </div>
                               </div>
@@ -457,7 +487,6 @@
 
 
                         </div>
-
                         <br>
 
                         <!-- carousel end -->
@@ -583,7 +612,9 @@
                 </mat-card>
               </div>
             </mat-tab>
+            <!--- Overall_Transaction Exposure Limit-->
 
+            <!--- Country Exposure  -->
             <mat-tab label="Country Exposure">
               <div class="links">
                 <mat-card>
@@ -631,7 +662,7 @@
                               </tbody>
                             </table>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6 hover">
                             <table class="table-bordered table" id="exposureTbl">
                               <tr>
                                 <th>Utilization Slabs</th>
@@ -774,7 +805,9 @@
                 </mat-card>
               </div>
             </mat-tab>
-            <!---New  -->
+            <!--- Country Exposure  -->
+
+            <!--- Sme Exposure  -->
             <mat-tab label="Sme Exposure">
               <div class="links">
                 <mat-card>
@@ -817,7 +850,7 @@
                               </tbody>
                             </table>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6 hover">
                             <table class="table-bordered table" id="exposureTbl">
                               <tr>
                                 <th>Utilization Slabs</th>
@@ -848,7 +881,7 @@
                                   ?smetransLimitUtilTableDatas[3].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
-                               
+
                                 <td>100% (Full Utilization)</td>
                                 <td>{{checkSmeExpValue('FULL')}}</td>
                                 <!-- <td>{{smetransLimitUtilTableDatas[4] ?
@@ -933,7 +966,7 @@
                               <table class="table-responsive" mat-table [dataSource]="dataSourceFour"
                                 style="width: 100%;">
                                 <ng-container matColumnDef="smeId">
-                                  <th mat-header-cell *matHeaderCellDef scope="column">{{'SME Name' | translate}}</th>
+                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Name</th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index">
                                     {{element.smeId}}
                                   </td>
@@ -978,8 +1011,9 @@
                 </mat-card>
               </div>
             </mat-tab>
+            <!--- Sme Exposure  -->
 
-
+            <!--- Sector Exposure  -->
             <mat-tab label="Sector Exposure">
               <div class="links">
                 <mat-card>
@@ -1022,7 +1056,7 @@
                               </tbody>
                             </table>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6 hover">
                             <table class="table-bordered table" id="exposureTbl">
                               <tr>
                                 <th>Utilization Slabs</th>
@@ -1054,7 +1088,7 @@
                                   ?sectorTableDatas[3].TRANS_COUNT:''}}</td> -->
                               </tr>
                               <tr>
-                               
+
                                 <td>100% (Full Utilization)</td>
                                 <td>{{checkSectorExpValue('FULL')}}</td>
                                 <!-- <td>{{sectorTableDatas[4] ?
@@ -1184,7 +1218,7 @@
                 </mat-card>
               </div>
             </mat-tab>
-            <!-- New  -->
+            <!-- Sector Exposure  -->
           </mat-tab-group>
         </div>
       </div>
