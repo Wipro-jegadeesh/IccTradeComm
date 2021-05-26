@@ -343,6 +343,31 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   ];
   //over_all transaction Limit end 
+
+  //Sme Exposure main start
+  dataSourceSmeExposureTable = new MatTableDataSource(); //data
+  displayedColumnsSmeExposureTable: string[] = [
+    'smename',
+    'LIMIT_PERCENT',
+    'bidvalue'
+  ];
+  //sme Exposure main end
+  //sector Exposure main start
+  dataSourceSectorExposureTable = new MatTableDataSource(); //data
+  displayedColumnsSectorExposureTable: string[] = [
+    'invoice',
+    'invoicedate',
+    'invoiceamount',
+    'sme_profile_id',
+    'smename',
+    'country',
+    'sector_description',
+    'LIMIT_PERCENT',
+    'bidvalue',
+    'status'
+
+  ];
+  //sector Exposure main end
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
     this.mainlimitMaintanceFormBuild()
@@ -671,13 +696,11 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   //start graphical representation
   newlimitExposure() {
-
     let newlimitExposure = [{
       name: 'Nike',
       exposure: '97%',
       exposureAmt: '48,500',
       amtAvailable: '1,500'
-
     }, {
       name: 'Apple',
       exposure: '97%',
@@ -700,29 +723,72 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   //overall_transaction main table Api dependency
   overtransTableDepenData(item) {
-
-    let smetransApiData = [
-      {
-        "invoiceamount": 1000.0,
-        "LIMIT_PERCENT": "100",
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "smename": "jhonson ss",
-        "status": "BFA",
-        "invoicedate": "2021-05-24T03:32:36.533+0000",
-        "invoice": "INV102",
-        "sme_profile_id": "SME75"
+    // let overALLtransApiData = [
+    //   {
+    //     "invoiceamount": 1000.0,
+    //     "LIMIT_PERCENT": "100",
+    //     "sector_description": "Agriculture, Forestry, Fishing",
+    //     "country": "Singapore",
+    //     "smename": "jhonson ss",
+    //     "status": "BFA",
+    //     "invoicedate": "2021-05-24T03:32:36.533+0000",
+    //     "invoice": "INV102",
+    //     "sme_profile_id": "SME75"
+    //   }
+    // ]
+    // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(overALLtransApiData);
+    this.financelimitMaintananceservices.overALLtransApiDependDataService(item).subscribe(resp => {
+      if (resp) {
+        this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
       }
-    ]
-   // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(smetransApiData);
-    this.financelimitMaintananceservices.smetransApiDependDataService(item).subscribe(resp => {
-
-       this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
     })
-
-    console.log(item, "items")
   }
   //overall_transaction main table Api dependency
+
+  //smeTableDependData main table Api dependency start
+  smeApiTableDependData(data) {
+    // let smetabledenpendData = [
+    //   {
+    //     "smename": "jhonson ss",
+    //     "bidvalue": 135.0,
+    //     "LIMIT_PERCENT": 6.75,
+    //   }
+    // ]
+    // this.dataSourceSmeExposureTable = new MatTableDataSource(smetabledenpendData);
+    this.financelimitMaintananceservices.smeApiDependDataService(data).subscribe(resp => {
+      if (resp) {
+        this.dataSourceSmeExposureTable = new MatTableDataSource(resp);
+      }
+    })
+  }
+
+  //smeTableDependData main table Api dependency end
+  //sectorApiTableDependData main table api dependency start
+
+  sectorApiTableDependData(value) {
+    // let sectortabledenpendData = [
+    //   {
+    //     "sector_description": "Agriculture, Forestry, Fishing",
+    //     "country": "Singapore",
+    //     "smename": "jhonson ss",
+    //     "status": "BFA",
+    //     "bidvalue": 135.0,
+    //     "invoicedate": "2021-05-24T02:46:27.290+0000",
+    //     "LIMIT_PERCENT": 13.5,
+    //     "invoiceamount": 150.0,
+    //     "sme_profile_id": "SME75",
+    //     "invoice": "INV101"
+    //   }
+    // ]
+    // this.dataSourceSectorExposureTable = new MatTableDataSource(sectortabledenpendData);
+    this.financelimitMaintananceservices.sectorApiDependDataService(value).subscribe(resp => {
+      if (resp) {
+        this.dataSourceSectorExposureTable = new MatTableDataSource(resp);
+      }
+    })
+  }
+
+  //sectorApiTableDependData main table api dependency end
   newlimitExposureFormBuild() {
     this.newLimitGraphForm = this.fb.group({
       newglobalLimit: [10000, Validators.required],
@@ -767,15 +833,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     console.log("ttt")
     this.graphLimit = false;
     this.tableLimit = true;
-    // if (value == 'table') {
-    //   this.graphLimit = false;
-    //   this.tableLimit = true;
-
-    // } else if (value == 'graph') {
-    //   this.tableLimit = false;
-    //   this.graphLimit = true;
-
-    // }
   }
   prevGraph() {
     console.log("gg")
