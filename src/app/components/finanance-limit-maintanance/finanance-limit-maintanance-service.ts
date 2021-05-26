@@ -83,5 +83,22 @@ export class FinanceLimitMaintananceServices {
   getsectorexposeTableDatas() {
     return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataBySector/' + this.financierProfileId);
   }
-
+  getcountryexposeTableDatas() {
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataByCountry/' + this.financierProfileId);
+  }
+  countryApiDependDataService(item) {
+    let minMaxValue;
+    if (item == "25") {
+      minMaxValue = "&min=0" + "&max=25"
+    } else if (item == "50") {
+      minMaxValue = "&min=25" + "&max=50"
+    } else if (item == "75") {
+      minMaxValue = "&min=50" + "&max=75" 
+    } else if (item == "100") {
+      minMaxValue = "&min=75" + "&max=100"
+    } else {
+      minMaxValue = "&min=0" + "&max=FULL"
+    }
+    return this.apiService.tempGet(environment.serviePath_4 + 'limit-request/limitChartDataByCountryList?finId=' + this.financierProfileId + minMaxValue);
+  }
 }

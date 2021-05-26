@@ -368,6 +368,24 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   ];
   //sector Exposure main end
+  //country Exposure start
+  public countryTableDatas: any = []
+  dataSourceCountryExposureTable = new MatTableDataSource(); //data
+  displayedColumnsCounrtyExposureTable: string[] = [
+    'invoice',
+    'invoicedate',
+    'invoiceamount',
+    'sme_profile_id',
+    'smename',
+    'country',
+    'addresss',
+    'sector_description',
+    'LIMIT_PERCENT',
+    'bidvalue',
+    'status'
+
+  ];
+  //country Exposure end
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
     this.mainlimitMaintanceFormBuild()
@@ -378,7 +396,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.overAllLimit = this.limitMaintanceForm.value.overAllLimit;
     this.smeoverAllLimit = this.limitMaintanceForm.value.smeoverAllLimit;
     this.countryoverLimitval = this.countrylimitMaintanceForm.value.countryoverAllLimit
@@ -392,8 +409,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.getnewLimitFinSmeDatas();
     this.gettransactionLimitUtilizationTable();
     this.getsmetransLimitUtilTableDatas();
-    this.getsectorTableDatas()
-
+    this.getsectorTableDatas();
+    this.getCountryTableDatas();
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
 
@@ -910,6 +927,90 @@ export class FinananceLimitMaintananceComponent implements OnInit {
         this.sectorTableDatas = resp;
       }
     })
-
   }
+  //country Exposure Tables  start
+  getCountryTableDatas() {
+    this.financelimitMaintananceservices.getcountryexposeTableDatas().subscribe(resp => {
+      if (resp) {
+        this.countryTableDatas = resp;
+      }
+    })
+  }
+  checkcountryExpValue(value) {
+    let transCount = 0;
+    let respObj = this.countryTableDatas
+    let obj = [
+      {
+        "LIMIT_PERCENT": "25",
+        "TRANS_COUNT": 3,
+        "sme_profile_id": "SME44"
+      },
+      {
+        "TRANS_COUNT": 1,
+        "LIMIT_PERCENT": "50",
+        "sme_profile_id": "SME44"
+      },
+      {
+        "LIMIT_PERCENT": "100",
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44"
+      },
+      {
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44",
+        "LIMIT_PERCENT": "FULL"
+      }
+    ]
+    respObj.map((item, index) => {
+      if (item.LIMIT_PERCENT == value) {
+        transCount = item.TRANS_COUNT
+      }
+    })
+    return transCount
+  }
+  countryApiTableDependData(items) {
+    let counrtytabledenpendData = [
+      {
+        "sector_description": "Agriculture, Forestry, Fishing",
+        "country": "Singapore",
+        "smename": "jhonson ss",
+        "status": "BFA",
+        "bidvalue": 135.0,
+        "addresss": "Singapore",
+        "invoicedate": "2021-05-24T02:46:27.290+0000",
+        "LIMIT_PERCENT": 6.75,
+        "invoiceamount": 150.0,
+        "sme_profile_id": "SME75",
+        "invoice": "INV101"
+      },
+      {
+        "sector_description": "Agriculture, Forestry, Fishing",
+        "country": "Singapore",
+        "smename": "jhonson ss",
+        "invoiceamount": 450.0,
+        "status": "BFA",
+        "LIMIT_PERCENT": 20.25,
+        "addresss": "Singapore",
+        "sme_profile_id": "SME75",
+        "invoice": "L1",
+        "invoicedate": null,
+        "bidvalue": 405.0
+      }
+    ]
+    this.dataSourceCountryExposureTable = new MatTableDataSource(counrtytabledenpendData);
+    this.financelimitMaintananceservices.countryApiDependDataService(items).subscribe(resp => {
+      if (resp) {
+        this.dataSourceCountryExposureTable = new MatTableDataSource(resp);
+      }
+    })
+  }
+  // country Exposure Tables End
+
+  // renderBgColor(id) {
+  //   let bgColor = ""
+  //   if (id) {
+  //     bgColor = "#172b4dd9";
+  //   }
+  //   return bgColor;
+  // }
 }

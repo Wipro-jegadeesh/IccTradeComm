@@ -662,39 +662,36 @@
                               </tbody>
                             </table>
                           </div>
+                          <!-- country Exposure start slabs -->
                           <div class="col-md-6 hover">
                             <table class="table-bordered table" id="exposureTbl">
                               <tr>
                                 <th>Utilization Slabs</th>
                                 <th>Number of Bids</th>
                               </tr>
-                              <tr>
+                              <tr (click)="countryApiTableDependData('25')">
                                 <td>0 to 25%</td>
-                                <td>{{transLimitUtilTableDatas[0] ? transLimitUtilTableDatas[0].TRANS_COUNT:
-                                  ""}}</td>
+                                <td>{{checkcountryExpValue(25)}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="countryApiTableDependData('50')">
                                 <td>25% to 50%</td>
-                                <td>{{transLimitUtilTableDatas[1] ?
-                                  transLimitUtilTableDatas[1].TRANS_COUNT:"" }}</td>
+                                <td>{{checkcountryExpValue(50)}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="countryApiTableDependData('75')">
                                 <td>50% to 75%</td>
-                                <td>{{transLimitUtilTableDatas[2] ?
-                                  transLimitUtilTableDatas[2].TRANS_COUNT:''}}</td>
+                                <td>{{checkcountryExpValue(75)}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="countryApiTableDependData('100')">
                                 <td>75% to 100%</td>
-                                <td>{{transLimitUtilTableDatas[3]?
-                                  transLimitUtilTableDatas[3].TRANS_COUNT:''}}</td>
+                                <td>{{checkcountryExpValue(100)}}</td>
                               </tr>
-                              <tr>
+                              <tr (click)="countryApiTableDependData('FULL')">
                                 <td>100% (Full Utilization)</td>
-                                <td>{{transLimitUtilTableDatas[4] ?transLimitUtilTableDatas[4].TRANS_COUNT
-                                  :''}}</td>
+                                <td>{{checkcountryExpValue('FULL')}}</td>
                               </tr>
                             </table>
                           </div>
+                          <!-- country Exposure end slabs -->
                         </div>
                         <div class="row">
                           <div class="col-md-4">
@@ -769,33 +766,82 @@
                         <div style="overflow-x:auto;">
                           <div id="container">
                             <div class="mat-elevation-z8">
-                              <table class="table-responsive" mat-table [dataSource]="dataSourceThree"
+                              <!-- country main table start -->
+                              <table class="table-responsive" mat-table [dataSource]="dataSourceCountryExposureTable"
                                 style="width: 100%;">
-                                <ng-container matColumnDef="country">
-                                  <th mat-header-cell *matHeaderCellDef scope="column">Country</th>
+                                <ng-container matColumnDef="invoice">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.invoice}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="invoicedate">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
+                                    {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="invoiceamount">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.invoiceamount}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="sme_profile_id">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.sme_profile_id}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="smename">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.smename}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="country">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
                                     {{element.country}}
                                   </td>
                                 </ng-container>
-                                <ng-container matColumnDef="utzAmt">
-                                  <th mat-header-cell *matHeaderCellDef scope="column">Utilized Amount</th>
+                                <ng-container matColumnDef="addresss">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Address</th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index">
-                                    {{element.utzAmt}}
+                                    {{element.addresss}}
                                   </td>
                                 </ng-container>
-
-                                <ng-container matColumnDef="avlAmt">
-                                  <th mat-header-cell *matHeaderCellDef scope="column">Available Amount </th>
+                                <ng-container matColumnDef="sector_description">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
                                   <td mat-cell *matCellDef="let element;let row; let index = index">
-                                    {{element.avlAmt}}
+                                    {{element.sector_description}}
                                   </td>
                                 </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumnsThree"
+                                <ng-container matColumnDef="LIMIT_PERCENT">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.LIMIT_PERCENT}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="bidvalue">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.bidvalue}}
+                                  </td>
+                                </ng-container>
+                                <ng-container matColumnDef="status">
+                                  <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                  <td mat-cell *matCellDef="let element;let row; let index = index">
+                                    {{element.status}}
+                                  </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsCounrtyExposureTable"
                                   style="background-color:#B4A6EA">
                                 </tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
-
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsCounrtyExposureTable">
+                                </tr>
                               </table>
+                              <!-- country main table end -->
                             </div>
                           </div>
                         </div>
@@ -856,6 +902,7 @@
                                 <th>Utilization Slabs</th>
                                 <th>Number of Bids</th>
                               </tr>
+                              <!-- style="background:renderBgColor('25')" -->
                               <tr (click)="smeApiTableDependData('25')">
                                 <td>0 to 25%</td>
                                 <td>{{checkSmeExpValue(25)}}</td>
