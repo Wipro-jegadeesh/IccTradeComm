@@ -326,12 +326,23 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   callPutMethodEdit: boolean = false;
   mainlimitScreenDatas
   public smetransLimitUtilTableDatas: any = [];
-
-  //line chart end
-
   public sectorTableDatas: any = [];
+  //over_all transaction limt start
+  moment: any = moment;
+  dataSourceOverAllTransactionLimit = new MatTableDataSource(); //data
+  displayedColumnsOverAllTransactionLimit: string[] = [
+    'invoice',
+    'invoicedate',
+    'invoiceamount',
+    'sme_profile_id',
+    'smename',
+    'country',
+    'sector_description',
+    'LIMIT_PERCENT',
+    'status'
 
-  //carousel end
+  ];
+  //over_all transaction Limit end 
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
     this.mainlimitMaintanceFormBuild()
@@ -357,9 +368,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.gettransactionLimitUtilizationTable();
     this.getsmetransLimitUtilTableDatas();
     this.getsectorTableDatas()
-
-
-
 
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -515,7 +523,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }
     })
   }
-  
+
   getsmetransLimitUtilTableDatas() {
     this.financelimitMaintananceservices.getsmetransLimitUtilTableDatas().subscribe(resp => {
       if (resp) {
@@ -690,6 +698,31 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
     this.dataSourceFour = new MatTableDataSource(newlimitExposure);
   }
+  //overall_transaction main table Api dependency
+  overtransTableDepenData(item) {
+
+    let smetransApiData = [
+      {
+        "invoiceamount": 1000.0,
+        "LIMIT_PERCENT": "100",
+        "sector_description": "Agriculture, Forestry, Fishing",
+        "country": "Singapore",
+        "smename": "jhonson ss",
+        "status": "BFA",
+        "invoicedate": "2021-05-24T03:32:36.533+0000",
+        "invoice": "INV102",
+        "sme_profile_id": "SME75"
+      }
+    ]
+    this.dataSourceOverAllTransactionLimit = new MatTableDataSource(smetransApiData);
+    this.financelimitMaintananceservices.smetransApiDependDataService(item).subscribe(resp => {
+
+      // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
+    })
+
+    console.log(item, "items")
+  }
+  //overall_transaction main table Api dependency
   newlimitExposureFormBuild() {
     this.newLimitGraphForm = this.fb.group({
       newglobalLimit: [10000, Validators.required],
@@ -749,77 +782,77 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.tableLimit = false;
     this.graphLimit = true;
 
-  } 
-  checkSmeExpValue(value){
+  }
+  checkSmeExpValue(value) {
     let transCount = 0;
     let respObj = this.smetransLimitUtilTableDatas
     let obj = [
       {
-          "LIMIT_PERCENT": "25",
-          "TRANS_COUNT": 3,
-          "sme_profile_id": "SME44"
+        "LIMIT_PERCENT": "25",
+        "TRANS_COUNT": 3,
+        "sme_profile_id": "SME44"
       },
       {
-          "TRANS_COUNT": 1,
-          "LIMIT_PERCENT": "50",
-          "sme_profile_id": "SME44"
+        "TRANS_COUNT": 1,
+        "LIMIT_PERCENT": "50",
+        "sme_profile_id": "SME44"
       },
       {
-          "LIMIT_PERCENT": "100",
-          "TRANS_COUNT": 1,
-          "sme_profile_id": "SME44"
+        "LIMIT_PERCENT": "100",
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44"
       },
       {
-          "TRANS_COUNT": 1,
-          "sme_profile_id": "SME44",
-          "LIMIT_PERCENT": "FULL"
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44",
+        "LIMIT_PERCENT": "FULL"
       }
-  ]
-  respObj.map((item,index) => {
-    if(item.LIMIT_PERCENT == value){
-    transCount =  item.TRANS_COUNT
-    }
-  })
-  return transCount
+    ]
+    respObj.map((item, index) => {
+      if (item.LIMIT_PERCENT == value) {
+        transCount = item.TRANS_COUNT
+      }
+    })
+    return transCount
   }
-  checkSectorExpValue(value){
+  checkSectorExpValue(value) {
     let transCount = 0;
     let respObj = this.sectorTableDatas
     let obj = [
       {
-          "LIMIT_PERCENT": "25",
-          "TRANS_COUNT": 3,
-          "sme_profile_id": "SME44"
+        "LIMIT_PERCENT": "25",
+        "TRANS_COUNT": 3,
+        "sme_profile_id": "SME44"
       },
       {
-          "TRANS_COUNT": 1,
-          "LIMIT_PERCENT": "50",
-          "sme_profile_id": "SME44"
+        "TRANS_COUNT": 1,
+        "LIMIT_PERCENT": "50",
+        "sme_profile_id": "SME44"
       },
       {
-          "LIMIT_PERCENT": "100",
-          "TRANS_COUNT": 1,
-          "sme_profile_id": "SME44"
+        "LIMIT_PERCENT": "100",
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44"
       },
       {
-          "TRANS_COUNT": 1,
-          "sme_profile_id": "SME44",
-          "LIMIT_PERCENT": "FULL"
+        "TRANS_COUNT": 1,
+        "sme_profile_id": "SME44",
+        "LIMIT_PERCENT": "FULL"
       }
-  ]
-  respObj.map((item,index) => {
-    if(item.LIMIT_PERCENT == value){
-    transCount =  item.TRANS_COUNT
-    }
-  })
-  return transCount
+    ]
+    respObj.map((item, index) => {
+      if (item.LIMIT_PERCENT == value) {
+        transCount = item.TRANS_COUNT
+      }
+    })
+    return transCount
   }
   getsectorTableDatas() {
     this.financelimitMaintananceservices.getsectorexposeTableDatas().subscribe(resp => {
       if (resp) {
         this.sectorTableDatas = resp;
-  }
-})
+      }
+    })
 
-}
+  }
 }
