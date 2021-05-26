@@ -213,28 +213,19 @@
 	"total":"total",
 	"yes":"sí",
     "Invoice size":"Tamaño de la factura",
-	
 	"BaseCCY Funding Amt":"Importe de financiación BaseCCY",
 	"ICC Tradecomm Ref":"ICC Tradecomm Ref",
-	"addGoods":"addGoods",
 	"billInfo":"informaciónLista",
-	"companyName is required":"companyName es obligatorio",
-	"desc":"desc",
 	"discAmount":"cantidadDisco",
-	"firstName is required":"firstName es obligatorio",
 	"invoiceAmount":"importeFactura",
 	"invoiceAuthorise":"facturaAutorizar",
 	"invoiceCreateDate":"facturaFechaCreación",
 	"invoiceDate":"fechaFactura",
 	"invoiceNumber":"númeroDeFactura",
-	"lastName is required":"lastName es obligatorio",
 	"nationalId is required":"se requiere nationalId",
 	"netAmount":"importeNeto",
 	"pendingInvoice":"pendienteFactura",
 	"phoneNumber is required":"númeroDeTeléfono es obligatorio",
-	"postalCode is required":"postalCode es obligatorio",
-	"refno":"refno",
-	"saveGoods":"saveGoods",
 	"taxAmount":"importeImpuesto",
 	"taxRate":"tasaDeImpuestos",
     "SMEDashboardComponent":{
@@ -244,15 +235,52 @@
         "Repayments Due Today":"Reembolsos con vencimiento hoy",
         "Repayments Overdue":"Reembolsos vencidos"
     },
+    "IccRoles":{
+        "Roles":"Roles",
+        "code":"código",
+        "roleDescription":"Descripción del rol",
+        "add":"Agregar",
+        "update":"Actualizar"
+    },
+    "IccSector":{
+        "SectorDescription":"Descripción del sector",
+        "add":"Agregar",
+        "update":"Actualizar"
+    },
+    "IccSmeDetails":{
+        "Details":"Detalles",
+        "Questionaire":"Cuestionario",
+        "Score":"Puntaje",
+        "Consolidated score":"Puntaje consolidado",
+        "Score State":"Estado de puntuación",
+        "Score Name":"Nombre de la partitura",
+        "Information":"Información",
+        "Adduser":"Agregar usuario",
+        "User Id":"ID de usuario",
+        "Country":"País",
+        "Related Users":"Usuarios relacionadas",
+        "CompanyRegisterId":"ID de registro de la empresa"
+    },
+
     "Re Launch Bid":"Re Launch Bid",
     "Offer Expired":"Offer Expired",
     "Reject Bid Details:":"Reject Bid Details:",
     "Finance Master":"Finance Master",
-    "Amt (BaseCcy)":"Amt (BaseCcy)",
+    "Amt (BaseCcy)":"Amount (BaseCcy)",
     "Fundable Percentage":"Fundable Percentage",
     "Funding Amt (BaseCcy)":"Funding Amt (BaseCcy)",
-    "Net Amt payable":"Net Amt payable",
+    "Net Amt payable":"Net Amount payable",
     "SME Id":"SME Id",
+    "refno":"Refer No",
+	"saveGoods":"Save Goods",
+	"addGoods":"Add Goods",
+	"firstName is required":"First Name es obligatorio",
+    "companyName is required":"Company Name es obligatorio",
+	"desc":"Discount",
+    "lastName is required":"Last Name es obligatorio",
+	"postalCode is required":"Postal Code es obligatorio",
+
+    
     "FinanceDashboardComponent":{
       "Finance Maturity":"Finance Maturity",
       "Period":"Period",
@@ -307,34 +335,6 @@
       "Add":"Add",
       "Update":"Update"
     },
-
-
-    "IccRoles":{
-      "Roles":"Roles",
-      "code":"código",
-      "roleDescription":"Descripción del rol",
-      "add":"Agregar",
-      "update":"Actualizar"
-    },
-    "IccSector":{
-      "SectorDescription":"Descripción del sector",
-      "add":"Agregar",
-      "update":"Actualizar"
-    },
-    "IccSmeDetails":{
-      "Details":"Detalles",
-      "Questionaire":"Cuestionario",
-      "Score":"Puntaje",
-      "Consolidated score":"Puntaje consolidado",
-      "Score State":"Estado de puntuación",
-      "Score Name":"Nombre de la partitura",
-      "Information":"Información",
-      "Adduser":"Agregar usuario",
-      "User Id":"ID de usuario",
-      "Country":"País",
-      "Related Users":"Usuarios relacionadas",
-      "CompanyRegisterId":"ID de registro de la empresa"
-    },
     "FinancierOnboardingComponent":{
       "FinancierOnBoarding" : "Financier OnBoarding",
       "FinancierId" : "Financier Id",
@@ -386,11 +386,11 @@
       "BackFinReg" : "Back to Financiar Registered Head Quarters",
       "MoreDetails" : "More Details",
       "DirPartner" : "Director / Partner Details",
-      "Name" : "NAME",
-      "Position" : "POSITION",
+      "Name" : "Name",
+      "Position" : "Position",
       "Address" : " Address",
-      "TelephoneNo" : "TELEPHONE NO",
-      "Email" : "EMAIL",
+      "TelephoneNo" : "Telephone Number",
+      "Email" : "Email",
       "AuthorisedSign" : "Authorised Signatories",
       "EnterAdmin" : "Entity Administrato",
       "BackToFintradecom" : "Back to Financiar TradeComm Service Branch",
@@ -406,8 +406,8 @@
       "Edit" : "Edit"
     },
     "FinancieruserCreation":{
-      "AddUser" : "Add User",
-      "UserId" :  "User Id",
+     "AddUser" : "Add User",
+     "UserId" :  "User Id",
      "FirstName" : "First Name",
      "LastName" : "Last Name",
      "EmailId" : "Email Id",
@@ -416,9 +416,9 @@
      "EnterCompReg" : "Register is required",
      "Enterlastname" : "Last name is required",
      "EnterEmail" : "Email is required",
-     "EnterPhoneNo" : "phoneNumber is required",
+     "EnterPhoneNo" : "Phone Number is required",
      "Group" :"Group",
      "Role" : "Role",
-     "EnterRole" : " Role is required"
+     "EnterRole" : "Role is required"
    }
 }
