@@ -64,6 +64,7 @@
   "Buyer": "Buyer",
   "Invoice Amount": "Invoice Amount",
   "Status": "Status",
+  "Status is Required":"Status is Required",
   "Initiated": "Initiated",
   "Submit": "Submit",
   "Authorise": "Authorise",
@@ -290,5 +291,35 @@
     "Numeric":"Numeric",
     "Add":"Add",
     "Update":"Update"
+  },
+
+
+
+
+  "IccRoles":{
+    "Roles":"Roles",
+    "code":"Code",
+    "roleDescription":"Role Description",
+    "add":"Add",
+    "update":"Update"
+  },
+  "IccSector":{
+    "SectorDescription":"Sector Description",
+    "add":"Add",
+    "update":"Update"
+  },
+  "IccSmeDetails":{
+    "Details":"Details",
+    "Questionaire":"Questionaire",
+    "Score":"Score",
+    "Consolidated score":"Consolidated score",
+    "Score State":"Score State",
+    "Score Name":"Score Name",
+    "Information":"Information",
+    "Adduser":"Add User",
+    "User Id":"User Id",
+    "Country":"Country",
+    "Related Users":"Related Users",
+    "CompanyRegisterId":"Company Register Id"
   }
 }
