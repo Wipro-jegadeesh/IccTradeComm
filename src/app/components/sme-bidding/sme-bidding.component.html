@@ -290,7 +290,7 @@
                             </ng-container>
                             <ng-container matColumnDef="Net Amt payable (Base CCY)">
                                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                                matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">Net Amt payable</th>
+                                matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'Net Amt payable' | translate}}</th>
                                 <td mat-cell *matCellDef="let financier"><input matInput
                                         value="{{ financier.baseCcyNetAmtPayable }}" />
                                 </td>

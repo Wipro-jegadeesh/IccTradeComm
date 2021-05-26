@@ -1,7 +1,7 @@
 <div class="app-content {{isOpen}} ">
     <header>
         <br>
-        <h5>Finance Master</h5>
+        <h5> {{'Finance Master' | translate}}</h5>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" >
 
@@ -28,7 +28,7 @@
 
           <ng-container matColumnDef="baseCcyAmt">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'">  Amt (BaseCcy)  </th>
+            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'Amt (BaseCcy)' | translate}}</th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip > -->
@@ -40,7 +40,7 @@
         
           <ng-container matColumnDef="fundablePercent">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.smeName}}" [matTooltipPosition]="'below'"> Fundable Percentage </th>
+            matTooltip="{{biddingTooltip.smeName}}" [matTooltipPosition]="'below'"> {{'Fundable Percentage' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip> -->
@@ -53,7 +53,7 @@
         
           <ng-container matColumnDef="baseCcyFundingAmt">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> Funding Amt (BaseCcy) </th>
+            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> {{'Funding Amt (BaseCcy)' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -66,7 +66,7 @@
         
           <ng-container matColumnDef="baseCcyNetAmtPayable">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">  Net Amt payable  </th>
+            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> {{'Net Amt payable' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -78,7 +78,7 @@
         
           <ng-container matColumnDef="smeId">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceDueDate}}" [matTooltipPosition]="'below'"> SME Id </th>
+            matTooltip="{{biddingTooltip.invoiceDueDate}}" [matTooltipPosition]="'below'"> {{'SME Id' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->

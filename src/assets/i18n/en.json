@@ -226,6 +226,69 @@
   "Finance Requests":"Finance Requests",
   "View all Finance Requests":"View all Finance Requests",
   "Repayment Over Due":"Repayment Over Due",
-  "Repayment Due Today":"Repayment Due Today"
-
+  "Repayment Due Today":"Repayment Due Today",
+  "Re Launch Bid":"Re Launch Bid",
+  "Offer Expired":"Offer Expired",
+  "Reject Bid Details:":"Reject Bid Details:",
+  "Finance Master":"Finance Master",
+  "Amt (BaseCcy)":"Amt (BaseCcy)",
+  "Fundable Percentage":"Fundable Percentage",
+  "Funding Amt (BaseCcy)":"Funding Amt (BaseCcy)",
+  "Net Amt payable":"Net Amt payable",
+  "SME Id":"SME Id",
+  
+  "FinanceDashboardComponent":{
+    "Finance Maturity":"Finance Maturity",
+    "Period":"Period",
+    "Number":"Number",
+    "Amount":"Amount",
+    "No Records Found":"No Records Found",
+    "Finance Size":"Finance Size",
+    "Chart":"Chart",
+    "Open for Offer":"Open for Offer",
+    "Offer Expired":"Offer Expired",
+    "Financier Funded":"Financier Funded",
+    "Bids to be accepted":"Bids to be accepted",
+    "Offer Rejected":"Offer Rejected"
+  },
+  "ICCDashboardComponent":{
+    "Funding Request":"Funding Request",
+    "Offer for Acceptance":"Offer for Acceptance",
+    "Financed Today":"Financed Today",
+    "Finance Master":"Finance Master",
+    "Invoice Master":"Invoice Master",
+    "Groups":"Groups",
+    "Roles":"Roles",
+    "Authorization Matrix":"Authorization Matrix",
+    "Country":"Country",
+    "Sector":"Sector",
+    "Capabilities":"Capabilities",
+    "Teams":"Teams",
+    "Onboarding":"Onboarding",
+    "Financier List":"Financier List",
+    "Profile Id":"Profile Id",
+    "Financier Name":"Financier Name",
+    "Register Date":"Register Date",
+    "View All Financiers":"View All Financiers",
+    "SME List":"SME List"
+  },
+  "IccAuthorizationMatrix":{
+    "SME/FIN":"SME/FIN",
+    "Currency":"Currency",
+    "Slab":"Slab",
+    "From Amount":"From Amount",
+    "To Amount":"To Amount",
+    "No of persons":"No of persons",
+    "Add":"Add",
+    "Update":"Update"
+  },
+  "IccCountry":{
+    "country":"country",
+    "Country Name":"Country Name",
+    "Country Code(2 digit)":"Country Code(2 digit)",
+    "Country Code(3 digit)":"Country Code(3 digit)",
+    "Numeric":"Numeric",
+    "Add":"Add",
+    "Update":"Update"
+  }
 }

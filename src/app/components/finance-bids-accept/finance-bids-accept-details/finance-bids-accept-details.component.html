@@ -6,7 +6,7 @@
           <tr>
               <td rowspan="1" colspan="1">
                 <mat-form-field dense>
-                  <mat-label>Invoice Reference No</mat-label>
+                  <mat-label>{{'Invoice Reference No' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''"  readonly/>
                 </mat-form-field>
               </td>
@@ -32,7 +32,7 @@
             <tr>
               <td rowspan="1" colspan="1">
                 <mat-form-field dense>
-                  <mat-label>Buyer Unique Identifier</mat-label>
+                  <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" readonly />
                 </mat-form-field>
               </td>
@@ -64,7 +64,7 @@
                   </td>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense>
-                      <mat-label>Invoice Amt</mat-label>
+                      <mat-label>{{'Invoice Amount' | translate}}</mat-label>
                       <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" readonly/>
                     </mat-form-field>
                   </td>
@@ -90,7 +90,7 @@
                               </ng-container>
                            
                               <ng-container matColumnDef="FX rate Base CCY">
-                                <th mat-header-cell *matHeaderCellDef scope="column" >FX rate Base CCY %</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column" >{{'FX rate Base CCY' | translate}} %</th>
                                 <td mat-cell style="border-right: 1px solid grey;
                                 align-self: stretch;
                                 text-align: center" *matCellDef="let element;let row; let index = index">
@@ -168,7 +168,7 @@
                        </table>
                        <table mat-table [dataSource]="dataSourceTwo" class="table-responsive">
                         <ng-container matColumnDef="Inv Discount  Rate">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >Inv Discount  Rate%</th>
+                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Inv Discount Rate' | translate}}%</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -198,12 +198,12 @@
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
                               <input matInput [readonly]="isView"
                               formControlName="invCcyDiscAmt" (keyup)="changeRowgrid()"
-                              placeholder="Disc Amt Inv CCY" 
+                              placeholder="{{'Disc Amt (Inv CCY)' | translate}}" 
                               required>
                             </td>
                           </ng-container>
                           <ng-container matColumnDef="Annual Yield (Basis a360)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >Annual Yield <br>(Basis a360) %</th>
+                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Annual Yield' | translate}} <br>(Basis a360) %</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -214,13 +214,13 @@
                             </td>
                           </ng-container>
                           <ng-container matColumnDef="Tenor Days">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >Tenor Days</th>
+                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Tenor Days' | translate}}</th>
                               <td mat-cell style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                 <input matInput (keyup)="changeRowgrid()"
                                 formControlName="tenor"[readonly]="isView"
-                                placeholder="Tenor Days" 
+                                placeholder="{{'Tenor Days' | translate}}" 
                                 required>
                               </td>
                             </ng-container>
@@ -238,7 +238,7 @@
                             </td>
                           </ng-container>
                           <ng-container matColumnDef="Net Amt payable (Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >Net Amt payable (Inv CCY)</th>
+                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable (Inv CCY)' | translate}}</th>
                               <td mat-cell style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -442,7 +442,7 @@
 
 <ng-template #template>
     <div class="modal-header">
-       <h4 class="modal-title pull-left">You are about to send for authorization the following BID:</h4>
+       <h4 class="modal-title pull-left">{{'You are about to send for authorization the following BID:' | translate}}</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">×</span>
        </button>

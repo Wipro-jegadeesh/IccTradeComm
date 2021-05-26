@@ -2,7 +2,7 @@
     <header>
       <div class="data-section">
         <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitgroupsForm()" #formDirective="ngForm">
-        <h5 class="text-center">Authorization Matrix</h5>
+        <h5 class="text-center">{{'IccAuthorizationMatrix.Authorization Matrix' | translate}}</h5>
             <mat-card>
           <mat-card-content>
             <table  class="table-responsive inv-table">
@@ -12,27 +12,27 @@
          
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Slab</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.Slab' | translate}}</mat-label>
         <input type="text" matInput value="" formControlName="slab" />
       </mat-form-field>
     </td>
 
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>SME/FIN</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.SME/FIN' | translate}}</mat-label>
         <input type="text" matInput value="" formControlName="smefin" />
       </mat-form-field>
     </td>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Currency</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.Currency' | translate}}</mat-label>
         <input type="text" matInput value="" formControlName="currency" />
       </mat-form-field>
     </td>
 
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>From Amount</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.From Amount' | translate}}</mat-label>
         <input type="number" matInput value="" formControlName="fromAmt" />
       </mat-form-field>
     </td>
@@ -44,22 +44,22 @@
   <tr>
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>To Amount</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.To Amount' | translate}}</mat-label>
         <input type="number" matInput value="" formControlName="toAmt" />
       </mat-form-field>
     </td>
 
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>No of persons</mat-label>
+        <mat-label>{{'IccAuthorizationMatrix.No of persons' | translate}}</mat-label>
         <input type="number" matInput value="" formControlName="noofPersons" />
       </mat-form-field>
     </td>
   
     <td rowspan="1" colspan="1">      
         <!-- <button  mat-flat-button color="primary"id=grid>Add</button> -->
-        <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
-        <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
+        <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>{{'IccAuthorizationMatrix.Add' | translate}}</button>
+        <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>{{'IccAuthorizationMatrix.Update' | translate}}</button>
         </td>
   </tr>
   
@@ -75,7 +75,7 @@
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="slab">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{groupTooltip.slab}}" [matTooltipPosition]="'below'"> Slab </th>
+                    matTooltip="{{groupTooltip.slab}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Slab' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.slab}}
                      </td>
@@ -83,7 +83,7 @@
 
                   <ng-container matColumnDef="smefin">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'"> Sme/Fin </th>
+                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Sme/Fin' | translate}} </th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.smefin}}
                     </td>
@@ -91,7 +91,7 @@
 
                 <ng-container matColumnDef="currency">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> Currency </th>
+                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.Currency' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.currency}}
                     </td>
@@ -99,7 +99,7 @@
   
                 <ng-container matColumnDef="fromAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'"> From Amount </th>
+                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.From Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.fromAmt}}
                     </td>
@@ -107,7 +107,7 @@
 
                 <ng-container matColumnDef="toAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> From Amount </th>
+                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.To Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.toAmt}}
                     </td>
@@ -115,7 +115,7 @@
 
                 <ng-container matColumnDef="noofPersons">
                     <th mat-header-cell *matHeaderCellDef  mat-sort-header
-                       > No of persons </th>
+                       >  {{'IccAuthorizationMatrix.No of persons' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.noofPersons}}
                     </td>
