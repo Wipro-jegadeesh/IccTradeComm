@@ -8,34 +8,34 @@
             <div class="row dis-block">
                 <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="National ID​">​ {{'FinancieruserCreation.CompRegId' | translate}}
+                      <label for="National ID​">​ {{'UserCreation.CompRegId' | translate}}
                       </label>
                       <mat-form-field dense>
-                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="Company Register Id" matInput formControlName="finDetailId" [readonly]="true"/>
-                        <mat-error *ngIf="hasError('finDetailId', 'required')"> {{'FinancieruserCreation.EnterCompReg' | translate}}</mat-error>
+                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="{{'UserCreation.CompRegId' | translate}}" matInput formControlName="finDetailId" [readonly]="true"/>
+                        <mat-error *ngIf="hasError('finDetailId', 'required')"> {{'UserCreation.EnterCompReg' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
 
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="First name​">​ {{'FinancieruserCreation.FirstName' | translate}}
+                      <label for="First name​">​ {{'UserCreation.FirstName' | translate}}
                       </label>
                       <mat-form-field dense>
                         <mat-icon matPrefix>person</mat-icon>
-                        <input type="text" placeholder="First Name" matInput formControlName="firstName" />
-                        <mat-error *ngIf="hasError('firstName', 'required')">firstName is required {{'FinancieruserCreation.UserDetails' | translate}}</mat-error>
+                        <input type="text" placeholder="{{'UserCreation.FirstName' | translate}}" matInput formControlName="firstName" />
+                        <mat-error *ngIf="hasError('firstName', 'required')">firstName is required {{'UserCreation.UserDetails' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="First name​"> {{'FinancieruserCreation.LastName' | translate}}
+                      <label for="First name​"> {{'UserCreation.LastName' | translate}}
                       </label>
                       <mat-form-field dense>
                         <mat-icon matPrefix>person</mat-icon>
-                        <input type="text" matInput placeholder="Last Name" formControlName="lastName" />
-                        <mat-error *ngIf="hasError('email', 'required')"> {{'FinancieruserCreation.Enterlastname' | translate}}</mat-error>
+                        <input type="text" matInput placeholder="{{'UserCreation.LastName' | translate}}" formControlName="lastName" />
+                        <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.Enterlastname' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   <!-- <div class="col-sm-4">
@@ -67,40 +67,40 @@
 
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="National ID​"> {{'FinancieruserCreation.EmailId' | translate}}
+                  <label for="National ID​"> {{'UserCreation.EmailId' | translate}}
                   </label>
                   <mat-form-field dense>
                     <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="Email" formControlName="email" />
-                    <mat-error *ngIf="hasError('email', 'required')"> {{'FinancieruserCreation.EnterEmail' | translate}}</mat-error>
+                    <input type="text" matInput placeholder="{{'UserCreation.EmailId' | translate}}" formControlName="email" />
+                    <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.EnterEmail' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
 
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label for="National ID​"> {{'FinancieruserCreation.PhoneNo' | translate}}</label>
+                    <label for="National ID​"> {{'UserCreation.PhoneNo' | translate}}</label>
                     <mat-form-field dense>
                       <mat-icon matPrefix>call</mat-icon>
-                      <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" />
-                      <mat-error *ngIf="hasError('contactNo', 'required')"> {{'FinancieruserCreation.EnterPhoneNo' | translate}}</mat-error>
+                      <input type="text" matInput placeholder="{{'UserCreation.PhoneNo' | translate}}" formControlName="contactNo" />
+                      <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNo' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                 </div>     
                 
                 <div class="col-sm-4">
                   <div class="form-group">
-                     <label for="First name​"> {{'FinancieruserCreation.Group' | translate}}
+                     <label for="First name​"> {{'UserCreation.Group' | translate}}
                      </label>
                      <mat-form-field dense>
-                         <mat-label>Group</mat-label>
+                         <mat-label>{{'UserCreation.Group' | translate}}</mat-label>
                         <mat-select formControlName="profileType">
                           <!-- <mat-option>None</mat-option> -->
                           <!-- <mat-option value="SME">SME</mat-option>
                           <mat-option value="ICC">ICC</mat-option> -->
                           <mat-option value="FINANCE">FINANCE</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="hasError('profileType', 'required')">group is required {{'FinancieruserCreation.UserDetails' | translate}}</mat-error>
+                        <mat-error *ngIf="hasError('profileType', 'required')">{{'UserCreation.EnterGroup' | translate}} {{'UserCreation.UserDetails' | translate}}</mat-error>
                      </mat-form-field>
                   </div>
               </div>
@@ -164,23 +164,23 @@
                     
                     <div class="col-sm-4">
                         <div class="form-group">
-                           <label for="First name​"> {{'FinancieruserCreation.Role' | translate}}
+                           <label for="First name​"> {{'UserCreation.Role' | translate}}
                            </label>
                            <mat-form-field dense>
-                               <mat-label>Role</mat-label>
+                               <mat-label>{{'UserCreation.Role' | translate}}</mat-label>
                               <mat-select formControlName="role">
                                 <mat-option>None</mat-option>
                                 <mat-option value="Input">Input</mat-option>
                                 <mat-option value="Authorise">Authorise</mat-option>
                               </mat-select>
-                              <mat-error *ngIf="hasError('role', 'required')"> {{'FinancieruserCreation.EnterRole' | translate}}</mat-error>
+                              <mat-error *ngIf="hasError('role', 'required')"> {{'UserCreation.EnterRole' | translate}}</mat-error>
                            </mat-form-field>
                         </div>
                    
                     </div>
           </div>
                 <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-                        <button mat-raised-button color="primary" >Submit</button>
+                        <button mat-raised-button color="primary" >{{'Submit' | translate}}</button>
                         <button type="button" mat-raised-button color="warn"  (click)="gobackPage()">{{'Cancel' | translate}}</button>
                 </div>
       </form>
