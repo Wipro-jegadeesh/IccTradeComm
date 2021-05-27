@@ -267,7 +267,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = ['0%', '25%', '50%', '75%', '95%', '100%'];
+  public pieChartLabels: Label[] = ['25%', '50%', '75%', '100%', 'FULL'];
   public pieChartData: SingleDataSet = [60, 50, 40, 30, 20, 10];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
@@ -285,7 +285,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }
     }
   };
-  public horizontalBarChartLabels = ['0%', '25%', '50%', '75%', '95%', '100%'];
+  public horizontalBarChartLabels = ['25%', '50%', '75%', '100%', 'FULL'];
   // public horizontalBarChartType: ChartType = 'horizontalBar';
   public horizontalBarChartType: ChartType = 'bar';
   public horizontalBarChartLegend = true;
@@ -303,9 +303,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     width: 900
   };
   chartData = [
-    { data: [50, 60, 30, 40, 20, 10], label: "Percentage" },
+    { data: [50, 60, 30, 40, 20, 10], label: "Exposure Datas" },
   ];
-  chartLabels = ['0%', '25%', '50%', '75%', '95%', '100%'];
+  chartLabels = ['25%', '50%', '75%', '100%', 'FULL'];
   chartColors = [
     {
       backgroundColor: "rgba(204, 51, 0, .3)",
@@ -386,6 +386,43 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   ];
   //country Exposure end
+  // overall Graph representaion
+  public OverallhorizontalBarChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0], label: 'Exposure Datas' },
+  ];
+  public OverallpieChartData: SingleDataSet = [0, 0, 0, 0, 0];
+  public OverallLineData = [
+    { data: [0, 0, 0, 0, 0], label: "Exposure Datas" },
+  ];
+  // overall Graph representaion
+  // country Graph representaion
+  public countryhorizontalBarChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0], label: 'Exposure Datas' },
+  ];
+  public countrypieChartData: SingleDataSet = [0, 0, 0, 0, 0];
+  public countryLineData = [
+    { data: [0, 0, 0, 0, 0], label: "Exposure Datas" },
+  ];
+  // country Graph representaion
+  // sme Graph representaion
+  public smehorizontalBarChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0], label: 'Exposure Datas' },
+  ];
+  public smepieChartData: SingleDataSet = [0, 0, 0, 0, 0];
+  public smeLineData = [
+    { data: [0, 0, 0, 0, 0], label: "Exposure Datas" },
+  ];
+  // sme Graph representaion
+  // sector Graph representaion
+  public sectorhorizontalBarChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0], label: 'Exposure Datas' },
+  ];
+  public sectorpieChartData: SingleDataSet = [0, 0, 0, 0, 0];
+  public sectorLineData = [
+    { data: [0, 0, 0, 0, 0], label: "Exposure Datas" },
+  ];
+  // sector Graph representaion
+
   constructor(public router: Router,
     private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
     this.mainlimitMaintanceFormBuild()
@@ -396,6 +433,10 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.overallLimitMaintananceGraph();
+    this.countryExposureGraph();
+    this.smeExposureGraph();
+    this.sectorExposureGraph();
     this.overAllLimit = this.limitMaintanceForm.value.overAllLimit;
     this.smeoverAllLimit = this.limitMaintanceForm.value.smeoverAllLimit;
     this.countryoverLimitval = this.countrylimitMaintanceForm.value.countryoverAllLimit
@@ -411,6 +452,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.getsmetransLimitUtilTableDatas();
     this.getsectorTableDatas();
     this.getCountryTableDatas();
+
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
 
@@ -499,6 +541,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       this.smeoverAllLimit = event.target.value
       this.limitMaintance()
     }
+  }
+  ngDocheck() {
+    let local_date = moment.utc(new Date).local().format('MMMM DD, LT');
   }
   changecountrylimit(event, type) {
     console.log(event, "event");
@@ -1006,11 +1051,106 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   // country Exposure Tables End
 
-  // renderBgColor(id) {
-  //   let bgColor = ""
-  //   if (id) {
-  //     bgColor = "#172b4dd9";
-  //   }
-  //   return bgColor;
-  // }
+  //graph Representation start
+  overallLimitMaintananceGraph() {
+    let Overall = {
+      "25": "2",
+      "50": "1",
+      "75": "1",
+      "100": "1",
+      "FULL": "0"
+    }
+    this.OverallhorizontalBarChartData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    this.OverallpieChartData = Object.values(Overall).map(i => Number(i));
+    this.OverallLineData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    // this.financelimitMaintananceservices.overallGraphService().subscribe(resp => {
+    //   this.OverallhorizontalBarChartData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    //   this.OverallpieChartData = Object.values(resp).map(i => Number(i));
+    //   this.OverallLineData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    // })
+  }
+  countryExposureGraph() {
+    let Overall = {
+      "25": "2",
+      "50": "14",
+      "75": "18",
+      "100": "1",
+      "FULL": "0"
+    }
+    this.countryhorizontalBarChartData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    this.countrypieChartData = Object.values(Overall).map(i => Number(i));
+    this.countryLineData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    // this.financelimitMaintananceservices.countryGraphService().subscribe(resp => {
+    //   this.countryhorizontalBarChartData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    //   this.countrypieChartData = Object.values(resp).map(i => Number(i));
+    //   this.countryLineData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    // })
+  }
+  smeExposureGraph() {
+    let Overall = {
+      "25": "2",
+      "50": "10",
+      "75": "20",
+      "100": "1",
+      "FULL": "0"
+    }
+    this.smehorizontalBarChartData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    this.smepieChartData = Object.values(Overall).map(i => Number(i));
+    this.smeLineData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    // this.financelimitMaintananceservices.smeGraphService().subscribe(resp => {
+    //   this.smehorizontalBarChartData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    //   this.smepieChartData = Object.values(resp).map(i => Number(i));
+    //   this.smeLineData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    // })
+  }
+  sectorExposureGraph() {
+    let Overall = {
+      "25": "2",
+      "50": "4",
+      "75": "5",
+      "100": "1",
+      "FULL": "0"
+    }
+    this.sectorhorizontalBarChartData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    this.sectorpieChartData = Object.values(Overall).map(i => Number(i));
+    this.sectorLineData = [
+      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    ]
+    // this.financelimitMaintananceservices.sectorGraphService().subscribe(resp => {
+    //   this.sectorhorizontalBarChartData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    //   this.sectorpieChartData = Object.values(resp).map(i => Number(i));
+    //   this.sectorLineData = [
+    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+    //   ]
+    // })
+  }
+  //graph Reprecentation end
 }
