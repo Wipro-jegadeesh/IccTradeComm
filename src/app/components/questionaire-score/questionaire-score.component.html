@@ -1,7 +1,7 @@
 <div class="app-content">
     <header>
       <div class="data-section">
-        <h5 class="text-center">Score Received</h5>
+        <h5 class="text-center">{{'questionaireScore.Score Received' | translate}}</h5>
 
         <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitgroupsForm()">
         <!-- <h5 class="text-center">Groups</h5> -->
@@ -12,14 +12,14 @@
         <tr>
             <td rowspan="1" colspan="1">
                 <mat-form-field dense class="icc-mat">
-                  <mat-label>Consolidated score</mat-label>
+                  <mat-label> {{'questionaireScore.Consolidated score' | translate}}</mat-label>
                   <input type="text" matInput formControlName="score" />
                 </mat-form-field>
               </td>
                   
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
-        <mat-label>Score State</mat-label>
+        <mat-label> {{'questionaireScore.Score State' | translate}}</mat-label>
         <input type="text" matInput formControlName="state" />
       </mat-form-field>
     </td>
@@ -57,7 +57,7 @@
                   </ng-container> -->
 
                 <ng-container matColumnDef="scoreName">
-                    <th mat-header-cell *matHeaderCellDef  mat-sort-header > Score Name </th>
+                    <th mat-header-cell *matHeaderCellDef  mat-sort-header > {{'questionaireScore.Score Name' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.scoreName}}
                     </td>
@@ -65,7 +65,7 @@
 
                 <ng-container matColumnDef="score">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> Score
+                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Score' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.score}}
@@ -74,7 +74,7 @@
 
                 <ng-container matColumnDef="information">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> Information
+                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Information' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.information && element.information[0] && element.information[0] ? element.information[0].type + ':' +element.information[0].message : '-' }}

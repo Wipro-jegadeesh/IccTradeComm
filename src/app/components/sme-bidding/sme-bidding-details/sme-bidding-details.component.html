@@ -3,7 +3,7 @@
         <div class="mmt70"></div>
   <div class="data-section">
     <mat-tab-group>
-        <mat-tab label="Bid Details">
+        <mat-tab label="{{'Bid Details' | translate}}">
             <div style="overflow-x:auto;">
                 <table mat-table [dataSource]="dataSourceTwo" >
                  
@@ -105,7 +105,7 @@
                 matTooltip="{{financierTooltip.submit}}" [matTooltipPosition]="'below'" (click)="saveFinBid()">{{'Accept' | translate}}</button> -->
             </div>
             </mat-tab>
-        <mat-tab label="Invoice And Goods Details Section"> 
+        <mat-tab label="{{'Invoice And Goods Details Section' | translate}}"> 
             <!-- <p style="font-weight: 500; color: #a899e4;margin-left: 14px;">Invoice Details</p> -->
             <mat-accordion>
                     <mat-expansion-panel>

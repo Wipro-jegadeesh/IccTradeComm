@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: 'view-profile/:type', component: ViewProfileComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
 
-  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire ", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
+  { path: 'sme-onboarding', component: SmeOnboardingComponent,  data : {"HeaderName" : "Sme Questionnaire", "headerPaths" : [{ path : "/login",pathName : "Login"}] } },
   { path: 'sme-dashboard', component: SmeDashboardComponent,  data : {"HeaderName" : "Seller Dashboard"} },
   { path: 'sme-bidding', component: SmeBiddingComponent ,  data : {"HeaderName" : "SME Bidding ", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}] }},
   { path: 'sme-bidding/:id', component: SmeBiddingDetailsComponent ,  data : {"HeaderName" : "SME Bidding", "headerPaths" : [{ path : "/sme-bidding",pathName : "SME Bidding Details"},{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},

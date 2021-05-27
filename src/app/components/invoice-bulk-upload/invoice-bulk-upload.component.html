@@ -4,7 +4,7 @@
         <form>
         <mat-card>
             <mat-card-content>
-                <h4>Invoice Upload</h4>
+                <h4>{{'Invoice Upload' | translate}}</h4>
 
                 <div class="card-form-container">
                     <div class="bulk-file-upload file-input">
@@ -12,7 +12,7 @@
                         <div class="file-upload row col-md-12">
                         <div class="upload-btn-wrapper col-md-9 ">
                           <!-- [disabled]="questionDatas.filesMax == fileNames.length" -->
-                          <button class="filebtn" >Upload a file</button>
+                          <button class="filebtn" >{{'Upload a file' | translate}}</button>
                         <!-- <input type="file" class="dynamic-file-upload form" (change)="onChange($event)"
                         accept=".xlsx,.xls,.csv" /> -->
                         <input type="file" accept=".xlsx,.xls,.csv" class="dynamic-file-upload form" (change)="onFileChange($event)" />
@@ -26,14 +26,14 @@
                             </span>
                           </button> -->
 
-                          <button type="button" class="btn btn-outline fundreq-btn" [matMenuTriggerFor]="menu"> Sample File Download
+                          <button type="button" class="btn btn-outline fundreq-btn" [matMenuTriggerFor]="menu"> {{'Sample File Download' | translate}}
                             <span class="material-icons">
                               file_download
                               </span>
                           </button>
                             <mat-menu #menu="matMenu">
-                            <button (click)="sampleDown();"  mat-menu-item>Download as XLSX </button>
-                            <button (click)="samplecsvDown();" mat-menu-item>Download as CSV </button>
+                            <button (click)="sampleDown();"  mat-menu-item> {{'Download as XLSX' | translate}}</button>
+                            <button (click)="samplecsvDown();" mat-menu-item>{{'Download as CSV' | translate}}</button>
                             </mat-menu>
                         </div>
                         <!-- <div class="upload-btn-wrapper col-md-3 ">
@@ -99,7 +99,7 @@
                 <mat-checkbox name="box"></mat-checkbox>
                 <ng-container matColumnDef="InvoiceRefNo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.refno}}" [matTooltipPosition]="tooltipPosition">Invoice Ref No</th>
+                  matTooltip="{{fundingTooltip.refno}}" [matTooltipPosition]="tooltipPosition">{{'Invoice Ref No' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{element && element.invoiceDetailsSequenceNumber.invoice_ref}}</td>
                  </ng-container>
                 <ng-container matColumnDef="DateOfInvoice">
@@ -109,12 +109,12 @@
                 </ng-container>
                 <ng-container matColumnDef="Seller">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.seller}}" [matTooltipPosition]="tooltipPosition">Seller</th>
+                  matTooltip="{{fundingTooltip.seller}}" [matTooltipPosition]="tooltipPosition">{{'Seller' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{element.smeId}}</td>
                 </ng-container>
                 <ng-container matColumnDef="buyerName">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.buyer}}" [matTooltipPosition]="tooltipPosition">Buyer</th>
+                  matTooltip="{{fundingTooltip.buyer}}" [matTooltipPosition]="tooltipPosition">{{'Buyer' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{element.buyerName}}</td>
                 </ng-container>
                 <ng-container matColumnDef="InvoiceAmount">
@@ -128,9 +128,9 @@
                 </ng-container>
                 <ng-container matColumnDef="Status">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                  matTooltip="{{fundingTooltip.status}}" [matTooltipPosition]="tooltipPosition">Status </th>
+                  matTooltip="{{fundingTooltip.status}}" [matTooltipPosition]="tooltipPosition"> {{'Status' | translate}}</th>
                   <td mat-cell *matCellDef="let element" style="color: green;">
-                   <mat-icon>exit_to_app</mat-icon><span style="float: left;">&nbsp;Initiated</span></td>
+                   <mat-icon>exit_to_app</mat-icon><span style="float: left;">&nbsp;{{'Initiated' | translate}}</span></td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
@@ -143,7 +143,7 @@
             <span class="fill-remaining-space"></span>
             <button mat-flat-button color="primary" #tooltip="matTooltip"
             matTooltip="{{fundingTooltip.submit}}" [matTooltipPosition]="tooltipPosition" disabled>
-              Submit
+              {{'Submit' | translate}}
             </button>
             <!-- <button mat-flat-button color="primary" #tooltip="matTooltip"
             matTooltip="{{fundingTooltip.pendingInvoice}}" [matTooltipPosition]="tooltipPosition">
@@ -151,7 +151,7 @@
             </button> -->
             <button mat-flat-button color="primary" (click)="authoriseInvoice()" #tooltip="matTooltip"
             matTooltip="{{fundingTooltip.invoiceAuthorise}}" [matTooltipPosition]="tooltipPosition">
-              Authorise
+              {{'Authorise' | translate}}
             </button>
           </mat-card-actions>
         </div>

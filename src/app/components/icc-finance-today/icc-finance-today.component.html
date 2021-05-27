@@ -1,7 +1,7 @@
 <div class="app-content {{isOpen}} ">
     <header>
         <br>
-        <h5>Finance Today</h5>
+        <h5>{{'Finance Today' | translate}}</h5>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
 
@@ -28,7 +28,7 @@
 
            <ng-container matColumnDef="baseCcyAmt">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'">  Amt (BaseCcy)  </th>
+            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'Amt' | translate}}  (BaseCcy)  </th>
             <td mat-cell *matCellDef="let element"> 
                          {{element.baseCcyAmt}} 
              </td>
@@ -36,7 +36,7 @@
         
           <ng-container matColumnDef="fundablePercent">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.smeName}}" [matTooltipPosition]="'below'"> Fundable Percentage </th>
+            matTooltip="{{biddingTooltip.smeName}}" [matTooltipPosition]="'below'">{{'Fundable Percentage' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
               <!-- <mat-chip-list>
                      <mat-chip> -->
@@ -49,7 +49,7 @@
         
           <ng-container matColumnDef="baseCcyFundingAmt">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> Funding Amt (BaseCcy) </th>
+            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> {{'Funding Amt' | translate}}(BaseCcy) </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -62,7 +62,7 @@
         
           <ng-container matColumnDef="baseCcyNetAmtPayable">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'"> Net Amt payable  </th>
+            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Net Amt payable' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
                <!-- <mat-chip-list>
                       <mat-chip> -->
@@ -137,7 +137,7 @@
   <div>   
     <ng-template #template>
        <div class="modal-header">
-          <h4 class="modal-title pull-left">View all Finance Today</h4>
+          <h4 class="modal-title pull-left">{{'View all Finance Today' | translate}}</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" #tooltip="matTooltip"
           matTooltip="{{biddingTooltip.close}}" [matTooltipPosition]="'below'">
              <span aria-hidden="true">×</span>
@@ -150,12 +150,12 @@
             color: #a899e4;margin-left: 14px;">Bidding Details</p> -->
             <table mat-table [dataSource]="dataSourceFour">
                 <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Financie Ref No</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Financie Ref No' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ 'FIN00'+data.fin_id }}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="finId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">FIN Id</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'FIN Id' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
                 </ng-container>
         
@@ -170,7 +170,7 @@
                 </ng-container>
         
                 <ng-container matColumnDef="baseCcyAmt">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Base CCY</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Base' | translate}}CCY</th>
                     <td mat-cell *matCellDef="let data">{{ data.baseCcyAmt }}</td>
                 </ng-container>      
                 
@@ -181,7 +181,7 @@
                 </ng-container> 
 
                 <ng-container matColumnDef="baseCcyFundingAmt">
-                    <th mat-header-cell *matHeaderCellDef scope="column">BaseCCY Funding Amt</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'BaseCCY Funding Amt' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.baseCcyFundingAmt }}</td>
                 </ng-container> 
 
@@ -191,12 +191,12 @@
                 </ng-container> 
 
                 <ng-container matColumnDef="baseCcyNetAmtPayable">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Net Amount Received</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount Received' | translate}}</th>
                     <td mat-cell *matCellDef="let data">{{ data.baseCcyNetAmtPayable }}</td>
                 </ng-container> 
 
                 <ng-container matColumnDef="annualYeild">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Annual Yield %</th>
+                    <th mat-header-cell *matHeaderCellDef scope="column"> {{'Annual Yield' | translate}}%</th>
                     <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
                 </ng-container> 
 
@@ -265,7 +265,7 @@
         
                 <ng-container matColumnDef="buyerName">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">Buyer</th>
+                    matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">{{'Buyer' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}</td>
                 </ng-container>
         
@@ -277,7 +277,7 @@
         
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                    matTooltip="{{biddingTooltip.invoiceStatus}}" [matTooltipPosition]="'below'">Status</th>
+                    matTooltip="{{biddingTooltip.invoiceStatus}}" [matTooltipPosition]="'below'">{{'Status' | translate}}</th>
                     <td mat-cell *matCellDef="let invoiceDetailsData">
                         {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
                     </td>
@@ -330,7 +330,7 @@
         
                     <ng-container matColumnDef="amt">
                         <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.amount}}" [matTooltipPosition]="'below'">Amount</th>
+                        matTooltip="{{biddingTooltip.amount}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                     </ng-container>
         
@@ -361,7 +361,7 @@
 
                     <ng-container matColumnDef="total">
                         <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.total}}" [matTooltipPosition]="'below'">Total</th>
+                        matTooltip="{{biddingTooltip.total}}" [matTooltipPosition]="'below'">{{'Total' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                     </ng-container>
                     
@@ -458,7 +458,7 @@
        </div>
        <div class="modal-footer">
           <!-- <button type="button" class="btn model-btn-outline">Submit</button> -->
-          <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+          <button type="button" class="btn btn-default" (click)="modalRef.hide()">{{'Close' | translate}}</button>
        </div>
     </ng-template>
   </div>

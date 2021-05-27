@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sme-onboarding',
@@ -26,7 +27,7 @@ export class SmeOnboardingComponent implements OnInit {
   dynamicquestionnaireSections=[]
   smeForm:FormGroup
 
-  constructor(private router: Router,private apiService:ApiService,
+  constructor(public translate: TranslateService,private router: Router,private apiService:ApiService,
     private fb:FormBuilder,private toastr: ToastrService,private datePipe:DatePipe) { }
 
   radioChecked={}
@@ -401,7 +402,8 @@ export class SmeOnboardingComponent implements OnInit {
   }
   onSubmit(){
     this.onSave('')
-    this.toastr.success('Questionnaire Section Submitted Successfully')
+    this.toastr.success(this.translate.instant('Questionnaire Section Submitted Successfully'))
+
     let data=JSON.parse(localStorage.getItem('userCred'))
     this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
       if(resp && resp.score >= 900){
@@ -416,7 +418,7 @@ export class SmeOnboardingComponent implements OnInit {
       this.router.navigateByUrl('/sme-dashboard')
     }
     else{
-      this.toastr.info('Kindly check your questionnaire section.')
+      this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
       this.router.navigateByUrl('/score-received')
     }
     },error=>{

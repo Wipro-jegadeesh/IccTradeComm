@@ -14,6 +14,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-icc-sector',
@@ -29,7 +30,7 @@ export class IccSectorComponent implements OnInit {
   isEdit : boolean
   id : any
 
-  constructor(public router: Router, private IccRolesServices: IccSectorServices, 
+  constructor(public translate: TranslateService,public router: Router, private IccRolesServices: IccSectorServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
@@ -99,7 +100,7 @@ export class IccSectorComponent implements OnInit {
       console.log(value,"value.id")
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
         if(resp){
-          this.toastr.success("Saved Successfully")
+          this.toastr.success(this.translate.instant('Saved Successfully'))
           this.groupsForm.reset();
           this.id = "";
           this.isEdit = false
@@ -111,7 +112,7 @@ export class IccSectorComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.error("Mandatory fields are missing")
+      this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
 

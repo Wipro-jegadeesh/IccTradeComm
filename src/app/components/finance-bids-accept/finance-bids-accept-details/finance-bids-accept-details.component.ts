@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import {FinanceBiddingService} from '../../../service/finance_bidding/finance-bidding.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -73,7 +74,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   isView: boolean;
   FinancebiddingDetails: any;
 
-  constructor(private FinanceBiddingService:FinanceBiddingService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService) { }
+  constructor(public translate: TranslateService,private FinanceBiddingService:FinanceBiddingService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService) { }
   finBidform: FormGroup;
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
@@ -311,13 +312,13 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   onSubmitBidForm() {
     try {
       if (this.finBidform.status === "INVALID") {
-        this.toastr.error("Please fill Mandatory fields")
+        this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
       } else {
         let params = this.finBidform.value
         params.repaymentDate = this.invoiceDetails.invDueDate;
         params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z";
         this.invoiceRequestServices.UpdateBiddingSave(this.id,params).subscribe(resp => {
-          this.toastr.success("Bid Accepted successfully")
+          this.toastr.success(this.translate.instant('Bid Update successfully'))
           this.buildfinBidform();
           this.modalRef.hide()
           this.router.navigateByUrl('/financier-bids-accept');
