@@ -1053,104 +1053,104 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   //graph Representation start
   overallLimitMaintananceGraph() {
-    let Overall = {
-      "25": "2",
-      "50": "1",
-      "75": "1",
-      "100": "1",
-      "FULL": "0"
-    }
-    this.OverallhorizontalBarChartData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    this.OverallpieChartData = Object.values(Overall).map(i => Number(i));
-    this.OverallLineData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    // this.financelimitMaintananceservices.overallGraphService().subscribe(resp => {
-    //   this.OverallhorizontalBarChartData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    //   this.OverallpieChartData = Object.values(resp).map(i => Number(i));
-    //   this.OverallLineData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    // })
+    // let Overall = {
+    //   "25": "2",
+    //   "50": "1",
+    //   "75": "1",
+    //   "100": "1",
+    //   "FULL": "0"
+    // }
+    // this.OverallhorizontalBarChartData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    // this.OverallpieChartData = Object.values(Overall).map(i => Number(i));
+    // this.OverallLineData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    this.financelimitMaintananceservices.overallGraphService().subscribe(resp => {
+      this.OverallhorizontalBarChartData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+      this.OverallpieChartData = Object.values(resp).map(i => Number(i));
+      this.OverallLineData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+    })
   }
   countryExposureGraph() {
-    let Overall = {
-      "25": "2",
-      "50": "14",
-      "75": "18",
-      "100": "1",
-      "FULL": "0"
-    }
-    this.countryhorizontalBarChartData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    this.countrypieChartData = Object.values(Overall).map(i => Number(i));
-    this.countryLineData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    // this.financelimitMaintananceservices.countryGraphService().subscribe(resp => {
-    //   this.countryhorizontalBarChartData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    //   this.countrypieChartData = Object.values(resp).map(i => Number(i));
-    //   this.countryLineData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    // })
+    // let Overall = {
+    //   "25": "2",
+    //   "50": "14",
+    //   "75": "18",
+    //   "100": "1",
+    //   "FULL": "0"
+    // }
+    // this.countryhorizontalBarChartData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    // this.countrypieChartData = Object.values(Overall).map(i => Number(i));
+    // this.countryLineData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    this.financelimitMaintananceservices.countryGraphService().subscribe(resp => {
+      this.countryhorizontalBarChartData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+      this.countrypieChartData = Object.values(resp).map(i => Number(i));
+      this.countryLineData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+    })
   }
   smeExposureGraph() {
-    let Overall = {
-      "25": "2",
-      "50": "10",
-      "75": "20",
-      "100": "1",
-      "FULL": "0"
-    }
-    this.smehorizontalBarChartData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    this.smepieChartData = Object.values(Overall).map(i => Number(i));
-    this.smeLineData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    // this.financelimitMaintananceservices.smeGraphService().subscribe(resp => {
-    //   this.smehorizontalBarChartData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    //   this.smepieChartData = Object.values(resp).map(i => Number(i));
-    //   this.smeLineData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    // })
+    // let Overall = {
+    //   "25": "2",
+    //   "50": "10",
+    //   "75": "20",
+    //   "100": "1",
+    //   "FULL": "0"
+    // }
+    // this.smehorizontalBarChartData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    // this.smepieChartData = Object.values(Overall).map(i => Number(i));
+    // this.smeLineData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    this.financelimitMaintananceservices.smeGraphService().subscribe(resp => {
+      this.smehorizontalBarChartData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+      this.smepieChartData = Object.values(resp).map(i => Number(i));
+      this.smeLineData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+    })
   }
   sectorExposureGraph() {
-    let Overall = {
-      "25": "2",
-      "50": "4",
-      "75": "5",
-      "100": "1",
-      "FULL": "0"
-    }
-    this.sectorhorizontalBarChartData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    this.sectorpieChartData = Object.values(Overall).map(i => Number(i));
-    this.sectorLineData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    // this.financelimitMaintananceservices.sectorGraphService().subscribe(resp => {
-    //   this.sectorhorizontalBarChartData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    //   this.sectorpieChartData = Object.values(resp).map(i => Number(i));
-    //   this.sectorLineData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    // })
+    // let Overall = {
+    //   "25": "2",
+    //   "50": "4",
+    //   "75": "5",
+    //   "100": "1",
+    //   "FULL": "0"
+    // }
+    // this.sectorhorizontalBarChartData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    // this.sectorpieChartData = Object.values(Overall).map(i => Number(i));
+    // this.sectorLineData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    this.financelimitMaintananceservices.sectorGraphService().subscribe(resp => {
+      this.sectorhorizontalBarChartData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+      this.sectorpieChartData = Object.values(resp).map(i => Number(i));
+      this.sectorLineData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+    })
   }
   //graph Reprecentation end
 }
