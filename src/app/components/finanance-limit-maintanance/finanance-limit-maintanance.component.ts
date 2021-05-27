@@ -574,19 +574,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       countryccy: ['SGD', Validators.required]
     });
   }
-  mainlimitMaintanceFormBuild() {
-    this.mainlimitMaintanceForm = this.fb.group({
-      mainoverallexposure: ['', Validators.required],
-      maincountryexposure: ['', Validators.required],
-      mainsmeexposure: ['', Validators.required],
-      mainOverallAvailable: [''],
-      mainlimitccy: ['SGD', Validators.required],
-      mainsector: ['', Validators.required],
-      transactions: ['', Validators.required],
-      buyerLimit: ['', Validators.required]
 
-    });
-  }
   clickedit() {
     this.enableReadonly = true;
     this.isEdit = true;
@@ -650,6 +638,19 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }
     })
   }
+  mainlimitMaintanceFormBuild() {
+    this.mainlimitMaintanceForm = this.fb.group({
+      mainoverallexposure: ['', Validators.required],
+      maincountryexposure: ['', Validators.required],
+      mainsmeexposure: ['', Validators.required],
+      mainOverallAvailable: [''],
+      mainlimitccy: ['SGD', Validators.required],
+      mainsector: ['', Validators.required],
+      transactions: ['', Validators.required],
+      buyerLimit: ['', Validators.required]
+
+    });
+  }
   mainlimitMaintanceFormSubmit() {
     if (this.mainlimitMaintanceForm.valid) {
       this.overAllLimit = this.mainlimitMaintanceForm.value.mainoverallexposure;
@@ -659,18 +660,30 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       this.limitMaintance();
       this.countrylimitMaintance();
       // this.toastr.success("Limit Maintanance Updated Successfully")
-      if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) && (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector))) {
-        this.toastr.error("Country and SME Exposure Amount should not exceeds or equal to the Overall Exposure");
+      if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) &&
+        (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) &&
+        (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) &&
+        (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.transactions)) &&
+        (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.buyerLimit))) {
+        this.toastr.error("Country,SME,Sector,Transaction and Buyer Limit Amount should not exceeds or equal to the Global Limit");
         return false;
       } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) {
-        this.toastr.error("Country Exposure Amount should not exceeds or equal to the Overall Exposure");
+        this.toastr.error("Country Limit Amount should not exceeds or equal to the Global Limit");
         return false;
       } else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) {
-        this.toastr.error("SME Exposure Amount should not exceeds or equal to the Overall Exposure")
+        this.toastr.error("SME Limit Amount should not exceeds or equal to the Global Limit")
         return false;
       }
       else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) {
-        this.toastr.error("Sector Amount should not exceeds or equal to the Overall Exposure");
+        this.toastr.error("Sector Limit Amount should not exceeds or equal to the Global Limit");
+        return false;
+      }
+      else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.transactions)) {
+        this.toastr.error("Transaction Limit Amount should not exceeds or equal to the Global Limit");
+        return false;
+      }
+      else if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.buyerLimit)) {
+        this.toastr.error("Buyer Limit Amount should not exceeds or equal to the Global Limit");
         return false;
       }
       else {
@@ -854,7 +867,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   newlimitExposureFormBuild() {
     this.newLimitGraphForm = this.fb.group({
       newglobalLimit: [10000, Validators.required],
-      newsmeLimit: [30000, Validators.required],
+      newtransactionLimit: [30000, Validators.required],
     });
     this.newInitalLimits = [this.newLimitGraphForm.value.newsmeLimit];
     // this.newsmelimitVal = this.newLimitGraphForm.value.newsmeLimit
