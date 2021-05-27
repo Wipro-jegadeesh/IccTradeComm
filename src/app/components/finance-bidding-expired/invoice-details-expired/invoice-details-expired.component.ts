@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Status {
   value: string;
@@ -96,7 +97,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   type: string;
   isView: boolean;
   
-  constructor(private invoiceRequestServices: InvoiceRequestServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,private router :Router,
+  constructor(public translate: TranslateService,private invoiceRequestServices: InvoiceRequestServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,private router :Router,
     private modalDialogService:ModalDialogService,private fb: FormBuilder,private FinanceBiddingExpiryServices:FinanceBiddingExpiryServices,private toastr: ToastrService) { }
 
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
@@ -337,13 +338,13 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   onSubmitBidForm() {
     try {
       if (this.finBidform.status === "INVALID"){
-        this.toastr.error("Please fill Mandatory fields")
+        this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
       }else{
         let params = this.finBidform.value
         params.repaymentDate = this.invoiceDetails.invDueDate;
         params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z"
         this.FinanceBiddingExpiryServices.UpdateBiddingSave(this.id,params).subscribe(resp => {
-          this.toastr.success("Bid Update successfully")
+          this.toastr.success(this.translate.instant('Bid Update successfully'))
           this.buildfinBidform();
           this.modalRef.hide()
           this.router.navigateByUrl('/financier-dashboard');

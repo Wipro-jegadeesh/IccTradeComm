@@ -13,23 +13,23 @@
         <!-- class="uxg-list-item-selected" -->
         <a mat-list-item >
             <mat-icon mat-list-icon>home</mat-icon>
-            <p>Home</p>
+            <p>{{'sideBarComponet.Home' | translate}}</p>
         </a>
         <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Questionnaire Details</p>
+            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Questionnaire Details' | translate}}</p>
         </a>
         <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Score Received</p>
+            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Score Received' | translate}}</p>
         </a>
         <a mat-list-item (click)="navigatePage('/sme-user-creation')" *ngIf="checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">User Creation</p>
+            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.User Creation' | translate}}</p>
         </a>
         <a *ngIf="roleName == 'financier'" mat-list-item (click)="navigatePage('/finanance-limit-maintanance')" >
             <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Limit Maintanance</p>
+            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Limit Maintanance' | translate}}</p>
         </a>
         <!-- <a *ngIf="roleName == 'icc'" mat-list-item (click)="navigatePage('/icc-list-smes')" >
             <mat-icon mat-list-icon>dashboard</mat-icon>
@@ -37,31 +37,31 @@
         </a> -->
         <a mat-list-item>
             <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Applications</p>
+            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Applications' | translate}}</p>
         </a>
         <a mat-list-item>
             <mat-icon mat-list-icon>notifications</mat-icon>
-            <p>Notifications</p>
+            <p>{{'sideBarComponet.Notifications' | translate}}</p>
         </a>
         <a mat-list-item>
             <mat-icon mat-list-icon>extension</mat-icon>
-            <p>Tools</p>
+            <p>{{'sideBarComponet.Tools' | translate}}</p>
         </a>
         <a mat-list-item>
             <mat-icon mat-list-icon>settings</mat-icon>
-            <p>Settings</p>
+            <p>{{'sideBarComponet.Settings' | translate}}</p>
         </a>
 
         <mat-divider></mat-divider>
 
         <a mat-list-item>
             <mat-icon mat-list-icon>help</mat-icon>
-            <p>Help</p>
+            <p>{{'sideBarComponet.Help' | translate}}</p>
         </a>
 
         <a mat-list-item>
             <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>Sign out</p>
+            <p>{{'sideBarComponet.Sign out' | translate}}</p>
         </a>
         <!-- <mat-divider></mat-divider> -->
     </mat-nav-list>

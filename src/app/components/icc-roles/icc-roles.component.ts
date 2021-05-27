@@ -14,6 +14,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-icc-roles',
@@ -30,7 +31,7 @@ export class IccRolesComponent implements OnInit {
   roleId : any
   @ViewChild('formDirective') private formDirective: NgForm;
 
-  constructor(public router: Router, private IccRolesServices: IccRolesServices, 
+  constructor(public translate: TranslateService,public router: Router, private IccRolesServices: IccRolesServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
@@ -98,7 +99,7 @@ export class IccRolesComponent implements OnInit {
       }
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
         if(resp){
-          this.toastr.success("Saved Successfully")
+          this.toastr.success(this.translate.instant('Saved Successfully'))
           // this.groupsForm.reset();
           this.formDirective.resetForm();
           this.roleId = "";
@@ -111,7 +112,7 @@ export class IccRolesComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.error("Mandatory fields are missing")
+      this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
 

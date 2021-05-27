@@ -74,7 +74,7 @@
     </tbody>
   </table>
   <mat-tab-group>
-      <mat-tab label="BIDDING Economic Details Section">
+      <mat-tab label="{{'BIDDING Economic Details Section' | translate}}">
         <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
          <mat-card>
               <mat-card-content>
@@ -112,7 +112,7 @@
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                 <input matInput [readonly]="isView"
                                 formControlName="baseCcyAmt" 
-                                placeholder="Base CCY Amt" (keyup)="changeRowgrid()"
+                                placeholder="{{'Base CCY Amount' | translate}}" (keyup)="changeRowgrid()"
                                  required>
                               </td>
                             </ng-container>
@@ -158,7 +158,7 @@
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                   <input matInput [readonly]="isView"
                                   formControlName="repaymentDate" 
-                                  placeholder="RepaymentDate" 
+                                  placeholder="{{'Repayment Date' | translate}}" 
                                   required>
                                 <!-- <input matInput [matDatepicker]="picker" formControlName="RepaymentDate">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -274,7 +274,7 @@
                                   text-align: center" *matCellDef="let element;let row; let index = index"  >
                                     <input matInput [readonly]="isView"
                                     formControlName="offerExpDateTime" 
-                                    placeholder="Off Exp date time" 
+                                    placeholder="{{'Off Exp date /time' | translate}}" 
                                     required>
                                   </td>
                                 </ng-container>
@@ -290,7 +290,7 @@
           </mat-card>
           <div class="modal-footer" style="justify-content:center">
               <button type="button" *ngIf="!isView" class="btn model-btn-outline"  style="background-color: #4CAF50;color: white;" 
-               (click)="openModal($event,template)" >Re-Launch Bid</button>
+               (click)="openModal($event,template)" >{{'Re-Launch' | translate}}</button>
            </div>
         </form>
             <br>
@@ -402,7 +402,7 @@
                 </ng-container>
                 <ng-container matColumnDef="amt">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                matTooltip="{{detailsTooltip.amount}}" [matTooltipPosition]="'below'">Amount</th>
+                matTooltip="{{detailsTooltip.amount}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
                 <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="netAmtPay">
@@ -429,7 +429,7 @@
                 
                 <ng-container matColumnDef="total">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                matTooltip="{{detailsTooltip.total}}" [matTooltipPosition]="'below'">Total</th>
+                matTooltip="{{detailsTooltip.total}}" [matTooltipPosition]="'below'">Total{{'Amt Ccy' | translate}}</th>
                 <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#B4A6EA"></tr>

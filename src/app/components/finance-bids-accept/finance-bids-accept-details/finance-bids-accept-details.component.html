@@ -155,7 +155,7 @@
                                 text-align: center" *matCellDef="let element;let row; let index = index"  >
                                     <input matInput 
                                     formControlName="repaymentDate" [readonly]="isView"
-                                    placeholder="RepaymentDate" 
+                                    placeholder="{{'Repayment Date' | translate}}" 
                                     required>
                                   <!-- <input matInput [matDatepicker]="picker" formControlName="RepaymentDate">
                                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -209,7 +209,7 @@
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
                               <input matInput (keyup)="changeRowgrid()"[readonly]="isView"
                               formControlName="annualYeild" 
-                              placeholder="Annual Yield Basis a360" 
+                              placeholder="{{'Annual Yield' | translate}} Basis a360" 
                               required>
                             </td>
                           </ng-container>
@@ -244,7 +244,7 @@
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
                                 <input matInput [readonly]="isView"
                                 formControlName="invCcyNetAmtPayable" 
-                                placeholder="Net Amt payable Inv CCY" 
+                                placeholder="{{'Net Amt payable (Inv CCY)' | translate}}" 
                                 required>
                               </td>
                             </ng-container>
@@ -269,7 +269,7 @@
                                     text-align: center" *matCellDef="let element;let row; let index = index"  >
                                       <input matInput [readonly]="isView"
                                       formControlName="offerExpDateTime" 
-                                      placeholder="Off Exp date time" 
+                                      placeholder="{{'Off Exp date /time' | translate}}" 
                                       required>
                                     </td>
                                   </ng-container>
@@ -284,7 +284,7 @@
             </mat-card>
             <div class="modal-footer" style="justify-content:center">
                 <button type="button" *ngIf="!isView" class="btn model-btn-outline"  style="background-color: #4CAF50;color: white;" 
-                 (click)="openModal($event,template)">Modify</button>
+                 (click)="openModal($event,template)">{{'Modify' | translate}}</button>
              </div>
           </form>
               <br>
@@ -395,7 +395,7 @@
                   </ng-container>
                   <ng-container matColumnDef="amt">
                   <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.amount}}" [matTooltipPosition]="'below'">Amount</th>
+                  matTooltip="{{detailsTooltip.amount}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                   </ng-container>
                   <!-- <ng-container matColumnDef="netAmtPay">
@@ -422,7 +422,7 @@
                   
                   <ng-container matColumnDef="total">
                   <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.total}}" [matTooltipPosition]="'below'">Total</th>
+                  matTooltip="{{detailsTooltip.total}}" [matTooltipPosition]="'below'">{{'Total' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#B4A6EA"></tr>

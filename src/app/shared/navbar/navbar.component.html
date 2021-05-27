@@ -8,9 +8,9 @@
         <button mat-icon-button color="accent" class="uxg-breadcrumb-back" (click)="backNavigation()">
             <mat-icon>chevron_left</mat-icon>
           </button>
-        <li class="uxg-h6">{{currentHeaderName}}</li>
+        <li class="uxg-h6">{{currentHeaderName | translate}}</li>
         <!-- <li class="curs-pointer" (click)="goHome()">Home</li> -->
-        <li *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">{{item.pathName}}</li>
+        <li *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">{{item.pathName | translate}}</li>
 
     </ul>
     <span class="fill-remaining-space"></span>
@@ -31,7 +31,7 @@
 
       
         <mat-form-field dense>
-            <mat-label>Language</mat-label>
+            <mat-label>{{'navbarComponet.Language' | translate}}</mat-label>
             <mat-icon matPrefix>language</mat-icon>
             <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
                 <mat-option *ngFor="let lang of languages" [value]="lang.id">
@@ -76,9 +76,9 @@
     <div class="uxg-menu-footer">
         <button mat-flat-button color="primary" dense (click)="logout()">
             <mat-icon>exit_to_app</mat-icon>
-            Logout
+            {{'navbarComponet.Logout' | translate}}
         </button>
-        <button mat-button color="primary" (click)="profile()" dense> View profile </button>
+        <button mat-button color="primary" (click)="profile()" dense> {{'navbarComponet.View profile' | translate}} </button>
     </div>
   </mat-menu>
   <!-- <mat-sidenav #sidenav mode="over">

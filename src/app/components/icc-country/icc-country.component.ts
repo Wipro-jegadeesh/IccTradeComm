@@ -14,6 +14,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { CountryModule } from '../../shared/constants/constants'
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class IccCountryComponent implements OnInit {
   @ViewChild('formDirective') private formDirective: NgForm;
 
 
-  constructor(public router: Router, private IccCountryServices: IccCountryServices, 
+  constructor(public translate: TranslateService,public router: Router, private IccCountryServices: IccCountryServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.countryFormBuild()
      }
@@ -73,7 +74,7 @@ export class IccCountryComponent implements OnInit {
       }
       this.IccCountryServices.submitIcccountry(value).subscribe(resp => {
         if(resp){
-          this.toastr.success("Saved Successfully")
+          this.toastr.success(this.translate.instant('Saved Successfully'))
           // this.countryForm.reset();
           this.formDirective.resetForm();
            this.id = "";
@@ -86,7 +87,7 @@ export class IccCountryComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.error("Mandatory fields are missing")
+      this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
 

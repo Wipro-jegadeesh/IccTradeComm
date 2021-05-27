@@ -14,6 +14,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-questionaire-score',
@@ -30,7 +31,7 @@ export class QuestionaireScoreComponent implements OnInit {
   groupId : any
 
 
-  constructor(public router: Router, private QuestionaireScoreServices: QuestionaireScoreServices, 
+  constructor(public translate: TranslateService,public router: Router, private QuestionaireScoreServices: QuestionaireScoreServices, 
      private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
        this.groupsFormBuild()
      }
@@ -73,7 +74,7 @@ export class QuestionaireScoreComponent implements OnInit {
       }
       this.QuestionaireScoreServices.submitIccGroups(value).subscribe(resp => {
         if(resp){
-          this.toastr.success("Saved Successfully")
+          this.toastr.success(this.translate.instant('Saved Successfully'))
           this.groupsForm.reset();
           this.groupId = "";
           this.isEdit = false
@@ -86,7 +87,7 @@ export class QuestionaireScoreComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.error("Mandatory fields are missing")
+      this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
 
