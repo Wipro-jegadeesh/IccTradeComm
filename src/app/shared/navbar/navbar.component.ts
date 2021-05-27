@@ -37,16 +37,18 @@ export class NavbarComponent implements OnInit {
     )
    { }
 
-   
   LanguagesOptions=[]
   languageDropdownSettings:any={}
   languageSelectedItems=[]
   selectedItems=[]
 
-
+  //currentTimeDate start
+  public currentTime: any;
+  public currentDate: any;
+  //currentTimeDate end
 
   ngOnInit(): void {
-
+    this.currentTimeDate();
     this.userName = localStorage.getItem("userId")
     this.roleName = localStorage.getItem("roleName")
     this.userDeatils = JSON.parse(localStorage.getItem('userCred'))
@@ -185,4 +187,20 @@ export class NavbarComponent implements OnInit {
     profile(){
       this.router.navigateByUrl('/view-profile/'+this.roleName)
     }
+      //currentTimeDate start
+  currentTimeDate() {
+    var x = new Date()
+    var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
+    let hours = x.getHours() % 12;
+    hours = hours ? hours : 12;
+    this.currentDate = x.getDate() + "/" + (x.getMonth() + 1) + "/" + x.getFullYear();
+    this.currentTime = hours + ":" + x.getMinutes() + ":" + x.getSeconds() + ampm;
+    this.displayRefresh()
+  }
+  displayRefresh() {
+    setTimeout(() => {
+      this.currentTimeDate()
+    }, 1000);
+  }
+  //currentTimeDate end
 }
