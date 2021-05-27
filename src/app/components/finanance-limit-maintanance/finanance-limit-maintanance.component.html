@@ -280,28 +280,42 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Currency</mat-label>
+                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                      <option value="SGD">SGD</option>
+                                    </select>
+                                  </mat-form-field>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
                                     <input type="text" matInput formControlName="newglobalLimit" [readonly]=newLimit />
                                   </mat-form-field>
                                 </td>
                               </tr>
-                              <!-- <tr>
-                                  <td rowspan="1" colspan="1">
-                                    <mat-form-field dense class="finlim-mat">
-                                      <mat-label>SME Limit</mat-label>
-                                      <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
-                                    </mat-form-field>
-                                  </td>
-                                </tr> -->
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Transaction Limit</mat-label>
+                                    <input type="text" matInput formControlName="newtransactionLimit"
+                                      [readonly]=newLimit />
+                                  </mat-form-field>
+                                </td>
+                              </tr>
                               <tr>
                                 <td></td>
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;" *ngIf=newLimit>
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Edit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Edit</button>
                                   </div>
                                   <div style="text-align: end;" *ngIf="newLimit == false">
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Cancel</button>
+                                    <button style="bottom: 24px;" type="submit" mat-flat-button
+                                      color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
@@ -612,7 +626,7 @@
           <!--- Overall_Transaction Exposure Limit-->
 
           <!--- Country Exposure  -->
-          <mat-tab label="Country Exposure">
+          <mat-tab label="Country Limit">
             <div class="links">
               <mat-card>
                 <mat-card-content>
@@ -623,8 +637,9 @@
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
+
                                 <td rowspan="1" colspan="1">
-                                  <mat-form-field dense class="icc-mat">
+                                  <mat-form-field dense class="finlim-mat">
                                     <mat-label>Currency</mat-label>
                                     <select matNativeControl formControlName="countryccy">
                                       <!-- <option value=""></option> -->
@@ -640,7 +655,8 @@
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
-                                  <mat-form-field dense class="icc-mat">
+                                  <!-- icc-mat -->
+                                  <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
                                     <input type="text" matInput formControlName="countryoverAllLimit"
                                       (keyup)="changecountrylimit($event,'overAllLimit')" [readonly]="true" />
@@ -649,16 +665,32 @@
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
-                                  <mat-form-field dense class="icc-mat">
+                                  <mat-form-field dense class="finlim-mat">
                                     <mat-label>Country Exposure</mat-label>
                                     <input type="text" matInput formControlName="countrysmeoverAllLimit"
-                                      (keyup)="changecountrylimit($event,'countryoverAllLimit')" [readonly]="true" />
+                                      (keyup)="changecountrylimit($event,'countryoverAllLimit')" [readonly]=newLimit />
                                   </mat-form-field>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td rowspan="1" colspan="1">
+                                  <div style="text-align: end;" *ngIf=newLimit>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Edit</button>
+                                  </div>
+                                  <div style="text-align: end;" *ngIf="newLimit == false">
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Cancel</button>
+                                    <button style="bottom: 24px;" type="submit" mat-flat-button
+                                      color="primary">submit</button>
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
+
                         <!-- country Exposure start slabs -->
                         <div class="col-md-6 hover">
                           <table class="table-bordered table" id="exposureTbl">
@@ -852,7 +884,7 @@
           <!--- Country Exposure  -->
 
           <!--- Sme Exposure  -->
-          <mat-tab label="Sme Exposure">
+          <mat-tab label="Sme Limit">
             <div class="links">
               <mat-card>
                 <mat-card-content>
@@ -862,6 +894,17 @@
                         <div class="col-md-5">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
+
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Currency</mat-label>
+                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                      <option value="SGD">SGD</option>
+                                    </select>
+                                  </mat-form-field>
+                                </td>
+                              </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
@@ -882,11 +925,14 @@
                                 <td></td>
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;" *ngIf=newLimit>
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Edit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Edit</button>
                                   </div>
                                   <div style="text-align: end;" *ngIf="newLimit == false">
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Cancel</button>
+                                    <button style="bottom: 24px;" type="submit" mat-flat-button
+                                      color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
@@ -1037,7 +1083,7 @@
           <!--- Sme Exposure  -->
 
           <!--- Sector Exposure  -->
-          <mat-tab label="Sector Exposure">
+          <mat-tab label="Sector Limit">
             <div class="links">
               <mat-card>
                 <mat-card-content>
@@ -1047,6 +1093,16 @@
                         <div class="col-md-5">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Currency</mat-label>
+                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                      <option value="SGD">SGD</option>
+                                    </select>
+                                  </mat-form-field>
+                                </td>
+                              </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
@@ -1067,11 +1123,14 @@
                                 <td></td>
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;" *ngIf=newLimit>
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Edit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Edit</button>
                                   </div>
                                   <div style="text-align: end;" *ngIf="newLimit == false">
-                                    <button mat-flat-button color="primary" (click)=newLimitFn()>Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)=newLimitFn()>Cancel</button>
+                                    <button style="bottom: 24px;" type="submit" mat-flat-button
+                                      color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>

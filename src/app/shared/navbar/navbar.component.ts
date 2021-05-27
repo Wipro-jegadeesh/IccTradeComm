@@ -186,7 +186,7 @@ export class NavbarComponent implements OnInit {
     }
     profile(){
       this.router.navigateByUrl('/view-profile/'+this.roleName)
-    }
+    } 
       //currentTimeDate start
   currentTimeDate() {
     var x = new Date()
