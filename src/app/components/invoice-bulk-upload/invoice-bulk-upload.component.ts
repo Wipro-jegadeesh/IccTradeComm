@@ -525,15 +525,15 @@ onKey(value) {
         let obj =  { id: item.countrycode3, itemName: item.country }
         countryArray.push(obj)
       })
-      // this.optionDatas = countryArray
+      this.optionDatas = countryArray
     })
-    this.optionDatas = [{
-      "id": "AFG",
-      "itemName": "Afghanistan"
-  },
-  {
-      "id": "ALB",
-      "itemName": "Albania"
-  }]
+  //   this.optionDatas = [{
+  //     "id": "AFG",
+  //     "itemName": "Afghanistan"
+  // },
+  // {
+  //     "id": "ALB",
+  //     "itemName": "Albania"
+  // }]
   }
 }
