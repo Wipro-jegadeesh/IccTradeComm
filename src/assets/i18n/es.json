@@ -403,7 +403,11 @@
     "BackToMoreInfo": "Back to More Info",
     "AddUser": "Add user",
     "Submit": "Submit",
-    "Edit": "Edit"
+    "Edit": "Edit",
+    
+    "FinancierView" : "Financier View",
+    "Country":"Country",
+    "EntityAdmin" : "Entity Administrator"
   },
   "FinancieruserCreation": {
     "AddUser": "Add User",

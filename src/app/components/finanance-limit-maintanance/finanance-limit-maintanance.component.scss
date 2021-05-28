@@ -3,12 +3,15 @@
 $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
-  margin: -32px 30px 0;
-  padding: 32px;
-  position: relative;
-  height: 45%;
-  width: 100%;
-
+  // margin: -32px 30px 0;
+  // padding: 32px;
+  // position: relative;
+  // height: 45%;
+  // width: 100%;
+     padding-top:1.6rem;
+      position: relative;
+      height: 45%;
+      width: 100%;
   .account-services-headline {
     display: flex;
     justify-content: space-between;
@@ -31,7 +34,7 @@ header {
   bottom: 0;
   left: 0;
   overflow-x: auto;
-  padding: 2rem;
+  padding: 0rem;
   position: absolute;
   right: 0;
   top: 33px;
@@ -99,6 +102,7 @@ header {
 /* Mobile Styles Small Screen */
 @media only screen and (max-width: 376px) {
   header {
+    padding-top: 18%;
     margin-bottom: $uxg-spacing-5;
     height: 35%;
 
@@ -498,7 +502,7 @@ mat-form-field {
       bottom: 0;
       left: 0;
       overflow-x: auto;
-      padding: 2rem;
+      padding: 0rem;
       position: absolute;
       right: 0;
       top: 33px;
@@ -590,6 +594,7 @@ mat-form-field {
       header {
           margin-bottom: $uxg-spacing-5;
           height: 35%;
+          padding-top: 18%;
   
           .wave {
               overflow: hidden;
@@ -921,10 +926,40 @@ width: auto;
 .prev{
   background: #b4a6eaad;
   float: left;
-  margin-top: 28px;
+  margin-top: 56px;
   padding: 1%;
   cursor: pointer;
 }
 .hover{
   cursor: pointer;
+}
+   
+::ng-deep  .mat-tab-list .mat-tab-labels {
+  background-color: #694ed6;
+    height: 46px;
+}
+::ng-deep .mat-tab-label .mat-tab-label-content
+{
+  color: #ffff;
+
+}
+::ng-deep .mat-tab-label-content {
+    font-size: 13px;
+}
+::ng-deep .mat-tab-label-active {
+  background-image: linear-gradient(to bottom right, #cc01ff00, #c60cdc, #2a034200) !important;
+}
+.typedataresp{
+  margin-left: 1%;
+  color: #694ed6;
+}
+ .mat-icon{
+  color: #fff;
+  background: #5f9ea096;
+  height: auto;
+  font-size: 18px;
+  display: unset;
+  margin-top: 22px;
+  padding: 3px;
+  border-radius: 20px;
 }

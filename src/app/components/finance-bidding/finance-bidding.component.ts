@@ -84,6 +84,16 @@ export class FinanceBiddingComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+
+    // this.dataSource = new MatTableDataSource([{ 'invoiceRef' : "12",
+    // 'invId' : "21",
+    // 'invoiceAmt' : "21",
+    // 'smeId' : "ui",
+    // 'buyerName' : "ioio",
+    // 'invDate' : "22/3/2333",}]);
+    // this.dataSource.paginator = this.paginator
+
+
     this.FinanceBiddingService.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
