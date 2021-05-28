@@ -7,7 +7,10 @@ import { ThemePalette } from '@angular/material/core';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SmeFinancierForBiddingServices } from './sme-financefor-bidding-service';
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
-import * as moment from 'moment';
+// import * as moment from 'moment';
+declare var require: any
+const moment = require('moment'); 
+
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import {MatSort} from '@angular/material/sort';
@@ -121,6 +124,9 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+
+    this.dataSource = new MatTableDataSource([{'invoiceRef' : "22",'invoiceNo' : "22", 'invAmt' : "22", 'smeId' : "22", 'buyerName' : "22", 'invDate' : "2021-07-24T05:30:00.000+0000", 'invDueDate' : "2021-07-24T05:30:00.000+0000", 'status' : "A"}]);
+    this.dataSource.paginator = this.paginator
 
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => { 
       this.dataSource = new MatTableDataSource(resp);
