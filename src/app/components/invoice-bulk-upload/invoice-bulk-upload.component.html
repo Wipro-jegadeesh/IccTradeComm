@@ -1,24 +1,24 @@
 <div class="app-content {{isOpen}} ">
     <header>
       <div class="data-section">
-        <form>
         <mat-card>
             <mat-card-content>
-                <h4>{{'Invoice Upload' | translate}}</h4>
-
                 <div class="card-form-container">
                     <div class="bulk-file-upload file-input">
                       <!-- <h6>{{questionDatas && questionDatas.label}}</h6> -->
                         <div class="file-upload row col-md-12">
-                        <div class="upload-btn-wrapper col-md-9 ">
+                          <div class="upload-btn-wrapper col-md-3">
+                            <h4>{{'Invoice Upload' | translate}}</h4>
+                          </div>
+                        <div class="upload-btn-wrapper col-md-3">
                           <!-- [disabled]="questionDatas.filesMax == fileNames.length" -->
                           <button class="filebtn" >{{'Upload a file' | translate}}</button>
                         <!-- <input type="file" class="dynamic-file-upload form" (change)="onChange($event)"
                         accept=".xlsx,.xls,.csv" /> -->
-                        <input type="file" accept=".xlsx,.xls,.csv" class="dynamic-file-upload form" (change)="onFileChange($event)" />
+                        <input type="file" accept=".xlsx,.xls,.csv,.pdf" class="dynamic-file-upload form" (change)="onFileChange($event)" />
 
                         </div>
-                        <div class="upload-btn-wrapper col-md-3 ">
+                        <div class="upload-btn-wrapper col-md-3">
                           <!-- <button class="filebtn" (click)="sampleDown();" ><span>
                             Sample XLSX File Download
                           </span> <span class="material-icons">
@@ -35,6 +35,13 @@
                             <button (click)="sampleDown();"  mat-menu-item> {{'Download as XLSX' | translate}}</button>
                             <button (click)="samplecsvDown();" mat-menu-item>{{'Download as CSV' | translate}}</button>
                             </mat-menu>
+                        </div>
+                        <div *ngIf="pdfDivEnable" class="col-md-3 upload-btn-wrapper">
+                          <button (click)="openModal($event,template)" type="button" class="btn btn-outline fundreq-btn" > {{'preview' | translate}}
+                            <span class="material-icons">
+                              preview
+                              </span>
+                          </button>
                         </div>
                         <!-- <div class="upload-btn-wrapper col-md-3 ">
                           <button class="filebtn" (click)="samplecsvDown();" >Sample CSV File Download<span class="material-icons">
@@ -54,13 +61,308 @@
                             </button>
                         </div> -->
                         </div>
+                        <!-- <div class="row file-upload">
+                          <div *ngIf="pdfDivEnable" class="upload-btn-wrapper col-md-11" style="text-align: end;">
+                            <button (click)="openModal($event,template)" type="button" class="btn btn-outline fundreq-btn" > {{'preview' | translate}}
+                              <span class="material-icons">
+                                preview
+                                </span>
+                            </button>
+                          </div>
+                        </div> -->
                     </div>
                     <!-- <input type="file" (change)="onFileChange($event)" /> -->
                 </div>
             </mat-card-content>
         </mat-card>
-        </form>
+        <div *ngIf="pdfDivEnable">
 
+       
+         <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
+          <mat-card>
+            <mat-card-content>
+              <table  class="table-responsive inv-table">
+                <tbody>
+                  <tr>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'Invoice No' | translate}}</mat-label>
+                        <input type="text" matInput formControlName="invId" (keyup)="updateInvoiceId($event)"/>
+                      </mat-form-field>
+                    </td>
+                    <td rowspan="1" colspan="1">
+    <table class="fun-table">
+      <tr>
+        <td rowspan="1" colspan="1">
+          <mat-form-field dense class="spilt-input" >
+            <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
+            <input type="number" matInput value="" autocomplete="on" formControlName="invAmt"/>
+          </mat-form-field>
+        </td>
+        <td rowspan="1" colspan="1">
+          <mat-form-field dense class="select-split-input">
+            <mat-label> {{'Currency' | translate}}</mat-label>
+            <select matNativeControl [disabled]="disableSelect.value" formControlName="invCcy" (change)="updateCurrency($event)">
+              <option value=""></option>
+              <option value="SGD">SGD</option>
+              <option value="USD">USD</option>
+              <option value="GBP">GBP</option>
+              <option value="EUR">EUR</option>
+              <option value="JPY">JPY</option>
+            </select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+                    </td>
+    
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label> {{'Buyer Name' | translate}} </mat-label>
+                        <input type="text" matInput value="Misys International Financial Systems Pte Ltd" formControlName="buyerName"/>
+                      </mat-form-field>
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                      
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'Funding Request Date' | translate}} </mat-label>
+                        <input matInput readonly="true" value="2021-05-27T18:30:00.000Z" [matDatepicker]="picker" formControlName="invDate" (dateInput)="updateInvoicedate($event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </td>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'Funding Request Due Date' | translate}} </mat-label>
+                        <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" />
+                        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                        <mat-datepicker #pickers></mat-datepicker>
+                      </mat-form-field>
+                    </td>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense class="listdown">
+                        <mat-label>{{'Buyer Location' | translate}}</mat-label>
+                        <mat-select panelClass="myPanelClass" formControlName="buyerAddr">
+                          <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)">
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+   
+                    </td>
+                    
+                  </tr>
+                  <tr>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
+                        <input type="text" matInput value="" formControlName="billNo" />
+                        <mat-icon class="info_icon" matSuffix  #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.billInfo | translate}}"
+                        [matTooltipPosition]="'below'">info</mat-icon>
+                      </mat-form-field>
+                    </td>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'Date of Dispatch' | translate}}</mat-label>
+                        <input readonly="true" matInput [matDatepicker]="picker1" formControlName="dispDate" />
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                    </td>
+                    <td rowspan="1" colspan="1">
+                      <mat-form-field dense>
+                        <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
+                        <input type="text" matInput value="" formControlName="buyerUEN" />
+                      </mat-form-field>
+                    </td>
+                  </tr>
+               
+                </tbody>
+              </table>
+      
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+              <mat-card-content>
+                <div id="container">
+                  <span class="uxg-h6" id=grid>{{'Goods Details' | translate}}</span>
+                  <div class="mat-elevation-z8">
+                    <form [formGroup]="invoiceForm">
+                     <table  class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;" formArrayName="goodsDetails">
+                      <ng-container matColumnDef="ID" >
+                        <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.id | translate}}"
+                        [matTooltipPosition]="tooltipPosition"> ID</th>
+                          <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          type="text" 
+                          formControlName="ID" 
+                          placeholder="ID" 
+                          readonly
+                          value="{{invoiceID}}"
+                          >
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="DescGoods">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.desc | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'Description of Goods' | translate}}</th>
+                          <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="desc-goods">
+                          <input matInput 
+                          type="text" 
+                          formControlName="descGoods" 
+                          placeholder="{{'Description of Goods' | translate}}" 
+                          required>
+                        </td>
+                      </ng-container>
+                  
+    
+                      <ng-container matColumnDef="Quantity">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.quantity | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'quantity' | translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                       
+                         <input matInput 
+                         min="0"
+                          type="number" 
+                          formControlName="quantity" 
+                          placeholder="{{'Quantity' | translate}}" 
+                          required (keyup)="changeRowgrid(index)">
+                        </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="Rate">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.rate | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'rate' | translate}}%</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          min="0"
+                          type="number" 
+                          formControlName="rate" 
+                          placeholder="{{'Rate' | translate}}" 
+                          required (keyup)="changeRowgrid(index)">
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Amt">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.amount | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          type="number" 
+                          formControlName="amt" 
+                          placeholder="{{'Amount' | translate}}" 
+                          value="{{element.amt}}"
+                          required readonly>
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Ccy">
+                        <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.ccy | translate}}"
+                        [matTooltipPosition]="tooltipPosition">Ccy</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          type="text" 
+                          formControlName="amtCcy" 
+                          placeholder="CCY" 
+                          readonly
+                          value="{{currencyName}}"
+                          required >
+                        </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="DiscAmt">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.discAmount | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'discAmount' | translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          min="0"
+                          type="number" 
+                          formControlName="discAmt" 
+                          placeholder="{{'Disc Amount' | translate}}" 
+                           required (keyup)="changeRowgrid(index)">
+                        </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="NetAmtPay">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.netAmount | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'netAmount' | translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          type="number" 
+                          formControlName="netAmtPay" 
+                          placeholder="{{'Net Amount' | translate}}" 
+                          required readonly>
+                        </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="TaxRate">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.taxRate | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'taxRate' | translate}}<br>
+                        {{'for Particular Good' | translate}}%</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          min="0"
+                          type="number" 
+                          formControlName="taxRate" 
+                          placeholder="{{'Tax Rate' | translate}}" 
+                          required  (keyup)="changeRowgrid(index)"
+                          >
+                        </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="TaxAmount">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.taxAmount | translate}}"
+                        [matTooltipPosition]="tooltipPosition">{{'taxAmount' | translate}}<br>
+                        {{'for Particular Good' | translate}}%</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput 
+                          type="number" 
+                          formControlName="taxAmt" 
+                          placeholder="{{'Tax Amount' | translate}}" 
+                          required readonly>
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Total">
+                        <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip" matTooltip="{{fundingTooltip.total | translate}}" [matTooltipPosition]="tooltipPosition">
+                          {{'Total' | translate}}
+                        <span *ngIf="!UpdateInvoiceLable" class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span></th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                          <input matInput type="number"  formControlName="total"  placeholder="{{'Total' | translate}}" required readonly>
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                  
+                  </table>
+                </form>
+                  </div>
+                </div>
+                <mat-card-actions class="ebtn">
+                  <span class="fill-remaining-space"></span>
+                  <button [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'"  mat-flat-button color="primary"id=grid #tooltip="matTooltip"
+                  matTooltip="{{fundingTooltip.saveGoods | translate}}"
+                  [matTooltipPosition]="tooltipPosition">
+                    <div *ngIf="!UpdateInvoiceLable"> {{'Add Invoice' | translate}} </div>
+                    <div *ngIf="UpdateInvoiceLable"> {{'Update Invoice' | translate}}</div>
+                  </button>
+                </mat-card-actions>
+              </mat-card-content>
+          
+          </mat-card>
+        </form>
+      </div>
         <div id="container">
             <span class="uxg-h6" id=grid>{{'Invoice Details' | translate}}  </span>
             <div class="mat-elevation-z8">
@@ -156,4 +458,23 @@
           </mat-card-actions>
         </div>
     </header>
+    <div>   
+      <ng-template #template>
+        <div class="modal-content" style="height: 550px;">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">{{'Invoice Preview' | translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+               <span aria-hidden="true">×</span>
+            </button>
+         </div>
+         <div class="modal-body">
+          <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()"> {{'Close' | translate}}</button>
+         </div>
+        </div>
+       
+      </ng-template>
+    </div>
 </div>
