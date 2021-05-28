@@ -44,6 +44,12 @@ let financierServicePath="http://localhost:8080/"
 // Coriolis service path
 let coriolisServicePath="http://localhost:8083/"
 
+//Redirect URL
+let SMEURL = "http://localhost:4200/sme-dashboard"
+let FINANCEURL = "http://localhost:4200/financier-dashboard"
+let ICCURL = "http://localhost:4200/icc-dashboard"
+
+
 //Dashboard  Service Url
 let dboardServerPath1 = "http://dboardServPath1/";
 let getSumOfOpenFinBidding = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
@@ -68,6 +74,9 @@ export const environment = {
   dboardServerPath6: `${dboardServerPath6}`,
   financierServicePath: `${financierServicePath}`,
   coriolisServicePath:`${coriolisServicePath}`,
+  SMEURL : `${SMEURL}`,
+  FINANCEURL:`${FINANCEURL}`,
+  ICCURL:`${ICCURL}`,
 
   keycloak : {
     // Url of the Identity Provider
