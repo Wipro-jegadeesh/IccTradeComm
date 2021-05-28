@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-sme-onboarding',
@@ -588,7 +589,8 @@ export class SmeOnboardingComponent implements OnInit {
     let obj={
         "type":'QuestionResponseDateDto',
         "questionAlias":Data.alias,
-        "value":this.datePipe.transform(Data.response,"YYYY-MM-dd")
+        "value":moment(Data.response).format("YYYY-MM-DD")
+        // this.datePipe.transform(Data.response,"YYYY-MM-dd")
     }
     return obj
   }
