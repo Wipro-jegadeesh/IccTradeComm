@@ -140,7 +140,7 @@ export class AuthConfigService {
                     }
                     else{
                       this.router.navigateByUrl('/sme-dashboard')
-                      localStorage.setItem("redirectUri","http://localhost:4200/sme-dashboard");  
+                      localStorage.setItem("redirectUri",environment.SMEURL);  
                       userObj['questionnaire']=resp[0].questionnaire
                     }
                     localStorage.setItem('userCred',JSON.stringify(userObj))
@@ -183,12 +183,12 @@ export class AuthConfigService {
                   //  else if (claims['realm_access']['roles'] && claims['realm_access']['roles'][0] == "financier"){
                        localStorage.setItem("roleName","financier");
                        this.router.navigateByUrl('/financier-dashboard');
-                       localStorage.setItem("redirectUri","http://localhost:4200/financier-dashboard");  
+                       localStorage.setItem("redirectUri",environment.FINANCEURL);  
                    }
                    if(item.match(/^.*icc$/) || item.match(/^icc.*$/)){
                     localStorage.setItem("roleName","icc");
                     this.router.navigateByUrl('/icc-dashboard');
-                    localStorage.setItem("redirectUri","http://localhost:4200/icc-dashboard");  
+                    localStorage.setItem("redirectUri",environment.ICCURL);  
                    }
             }) 
           
