@@ -1535,29 +1535,29 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     })
   }
   buyerExposureGraph() {
-    let Overall = {
-      "25": "1",
-      "50": "2",
-      "75": "1",
-      "100": "0",
-      "FULL": "0"
-    }
-    this.buyerhorizontalBarChartData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    this.buyerpieChartData = Object.values(Overall).map(i => Number(i));
-    this.buyerLineData = [
-      { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    ]
-    // this.financelimitMaintananceservices.buyerGraphService().subscribe(resp => {
-    //   this.buyerhorizontalBarChartData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    //   this.buyerpieChartData = Object.values(resp).map(i => Number(i));
-    //   this.buyerLineData = [
-    //     { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
-    //   ]
-    // })
+    // let Overall = {
+    //   "25": "1",
+    //   "50": "2",
+    //   "75": "1",
+    //   "100": "0",
+    //   "FULL": "0"
+    // }
+    // this.buyerhorizontalBarChartData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    // this.buyerpieChartData = Object.values(Overall).map(i => Number(i));
+    // this.buyerLineData = [
+    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
+    // ]
+    this.financelimitMaintananceservices.buyerGraphService().subscribe(resp => {
+      this.buyerhorizontalBarChartData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+      this.buyerpieChartData = Object.values(resp).map(i => Number(i));
+      this.buyerLineData = [
+        { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
+      ]
+    })
   }
   //graph Reprecentation end
 }
