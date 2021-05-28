@@ -5,7 +5,7 @@
       <div class="col-md-12">
         <mat-tab-group dynamicHeight>
           <!--Limit Maintanance-->
-          <mat-tab label="Limit Maintanance">
+          <mat-tab label="Limit Maintanance" class="fin-limit-mat-tab-header">
             <div class="links">
               <mat-card>
                 <mat-card-content>
@@ -265,13 +265,12 @@
                 </mat-card>
               </div>
             </mat-tab> -->
-
           <!--- Overall_Transaction Exposure Limit-->
           <mat-tab label="Global and Transaction Limit">
             <div class="links">
               <mat-card>
                 <mat-card-content>
-                  <form [formGroup]="newLimitGraphForm" autocomplete="off" (ngSubmit)="newLimitGraphFormSubmit()">
+                  <form [formGroup]="globalLimitForm" autocomplete="off" (ngSubmit)="globalLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-5">
@@ -281,7 +280,7 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Currency</mat-label>
-                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                    <select matNativeControl formControlName="globallimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
                                   </mat-form-field>
@@ -291,7 +290,7 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
-                                    <input type="text" matInput formControlName="newglobalLimit" [readonly]=newLimit />
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
                               </tr>
@@ -299,21 +298,21 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Transaction Limit</mat-label>
-                                    <input type="text" matInput formControlName="newtransactionLimit"
-                                      [readonly]=newLimit />
+                                    <input type="text" matInput formControlName="globaltransactionLimit"
+                                      [readonly]=globalLimitBoolean />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td></td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=newLimit>
+                                  <div style="text-align: end;" *ngIf=globalLimitBoolean>
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Edit</button>
+                                      (click)="globalLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="newLimit == false">
+                                  <div style="text-align: end;" *ngIf="globalLimitBoolean == false">
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Cancel</button>
+                                      (click)="globalLimitflipFlop('cancel')">Cancel</button>
                                     <button style="bottom: 24px;" type="submit" mat-flat-button
                                       color="primary">submit</button>
                                   </div>
@@ -363,8 +362,11 @@
                         <button class="next" *ngIf="graphLimit" (click)="prevTable()">&#10095;</button>
                       </span>
                       <div>
-
                         <div *ngIf="graphLimit">
+                          <p class="typedataresp">
+                            <mat-icon> bar_chart</mat-icon>
+                            Graph Representation
+                          </p>
                           <div class="row">
                             <div class="col-md-4">
                               <div class="chart">
@@ -420,12 +422,15 @@
                         </div>
 
                         <div *ngIf="tableLimit">
+                          <p class="typedataresp">
+                            <mat-icon> border_all</mat-icon> Data Representation
+                          </p>
                           <div style="overflow-x:auto;">
                             <div id="container">
                               <div class="mat-elevation-z8">
                                 <table class="table-responsive" mat-table
                                   [dataSource]="dataSourceOverAllTransactionLimit"
-                                  style="width: 100%;margin-left: 25px;">
+                                  style="width: 100%;margin-left: 14px;">
                                   <ng-container matColumnDef="invoice">
                                     <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
@@ -494,12 +499,8 @@
                             </div>
                           </div>
                         </div>
-
-
-
                       </div>
                       <br>
-
                       <!-- carousel end -->
                       <!-- chart start -->
                       <!-- <div class="row">
@@ -555,7 +556,6 @@
                       <!-- chart end -->
                     </div>
                   </form>
-
                   <!-- <mat-accordion>
                       <mat-expansion-panel>
                       </mat-expansion-panel>
@@ -624,64 +624,54 @@
             </div>
           </mat-tab>
           <!--- Overall_Transaction Exposure Limit-->
-
           <!--- Country Exposure  -->
-          <mat-tab label="Country Limit">
+          <mat-tab label="Country Exposure">
             <div class="links">
               <mat-card>
                 <mat-card-content>
-                  <form [formGroup]="countrylimitMaintanceForm" autocomplete="off" (ngSubmit)="onSubmitLimitForm()">
+                  <form [formGroup]="countryLimitForm" autocomplete="off" (ngSubmit)="countryLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-5">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
-
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Currency</mat-label>
-                                    <select matNativeControl formControlName="countryccy">
-                                      <!-- <option value=""></option> -->
+                                    <select matNativeControl formControlName="countrylimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
-                                      <!-- <option value="USD">USD</option>
-                                                  <option value="GBP">GBP</option>
-                                                  <option value="EUR">EUR</option>
-                                                  <option value="JPY">JPY</option> -->
                                     </select>
                                   </mat-form-field>
                                 </td>
-
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
-                                  <!-- icc-mat -->
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
-                                    <input type="text" matInput formControlName="countryoverAllLimit"
-                                      (keyup)="changecountrylimit($event,'overAllLimit')" [readonly]="true" />
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Country Exposure</mat-label>
-                                    <input type="text" matInput formControlName="countrysmeoverAllLimit"
-                                      (keyup)="changecountrylimit($event,'countryoverAllLimit')" [readonly]=newLimit />
+                                    <mat-label>Country Limit</mat-label>
+                                    <input type="text" matInput formControlName="counrtyLimit"
+                                      [readonly]=counrtyLimitBoolean />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td></td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=newLimit>
+                                  <div style="text-align: end;" *ngIf=counrtyLimitBoolean>
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Edit</button>
+                                      (click)="countryLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="newLimit == false">
+                                  <div style="text-align: end;" *ngIf="counrtyLimitBoolean == false">
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Cancel</button>
+                                      (click)="countryLimitflipFlop('cancel')">Cancel</button>
                                     <button style="bottom: 24px;" type="submit" mat-flat-button
                                       color="primary">submit</button>
                                   </div>
@@ -882,24 +872,22 @@
             </div>
           </mat-tab>
           <!--- Country Exposure  -->
-
           <!--- Sme Exposure  -->
-          <mat-tab label="Sme Limit">
+          <mat-tab label="Sme Exposure">
             <div class="links">
               <mat-card>
                 <mat-card-content>
-                  <form [formGroup]="newLimitGraphForm" autocomplete="off" (ngSubmit)="newLimitGraphFormSubmit()">
+                  <form [formGroup]="smeLimitForm" autocomplete="off" (ngSubmit)="smeLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-5">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
-
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Currency</mat-label>
-                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                    <select matNativeControl formControlName="smelimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
                                   </mat-form-field>
@@ -909,28 +897,28 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
-                                    <input type="text" matInput formControlName="newglobalLimit" [readonly]=newLimit />
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>SME Exposure Limit</mat-label>
-                                    <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
+                                    <mat-label>SME Limit</mat-label>
+                                    <input type="text" matInput formControlName="smeLimit" [readonly]=smeLimitBoolean />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td></td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=newLimit>
+                                  <div style="text-align: end;" *ngIf=smeLimitBoolean>
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Edit</button>
+                                      (click)="smeLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="newLimit == false">
+                                  <div style="text-align: end;" *ngIf="smeLimitBoolean == false">
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Cancel</button>
+                                      (click)="smeLimitflipFlop('cancel')">Cancel</button>
                                     <button style="bottom: 24px;" type="submit" mat-flat-button
                                       color="primary">submit</button>
                                   </div>
@@ -1081,13 +1069,12 @@
             </div>
           </mat-tab>
           <!--- Sme Exposure  -->
-
           <!--- Sector Exposure  -->
-          <mat-tab label="Sector Limit">
+          <mat-tab label="Sector Exposure">
             <div class="links">
               <mat-card>
                 <mat-card-content>
-                  <form [formGroup]="newLimitGraphForm" autocomplete="off" (ngSubmit)="newLimitGraphFormSubmit()">
+                  <form [formGroup]="sectorLimitForm" autocomplete="off" (ngSubmit)="sectorLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
                         <div class="col-md-5">
@@ -1097,7 +1084,7 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Currency</mat-label>
-                                    <select matNativeControl formControlName="newglobalCcy" [readonly]=newLimit>
+                                    <select matNativeControl formControlName="sectorlimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
                                   </mat-form-field>
@@ -1107,28 +1094,29 @@
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
                                     <mat-label>Global Limit</mat-label>
-                                    <input type="text" matInput formControlName="newglobalLimit" [readonly]=newLimit />
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Sector Exposure Limit</mat-label>
-                                    <input type="text" matInput formControlName="newsmeLimit" [readonly]=newLimit />
+                                    <mat-label>Sector Limit</mat-label>
+                                    <input type="text" matInput formControlName="sectorLimit"
+                                      [readonly]=sectorLimitBoolean />
                                   </mat-form-field>
                                 </td>
                               </tr>
                               <tr>
                                 <td></td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=newLimit>
+                                  <div style="text-align: end;" *ngIf=sectorLimitBoolean>
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Edit</button>
+                                      (click)="sectorLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="newLimit == false">
+                                  <div style="text-align: end;" *ngIf="sectorLimitBoolean == false">
                                     <button style="bottom: 24px;" mat-flat-button color="primary"
-                                      (click)=newLimitFn()>Cancel</button>
+                                      (click)="sectorLimitflipFlop('cancel')">Cancel</button>
                                     <button style="bottom: 24px;" type="submit" mat-flat-button
                                       color="primary">submit</button>
                                   </div>
@@ -1321,6 +1309,251 @@
             </div>
           </mat-tab>
           <!-- Sector Exposure  -->
+          <!-- buyer Limit start -->
+          <mat-tab label="Buyer Limit">
+            <div class="links">
+              <mat-card>
+                <mat-card-content>
+                  <form [formGroup]="buyerLimitForm" autocomplete="off" (ngSubmit)="buyerLimitFormSubmit()">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <table class="table-responsive inv-table" style="display: contents;">
+                            <tbody>
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Currency</mat-label>
+                                    <select matNativeControl formControlName="buyerlimitccy" [readonly]="true">
+                                      <option value="SGD">SGD</option>
+                                    </select>
+                                  </mat-form-field>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Global Limit</mat-label>
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
+                                  </mat-form-field>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Buyer Limit</mat-label>
+                                    <input type="text" matInput formControlName="buyerLimit"
+                                      [readonly]=buyerLimitBoolean />
+                                  </mat-form-field>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td rowspan="1" colspan="1">
+                                  <div style="text-align: end;" *ngIf=buyerLimitBoolean>
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)="buyerLimitflipFlop('edit')">Edit</button>
+                                  </div>
+                                  <div style="text-align: end;" *ngIf="buyerLimitBoolean == false">
+                                    <button style="bottom: 24px;" mat-flat-button color="primary"
+                                      (click)="buyerLimitflipFlop('cancel')">Cancel</button>
+                                    <button style="bottom: 24px;" type="submit" mat-flat-button
+                                      color="primary">submit</button>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-md-6 hover">
+                          <table class="table-bordered table" id="exposureTbl">
+                            <tr>
+                              <th>Utilization Slabs</th>
+                              <th>Number of Bids</th>
+                            </tr>
+                            <tr (click)="buyerApiTableDependData('25')">
+                              <td>0 to 25%</td>
+                              <td>{{checkBuyerExpValue(25)}}</td>
+                            </tr>
+                            <tr (click)="buyerApiTableDependData('50')">
+                              <td>25% to 50%</td>
+                              <td>{{checkBuyerExpValue(50)}}</td>
+                            </tr>
+                            <tr (click)="buyerApiTableDependData('75')">
+                              <td>50% to 75%</td>
+                              <td>{{checkBuyerExpValue(75)}}</td>
+                            </tr>
+                            <tr (click)="buyerApiTableDependData('100')">
+                              <td>75% to 100%</td>
+                              <td>{{checkBuyerExpValue(100)}}</td>
+                            </tr>
+                            <tr (click)="buyerApiTableDependData('FULL')">
+                              <td>100% (Full Utilization)</td>
+                              <td>{{checkBuyerExpValue('FULL')}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="chart">
+                            <div class="col-lg-12 grid-margin stretch-card p-0">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div style="display: block;">
+                                    <canvas baseChart [datasets]="buyerhorizontalBarChartData" height="200px"
+                                      width="300px" [labels]="horizontalBarChartLabels"
+                                      [options]="horizontalBarChartOptions" [legend]="horizontalBarChartLegend"
+                                      [chartType]="horizontalBarChartType">
+                                    </canvas>
+                                  </div>
+                                  <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="chart">
+                            <div class="col-lg-12 grid-margin stretch-card p-0">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div style="display: block;">
+                                    <canvas baseChart [data]="buyerpieChartData" [labels]="pieChartLabels"
+                                      height="200px" width="300px" [chartType]="pieChartType"
+                                      [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="true">
+                                    </canvas>
+                                  </div>
+                                  <!-- <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" height="150"></canvas> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="chart">
+                            <div class="col-lg-12 grid-margin stretch-card p-0">
+                              <div class="card">
+                                <div class="card-body">
+                                  <div style="display: block;">
+                                    <canvas baseChart [chartType]="chartType" [datasets]="buyerLineData" height="200px"
+                                      width="300px" [labels]="chartLabels" [colors]="chartColors"
+                                      [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)">
+                                    </canvas>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title style="font-weight:500;color: #a899e4;">
+                          <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
+                            <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false"
+                              viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z">
+                              </path>
+                            </svg>
+                          </div>
+                          Buyer Exposure Sub Screen (Based On Exposure Slot)
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div style="overflow-x:auto;">
+                        <div id="container">
+                          <div class="mat-elevation-z8">
+                            <table class="table-responsive" mat-table [dataSource]="dataSourcebuyerExposureTable"
+                              style="width: 100%;">
+                              <ng-container matColumnDef="invoice">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.invoice}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="invoicedate">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
+                                  {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="invoiceamount">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.invoiceamount}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="sme_profile_id">
+                                <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.sme_profile_id}}
+                                </td>
+                              </ng-container>
+
+                              <ng-container matColumnDef="smename">
+                                <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.smename}}
+                                </td>
+                              </ng-container>
+
+                              <ng-container matColumnDef="country">
+                                <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.country}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="buyeruen">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Buyer Uen</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.buyeruen}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="sector_description">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.sector_description}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="LIMIT_PERCENT">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.LIMIT_PERCENT}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="bidvalue">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.bidvalue}}
+                                </td>
+                              </ng-container>
+                              <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                <td mat-cell *matCellDef="let element;let row; let index = index">
+                                  {{element.status}}
+                                </td>
+                              </ng-container>
+                              <tr mat-header-row *matHeaderRowDef="displayedColumnsbuyerExposureTable"
+                                style="background-color:#B4A6EA">
+                              </tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumnsbuyerExposureTable">
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </mat-tab>
+          <!-- buyer Limit end -->
         </mat-tab-group>
       </div>
     </div>
