@@ -224,9 +224,9 @@ getAllCountry(){
       let obj =  { id: item.countrycode3, itemName: item.country }
       countryArray.push(obj)
     })
-    // this.optionDatas = countryArray
+    this.optionDatas = countryArray
   })
-  this.optionDatas = COUNTRYNAMES; 
+  // this.optionDatas = COUNTRYNAMES; 
 }
 
   onKey(value) { 

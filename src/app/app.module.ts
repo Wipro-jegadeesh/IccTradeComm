@@ -46,6 +46,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 import {ApiService} from './service/api.service';
@@ -250,6 +251,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   }),
   CommonModule,
   LanguageTranslationModule,
+    PdfViewerModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -297,9 +299,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
     CountdownModule, 
     // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
-
-    
-    AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
+    // AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
   providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,

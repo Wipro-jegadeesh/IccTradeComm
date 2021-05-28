@@ -38,4 +38,7 @@ export class InvoiceRequestServices {
     let userCred = JSON.parse(localStorage.getItem('userCred'))
     return this.apiService.tempGet(environment.serviePath_4+'limit-request/allLimitsbyFinId/'+userCred['financierProfileId']); 
   }
+  invoicePDFSave(body: any){
+    return this.apiService.post(environment.serviePath_2+'api/v1/ocrspr/post', body);
+  }
 }
