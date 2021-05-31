@@ -280,31 +280,13 @@ export class FinancierFundedComponent implements OnInit {
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
     this.FinancierFundedServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      // let status = "";
-      // if (resp.status == "I") {
-      //   status = "Initiated"
-      // }
-      // else if (resp.status == "A") {
-      //   status = "Waiting for bid"
-      // }
-      // else if (resp.status == "B") {
-      //   status = "Bid Created"
-      // }
-      // else {
-      //   status = "Financed Successfully"
-      // }
       this.dataSourceTwo = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
 
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-      
     })
-
-
-   
     this.dataSourcePayment = new MatTableDataSource( [{
       "paymentRef": "PAY123",
       "paymentType": "online",
@@ -315,25 +297,11 @@ export class FinancierFundedComponent implements OnInit {
       "benIfsc":"123TY132",     
       "netAmount": "200"
   }])
-   
-
-    // this.FinancierFundedServices.getInvoiceRequestLists(data.id).subscribe(resp => {
-
-    //   this.dataSourcePayment = new MatTableDataSource(resp.goodsDetails);
-      
-    // })
-
-
-    
-
     this.FinancierFundedServices.getAcceptedFinanceDetails(data.invoiceId).subscribe(resp => {
       if(resp){
         this.dataSourceThree = new MatTableDataSource(resp);
       }
     })
-
-    // this.dataSourceThree = new MatTableDataSource([{'financeOfferAmt' : 'test', 'ccy' : 'test', 'fxRate' : 'test', 'margin' : 'test', 'netAmtDisc' : 'test','discAmt' : 'test','discRate' : 'test','offerExpPeriod' : 'test','offerExpPeriod1' : 'test','offerExpPeriod2' : 'test','offerExpPeriod3' : 'test','offerExpPeriod4' : 'test','offerExpPeriod5' : 'test','offerExpPeriod6' : 'test','offerExpPeriod7' : 'test','offerExpPeriod8' : 'test','offerExpPeriod9' : 'test','offerExpPeriod10' : 'test'}])
-
   }
 
   handleToggle(e, status) {
@@ -347,6 +315,9 @@ export class FinancierFundedComponent implements OnInit {
   }
   logout() {
     this.authenticationService.logout()
+  }
+  navigateInvoiceDetails(id) {
+    this.router.navigateByUrl('/accepted-detail/' + id);
   }
 }
 

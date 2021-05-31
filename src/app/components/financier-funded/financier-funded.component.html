@@ -2,7 +2,7 @@
     <header class="mm0p0">
         <br>
         <h5 class="mmt20"> {{'Accepted Finance' | translate}}</h5>
-        <div class="table-res mat-elevation-z8">
+        <div class="table-res mat-elevation-z8 table-responsive table-post">
             <table mat-table [dataSource]="dataSource" matSort>
                     
             <ng-container matColumnDef="invoiceRef">
@@ -78,7 +78,7 @@
                   <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                       <mat-icon>edit</mat-icon>
                     </a>&nbsp; -->
-                  <a href="javascript:void(0)" (click)="openModal($event,template,element)">
+                  <a href="javascript:void(0)" (click)="navigateInvoiceDetails(element.id)">
                       <mat-icon #tooltip="matTooltip"
                       matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
                   </a>

@@ -321,10 +321,6 @@ getAllCountry(){
     console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
-    let invIdparams = {
-      "invoiceIds": invoiceIds,
-    }
-
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();

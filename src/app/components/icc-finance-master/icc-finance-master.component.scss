@@ -35,7 +35,12 @@ header {
     right: 0;
     top: 33px;
 }
-
+.table-post{
+    position: relative;
+}
+table.table-responsive{
+    display: inline-table;
+}
 .accounts-list {
     // float: left;
     // position: relative;
