@@ -459,6 +459,7 @@ getAllCountry(){
 
       }else{
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
+          console.log(resp)
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
           this.invoiceID = "";
@@ -470,9 +471,12 @@ getAllCountry(){
           this.addRow()
           this.getInvDetailsLists();
         }, error => {
+           this.toastr.error(error.error);
+
         })
       }
     } catch (err) {
+      console.log(err,"errr")
     }
   }
   get dateFormArray(): FormArray {
