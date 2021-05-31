@@ -273,7 +273,7 @@
                   <form [formGroup]="globalLimitForm" autocomplete="off" (ngSubmit)="globalLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-xl-5 col-12">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
@@ -285,12 +285,12 @@
                                     </select>
                                   </mat-form-field>
                                 </td>
-                                  <td rowspan="1" colspan="1">
-                                    <mat-form-field dense class="finlim-mat">
-                                      <mat-label>Global Limit</mat-label>
-                                      <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
-                                    </mat-form-field>
-                                  </td>
+                                <td rowspan="1" colspan="1">
+                                  <mat-form-field dense class="finlim-mat">
+                                    <mat-label>Global Limit</mat-label>
+                                    <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
+                                  </mat-form-field>
+                                </td>
                               </tr>
                               <tr>
                                 <td rowspan="1" colspan="1">
@@ -301,22 +301,21 @@
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=globalLimitBoolean>
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf=globalLimitBoolean>
                                     <button mat-flat-button color="primary"
                                       (click)="globalLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="globalLimitBoolean == false">
-                                    <button  mat-flat-button color="primary"
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf="globalLimitBoolean == false">
+                                    <button mat-flat-button color="primary"
                                       (click)="globalLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button
-                                      color="primary">submit</button>
+                                    <button type="submit" mat-flat-button color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-md-6 hover">
+                        <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
                               <th>Utilization Slabs</th>
@@ -627,7 +626,7 @@
                   <form [formGroup]="countryLimitForm" autocomplete="off" (ngSubmit)="countryLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-xl-5 col-12">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
@@ -655,15 +654,15 @@
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
-                                  <div  *ngIf=counrtyLimitBoolean>
-                                    <button  mat-flat-button color="primary"
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf=counrtyLimitBoolean>
+                                    <button mat-flat-button color="primary"
                                       (click)="countryLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div  *ngIf="counrtyLimitBoolean == false">
+                                  <div style="text-align: end;margin-bottom: 10px;"
+                                    *ngIf="counrtyLimitBoolean == false">
                                     <button mat-flat-button color="primary"
                                       (click)="countryLimitflipFlop('cancel')">Cancel</button>
-                                    <button  type="submit" mat-flat-button
-                                      color="primary">submit</button>
+                                    <button type="submit" mat-flat-button color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
@@ -672,7 +671,7 @@
                         </div>
 
                         <!-- country Limit start slabs -->
-                        <div class="col-md-6 hover">
+                        <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
                               <th>Utilization Slabs</th>
@@ -870,7 +869,7 @@
                   <form [formGroup]="smeLimitForm" autocomplete="off" (ngSubmit)="smeLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-xl-5 col-12">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
@@ -897,23 +896,21 @@
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=smeLimitBoolean>
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf=smeLimitBoolean>
                                     <button mat-flat-button color="primary"
                                       (click)="smeLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="smeLimitBoolean == false">
-                                    <button  mat-flat-button color="primary"
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf="smeLimitBoolean == false">
+                                    <button mat-flat-button color="primary"
                                       (click)="smeLimitflipFlop('cancel')">Cancel</button>
-                                    <button  type="submit" mat-flat-button
-                                      color="primary">submit</button>
+                                    <button type="submit" mat-flat-button color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
-                             
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-md-6 hover">
+                        <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
                               <th>Utilization Slabs</th>
@@ -1063,7 +1060,7 @@
                   <form [formGroup]="sectorLimitForm" autocomplete="off" (ngSubmit)="sectorLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-xl-5 col-12">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
@@ -1091,23 +1088,22 @@
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=sectorLimitBoolean>
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf=sectorLimitBoolean>
                                     <button mat-flat-button color="primary"
                                       (click)="sectorLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="sectorLimitBoolean == false">
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf="sectorLimitBoolean == false">
                                     <button mat-flat-button color="primary"
                                       (click)="sectorLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button
-                                      color="primary">submit</button>
+                                    <button type="submit" mat-flat-button color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
-                            
+
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-md-6 hover">
+                        <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
                               <th>Utilization Slabs</th>
@@ -1299,7 +1295,7 @@
                   <form [formGroup]="buyerLimitForm" autocomplete="off" (ngSubmit)="buyerLimitFormSubmit()">
                     <div class="container-fluid">
                       <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-xl-5 col-12">
                           <table class="table-responsive inv-table" style="display: contents;">
                             <tbody>
                               <tr>
@@ -1327,22 +1323,21 @@
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
-                                  <div style="text-align: end;" *ngIf=buyerLimitBoolean>
-                                    <button  mat-flat-button color="primary"
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf=buyerLimitBoolean>
+                                    <button mat-flat-button color="primary"
                                       (click)="buyerLimitflipFlop('edit')">Edit</button>
                                   </div>
-                                  <div style="text-align: end;" *ngIf="buyerLimitBoolean == false">
+                                  <div style="text-align: end;margin-bottom: 10px;" *ngIf="buyerLimitBoolean == false">
                                     <button mat-flat-button color="primary"
                                       (click)="buyerLimitflipFlop('cancel')">Cancel</button>
-                                    <button  type="submit" mat-flat-button
-                                      color="primary">submit</button>
+                                    <button type="submit" mat-flat-button color="primary">submit</button>
                                   </div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
-                        <div class="col-md-6 hover">
+                        <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
                               <th>Utilization Slabs</th>
