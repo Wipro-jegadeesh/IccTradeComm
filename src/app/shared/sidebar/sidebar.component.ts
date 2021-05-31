@@ -18,8 +18,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.checkRolesPer=JSON.parse(localStorage.getItem('userCred'))
     this.roleName = localStorage.getItem('roleName');
-    
-
   }
 
   isOpen = 'inActive';
