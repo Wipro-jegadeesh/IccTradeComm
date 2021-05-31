@@ -37,6 +37,9 @@ let serviePath_3 = "http://localhost:8082/";
 
 let serviePath_4 = "http://localhost:8090/";
 
+//OCR path 
+let serviePath_5 = "http://localhost:8091/";
+
 
 //Financier onboard path
 let financierServicePath="http://localhost:8080/"
@@ -65,6 +68,7 @@ export const environment = {
   serviePath_2: `${serviePath_2}`,
   serviePath_3: `${serviePath_3}`,
   serviePath_4: `${serviePath_4}`,
+  serviePath_5: `${serviePath_5}`,
 
   dboardServerPath1: `${dboardServerPath1}`,
   getSumOfOpenFinBidding: `${getSumOfOpenFinBidding}`,

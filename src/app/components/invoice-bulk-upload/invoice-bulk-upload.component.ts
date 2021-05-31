@@ -40,7 +40,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
   displayedColumns: string[] = ['select', 'DateTime', 'InvoiceRefNo', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Status'];
   selection = new SelectionModel(true, []);
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
-  fileNames = []
+  fileNames
   isOpen = ''
   name = "This is XLSX TO JSON CONVERTER";
   willDownload = false;
@@ -171,7 +171,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
           'data': data,
           'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
         }
-        this.fileNames.push(fileName)
+        this.fileNames = fileName
         console.log(fileName, "fileName.fileName")
         console.log(this.fileNames, "this.fileNames")
         this.pdfApi()
@@ -343,11 +343,11 @@ export class InvoiceBulkUploadComponent implements OnInit {
       console.log(resp,"resp")
      setTimeout(() => {
       this.invoiceForm.patchValue({
-        invId: resp.invoiceId,
-        buyerName: resp.buyerName ,
-        invDate: resp.invoiceDate = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
+        invId: resp.invoiceId === null ? '' : resp.invoiceId,
+        buyerName: resp.buyerName  === null ? '' : resp.buyerName,
+        invDate: resp.invoiceDate === null ? '' : resp.invoiceDate = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
       });
-      this.invoiceID = resp.invoiceId
+      this.invoiceID = resp.invoiceId === null ? '' : resp.invoiceDate 
     }, 1000);
     }, error => {
     })

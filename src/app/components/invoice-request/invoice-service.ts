@@ -39,6 +39,6 @@ export class InvoiceRequestServices {
     return this.apiService.tempGet(environment.serviePath_4+'limit-request/allLimitsbyFinId/'+userCred['financierProfileId']); 
   }
   invoicePDFSave(body: any){
-    return this.apiService.post(environment.api_url+'api/v1/ocrspr/post', body);
+    return this.apiService.post(environment.serviePath_5+'ocrspr/post', body);
   }
 }

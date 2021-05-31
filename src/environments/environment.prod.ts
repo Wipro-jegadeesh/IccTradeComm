@@ -13,6 +13,9 @@ let serviePath_4 = "https://tradecomm-limits.ffdcdev.fusionfabric.io/";
  
 //Financier onboard path
 let financierServicePath="https://tradecomm-userprofile.ffdcdev.fusionfabric.io/";
+
+//OCR path 
+let serviePath_5 = "http://localhost:8091/";
  
 // Coriolis service path
 let coriolisServicePath="https://tradecomm-common.ffdcdev.fusionfabric.io/"
@@ -37,7 +40,9 @@ export const environment = {
   serviePath_2: `${serviePath_2}`,
   serviePath_3: `${serviePath_3}`,
   serviePath_4: `${serviePath_4}`,
- 
+  serviePath_5: `${serviePath_5}`,
+
+  
   dboardServerPath1: `${dboardServerPath1}`,
   getSumOfOpenFinBidding: `${getSumOfOpenFinBidding}`,
   dboardServerPath3: `${dboardServerPath3}`,
