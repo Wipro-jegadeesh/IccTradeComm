@@ -261,6 +261,12 @@ mat-card-content[_ngcontent-njk-c181]
     padding: "";
     margin-left: -11px;
 }
+.table-post{
+    position: relative;
+}
+table.table-responsive{
+    display: inline-table;
+}
 .searchInput{
     th{
         padding-top: 10px;

@@ -12,7 +12,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 export interface financeForBiddingData {
   invId: String;
   invAmt: String;
@@ -237,25 +236,14 @@ export class AcceptedFinanceComponent implements OnInit {
   isOpenHandle(isTrue) {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
-
+  navigateInvoiceDetails(id) {
+    this.router.navigateByUrl('/accepted-detail/' + id);
+  }
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
 
-    this.AcceptedFinanceServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      this.dataSourceTwo = new MatTableDataSource([
-        { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
-      ]);
-
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-
-    })
-
-    this.AcceptedFinanceServices.getAcceptedFinanceDetails(data.invoiceId).subscribe(resp => {
-      if (resp) {
-        this.dataSourceThree = new MatTableDataSource(resp);
-      }
-    })
+   
 
 
   }

@@ -2,7 +2,7 @@
 <div *ngIf="!canceldiv" class="app-content {{isOpen}}">
   <header>
       <br>
-        <div class="uxg-h4" style="text-align: center">{{'Bids to be Accepted' | translate}}</div>
+        <h5 class="mmt20">{{'Bids to be Accepted' | translate}}</h5>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
         (mouseleave)="isHover=false" class="table-responsive" matSort>

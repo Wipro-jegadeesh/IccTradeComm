@@ -159,6 +159,7 @@ import { LanguageTranslationModule } from './shared/language-translation/languag
 
 import { FinanceLimitMaintananceServices } from './components/finanance-limit-maintanance/finanance-limit-maintanance-service';
 import { CountdownModule } from 'ngx-countdown';
+import { AcceptedDetailsComponent } from './components/accepted-finance/accepted-details/accepted-details.component';
 
 
 
@@ -236,7 +237,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NotActivatedPopup,
     IccSectorComponent,
     DialogDataExampleDialog,
-    IccCountryComponent
+    IccCountryComponent,
+    AcceptedDetailsComponent
   ],
   imports: [
     BrowserModule,

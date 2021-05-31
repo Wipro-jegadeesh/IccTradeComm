@@ -2,7 +2,7 @@
     <header>
         <br>
         <h5> {{'Finance Master' | translate}}</h5>
-        <div class="mat-elevation-z8">
+        <div class="mat-elevation-z8 table-responsive table-post">
         <table mat-table [dataSource]="dataSource" >
 
             
@@ -193,7 +193,7 @@
               <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
               <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;" style="background-color:#B4A6EA"></tr>
         </table>
         <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
     </div>

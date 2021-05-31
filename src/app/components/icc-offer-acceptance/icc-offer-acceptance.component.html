@@ -2,7 +2,7 @@
     <header *ngIf="!AllFundingOpen" class="m0p0">
         <br>
         <h5> {{'Offer For Acceptance' | translate}} </h5>
-        <div class="mat-elevation-z8">
+        <div class="mat-elevation-z8 table-responsive table-post">
           <div class="table-res">
            <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
         (mouseleave)="isHover=false">
