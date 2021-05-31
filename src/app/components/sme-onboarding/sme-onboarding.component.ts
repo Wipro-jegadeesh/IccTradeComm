@@ -124,7 +124,12 @@ export class SmeOnboardingComponent implements OnInit {
                       }
                     }
                     else{
-                    secResp.response=item.value
+                      if(item.type == "QuestionResponseBoolDto"){
+                        secResp.response=item.value == true ? 'true' : 'false'
+                      }
+                      else{
+                    secResp.response= item.value
+                      }
                     }
                     secResp.itHasValue=true
                 }
@@ -403,30 +408,7 @@ export class SmeOnboardingComponent implements OnInit {
   }
   onSubmit(){
     this.onSave('')
-    this.toastr.success(this.translate.instant('Questionnaire Section Submitted Successfully'))
-
-    let data=JSON.parse(localStorage.getItem('userCred'))
-    this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
-      if(resp && resp.score >= 900){
-      this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
-      })
-      let obj={
-        status : 'A'
-      }
-      this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+data.companyId,obj).subscribe(resp=>{
-
-      })
-      this.router.navigateByUrl('/sme-dashboard')
-    }
-    else{
-      this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
-      this.router.navigateByUrl('/score-received')
-    }
-    },error=>{
-      this.toastr.error('Error')
-    })
- 
-
+    // this.toastr.success(this.translate.instant('Questionnaire Section Submitted Successfully'))
     // this.router.navigateByUrl('/sme-dashboard')
   }
   onSave(type) {
@@ -487,7 +469,31 @@ export class SmeOnboardingComponent implements OnInit {
     this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire',obj).subscribe(resp=>{
         if(resp){
             // alert('Questionnaire Section Submitted Successfully')
-          type && this.toastr.success('Questionnaire Section Submitted Successfully')
+          // type &&
+           this.toastr.success('Questionnaire Section Submitted Successfully')
+           if(!type){
+          let data=JSON.parse(localStorage.getItem('userCred'))
+          this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+            if(resp && resp.score >= 900){
+            this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
+            })
+            let obj={
+              status : 'A'
+            }
+            this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+data.companyId,obj).subscribe(resp=>{
+      
+            })
+            this.router.navigateByUrl('/sme-dashboard')
+          }
+          else{
+            this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
+            this.router.navigateByUrl('/score-received')
+          }
+          },error=>{
+            this.toastr.error('Error')
+          })
+        }
+       
         }
     })
     console.log(onboardingResp)

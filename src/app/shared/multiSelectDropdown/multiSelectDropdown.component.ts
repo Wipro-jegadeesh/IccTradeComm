@@ -40,7 +40,7 @@ export class MultiSelectDropdown implements OnInit {
             allowSearchFilter: true,
             // showCheckbox:this.questionDatas.allowMultiple ? true : false,
             showCheckbox:true,
-            position:'bottom',
+            // position:'bottom',
             enableSearchFilter:true
           };
         // this.dropdownSettings['singleSelection'] = this.questionDatas.allowMultiple ? true : false;
