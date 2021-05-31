@@ -339,25 +339,33 @@ export class InvoiceBulkUploadComponent implements OnInit {
   }
   pdfApi() {
     console.log(this.fileNames)
-    // this.invoiceRequestServices.invoicePDFSave(this.fileNames).subscribe(resp => {
-    //   this.getInvDetailsLists()
-    // }, error => {
-    // })
-    let obj = {
-      invdate: "21/05/2014",
-      InvoiceId: "1400002432",
-      BuyerName: "Misys International Financial Systems Pte Ltd",
-      BuyerAddress: "2 Shenton Way #14-01 SGX Center 1"
-    }
-    let obj1 = '2014/05/01'
-    setTimeout(() => {
+    this.invoiceRequestServices.invoicePDFSave(this.fileNames).subscribe(resp => {
+      console.log(resp,"resp")
+     setTimeout(() => {
       this.invoiceForm.patchValue({
-        invId: "1400002432",
-        buyerName: 'Misys International Financial Systems Pte Ltd',
-        invDate: obj1 = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
+        invId: resp.invoiceId,
+        buyerName: resp.buyerName ,
+        invDate: resp.invoiceDate = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
       });
-      this.invoiceID = '1400002432'
+      this.invoiceID = resp.invoiceId
     }, 1000);
+    }, error => {
+    })
+    // let obj = {
+    //   invdate: "21/05/2014",
+    //   InvoiceId: "1400002432",
+    //   BuyerName: "Misys International Financial Systems Pte Ltd",
+    //   BuyerAddress: "2 Shenton Way #14-01 SGX Center 1"
+    // }
+    // let obj1 = '2014/05/01'
+    // setTimeout(() => {
+    //   this.invoiceForm.patchValue({
+    //     invId: "1400002432",
+    //     buyerName: 'Misys International Financial Systems Pte Ltd',
+    //     invDate: obj1 = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
+    //   });
+    //   this.invoiceID = '1400002432'
+    // }, 1000);
    
   }
   getInvDetailsLists() {
