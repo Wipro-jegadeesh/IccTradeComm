@@ -135,14 +135,14 @@
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense class="listdown">
+                  <mat-form-field dense class="listdown" (click)="myInput.focus()">
                     <mat-label>{{'Buyer Location' | translate}}</mat-label>
-                    <mat-select panelClass="myPanelClass" formControlName="buyerAddr">
-                      <input style="border: 1px solid #a59f9f;padding: 11px;" matInput  placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)" autofocus>
+                    <mat-select panelClass="myPanelClass" formControlName="buyerAddr" >
+                      <input style="border: 1px solid #a59f9f;padding: 11px;" matInput  placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)" #myInput>
                       <mat-option>None</mat-option>
                       <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}</mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field> 
                   
                   <!-- <mat-form-field>
                     <mat-select placeholder="{{'Buyer Location' | translate}}">

@@ -16,6 +16,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IccCountryServices } from '../icc-country/icc-country.services'
 import {TranslateService} from '@ngx-translate/core';
+// import { MatInput } from '@angular/material/input';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -130,6 +131,7 @@ export class InvoiceRequestComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'DateTime','InvoiceRefNo', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount','Ccy','Status'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  // @ViewChild('firstname', {static: true}) firstname:any;
   // tslint:disable-next-line: typedef
   isOpen = ""
   mobileScreen = false;
@@ -146,6 +148,7 @@ export class InvoiceRequestComponent implements OnInit {
   invoiceDetails: any;
   userDeatils: any;
   optionDatas: any;
+  nonFilterOptions : any;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -188,13 +191,21 @@ export class InvoiceRequestComponent implements OnInit {
   public variables = ['One','Two','County', 'Three', 'Zebra', 'XiOn'];
   constructor(public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
-    private datePipe: DatePipe,private toastr: ToastrService) {
+    private datePipe: DatePipe,private toastr: ToastrService
+    // ,private matInput: MatInput
+    ) {
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
 
   ngOnInit() {
    
+    
+    // this.firstname.nativeElement.focus();
+
+
+    // setTimeout(() => this.matInput.focus());
+    
     this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -225,6 +236,7 @@ getAllCountry(){
       countryArray.push(obj)
     })
     this.optionDatas = countryArray
+    this.nonFilterOptions = countryArray
   })
   // this.optionDatas = COUNTRYNAMES; 
 }
@@ -234,6 +246,10 @@ getAllCountry(){
   }
   
   search(value: string) { 
+    if(value == ""){
+      this.optionDatas = this.nonFilterOptions
+      return this.optionDatas
+    }
     let filter = value.toLowerCase();
     return this.optionDatas.filter(option => option.itemName.toLowerCase().startsWith(filter));
   }
