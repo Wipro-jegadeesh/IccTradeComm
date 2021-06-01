@@ -963,3 +963,9 @@ width: auto;
   padding: 3px;
   border-radius: 20px;
 }
+::ng-deep .toast-container .ngx-toastr{
+    width: fit-content !important;
+    font-size:small;
+    min-width: 241px;
+    max-width: 500px;
+}

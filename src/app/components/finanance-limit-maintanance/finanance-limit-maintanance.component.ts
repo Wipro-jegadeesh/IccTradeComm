@@ -917,8 +917,18 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }
     } else {
       this.globalLimitBoolean = false;
-      this.toastr.error("Please Fill Mandatory fields")
+      let availableData = 'Please fix the following:,' + 'First Name is required,Last Name is required,Email Address is required';
+      let desiredData = this.replaceCommaLine(availableData);
+      console.log(desiredData, "desiredDatas")
+      this.toastr.error(desiredData, '', {
+        timeOut: 4000, progressBar: true, enableHtml: true
+      });
+      // this.toastr.error("Please Fill Mandatory fields")
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
   globalLimitflipFlop(value) {
     if (value == 'edit') {
