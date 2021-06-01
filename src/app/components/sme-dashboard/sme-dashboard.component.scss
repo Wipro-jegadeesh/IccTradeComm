@@ -37,6 +37,9 @@ header {
     top: 33px;
 }
 .topbar_item{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     &:nth-child(3n + 1) {
         a{
             background: url("/assets/round_trans.svg")  no-repeat 134% 15% / 52% 140%, linear-gradient(180deg, #C694F9, #AB64F4);
@@ -122,9 +125,15 @@ header {
     z-index: 1;
 }
 
+a.list-group-item.text-center.tablecolour.mat-menu-trigger{
+    cursor: pointer;
+    width: 378px;
+}
+
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
+        margin-left: 5px;
 
         .wave {
             overflow: hidden;
@@ -151,7 +160,7 @@ header {
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
+        margin-left: 5px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -190,6 +199,9 @@ header {
     .accounts-list {
         overflow: auto;
         padding-top: $margin;
+    }
+    .topbar_item{
+        margin-bottom: 20px;
     }
 }
 .app-content.active{
@@ -288,6 +300,9 @@ mat-card-content[_ngcontent-njk-c181]
     top: 56px;
     left: -28px;
     padding: 5px;
+}
+.topbar_item{
+    margin-bottom: 20px;
 }
 }
 @media screen and (max-width: 1030px) {

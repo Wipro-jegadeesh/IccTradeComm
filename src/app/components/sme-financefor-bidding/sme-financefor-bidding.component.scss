@@ -86,7 +86,8 @@ table.table-responsive{
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
+        padding: 15px;
+        margin: auto;
         .wave {
             overflow: hidden;
             ::ng-deep svg {

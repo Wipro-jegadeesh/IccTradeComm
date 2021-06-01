@@ -84,7 +84,9 @@ table.table-responsive{
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
+        h5{
+            margin-top: 20px;
+        }
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -102,6 +104,9 @@ table.table-responsive{
                 }
             }
         }
+    }
+    table.table-responsive{
+        display: block;
     }
 }
 
@@ -110,7 +115,9 @@ table.table-responsive{
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
+        h5{
+            margin-top: 20px;
+        }
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -128,6 +135,10 @@ table.table-responsive{
                 }
             }
         }
+       
+    }
+    table.table-responsive{
+        display: block;
     }
 }
 
@@ -136,7 +147,9 @@ table.table-responsive{
     header {
         margin-bottom: $margin;
         height: 30%;
-
+        h5{
+            margin-top: 20px;
+        }
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -148,6 +161,9 @@ table.table-responsive{
     .accounts-list {
         overflow: hidden;
         padding-top: $margin;
+    }
+    table.table-responsive{
+        display: block;
     }
 }
 .app-content.active{

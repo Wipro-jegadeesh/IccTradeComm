@@ -133,17 +133,18 @@ mat-icon[matPrefix] {
   .uxg-signup-container{
     width: 100vw;
     position: absolute;
-    top: 19%;
+    top: 35%;
   }
   .uxg-signup-page .uxg-illustration-container{
     display: block;
     width: 100%;
     background-image: url('/assets/img/TradeCom-Image.jfif');
     background-size: 100% 100%;
-    background-position: 100% 24%;
-    height: 300px;
+    background-position: left top;
+    height: 49%;
     position: absolute;
-    top: 15%;
+    top: 11%;
+    background-repeat: no-repeat;
   }
   .sign-form mat-form-field{
       width: 100%;
@@ -383,7 +384,7 @@ table{
 
 @media screen and (min-width: 768px) and (max-width: 991px){
     .uxg-signup-page .uxg-illustration-container{
-        background-size: 100% 62%;
+        background-size: 100% 43%;
         background-position: 100% center;
     }
     .signup-lang .uxg-toolbar-actions{
