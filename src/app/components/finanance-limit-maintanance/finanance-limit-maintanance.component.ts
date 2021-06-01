@@ -917,7 +917,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       }
     } else {
       this.globalLimitBoolean = false;
-      let availableData = 'Please fix the following:,' + 'First Name is required,Last Name is required,Email Address is required';
+      let availableData = 'Please fix the following:,' + 'Global Limit is required,OverAll Limit is required';
       let desiredData = this.replaceCommaLine(availableData);
       console.log(desiredData, "desiredDatas")
       this.toastr.error(desiredData, '', {
