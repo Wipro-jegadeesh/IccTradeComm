@@ -184,7 +184,20 @@ table{
         }
     }
 }
-
+@media only screen and (max-width: 575px){
+    .data-section h4, .language{
+        text-align: center;
+    }
+    .language .mat-form-field{
+        width: 100%;
+    }
+    .sign-drop .multiselect-dropdown{
+        width: 93%;
+    }
+    .dis-block .mat-box.mat-form-field{
+        width: 93%;
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     // mat-form-field{
@@ -217,6 +230,12 @@ table{
         &.table-responsive{
             display: block;
         }
+    }
+    .sign-drop .multiselect-dropdown{
+        width: 93%;
+    }
+    .dis-block .mat-box.mat-form-field{
+        width: 93%;
     }
 }
 .app-content.active{

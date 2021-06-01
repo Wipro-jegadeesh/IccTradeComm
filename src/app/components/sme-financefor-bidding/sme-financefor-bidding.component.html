@@ -3,7 +3,7 @@
         <br>
         <h5>{{'Finance Requests' | translate}}</h5>
         <div class="mat-elevation-z8 table-responsive table-post">
-            <table mat-table [dataSource]="dataSource" matSort>
+            <table mat-table [dataSource]="dataSource" matSort class="table-responsive">
                 <ng-container matColumnDef="invoiceRef">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                     matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'"> {{'ICC Tradecomm Ref' | translate}} </th>

@@ -2,13 +2,13 @@
     <header>
       <div class="data-section">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-lg-4 col-sm-4">
             <img src="../../../assets/img/icctradelogo.png" class="log-logoss" />
           </div>
-          <div class="col-sm-6" style="padding: 14px 29px;">
+          <div class="col-lg-6 col-sm-5" style="padding: 14px 29px;">
             <h4>{{'Welcome TO ICC TradeComm' | translate}}</h4>
           </div>
-            <div class="col-sm-2 language">
+            <div class="col-lg-2 col-sm-3 language">
                 <mat-form-field dense>
                     <mat-label>Language</mat-label>
                     <mat-icon matPrefix>language</mat-icon>
@@ -69,7 +69,7 @@
                      [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
                      [settings]="dropdownSettings" ></angular2-multiselect> -->
 
-                      <ng-multiselect-dropdown
+                      <ng-multiselect-dropdown class="sign-drop"
                       [placeholder]="('Select Country' | translate)"
                       [settings]="dropdownSettings"
                       [data]="optionDatas"
@@ -194,7 +194,7 @@
           </div>
           <div class="row dis-block">
             <div class="col-sm-4">
-             <mat-form-field dense>
+             <mat-form-field dense class="mat-box">
               <mat-label>{{'Sector' | translate}}</mat-label>
               <mat-select formControlName="sector">
                 <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description | translate}}</mat-option>
@@ -214,7 +214,7 @@
                 formControlName="language"
                 [settings]="languageDropdownSettings"></angular2-multiselect>    
                 </div>  -->
-                <mat-form-field dense>
+                <mat-form-field dense class="mat-box">
                   <mat-label>{{'Language' | translate}}</mat-label>
                   <mat-select formControlName="language">
                     <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search" (keyup)="onKey($event.target.value)">

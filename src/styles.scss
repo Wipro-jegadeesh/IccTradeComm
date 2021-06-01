@@ -771,6 +771,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
 }
 .mat-paginator .mat-paginator-container .mat-paginator-range-actions .mat-paginator-range-label {
     margin-left: 0;
+    margin-right: 10px;
 }
 .toast-top-right{
     left: 9%;
@@ -824,6 +825,10 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         max-width: 360px;
     }
 }
+.dis-block .sign-drop .multiselect-dropdown{
+    width: 93%;
+}
+
     }
 //ipad
     @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -874,7 +879,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
                 .toast-top-right{
                     left: 34%;
                 }
-
+                .dis-block .sign-drop .multiselect-dropdown{
+                    width: 93%;
+                }
     }
 //ipadpro
     @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -912,6 +919,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
             .mod-box{
                 max-width: 750px;
                 margin: auto;
+            }
+            .dis-block .sign-drop .multiselect-dropdown{
+                width: 93%;
             }
     }
 .dynamicForm-textarea{
