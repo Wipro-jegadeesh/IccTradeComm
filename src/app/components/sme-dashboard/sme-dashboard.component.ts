@@ -1,10 +1,12 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, ElementRef, HostListener, ViewChild,EventEmitter, Input, Output } from '@angular/core';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SmeDashboardServices } from './sme-dashboard-service';
 import { DASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { COMMONCONSTANTS } from '../../shared/constants/constants';
 import { TranslateService } from '@ngx-translate/core';
+import * as XLSX from "xlsx";
+import * as Papa from 'papaparse';
 
 @Component({
   selector: 'app-sme-dashboard',
@@ -12,6 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./sme-dashboard.component.scss']
 })
 export class SmeDashboardComponent implements OnInit {
+
+  @Output() public found = new EventEmitter<any>();
 
   lineChartData = [{
     label: '# of Votes',
@@ -236,6 +240,7 @@ export class SmeDashboardComponent implements OnInit {
   getFinMaturityData;
   getFinnSizeData;
   getTblChartData
+  FileType: any;
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -244,6 +249,9 @@ export class SmeDashboardComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
+  invoicedata: any;
+
+
 
   constructor(public translate: TranslateService,public router: Router,public authenticationService: AuthenticationService, public smeDashboardServices: SmeDashboardServices ) { }
 
@@ -259,7 +267,6 @@ export class SmeDashboardComponent implements OnInit {
     this.getFinMatData();
     this.getFinSizeData();
     this.getChartData();
-    
   }
 
   public scrollRight(): void {
@@ -399,8 +406,88 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
       if(event == 'manual'){
         this.navigateInvoiceCreation()
       }else{
-        this.router.navigateByUrl('/invoice-request/bulk')
+        // this.router.navigateByUrl('/invoice-request/bulk')
       }
     }
+    navigateToSmeDetails(){
+      let path = '/invoice-request/bulk'
+      let data: NavigationExtras = {
+        queryParams: {
+        "invoicedata":this.invoicedata, 
+        "uploadType": this.FileType,
+        }
+      }
+      this.router.navigate([path], { state: { FileData: data } });
+    }
+    onFileChange(ev) {
+      let workBook = null;
+      let jsonData = null;
+      const reader = new FileReader();
+      const file = ev.target.files[0];
+      console.log(file, "file")
+      console.log(file.type, "file")
+      this.FileType = file.type
+      if (file.type === "text/csv") {
+        this.onChangess(file)
+      } else if (file.type === "application/pdf") {
+        this.getBase64(<File>ev.target.files[0]).then((data) => {
+          let flName = file.name
+          console.log(flName, "flName")
+          // console.log(ev.target.files, "ev.target.files")
+          let fileName = {
+            'fileName': file.name,
+            'data': (<string>data).split(',')[1],
+            'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
+          }
+          this.invoicedata = fileName
+          console.log(this.invoicedata, "this.fileNames")
+          this.navigateToSmeDetails()
+        });
+  
+      } else {
+        reader.onload = event => {
+          const data = reader.result;
+          workBook = XLSX.read(data, { type: "binary" });
+          console.log(workBook);
+          jsonData = workBook.SheetNames.reduce((initial, name) => {
+            console.log(name)
+            const sheet = workBook.Sheets[name];
+            console.log(sheet, "sheet")
+            initial['invoice'] = XLSX.utils.sheet_to_json(sheet);
+            return initial;
+          }, {});
+          console.log(jsonData, "jsonData")
+          this.invoicedata = jsonData.invoice
+          this.navigateToSmeDetails()
+        };
+        reader.readAsBinaryString(file);
+      }
+    }
+    getBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    }
+    onChangess(files: File[]) {
+      console.log(files, "files")
+      if (files) {
+        console.log(files);
+        Papa.parse(files, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (result, file) => {
+            console.log(result, "sksksk");
+            this.invoicedata = result.data[0]
+            this.navigateToSmeDetails()
+            // this.dataSource = new MatTableDataSource(result);
+            // this.dataList = result.data;
+          }
+        });
+      }
+    }
+    
 }
 

@@ -90,13 +90,15 @@
                 </span>
               
                 </button>
-            <button (click)="onRequestChange('')" style="color: #7c49cb;" mat-menu-item>
+            <button style="color: #7c49cb;" mat-menu-item>
                 <i class="fas fa-2x fa-upload"></i>&nbsp;
                 <span>
                     {{'Invoice Request Upload' | translate}}
+                    <input type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
                 </span>
             </button>
             </mat-menu>
+           
         <!-- </div> -->
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
     <div class="container-fluid">

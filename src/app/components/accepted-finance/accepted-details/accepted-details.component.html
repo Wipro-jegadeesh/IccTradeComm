@@ -1,456 +1,522 @@
 <div class="app-content">
     <header>
         <div class="data-section">
-            <!-- Finance Details -->
-            <mat-accordion>
-                <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true"
-                    (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'acceptFinance.Finance Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="table-responsive">
-                        <table mat-table [dataSource]="dataSourceThree">
+            <mat-tab-group dynamicHeight>
+                <mat-tab label="{{'acceptFinance.Finance Details' | translate}}">
+                    <!-- Finance Details -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true"
+                            (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'acceptFinance.Finance Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-res">
+                                <table mat-table [dataSource]="dataSourceThree">
 
-                            <ng-container matColumnDef="id">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Financie Ref No' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let data">{{ data.fin_id }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Financie Ref No' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.fin_id }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="finId">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'FIN Id' | translate}}</th>
-                                <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="finId">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'FIN Id' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="invoiceId">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Id' | translate}}</th>
-                                <td mat-cell *matCellDef="let data">{{ data.invoiceId }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="invoiceId">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Id' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let data">{{ data.invoiceId }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="fxRate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Fx Rate' | translate}}%</th>
-                                <td mat-cell *matCellDef="let data">{{ data.fxRate }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="fxRate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Fx Rate' | translate}}%
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.fxRate }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="baseCcyAmt">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Base CCY' | translate}}</th>
-                                <td mat-cell *matCellDef="let data">{{ data.baseCcyAmt }}</td>
-                            </ng-container>
-
-
-                            <ng-container matColumnDef="fundablePercent">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Funded' | translate}}%</th>
-                                <td mat-cell *matCellDef="let data">{{ data.fundablePercent }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="baseCcyFundingAmt">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'BaseCCY Funding Amt' | translate}}</th>
-                                <td mat-cell *matCellDef="let data">{{ data.baseCcyFundingAmt }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="repaymentDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Repayment Date' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let data">
-                                    {{data.repaymentDate && moment(data.repaymentDate).format('DD/MM/YYYY')}}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="baseCcyNetAmtPayable">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'Net Amount Received' | translate}}</th>
-                                <td mat-cell *matCellDef="let data">{{ data.baseCcyNetAmtPayable }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="annualYeild">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Annual Yield' | translate}}%
-                                </th>
-                                <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
-                            </ng-container>
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsThree"
-                                style="background-color:#B4A6EA"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
-                        </table>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Table Interest Details  -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'acceptFinance.Interest Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="table-responsive">
-
-                        <table mat-table [dataSource]="dataSourceFour">
-                            <ng-container matColumnDef="FromDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.From Date' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.FromDate }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="ToDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.To Date' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.invDate &&
-                                moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="NoDays">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.No. of Days' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="FinanceCurrency">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Finance Currency' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="TotalAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Total Finance Amount' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="ActualRate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Actual Interest Rate' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="InterestAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Interest Amount' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="RepaymentDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Repayment Date' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="RepaymentAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Repayment Amount' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsFour" style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsFour"></tr>
-                        </table>
-                    </div>
-
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Amortization Details -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'acceptFinance.Amortization Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="table-responsive">
-
-                        <table mat-table [dataSource]="dataSourceFive">
-                            <ng-container matColumnDef="FromDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.From Date' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="ToDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.To Date' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.invDate &&
-                                moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="NoDays">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.No. of Days' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="FinanceCurrency">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Interest Currency' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="TotalAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Total Finance Amount' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="ActualRate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Actual Total Interest Received' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="InterestAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Interest Earned Per Day' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="RepaymentDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Interest Earned Till Date' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="baseCcyAmt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Base CCY' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.baseCcyAmt }}</td>
+                                    </ng-container>
 
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsFive" style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsFive"></tr>
-                        </table>
-                    </div>
+                                    <ng-container matColumnDef="fundablePercent">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Funded' | translate}}%
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.fundablePercent }}</td>
+                                    </ng-container>
 
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Amortization Details On Daily Basis -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'Amortization Details On Daily Basis' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div style="overflow-x:auto;">
-                        <table mat-table [dataSource]="dataSourceSix">
+                                    <ng-container matColumnDef="baseCcyFundingAmt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'BaseCCY Funding Amt' | translate}}</th>
+                                        <td mat-cell *matCellDef="let data">{{ data.baseCcyFundingAmt }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="Day">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'acceptFinance.Day' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="repaymentDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Repayment Date' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">
+                                            {{data.repaymentDate && moment(data.repaymentDate).format('DD/MM/YYYY')}}
+                                        </td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="Date">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.Date' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="baseCcyNetAmtPayable">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'Net Amount Received' | translate}}</th>
+                                        <td mat-cell *matCellDef="let data">{{ data.baseCcyNetAmtPayable }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="InterestCurrency">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.InterestCurrency' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="annualYeild">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Annual Yield' |
+                                            translate}}%
+                                        </th>
+                                        <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="InterestDay">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.InterestDay' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
-                            </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsThree"
+                                        style="background-color:#B4A6EA"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
+                                </table>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <br>
+                    <!-- Table Interest Details  -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'acceptFinance.Interest Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-res">
+
+                                <table mat-table [dataSource]="dataSourceFour">
+                                    <ng-container matColumnDef="FromDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.From Date' | translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.FromDate
+                                            }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ToDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.To Date' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.invDate &&
+                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NoDays">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.No. of Days' | translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{
+                                            invoiceDetailsData.buyerName }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="FinanceCurrency">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Finance Currency' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="TotalAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Total Finance Amount' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="ActualRate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Actual Interest Rate' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="InterestAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Interest Amount' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="RepaymentDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Repayment Date' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="RepaymentAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Repayment Amount' | translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsFour"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsFour"></tr>
+                                </table>
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+                <mat-tab label="{{'Goods Details' | translate}}">
+                    <!-- Invoice Details -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'Invoice Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-res">
+
+                                <table mat-table [dataSource]="dataSourceTwo">
+                                    <ng-container matColumnDef="invId">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice No' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="invDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Date' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.invDate &&
+                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="buyerName">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Buyer' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{
+                                            invoiceDetailsData.buyerName }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="invAmt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Amount' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="status">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Status' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                                </table>
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <br>
+                    <!-- Goods Details -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'Goods Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div style="overflow-x:auto;">
+                                <table mat-table [dataSource]="dataSourceOne">
+
+                                    <ng-container matColumnDef="descGoods">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'Description of Goods' | translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="quantity">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Quantity' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="rate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Amt Ccy' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="amt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Amount' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
+                                    </ng-container>
 
 
-                            <ng-container matColumnDef="InterestDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'acceptFinance.InterestDate' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="taxRate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Rate' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="taxAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amount' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="discAmt">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amt Ccy' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="total">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Total' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsOne"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+                                </table>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+                <mat-tab label="{{'acceptFinance.Amortization Details' | translate}}">
+                    <!-- Amortization Details -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'acceptFinance.Amortization Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-res">
+
+                                <table mat-table [dataSource]="dataSourceFive">
+                                    <ng-container matColumnDef="FromDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.From Date' | translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ToDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.To Date' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.invDate &&
+                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NoDays">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.No. of Days' | translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{
+                                            invoiceDetailsData.buyerName }}
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="FinanceCurrency">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Interest Currency' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="TotalAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Total Finance Amount' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="ActualRate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Actual Total Interest Received' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="InterestAmount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Interest Earned Per Day' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="RepaymentDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Interest Earned Till Date' | translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsFive"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsFive"></tr>
+                                </table>
+                            </div>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <br>
+                    <!-- Amortization Details On Daily Basis -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'Amortization Details On Daily Basis' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div style="overflow-x:auto;">
+                                <table mat-table [dataSource]="dataSourceSix">
+
+                                    <ng-container matColumnDef="Day">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'acceptFinance.Day' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Date">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.Date' | translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="InterestCurrency">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.InterestCurrency' | translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="InterestDay">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.InterestDay' | translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="InterestDate">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">
+                                            {{'acceptFinance.InterestDate' | translate}}</th>
+                                        <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
+                                    </ng-container>
 
 
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsSix" style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsSix"></tr>
-                        </table>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Invoice Details -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'Invoice Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="table-responsive">
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsSix"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsSix"></tr>
+                                </table>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+                <mat-tab label="{{'Payment Details' | translate}}">
+                    <!-- Payment Details  -->
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title style="font-weight:500;color: #a899e4;">
+                                    {{'Payment Details' | translate}}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <div class="table-res">
 
-                        <table mat-table [dataSource]="dataSourceTwo">
-                            <ng-container matColumnDef="invId">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice No' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
-                            </ng-container>
+                                <table mat-table [dataSource]="dataSourceSeven">
+                                    <ng-container matColumnDef="Payment Id">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Id' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}
+                                        </td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="invDate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Date' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.invDate &&
-                                moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
-                                </td>
-                            </ng-container>
+                                    <ng-container matColumnDef="Payment Type">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Type' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.invDate &&
+                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                        </td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="buyerName">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Buyer' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}
-                                </td>
-                            </ng-container>
+                                    <ng-container matColumnDef="Payment Date">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Date' |
+                                            translate}}</th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{
+                                            invoiceDetailsData.buyerName }}
+                                        </td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="invAmt">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Amount' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
+                                    <ng-container matColumnDef="Payment Amount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Amount' |
+                                            translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Ben Name">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Name' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Ben Account">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Account' |
+                                            translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Ben IFSC">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben IFSC' | translate}}
+                                        </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Net Amount">
+                                        <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount' |
+                                            translate}} </th>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                            }}</td>
+                                    </ng-container>
 
-                            <ng-container matColumnDef="status">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Status' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
-                                </td>
-                            </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsSeven"
+                                        style="background-color:#B4A6EA">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumnsSeven"></tr>
+                                </table>
+                            </div>
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
-                        </table>
-                    </div>
-
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Goods Details -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'Goods Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div style="overflow-x:auto;">
-                        <table mat-table [dataSource]="dataSourceOne">
-
-                            <ng-container matColumnDef="descGoods">
-                                <th mat-header-cell *matHeaderCellDef scope="column">
-                                    {{'Description of Goods' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="quantity">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Quantity' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="rate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Amt Ccy' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="amt">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Amount' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
-                            </ng-container>
-
-
-                            <ng-container matColumnDef="taxRate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Rate' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="taxAmount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amount' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="discAmt">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amt Ccy' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
-                            </ng-container>
-
-
-                            <ng-container matColumnDef="total">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Total' | translate}}</th>
-                                <td mat-cell *matCellDef="let element">{{ element.total }}</td>
-                            </ng-container>
-
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
-                        </table>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
-            <!-- Payment Details  -->
-            <mat-accordion>
-                <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="font-weight:500;color: #a899e4;">
-                            {{'Payment Details' | translate}}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="table-responsive">
-
-                        <table mat-table [dataSource]="dataSourceSeven">
-                            <ng-container matColumnDef="Payment Id">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Id' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Payment Type">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Type' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.invDate &&
-                                moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Payment Date">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Date' | translate}}</th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}
-                                </td>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Payment Amount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Amount' | translate}}
-                                </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="Ben Name">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Name' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="Ben Account">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Account' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="Ben IFSC">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben IFSC' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-                            <ng-container matColumnDef="Net Amount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount' | translate}} </th>
-                                <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
-                            </ng-container>
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsSeven"
-                                style="background-color:#B4A6EA">
-                            </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsSeven"></tr>
-                        </table>
-                    </div>
-
-                </mat-expansion-panel>
-            </mat-accordion>
-            <br>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </header>
 </div>

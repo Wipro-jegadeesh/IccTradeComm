@@ -11,7 +11,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr';
 import { SmeUserCreationService } from '../sme-user-creation.service';
 
 
@@ -60,7 +59,7 @@ export class SmeUserDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe,private toastr: ToastrService) {
+    private datePipe: DatePipe) {
     this.invoiceFormBuild()  
   }
   ngOnInit() {

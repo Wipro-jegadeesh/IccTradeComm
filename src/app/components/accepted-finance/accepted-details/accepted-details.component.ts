@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AcceptedFinanceServices } from '../accepted-finance-service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-accepted-details',
@@ -24,7 +25,8 @@ export class AcceptedDetailsComponent implements OnInit {
   dataSourceFive = new MatTableDataSource(); //data
   dataSourceSix = new MatTableDataSource(); //data
   dataSourceSeven = new MatTableDataSource(); //data
-  
+  moment: any = moment;
+
   bidpanelOpenState = false;
   id: any;
 

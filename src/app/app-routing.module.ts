@@ -66,7 +66,7 @@ const routes: Routes = [
   { path: 'sme-bidding/:id', component: SmeBiddingDetailsComponent ,  data : {"HeaderName" : "SME Bidding", "headerPaths" : [{ path : "/sme-bidding",pathName : "SME Bidding Details"},{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'sme-finance-for-bidding', component: SmeFinanceforBiddingComponent , data : {"HeaderName" : "Finance For Bidding", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'accepted-finance', component: AcceptedFinanceComponent , data : {"HeaderName" : "Accepted Finance", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
-  { path: 'accepted-detail/:id', component: AcceptedDetailsComponent , data : {"HeaderName" : "Accepted Finance", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+  { path: 'accepted-detail/:id', component: AcceptedDetailsComponent , data : {"HeaderName" : "Accepted Finance Details", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'invoice-request', component: InvoiceRequestComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'repayment_today', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Today", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'repayment_overdue', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Over Due", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
