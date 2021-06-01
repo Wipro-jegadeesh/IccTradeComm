@@ -146,7 +146,7 @@ export const LANGUAGES = [
     {"id":"sl","itemName":"Slovene","nativeName":"slovenščina"},
     {"id":"so","itemName":"Somali","nativeName":"Soomaaliga, af Soomaali"},
     {"id":"st","itemName":"Southern Sotho","nativeName":"Sesotho"},
-    {"id":"es","itemName":"Spanish; Castilian","nativeName":"español, castellano"},
+    {"id":"es","itemName":"Spanish; Castilian","nativeName":"Español, castellano"},
     {"id":"su","itemName":"Sundanese","nativeName":"Basa Sunda"},
     {"id":"sw","itemName":"Swahili","nativeName":"Kiswahili"},
     {"id":"ss","itemName":"Swati","nativeName":"SiSwati"},

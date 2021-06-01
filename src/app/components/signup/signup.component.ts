@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
   signUpDetails:any;
   modalRef: BsModalRef;
   languages = [{"id":"en","itemName":"English","nativeName":"English"},
-      {"id":"es","itemName":"Espano","nativeName":"español"}
+      {"id":"es","itemName":"Espano","nativeName":"Español"}
 ]
   countryId : any
 
