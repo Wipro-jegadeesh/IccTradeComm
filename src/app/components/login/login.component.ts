@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 // private modalRef: TemplateRef<any>;
   // mymodal
   languages  = [{"id":"en","itemName":"English","nativeName":"English"},
-  {"id":"es","itemName":"Espano","nativeName":"español, castellano"}
+  {"id":"es","itemName":"Espano","nativeName":"Español"}
 ]
   constructor(public translate: TranslateService,private modalService: BsModalService,private router: Router,private apiService:ApiService,
     private authService: AuthenticationService,private toastr: ToastrService) { }

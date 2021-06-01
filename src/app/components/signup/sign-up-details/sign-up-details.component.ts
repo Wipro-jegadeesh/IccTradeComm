@@ -27,7 +27,7 @@ export class SignUpDetailsComponent implements OnInit {
   // selectedItems=[]
   sectors: any;
   languages  = [{"id":"en","itemName":"English","nativeName":"English"},
-  {"id":"es","itemName":"Espano","nativeName":"español"}
+  {"id":"es","itemName":"Espano","nativeName":"Español"}
 ]
 
 

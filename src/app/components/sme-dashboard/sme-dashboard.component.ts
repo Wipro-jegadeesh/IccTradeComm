@@ -241,6 +241,7 @@ export class SmeDashboardComponent implements OnInit {
   getFinnSizeData;
   getTblChartData
   FileType: any;
+  PDFData: any;
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -415,6 +416,7 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
         queryParams: {
         "invoicedata":this.invoicedata, 
         "uploadType": this.FileType,
+        "PDFData": this.PDFData 
         }
       }
       this.router.navigate([path], { state: { FileData: data } });
@@ -428,12 +430,14 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
       console.log(file.type, "file")
       this.FileType = file.type
       if (file.type === "text/csv") {
+        this.PDFData = ''
         this.onChangess(file)
       } else if (file.type === "application/pdf") {
         this.getBase64(<File>ev.target.files[0]).then((data) => {
           let flName = file.name
           console.log(flName, "flName")
           // console.log(ev.target.files, "ev.target.files")
+          this.PDFData = data
           let fileName = {
             'fileName': file.name,
             'data': (<string>data).split(',')[1],
@@ -445,6 +449,7 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
         });
   
       } else {
+        this.PDFData = ''
         reader.onload = event => {
           const data = reader.result;
           workBook = XLSX.read(data, { type: "binary" });
@@ -480,7 +485,7 @@ public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): voi
           skipEmptyLines: true,
           complete: (result, file) => {
             console.log(result, "sksksk");
-            this.invoicedata = result.data[0]
+            this.invoicedata = result.data
             this.navigateToSmeDetails()
             // this.dataSource = new MatTableDataSource(result);
             // this.dataList = result.data;

@@ -90,8 +90,10 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.addRow();
     this.getAllCountry()
 
+    console.log(this.FileData,"this.FileData")
     if(this.FileData.FileData.queryParams.uploadType === "text/csv"){
       this.invoicedata = this.FileData.FileData.queryParams.invoicedata
+      console.log(this.invoicedata,"this.invoicedata")
       this.InvoiceAPI()
     }else if(this.FileData.FileData.queryParams.uploadType === "application/pdf"){
       this.pdfDivEnable = true

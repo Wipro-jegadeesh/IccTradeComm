@@ -9,7 +9,7 @@
                 <div class="upload-btn-wrapper col-md-3">
                   <h4>{{'Invoice Upload' | translate}}</h4>
                 </div>
-                <div class="upload-btn-wrapper col-md-3">
+                <!-- <div class="upload-btn-wrapper col-md-3">
                   <button class="filebtn">{{'Upload a file' | translate}}</button>
                   <input type="file" accept=".xlsx,.xls,.csv,.pdf" class="dynamic-file-upload form"
                     (change)="onFileChange($event)" />
@@ -25,7 +25,7 @@
                     <button (click)="sampleDown();" mat-menu-item> {{'Download as XLSX' | translate}}</button>
                     <button (click)="samplecsvDown();" mat-menu-item>{{'Download as CSV' | translate}}</button>
                   </mat-menu>
-                </div>
+                </div> -->
                 <div *ngIf="pdfDivEnable" class="col-md-3 upload-btn-wrapper">
                   <button (click)="openModal($event,template)" type="button" class="btn btn-outline fundreq-btn">
                     {{'preview' | translate}}
