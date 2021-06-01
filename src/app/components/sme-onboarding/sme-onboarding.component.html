@@ -20,7 +20,7 @@
     <div>
       <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
       <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
-      <div class="title sec-cmlp" *ngIf="sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+      <div class="title sec-cmlp" *ngIf="sections.itHasValue" [ngClass]="{'isSectionSelected': sectionIndex == secIndex}" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
 
       <!-- SUB SECTIONS -->
       <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
