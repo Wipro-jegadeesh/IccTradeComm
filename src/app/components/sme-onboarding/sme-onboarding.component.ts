@@ -471,11 +471,11 @@ export class SmeOnboardingComponent implements OnInit {
             // alert('Questionnaire Section Submitted Successfully')
           // type &&
            this.toastr.success('Questionnaire Section Submitted Successfully')
-           if(!type){
+
           let data=JSON.parse(localStorage.getItem('userCred'))
           this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp && resp.score >= 900){
-            this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
+           !type && this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
             })
             let obj={
               status : 'A'
@@ -486,13 +486,13 @@ export class SmeOnboardingComponent implements OnInit {
             this.router.navigateByUrl('/sme-dashboard')
           }
           else{
-            this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
+            !type && this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
             this.router.navigateByUrl('/score-received')
           }
           },error=>{
             this.toastr.error('Error')
           })
-        }
+      
        
         }
     })
