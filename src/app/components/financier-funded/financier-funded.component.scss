@@ -105,7 +105,8 @@ header {
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
+        margin: auto;
+        padding: 15px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -123,8 +124,36 @@ header {
                 }
             }
         }
+
+    }
+    table.table-responsive{
+        display:block;
     }
 }
+// @media only screen and (max-width: 376px) {
+//     header {
+//         margin-bottom: $uxg-spacing-5;
+//         height: 35%;
+
+//         .wave {
+//             overflow: hidden;
+//             ::ng-deep svg {
+//                 height: 200px;
+//             }
+//         }
+
+//         .account-services-headline {
+//             font-size: $margin;
+
+//             .global-balance {
+//                 .uxg-h3,
+//                 p {
+//                     font-size: $uxg-spacing-4;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
@@ -277,5 +306,11 @@ mat-card-content[_ngcontent-njk-c181]
     position: relative;
     padding-top:30px !important;
   
+  }
+  @media only screen and (max-width: 1030px)
+  {
+     .m0p0{margin: 0px;padding: 0px;}
+     .uxg-h4{margin-top: 20px;}
+     .table-res{overflow-x: auto;}
   }
 

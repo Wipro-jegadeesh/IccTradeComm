@@ -1,12 +1,10 @@
 <div class="app-content {{isOpen}}">
-  <header>
+  <header class="mm0p0">
     <br>
     <h5>{{'Bidding by Financiers' | translate}}</h5>
-    <div class="mat-elevation-z8">
-      <table mat-table class="table-responsive" [dataSource]="dataSource" (mouseenter)="isHover=true"
+    <div class="mat-elevation-z8 table-res">
+      <table mat-table class="" [dataSource]="dataSource" (mouseenter)="isHover=true"
         (mouseleave)="isHover=false" matSort>
-
-        
         <ng-container matColumnDef="invoiceRef">
           <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
           matTooltip="{{dashboardTooltip.tradecommRef}}" [matTooltipPosition]="'below'">{{'ICC Tradecomm Ref' | translate}}</th>
