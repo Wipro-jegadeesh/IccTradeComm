@@ -4,7 +4,6 @@ import { filter } from 'rxjs/operators';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
-import { ToastrService } from 'ngx-toastr';
 import { DialogDataExampleService } from '../shared/dialogBox/dialogBox.component';
 import { UserIdleService } from 'angular-user-idle';
 
@@ -22,7 +21,6 @@ export class AuthConfigService {
       private readonly authConfig: AuthConfig,
       private router: Router,
       private apiService:ApiService,
-      public toastr:ToastrService,
       private dialogBox:DialogDataExampleService,
       private userIdle: UserIdleService
     ) {}

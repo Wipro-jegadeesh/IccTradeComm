@@ -11,7 +11,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr';
 import { FinancierUserCreationService } from '../financier-user-creation.service';
 import {Location} from '@angular/common';
 
@@ -62,7 +61,7 @@ export class FinancierUserDetailsComponent implements OnInit {
 
   constructor(private _location: Location,private route: ActivatedRoute,private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private FinancierUserCreationService: FinancierUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe,private toastr: ToastrService) {
+    private datePipe: DatePipe) {
     this.invoiceFormBuild()
   }
   ngOnInit() {

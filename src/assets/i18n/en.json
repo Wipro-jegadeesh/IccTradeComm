@@ -588,6 +588,7 @@
    "InterestDay":"InterestDay",
    "InterestCurrency":"InterestCurrency",
    "Date":"Date",
-   "Day":"Day"
+   "Day":"Day",
+   "Finance Details":"Finance Details"
   }
 }

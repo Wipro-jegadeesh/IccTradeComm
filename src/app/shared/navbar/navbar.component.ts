@@ -152,9 +152,16 @@ export class NavbarComponent implements OnInit {
       this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
     }else if(this.router.url == '/view-profile/icc'){
       this.headerPaths =[{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
+    }else if(this.roleName === 'sme'){
+      this.headerPaths =[{ path : "/accepted-finance",pathName : "Accepted Finance"},{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
+    }else if(this.roleName === 'financier'){
+      this.headerPaths =[{ path : "/finance-funded",pathName : "Financier Funded"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
+    }else if(this.roleName === 'icc'){
+      this.headerPaths =[{ path : "/icc-finance-today",pathName : "Finance-Today"},{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
     }
     else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
+    // console.log(this.headerPaths ,"this.homePath ")
     }
   }
 

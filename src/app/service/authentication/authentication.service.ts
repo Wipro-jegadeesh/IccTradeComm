@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root' 
 })
 export class AuthenticationService { 
 
-  constructor(private router:Router,private toastr: ToastrService) { }
+  constructor(private router:Router) { }
 
   // tslint:disable-next-line: typedef
   loginAsSme(username: string, password: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +12,8 @@ import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@ang
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { IccCountryServices } from '../icc-country/icc-country.services'
+import { Router } from "@angular/router";
+
 
 export interface invoiceData {
   invref: any;
@@ -73,7 +75,11 @@ export class InvoiceBulkUploadComponent implements OnInit {
   optionDatas: any;
   userDeatils: any;
   UpdateInvoiceLable: boolean;
-  constructor(private IccCountryServices: IccCountryServices, private datePipe: DatePipe, public translate: TranslateService, private fb: FormBuilder, private modalService: BsModalService, private toastr: ToastrService, private invoiceRequestServices: InvoiceRequestServices) {
+  message:string;
+  FileData:any;
+
+  constructor(public router: Router,private IccCountryServices: IccCountryServices, private datePipe: DatePipe, public translate: TranslateService, private fb: FormBuilder, private modalService: BsModalService, private toastr: ToastrService, private invoiceRequestServices: InvoiceRequestServices) {
+    this.FileData = this.router.getCurrentNavigation().extras.state;
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
@@ -83,6 +89,20 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.getInvDetailsLists()
     this.addRow();
     this.getAllCountry()
+
+    if(this.FileData.FileData.queryParams.uploadType === "text/csv"){
+      this.invoicedata = this.FileData.FileData.queryParams.invoicedata
+      this.InvoiceAPI()
+    }else if(this.FileData.FileData.queryParams.uploadType === "application/pdf"){
+      this.pdfDivEnable = true
+      this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.data
+      this.fileNames = this.FileData.FileData.queryParams.invoicedata
+      this.pdfApi()
+    }else{
+      this.invoicedata =  this.FileData.FileData.queryParams.invoicedata
+      this.InvoiceAPI()
+    }
+  
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -101,10 +121,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
 
-
-  onFileRemove(index) {
-    this.fileNames.splice(index, 1)
-  }
   authoriseInvoice() {
     let invoiceIds = []
     this.selection.selected.forEach(s =>
@@ -168,7 +184,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
         this.pdfSrc = data
         let fileName = {
           'fileName': ev.target.files[0].name,
-          'data': data,
+          'data': (<string>data).split(',')[1],
           'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
         }
         this.fileNames = fileName
@@ -263,6 +279,8 @@ export class InvoiceBulkUploadComponent implements OnInit {
     } catch (err) {
     }
   }
+
+
   InvoiceAPI() {
     let invoiceDetailss
     let goodsDetails = []
@@ -368,6 +386,8 @@ export class InvoiceBulkUploadComponent implements OnInit {
     // }, 1000);
    
   }
+
+
   getInvDetailsLists() {
     let tempInvArray;
     this.invoiceRequestServices.getInvDetailsLists().subscribe(resp => {
