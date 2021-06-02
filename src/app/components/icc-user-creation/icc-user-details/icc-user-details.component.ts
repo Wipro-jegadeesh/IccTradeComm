@@ -197,6 +197,16 @@ UserADDFormBuild(){
 
 
 selectionChange(option) {
+  this.selectedProducts=[]
+  let arr=option && option.option && option.option.selectionList && option.option.selectionList._value ? option.option.selectionList._value : []
+  this.RolesType.forEach((item)=>{
+    arr.forEach((arrItem)=>{
+      if(arrItem == item.roleId){
+        item['isSelected']= true
+        this.selectedProducts.push(item)
+      }
+    })
+  })
   console.log(option,this.selectedProducts,'ddd');
 }
 
@@ -324,27 +334,49 @@ removeImage() {
     this.isImageSaved = false;
 }
   onSubmitInvoiceForm() {
+    
+    let role=''
+     this.selectedProducts.forEach((item)=>{
+        role=role+item.roleId
+     })
+
     try {
       this.userForm.patchValue({
         role:JSON.stringify(this.selectedProducts)
       })
+      
       if (this.userForm.status === "INVALID"){
         // throw { "mes": "Please fill mendatory  fields" }
         this.toastr.error("Please fill mendatory  fields")
         return
       }        
-
       this.userForm.value['country'] = this.userForm.value.country && this.userForm.value.country[0] && this.userForm.value.country[0].itemName
-
+                  let respObj={
+                    "lastName": this.userForm.value.lastName,
+                    "locale": this.userForm.value.locale,
+                    "nationalId": this.userForm.value.nationalId,
+                    "postalCode": this.userForm.value.postalCode,
+                    "profileType": this.userForm.value.profileType,
+                    "role": role,
+                    "state": this.userForm.value.state,
+                    "address": this.userForm.value.address,
+                    "address1": this.userForm.value.address1,
+                    "companyName": this.userForm.value.companyName,
+                    "contactNo": this.userForm.value.contactNo,
+                    "country": this.userForm.value.country,
+                    "email": this.userForm.value.email,
+                    "firstName": this.userForm.value.firstName,
+                    "language":this.userForm.value.language[0].id
+                  }
                  if(this.id && this.type === 'EDIT'){
-                  this.IccUserCreationssService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
+                  this.IccUserCreationssService.UpdateUser(this.id,respObj).subscribe(resp => {
                     this.invoiceFormBuild();
                     this.router.navigateByUrl('/icc-sme-details');
           
                   }, error => {
                   })
                 }else{
-                  this.IccUserCreationssService.Usersave(this.userForm.value).subscribe(resp => {
+                  this.IccUserCreationssService.Usersave(respObj).subscribe(resp => {
                     this.invoiceFormBuild();
                     this.router.navigateByUrl('/icc-sme-details');
                   }, error => {

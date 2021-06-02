@@ -1,124 +1,128 @@
 <div class="app-content {{isOpen}} ">
   <header>
-      <br>
-      <h5>SME - {{this.smeData?.smeData?.queryParams?.companyId || ''}}</h5>
+    <br>
+    <h5>SME - {{this.smeData?.smeData?.queryParams?.companyId || ''}}</h5>
     <div class="container-fluid contnr-div">
       <div class="row">
-          <div class="col-md-12">
-           
-            <mat-tab-group dynamicHeight>
-              <mat-tab label="{{'IccSmeDetails.Details' | translate }}">
-                <div class="links">
-                  <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
-                        <mat-card>
-                      <mat-card-content>
-                        <div class="row dis-block">
-                          <div class="col-sm-4">
-                              <div class="form-group">
-                                <!-- <label for="National ID​">Company Register ID​
+        <div class="col-md-12">
+
+          <mat-tab-group dynamicHeight>
+            <mat-tab label="{{'IccSmeDetails.Details' | translate }}">
+              <div class="links">
+                <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
+                  <mat-card>
+                    <mat-card-content>
+                      <div class="row dis-block">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="National ID​">Company Register ID​
                                 </label> -->
-                                <mat-form-field dense>
-                                  <mat-label>{{'Company Register Id' | translate }}</mat-label>
-                                    <!-- {{'IccSmeDetails.CompanyRegisterId' | translate​}} </mat-label> --> 
-                                  <input type="text"  placeholder="{{'Company Register Id' | translate }}" matInput formControlName="nationalId" readonly/>
-                                  <!-- <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error> -->
-                                </mat-form-field>
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <!-- <label for="First name​">Company name​
-                                </label> -->
-                                <mat-form-field dense>
-                                  <mat-label>{{'Company name​' | translate }}</mat-label>
-                                  <mat-icon matPrefix>business</mat-icon>
-                                  <input type="text" matInput placeholder="Company Number" formControlName="companyName" readonly/>
-                                  <!-- <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error> -->
-                                </mat-form-field>
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <!-- <label for="Country​">Country
-                                </label> -->
-                                <mat-form-field dense>
-                                  <mat-label>{{'IccSmeDetails.Country' | translate }}</mat-label>
-                                  <mat-icon matPrefix>flag</mat-icon>
-                                  <input type="text" matInput placeholder="{{'Country' | translate }}" formControlName="country" readonly/>
-                                  <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
-                                </mat-form-field>
-                              </div>
-                            </div>
-                      </div>
-                        <div class="row dis-block">
-                          <div class="col-sm-4">
-                            <!-- <label for="Address">Address 1</label> -->
-                            <div class="form-group">
                             <mat-form-field dense>
-                              <mat-label>{{'Address 1' | translate }}</mat-label>
-                              <mat-icon matPrefix>home</mat-icon>
-                              <input type="text" matInput  formControlName="address" readonly/>
-                              <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
+                              <mat-label>{{'Company Register Id' | translate }}</mat-label>
+                              <!-- {{'IccSmeDetails.CompanyRegisterId' | translate​}} </mat-label> -->
+                              <input type="text" placeholder="{{'Company Register Id' | translate }}" matInput
+                                formControlName="nationalId" readonly />
+                              <!-- <mat-error *ngIf="hasError('nationalId', 'required')">Register is required</mat-error> -->
                             </mat-form-field>
-                        </div>
                           </div>
-                          <div class="col-sm-4">
-                            <!-- <label for="Address">Address 2</label> -->
-                            <div class="form-group">
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="First name​">Company name​
+                                </label> -->
                             <mat-form-field dense>
-                              <mat-label>{{'Address 2' | translate }}</mat-label>
-                              <mat-icon matPrefix>home</mat-icon>
-                              <input type="text" matInput  formControlName="address1" readonly/>
-                              <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
+                              <mat-label>{{'Company name​' | translate }}</mat-label>
+                              <mat-icon matPrefix>business</mat-icon>
+                              <input type="text" matInput placeholder="Company Number" formControlName="companyName"
+                                readonly />
+                              <!-- <mat-error *ngIf="hasError('companyName', 'required')">companyName is required</mat-error> -->
                             </mat-form-field>
+                          </div>
                         </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="Country​">Country
+                                </label> -->
+                            <mat-form-field dense>
+                              <mat-label>{{'IccSmeDetails.Country' | translate }}</mat-label>
+                              <mat-icon matPrefix>flag</mat-icon>
+                              <input type="text" matInput placeholder="{{'Country' | translate }}"
+                                formControlName="country" readonly />
+                              <!-- <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error> -->
+                            </mat-form-field>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <!-- <label for="National ID​">Phone Number</label> -->
-                              <mat-form-field dense>
-                                <mat-label>{{'Phone Number' | translate }}</mat-label>
-                                <mat-icon matPrefix>call</mat-icon>
-                                <input type="text" matInput placeholder="{{'Phone Number' | translate }}" formControlName="contactNo" readonly/>
-                                <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
-                              </mat-form-field>
-                            </div>
-                          </div>
+                        </div>
                       </div>
                       <div class="row dis-block">
                         <div class="col-sm-4">
-                            <div class="form-group">
-                              <!-- <label for="Locale">State</label> -->
-                              <mat-form-field dense>
-                                <mat-label>{{'State' |  translate }}</mat-label>
-                                <mat-icon matPrefix>add_location</mat-icon>
-                                <input type="text" matInput  formControlName="state" readonly/>
-                                <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
-                              </mat-form-field>
-                            </div>
+                          <!-- <label for="Address">Address 1</label> -->
+                          <div class="form-group">
+                            <mat-form-field dense>
+                              <mat-label>{{'Address 1' | translate }}</mat-label>
+                              <mat-icon matPrefix>home</mat-icon>
+                              <input type="text" matInput formControlName="address" readonly />
+                              <mat-error *ngIf="hasError('address', 'required')">address is required</mat-error>
+                            </mat-form-field>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <!-- <label for="Locale">City</label> -->
-                              <mat-form-field dense>
-                                <mat-label>{{'City' | translate }}</mat-label>
-                                <mat-icon matPrefix>add_location</mat-icon>
-                                <input type="text" matInput  formControlName="locale" readonly/>
-                                <mat-error *ngIf="hasError('locale', 'required')">City is required</mat-error>
-                              </mat-form-field>
-                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <!-- <label for="Address">Address 2</label> -->
+                          <div class="form-group">
+                            <mat-form-field dense>
+                              <mat-label>{{'Address 2' | translate }}</mat-label>
+                              <mat-icon matPrefix>home</mat-icon>
+                              <input type="text" matInput formControlName="address1" readonly />
+                              <mat-error *ngIf="hasError('address1', 'required')">address is required</mat-error>
+                            </mat-form-field>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <!-- <label for="Locale">Postal Code</label> -->
-                              <mat-form-field dense>
-                                <mat-label>{{'Postal Code' | translate}}</mat-label>
-                                <mat-icon matPrefix>local_shipping</mat-icon>
-                                <input type="text" matInput  formControlName="postalCode" readonly/>
-                                <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
-                              </mat-form-field>
-                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="National ID​">Phone Number</label> -->
+                            <mat-form-field dense>
+                              <mat-label>{{'Phone Number' | translate }}</mat-label>
+                              <mat-icon matPrefix>call</mat-icon>
+                              <input type="text" matInput placeholder="{{'Phone Number' | translate }}"
+                                formControlName="contactNo" readonly />
+                              <!-- <mat-error *ngIf="hasError('contactNo', 'required')">phoneNumber is required</mat-error> -->
+                            </mat-form-field>
                           </div>
+                        </div>
+                      </div>
+                      <div class="row dis-block">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="Locale">State</label> -->
+                            <mat-form-field dense>
+                              <mat-label>{{'State' | translate }}</mat-label>
+                              <mat-icon matPrefix>add_location</mat-icon>
+                              <input type="text" matInput formControlName="state" readonly />
+                              <mat-error *ngIf="hasError('state', 'required')">State is required</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="Locale">City</label> -->
+                            <mat-form-field dense>
+                              <mat-label>{{'City' | translate }}</mat-label>
+                              <mat-icon matPrefix>add_location</mat-icon>
+                              <input type="text" matInput formControlName="locale" readonly />
+                              <mat-error *ngIf="hasError('locale', 'required')">City is required</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <!-- <label for="Locale">Postal Code</label> -->
+                            <mat-form-field dense>
+                              <mat-label>{{'Postal Code' | translate}}</mat-label>
+                              <mat-icon matPrefix>local_shipping</mat-icon>
+                              <input type="text" matInput formControlName="postalCode" readonly />
+                              <mat-error *ngIf="hasError('postalCode', 'required')">postalCode is required</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
                       </div>
                       <div class="row dis-block">
                         <div class="col-sm-4">
@@ -128,78 +132,98 @@
                             <mat-form-field dense>
                               <mat-label>{{'Email Id' | translate}}</mat-label>
                               <mat-icon matPrefix>email</mat-icon>
-                              <input type="text" matInput placeholder="{{'Email Id' | translate}}" formControlName="email" readonly/>
+                              <input type="text" matInput placeholder="{{'Email Id' | translate}}"
+                                formControlName="email" readonly />
                               <!-- <mat-error *ngIf="hasError('email', 'required')">email is required</mat-error> -->
                             </mat-form-field>
                           </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
-                          <mat-form-field dense>
-                           <mat-label>{{'Sector' | translate }}</mat-label>
-                           <mat-select formControlName="sector">
-                             <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
-                           </mat-select>
-                         </mat-form-field>
-                         </div>
+                            <mat-form-field dense>
+                              <mat-label>{{'Sector' | translate }}</mat-label>
+                              <mat-select formControlName="sector">
+                                <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
-                             <!-- <label for="Status">Status</label> -->
-                             <mat-form-field dense>
+                            <!-- <label for="Status">Status</label> -->
+                            <mat-form-field dense>
                               <mat-label>{{'Status' | translate }}</mat-label>
-                                <mat-select formControlName="status" panelClass="myPanelClass">
-                                  <mat-option value="A">Active</mat-option>
-                                  <mat-option value="I">Inactive</mat-option>
-                                  <mat-option value="D">Defaulted</mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="hasError('status', 'required')">{{'Status is Required' | translate }}</mat-error>
-                             </mat-form-field>
+                              <mat-select formControlName="status" panelClass="myPanelClass">
+                                <mat-option value="A">Active</mat-option>
+                                <mat-option value="I">Inactive</mat-option>
+                                <mat-option value="D">Defaulted</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="hasError('status', 'required')">{{'Status is Required' | translate }}
+                              </mat-error>
+                            </mat-form-field>
                           </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-                      <button mat-raised-button color="primary" >{{'Submit' | translate}}</button>
+                      <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
+                        <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </form>
               </div>
-            </mat-card-content>
-            </mat-card>
-            </form>
-                </div>
-              </mat-tab>
-              <mat-tab label="{{'IccSmeDetails.Questionaire' | translate}}">
-                <div class="links">
-                  <div class="row col-md-12 col-12" *ngIf="questionnaireSections">
-                      <div class="col-md-3 col-3 ques-sec" >
-                        <!-- <div *ngFor="let sections of questionnaireSections;let secIndex=index" style="text-align: center;">
+            </mat-tab>
+            <mat-tab label="{{'IccSmeDetails.Questionaire' | translate}}">
+              <div class="links">
+                <div class="row col-md-12 col-12" *ngIf="questionnaireSections">
+                  <div class="col-md-3 col-3 ques-sec">
+                    <!-- <div *ngFor="let sections of questionnaireSections;let secIndex=index" style="text-align: center;">
                         <button class="ques-sec-btn section-title" [ngClass]="{'selbut': secIndex == sectionIndex}" type="button" (click)="onSectionClick(secIndex)">{{sections.label}}</button>
                       </div> -->
-                    
-                      <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}" *ngFor="let sections of questionnaireSections;let secIndex=index" >
-                        <div>
-                          <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}} </div>
-                          <div class="circle " style="background-color: red;" *ngIf="!sections.itHasValue && sections.isStepChange"><mat-icon>info</mat-icon> </div>
-                          <div class="circle sec-cmlp" *ngIf="sections.itHasValue"><mat-icon>check_circle</mat-icon> </div>
+
+                    <div class="step section-title" [ngClass]="{'step-active': secIndex == sectionIndex}"
+                      *ngFor="let sections of questionnaireSections;let secIndex=index">
+                      <div>
+                        <div class="circle" *ngIf="!sections.itHasValue &&  !sections.isStepChange">{{secIndex+1}}
                         </div>
-                        <div>
-                          <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
-                          <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
-                          <div class="title sec-cmlp" *ngIf="sections.itHasValue" (click)="onSectionClick(secIndex)">{{sections.label}}</div>
-                    
-                          <!-- SUB SECTIONS -->
-                          <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
-                            <div *ngFor="let subSection of sections.subSections;let subIndex=index" >
-                              <label class="caption" *ngIf="!subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
-                            <label class="caption subSecSel" *ngIf="subSection.isSelected && !subSection.itHasValue"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
-                            <!-- [ngClass]="{subSecSel: subSection.isSelected}" -->
-                            <label class="caption subSeccomp" *ngIf="subSection.itHasValue"  [ngClass]="{subSecSel: subSection.isSelected}"  (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} - {{subSection.alias}}</label>
-                            <!-- [ngClass]="{subSeccomp: subSection.itHasValue}" -->
-                          </div>
-                          </div>
-                          <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
+                        <div class="circle " style="background-color: red;"
+                          *ngIf="!sections.itHasValue && sections.isStepChange">
+                          <mat-icon>info</mat-icon>
+                        </div>
+                        <div class="circle sec-cmlp" *ngIf="sections.itHasValue">
+                          <mat-icon>check_circle</mat-icon>
                         </div>
                       </div>
-                    
-                      <!-- <mat-form-field class="example-chip-list">
+                      <div>
+                        <div class="title" *ngIf="!sections.itHasValue && !sections.isStepChange"
+                          (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+                        <div class="title" style="color:red" *ngIf="!sections.itHasValue && sections.isStepChange"
+                          (click)="onSectionClick(secIndex)">{{sections.label}}</div>
+                        <div class="title sec-cmlp" *ngIf="sections.itHasValue" (click)="onSectionClick(secIndex)">
+                          {{sections.label}}</div>
+
+                        <!-- SUB SECTIONS -->
+                        <div *ngIf="secIndex == sectionIndex && sections.subSections.length">
+                          <div *ngFor="let subSection of sections.subSections;let subIndex=index">
+                            <label class="caption" *ngIf="!subSection.isSelected && !subSection.itHasValue"
+                              (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} -
+                              {{subSection.alias}}</label>
+                            <label class="caption subSecSel" *ngIf="subSection.isSelected && !subSection.itHasValue"
+                              (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} -
+                              {{subSection.alias}}</label>
+                            <!-- [ngClass]="{subSecSel: subSection.isSelected}" -->
+                            <label class="caption subSeccomp" *ngIf="subSection.itHasValue"
+                              [ngClass]="{subSecSel: subSection.isSelected}"
+                              (click)="onSubSection(secIndex,subIndex)">{{(secIndex+1) + '.' + (subIndex+1)}} -
+                              {{subSection.alias}}</label>
+                            <!-- [ngClass]="{subSeccomp: subSection.itHasValue}" -->
+                          </div>
+                        </div>
+                        <!-- <div class="caption" [ngClass]="{subSecSel: subSection}"  *ngIf="secIndex == 0 && secIndex == sectionIndex" (click)="onSubSection('other')"> 1.2  Others</div> -->
+                      </div>
+                    </div>
+
+                    <!-- <mat-form-field class="example-chip-list">
                         <mat-label>Favorite Fruits</mat-label>
                         <mat-chip-list #chipList aria-label="Fruit selection">
                           <mat-chip
@@ -219,58 +243,69 @@
                         (matChipInputTokenEnd)="add($event)">
                         </mat-chip-list>
                       </mat-form-field> -->
+                  </div>
+                  <div class="col-md-9 col-9 ques-col">
+                    <!-- <div class="row" *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index"> -->
+                    <perfect-scrollbar class="pft-scrollbar">
+
+                      <!-- QUESTIONS SECTIONS -->
+                      <div class="row">
+                        <div *ngFor="let questionType of questions;let questionIndex=index">
+                          <span class="form-group" *ngIf="questionType.show">
+                            <textBox [questionDatas]="questionType"
+                              (formChange)="onTextBoxChange($event,sectionIndex,questionIndex)"
+                              *ngIf="(questionType.type == 'QuestionTextDto' || 'QuestionNumberDto')"></textBox>
+                            <!-- <multiSelectDropdown [questionDatas]="questionType" (formChange)="onDropdownChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionMultipleChoiceDto'" ></multiSelectDropdown> -->
+                            <radioButton [questionDatas]="questionType" [sectionIndex]="sectionIndex"
+                              [questionIndex]="questionIndex"
+                              (formChange)="onRadioChange($event,sectionIndex,questionIndex)"
+                              *ngIf="questionType.type == 'QuestionBoolDto'"></radioButton>
+                            <DateField [questionDatas]="questionType"
+                              (formChange)="onDateChange($event,sectionIndex,questionIndex)"
+                              *ngIf="questionType.type == 'QuestionDateDto'"></DateField>
+                            <fileUpload [questionDatas]="questionType"
+                              (formChange)="onFileChange($event,sectionIndex,questionIndex)"
+                              *ngIf="questionType.type == 'QuestionFileListDto'"></fileUpload>
+                            <textList [questionDatas]="questionType"
+                              (formChange)="onTextListChange($event,sectionIndex,questionIndex)"
+                              *ngIf="questionType.type == 'QuestionTextListDto'"></textList>
+
+                          </span>
+                        </div>
                       </div>
-                      <div class="col-md-9 col-9 ques-col">
-                        <!-- <div class="row" *ngFor="let questionType of questionnaireSections[sectionIndex].questions;let questionIndex=index"> -->
-                          <perfect-scrollbar class="pft-scrollbar" >
-                    
-                            <!-- QUESTIONS SECTIONS -->
-                              <div class="row">
-                              <div *ngFor="let questionType of questions;let questionIndex=index">
-                                <span class="form-group" *ngIf="questionType.show">
-                                  <textBox  [questionDatas]="questionType" (formChange)="onTextBoxChange($event,sectionIndex,questionIndex)" *ngIf="(questionType.type == 'QuestionTextDto' || 'QuestionNumberDto')"></textBox>
-                                  <!-- <multiSelectDropdown [questionDatas]="questionType" (formChange)="onDropdownChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionMultipleChoiceDto'" ></multiSelectDropdown> -->
-                                  <radioButton  [questionDatas]="questionType" [sectionIndex]="sectionIndex" [questionIndex]="questionIndex" (formChange)="onRadioChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionBoolDto'"></radioButton>
-                                  <DateField  [questionDatas]="questionType" (formChange)="onDateChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionDateDto'"></DateField>
-                                  <fileUpload [questionDatas]="questionType" (formChange)="onFileChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionFileListDto'"></fileUpload>
-                                  <textList [questionDatas]="questionType" (formChange)="onTextListChange($event,sectionIndex,questionIndex)" *ngIf="questionType.type == 'QuestionTextListDto'"></textList>
-                    
-                                </span>
-                              </div>
-                              </div>
-                            </perfect-scrollbar>
-                    
-                      </div>
-                    </div>
+                    </perfect-scrollbar>
+
+                  </div>
                 </div>
-              </mat-tab>
-              <mat-tab label="{{'IccSmeDetails.Score' | translate}}">
-                <div class="links">
-                  <!-- <a routerLink="#">Creation</a>
+              </div>
+            </mat-tab>
+            <mat-tab label="{{'IccSmeDetails.Score' | translate}}">
+              <div class="links">
+                <!-- <a routerLink="#">Creation</a>
                   <a routerLink="#">Edit</a>
                   <a routerLink="#">View</a> -->
-                  <form [formGroup]="groupsForm" autocomplete="off">
-                    <!-- <h5 class="text-center">Groups</h5> -->
-                        <mat-card>
-                      <mat-card-content>
-                        <table  class="table-responsive inv-table" style="width: 100%;">
-                          <tbody>
-                    <tr>
-                        <td rowspan="1" colspan="1">
-                            <mat-form-field dense class="icc-mat">
-                              <mat-label>{{'IccSmeDetails.Consolidated score' | translate }}</mat-label>
-                              <input type="text" matInput formControlName="score" />
-                            </mat-form-field>
-                          </td>
-                              
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense class="icc-mat">
-                    <mat-label>{{'IccSmeDetails.Score State'| translate}}</mat-label>
-                    <input type="text" matInput formControlName="state" />
-                  </mat-form-field>
-                </td>
-                
-                 <!-- <td rowspan="1" colspan="1">
+                <form [formGroup]="groupsForm" autocomplete="off">
+                  <!-- <h5 class="text-center">Groups</h5> -->
+                  <mat-card>
+                    <mat-card-content>
+                      <table class="table-responsive inv-table" style="width: 100%;">
+                        <tbody>
+                          <tr>
+                            <td rowspan="1" colspan="1">
+                              <mat-form-field dense class="icc-mat">
+                                <mat-label>{{'IccSmeDetails.Consolidated score' | translate }}</mat-label>
+                                <input type="text" matInput formControlName="score" />
+                              </mat-form-field>
+                            </td>
+
+                            <td rowspan="1" colspan="1">
+                              <mat-form-field dense class="icc-mat">
+                                <mat-label>{{'IccSmeDetails.Score State'| translate}}</mat-label>
+                                <input type="text" matInput formControlName="state" />
+                              </mat-form-field>
+                            </td>
+
+                            <!-- <td rowspan="1" colspan="1">
                   <mat-form-field dense class="icc-mat">
                     <mat-label>Group Description</mat-label>
                     <input type="text" matInput formControlName="groupDescription" />
@@ -281,50 +316,50 @@
                     <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>Add</button>
                     <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>Update</button>
                     </td>  -->
-                
-              </tr>
-            
-            </tbody>
-            </table>
-            </mat-card-content>
-            </mat-card>
-            
-            </form>
-                  <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;">
-                    <!-- <ng-container matColumnDef="scoreAlias">
+
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </mat-card-content>
+                  </mat-card>
+
+                </form>
+                <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;">
+                  <!-- <ng-container matColumnDef="scoreAlias">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{groupTooltip.groupCode}}" [matTooltipPosition]="'below'"> Score Alias </th>
                         <td mat-cell *matCellDef="let element">
                                      {{element.scoreAlias}}
                          </td>
                       </ng-container> -->
-    
-                    <ng-container matColumnDef="scoreName">
-                        <th mat-header-cell *matHeaderCellDef  mat-sort-header >{{'IccSmeDetails.Score Name' | translate }} </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.scoreName}}
-                        </td>
-                    </ng-container>
-    
-                    <ng-container matColumnDef="score">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                            matTooltip="score" [matTooltipPosition]="'below'"> {{'IccSmeDetails.Score' | translate}}
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.score}}
-                        </td>
-                    </ng-container>
-    
-                    <ng-container matColumnDef="information">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                            matTooltip="information" [matTooltipPosition]="'below'">{{'IccSmeDetails.Information' | translate}}
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.information[0]?.information[0]?.message || ''}}
-                        </td>
-                    </ng-container>
-    
-                    <!-- <ng-container matColumnDef="action">
+
+                  <ng-container matColumnDef="scoreName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'IccSmeDetails.Score Name' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.scoreName}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header matTooltip="score"
+                      [matTooltipPosition]="'below'"> {{'IccSmeDetails.Score' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.score}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="information">
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header matTooltip="information"
+                      [matTooltipPosition]="'below'">{{'IccSmeDetails.Information' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.information && element.information[0]?.information[0]?.message || ''}}
+                    </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                       <td mat-cell *matCellDef="let element">
                         <a  href="javascript:void(0)" (click)="getEditData(element)">
@@ -333,77 +368,82 @@
                         </a>&nbsp;
                          </td>
                     </ng-container> -->
-    
-                    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr> -->
-                    <!-- <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+
+                  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr> -->
+                  <!-- <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
                         *matHeaderRowDef="displayedColumnsearch"></tr> -->
-                    <!-- <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> -->
-                    <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
+                  <!-- <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr> -->
+                  <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                  <!-- <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
+                <!-- <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
                   matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-group')">Groups</button> 
                   <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
                   matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-roles')">Roles</button>
                   <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
                   matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-authorize')">Authorization Matrix</button> -->
+              </div>
+            </mat-tab>
+            <mat-tab label="{{'IccSmeDetails.Related Users' | translate}}">
+              <div class="row">
+                <div class="col-sm-12" style="text-align: end; top: 5px;">
+                  <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid,'ADD')">{{
+                    'IccSmeDetails.Adduser' | translate}} </button>
                 </div>
-              </mat-tab>
-              <mat-tab label="{{'IccSmeDetails.Related Users' | translate}}"> 
-                <div class="row" >
-                  <div class="col-sm-12" style="text-align: end; top: 5px;">
-                      <button mat-flat-button color="primary" (click)="navigateFinanceDetails(this.companyid,'ADD')" >{{ 'IccSmeDetails.Adduser' | translate}} </button>
-                  </div>
               </div>
               <div class="row col-sm-12" style="top: 13px;">
-                <table mat-table [dataSource]="dataSource1" >
+                <table mat-table [dataSource]="dataSource1">
                   <ng-container matColumnDef="userId">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="UserID" [matTooltipPosition]="'below'">{{'IccSmeDetails.User Id' | translate }} </th>
-                      <td mat-cell *matCellDef="let element">
-                                  {{element.usersId}}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="UserID"
+                      [matTooltipPosition]="'below'">{{'IccSmeDetails.User Id' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.usersId}}
+                    </td>
                   </ng-container>
-                  
+
                   <ng-container matColumnDef="firstName">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> {{'First Name' | translate}} </th>
-                      <td mat-cell *matCellDef="let element">
-                          {{element.firstName}}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                      matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> {{'First Name' |
+                      translate}} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.firstName}}
+                    </td>
                   </ng-container>
-  
+
                   <ng-container matColumnDef="lastName">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'Last name' | translate }} 
-                      </th>
-                      <td mat-cell *matCellDef="let element">
-                          {{element.lastName}}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                      matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'Last name' |
+                      translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.lastName}}
+                    </td>
                   </ng-container>
-  
+
                   <ng-container matColumnDef="companyName">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
-                          [matTooltipPosition]="'below'"> {{'Company name' | translate }} </th>
-                      <td mat-cell *matCellDef="let element">
-                          {{element.companyName}}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
+                      [matTooltipPosition]="'below'"> {{'Company name' | translate }} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.companyName}}
+                    </td>
                   </ng-container>
-  
+
                   <ng-container matColumnDef="emailId">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">{{'Email Id' | translate}}  </th>
-                      <td mat-cell *matCellDef="let element">
-                          {{element.email}}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                      matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">{{'Email Id' |
+                      translate}} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.email}}
+                    </td>
                   </ng-container>
-  
+
                   <ng-container matColumnDef="phoneNumber">
-                      <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                          matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Phone Number' | translate}}  </th>
-                      <td mat-cell *matCellDef="let element">
-                          {{ element.contact }}
-                      </td>
+                    <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
+                      matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">{{'Phone Number'
+                      | translate}} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.contact }}
+                    </td>
                   </ng-container>
                   <!-- <ng-container matColumnDef="status">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
@@ -414,32 +454,31 @@
                           {{element.status === 'A' ? 'Active' : 'Deactive'}}
                       </td>
                   </ng-container> -->
-                 
+
                   <ng-container matColumnDef="action">
-                      <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
-                      <td mat-cell *matCellDef="let element">
-                          <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.usersKey,'EDIT')">
-                              <mat-icon  #tooltip="matTooltip"
-                              matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
-                            </a>&nbsp;
-                          <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
+                    <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
+                    <td mat-cell *matCellDef="let element">
+                      <a href="javascript:void(0)" (click)="navigateFinanceDetails(element.usersKey,'EDIT')">
+                        <mat-icon #tooltip="matTooltip" matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                      </a>&nbsp;
+                      <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                               <mat-icon #tooltip="matTooltip" matTooltip="View" [matTooltipPosition]="'below'">visibility
                               </mat-icon>
                           </a> -->
-                      </td>
+                    </td>
                   </ng-container>
                   <ng-container matColumnDef="TopBar">
-                      <th colspan="8" mat-header-cell *matHeaderCellDef> 
-                        <div style="justify-content:flex-end;cursor: pointer;">
+                    <th colspan="8" mat-header-cell *matHeaderCellDef>
+                      <div style="justify-content:flex-end;cursor: pointer;">
                         <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                         <span (click)="filterDiv()" class="material-icons">filter_list</span>
-                          </div>
-                       </th>
-                    </ng-container>
-                    <ng-container matColumnDef="Search">
-                      <th colspan="8" mat-header-cell *matHeaderCellDef> 
-                          <h6>{{'Search By' | translate}}</h6>
-                        <!-- <div class="row">
+                      </div>
+                    </th>
+                  </ng-container>
+                  <ng-container matColumnDef="Search">
+                    <th colspan="8" mat-header-cell *matHeaderCellDef>
+                      <h6>{{'Search By' | translate}}</h6>
+                      <!-- <div class="row">
                             <div class="col-sm-2">
                               <mat-form-field appearance="outline">
                                   <mat-label>User ID</mat-label>
@@ -470,12 +509,12 @@
                               matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                             </button>
                         </div> -->
-                       
-                       </th>
-                    </ng-container>
-                    <ng-container matColumnDef="Filter">
-                      <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
-                          <!-- <div class="row">
+
+                    </th>
+                  </ng-container>
+                  <ng-container matColumnDef="Filter">
+                    <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
+                      <!-- <div class="row">
                               <div class="col-sm-3">
                                   <label>{{'invoiceAmount' | translate}}</label>
                                   <div class="custom-slider">
@@ -515,19 +554,19 @@
                                   matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                                 </button>
                             </div> -->
-                       </th>
-                    </ng-container>
-                      <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color:#B4A6EA"></tr>
+                    </th>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color:#B4A6EA"></tr>
                   <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns1;"></tr>
-              </table>
+                </table>
               </div>
-               </mat-tab>
-             </mat-tab-group>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div class="col-md-6">
+          <div style="display: block;">
           </div>
-          <div class="col-md-6">
-            <div style="display: block;">
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   </header>
