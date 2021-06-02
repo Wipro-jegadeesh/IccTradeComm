@@ -90,11 +90,11 @@
                 </span>
               
                 </button>
-            <button style="color: #7c49cb;" mat-menu-item>
+            <input  hidden #uploader type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
+            <button style="color: #7c49cb;" (click)="uploader.click()" mat-menu-item>
                 <i class="fas fa-2x fa-upload"></i>&nbsp;
                 <span>
                     {{'Invoice Request Upload' | translate}}
-                    <input  type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
                 </span>
             </button>
             </mat-menu>
