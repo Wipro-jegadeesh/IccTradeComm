@@ -322,4 +322,10 @@ mat-form-field {
 .ebtn {
     display: flex;
     justify-content: flex-end;
+} 
+::ng-deep .toast-container .ngx-toastr{
+    width: fit-content !important;
+    font-size:small;
+    min-width: 241px;
+    max-width: 500px;
 }
