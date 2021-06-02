@@ -97,7 +97,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
       this.InvoiceAPI()
     }else if(this.FileData.FileData.queryParams.uploadType === "application/pdf"){
       this.pdfDivEnable = true
-      this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.data
+      this.pdfSrc = this.FileData.FileData.queryParams.PDFData
       this.fileNames = this.FileData.FileData.queryParams.invoicedata
       this.pdfApi()
     }else{
