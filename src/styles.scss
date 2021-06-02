@@ -1212,3 +1212,9 @@ width:100%
 .fin-limit-mat-tab-header{
     background: #694ed6  !important;
   }
+  ::ng-deep .toast-container .ngx-toastr{
+    width: fit-content !important;
+    font-size:small;
+    min-width: 241px;
+    max-width: 500px;
+}

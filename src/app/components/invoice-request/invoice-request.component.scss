@@ -410,3 +410,9 @@ mat-form-field {
     padding-top: 7px;
     padding-left: 1em;
 }
+::ng-deep .toast-container .ngx-toastr{
+    width: fit-content !important;
+    font-size:small;
+    min-width: 241px;
+    max-width: 500px;
+}

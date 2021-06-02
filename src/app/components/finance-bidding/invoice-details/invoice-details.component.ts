@@ -388,7 +388,11 @@ export class InvoiceDetailsComponent implements OnInit {
         let userData = JSON.parse(localStorage.getItem('userCred'))
         params.repaymentDate = this.invoiceDetails.invDueDate;
         params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z"
-        params.financierProfileId = userData['financierProfileId']
+        params.financierProfileId = userData['financierProfileId'];
+        params.repaymentDate = this.invoiceDetails.invDueDate;
+        params.buyerUEN = this.invoiceDetails.buyerUEN;
+        params.smeProfileId = this.invoiceDetails.smeProfileId;
+
         // this.invoiceFormBuild();
         // this.dataSourceTwo.data = [];
         // this.invoiceID = "";
@@ -404,11 +408,27 @@ export class InvoiceDetailsComponent implements OnInit {
           this.router.navigateByUrl('/financier-dashboard');
           // this.getInvDetailsLists();
         }, error => {
+          if(error.status != 200){
+            let availableData = error.error
+            let desiredData = this.replaceCommaLine(availableData);
+            this.toastr.error(desiredData, '', {
+              timeOut: 4000, progressBar: true, enableHtml: true
+            });
+
+            // this.toastr.error(error.error);
+          }else{
+            this.toastr.success(error.error.text);
+          }
+          
         })
       }
     } 
     catch (err) {
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
     changeRowgrid(){
        console.log(this.finBidform,"finnnn");
