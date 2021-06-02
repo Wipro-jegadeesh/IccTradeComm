@@ -86,7 +86,8 @@ export class AppComponent {
   }
   screenClicked(event){
 
-    if(this.isOpen == 'active'  && this.showSidebar){
+    // this.isOpen == 'active'  &&
+    if(this.showSidebar){
       // this.emitIsOpen('inActive')
       this.sidebar.isOpenHandle('active','disable')
     }
