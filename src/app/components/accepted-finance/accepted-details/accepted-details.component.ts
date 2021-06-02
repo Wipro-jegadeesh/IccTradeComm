@@ -40,7 +40,6 @@ export class AcceptedDetailsComponent implements OnInit {
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
 
-
 // [{
 //   "id": 127,
 //   "smeId": "user110",
@@ -89,18 +88,22 @@ export class AcceptedDetailsComponent implements OnInit {
       if (resp) {
       //   [
       //     {
+      //         "baseCcyDiscAmt": 13.13,
       //         "invoiceDate": "2021-05-31T18:30:00.000+0000",
       //         "baseCcyNetAmtPayable": 886.88,
       //         "fundablePercent": "90",
       //         "invoiceNo": "1111",
       //         "invoiceId": "127",
+      //         "tenor": "21",
       //         "repaymentDate": "2021-06-23T18:30:00.000+0000",
       //         "annualYeild": "25",
       //         "fxRate": "1",
       //         "baseCcyFundingAmt": 900.0,
       //         "status": "FIN",
+      //         "repaymentAmt": 900.00,
       //         "baseCcyAmt": "SGD",
       //         "invoiceDueDate": "2021-06-23T18:30:00.000+0000",
+      //         "baseamt": 1000.00,
       //         "fin_id": "FIN202100081",
       //         "finId": "FIN202100081",
       //         "buyerName": "gold",
@@ -108,7 +111,10 @@ export class AcceptedDetailsComponent implements OnInit {
       //     }
       // ]
         this.dataSourceThree = new MatTableDataSource(resp);
+        this.dataSourceFour = new MatTableDataSource(resp);
+        this.dataSourceFive = new MatTableDataSource(resp);
         this.dataSourceSeven = new MatTableDataSource(resp);
+        
       }
     })
   }

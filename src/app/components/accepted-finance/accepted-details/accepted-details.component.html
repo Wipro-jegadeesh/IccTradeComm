@@ -103,16 +103,16 @@
                                     <ng-container matColumnDef="FromDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.From Date' | translate}}</th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.FromDate
-                                            }}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData"> {{invoiceDetailsData.invoiceDate &&
+                                            moment(invoiceDetailsData.invoiceDate).format('DD/MM/YYYY')}}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="ToDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.To Date' | translate}} </th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">
-                                            {{invoiceDetailsData.invDate &&
-                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                            {{invoiceDetailsData.invoiceDueDate &&
+                                            moment(invoiceDetailsData.invoiceDueDate).format('DD/MM/YYYY')}}
                                         </td>
                                     </ng-container>
 
@@ -120,46 +120,46 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.No. of Days' | translate}}</th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">{{
-                                            invoiceDetailsData.buyerName }}
+                                            invoiceDetailsData.tenor }}
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="FinanceCurrency">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Finance Currency' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="TotalAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Total Finance Amount' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyFundingAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="ActualRate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Actual Interest Rate' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyDiscAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="InterestAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Interest Amount' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyNetAmtPayable
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="RepaymentDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Repayment Date' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
-                                            }}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.repaymentDate &&
+                                                moment(invoiceDetailsData.repaymentDate).format('DD/MM/YYYY')}}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="RepaymentAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Repayment Amount' | translate}}</th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
-                                            }}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">  {{invoiceDetailsData.baseCcyNetAmtPayable }}</td>
                                     </ng-container>
 
                                     <tr mat-header-row *matHeaderRowDef="displayedColumnsFour"
@@ -320,7 +320,8 @@
                                     <ng-container matColumnDef="FromDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.From Date' | translate}}</th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{invoiceDetailsData.invoiceDate &&
+                                            moment(invoiceDetailsData.invoiceDate).format('DD/MM/YYYY')}}
                                         </td>
                                     </ng-container>
 
@@ -328,8 +329,8 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.To Date' | translate}} </th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">
-                                            {{invoiceDetailsData.invDate &&
-                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                            {{invoiceDetailsData.invoiceDueDate &&
+                                            moment(invoiceDetailsData.invoiceDueDate).format('DD/MM/YYYY')}}
                                         </td>
                                     </ng-container>
 
@@ -337,39 +338,39 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.No. of Days' | translate}}</th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">{{
-                                            invoiceDetailsData.buyerName }}
+                                            invoiceDetailsData.tenor }}
                                         </td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="FinanceCurrency">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Interest Currency' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="TotalAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Total Finance Amount' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyFundingAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="ActualRate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Actual Total Interest Received' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyDiscAmt
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="InterestAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Interest Earned Per Day' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
-                                            }}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyDiscAmt / 1}}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="RepaymentDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Interest Earned Till Date' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
-                                            }}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">
+                                            {{invoiceDetailsData.repaymentDate &&
+                                                moment(invoiceDetailsData.repaymentDate).format('DD/MM/YYYY')}}</td>
                                     </ng-container>
 
 
