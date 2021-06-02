@@ -237,7 +237,7 @@ export class AcceptedFinanceComponent implements OnInit {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
   navigateInvoiceDetails(id) {
-    this.router.navigateByUrl('/accepted-detail/' + id);
+    this.router.navigateByUrl('/accepted-detail/' + Number(id));
   }
   openModal(event, template, data) {
     event.preventDefault();
