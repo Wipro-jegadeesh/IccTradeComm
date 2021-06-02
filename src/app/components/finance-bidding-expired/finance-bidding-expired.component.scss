@@ -97,7 +97,9 @@ header {
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
+        h5{
+            margin-top: 20px;
+        }
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -123,7 +125,9 @@ header {
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
+        h5{
+            margin-top: 20px;
+        }
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -144,6 +148,25 @@ header {
     }
 }
 
+@media only screen and (max-width:575px) {
+    .table-res{
+        table.mat-table{
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
+    }
+    .res-row.row{
+        display: block;
+    }
+}
+@media only screen and (min-width:768px) and (max-width:991px){
+    header{
+        h5{
+            margin-top: 20px;
+        }
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {

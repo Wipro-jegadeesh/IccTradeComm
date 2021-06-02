@@ -174,6 +174,11 @@ header {
         padding-top: $margin;
     }
 }
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    table.table-responsive {
+        display: inline-table;
+    }
+}
 .app-content.active{
     @media only screen and (min-width: 1025px) {
         .wave {
@@ -183,6 +188,9 @@ header {
 }
 /* Desktop Styles */
 @media only screen and (min-width: 1025px) {
+    table.table-responsive{
+        display: inline-table;
+    }
     .wave {
         // top: -10%;
         top: -22%;

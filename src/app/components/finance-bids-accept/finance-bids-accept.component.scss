@@ -93,9 +93,7 @@ header {
     bottom: $uxg-spacing-0;
     z-index: 1;
 }
-table.table-responsive{
-    display:inline-table;
-}
+
 
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
@@ -119,6 +117,9 @@ table.table-responsive{
             }
         }
         
+    }
+    table.table-responsive.bid-table{
+        display:block;
     }
 }
 
@@ -148,7 +149,7 @@ table.table-responsive{
         }
 
     }
-    table.table-responsive{
+    table.table-responsive.bid-table{
         display:block;
     }
 }
@@ -181,6 +182,9 @@ table.table-responsive{
 }
 /* Desktop Styles */
 @media only screen and (min-width: 1025px) {
+    table.table-responsive.bid-table{
+        display: inline-table;
+    }
     .wave {
         // top: -10%;
         top: -22%;
@@ -196,6 +200,9 @@ table.table-responsive{
         // padding-top: $margin;
         // padding-top: $margin;
     }
+    // table.table-responsive{
+    //     display:inline-table;
+    // }
 }
 
 .uxg-nav {
@@ -264,9 +271,7 @@ mat-card-content[_ngcontent-njk-c181]
 .table-post{
     position: relative;
 }
-table.table-responsive{
-    display: inline-table;
-}
+
 .searchInput{
     th{
         padding-top: 10px;

@@ -30,7 +30,7 @@
             </div> -->
 
       
-        <mat-form-field dense>
+        <mat-form-field dense class="lang-res">
             <mat-label>{{'navbarComponet.Language' | translate}}</mat-label>
             <mat-icon matPrefix>language</mat-icon>
             <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">

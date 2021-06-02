@@ -820,16 +820,24 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
             float: left;
         }
     }
-.sme-fin-modal{
-    .modal-content {
-        max-width: 360px;
+    .sme-fin-modal{
+        .modal-content {
+            max-width: 360px;
+        }
     }
-}
-.dis-block .sign-drop .multiselect-dropdown{
-    width: 93%;
+    .dis-block .sign-drop .multiselect-dropdown{
+        width: 93%;
+    }
+    .res-row{
+        .mat-form-field-wrapper{
+            width: 250px;
+        }
+    }
+    table.table-responsive.bid-table{
+        display: block;
+    }
 }
 
-    }
 //ipad
     @media screen and (min-width: 768px) and (max-width: 991px) {
         header .wave svg {
@@ -882,6 +890,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
                 .dis-block .sign-drop .multiselect-dropdown{
                     width: 93%;
                 }
+                table.table-responsive.bid-table{
+                    display: block;
+                }
     }
 //ipadpro
     @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -922,6 +933,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
             }
             .dis-block .sign-drop .multiselect-dropdown{
                 width: 93%;
+            }
+            table.table-responsive.bid-table{
+                display: inline-table;
             }
     }
 .dynamicForm-textarea{

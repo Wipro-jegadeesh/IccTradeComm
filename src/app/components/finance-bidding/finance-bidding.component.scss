@@ -102,7 +102,9 @@ table.table-responsive{
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
+        margin-bottom: $uxg-spacing-5;
+        padding: 15px;
+        margin: auto;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -156,6 +158,16 @@ table.table-responsive{
     }
 }
 
+@media only screen and (max-width:575px){
+    header{
+        h5{
+            margin-top: 20px;
+        }
+    }
+    .res-row.row{
+        display: block;
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {
@@ -173,6 +185,11 @@ table.table-responsive{
     .accounts-list {
         overflow: hidden;
         padding-top: $margin;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px){
+    table.table-responsive {
+        display: block;
     }
 }
 .app-content.active{

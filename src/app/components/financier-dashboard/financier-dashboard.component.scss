@@ -145,6 +145,9 @@ header {
         overflow: hidden;
         padding-top: $margin;
     }
+    .table.table-responsive{
+        display: inline-table;
+    }
 }
 .app-content.active{
     @media only screen and (min-width: 1025px) {
@@ -169,6 +172,9 @@ header {
         overflow: hidden;
         // padding-top: $margin;
         // padding-top: $margin;
+    }
+    .table.table-responsive{
+        display: inline-table;
     }
 }
 @media screen and (max-width: 575px) {
