@@ -144,6 +144,7 @@ export class NavbarComponent implements OnInit {
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
     let userData=JSON.parse(localStorage.getItem('userCred'))
+    // console.log(result,"result")
     if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
       this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
     }else if(this.router.url == '/view-profile/sme'){
@@ -152,11 +153,11 @@ export class NavbarComponent implements OnInit {
       this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
     }else if(this.router.url == '/view-profile/icc'){
       this.headerPaths =[{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
-    }else if(this.roleName === 'sme'){
+    }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'sme'){
       this.headerPaths =[{ path : "/accepted-finance",pathName : "Accepted Finance"},{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
-    }else if(this.roleName === 'financier'){
+    }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'financier'){
       this.headerPaths =[{ path : "/finance-funded",pathName : "Financier Funded"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
-    }else if(this.roleName === 'icc'){
+    }else if(result[0].data.HeaderName === "Finance Details" &&  this.roleName === 'icc'){
       this.headerPaths =[{ path : "/icc-finance-today",pathName : "Finance-Today"},{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
     }
     else{

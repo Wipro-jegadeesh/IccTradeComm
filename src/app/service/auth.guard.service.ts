@@ -137,6 +137,7 @@ export class AuthConfigService {
                       this.router.navigateByUrl('/sme-onboarding')
                     }
                     else{
+                      localStorage.setItem("roleName","sme");
                       this.router.navigateByUrl('/sme-dashboard')
                       localStorage.setItem("redirectUri",environment.SMEURL);  
                       userObj['questionnaire']=resp[0].questionnaire
