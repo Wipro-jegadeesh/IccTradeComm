@@ -242,6 +242,7 @@ export class SmeDashboardComponent implements OnInit {
   getTblChartData
   FileType: any;
   PDFData: any;
+  userDetails: any;
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -257,6 +258,7 @@ export class SmeDashboardComponent implements OnInit {
   constructor(public translate: TranslateService,public router: Router,public authenticationService: AuthenticationService, public smeDashboardServices: SmeDashboardServices ) { }
 
   ngOnInit() {
+    this.userDetails = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {status : "Y"}
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }

@@ -125,7 +125,8 @@ export class AuthConfigService {
                       'mobile':resp[0].contactnum,
                       'email':resp[0].email,
                       'city':resp[0].locale,
-                      'language': resp[0].languages
+                      'language': resp[0].languages,
+                      'status': resp[0].status
                     }
                     let isQuesSucc=resp[0].questionnaire
                     let status=resp[0].status

@@ -82,21 +82,23 @@
           matTooltip="{{dashboardTooltips.fundingRequest}}"
           [matTooltipPosition]="tooltipPosition" [matMenuTriggerFor]="menu"> + Funding Request</button> -->
             <mat-menu #menu="matMenu">
-            
-            <button (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
-                <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
-                <span>
-                    {{'Invoice Request Manual' | translate}} 
-                </span>
-              
-                </button>
+                <div [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : null">
+                    <button [disabled]="this.userDetails.status === 'D'? true : false"  (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
+                        <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
+                        <span>
+                            {{'Invoice Request Manual' | translate}} 
+                        </span>
+                        </button>
+                </div>
+                <div [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : null">
             <input  hidden #uploader type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
-            <button style="color: #7c49cb;" (click)="uploader.click()" mat-menu-item>
+            <button  [disabled]="this.userDetails.status === 'D'? true : false " [matTooltip]="this.userDetails.status === 'D' ? 'Deactive' : null" style="color: #7c49cb;" (click)="uploader.click()" mat-menu-item>
                 <i class="fas fa-2x fa-upload"></i>&nbsp;
                 <span>
                     {{'Invoice Request Upload' | translate}}
                 </span>
             </button>
+        </div>
             </mat-menu>
            
         <!-- </div> -->
