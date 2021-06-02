@@ -471,13 +471,38 @@ getAllCountry(){
           this.addRow()
           this.getInvDetailsLists();
         }, error => {
-           this.toastr.error(error.error);
+          if(error.status != 200){
+            let availableData = error.error
+            let desiredData = this.replaceCommaLine(availableData);
+            this.toastr.error(desiredData, '', {
+              timeOut: 4000, progressBar: true, enableHtml: true
+            });
+
+            // this.toastr.error(error.error);
+          }else{
+            this.invoiceFormBuild();
+            this.dataSourceTwo.data = [];
+            this.invoiceID = "";
+            this.InvoiceFdate = ""
+            for (const key in this.invoiceForm.controls) {
+              this.invoiceForm.get(key).clearValidators();
+              this.invoiceForm.get(key).updateValueAndValidity();
+            }
+            this.addRow()
+            this.getInvDetailsLists();
+            this.toastr.success(error.error.text);
+          }
+          
 
         })
       }
     } catch (err) {
       console.log(err,"errr")
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
   get dateFormArray(): FormArray {
     return this.invoiceForm.get('goodsDetails') as FormArray;
