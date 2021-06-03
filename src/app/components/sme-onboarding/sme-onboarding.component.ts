@@ -481,7 +481,7 @@ export class SmeOnboardingComponent implements OnInit {
               status : 'A'
             }
             this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+data.companyId,obj).subscribe(resp=>{
-      
+              this.toastr.success('Status Update Sucessfully')
             })
             this.router.navigateByUrl('/sme-dashboard')
           }

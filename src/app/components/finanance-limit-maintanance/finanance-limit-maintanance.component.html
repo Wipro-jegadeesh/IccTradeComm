@@ -9,7 +9,7 @@
             <div class="links">
               <mat-card>
                 <mat-card-content>
-                  <h5 class="tab-text">Limit Maintanance
+                  <h5 class="tab-text">{{'limitMaintanance.Limit Maintanance' | translate}}
                     <div class="acc-bal-icon MuiGrid-root MuiGrid-item">
                       <svg class="MuiSvgIcon-root jss152 MuiSvgIcon-fontSizeLarge" focusable="false" viewBox="0 0 24 24"
                         aria-hidden="true">
@@ -26,7 +26,7 @@
                             <tr>
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Currency</mat-label>
+                                  <mat-label>{{'limitMaintanance.Currency' | translate}}</mat-label>
                                   <select matNativeControl formControlName="mainlimitccy">
                                     <!-- <option value=""></option> -->
                                     <option value="SGD">SGD</option>
@@ -41,7 +41,7 @@
                               <tr> -->
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Global Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="mainoverallexposure"
                                     [readonly]=callPutMethodEdit />
                                 </mat-form-field>
@@ -51,7 +51,7 @@
                               <tr> -->
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Country Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Country Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="maincountryexposure"
                                     (keyup)="changecountrylimit($event,'countryoverAllLimit')"
                                     [readonly]=callPutMethodEdit />
@@ -62,7 +62,7 @@
                             <tr>
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>SME Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.SME Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="mainsmeexposure"
                                     (keyup)="changesmelimit($event,'smeoverAllLimit')" [readonly]=callPutMethodEdit />
                                 </mat-form-field>
@@ -72,7 +72,7 @@
                               <tr> -->
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Sector Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Sector Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="mainsector"
                                     [readonly]=callPutMethodEdit />
                                 </mat-form-field>
@@ -83,7 +83,7 @@
                               <tr> -->
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Transaction Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Transaction Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="transactions"
                                     [readonly]=callPutMethodEdit />
                                 </mat-form-field>
@@ -94,7 +94,7 @@
                             <tr>
                               <td rowspan="1" colspan="1">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Buyer Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Buyer Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="buyerLimit"
                                     [readonly]=callPutMethodEdit />
                                 </mat-form-field>
@@ -102,7 +102,7 @@
 
                               <td rowspan="1" colspan="1" *ngIf="callPutMethodEdit">
                                 <mat-form-field dense class="icc-mat">
-                                  <mat-label>Global Available Limit</mat-label>
+                                  <mat-label> {{'limitMaintanance.Global Available Limit' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="mainOverallAvailable" [readonly]=true />
                                 </mat-form-field>
                               </td>
@@ -112,19 +112,17 @@
                               <td rowspan="1" colspan="1">
                                 <div *ngIf="callPostMethod">
                                   <button *ngIf="callPostMethod" type="submit" mat-flat-button color="primary"
-                                    id=grid>Create
-                                    Limit</button>
+                                    id=grid> {{'limitMaintanance.Create Limit' | translate}}</button>
                                 </div>
                                 <div style="text-align: end;" *ngIf="callPutMethodEdit && !callPostMethod">
                                   <button *ngIf="callPutMethodEdit" mat-flat-button color="primary"
-                                    (click)="callPutMethodEditFn('edit')">Edit
-                                    Limit</button>
+                                    (click)="callPutMethodEditFn('edit')"> {{'limitMaintanance.Edit Limit' | translate}}</button>
                                 </div>
                                 <div style="text-align: end;" *ngIf="callPutMethodEdit == false && !callPostMethod">
                                   <button mat-flat-button color="primary" (click)="callPutMethodEditFn('cancel')"
-                                    type="button">Cancel
+                                    type="button">{{'limitMaintanance.Cancel' | translate}}
                                   </button>
-                                  <button type="submit" mat-flat-button color="primary">Update
+                                  <button type="submit" mat-flat-button color="primary">{{'limitMaintanance.Update' | translate}}
                                   </button>
                                 </div>
                               </td>
@@ -279,7 +277,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Currency</mat-label>
+                                    <mat-label>{{'limitMaintanance.Currency' | translate}}</mat-label>
                                     <select matNativeControl formControlName="globallimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
@@ -287,7 +285,7 @@
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Global Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
@@ -295,7 +293,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Transaction Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Transaction Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globaltransactionLimit"
                                       [readonly]=globalLimitBoolean />
                                   </mat-form-field>
@@ -303,12 +301,12 @@
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf=globalLimitBoolean>
                                     <button mat-flat-button color="primary"
-                                      (click)="globalLimitflipFlop('edit')">Edit</button>
+                                      (click)="globalLimitflipFlop('edit')">{{'limitMaintanance.Edit' | translate}}</button>
                                   </div>
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf="globalLimitBoolean == false">
                                     <button mat-flat-button color="primary"
-                                      (click)="globalLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                      (click)="globalLimitflipFlop('cancel')">{{'limitMaintanance.Cancel' | translate}}</button>
+                                    <button type="submit" mat-flat-button color="primary">{{'limitMaintanance.submit' | translate}}</button>
                                   </div>
                                 </td>
                               </tr>
@@ -318,8 +316,8 @@
                         <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
-                              <th>Utilization Slabs</th>
-                              <th>Number of Transactions</th>
+                              <th>{{'limitMaintanance.Utilization Slabs' | translate}}</th>
+                              <th>{{'limitMaintanance.Number of Transactions' | translate}}</th>
                             </tr>
                             <!-- <tr  *ngFor="let item of transLimitUtilTableDatas; index as i;"></tr> -->
                             <tr (click)="overtransTableDepenData('25')">
@@ -359,7 +357,7 @@
                         <div *ngIf="graphLimit">
                           <p class="typedataresp">
                             <mat-icon> bar_chart</mat-icon>
-                            Graph Representation
+                            {{'limitMaintanance.Graph Representation' | translate}}
                           </p>
                           <div class="row">
                             <div class="col-md-4">
@@ -417,7 +415,7 @@
 
                         <div *ngIf="tableLimit">
                           <p class="typedataresp">
-                            <mat-icon> border_all</mat-icon> Data Representation
+                            <mat-icon> border_all</mat-icon> {{'limitMaintanance.Data Representation' | translate}}
                           </p>
                           <div style="overflow-x:auto;">
                             <div id="container">
@@ -426,59 +424,59 @@
                                   [dataSource]="dataSourceOverAllTransactionLimit"
                                   style="width: 100%;margin-left: 14px;">
                                   <ng-container matColumnDef="invoice">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Number' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.invoice}}
                                     </td>
                                   </ng-container>
                                   <ng-container matColumnDef="invoicedate">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Date' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index"
                                       class="desc-goods">
                                       {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
                                     </td>
                                   </ng-container>
                                   <ng-container matColumnDef="invoiceamount">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Value' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.invoiceamount}}
                                     </td>
                                   </ng-container>
                                   <ng-container matColumnDef="sme_profile_id">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Id' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.sme_profile_id}}
                                     </td>
                                   </ng-container>
 
                                   <ng-container matColumnDef="smename">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column"> {{'limitMaintanance.SME Name' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.smename}}
                                     </td>
                                   </ng-container>
 
                                   <ng-container matColumnDef="country">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Country' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.country}}
                                     </td>
                                   </ng-container>
 
                                   <ng-container matColumnDef="sector_description">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Sector' | translate}} </th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.sector_description}}
                                     </td>
                                   </ng-container>
                                   <ng-container matColumnDef="LIMIT_PERCENT">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Limit Percent' | translate}} </th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.LIMIT_PERCENT}}
                                     </td>
                                   </ng-container>
                                   <ng-container matColumnDef="status">
-                                    <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column"> {{'limitMaintanance.Status' | translate}}</th>
                                     <td mat-cell *matCellDef="let element;let row; let index = index">
                                       {{element.status}}
                                     </td>
@@ -632,7 +630,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Currency</mat-label>
+                                    <mat-label>{{'limitMaintanance.Currency' | translate}}</mat-label>
                                     <select matNativeControl formControlName="countrylimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
@@ -640,7 +638,7 @@
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Global Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
@@ -648,7 +646,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Country Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Country Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="counrtyLimit"
                                       [readonly]=counrtyLimitBoolean />
                                   </mat-form-field>
@@ -656,13 +654,13 @@
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf=counrtyLimitBoolean>
                                     <button mat-flat-button color="primary"
-                                      (click)="countryLimitflipFlop('edit')">Edit</button>
+                                      (click)="countryLimitflipFlop('edit')">{{'limitMaintanance.Edit' | translate}}</button>
                                   </div>
                                   <div style="text-align: end;margin-bottom: 10px;"
                                     *ngIf="counrtyLimitBoolean == false">
                                     <button mat-flat-button color="primary"
-                                      (click)="countryLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                      (click)="countryLimitflipFlop('cancel')">{{'limitMaintanance.Cancel' | translate}}</button>
+                                    <button type="submit" mat-flat-button color="primary">{{'limitMaintanance.submit' | translate}}</button>
                                   </div>
                                 </td>
                               </tr>
@@ -674,8 +672,8 @@
                         <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
-                              <th>Utilization Slabs</th>
-                              <th>Number of Countries</th>
+                              <th>{{'limitMaintanance.Utilization Slabs' | translate}}</th>
+                              <th>{{'limitMaintanance.Number of Countries' | translate}}</th>
                             </tr>
                             <tr (click)="countryApiTableDependData('25')">
                               <td>0 to 25%</td>
@@ -769,7 +767,7 @@
                               </path>
                             </svg>
                           </div>
-                          Country Limit Maintanance
+                          {{'limitMaintanance.Country Limit Maintanance' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <div style="overflow-x:auto;">
@@ -779,67 +777,67 @@
                             <table class="table-responsive" mat-table [dataSource]="dataSourceCountryExposureTable"
                               style="width: 100%;">
                               <ng-container matColumnDef="invoice">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Number' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoice}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoicedate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Date' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
                                   {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoiceamount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoiceamount}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="sme_profile_id">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Id' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sme_profile_id}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="smename">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Name' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.smename}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="country">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Country' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.country}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="addresss">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Address</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Address' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.addresss}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="sector_description">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Sector' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sector_description}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="LIMIT_PERCENT">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Limit Percent' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.LIMIT_PERCENT}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="bidvalue">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Bid Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.bidvalue}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="status">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Status' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.status}}
                                 </td>
@@ -875,7 +873,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Currency</mat-label>
+                                    <mat-label> {{'limitMaintanance.Currency' | translate}}</mat-label>
                                     <select matNativeControl formControlName="smelimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
@@ -883,7 +881,7 @@
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Global Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
@@ -891,19 +889,19 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>SME Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.SME Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="smeLimit" [readonly]=smeLimitBoolean />
                                   </mat-form-field>
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf=smeLimitBoolean>
                                     <button mat-flat-button color="primary"
-                                      (click)="smeLimitflipFlop('edit')">Edit</button>
+                                      (click)="smeLimitflipFlop('edit')">{{'limitMaintanance.Edit' | translate}}</button>
                                   </div>
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf="smeLimitBoolean == false">
                                     <button mat-flat-button color="primary"
-                                      (click)="smeLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                      (click)="smeLimitflipFlop('cancel')">{{'limitMaintanance.Cancel' | translate}}</button>
+                                    <button type="submit" mat-flat-button color="primary">{{'limitMaintanance.submit' | translate}}</button>
                                   </div>
                                 </td>
                               </tr>
@@ -913,8 +911,8 @@
                         <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
-                              <th>Utilization Slabs</th>
-                              <th>Number of SMEs</th>
+                              <th>{{'limitMaintanance.Utilization Slabs' | translate}}</th>
+                              <th>{{'limitMaintanance.Number of SMEs' | translate}}</th>
                             </tr>
                             <!-- style="background:renderBgColor('25')" -->
                             <tr (click)="smeApiTableDependData('25')">
@@ -1008,7 +1006,7 @@
                               </path>
                             </svg>
                           </div>
-                          SME Limit Sub Screen (Based On Limit Slot)
+                          {{'limitMaintanance.SME Limit Sub Screen (Based On Limit Slot)' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <div style="overflow-x:auto;">
@@ -1018,19 +1016,19 @@
                             <table class="table-responsive" mat-table [dataSource]="dataSourceSmeExposureTable"
                               style="width: 100%;">
                               <ng-container matColumnDef="smename">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Name' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.smename}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="LIMIT_PERCENT">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Limit Percent' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.LIMIT_PERCENT}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="bidvalue">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Bid Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.bidvalue}}
                                 </td>
@@ -1066,7 +1064,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Currency</mat-label>
+                                    <mat-label>{{'limitMaintanance.Currency' | translate}}</mat-label>
                                     <select matNativeControl formControlName="sectorlimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
@@ -1074,7 +1072,7 @@
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Global Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
@@ -1082,7 +1080,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Sector Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Sector Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="sectorLimit"
                                       [readonly]=sectorLimitBoolean />
                                   </mat-form-field>
@@ -1090,12 +1088,12 @@
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf=sectorLimitBoolean>
                                     <button mat-flat-button color="primary"
-                                      (click)="sectorLimitflipFlop('edit')">Edit</button>
+                                      (click)="sectorLimitflipFlop('edit')">{{'limitMaintanance.Edit' | translate}}</button>
                                   </div>
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf="sectorLimitBoolean == false">
                                     <button mat-flat-button color="primary"
-                                      (click)="sectorLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                      (click)="sectorLimitflipFlop('cancel')">{{'limitMaintanance.Cancel' | translate}}</button>
+                                    <button type="submit" mat-flat-button color="primary"> {{'limitMaintanance.submit' | translate}}</button>
                                   </div>
                                 </td>
                               </tr>
@@ -1106,8 +1104,8 @@
                         <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
-                              <th>Utilization Slabs</th>
-                              <th>Number of Sectors</th>
+                              <th>{{'limitMaintanance.Utilization Slabs' | translate}}</th>
+                              <th>{{'limitMaintanance.Number of Sectors' | translate}}</th>
                             </tr>
                             <tr (click)="sectorApiTableDependData('25')">
                               <td>0 to 25%</td>
@@ -1200,7 +1198,7 @@
                               </path>
                             </svg>
                           </div>
-                          Sector Limit Sub Screen (Based On Limit Slot)
+                          {{'limitMaintanance.Sector Limit Sub Screen (Based On Limit Slot)' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <div style="overflow-x:auto;">
@@ -1209,64 +1207,64 @@
                             <table class="table-responsive" mat-table [dataSource]="dataSourceSectorExposureTable"
                               style="width: 100%;">
                               <ng-container matColumnDef="invoice">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Number' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoice}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoicedate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Date' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
                                   {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoiceamount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoiceamount}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="sme_profile_id">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Id' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sme_profile_id}}
                                 </td>
                               </ng-container>
 
                               <ng-container matColumnDef="smename">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column"> {{'limitMaintanance.SME Name' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.smename}}
                                 </td>
                               </ng-container>
 
                               <ng-container matColumnDef="country">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Country' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.country}}
                                 </td>
                               </ng-container>
 
                               <ng-container matColumnDef="sector_description">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Sector' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sector_description}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="LIMIT_PERCENT">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Limit Percent' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.LIMIT_PERCENT}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="bidvalue">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Bid Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.bidvalue}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="status">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Status' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.status}}
                                 </td>
@@ -1301,7 +1299,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Currency</mat-label>
+                                    <mat-label>{{'limitMaintanance.Currency' | translate}}</mat-label>
                                     <select matNativeControl formControlName="buyerlimitccy" [readonly]="true">
                                       <option value="SGD">SGD</option>
                                     </select>
@@ -1309,7 +1307,7 @@
                                 </td>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Global Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Global Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="globalLimit" [readonly]="true" />
                                   </mat-form-field>
                                 </td>
@@ -1317,7 +1315,7 @@
                               <tr>
                                 <td rowspan="1" colspan="1">
                                   <mat-form-field dense class="finlim-mat">
-                                    <mat-label>Buyer Limit</mat-label>
+                                    <mat-label>{{'limitMaintanance.Buyer Limit' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="buyerLimit"
                                       [readonly]=buyerLimitBoolean />
                                   </mat-form-field>
@@ -1325,12 +1323,12 @@
                                 <td rowspan="1" colspan="1">
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf=buyerLimitBoolean>
                                     <button mat-flat-button color="primary"
-                                      (click)="buyerLimitflipFlop('edit')">Edit</button>
+                                      (click)="buyerLimitflipFlop('edit')">{{'limitMaintanance.Edit' | translate}}</button>
                                   </div>
                                   <div style="text-align: end;margin-bottom: 10px;" *ngIf="buyerLimitBoolean == false">
                                     <button mat-flat-button color="primary"
-                                      (click)="buyerLimitflipFlop('cancel')">Cancel</button>
-                                    <button type="submit" mat-flat-button color="primary">submit</button>
+                                      (click)="buyerLimitflipFlop('cancel')">{{'limitMaintanance.Cance' | translate}}l</button>
+                                    <button type="submit" mat-flat-button color="primary">{{'limitMaintanance.submit' | translate}}</button>
                                   </div>
                                 </td>
                               </tr>
@@ -1340,8 +1338,8 @@
                         <div class="col-xl-6 col-12 hover">
                           <table class="table-bordered table" id="exposureTbl">
                             <tr>
-                              <th>Utilization Slabs</th>
-                              <th>Number of Buyers</th>
+                              <th>{{'limitMaintanance.Utilization Slabs' | translate}}</th>
+                              <th>{{'limitMaintanance.Number of Buyers' | translate}}</th>
                             </tr>
                             <tr (click)="buyerApiTableDependData('25')">
                               <td>0 to 25%</td>
@@ -1434,7 +1432,7 @@
                               </path>
                             </svg>
                           </div>
-                          Buyer Limit Sub Screen (Based On Limit Slot)
+                          {{'limitMaintanance.Buyer Limit Sub Screen (Based On Limit Slot)' | translate}}
                         </mat-panel-title>
                       </mat-expansion-panel-header>
                       <div style="overflow-x:auto;">
@@ -1443,69 +1441,69 @@
                             <table class="table-responsive" mat-table [dataSource]="dataSourcebuyerExposureTable"
                               style="width: 100%;">
                               <ng-container matColumnDef="invoice">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Number</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Number' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoice}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoicedate">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Date</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Date' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index" class="desc-goods">
                                   {{element.invoicedate && moment(element.invoicedate).format('DD/MM/YYYY')}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="invoiceamount">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Invoice Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Invoice Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.invoiceamount}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="sme_profile_id">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Id</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Id' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sme_profile_id}}
                                 </td>
                               </ng-container>
 
                               <ng-container matColumnDef="smename">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Name </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Name' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.smename}}
                                 </td>
                               </ng-container>
 
                               <ng-container matColumnDef="country">
-                                <th mat-header-cell *matHeaderCellDef scope="column">SME Country</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.SME Country' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.country}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="buyeruen">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Buyer Uen</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Buyer Uen' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.buyeruen}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="sector_description">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Sector </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Sector' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.sector_description}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="LIMIT_PERCENT">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Limit Percent </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Limit Percent' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.LIMIT_PERCENT}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="bidvalue">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Bid Value</th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Bid Value' | translate}}</th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.bidvalue}}
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="status">
-                                <th mat-header-cell *matHeaderCellDef scope="column">Status </th>
+                                <th mat-header-cell *matHeaderCellDef scope="column">{{'limitMaintanance.Status' | translate}} </th>
                                 <td mat-cell *matCellDef="let element;let row; let index = index">
                                   {{element.status}}
                                 </td>

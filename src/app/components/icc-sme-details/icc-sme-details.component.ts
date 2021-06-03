@@ -176,16 +176,18 @@ export class IccSmeDetailsComponent implements OnInit {
   onSubmitInvoiceForm() {
     try {
       if (this.userForm.status === "INVALID"){
-        throw { "mes": "Please fill mendatory  fields" }
+        // throw { "mes": "Please fill mendatory  fields" }
+        this.toastr.error('Please fill mendatory  fields')
       }
       let obj = {
         status: this.userForm.value.status
       }
       this.iccListSmeServices.statusChange(this.smeData.smeData.queryParams.companyId,obj).subscribe(resp => {
         // this.invoiceFormBuild();
-        this.toastr.success('Update Sucessfully')
-                  }, error => {
-                  })
+        this.toastr.success('Status Update Sucessfully')
+        }, error => {
+
+        })
                 
      
     } catch (err) {
