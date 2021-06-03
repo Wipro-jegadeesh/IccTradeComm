@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { SmeUserCreationService } from '../sme-user-creation.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -59,7 +60,7 @@ export class SmeUserDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,private toastr:ToastrService) {
     this.invoiceFormBuild()  
   }
   ngOnInit() {
@@ -149,9 +150,12 @@ export class SmeUserDetailsComponent implements OnInit {
                   })
                 }else{
                   this.smeUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
+                    if(resp && resp.status == 200){
                     this.invoiceFormBuild();
                     this.router.navigateByUrl('/sme-user-creation');
+                    }
                   }, error => {
+                    error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
                   })
                 }
      
