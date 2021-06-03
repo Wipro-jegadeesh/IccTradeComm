@@ -69,7 +69,7 @@
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.status}}"
                         [matTooltipPosition]="'below'"> {{'Status' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':'Financed'}}
+                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="action">
@@ -243,7 +243,7 @@
                             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                                 matTooltip="{{biddingTooltip.invoiceStatus}}" [matTooltipPosition]="'below'">{{'Status' | translate}} </th>
                             <td mat-cell *matCellDef="let invoiceDetailsData">
-                                {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':'Financed'}}
+                                {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':invoiceDetailsData.status == "CAN" ? 'Cancelled':'Financed'}}
                             </td>
                         </ng-container>
 
