@@ -123,7 +123,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
   detailsTooltip=INVOICEDETAILSCONSTANTS
   bidDetails
   financierProfileId;
-
+  buyerUEN
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   id: any;
@@ -225,7 +225,8 @@ rejectQustionTwo = {
     this.smeBiddingServices.getBiddingDetails(this.id).subscribe(resp => {
       console.log(resp,"resp")
       if(resp){
-        this.financierProfileId = resp[0] && resp[0].financierProfileId
+        this.financierProfileId = resp[0] && resp[0].financierProfileId;
+        this.buyerUEN = resp[0] && resp[0].buyerUEN
         this.smeBiddingServices.getInvoiceGoodsDetails(resp[0] && resp[0].invoiceId).subscribe(resp => {
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails)
           this.dataSourceInvoiceDetails = new MatTableDataSource([
@@ -328,6 +329,7 @@ rejectQustionTwo = {
 
       data.filteredData[0]['financierProfileId'] = this.financierProfileId
       data.filteredData[0]['smeProfileId'] = userData['smeProfileId']
+      data.filteredData[0]['buyerUEN'] =this.buyerUEN
       var element =  data.filteredData[0];
       this.smeBiddingServices.saveFinBid(element).subscribe(resp => {
         console.log(resp,"resp")

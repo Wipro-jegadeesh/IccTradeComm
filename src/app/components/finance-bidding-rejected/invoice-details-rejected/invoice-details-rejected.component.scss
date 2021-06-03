@@ -359,3 +359,9 @@ mat-form-field {
 .RemarkClass{
     background-color: yellow;  
 }
+::ng-deep .toast-container .ngx-toastr{
+    width: fit-content !important;
+    font-size:small;
+    min-width: 241px;
+    max-width: 500px;
+}
