@@ -186,7 +186,7 @@
   },
   
 
-  
+
 	"Welcome": "Welcome",
 	"Dashboard": "Dashboard",
 	"Charts": "Charts",
@@ -598,5 +598,48 @@
 		"Group" : "Group",
 		"Role" : "Role",
 		"EnterRole" : "Role Is Required"
+	},
+
+
+	"limitMaintanance":{
+		"Limit Maintanance":"Limit Maintanance",
+		"Currency":"Currency",
+		"Global Limit":"Global Limit",
+		"Country Limit":"Country Limit",
+		"SME Limit":"SME Limit",
+		"Sector Limit":"Sector Limit",
+		"Transaction Limit":"Transaction Limit",
+		"Buyer Limit":"Buyer Limit",
+		"Global Available Limit":"Global Available Limit",
+		"Create Limit":"Create Limit",
+		"Edit Limit":"Edit Limit",
+		"Cancel":"Cancel",
+		"Update":"Update",
+		"Utilization Slabs":"Utilization Slabs",
+		"Number of Transactions":"Number of Transactions",
+		"Graph Representation":"Graph Representation",
+		"Data Representation":"Data Representation",
+		"Invoice Number":"Invoice Number",
+		"Invoice Date":"Invoice Date",
+		"SME Id":"SME Id",
+		"SME Name":"SME Name",
+		"SME Country":"SME Country",
+		"Sector":"Sector",
+		"Limit Percent":"Limit Percent",
+		"Status":"Status",
+		"submit":"submit",
+		"Edit":"Edit",
+		"Number of Countries":"Number of Countries",
+		"Country Limit Maintanance":"Country Limit Maintanance",
+		"Invoice Value":"Invoice Value",
+		"Address":"Address",
+		"Bid Value":"Bid Value",
+		"Number of SMEs":"Number of SMEs",
+		"SME Limit Sub Screen (Based On Limit Slot)":"SME Limit Sub Screen (Based On Limit Slot)",
+		"Number of Sectors":"Number of Sectors",
+		"Sector Limit Sub Screen (Based On Limit Slot)":"Sector Limit Sub Screen (Based On Limit Slot)",
+		"Number of Buyers":"Number of Buyers",
+		"Buyer Limit Sub Screen (Based On Limit Slot)":"Buyer Limit Sub Screen (Based On Limit Slot)",
+		"Buyer Uen":"Buyer Uen"
 	}
 }
