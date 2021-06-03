@@ -177,7 +177,7 @@ export class IccSmeDetailsComponent implements OnInit {
     try {
       if (this.userForm.status === "INVALID"){
         // throw { "mes": "Please fill mendatory  fields" }
-        this.toastr.error('Please fill mendatory  fields')
+        // this.toastr.error('Please fill mendatory  fields')
       }
       let obj = {
         status: this.userForm.value.status
