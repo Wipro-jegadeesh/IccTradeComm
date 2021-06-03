@@ -13,7 +13,7 @@ import {map, startWith} from 'rxjs/operators';
 import * as moment from 'moment';
 import { FinancierUserCreationService } from '../financier-user-creation.service';
 import {Location} from '@angular/common';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -61,7 +61,7 @@ export class FinancierUserDetailsComponent implements OnInit {
 
   constructor(private _location: Location,private route: ActivatedRoute,private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private FinancierUserCreationService: FinancierUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,private toastr:ToastrService) {
     this.invoiceFormBuild()
   }
   ngOnInit() {
@@ -174,17 +174,24 @@ export class FinancierUserDetailsComponent implements OnInit {
 
                  if(this.id){
                   this.FinancierUserCreationService.UpdateUser(this.id,values).subscribe(resp => {
+                    if(resp && resp.status == 200){
                     this.invoiceFormBuild();
                     // this.router.navigateByUrl('/financier-user-creation');
                     this.gobackPage()
+                    }
                   }, error => {
+                    error && error.error && error.error.msg ?this.toastr.error(error.error.msg) : this.toastr.error('Error')
                   })
                 }else{
                   this.FinancierUserCreationService.Usersave(values).subscribe(resp => {
+                    if(resp && resp.status == 200){
                     this.invoiceFormBuild();
                     // this.router.navigateByUrl('/financier-user-creation');
                     this.gobackPage();
+                    }
                   }, error => {
+                    error && error.error && error.error.msg ?this.toastr.error(error.error.msg) : this.toastr.error('Error')
+
                   })
                 }
      
