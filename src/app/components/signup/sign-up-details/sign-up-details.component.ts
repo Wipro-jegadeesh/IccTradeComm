@@ -347,10 +347,13 @@ export class SignUpDetailsComponent implements OnInit {
       console.log(smeboards,"smeboards")
        
     this.SignupServices.Usersave(smeboards).subscribe(resp => {
+            if(resp && resp.status == 200){
                     this.signupFormBuild();
-                    this.toastr.success("SME create succesfully kindly login with your credentials")
+                    this.toastr.success("SME created succesfully kindly login with your credentials")
                     this.router.navigateByUrl('/login');
+            }
           },error => {
+            error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
       })
                 
     } catch (err) {
