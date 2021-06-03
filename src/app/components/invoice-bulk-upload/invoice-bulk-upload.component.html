@@ -27,9 +27,9 @@
                   </mat-menu>
                 </div> -->
                 <div *ngIf="pdfDivEnable" class="col-md-3 upload-btn-wrapper">
-                  <button (click)="openModal($event,template)" type="button" class="btn btn-outline fundreq-btn">
+                  <button (click)="openModal($event,template)" style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline fundreq-btn">
                     {{'preview' | translate}}
-                    <span class="material-icons">
+                    <span style="position: absolute;" class="material-icons">
                       preview
                     </span>
                   </button>
@@ -392,7 +392,7 @@
   </header>
   <div>
     <ng-template #template>
-      <div class="modal-content" style="height: 550px;">
+      <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title pull-left">{{'Invoice Preview' | translate}}</h4>
           <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
