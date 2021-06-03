@@ -84,7 +84,10 @@ table.table-responsive{
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
+        margin-left: 0;
+        padding: 10px;
+        margin-right: 0;
+        margin-top: 20px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -110,7 +113,10 @@ table.table-responsive{
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
+        margin-left: 0;
+        padding: 10px;
+        margin-right: 0;
+        margin-top: 20px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -136,7 +142,10 @@ table.table-responsive{
     header {
         margin-bottom: $margin;
         height: 30%;
-
+        margin-left: 0;
+        padding: 10px;
+        margin-right: 0;
+        margin-top: 20px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -150,6 +159,9 @@ table.table-responsive{
         padding-top: $margin;
     }
 }
+@media only screen and (min-width:768px) and (max-width:991px){
+}
+
 .app-content.active{
     @media only screen and (min-width: 1025px) {
         .wave {

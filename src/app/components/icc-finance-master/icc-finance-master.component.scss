@@ -131,12 +131,22 @@ table.table-responsive{
     }
 }
 
+@media only screen and (max-width: 575px) {
+    header{
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
+        margin-top: 20px;
+    }
+}
+
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {
         margin-bottom: $margin;
         height: 30%;
-
+        margin-left: 0;
+        margin-right: 0;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -150,6 +160,15 @@ table.table-responsive{
         padding-top: $margin;
     }
 }
+@media only screen and (min-width:768px) and (max-width:991px){
+    header{
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
+        margin-top: 20px;
+    }
+}
+
 .app-content.active{
     @media only screen and (min-width: 1025px) {
         .wave {

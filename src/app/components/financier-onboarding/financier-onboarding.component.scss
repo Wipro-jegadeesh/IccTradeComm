@@ -94,3 +94,22 @@ header {
     // font-size: 10px;
     // cursor: pointer;
 }
+
+@media only screen and (max-width: 575px) {
+    .app-content{
+        left: -12px;
+        padding: 2rem 6px;
+    }
+    header{
+        padding: 10px;
+        margin: 0;
+        margin-top: 20px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width:991px){
+    header{
+        padding: 10px;
+        margin: 0;
+        margin-top: 20px;
+    }
+}

@@ -836,6 +836,21 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     table.table-responsive.bid-table{
         display: block;
     }
+    .fin-stepper{
+        .mat-horizontal-stepper-header-container{
+            display: block;
+        }
+        .mat-card .mat-card-actions{
+            justify-content: center;
+            flex-direction: column;
+        }
+        .mat-card-actions .mat-stroked-button{
+            margin-bottom: 18px;
+        }
+        .mat-form-field, .multiselect-dropdown-dsgn{
+            width: 213px !important;
+        }
+    }
 }
 
 //ipad

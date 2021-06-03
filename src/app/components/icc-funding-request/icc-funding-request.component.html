@@ -2,7 +2,8 @@
     <header class="m0p0">
         <br>
         <h5>{{'Funding Requests' | translate}}</h5>
-        <div class="mat-elevation-z8 table-res table-responsive table-post">
+        <div class="mat-elevation-z8 table-res table-post">
+            <div class="table-responsive">
             <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" (mouseleave)="isHover=false">
                 
                 
@@ -92,26 +93,26 @@
                     <th colspan="8" mat-header-cell *matHeaderCellDef> 
                         <h6>{{'Search By' | translate}}</h6>
                       <div class="row">
-                          <div class="col-sm-2">
+                          <div class="col-sm-3 col-xl-2">
                             <mat-form-field appearance="outline">
                                 <mat-label>{{'Invoice Id' | translate}}</mat-label>
                                 <input type="text" [(ngModel)]="SearchModel.invoiceRef"matInput />
                               </mat-form-field>
                           </div>
                        
-                          <div class="col-sm-2">
+                          <div class="col-sm-3 col-xl-2">
                             <mat-form-field appearance="outline">
                                 <mat-label>{{'Sme Name' | translate}} </mat-label>
                                 <input type="text" [(ngModel)]="SearchModel.invoiceRef"matInput />
                               </mat-form-field>
                           </div>
-                          <div class="col-sm-2">
+                          <div class="col-sm-3 col-xl-2">
                             <mat-form-field appearance="outline">
                                 <mat-label>{{'StbuyerNameatus' | translate}} </mat-label>
                                 <input type="text" [(ngModel)]="SearchModel.invoiceRef"matInput />
                               </mat-form-field>
                           </div>
-                          <div class="col-sm-2">
+                          <div class="col-sm-3 col-xl-2">
                             <mat-form-field appearance="outline">
                             <mat-label>{{'Invoice Date' | translate}}</mat-label>
                             <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
@@ -119,7 +120,7 @@
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3 col-xl-2">
                             <mat-form-field appearance="outline">
                                 <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
                                 <input matInput readonly="true"  [matDatepicker]="picker1"  [(ngModel)]="SearchModel.invoiceDueDate">
@@ -191,6 +192,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            </div>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>
