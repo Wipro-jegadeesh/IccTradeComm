@@ -418,6 +418,9 @@ export class InvoiceDetailsComponent implements OnInit {
             // this.toastr.error(error.error);
           }else{
             this.toastr.success(error.error.text);
+            this.buildfinBidform();
+            this.modalRef.hide()
+            this.router.navigateByUrl('/financier-dashboard');
           }
           
         })

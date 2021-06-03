@@ -396,19 +396,39 @@ updateAllComplete(text){
         this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
       }else{
         let params = this.finBidform.value
+        let userData = JSON.parse(localStorage.getItem('userCred'))
         params.repaymentDate = this.invoiceDetails.invDueDate;
+        params.financierProfileId = userData['financierProfileId'];
+        params.buyerUEN = this.invoiceDetails.buyerUEN;
+        params.smeProfileId = this.invoiceDetails.smeProfileId;
         params.offerExpDateTime = moment().format('YYYY-MM-DD')+ "T00:00:00.000Z";
         this.FinanceBiddingRejectedServices.UpdateBiddingSave(this.id,params).subscribe(resp => {
-          this.toastr.success(this.translate.instant('Bid Update successfully'))
-          this.buildfinBidform();
-          this.modalRef.hide()
-          this.router.navigateByUrl('/financier-dashboard');
+        
         }, error => {
+          if(error.status != 200){
+            let availableData = error.error
+            let desiredData = this.replaceCommaLine(availableData);
+            this.toastr.error(desiredData, '', {
+              timeOut: 4000, progressBar: true, enableHtml: true
+            });
+
+            // this.toastr.error(error.error);
+          }else{
+            // this.toastr.success(error.error.text);
+            this.toastr.success(this.translate.instant(error.error.text))
+            this.buildfinBidform();
+            this.modalRef.hide()
+            this.router.navigateByUrl('/financier-dashboard');
+          }
         })
       }
     } 
     catch (err) {
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
   changeRowgrid(){
     console.log(this.finBidform,"finnnn");
