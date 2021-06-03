@@ -123,9 +123,11 @@ export class IccSmeDetailsComponent implements OnInit {
         this.sectors = listResp
       }
     })
+    
+    this.companyid =this.smeData.smeData.queryParams.companyId
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
-      this.companyid = resp[0].companyid
+      //  resp[0].companyid
       this.userForm.patchValue({
     nationalId:resp[0].companyid,
     address: resp[0].address,

@@ -2,7 +2,7 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
@@ -132,6 +132,8 @@ this.languageDropdownSettings = {
 
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
+
+
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -176,19 +178,20 @@ UserADDFormBuild(){
   this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
     console.log(resp)
     this.userForm.patchValue({
-  firstName: resp[0].fname,
-  email: resp[0].email ,
-  lastName: resp[0].lname,
-  contactNo: resp[0].contactnum,
+  firstName:'',
+  email: '' ,
+  lastName:'',
+  contactNo: '',
   companyName: resp[0].companyname, 
-  locale: resp[0].locale,
-  address:resp[0].address,
+  locale:'',
+  address:'',
   // country:resp[0].country,
   role:resp[0].role,
   profileType:resp[0].profiletype,
-  address1: resp[0].address1,
-  postalCode:resp[0].postalCode,
-  state:resp[0].state,
+  address1: '',
+  postalCode:'',
+  state:'',
+  nationalId:this.id
     });
     this.setCountryFormController(resp[0])
     this.setLanguageFormController(resp[0])
@@ -254,27 +257,28 @@ selectionChange(option) {
   blurFunction(){
     console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
     this.IccUserCreationssService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
+      if(resp && resp.length){
       console.log(resp)
       this.userForm.patchValue({
-    firstName: resp[0].fname,
-    email: resp[0].email ,
-    lastName: resp[0].lname,
-    contactNo: resp[0].contactnum,
+    firstName: ['',Validators.required],
+    email: ['',Validators.required] ,
+    lastName: ['',Validators.required],
+    contactNo: ['',Validators.required],
     companyName: resp[0].companyname, 
-    locale: resp[0].locale,
-    address:resp[0].address,
+    locale: ['',Validators.required],
+    address:['',Validators.required],
     // country:resp[0].country,
     role:resp[0].role,
     profileType:resp[0].profiletype,
-    address1: resp[0].address1,
-    postalCode:resp[0].postalCode,
-    state:resp[0].state,
+    address1: ['',Validators.required],
+    postalCode:['',Validators.required],
+    state:['',Validators.required],
 
       });
       this.setCountryFormController(resp[0])
           this.setLanguageFormController(resp[0])
 
-
+    }
     })
   }
   fileChangeEvent(fileInput: any,type) {
@@ -371,15 +375,36 @@ removeImage() {
                  if(this.id && this.type === 'EDIT'){
                   this.IccUserCreationssService.UpdateUser(this.id,respObj).subscribe(resp => {
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/icc-sme-details');
-          
+                    if(resp && resp.status == 200){
+                    let data: NavigationExtras = {
+                      queryParams: {
+                      "companyId":this.id, 
+                      "companyName":respObj.companyName,
+                      "country": "SGP"
+                      }
+                    }
+                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    // this.router.navigateByUrl('/icc-sme-details/1');
+                  }
                   }, error => {
+                    error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
                   })
                 }else{
                   this.IccUserCreationssService.Usersave(respObj).subscribe(resp => {
+                    if(resp && resp.status == 200){
                     this.invoiceFormBuild();
-                    this.router.navigateByUrl('/icc-sme-details');
+                    let data: NavigationExtras = {
+                      queryParams: {
+                      "companyId":this.id, 
+                      "companyName":respObj.companyName,
+                      "country": "SGP"
+                      }
+                    }
+                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    // this.router.navigateByUrl('/icc-sme-details/1');
+                  }
                   }, error => {
+                    error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
                   })
                 }
      
