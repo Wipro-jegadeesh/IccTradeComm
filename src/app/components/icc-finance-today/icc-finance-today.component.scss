@@ -126,11 +126,23 @@ header {
     }
 }
 
+@media only screen and (max-width: 575px) {
+    header{
+        margin: 0;
+        padding: 10px;
+        h5{
+            margin-top: 20px;
+        }
+    }
+}
+
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {
         margin-bottom: $margin;
         height: 30%;
+        margin-left: 0;
+        margin-right: 0;
 
         .wave {
             overflow: hidden;
@@ -143,6 +155,15 @@ header {
     .accounts-list {
         overflow: hidden;
         padding-top: $margin;
+    }
+}
+@media only screen and (min-width:767px) and (max-width:991px){
+    header{
+        margin: 0;
+        padding: 10px;
+        h5{
+            margin-top: 20px;
+        }
     }
 }
 .app-content.active{

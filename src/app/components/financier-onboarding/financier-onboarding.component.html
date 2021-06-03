@@ -17,6 +17,7 @@
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.FinancierOnBoarding' | translate}}</ng-template>
           <mat-card>
             <mat-card-content>
+              <div class="table-responsive">
               <table style="width: 100%;">
                 <tbody>
 
@@ -253,6 +254,7 @@
               <!-- =========== -->
                 </tbody>
               </table>
+              </div>
             </mat-card-content>
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
@@ -272,6 +274,7 @@
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.FinancierRegistered' | translate}}</ng-template>
           <mat-card>
             <mat-card-content>
+              <div class="table-responsive">
               <table style="width: 100%;">
                 <tbody>
                   <tr class="form-group"
@@ -530,6 +533,7 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
               <mat-card-actions>
                 <span class="fill-remaining-space"></span>
                 <button type="button"
@@ -559,7 +563,7 @@
             <!-- <mat-card-title>
           <h4 class="uxg-h4"></h4>
         </mat-card-title> -->
-
+          <div class="table-responsive">
             <table style="width: 100%;">
               <tbody>
 
@@ -819,7 +823,7 @@
 
               </tbody>
             </table>
-
+          </div>
 
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
@@ -848,6 +852,7 @@
 
             <span class="uxg-h6"
                   id=grid> {{'FinancierOnboardingComponent.DirPartner' | translate}}</span>
+            <div class="table-responsive">
             <table mat-table
                    [dataSource]="dataSource1"
                    style="width: 90%;"
@@ -956,9 +961,10 @@
               <tr mat-row
                   *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
-
+            </div>
             <span class="uxg-h6"
                   id=grid> {{'FinancierOnboardingComponent.AuthorisedSign' | translate}}</span>
+            <div class="table-responsive">
             <table mat-table
                    [dataSource]="dataSource2"
                    style="width: 90%;"
@@ -1068,9 +1074,10 @@
               <tr mat-row
                   *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
-
+            </div>
             <span class="uxg-h6"
                   id=grid>r {{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
+            <div class="table-responsive">
             <table mat-table
                    [dataSource]="dataSource3"
                    style="width: 90%;"
@@ -1180,6 +1187,7 @@
               <tr mat-row
                   *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
+            </div>
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
               <button mat-stroked-button
@@ -1210,7 +1218,7 @@
                     (click)="this.navigateUserAdd()"                  
                     >{{'FinancierOnboardingComponent.AddUser' | translate}}r</button>
                   </div>
-                  
+                  <div class="table-responsive">
                   <table mat-table [dataSource]="userDataSource" >
                   
                   
@@ -1277,6 +1285,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumnsUser" style="background-color:#B4A6EA"></tr>
                     <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumnsUser"></tr>
                 </table>
+              </div>
                  <!-- </mat-tab>
                 </mat-tab-group> -->
                  <mat-card-actions>

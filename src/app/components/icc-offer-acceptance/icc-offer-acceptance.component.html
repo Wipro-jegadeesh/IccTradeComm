@@ -100,26 +100,26 @@
                 <th colspan="8" mat-header-cell *matHeaderCellDef> 
                     <h6>{{'Search By' | translate}}</h6>
                   <div class="row">
-                      <div class="col-sm-2">
+                      <div class="col-sm-3 col-xl-2">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'invoiceRef' | translate}}</mat-label>
                             <input type="text" [(ngModel)]="SearchModel.invoiceRef"matInput />
                           </mat-form-field>
                       </div>
                      
-                      <div class="col-sm-2">
+                      <div class="col-sm-3 col-xl-2">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'smeId' | translate}}</mat-label>
                             <input type="text" [(ngModel)]="SearchModel.smeId"matInput />
                           </mat-form-field>
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-3 col-xl-2">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'buyerName' | translate}}</mat-label>
                             <input type="text" [(ngModel)]="SearchModel.buyerName"matInput />
                           </mat-form-field>
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-3 col-xl-2">
                         <mat-form-field appearance="outline">
                         <mat-label>{{'Invoice Date' | translate}}</mat-label>
                         <input matInput readonly="true"  [matDatepicker]="picker"  [(ngModel)]="SearchModel.invoiceDate">
@@ -127,7 +127,7 @@
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3 col-xl-2">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
                             <input matInput readonly="true"  [matDatepicker]="picker1"  [(ngModel)]="SearchModel.invoiceDueDate">
@@ -152,7 +152,7 @@
               <ng-container matColumnDef="Filter">
                 <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-4">
                             <label>{{'invoiceAmount' | translate}}</label>
                             <div class="custom-slider">
                             <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>

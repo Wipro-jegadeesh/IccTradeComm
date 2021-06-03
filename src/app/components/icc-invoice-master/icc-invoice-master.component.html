@@ -2,7 +2,8 @@
     <header>
         <br>
         <h5>{{'Invoice Master' | translate}}</h5>
-        <div class="mat-elevation-z8 table-responsive table-post">
+        <div class="mat-elevation-z8 table-post">
+            <div class="table-responsive">
             <table mat-table [dataSource]="dataSource">
 
                 <ng-container matColumnDef="invoiceRef">
@@ -199,6 +200,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            </div>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>
@@ -214,9 +216,10 @@
         </div>
         <div class="modal-body">
             <!-- Table 2 -->
-            <div style="overflow-x:auto;">
+            <div>
                 <p style="font-weight: 500;
             color: #a899e4;margin-left: 14px;">{{'Invoice Details' | translate}} </p>
+                <div class="table-responsive">
                 <table mat-table [dataSource]="dataSourceTwo">
                     <ng-container matColumnDef="invId">
                         <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
@@ -256,6 +259,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
                 </table>
+                </div>
             </div>
 
             <mat-accordion>
@@ -267,6 +271,7 @@
                             {{'Goods Details' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <div class="table-responsive">
                     <table mat-table [dataSource]="dataSourceOne">
 
                         <ng-container matColumnDef="descGoods">
@@ -322,6 +327,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#B4A6EA"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
                     </table>
+                    </div>
                 </mat-expansion-panel>
             </mat-accordion>
             <br>

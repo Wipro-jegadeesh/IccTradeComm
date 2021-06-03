@@ -3,6 +3,7 @@
         <br>
         <h5>{{'Sme Users' | translate}}</h5>
         <div class="mat-elevation-z8">
+          <div class="table-responsive">
             <table mat-table [dataSource]="dataSource">
 
                 <ng-container matColumnDef="smeprofileID">
@@ -175,6 +176,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            </div>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>

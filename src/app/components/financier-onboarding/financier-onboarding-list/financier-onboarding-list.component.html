@@ -2,6 +2,7 @@
 <div class="app-content {{isOpen}} ">
 <header>
     <div class="mat-elevation-z8">
+    <div class="table-responsive">
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="financierId">
           <th mat-header-cell *matHeaderCellDef>
@@ -37,6 +38,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color:#B4A6EA"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
       </table> 
+      </div>
       <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
     </div>
 </header>
