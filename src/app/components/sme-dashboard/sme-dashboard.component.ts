@@ -258,7 +258,7 @@ export class SmeDashboardComponent implements OnInit {
   constructor(public translate: TranslateService,public router: Router,public authenticationService: AuthenticationService, public smeDashboardServices: SmeDashboardServices ) { }
 
   ngOnInit() {
-    this.userDetails = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {status : "Y"}
+    this.userDetails = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {status : "D"}
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }

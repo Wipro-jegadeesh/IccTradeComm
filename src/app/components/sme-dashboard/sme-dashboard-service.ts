@@ -27,7 +27,7 @@ export class SmeDashboardServices {
     return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinSizeDataForSme/'+localStorage.getItem("userId"));
   }
   getChartData(){
-    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/getSmeFundingRequestedChartData/'+localStorage.getItem("userId")); 
+    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/smefundreqchartdata/'+localStorage.getItem("userId")); 
   }
   getActualFundingChartData(){
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/getSmeActualFundingChartData/'+localStorage.getItem("userId")); 
