@@ -517,6 +517,18 @@ header{
     width: 62%;
     margin-bottom: 26px;
 }
+.mat-snack-bar-container{
+    background-color: #b4a6ea;
+    margin: 26px 53px 0px 0px !important;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    max-width: 33vw;
+    min-width: 344px;
+    padding: 14px 16px;
+    min-height: 48px;
+    transform-origin: center;
+}
 .add-good-plusbtn
 {
     float: right;

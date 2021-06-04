@@ -606,6 +606,6 @@
 		"Group" : "Grupo",
 		"Role" : "Función",
 		"EnterRole" : "El rol es obligatorio"
-	}
-
+	},
+  "Invoice repository Download":"Descargar Factura Repositorio"
 }
