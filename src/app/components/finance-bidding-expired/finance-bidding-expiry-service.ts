@@ -21,7 +21,7 @@ export class FinanceBiddingExpiryServices {
     }
 
     getInvDetailsLists(id){
-      return this.apiService.get('invoice-request/getInvoiceData/'+id);
+      return this.apiService.get('invoice-request/invoice/'+id);
     }
 
 
@@ -33,6 +33,6 @@ export class FinanceBiddingExpiryServices {
     }
 
     // getInvDetailsLists_ForFinanceBidding(id){
-    //   return this.apiService.get('invoice-request/getInvoiceData/'+id);
+    //   return this.apiService.get('invoice-request/invoice/'+id);
     // }
 }

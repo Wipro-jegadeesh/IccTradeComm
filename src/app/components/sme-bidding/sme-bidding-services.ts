@@ -9,13 +9,13 @@ export class SmeBiddingServices {
   public baseUrl: string;
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   getInvDetailsLists(){
-    return this.apiService.get('invoice-request/initiatedInvoicesBySmeId/'+localStorage.getItem("userId"));
+    return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
   getBiddingDetails(invId){
     return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/bidding-details/getBiddingDetails/'+invId);
   } 
   getInvoiceGoodsDetails(invId){
-    return this.apiService.generalServiceget(environment.serviePath_1+'invoice-request/getInvoiceData/'+invId);
+    return this.apiService.generalServiceget(environment.serviePath_1+'invoice-request/invoice/'+invId);
   }
   saveFinBid(body: any) {
     return this.apiService.post(environment.serviePath_2+'api/v1/financing-details/addFinancingBidDetails', body);
