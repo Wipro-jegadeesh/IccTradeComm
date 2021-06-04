@@ -32,7 +32,7 @@ export class AuthConfigService {
         return false;
        }
   else{
-    return
+    // return
         return new Promise<void>((resolveFn, rejectFn) => {
         // setup oauthService
         this.oauthService.configure(this.authConfig);
