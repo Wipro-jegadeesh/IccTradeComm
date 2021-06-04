@@ -180,8 +180,8 @@ export class FinancierUserDetailsComponent implements OnInit {
                     this.gobackPage()
                     }
                   }, error => {
-                    error && error.error && error.error.msg ?this.toastr.error(error.error.msg) : this.toastr.error('Error')
-                  })
+                    error && error.error && error.error.msg ? this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
+              })
                 }else{
                   this.FinancierUserCreationService.Usersave(values).subscribe(resp => {
                     if(resp && resp.status == 200){
@@ -190,13 +190,17 @@ export class FinancierUserDetailsComponent implements OnInit {
                     this.gobackPage();
                     }
                   }, error => {
-                    error && error.error && error.error.msg ?this.toastr.error(error.error.msg) : this.toastr.error('Error')
+                    error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
 
                   })
                 }
      
     } catch (err) {
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
   UserEditFormBuild(){
     this.FinancierUserCreationService.getUserDetails(this.id).subscribe(resp => {

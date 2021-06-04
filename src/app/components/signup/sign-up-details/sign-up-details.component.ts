@@ -353,10 +353,14 @@ export class SignUpDetailsComponent implements OnInit {
                     this.router.navigateByUrl('/login');
             }
           },error => {
-            error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
+            error && error.error && error.error.msg ? this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
       })
                 
     } catch (err) {
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
 }
