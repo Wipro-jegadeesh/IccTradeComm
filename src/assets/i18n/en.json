@@ -641,5 +641,6 @@
 		"Number of Buyers":"Number of Buyers",
 		"Buyer Limit Sub Screen (Based On Limit Slot)":"Buyer Limit Sub Screen (Based On Limit Slot)",
 		"Buyer Uen":"Buyer Uen"
-	}
+	},
+	"Invoice repository Download":"Invoice repository Download"
 }

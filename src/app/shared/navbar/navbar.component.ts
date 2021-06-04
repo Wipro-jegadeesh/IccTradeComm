@@ -6,6 +6,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
 import {LANGUAGES} from '../constants/Languages';
 import { CountdownComponent } from 'ngx-countdown';
+import {MatSnackBar, MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -30,11 +31,8 @@ export class NavbarComponent implements OnInit {
    private countdown: CountdownComponent;
 
 
-  constructor(public translate: TranslateService,      private readonly oauthService: OAuthService,
-
-    public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location
-    // ,private oauthService: OAuthService
-    )
+  constructor(private _snackBar: MatSnackBar,public translate: TranslateService,private readonly oauthService: OAuthService,
+    public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location)
    { }
 
   LanguagesOptions=[]
@@ -46,12 +44,15 @@ export class NavbarComponent implements OnInit {
   public currentTime: any;
   public currentDate: any;
   //currentTimeDate end
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit(): void {
     this.currentTimeDate();
     this.userName = localStorage.getItem("userId")
     this.roleName = localStorage.getItem("roleName")
-    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))
+    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))? JSON.parse(localStorage.getItem('userCred')) : {status : "Y"}
+
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.getModuleDependencies()
@@ -74,10 +75,19 @@ export class NavbarComponent implements OnInit {
     this.selectedItems = [{"id":"en","itemName":"English"}]
 
     // this.setTime()
-    
+
+    if(this.userDeatils.status === 'D' || this.userDeatils.status === 'I'){
+      this.openSnackBar()
+    }
   }
 
-
+  openSnackBar() {
+    this._snackBar.open('Repayments overdue,please complete payment to get ICC TRADECOMM features enabled','', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['blue-snackbar']
+    });
+  }
   setTime(){
 
     var timestamp = this.oauthService.getAccessTokenExpiration()
@@ -159,6 +169,8 @@ export class NavbarComponent implements OnInit {
       this.headerPaths =[{ path : "/finance-funded",pathName : "Financier Funded"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
     }else if(result[0].data.HeaderName === "Finance Details" &&  this.roleName === 'icc'){
       this.headerPaths =[{ path : "/icc-finance-today",pathName : "Finance-Today"},{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
+    }else if(result[0].data.HeaderName === "Financier Onboarding Details" && this.roleName === 'financier'){
+      this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
     }
     else{
     this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []

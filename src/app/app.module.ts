@@ -47,6 +47,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 
 import {ApiService} from './service/api.service';
@@ -297,6 +298,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatSelectModule,
     MatSortModule,
     MatDialogModule,
+    MatSnackBarModule,
     UserIdleModule.forRoot({}),
     // UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
     CountdownModule, 

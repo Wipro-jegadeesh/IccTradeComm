@@ -163,7 +163,8 @@ export class AuthConfigService {
                         if(resp.length){
                           let userObj={
                             'financierProfileId':resp[0].companyid,
-                            // 'companyName':resp[0].companyname,
+                            'profileID':resp[0].profileID,
+                            'role':resp[0].role,
                             'userId':claims['preferred_username'],
                             'language': resp[0].languages
                             // 'companyId':resp[0].nationalid,
