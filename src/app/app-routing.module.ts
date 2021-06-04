@@ -54,8 +54,8 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { StaticPageComponent } from './components/static-page/static-page.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
+  // { path: '', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'view-profile/:type', component: ViewProfileComponent },
   { path: 'signup-details', component: SignUpDetailsComponent },
