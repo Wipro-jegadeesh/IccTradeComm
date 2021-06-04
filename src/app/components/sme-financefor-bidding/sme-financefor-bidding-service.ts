@@ -15,7 +15,7 @@ export class SmeFinancierForBiddingServices {
   getInvoiceRequestLists(id){
     // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
     // 
-    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/getInvoiceData/'+id); 
+    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/invoice/'+id); 
   }
 
   getFinanceBiddingLists(id){

@@ -7,11 +7,11 @@ export class InvoiceRequestServices {
   public baseUrl: string;
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   getInvDetailsLists(){
-    return this.apiService.get('invoice-request/initiatedInvoicesBySmeId/'+localStorage.getItem("userId"));
+    return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
 
   getInvDetailsLists_ForFinanceBidding(id){
-    return this.apiService.get('invoice-request/getInvoiceData/'+id);
+    return this.apiService.get('invoice-request/invoice/'+id);
   }
 
 
@@ -20,10 +20,10 @@ export class InvoiceRequestServices {
   }
   
   authoriseInvoice(body: any) {
-    return this.apiService.put(environment.api_url+'invoice-request/updateInvoiceStatusToApr/'+body,'' );
+    return this.apiService.put(environment.api_url+'invoice-request/statusupdatetoapr/'+body,'' );
   }
   UpdateInvoice(id,body: any) {
-    return this.apiService.put(environment.api_url+'invoice-request/updateInvoice/'+id,body);
+    return this.apiService.put(environment.api_url+'invoice-request/invoiceupdate/'+id,body);
   }
   finbidSave(body: any) {
     return this.apiService.post(environment.serviePath_2+'api/v1/bidding-details', body);

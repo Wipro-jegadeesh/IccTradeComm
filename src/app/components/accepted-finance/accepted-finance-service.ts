@@ -13,7 +13,7 @@ export class AcceptedFinanceServices {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allInvoiceFinancing/'+localStorage.getItem("userId"));
   }
   getInvoiceRequestLists(id){
-    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/getInvoiceData/'+id); 
+    return this.apiService.tempGet(environment.serviePath_1+'invoice-request/invoice/'+id); 
   }
   getAcceptedFinanceDetails(id){
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/getFinancingDetails/'+id);

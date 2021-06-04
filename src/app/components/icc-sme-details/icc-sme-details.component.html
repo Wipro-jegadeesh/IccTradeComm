@@ -325,6 +325,7 @@
                   </mat-card>
 
                 </form>
+                <div class="table-responsive">
                 <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;">
                   <!-- <ng-container matColumnDef="scoreAlias">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
@@ -376,6 +377,7 @@
                   <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                </div>
                 <!-- <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
                   matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-group')">Groups</button> 
                   <button mat-button type="button"  #tooltip="matTooltip" mat-stroked-button color="primary" class="role-btn"
@@ -392,6 +394,7 @@
                 </div>
               </div>
               <div class="row col-sm-12" style="top: 13px;">
+                <div class="table-responsive">
                 <table mat-table [dataSource]="dataSource1">
                   <ng-container matColumnDef="userId">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="UserID"
@@ -559,6 +562,7 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color:#B4A6EA"></tr>
                   <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns1;"></tr>
                 </table>
+                </div>
               </div>
             </mat-tab>
           </mat-tab-group>

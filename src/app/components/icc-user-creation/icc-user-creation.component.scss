@@ -125,13 +125,21 @@ header {
         }
     }
 }
-
+@media only screen and (max-width: 575px) {
+    header.m0p0{
+        padding: 10px;
+        margin-left: 25px;
+        margin-top: 10px;
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
-    header {
+    header.m0p0 {
         margin-bottom: $margin;
         height: 30%;
-
+        padding: 10px;
+        margin-left: 25px;
+        margin-top: 10px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {

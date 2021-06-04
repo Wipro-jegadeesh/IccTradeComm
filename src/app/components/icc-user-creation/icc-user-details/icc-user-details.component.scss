@@ -179,7 +179,15 @@ table{
         }
     }
 }
-
+@media only screen and (max-width: 575px) {
+    header{
+        margin-top: 80px;
+    }
+    .multiselect-dropdown-dsgn{
+        width: 93%;
+        margin: 2px 8px 44px 1px;
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     // mat-form-field{
@@ -195,7 +203,7 @@ table{
     header {
         margin-bottom: $margin;
         height: 30%;
-
+        margin-top: 80px;
         .wave {
             overflow: hidden;
             ::ng-deep svg {
@@ -203,7 +211,10 @@ table{
             }
         }
     }
-
+    .multiselect-dropdown-dsgn{
+        width: 93%;
+        margin: 2px 8px 44px 1px;
+    }
     .accounts-list {
         overflow: hidden;
         padding-top: $margin;

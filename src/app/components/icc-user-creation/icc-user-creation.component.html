@@ -8,6 +8,7 @@
             </div>
         </div>
         <div class="mat-elevation-z8 table-res">
+            <div class="table-responsive">
             <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" (mouseleave)="isHover=false">
                 
                 
@@ -177,6 +178,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                 <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            </div>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>
