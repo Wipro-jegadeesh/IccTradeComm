@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
 
     // this.setTime()
 
-    if(this.userDeatils.status === 'D' || this.userDeatils.status === 'I'){
+    if(this.userDeatils.status === 'D' && this.roleName === 'sme' || this.userDeatils.status === 'I' && this.roleName === 'sme'){
       this.openSnackBar()
     }
   }
