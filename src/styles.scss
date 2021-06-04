@@ -518,16 +518,17 @@ header{
     margin-bottom: 26px;
 }
 .mat-snack-bar-container{
-    background-color: #b4a6ea;
-    margin: 26px 53px 0px 0px !important;
-    border-radius: 4px;
+    background-color: #bd362f;
+    margin: 54px 53px 0px 0px !important;
+    border-radius: 54px !important;
     box-sizing: border-box;
     display: block;
-    max-width: 33vw;
-    min-width: 344px;
+    max-width: 53vw !important;
+    min-width: 347px !important;
     padding: 14px 16px;
-    min-height: 48px;
+    min-height: 52px !important;
     transform-origin: center;
+
 }
 .add-good-plusbtn
 {
