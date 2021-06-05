@@ -166,7 +166,7 @@ export class NavbarComponent implements OnInit {
     }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'sme'){
       this.headerPaths =[{ path : "/accepted-finance",pathName : "Accepted Finance"},{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
     }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'financier'){
-      this.headerPaths =[{ path : "/finance-funded",pathName : "Financier Funded"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
+      this.headerPaths =[{ path : "/finance-funded",pathName : "Funded Deals"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
     }else if(result[0].data.HeaderName === "Finance Details" &&  this.roleName === 'icc'){
       this.headerPaths =[{ path : "/icc-finance-today",pathName : "Finance-Today"},{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
     }else if(result[0].data.HeaderName === "Financier Onboarding Details" && this.roleName === 'financier'){

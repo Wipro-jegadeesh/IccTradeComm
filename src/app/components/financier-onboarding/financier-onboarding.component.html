@@ -7,7 +7,7 @@
   </ul>
 </mat-toolbar> -->
 
-    <form 
+    <form  
           [formGroup]="financierForm">
       <mat-horizontal-stepper linear="true"
                               #stepper
@@ -139,7 +139,7 @@
                                type="text"
                                formControlName="activity"
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-hint>
+                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-hint> -->
                       </mat-form-field>
                     </td>
                   </tr>
@@ -156,7 +156,7 @@
                                type="number"
                                formControlName="principalBankAccount"
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-hint>
+                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-hint> -->
                       </mat-form-field>
                     </td>
                     <td rowspan="1"
@@ -170,7 +170,7 @@
                                type="text"
                                formControlName="prncbankbranch"
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-hint>
+                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-hint> -->
                       </mat-form-field>
                     </td>
                   
@@ -191,7 +191,7 @@
                                    matInput
                                    formControlName="anlScfTrnOver"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -216,7 +216,7 @@
                                    matInput
                                    formControlName="transLimit"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -240,7 +240,7 @@
                                matInput
                                formControlName="currency"
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint>
+                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint> -->
                       </mat-form-field>
                     </div>
                   </div>
@@ -295,7 +295,7 @@
                             <input type="text"
                                    matInput
                                    formControlName="headAddrLine1"
-                                   [readonly]="isView" />
+                                   [readonly]="isView" required/>
                             <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
@@ -318,7 +318,7 @@
                         <input type="email"
                                matInput
                                formControlName="heademail"
-                               [readonly]="isView" />
+                               [readonly]="isView" required />
                         <mat-hint>{{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-hint>
                       </mat-form-field>
                     </div>
@@ -342,7 +342,7 @@
                                    matInput
                                    formControlName="headAddrLine2"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -368,7 +368,7 @@
                             <input type="number"
                                    matInput
                                    formControlName="headtelephoneNumber"
-                                   [readonly]="isView" />
+                                   [readonly]="isView" required />
                             <mat-hint>{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
@@ -392,7 +392,7 @@
                                    matInput
                                    formControlName="headAddrLine3"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -414,7 +414,7 @@
                                    matInput
                                    formControlName="headfaxNo"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -441,7 +441,7 @@
                                    matInput
                                    formControlName="headcity"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -477,7 +477,7 @@
                              matInput
                              formControlName="headpostalCode"
                              [readonly]="isView" />
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
+                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint> -->
                     </mat-form-field>
                   </div>
                   </div>
@@ -502,7 +502,7 @@
                              matInput
                              formControlName="headstate"
                              [readonly]="isView" />
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-hint>
+                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-hint> -->
                     </mat-form-field>
                   </div>
                 </div>
@@ -525,7 +525,7 @@
                                    matInput
                                    formControlName="headswiftBic"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
+                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
                       </div>
@@ -586,7 +586,7 @@
                           <input type="text"
                                  matInput
                                  formControlName="servAddrLine1"
-                                 [readonly]="isView" />
+                                 [readonly]="isView" required/>
                           <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
                         </mat-form-field>
                       </div>
@@ -609,7 +609,7 @@
                       <input type="email"
                              matInput
                              formControlName="servemail"
-                             [readonly]="isView" />
+                             [readonly]="isView" required/>
                       <mat-hint> {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-hint>
                     </mat-form-field>
                   </div>
@@ -634,7 +634,7 @@
                                  matInput
                                  formControlName="servAddrLine2"
                                  [readonly]="isView" />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint>
+                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -658,7 +658,7 @@
                           <input type="number"
                                  matInput
                                  formControlName="servtelephoneNumber"
-                                 [readonly]="isView" />
+                                 [readonly]="isView" required />
                           <mat-hint> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
                         </mat-form-field>
                       </div>
@@ -682,7 +682,7 @@
                                  matInput
                                  formControlName="servAddrLine3"
                                  [readonly]="isView" />
-                          <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint>
+                          <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -704,7 +704,7 @@
                                  matInput
                                  formControlName="servfaxNo"
                                  [readonly]="isView" />
-                          <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
+                          <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -729,7 +729,7 @@
                                  matInput
                                  formControlName="servcity"
                                  [readonly]="isView" />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
+                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -765,7 +765,7 @@
                              matInput
                              formControlName="servpostalCode"
                              [readonly]="isView" />
-                      <mat-hint> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
+                      <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint> -->
                     </mat-form-field>
                   </div>
                   </div>
@@ -814,7 +814,7 @@
                                  matInput
                                  formControlName="servswiftBic"
                                  [readonly]="isView" />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
+                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -1197,6 +1197,10 @@
                 <mat-icon>arrow_back</mat-icon>
                 {{'FinancierOnboardingComponent.BackToFintradecom' | translate}}
               </button>
+              <button mat-flat-button type="button" color="primary" matStepperNext>
+                <mat-icon>arrow_forward</mat-icon>
+                 {{'FinancierOnboardingComponent.Next' | translate}}
+               </button>
             </mat-card-actions>
           </mat-card>
         </mat-step>
@@ -1302,6 +1306,9 @@
 
       </mat-horizontal-stepper>
       <div class="submit">
+        <button mat-flat-button color="primary" (click)="cancel()">
+          {{'cancel' | translate}}
+</button> &nbsp; &nbsp;
         <button mat-flat-button
                 color="primary"
                 (click)="check()"                
@@ -1319,7 +1326,10 @@
           {{'FinancierOnboardingComponent.Edit' | translate}}
         </button>
       </div>
+      
     </form>
 
   </header>
 </div>
+
+
