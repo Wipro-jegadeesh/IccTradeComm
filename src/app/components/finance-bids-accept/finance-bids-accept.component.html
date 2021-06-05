@@ -2,7 +2,7 @@
 <div *ngIf="!canceldiv" class="app-content {{isOpen}}">
   <header>
       <br>
-        <h5 class="mmt20">{{'Bids to be Accepted' | translate}}</h5>
+        <h5 class="mmt20">{{'FinanceDashboardComponent.Bids to be accepted' | translate}}</h5>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" 
         (mouseleave)="isHover=false" class="table-responsive bid-table" matSort>

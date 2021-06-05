@@ -291,7 +291,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgMultiSelectDropDownModule.forRoot(),
     MatExpansionModule,
     MatTooltipModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      "preventDuplicates": true,
+      "maxOpened": 1
+    }),
     TextFieldModule,
     MatSliderModule,
     PerfectScrollbarModule,
