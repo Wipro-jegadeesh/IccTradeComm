@@ -102,14 +102,16 @@
                     <td rowspan="1"
                         colspan="1">
                       <mat-form-field dense>
+                        <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                         <mat-label>{{'FinancierOnboardingComponent.RegDate' | translate}}</mat-label>
                         <input matInput
                                formControlName="regDate"
                                [matDatepicker]="pickers"
-                               readonly="true" />
+                               readonly="true" required/>
                         <mat-datepicker-toggle matSuffix
                                                [for]="pickers"></mat-datepicker-toggle>
                         <mat-datepicker #pickers></mat-datepicker>
+                        <mat-hint> {{'FinancierOnboardingComponent.EnterRegDate' | translate}}</mat-hint>
                       </mat-form-field>
                     </td>
                  
