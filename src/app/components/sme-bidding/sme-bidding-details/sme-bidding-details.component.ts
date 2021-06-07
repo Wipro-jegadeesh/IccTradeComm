@@ -344,6 +344,8 @@ rejectQustionTwo = {
           })
           this.smeBiddingServices.updateAcceptStatusBid(data.filteredData[0].financierProfileId,data.filteredData[0].baseCcyNetAmtPayable,'').subscribe(resp => {
           })
+          this.smeBiddingServices.updatepaymentsBid(element).subscribe(resp => {
+          })
           this.toastr.success("Accepted successfully")
         this.modalRef.hide()
         this.router.navigateByUrl('/sme-dashboard');

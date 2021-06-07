@@ -31,7 +31,7 @@
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Limit Maintanance' | translate}}</p>
         </a>
-        <a *ngIf="roleName == 'financier' && checkRolesPer.role == 'admin'" mat-list-item (click)="navigatePage('/financier-onboarding/edit/'+ this.checkRolesPer.profileID)" >
+        <a *ngIf="roleName == 'financier' && checkRolesPer && checkRolesPer.role == 'admin'" mat-list-item (click)="navigatePage('/financier-onboarding/edit/'+ this.checkRolesPer.profileID)" >
 
           <mat-icon mat-list-icon>dashboard</mat-icon>
           <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Profile' | translate}}</p>

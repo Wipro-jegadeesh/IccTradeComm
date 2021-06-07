@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRolesPer=JSON.parse(localStorage.getItem('userCred'))
+    console.log(this.checkRolesPer,"this.checkRolesPer")
     this.roleName = localStorage.getItem('roleName');
   }
 

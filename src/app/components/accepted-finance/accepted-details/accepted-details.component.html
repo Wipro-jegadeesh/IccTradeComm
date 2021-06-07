@@ -363,7 +363,7 @@
                                     <ng-container matColumnDef="InterestAmount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Interest Earned Per Day' | translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.baseCcyDiscAmt / 1}}</td>
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ (invoiceDetailsData.baseCcyDiscAmt / invoiceDetailsData.tenor).toFixed(2) }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="RepaymentDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
@@ -399,32 +399,32 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'acceptFinance.Day' |
                                             translate}}
                                         </th>
-                                        <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ element.days }}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="Date">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.Date' | translate}}</th>
-                                        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+                                        <td mat-cell *matCellDef="let element">{{moment(element.date).format('DD/MM/YYYY')}}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="InterestCurrency">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.InterestCurrency' | translate}}</th>
-                                        <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ element.InterestCurrency }}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="InterestDay">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.InterestDay' | translate}}</th>
-                                        <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ (element.Interestperday/element.days).toFixed(2) }}</td>
                                     </ng-container>
 
 
                                     <ng-container matColumnDef="InterestDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.InterestDate' | translate}}</th>
-                                        <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ (element.InteresttillDate).toFixed(2) }}</td>
                                     </ng-container>
 
 
@@ -453,7 +453,7 @@
                                     <ng-container matColumnDef="Payment Id">
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Id' |
                                             translate}}</th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invoiceId }}
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.paymentRef }}
                                         </td>
                                     </ng-container>
 
@@ -462,8 +462,7 @@
                                             translate}}
                                         </th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">
-                                            {{invoiceDetailsData.invDate &&
-                                            moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                            {{invoiceDetailsData.paymentType }}
                                         </td>
                                     </ng-container>
 
@@ -471,7 +470,8 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Date' |
                                             translate}}</th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">{{
-                                            invoiceDetailsData.buyerName }}
+                                            invoiceDetailsData.paymentDate &&
+                                            moment(invoiceDetailsData.paymentDate).format('DD/MM/YYYY')}}
                                         </td>
                                     </ng-container>
 
@@ -479,31 +479,31 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Payment Amount' |
                                             translate}}
                                         </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.paymentAmount
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="Ben Name">
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Name' | translate}}
                                         </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.benName
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="Ben Account">
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben Account' |
                                             translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.benAccount
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="Ben IFSC">
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Ben IFSC' | translate}}
                                         </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.benIfsc
                                             }}</td>
                                     </ng-container>
                                     <ng-container matColumnDef="Net Amount">
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount' |
                                             translate}} </th>
-                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt
+                                        <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.netAmount
                                             }}</td>
                                     </ng-container>
 
