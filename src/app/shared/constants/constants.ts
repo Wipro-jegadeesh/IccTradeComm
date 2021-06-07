@@ -25,7 +25,10 @@ export const FUNDINGREQUESTCONSTANTS={
     'pendingInvoice':'Pending a Selected Invoices',
     'billInfo':'BL(Landing Bill ) / Roadway Bill for Specific Good',
     'ccy':'Currency',
-    'refno':'Invoice Referral Number (Unique)'
+    'refno':"Funding Request Number (Unique)",
+    'goodsId': 'Goods Id',
+    "clear": "Clear"
+    
 }
 
 // DASHBOARD PAGE TOOLTIPS

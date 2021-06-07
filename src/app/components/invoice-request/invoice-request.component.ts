@@ -109,7 +109,8 @@ export class InvoiceRequestComponent implements OnInit {
   dataSourceTwo = new MatTableDataSource(); //data
   // dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
   displayedColumnsTwo: string[] = [
-    'ID',
+    // 'ID',
+    'goodsId',
     'DescGoods',
     // 'IdNo',
     // 'DateOfInvoice',
@@ -332,7 +333,7 @@ getAllCountry(){
     if(invoiceIds.length > 0){
       this.updateInvoice(invoiceIds)
     }else{
-      return this.toastr.error(this.translate.instant('Please Select Invoice Details'));
+      return this.toastr.error(this.translate.instant('Please select invoice details'));
     }
     console.log("invoiceIds", invoiceIds);
   }
@@ -409,7 +410,8 @@ getAllCountry(){
       taxRate: element.taxRate,
       taxAmt: element.taxAmt,
       total: element.total,
-      goodsId: "GD101"
+      goodsId: element.goodsId
+      // goodsId: "GD101"
       })
       this.dateFormArray.push(row);
     });
@@ -425,12 +427,16 @@ getAllCountry(){
     this.invoiceForm.value.goodsDetails.forEach(element => {
        grandtotal += Number(element.total)
     });
-    if(grandtotal != this.invoiceForm.value.invAmt){
+    if (grandtotal != this.invoiceForm.value.invAmt) {
+      if (this.dataSourceTwo.data.length < 1) {
+        return this.toastr.error("Please add goods details");
+      }
       return this.toastr.error(this.translate.instant('Please check Good Details !! Grant Total Should Be Equal to Funding Request Amount'));
     }
 
     try {
-      if (this.invoiceForm.status === "INVALID"){
+      if (this.invoiceForm.status === "INVALID") {
+        this.toastr.error("Please fill mandatory fields")
         throw { "mes": "Please fill mendatory  fields" }
       }
       this.invoiceForm.value['invoiceDetailsSequenceNumber']={}     
@@ -524,7 +530,8 @@ getAllCountry(){
       taxRate: [""],
       taxAmt: [""],
       total: [""],
-      goodsId: "GD101",
+      goodsId: [""]
+      // goodsId: "GD101",
     })
     this.dateFormArray.push(row);
     this.dataSourceTwo.data = this.dateFormArray.controls;
@@ -559,7 +566,8 @@ getAllCountry(){
     this.InvoiceFdate = event.target.value;
   }
   changeRowgrid(index){
-    this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
+    // this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
+    this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID
     this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) : "0" 
     this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) :'0'
     this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ?parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100  :"0" 
@@ -573,5 +581,22 @@ getAllCountry(){
   invoiceId(Id){
     this.invoiceID=Id
     }
+    removeRow(index) {
+      let removeEntry = this.dataSourceTwo.data
+     this.invoiceForm.value.goodsDetails.splice(index, 1)
+       removeEntry.splice(index, 1)
+      this.dataSourceTwo.data = removeEntry
+    }
+    clear() {
+      this.currencyName = ''
+      this.invoiceID = ''
+      this.InvoiceFdate = ''
+      this.invoiceFormBuild();
+      this.dataSourceTwo = new MatTableDataSource();
+      // this.dataSourceTwo.data = []
+      this.addRow();
+      this.toastr.success("Data cleared successfully")
+    }
+  
 }
 

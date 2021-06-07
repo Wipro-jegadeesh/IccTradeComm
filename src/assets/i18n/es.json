@@ -258,7 +258,7 @@
     "Add Invoice": "Añadir factura",
     "Update Invoice": "Actualizar factura",
     "Invoice Details": "Detalles Factura",
-    "Invoice Ref No": "Nº Referencia Factura",
+    "Invoice Ref No":"Número de solicitud de financiación",
     "Invoice Date": "Fecha Factura",
     "Seller": "Vendedor",
     "Buyer": "Comprador",
@@ -592,7 +592,9 @@
       "BackToMoreInfo": "Volver A Más Información",
       "AddUser": "Agregar usuario",
       "Submit": "Enviar",
-      "Edit": "Editar"
+      "Edit": "Editar",
+      "goodsId": "ID de bienes",
+      "clear":"clara"
     },
     "FinancieruserCreation":{
       "AddUser": "Agregar usuario",
