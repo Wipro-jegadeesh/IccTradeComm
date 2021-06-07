@@ -84,39 +84,87 @@ export class AcceptedDetailsComponent implements OnInit {
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
 
     })
+    this.AcceptedFinanceServices.getPaymentDetails(this.id).subscribe(resp => {
+      if (resp) {
+        this.dataSourceSeven = new MatTableDataSource(resp);
+      }
+    })
+    // this.AcceptedFinanceServices.getAmortiaztionDetails(this.id).subscribe(resp => {
+    //   if (resp) {
+    //     this.dataSourceSix = new MatTableDataSource(resp);
+    //   }
+    // })
     this.AcceptedFinanceServices.getAcceptedFinanceDetails(this.id).subscribe(resp => {
       if (resp) {
-      //   [
-      //     {
-      //         "baseCcyDiscAmt": 13.13,
-      //         "invoiceDate": "2021-05-31T18:30:00.000+0000",
-      //         "baseCcyNetAmtPayable": 886.88,
-      //         "fundablePercent": "90",
-      //         "invoiceNo": "1111",
-      //         "invoiceId": "127",
-      //         "tenor": "21",
-      //         "repaymentDate": "2021-06-23T18:30:00.000+0000",
-      //         "annualYeild": "25",
-      //         "fxRate": "1",
-      //         "baseCcyFundingAmt": 900.0,
-      //         "status": "FIN",
-      //         "repaymentAmt": 900.00,
-      //         "baseCcyAmt": "SGD",
-      //         "invoiceDueDate": "2021-06-23T18:30:00.000+0000",
-      //         "baseamt": 1000.00,
-      //         "fin_id": "FIN202100081",
-      //         "finId": "FIN202100081",
-      //         "buyerName": "gold",
-      //         "smeId": "user110"
-      //     }
-      // ]
+        let array =  [
+          {
+              "baseCcyDiscAmt": 13.13,
+              "invoiceDate": "2021-05-31T18:30:00.000+0000",
+              "baseCcyNetAmtPayable": 886.88,
+              "fundablePercent": "90",
+              "invoiceNo": "1111",
+              "invoiceId": "127",
+              "tenor": "21",
+              "repaymentDate": "2021-06-23T18:30:00.000+0000",
+              "annualYeild": "25",
+              "fxRate": "1",
+              "baseCcyFundingAmt": 900.0,
+              "status": "FIN",
+              "repaymentAmt": 900.00,
+              "baseCcyAmt": "SGD",
+              "invoiceDueDate": "2021-06-23T18:30:00.000+0000",
+              "baseamt": 1000.00,
+              "fin_id": "FIN202100081",
+              "finId": "FIN202100081",
+              "buyerName": "gold",
+              "smeId": "user110"
+          }
+      ]
+        console.log(array,"jlsllsls")
+
+
         this.dataSourceThree = new MatTableDataSource(resp);
         this.dataSourceFour = new MatTableDataSource(resp);
         this.dataSourceFive = new MatTableDataSource(resp);
-        this.dataSourceSeven = new MatTableDataSource(resp);
+
+
+        let arrayobj = []
+        for (var i = 0; i < 26; i++) {
+          arrayobj.push(resp[0])
+        }
+        let aromzition = []
+        arrayobj.forEach((element,i) => {
+          var dt = new Date(element.invoiceDate);
+          console.log(dt,"dtdt")
+          aromzition.push({days:i + 1,date: element.invoiceDate
+            // new Date(dt.setDate(dt.getDate() + 1))
+            // this.getDateArray(moment(element.invoiceDate).format('YYYY/MM/DD'),(moment(element.invoiceDueDate).format('YYYY/MM/DD')))
+            ,InterestCurrency:element.baseCcyAmt,
+            Interestperday:element.baseCcyDiscAmt,InteresttillDate:element.baseCcyDiscAmt/element.tenor})
+        });
+        console.log(arrayobj)
+        console.log(aromzition,"aromzition")
+        this.dataSourceSix = new MatTableDataSource(aromzition);
+        
         
       }
     })
   }
+  getDateArray = function(start,end) {
 
+     start = new Date(start)
+     end = new Date(end)
+    var
+      arr = new Array(),
+      dt = new Date(start);
+    let datet 
+    while (dt <= end) {
+      arr.push(new Date(dt));
+      datet = new Date(dt)
+      dt.setDate(dt.getDate() + 1);
+    }
+    console.log(arr,"arr")
+    console.log(datet,"datet")
+    // return datet
+  }  
 }

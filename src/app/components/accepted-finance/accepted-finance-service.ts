@@ -18,6 +18,12 @@ export class AcceptedFinanceServices {
   getAcceptedFinanceDetails(id){
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/getFinancingDetails/'+id);
   }  
+  getPaymentDetails(id){
+    return this.apiService.tempGet(environment.serviePath_2+'payment-details/getPaymentDetailsByInvId/'+id);
+  }
+  getAmortiaztionDetails(id){
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-details/oneDayInterestCalculation/'+id);
+  }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);
     let invoiceRef  = params.invoiceRef == undefined ? "" : params.invoiceRef;
