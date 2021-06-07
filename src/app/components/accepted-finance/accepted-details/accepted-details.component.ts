@@ -96,75 +96,65 @@ export class AcceptedDetailsComponent implements OnInit {
     // })
     this.AcceptedFinanceServices.getAcceptedFinanceDetails(this.id).subscribe(resp => {
       if (resp) {
-        let array =  [
-          {
-              "baseCcyDiscAmt": 13.13,
-              "invoiceDate": "2021-05-31T18:30:00.000+0000",
-              "baseCcyNetAmtPayable": 886.88,
-              "fundablePercent": "90",
-              "invoiceNo": "1111",
-              "invoiceId": "127",
-              "tenor": "21",
-              "repaymentDate": "2021-06-23T18:30:00.000+0000",
-              "annualYeild": "25",
-              "fxRate": "1",
-              "baseCcyFundingAmt": 900.0,
-              "status": "FIN",
-              "repaymentAmt": 900.00,
-              "baseCcyAmt": "SGD",
-              "invoiceDueDate": "2021-06-23T18:30:00.000+0000",
-              "baseamt": 1000.00,
-              "fin_id": "FIN202100081",
-              "finId": "FIN202100081",
-              "buyerName": "gold",
-              "smeId": "user110"
-          }
-      ]
-        console.log(array,"jlsllsls")
-
+        // let resp =  [
+        //   {
+        //       "baseCcyDiscAmt": 13.13,
+        //       "invoiceDate": "2021-05-31T18:30:00.000+0000",
+        //       "baseCcyNetAmtPayable": 886.88,
+        //       "fundablePercent": "90",
+        //       "invoiceNo": "1111",
+        //       "invoiceId": "127",
+        //       "tenor": "21",
+        //       "repaymentDate": "2021-06-23T18:30:00.000+0000",
+        //       "annualYeild": "25",
+        //       "fxRate": "1",
+        //       "baseCcyFundingAmt": 900.0,
+        //       "status": "FIN",
+        //       "repaymentAmt": 900.00,
+        //       "baseCcyAmt": "SGD",
+        //       "invoiceDueDate": "2021-06-23T18:30:00.000+0000",
+        //       "baseamt": 1000.00,
+        //       "fin_id": "FIN202100081",
+        //       "finId": "FIN202100081",
+        //       "buyerName": "gold",
+        //       "smeId": "user110"
+        //   }
+        // ]
+        console.log(resp,"jlsllsls")
 
         this.dataSourceThree = new MatTableDataSource(resp);
         this.dataSourceFour = new MatTableDataSource(resp);
         this.dataSourceFive = new MatTableDataSource(resp);
 
-
+        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        const diffDays = Math.round(Math.abs((new Date(resp[0].invoiceDate).valueOf() - new Date(resp[0].invoiceDueDate).valueOf()) / oneDay));
+        console.log(diffDays,"diffDays")
         let arrayobj = []
-        for (var i = 0; i < 26; i++) {
+        let Tentor = diffDays
+        for (var i = 0; i < Tentor; i++) {
           arrayobj.push(resp[0])
         }
         let aromzition = []
         arrayobj.forEach((element,i) => {
-          var dt = new Date(element.invoiceDate);
-          console.log(dt,"dtdt")
-          aromzition.push({days:i + 1,date: element.invoiceDate
-            // new Date(dt.setDate(dt.getDate() + 1))
-            // this.getDateArray(moment(element.invoiceDate).format('YYYY/MM/DD'),(moment(element.invoiceDueDate).format('YYYY/MM/DD')))
-            ,InterestCurrency:element.baseCcyAmt,
+          var start = new Date(element.invoiceDate);
+          var end =  new Date(element.invoiceDueDate);
+          var dt = new Date(start);
+          let arr = []
+          while (dt <= end) {
+            arr.push(new Date(dt));
+            dt.setDate(dt.getDate() + 1);
+          }
+          // console.log(i,"iiiiii")
+          aromzition.push({days:i,date:arr[i],
+            InterestCurrency:element.baseCcyAmt,
             Interestperday:element.baseCcyDiscAmt,InteresttillDate:element.baseCcyDiscAmt/element.tenor})
         });
         console.log(arrayobj)
         console.log(aromzition,"aromzition")
         this.dataSourceSix = new MatTableDataSource(aromzition);
         
-        
       }
     })
   }
-  getDateArray = function(start,end) {
 
-     start = new Date(start)
-     end = new Date(end)
-    var
-      arr = new Array(),
-      dt = new Date(start);
-    let datet 
-    while (dt <= end) {
-      arr.push(new Date(dt));
-      datet = new Date(dt)
-      dt.setDate(dt.getDate() + 1);
-    }
-    console.log(arr,"arr")
-    console.log(datet,"datet")
-    // return datet
-  }  
 }

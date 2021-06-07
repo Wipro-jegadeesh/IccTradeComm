@@ -399,7 +399,7 @@
                                         <th mat-header-cell *matHeaderCellDef scope="column">{{'acceptFinance.Day' |
                                             translate}}
                                         </th>
-                                        <td mat-cell *matCellDef="let element">{{ element.days }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ element.days + 1}}</td>
                                     </ng-container>
 
                                     <ng-container matColumnDef="Date">
@@ -417,7 +417,7 @@
                                     <ng-container matColumnDef="InterestDay">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
                                             {{'acceptFinance.InterestDay' | translate}}</th>
-                                        <td mat-cell *matCellDef="let element">{{ (element.Interestperday/element.days).toFixed(2) }}</td>
+                                        <td mat-cell *matCellDef="let element">{{ (element.Interestperday/(element.days+1)).toFixed(2) }}</td>
                                     </ng-container>
 
 
