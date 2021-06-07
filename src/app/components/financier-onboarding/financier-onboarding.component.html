@@ -72,7 +72,7 @@
                                   matPrefix>person_outline</mat-icon>
                         <mat-label>{{'FinancierOnboardingComponent.LocalRegNo' | translate}}</mat-label>
                         <input matInput
-                               type="number"
+                               type="text"
                                formControlName="regNum"
                                [readonly]="isView"
                                required />
@@ -88,7 +88,7 @@
                               matPrefix>person_outline</mat-icon>
                     <mat-label> {{'FinancierOnboardingComponent.TaxId' | translate}}</mat-label>
                     <input matInput
-                           type="number"
+                           type="text"
                            formControlName="taxIdNum"
                            [readonly]="isView"
                            required />
@@ -155,7 +155,7 @@
                                   matPrefix>person_outline</mat-icon>
                         <mat-label>{{'FinancierOnboardingComponent.PrincipalAc' | translate}}</mat-label>
                         <input matInput
-                               type="number"
+                               type="text"
                                formControlName="principalBankAccount"
                                [readonly]="isView" />
                         <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-hint> -->
@@ -189,7 +189,7 @@
                                       dense
                                       matPrefix>person_outline</mat-icon>
                             <mat-label>{{'FinancierOnboardingComponent.AnnualSCF' | translate}}</mat-label>
-                            <input type="number"
+                            <input type="text"
                                    matInput
                                    formControlName="anlScfTrnOver"
                                    [readonly]="isView" />
@@ -281,28 +281,7 @@
                 <tbody>
                   <tr class="form-group"
                       data-always-visible="false">
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headAddrLine1"
-                                   [readonly]="isView" required/>
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+          
 
                     <td class="T1"
                     rowspan="1"
@@ -326,56 +305,82 @@
                     </div>
                   </div>
                 </td>
-                 
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headAddrLine2"
-                                   [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+
+                <td class="T1"
+                rowspan="1"
+                colspan="1">
+              <div class="card-form-container">
+                <div>
+                  <mat-form-field floatLabel="never"
+                                  dense
+                                  appearance="fill"
+                                  class="example-full-width">
+                    <mat-icon color="primary"
+                              dense
+                              matPrefix>person_outline</mat-icon>
+                    <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
+                    <input type="number"
+                           matInput
+                           formControlName="headtelephoneNumber"
+                           [readonly]="isView" required />
+                    <mat-hint>{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </td>
+
+            <td class="T1"
+            rowspan="1"
+            colspan="1">
+          <div class="card-form-container">
+            <div>
+              <mat-form-field floatLabel="never"
+                              dense
+                              appearance="fill"
+                              class="example-full-width">
+                <mat-icon color="primary"
+                          dense
+                          matPrefix>person_outline</mat-icon>
+                <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
+                <input type="number"
+                       matInput
+                       formControlName="headfaxNo"
+                       [readonly]="isView" />
+                <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
+              </mat-form-field>
+            </div>
+          </div>
+        </td>
+        </tr>
 
 
                     <tr class="form-group"
                     data-always-visible="false">
 
+                   
+
                     <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
                                       dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
-                            <input type="number"
-                                   matInput
-                                   formControlName="headtelephoneNumber"
-                                   [readonly]="isView" required />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
+                        <input type="text"
+                               matInput
+                               formControlName="headAddrLine1"
+                               [readonly]="isView" required/>
+                        <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
                  
                     <td class="T1"
                         rowspan="1"
@@ -399,28 +404,29 @@
                         </div>
                       </div>
                     </td>
+                    
                     <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
+                    rowspan="1"
+                    colspan="1">
+                  <div class="card-form-container">
+                    <div>
+                      <mat-form-field floatLabel="never"
                                       dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
-                            <input type="number"
-                                   matInput
-                                   formControlName="headfaxNo"
-                                   [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+                                      appearance="fill"
+                                      class="example-full-width">
+                        <mat-icon color="primary"
+                                  dense
+                                  matPrefix>person_outline</mat-icon>
+                        <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
+                        <input type="text"
+                               matInput
+                               formControlName="headAddrLine2"
+                               [readonly]="isView" />
+                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
                   </tr>
 
 
@@ -527,7 +533,7 @@
                                    matInput
                                    formControlName="headswiftBic"
                                    [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint> -->
+                            <mat-hint>{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
                       </div>
@@ -572,28 +578,7 @@
 
                 <tr class="form-group"
                     data-always-visible="false">
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="servAddrLine1"
-                                 [readonly]="isView" required/>
-                          <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
+               
 
                   <td class="T1"
                   rowspan="1"
@@ -617,34 +602,8 @@
                   </div>
                 </div>
               </td>
-                 
-           
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="servAddrLine2"
-                                 [readonly]="isView" />
-                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
 
-                  <tr class="form-group"
-                  data-always-visible="false">
-                  <td class="T1"
+              <td class="T1"
                       rowspan="1"
                       colspan="1">
                     <div class="card-form-container">
@@ -666,6 +625,85 @@
                       </div>
                     </div>
                   </td>
+
+                  <td class="T1"
+                  rowspan="1"
+                  colspan="1">
+                <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
+                                    dense
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label> {{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
+                      <input type="number"
+                             matInput
+                             formControlName="servfaxNo"
+                             [readonly]="isView" />
+                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
+                    </mat-form-field>
+                  </div>
+                </div>
+              </td>
+
+              </tr>
+                 
+           
+                
+
+                  <tr class="form-group"
+                  data-always-visible="false">
+                  
+
+
+                  <td class="T1"
+                  rowspan="1"
+                  colspan="1">
+                <div class="card-form-container">
+                  <div>
+                    <mat-form-field floatLabel="never"
+                                    dense
+                                    appearance="fill"
+                                    class="example-full-width">
+                      <mat-icon color="primary"
+                                dense
+                                matPrefix>person_outline</mat-icon>
+                      <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
+                      <input type="text"
+                             matInput
+                             formControlName="servAddrLine1"
+                             [readonly]="isView" required/>
+                      <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </td>
+
+              <td class="T1"
+              rowspan="1"
+              colspan="1">
+            <div class="card-form-container">
+              <div>
+                <mat-form-field floatLabel="never"
+                                dense
+                                appearance="fill"
+                                class="example-full-width">
+                  <mat-icon color="primary"
+                            dense
+                            matPrefix>person_outline</mat-icon>
+                  <mat-label> {{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
+                  <input type="text"
+                         matInput
+                         formControlName="servAddrLine2"
+                         [readonly]="isView" />
+                  <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
+                </mat-form-field>
+              </div>
+            </div>
+          </td>
          
                   <td class="T1"
                       rowspan="1"
@@ -689,28 +727,7 @@
                       </div>
                     </div>
                   </td>
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
-                          <input type="number"
-                                 matInput
-                                 formControlName="servfaxNo"
-                                 [readonly]="isView" />
-                          <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
+                
                 </tr>
                 <tr class="form-group"
                     data-always-visible="false">
@@ -1078,7 +1095,7 @@
             </table>
             </div>
             <span class="uxg-h6"
-                  id=grid>r {{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
+                  id=grid>{{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
             <div class="table-responsive">
             <table mat-table
                    [dataSource]="dataSource3"
@@ -1222,31 +1239,31 @@
                     <button mat-button type="button" mat-stroked-button color="primary" class="onboard-btn" 
                 
                     (click)="this.navigateUserAdd()"                  
-                    >{{'FinancierOnboardingComponent.AddUser' | translate}}r</button>
+                    >{{'FinancierOnboardingComponent.AddUser' | translate}}</button>
                   </div>
                   <div class="table-responsive">
                   <table mat-table [dataSource]="userDataSource" >
                   
                   
                     <ng-container matColumnDef="userId">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                        matTooltip="UserID" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.UserId' | translate}}</th>
+                        <th mat-header-cell *matHeaderCellDef 
+                        >  {{'FinancierOnboardingComponent.UserId' | translate}}</th>
                         <td mat-cell *matCellDef="let element">
                                     {{element.userId}}
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="firstName">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'">   {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
+                        <th mat-header-cell *matHeaderCellDef 
+                             >   {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.firstName}}
                         </td>
                     </ng-container>
               
                     <ng-container matColumnDef="lastName">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'">    {{'FinancierOnboardingComponent.LastName' | translate}}
+                        <th mat-header-cell *matHeaderCellDef 
+                           >    {{'FinancierOnboardingComponent.LastName' | translate}}
                         </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.lastName}}
@@ -1254,24 +1271,24 @@
                     </ng-container>
               
                     <!-- <ng-container matColumnDef="companyName">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
-                            [matTooltipPosition]="'below'"> Company Name </th>
+                        <th mat-header-cell *matHeaderCellDef  matTooltip="{{biddingTooltip.smeName}}"
+                            > Company Name </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.companyName}}
                         </td>
                     </ng-container> -->
               
                     <ng-container matColumnDef="emailId">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.EmailId' | translate}} </th>
+                        <th mat-header-cell *matHeaderCellDef 
+                           >  {{'FinancierOnboardingComponent.EmailId' | translate}} </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.emailId}}
                         </td>
                     </ng-container>
               
                     <ng-container matColumnDef="phoneNumber">
-                        <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">   {{'FinancierOnboardingComponent.PhoneNo' | translate}}  </th>
+                        <th mat-header-cell *matHeaderCellDef 
+                            >   {{'FinancierOnboardingComponent.PhoneNo' | translate}}  </th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.phoneNumber }}
                         </td>
