@@ -291,7 +291,7 @@
 		"Add Invoice": "Add Invoice",
 		"Update Invoice": "Update Invoice",
 		"Invoice Details": "Invoice Details",
-		"Invoice Ref No": "Invoice Reference Number",
+		"Invoice Ref No": "Funding Request Number",
 		"Invoice Date": "Invoice Date",
 		"Seller": "Seller",
 		"Buyer": "Buyer",
@@ -644,7 +644,10 @@
 			"Group": "Group",
 			"Role": "Role",
 			"EnterRole": "Role Is Required"
-		}
+		},
+		"goodsId": "Goods Id",
+		"clear": "Clear"
+		
 	
 	
 }
