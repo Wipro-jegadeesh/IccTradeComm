@@ -49,9 +49,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentTimeDate();
-    this.userName = localStorage.getItem("userId")
-    this.roleName = localStorage.getItem("roleName")
-    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))? JSON.parse(localStorage.getItem('userCred')) : {status : "Y"}
+    this.userName = localStorage.getItem("userId") ?  localStorage.getItem("userId") : ''
+    this.roleName = localStorage.getItem("roleName") ? localStorage.getItem("roleName") : ''
+    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))? JSON.parse(localStorage.getItem('userCred')) : ''
 
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName

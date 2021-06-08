@@ -288,6 +288,13 @@
                                         value="{{ financier.annualYeild }}" />
                                 </td>
                             </ng-container>
+                            <ng-container matColumnDef="Penal ROI">
+                                <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                                matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'finaniceBidding.Penal ROI' | translate}}</th>
+                                <td mat-cell *matCellDef="let financier"><input matInput
+                                        value="{{ financier.penalRate }}" />
+                                </td>
+                            </ng-container>
                             <ng-container matColumnDef="Net Amt payable (Base CCY)">
                                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                                 matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'Net Amt payable' | translate}}</th>

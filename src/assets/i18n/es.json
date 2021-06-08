@@ -611,6 +611,18 @@
       "Group": "Grupo",
       "Role": "Función",
       "EnterRole": "El rol es obligatorio"
+    },
+    "finaniceBidding":{
+      "FX rate":"FX rate",
+      "Base CCY":"Base CCY",
+      "Repay Amount (Base CCY)":"Repay Amount (Base CCY)",
+      "Disc Amt": "Discount Amount",
+      "Net Amt payable": "Net Amount Payable",
+      "Off Exp date /time": "Offer Expiry",
+      "Date / Time":"Date / Time",
+      "Penal ROI":"Penal ROI",
+      "Offer Exp": "Offer Expiry",
+      "Period":"Period",
+      "BIDDING Economic Details Section":"BIDDING Economic Details Section"
     }
-  
 }

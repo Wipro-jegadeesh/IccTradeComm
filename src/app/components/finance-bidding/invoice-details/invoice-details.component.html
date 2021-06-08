@@ -73,7 +73,7 @@
       </tbody>
     </table>
     <mat-tab-group>
-        <mat-tab label="BIDDING Economic Details Section">
+        <mat-tab label="{{'finaniceBidding.BIDDING Economic Details Section' | translate}}">
           <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
            <mat-card>
                 <mat-card-content>
@@ -127,13 +127,14 @@
                                 </td>
                               </ng-container>
                               <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
-                                <th mat-header-cell *matHeaderCellDef  scope="column" >{{'Funding Amount / Repay Amount (Base CCY)' | translate}}</th>
+                                <th mat-header-cell *matHeaderCellDef  scope="column" >{{'Funding Amount' | translate}}<br>
+                                   {{'finaniceBidding.Repay Amount (Base CCY)' | translate}}</th>
                                 <td mat-cell style="border-right: 1px solid grey;
                                 align-self: stretch;
                                 text-align: center" *matCellDef="let element;let row; let index = index"  >
                                   <input matInput 
                                   formControlName="baseCcyFundingAmt" 
-                                  placeholder="{{'Funding Amount / Repay Amount (Base CCY)' | translate}}" (keyup)="changeRowgrid()"
+                                  placeholder="{{'finaniceBidding.Repay Amount (Base CCY)' | translate}}" (keyup)="changeRowgrid()"
                                   required>
                                 </td>
                               </ng-container>
@@ -181,7 +182,7 @@
                           </ng-container>
         
                           <ng-container matColumnDef="Disc Amt (Base CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Disc Amt (Base CCY)' | translate}}</th>
+                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Disc Amt' | translate}}<br>(Base CCY)</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index" >
@@ -193,7 +194,7 @@
                           </ng-container>
         
                           <ng-container matColumnDef="Disc Amt (Inv CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Disc Amt (Inv CCY)' | translate}}  </th>
+                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Disc Amt' | translate}}<br>(Invoice CCY)</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -225,10 +226,21 @@
                                 required>
                               </td>
                             </ng-container>
+                            <ng-container matColumnDef="Penal ROI">
+                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Penal ROI' | translate}}</th>
+                              <td mat-cell style="border-right: 1px solid grey;
+                              align-self: stretch;
+                              text-align: center" *matCellDef="let element;let row; let index = index"  >
+                                <input matInput
+                                formControlName="penalRate"
+                                placeholder="{{'Penal ROI' | translate}}" 
+                                required>
+                              </td>
+                            </ng-container>
                           <ng-container matColumnDef="Net Amt payable (Base CCY)">
                             <th mat-header-cell *matHeaderCellDef scope="column" >
-                              {{'Net Amt' | translate}}
-                             <br> {{'payable (Base CCY)' | translate}}</th>
+                              {{'finaniceBidding.Net Amt payable' | translate}}
+                             <br>(Base CCY)</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -239,7 +251,7 @@
                             </td>
                           </ng-container>
                           <ng-container matColumnDef="Net Amt payable (Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable (Inv CCY)' | translate}}</th>
+                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Net Amt payable' | translate}}<br>(Invoice CCY)</th>
                               <td mat-cell style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -250,7 +262,8 @@
                               </td>
                             </ng-container>
                               <ng-container matColumnDef="Offer Exp period">
-                                  <th mat-header-cell *matHeaderCellDef scope="column" >{{'Offer Exp period' | translate}}</th>
+                                  <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Offer Exp' | translate}}<br>
+                                    {{'finaniceBidding.Period' | translate}}</th>
                                   <td mat-cell style="border-right: 1px solid grey;
                                   align-self: stretch;
                                   text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -264,7 +277,8 @@
                                   </td>
                                 </ng-container>
                                 <ng-container matColumnDef="Off Exp date /time">
-                                    <th mat-header-cell *matHeaderCellDef scope="column" >{{'Off Exp date /time' | translate}}</th>
+                                    <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Off Exp date /time' | translate}}<br>
+                                      {{'finaniceBidding.Date / Time' | translate}} </th>
                                     <td mat-cell style="border-right: 1px solid grey;
                                     align-self: stretch;
                                     text-align: center" *matCellDef="let element;let row; let index = index"  >

@@ -14,8 +14,8 @@ export class SidebarComponent implements OnInit {
   opened=false
   roleName
   constructor(private router:Router) {
-    this.checkRolesPer=JSON.parse(localStorage.getItem('userCred'))
-    this.roleName = localStorage.getItem('roleName');
+    this.checkRolesPer=JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : ''
+    this.roleName = localStorage.getItem('roleName') ? localStorage.getItem('roleName') : '';
    }
 
   ngOnInit(): void {

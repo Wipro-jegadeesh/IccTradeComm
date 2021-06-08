@@ -129,6 +129,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Disc Amt (Inv CCY)',
     'Annual Yield (Basis a360)',
     'Tenor Days',
+    'Penal ROI',
     'Net Amt payable (Base CCY)',
     'Net Amt payable (Inv CCY)',
     'Offer Exp period',
@@ -255,6 +256,7 @@ export class InvoiceDetailsComponent implements OnInit {
       finId: localStorage.getItem("userId"),
       invoiceId: this.id,
       tenor: ['', Validators.required],
+      penalRate:[''],
       invNo: [''],
       invoiceAmt: ['']
     })
@@ -281,6 +283,7 @@ export class InvoiceDetailsComponent implements OnInit {
       finId: localStorage.getItem("userId"),
       invoiceId : this.id,
       tenor:[this.dateMinus(this.datePipe.transform(this.invoiceDetails.invDueDate,'MM/dd/yyyy'),this.datePipe.transform(ddatae,'MM/dd/yyyy')), Validators.required],
+      penalRate:[''],
       invNo:[''],
       invoiceAmt:['']
     })
