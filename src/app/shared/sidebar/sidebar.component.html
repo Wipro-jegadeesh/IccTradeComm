@@ -15,14 +15,14 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p>{{'sideBarComponet.Home' | translate}}</p>
         </a>
-        <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
+        <!-- <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Questionnaire Details' | translate}}</p>
         </a>
         <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Score Received' | translate}}</p>
-        </a>
+        </a> -->
         <a mat-list-item (click)="navigatePage('/sme-user-creation')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
             <mat-icon mat-list-icon>dashboard</mat-icon>
             <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.User Creation' | translate}}</p>

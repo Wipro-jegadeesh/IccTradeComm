@@ -47,6 +47,9 @@ export class FinancierOnboardingComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   userDataSource = new MatTableDataSource();
   companyid;
+  errorColor = ""
+  errorColor1 = ""
+
 
   constructor(private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
     private customerService: CustomerService, public authenticationService: AuthenticationService, private toastr: ToastrService,
@@ -315,7 +318,7 @@ let respObj = {​​​​​​​​
         servemail: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].email,Validators.required],
         servswiftBic: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].swiftBic],
         servfaxNo: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].faxno],
-        servCountry: [[]],
+        servCountry: [[],Validators.required],
         partnerDetails: this.fb.array([]),
         authSign: this.fb.array([]),
         entityAdmin: this.fb.array([])
@@ -451,13 +454,13 @@ let respObj = {​​​​​​​​
       taxIdNum: ['', [Validators.pattern(/^[0-9a-zA-Z]+$/)]],
       regDate: ['',Validators.required],
       fExpYears: ['', Validators.required],
-      activity: [''],
+      activity: ['',Validators.required],
       principalBankAccount: ['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]+$/),Validators.maxLength(34)]],
-      prncbankbranch: [''],
-      anlScfTrnOver: [''],
-      transLimit: [''],
+      prncbankbranch: ['',Validators.required],
+      anlScfTrnOver: ['',Validators.required],
+      transLimit: ['',Validators.required],
       // postalCode: [''],
-      currency: [''],
+      currency: ['',Validators.required],
 
 
       // userName : ['',Validators.required], email : ['',[Validators.email,Validators.required]],contactNo: ['',Validators.required], 
@@ -468,26 +471,26 @@ let respObj = {​​​​​​​​
       headAddrLine1: ['',Validators.required],
       headAddrLine2: [''],
       headAddrLine3: [''],
-      headcity: [''],
-      headstate: [''],
-      headpostalCode: [''],
+      headcity: ['',Validators.required],
+      headstate: ['',Validators.required],
+      headpostalCode: ['',Validators.required],
       headtelephoneNumber: ['',Validators.required],
-      headcountry: [[]],
+      headcountry: [[],Validators.required],
       heademail: ['',[Validators.email,Validators.required]],
       headswiftBic: ['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]+$/),Validators.maxLength(11)]],
-      headfaxNo: [''],
+      headfaxNo: ['',Validators.required],
       servAddrLine1: ['',Validators.required],
       servAddrLine2: [''],
       servAddrLine3: [''],
-      servcity: [''],
+      servcity: ['',Validators.required],
       servstate: [''],
       paymentCode: [''],
-      servpostalCode: [''],
+      servpostalCode: ['',Validators.required],
       servtelephoneNumber: ['',Validators.required],
       servemail: ['',[Validators.email,Validators.required]],
-      servswiftBic: [''],
-      servfaxNo: [''],
-      servCountry: [[]],
+      servswiftBic: ['',Validators.required],
+      servfaxNo: ['',Validators.required],
+      servCountry: [[],Validators.required],
       partnerDetails: this.fb.array([]),
       authSign: this.fb.array([]),
       entityAdmin: this.fb.array([])
@@ -530,25 +533,49 @@ let respObj = {​​​​​​​​
   get entityFormArray(): FormArray {
     return this.financierForm.get('entityAdmin') as FormArray;
   }
-  onItemSelect(item: any) {
-    this.selectedItems.push(item)
-  }
-  onItemDeSelect(item: any) {
-    this.selectedItems.push(item)
+  onHeadCountrySelect(item: any) {
+    this.errorColor = ""
   }
 
-  onSelectAll(items: any) {
-    console.log('onSelectAll', items);
+  onHeadCountryDeSelect(item : any){
+    this.errorColor = "error-color"
   }
 
-  onDropDownClose() {
-    console.log('dropdown closed');
+  onServeCountrySelect(item: any) {
+    this.errorColor1 = ""
   }
+
+  onServeCountryDeSelect(item : any){
+    this.errorColor1 = "error-color"
+  }
+
+  // onClose(item : any){
+  //   debugger
+  //   this.checkHeadCountryData(this.financierForm.value && this.financierForm.value.headcountry && this.financierForm.value.headcountry[0])
+  // } 
+
+  checkHeadCountryData(data){
+if(data && data.itemName){
+  this.errorColor = ""
+}else{
+  this.errorColor = "error-color"
+}
+  }
+  checkServeCountryData(data){
+    if(data && data.itemName){
+      this.errorColor1 = ""
+    }else{
+      this.errorColor1 = "error-color"
+    }
+      }
 
    check() {
     if(this.financierForm.valid){
       this.onSubmit()
     }else{
+      this.checkHeadCountryData(this.financierForm.value && this.financierForm.value.headcountry && this.financierForm.value.headcountry[0])
+      this.checkServeCountryData(this.financierForm.value && this.financierForm.value.servCountry && this.financierForm.value.servCountry[0])
+
       this.toastr.error("Please Enter All Mandatory Fields")
     }
   }

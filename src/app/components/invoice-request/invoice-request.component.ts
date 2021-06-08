@@ -225,6 +225,12 @@ export class InvoiceRequestComponent implements OnInit {
     );
 }
 
+public setTwoNumberDecimal($event) {
+  if(!Number.isInteger(parseFloat($event.target.value))){
+    $event.target.value = parseFloat($event.target.value).toFixed(2);
+  }
+}
+
 private _filter(value: string): string[] {
   const filterValue = value.toLowerCase();
   return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
