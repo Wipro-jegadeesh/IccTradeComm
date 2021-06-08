@@ -176,12 +176,25 @@
    "Actual Total Interest Received":"Actual Total Interest Received",
    "Interest Earned Per Day":"Interest Earned Per Day",
    "Interest Earned Till Date":"Interest Earned Till Date",
-   "InterestDate":"Interest Till Date",
+   "InterestDate":"Interest Till Date Amount",
    "InterestDay":"Interest Per Day",
    "InterestCurrency":"InterestCurrency",
    "Date":"Date",
    "Day":"Day",
    "Finance Details":"Finance Details"
+  },
+  "finaniceBidding":{
+	  "FX rate":"FX rate",
+	  "Base CCY":"Base CCY",
+	  "Repay Amount (Base CCY)":"Repay Amount (Base CCY)",
+	  "Disc Amt": "Discount Amount",
+	  "Net Amt payable": "Net Amount Payable",
+	  "Off Exp date /time": "Offer Expiry",
+	  "Date / Time":"Date / Time",
+	  "Penal ROI":"Penal ROI",
+	  "Offer Exp": "Offer Expiry",
+	  "Period":"Period",
+	  "BIDDING Economic Details Section":"BIDDING Economic Details Section"
   },
 
 
@@ -291,7 +304,7 @@
 		"Add Invoice": "Add Invoice",
 		"Update Invoice": "Update Invoice",
 		"Invoice Details": "Invoice Details",
-		"Invoice Ref No": "Funding Request Number",
+		"Invoice Ref No": "Invoice Reference Number",
 		"Invoice Date": "Invoice Date",
 		"Seller": "Seller",
 		"Buyer": "Buyer",
@@ -564,9 +577,9 @@
 			"FinancierNameConstitution": "Financing Institution Name",
 			"EnterNameConstution": "Please Enter Financing Institution Name",
 			"LocalRegNo": "Local Registration Number",
-			"EnterLocalRegNo": "Please Enter Local Registration Number (Alpha numeric)",
+			"EnterLocalRegNo": "Please Enter Local Registration Number",
 			"TaxId": "Tax Identification Number",
-			"EnterTaxNo": "Please Enter Tax Identification Number (Alpha numeric)",
+			"EnterTaxNo": "Please Enter Tax Identification Number",
 			"RegDate": "Registration Date",
 			"EnterRegDate": "Please Enter Registration Date",
 			"SCFYears": "SCF Financing Experience Years",
@@ -577,8 +590,8 @@
 			"EnterPrincipalAc": "Please Enter Principal Bank Account",
 			"PrincipalBankBrn": "Principal Bank Branch",
 			"EnterPrincipalBankBrn": "Please Enter Principal Bank Branch",
-			"AnnualSCF": "Annual Turnover",
-			"EnterAnnualSCF": "Please Enter Annual Turnover",
+			"AnnualSCF": "Annual SCF Turnover",
+			"EnterAnnualSCF": "Please Enter Annual SCF Turnover",
 			"TransactionLimit": "Transaction Limit",
 			"EntertransactionLimit": "Please Enter Transaction Limit",
 			"Currency": "Currency",
@@ -604,7 +617,7 @@
 			"State": "State / Region",
 			"EnterState": "Please Enter Your State / Region",
 			"SWIFT_BIC": "Swift BIC",
-			"EnterSWIFT_BIC": "Please Enter Swift BIC (Alpha numeric)",
+			"EnterSWIFT_BIC": "Please Enter Swift BIC",
 			"BackToFinancier": "Back To Financier On-Boarding",
 			"FinancierTradecommSer": "Financier's TradeComm Service Branch",
 			"BackFinReg": "Back To Financier Registered Head Quarters",
@@ -644,10 +657,7 @@
 			"Group": "Group",
 			"Role": "Role",
 			"EnterRole": "Role Is Required"
-		},
-		"goodsId": "Goods Id",
-		"clear": "Clear"
-		
+		}
 	
 	
 }

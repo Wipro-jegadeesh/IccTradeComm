@@ -90,6 +90,7 @@ export class SmeBiddingComponent implements OnInit {
     // 'Disc Amt (Base CCY)',
     // 'Disc Amt (Inv CCY)',
     'Annual Yield (Basis a360)',
+    'Penal ROI',
     'Net Amt payable (Base CCY)',
     // 'Net Amt payable (Inv CCY)',
     // 'Offer Exp period',

@@ -239,6 +239,17 @@
                               required>
                             </td>
                           </ng-container>
+                          <ng-container matColumnDef="Penal ROI">
+                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Penal ROI' | translate}}</th>
+                            <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index"  >
+                              <input matInput
+                              formControlName="penalRate"
+                              placeholder="{{'finaniceBidding.Penal ROI' | translate}}" 
+                              required>
+                            </td>
+                          </ng-container>
                         <ng-container matColumnDef="Net Amt payable (Base CCY)">
                           <th mat-header-cell *matHeaderCellDef scope="column" >
                                    Net Amt
