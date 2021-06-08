@@ -172,7 +172,7 @@
                                type="text"
                                formControlName="prncbankbranch"
                                [readonly]="isView" />
-                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-hint> -->
+                        <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-hint>
                       </mat-form-field>
                     </td>
                   
@@ -193,7 +193,7 @@
                                    matInput
                                    formControlName="anlScfTrnOver"
                                    [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint> -->
+                            <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
                       </div>
@@ -225,7 +225,7 @@
                     </td>
                 
 
-                    <td class="T1"
+                    <!-- <td class="T1"
                     rowspan="1"
                     colspan="1">
                   <div class="card-form-container">
@@ -242,15 +242,29 @@
                                matInput
                                formControlName="currency"
                                [readonly]="isView" />
-                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint> -->
+                        <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint>
                       </mat-form-field>
                     </div>
                   </div>
+                </td> -->
+
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense class="select-split-input">
+                    <mat-label> {{'Currency' | translate}}</mat-label>
+                    <select matNativeControl formControlName="currency" >
+                      <!-- (change)="updateCurrency($event)" -->
+                      <!-- <option value=""></option> -->
+                      <option value="SGD">SGD</option>
+                      <option value="USD">USD</option>
+                      <option value="GBP">GBP</option>
+                      <option value="EUR">EUR</option>
+                      <option value="JPY">JPY</option>
+                    </select>
+                    <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint>
+                  </mat-form-field>
                 </td>
 
-                  <!-- ============== -->
-                  <!-- <tr class="form-group"
-                  data-always-visible="false"> -->
+
               
               </tr>
               <!-- =========== -->
@@ -346,7 +360,7 @@
                        matInput
                        formControlName="headfaxNo"
                        [readonly]="isView" />
-                <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
+                <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
               </mat-form-field>
             </div>
           </div>
@@ -383,29 +397,6 @@
                 </td>
                  
                     <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headAddrLine3"
-                                   [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
-                    
-                    <td class="T1"
                     rowspan="1"
                     colspan="1">
                   <div class="card-form-container">
@@ -427,6 +418,29 @@
                     </div>
                   </div>
                 </td>
+
+                <td class="T1"
+                rowspan="1"
+                colspan="1">
+              <div class="card-form-container">
+                <div>
+                  <mat-form-field floatLabel="never"
+                                  dense
+                                  appearance="fill"
+                                  class="example-full-width">
+                    <mat-icon color="primary"
+                              dense
+                              matPrefix>person_outline</mat-icon>
+                    <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
+                    <input type="text"
+                           matInput
+                           formControlName="headAddrLine3"
+                           [readonly]="isView" />
+                    <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+              </div>
+            </td>
                   </tr>
 
 
@@ -449,7 +463,7 @@
                                    matInput
                                    formControlName="headcity"
                                    [readonly]="isView" />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint> -->
+                            <mat-hint>{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
                       </div>
@@ -459,10 +473,13 @@
                     rowspan="1"
                     colspan="1">
                   <div class="card-form-container">
-                    <div class="multiselect-dropdown-dsgn">                   
+                    <div class="multiselect-dropdown-dsgn {{errorColor}}">                   
                       <angular2-multiselect [data]="cities"
                                             formControlName="headcountry"
-                                            [settings]="dropdownSettings"></angular2-multiselect>                         
+                                            [settings]="dropdownSettings"
+                                            (onSelect)="onHeadCountrySelect($event)" 
+                                            (onDeSelect)="onHeadCountryDeSelect($event)"
+                                            ></angular2-multiselect>                         
                     </div>
                   </div>
                 </td>
@@ -485,7 +502,7 @@
                              matInput
                              formControlName="headpostalCode"
                              [readonly]="isView" />
-                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint> -->
+                      <mat-hint>{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
                     </mat-form-field>
                   </div>
                   </div>
@@ -510,7 +527,7 @@
                              matInput
                              formControlName="headstate"
                              [readonly]="isView" />
-                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-hint> -->
+                      <mat-hint>{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -643,7 +660,7 @@
                              matInput
                              formControlName="servfaxNo"
                              [readonly]="isView" />
-                      <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint> -->
+                      <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
                     </mat-form-field>
                   </div>
                 </div>
@@ -748,7 +765,7 @@
                                  matInput
                                  formControlName="servcity"
                                  [readonly]="isView" />
-                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint> -->
+                          <mat-hint> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
@@ -758,11 +775,14 @@
                   rowspan="1"
                   colspan="1">
                 <div class="card-form-container">
-                  <div class="multiselect-dropdown-dsgn">
+                  <div class="multiselect-dropdown-dsgn {{errorColor1}}">
 
                     <angular2-multiselect [data]="cities"
                                           formControlName="servCountry"
-                                          [settings]="dropdownSettings"></angular2-multiselect>
+                                          [settings]="dropdownSettings"
+                                          (onSelect)="onServeCountrySelect($event)" 
+                                          (onDeSelect)="onServeCountryDeSelect($event)"
+                                          ></angular2-multiselect>
                   </div>
                 </div>
               </td>
@@ -784,7 +804,7 @@
                              matInput
                              formControlName="servpostalCode"
                              [readonly]="isView" />
-                      <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint> -->
+                      <mat-hint> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
                     </mat-form-field>
                   </div>
                   </div>
@@ -833,7 +853,7 @@
                                  matInput
                                  formControlName="servswiftBic"
                                  [readonly]="isView" />
-                          <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint> -->
+                          <mat-hint> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
