@@ -50,7 +50,7 @@
                   <mat-form-field dense>
                     <mat-label> {{'UserCreation.EmailId' | translate}}</mat-label>
                     <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.EmailId' | translate}}" formControlName="email" />
+                    <input type="text" matInput placeholder="{{'UserCreation.EmailId' | translate}}" formControlName="email" name="emailId" />
                     <mat-error *ngIf="hasError('email', 'required')">{{'UserCreation.EnterEmail' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
@@ -62,7 +62,7 @@
                 <mat-form-field dense>
                   <mat-label>{{'UserCreation.FirstName' | translate}}</mat-label>
                   <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" placeholder="{{'UserCreation.FirstName' | translate}}" matInput formControlName="firstName" />
+                  <input type="text" placeholder="{{'UserCreation.FirstName' | translate}}" matInput formControlName="firstName" name="firstName" />
                   <mat-error *ngIf="hasError('firstName', 'required')">{{'UserCreation.EnterFirstName' | translate}}</mat-error>
                 </mat-form-field>
               </div>
@@ -74,7 +74,7 @@
                 <mat-form-field dense>
                   <mat-label> {{'UserCreation.LastName' | translate}}</mat-label>
                   <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.LastName' | translate}}" formControlName="lastName" />
+                  <input type="text" matInput placeholder="{{'UserCreation.LastName' | translate}}" formControlName="lastName" name="lastName" />
                   <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.Enterlastname' | translate}}</mat-error>
                 </mat-form-field>
               </div>
@@ -88,7 +88,7 @@
                 <mat-form-field dense>
                   <mat-label> {{'UserCreation.PhoneNumber' | translate}}</mat-label>
                   <mat-icon matPrefix>call</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.PhoneNumber' | translate}}" formControlName="contactNo" />
+                  <input type="text" matInput placeholder="{{'UserCreation.PhoneNumber' | translate}}" formControlName="contactNo" name="phoneNo" />
                   <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNumber' | translate}}</mat-error>
                 </mat-form-field>
               </div>
@@ -99,7 +99,7 @@
                 <mat-form-field dense>
                   <mat-label> {{'UserCreation.Addr1' | translate}}</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.Addr1' | translate}}" formControlName="address" />
+                  <input type="text" matInput placeholder="{{'UserCreation.Addr1' | translate}}" formControlName="address" name="address" />
                   <mat-error *ngIf="hasError('address', 'required')"> {{'UserCreation.EnterAddr1' | translate}}</mat-error>
                 </mat-form-field>
             </div>
@@ -110,7 +110,7 @@
                 <mat-form-field dense>
                   <mat-label> {{'UserCreation.Addr2' | translate}}</mat-label>
                   <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.Addr2' | translate}}" formControlName="address1" />
+                  <input type="text" matInput placeholder="{{'UserCreation.Addr2' | translate}}" formControlName="address1" name="address1" />
                   <mat-error *ngIf="hasError('address1', 'required')"> {{'UserCreation.EnterAddr2' | translate}}</mat-error>
                 </mat-form-field>
             </div>
@@ -123,7 +123,7 @@
                   <mat-form-field dense>
                     <mat-label> {{'UserCreation.State' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.State' | translate}}" formControlName="state" />
+                    <input type="text" matInput placeholder="{{'UserCreation.State' | translate}}" formControlName="state" name="state" />
                     <mat-error *ngIf="hasError('state', 'required')"> {{'UserCreation.EnterState' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
@@ -134,7 +134,7 @@
                   <mat-form-field dense>
                     <mat-label> {{'UserCreation.City' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.City' | translate}}" formControlName="city" />
+                    <input type="text" matInput placeholder="{{'UserCreation.City' | translate}}" formControlName="city" name="city" />
                     <mat-error *ngIf="hasError('city', 'required')"> {{'UserCreation.EnterCity' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
@@ -145,7 +145,7 @@
                   <mat-form-field dense>
                     <mat-label> {{'UserCreation.PostalCode' | translate}}</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.PostalCode' | translate}}" formControlName="postalCode" />
+                    <input type="text" matInput placeholder="{{'UserCreation.PostalCode' | translate}}" formControlName="postalCode" name="postalCode" />
                     <mat-error *ngIf="hasError('postalCode', 'required')"> {{'UserCreation.EnterPostalCode' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
@@ -187,7 +187,7 @@
                     </div>
           </div>
                 <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-                        <button mat-raised-button color="primary" > {{'Submit' | translate}}</button>
+                        <button mat-raised-button color="primary" name="submit"> {{'Submit' | translate}}</button>
                         <button type="button" mat-raised-button color="warn" routerLink='/sme-user-creation'> {{'Cancel' | translate}}</button>
                 </div>
       </form>

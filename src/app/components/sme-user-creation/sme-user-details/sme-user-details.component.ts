@@ -40,6 +40,7 @@ export class SmeUserDetailsComponent implements OnInit {
   UpdateInvoiceLable: boolean;
   invoiceDetails: any;
   id: string;
+  companyId;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -61,10 +62,13 @@ export class SmeUserDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
     private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr:ToastrService) {
+      let userCred=JSON.parse(localStorage.getItem('userCred'))
+      this.companyId = userCred.companyId
     this.invoiceFormBuild()  
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
+
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -119,21 +123,22 @@ export class SmeUserDetailsComponent implements OnInit {
   blurFunction(){
     console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
     this.smeUserCreationService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
-      console.log(resp)
+
+      if(resp){
       this.userForm.patchValue({
-    firstName: resp[0].fname,
-    email: resp[0].email ,
-    lastName: resp[0].lname,
-    contactNo: resp[0].contactnum,
-    companyName: resp[0].companyname, 
-    city: resp[0].locale,
-    address:resp[0].address,
+    firstName: '',
+    email:'' ,
+    lastName: '',
+    contactNo:'',
+    companyName: resp[0].companyname,
+    city: '',
+    address:'',
     country:resp[0].country,
     role:resp[0].role,
     profileType:resp[0].profiletype,
 
       });
-
+    }
     })
   }
   onSubmitUserForm() {
@@ -147,6 +152,7 @@ export class SmeUserDetailsComponent implements OnInit {
                     this.router.navigateByUrl('/sme-user-creation');
           
                   }, error => {
+                    error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
                   })
                 }else{
                   this.smeUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
@@ -155,12 +161,16 @@ export class SmeUserDetailsComponent implements OnInit {
                     this.router.navigateByUrl('/sme-user-creation');
                     }
                   }, error => {
-                    error && error.error && error.error.msg ? this.toastr.error(error.error.msg) : this.toastr.error('Error')
+                    error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
                   })
                 }
      
     } catch (err) {
     }
+  }
+  replaceCommaLine(data) {
+    let dataToArray = data.split(',').map(item => item.trim());
+    return dataToArray.join("</br>");
   }
   UserEditFormBuild(){
     this.smeUserCreationService.getUserDetails(this.id).subscribe(resp => {
@@ -193,7 +203,7 @@ export class SmeUserDetailsComponent implements OnInit {
   }
   invoiceFormBuild() {
     this.userForm = this.fb.group({
-      nationalId: ['', Validators.required],
+      nationalId: [this.companyId, Validators.required],
       firstName: ['', Validators.required],
       email: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -213,7 +223,7 @@ export class SmeUserDetailsComponent implements OnInit {
       // language:['',Validators.required],
 
     });
-  
+    this.blurFunction()
   }
   public hasError = (controlName: string, errorName: string) =>{
     return this.userForm.controls[controlName].hasError(errorName);
