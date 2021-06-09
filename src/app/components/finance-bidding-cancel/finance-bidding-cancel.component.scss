@@ -1,0 +1,335 @@
+@import "~@ffdc/uxg-angular-theme/lib/core/style/spacing";
+
+table {
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 60px;
+}
+
+.table-section {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-4 * 2;
+    
+}
+
+$margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
+
+header {
+    // margin: -$margin (-$margin) $uxg-spacing-0;
+    margin: -32px 30px 0;
+    padding: $margin;
+    position: relative;
+    height: 45%;
+    width: 100%;
+
+    .account-services-headline {
+        display: flex;
+        justify-content: space-between;
+        color: white;
+        .global-balance {
+            z-index: 10;
+        }
+    }
+
+    .paginator {
+        display: flex;
+        align-self: flex-end;
+        z-index: 10;
+    }
+}
+
+.app-content {
+    bottom: 0;
+    left: 0;
+    overflow-x: auto;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 33px;
+}
+
+.accounts-list {
+    // float: left;
+    // position: relative;
+    // overflow: auto;
+    // z-index: 10;
+    // width: 100%;
+    // white-space: nowrap;
+    // padding-right: $margin * 2;
+    // margin-left: -$margin;
+    // padding-bottom: 3px;
+    float: left;
+    position: relative;
+    overflow: auto;
+    z-index: 10;
+    width: 100%;
+    white-space: nowrap;
+    padding-right: 50px;
+    margin-left: -30px;
+    padding-bottom: 27px;
+
+    uxg-account-card,
+    uxg-account-card-skeleton {
+        display: inline-grid;
+        margin-left: $margin;
+    }
+}
+
+.uxg-breadcrumb {
+    margin-left: 50px !important;
+}
+
+.wave {
+    margin: $uxg-spacing-0 (-$margin) -5px;
+    position: absolute;
+    width: 100%;
+    top: $uxg-spacing-0;
+    bottom: $uxg-spacing-0;
+    z-index: 1;
+}
+
+@media only screen and (min-width: 377px) and (max-width: 415px) {
+    header {
+        height: 35%;
+        h5{
+            margin-top: 20px;
+        }
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 200px;
+            }
+        }
+
+        .account-services-headline {
+            font-size: $margin;
+
+            .global-balance {
+                .uxg-h3,
+                p {
+                    font-size: $uxg-spacing-4;
+                }
+            }
+        }
+    }
+    .row.res-row{display: block;}
+}
+
+/* Mobile Styles Small Screen */
+@media only screen and (max-width: 376px) {
+    header {
+        margin-bottom: $uxg-spacing-5;
+        height: 35%;
+        h5{
+            margin-top: 20px;
+        }
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 200px;
+            }
+        }
+
+        .account-services-headline {
+            font-size: $margin;
+
+            .global-balance {
+                .uxg-h3,
+                p {
+                    font-size: $uxg-spacing-4;
+                }
+            }
+        }
+    }
+    .row.res-row{display: block;}
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+        header{
+            h5{
+                margin-top: 20px;
+            }
+        }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 500px) and (max-width: 1024px) {
+    header {
+        margin-bottom: $margin;
+        height: 30%;
+
+        .wave {
+            overflow: hidden;
+            ::ng-deep svg {
+                height: 300px;
+            }
+        }
+    }
+
+    .accounts-list {
+        overflow: hidden;
+        padding-top: $margin;
+    }
+}
+.app-content.active{
+    @media only screen and (min-width: 1025px) {
+        .wave {
+            top: -65%;
+        }
+    }
+}
+/* Desktop Styles */
+@media only screen and (min-width: 1025px) {
+    .wave {
+        // top: -10%;
+        top: -22%;
+        height: 100px;
+    }
+
+    .content {
+        padding: $margin $margin * 2 $uxg-spacing-0 $margin;
+    }
+
+    .accounts-list {
+        overflow: hidden;
+        // padding-top: $margin;
+        // padding-top: $margin;
+    }
+}
+
+.uxg-nav {
+    position: absolute;
+    // height: 850px;
+    border: 1px solid #eaeaea;
+}
+
+.mat-drawer-container {
+    width: 100%;
+    // height: 100%;
+    background-color: white;
+}
+
+.uxg-nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px !important;
+}
+
+.finastra-logo {
+    width: 150px;
+    height: auto;
+}
+mat-sidenav-container {
+    padding: 0;
+    position: relative;
+}
+
+.uxg-toolbar {
+    z-index: 15;
+    position: absolute;
+}
+
+
+.app-content.inActive
+{
+// margin-left: 300px;
+}
+
+.chart.inActive{
+   margin-left: auto;
+}
+
+.tableView.inActive{
+    margin-left: 300px;
+}
+mat-card-content[_ngcontent-njk-c181]
+{
+    display: grid;
+     grid-template-columns: 0fr 0fr 0fr 0fr !important;
+    grid-column-gap: 8px;
+    grid-template-areas:
+        "icon name name menu"
+        "icon balance balance balance";
+}
+.btn-outline {
+    color: #7c49cb;
+    background-color: transparent; 
+    background-image: none;
+    border-color: #7c49cb;
+    padding: "";
+    margin-left: -11px;
+}
+@media only screen and (max-width: 1030px)
+{
+   .m0p0{margin: 0px;padding: 0px;}
+   .uxg-h4{margin-top: 20px;}
+   .table-res{overflow-x: auto;}
+}
+.searchInput{
+    th{
+        padding-top: 10px;
+        .mat-form-field-infix{
+            width: 110px;
+        }
+        .mat-form-field-flex{
+            max-width: 110px!important;
+        }
+    }
+}
+// .searchInputable{
+//     th{
+//         text-align: center;
+//     }
+// }
+
+.custom-slider {
+    width: 100% !important;
+    .ngx-slider {
+         .ngx-slider-pointer{
+            cursor: pointer;
+            width: 13px;
+            height: 13px;
+            top: -5px;
+            background-color: #2ab9f0;
+            z-index: 3;
+            border-radius: 16px;
+            &::after{
+                content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    border-radius: 4px;
+    background: #2ab9f0;
+            }
+         }
+      
+    }
+  }
+  .searchInput{
+    th{
+        padding-top: 10px;
+        .mat-form-field-infix{
+            width: 110px;
+        }
+        .mat-form-field-flex{
+            max-width: 110px!important;
+        }
+    }
+}
+.class2{
+    min-width: 233px;
+    vertical-align: middle;
+    position: relative;
+    padding-top:30px !important;
+  
+  }
