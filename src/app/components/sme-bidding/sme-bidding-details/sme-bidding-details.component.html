@@ -70,6 +70,13 @@
                         <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.annualYeild }}
                         </td>
                     </ng-container>
+                    <ng-container matColumnDef="Penal ROI">
+                        <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                        matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'finaniceBidding.Penal ROI' | translate}}</th>
+                        <td mat-cell *matCellDef="let financier"><input matInput
+                                value="{{ financier.penalRate }}" />
+                        </td>
+                    </ng-container>
                     <ng-container matColumnDef="Net Amt payable (Base CCY)">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'Net Amt Receivable' | translate}}</th>
@@ -293,6 +300,13 @@
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.discAmount}}" [matTooltipPosition]="'below'">{{'Repayment Date' | translate}}</th>
                         <td mat-cell *matCellDef="let financier let index = index">{{ financier.repaymentDate | date}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="Penal ROI">
+                        <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
+                        matTooltip="{{financierTooltip.expPeriod}}" [matTooltipPosition]="'below'">{{'finaniceBidding.Penal ROI' | translate}}</th>
+                        <td mat-cell *matCellDef="let financier"><input matInput
+                                value="{{ financier.penalRate }}" />
+                        </td>
                     </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="displayedsmeOne" style="background-color:#B4A6EA">

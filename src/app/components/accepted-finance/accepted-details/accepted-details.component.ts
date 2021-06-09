@@ -159,5 +159,18 @@ export class AcceptedDetailsComponent implements OnInit {
       }
     })
   }
-
+  tillDateCalu(invoiceDate,baseCcyAmt,tenor){
+    console.log(baseCcyAmt,tenor,"baseCcyAmt,tenor")
+    if(invoiceDate){
+      var ddatae = new Date();
+      console.log(ddatae.setDate(ddatae.getDate() - 1),"ddatae")
+      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+      const diffDays = Math.round(Math.abs((new Date(invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
+      console.log(diffDays,"diffDays")
+      return baseCcyAmt / tenor * diffDays
+    }else{
+      return '0'
+    }
+        
+  }
 }

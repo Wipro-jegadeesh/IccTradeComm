@@ -285,7 +285,7 @@ updateAllComplete(text){
       finId: localStorage.getItem("userId"),
       //invoiceId: this.id,
       invoiceId: [this.FinancebiddingDetails.invoiceId, Validators.required],
-      tenor: [this.dateMinus(this.datePipe.transform(this.invoiceDetails.invDueDate, 'MM/dd/yyyy'), this.datePipe.transform(ddatae, 'MM/dd/yyyy')), Validators.required],
+      tenor: [this.dateMinus(this.datePipe.transform(this.invoiceDetails.invDueDate, 'MM/dd/yyyy'), this.datePipe.transform(this.invoiceDetails.invDate, 'MM/dd/yyyy')), Validators.required],
       penalRate:[this.FinancebiddingDetails.penalRate],
       invNo: [this.FinancebiddingDetails.invNo],
       invoiceAmt: [this.FinancebiddingDetails.invoiceAmt]

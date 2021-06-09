@@ -159,13 +159,15 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Fundable percentage',
     // 'Funding Amount / Repay Amount (Base CCY)',
     'Funding Amount / Repay Amount (Inv CCY)',
-    'Repayment Date'
+    'Repayment Date',
+    'Penal ROI'
   ];
   displayedsmeTwo: string[] = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
     'Annual Yield (Basis a360)',
+    'Penal ROI',
     'Net Amt payable (Base CCY)',
     'Net Amt payable (Inv CCY)',
     'Offer Exp period',
