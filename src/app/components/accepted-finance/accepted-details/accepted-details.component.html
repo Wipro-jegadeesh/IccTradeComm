@@ -367,10 +367,9 @@
                                     </ng-container>
                                     <ng-container matColumnDef="RepaymentDate">
                                         <th mat-header-cell *matHeaderCellDef scope="column">
-                                            {{'acceptFinance.Interest Earned Till Date' | translate}} </th>
+                                            {{'acceptFinance.InterestDate' | translate}} </th>
                                         <td mat-cell *matCellDef="let invoiceDetailsData">
-                                            {{invoiceDetailsData.repaymentDate &&
-                                                moment(invoiceDetailsData.repaymentDate).format('DD/MM/YYYY')}}</td>
+                                            {{tillDateCalu(invoiceDetailsData.invoiceDate,invoiceDetailsData.baseCcyDiscAmt,invoiceDetailsData.tenor).toFixed(2)}}</td>
                                     </ng-container>
 
 

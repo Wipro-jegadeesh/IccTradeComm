@@ -204,6 +204,7 @@ export class InvoiceDetailsComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.buildform()
+    // this.dateMinus(this.datePipe.transform('2021-08-20T00:00:00.000+0000','MM/dd/yyyy'),this.datePipe.transform('2021-06-09T00:00:00.000+0000','MM/dd/yyyy'))
     this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(this.id).subscribe(resp => {
       if(resp){
 
@@ -282,7 +283,7 @@ export class InvoiceDetailsComponent implements OnInit {
       offerExpDateTime:[this.datePipe.transform(ddatae.setDate(ddatae.getDate() + 1)), Validators.required],
       finId: localStorage.getItem("userId"),
       invoiceId : this.id,
-      tenor:[this.dateMinus(this.datePipe.transform(this.invoiceDetails.invDueDate,'MM/dd/yyyy'),this.datePipe.transform(ddatae,'MM/dd/yyyy')), Validators.required],
+      tenor:[this.dateMinus(this.datePipe.transform(this.invoiceDetails.invDueDate,'MM/dd/yyyy'),this.datePipe.transform(this.invoiceDetails.invDate,'MM/dd/yyyy')), Validators.required],
       penalRate:[''],
       invNo:[''],
       invoiceAmt:['']
@@ -296,6 +297,7 @@ export class InvoiceDetailsComponent implements OnInit {
     var time_difference = date2.getTime() - date1.getTime();  
     console.log(time_difference,"time_difference")
     var days_difference = time_difference / (1000 * 60 * 60 * 24);
+    console.log(days_difference,"days_difference")
     return days_difference
   }
 
