@@ -17,9 +17,10 @@ import { IccCountryServices } from '../icc-country/icc-country.services'
 
 const ELEMENT_DATA: any[] = [
   {
+    uniqueId : '',
     Name: '',
     Position: '',
-    Address: '',
+    // Address: '',
     TelephoneNo: '', 
     Email: ''
   }
@@ -62,7 +63,8 @@ export class FinancierOnboardingComponent implements OnInit {
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
 
-  displayedColumns: string[] = ['name','Position', 'Address', 'TelephoneNo', 'Email'];
+  // , 'Address'
+  displayedColumns: string[] = ['uniqueId','name','Position', 'TelephoneNo', 'Email'];
   displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
 
 
@@ -128,6 +130,18 @@ export class FinancierOnboardingComponent implements OnInit {
     this.getAllCountry()
   }
 
+  public setTwoNumberDecimal($event,name) {
+    if(this.chkDecimalLength($event.target.value) >= 2){
+      $event.target.value = parseFloat($event.target.value).toFixed(2);
+      this.financierForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
+    }
+  }
+  
+  chkDecimalLength (value) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split(".")[1].length || 0;
+    }
+
   getAllCountry(){
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
@@ -160,7 +174,7 @@ export class FinancierOnboardingComponent implements OnInit {
     const partnerRow = this.fb.group({
       name: [""],
       position: [""],
-      address: [""],
+      // address: [""],
       phoneNo: [""],
       email: [""]
     })
@@ -385,7 +399,7 @@ let respObj = {​​​​​​​​
           let partnerRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            // address: [ item.addressLine1 ? item.addressLine1 : ''],
             phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : '']
           })
@@ -396,7 +410,7 @@ let respObj = {​​​​​​​​
           let authRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            // address: [ item.addressLine1 ? item.addressLine1 : ''],
             phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : '']
           })
@@ -407,7 +421,7 @@ let respObj = {​​​​​​​​
           let entityRow = this.fb.group({
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
-            address: [ item.addressLine1 ? item.addressLine1 : ''],
+            // address: [ item.addressLine1 ? item.addressLine1 : ''],
             phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : ''] 
           })
@@ -419,21 +433,21 @@ let respObj = {​​​​​​​​
       const partnerRow = this.fb.group({
         name: [""],
         position: [""],
-        address: [""],
+        // address: [""],
         phoneNo: [""],
         email: [""]
       })
       const authRow = this.fb.group({
         name: [""],
         position: [""],
-        address: [""],
+        // address: [""],
         phoneNo: [""],
         email: [""]
       })
       const entityRow = this.fb.group({
         name: [""],
         position: [""],
-        address: [""],
+        // address: [""],
         phoneNo: [""],
         email: [""]
       })
@@ -496,25 +510,28 @@ let respObj = {​​​​​​​​
       entityAdmin: this.fb.array([])
     })
     const partnerRow = this.fb.group({
-      name: [""],
-      position: [""],
-      address: [""],
-      phoneNo: [""],
-      email: [""]
+      uniqueId: ["",Validators.required],
+      name: ["",Validators.required],
+      position: ["",Validators.required],
+      // address: [""],
+      phoneNo: ["",Validators.required],
+      email: ["",Validators.required]
     })
     const authRow = this.fb.group({
-      name: [""],
-      position: [""],
-      address: [""],
-      phoneNo: [""],
-      email: [""]
+      uniqueId: ["",Validators.required],
+      name: ["",Validators.required],
+      position: ["",Validators.required],
+      // address: [""],
+      phoneNo: ["",Validators.required],
+      email: ["",Validators.required]
     })
     const entityRow = this.fb.group({
-      name: [""],
-      position: [""],
-      address: [""],
-      phoneNo: [""],
-      email: [""]
+      uniqueId: ["",Validators.required],
+      name: ["",Validators.required],
+      position: ["",Validators.required],
+      // address: [""],
+      phoneNo: ["",Validators.required],
+      email: ["",Validators.required]
     })
     this.partnerFormArray.push(partnerRow);
     this.authoriseFormArray.push(authRow);
@@ -628,10 +645,9 @@ if(data && data.itemName){
         'name': item.name,
         'position': item.position,
         'assocType': "Director/Partner",
-        'addressLine1': item.address,
+        // 'addressLine1': item.address,
         'telephoneNumber': item.phoneNo,
         'email': item.email
-        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
@@ -642,11 +658,10 @@ if(data && data.itemName){
         'name': item.name,
         'position': item.position,
         'assocType': "Authorised Signat",
-        'addressLine1': item.address,
+        // 'addressLine1': item.address,
         'telephoneNumber': item.phoneNo,
         'email': item.email
 
-        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
@@ -657,11 +672,9 @@ if(data && data.itemName){
         'name': item.name,
         'position': item.position,
         'assocType': "Entity Admin",
-        'addressLine1': item.address,
+        // 'addressLine1': item.address,
         'telephoneNumber': item.phoneNo,
         'email': item.email
-
-        // 'assocaddrlst': [{ 'addressLine1': item.address, 'telephoneNumber': item.phoneNo, 'email': item.email }]
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))

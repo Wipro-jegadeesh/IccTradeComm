@@ -106,6 +106,19 @@ export class InvoiceBulkUploadComponent implements OnInit {
     }
   
   }
+
+  public setTwoNumberDecimal($event,name) {
+    if(this.chkDecimalLength($event.target.value) >= 2){
+      $event.target.value = parseFloat($event.target.value).toFixed(2);
+      this.invoiceForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
+    }
+  }
+  
+  chkDecimalLength (value) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split(".")[1].length || 0;
+    }
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
