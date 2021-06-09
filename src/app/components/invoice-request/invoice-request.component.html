@@ -85,7 +85,7 @@
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="spilt-input" >
         <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
-        <input type="number" matInput value="" autocomplete="on" formControlName="invAmt" (input)="setTwoNumberDecimal($event)"/>
+        <input type="number" matInput value="" autocomplete="on" formControlName="invAmt" (input)="setTwoNumberDecimal($event,'invAmt')"/>
         <!-- <mat-hint>Please enter the Invoice Amount</mat-hint> -->
       </mat-form-field>
     </td>
@@ -293,7 +293,8 @@
                       type="number" 
                       formControlName="quantity" 
                       placeholder="{{'Quantity' | translate}}" 
-                      required (keyup)="changeRowgrid(index)">
+                      required (keyup)="changeRowgrid(index)"
+                      >
                     </td>
                   </ng-container>
 
@@ -307,7 +308,8 @@
                       type="number" 
                       formControlName="rate" 
                       placeholder="{{'Rate' | translate}}" 
-                      required (keyup)="changeRowgrid(index)">
+                      required (keyup)="changeRowgrid(index)"
+                      (input)="setGoodsDetails_TwoNumberDecimal($event,'rate',index)" >
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="Amt">
@@ -320,7 +322,8 @@
                       formControlName="amt" 
                       placeholder="{{'Amount' | translate}}" 
                       value="{{element.amt}}"
-                      required readonly>
+                      required readonly
+                      (input)="setGoodsDetails_TwoNumberDecimal($event,'amt',index)">
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="Ccy">
@@ -334,7 +337,7 @@
                       placeholder="CCY" 
                       readonly
                       value="{{currencyName}}"
-                      required >
+                      required (input)="setGoodsDetails_TwoNumberDecimal($event,'amtCcy',index)">
                       <!-- {{"SGD"}} -->
                     </td>
                   </ng-container>
@@ -349,7 +352,7 @@
                       type="number" 
                       formControlName="discAmt" 
                       placeholder="{{'Disc Amount' | translate}}" 
-                       required (keyup)="changeRowgrid(index)">
+                       required (keyup)="changeRowgrid(index)" (input)="setGoodsDetails_TwoNumberDecimal($event,'discAmt',index)">
                     </td>
                   </ng-container>
 
@@ -362,7 +365,7 @@
                       type="number" 
                       formControlName="netAmtPay" 
                       placeholder="{{'Net Amount' | translate}}" 
-                      required readonly>
+                      required readonly (input)="setGoodsDetails_TwoNumberDecimal($event,'netAmtPay',index)">
                     </td>
                   </ng-container>
 
@@ -378,7 +381,7 @@
                       formControlName="taxRate" 
                       placeholder="{{'Tax Rate' | translate}}" 
                       required  (keyup)="changeRowgrid(index)"
-                      >
+                      (input)="setGoodsDetails_TwoNumberDecimal($event,'taxRate',index)">
                     </td>
                   </ng-container>
 
@@ -392,7 +395,7 @@
                       type="number" 
                       formControlName="taxAmt" 
                       placeholder="{{'Tax Amount' | translate}}" 
-                      required readonly>
+                      required readonly (input)="setGoodsDetails_TwoNumberDecimal($event,'taxAmt',index)">
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="Total">

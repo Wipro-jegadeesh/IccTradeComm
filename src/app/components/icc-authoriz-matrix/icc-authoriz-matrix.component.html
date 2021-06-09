@@ -33,7 +33,7 @@
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>{{'IccAuthorizationMatrix.From Amount' | translate}}</mat-label>
-        <input type="number" matInput value="" formControlName="fromAmt" />
+        <input type="number" matInput value="" formControlName="fromAmt" (input)="setTwoNumberDecimal($event,'fromAmt')" />
       </mat-form-field>
     </td>
 
@@ -45,7 +45,7 @@
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="icc-mat">
         <mat-label>{{'IccAuthorizationMatrix.To Amount' | translate}}</mat-label>
-        <input type="number" matInput value="" formControlName="toAmt" />
+        <input type="number" matInput value="" formControlName="toAmt" (input)="setTwoNumberDecimal($event,'fromAmt')"/>
       </mat-form-field>
     </td>
 

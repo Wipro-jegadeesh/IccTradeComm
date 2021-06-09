@@ -225,11 +225,55 @@ export class InvoiceRequestComponent implements OnInit {
     );
 }
 
-public setTwoNumberDecimal($event) {
-  if(!Number.isInteger(parseFloat($event.target.value))){
+public setTwoNumberDecimal($event,name) {
+  if(this.chkDecimalLength($event.target.value) >= 2){
     $event.target.value = parseFloat($event.target.value).toFixed(2);
+    this.invoiceForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
   }
 }
+
+public setGoodsDetails_TwoNumberDecimal($event,name,index) {
+  if (Number.isInteger(Number($event.target.value))) { // not an decimal
+    this.invoiceForm.value.goodsDetails[index][name] = $event.target.value
+    this.changeRowgrid(index)
+ }else if(this.chkDecimalLength($event.target.value) >= 2){ //check decimal length
+    $event.target.value = parseFloat($event.target.value).toFixed(2);
+    this.invoiceForm.value.goodsDetails[index][name] = parseFloat($event.target.value).toFixed(2)
+    this.changeRowgrid(index)
+    // this.invoiceForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
+  }
+}
+
+
+
+chkDecimalLength (value) {
+  if(Math.floor(value) === value) return 0;
+  return value.toString().split(".")[1].length || 0;
+  }
+
+
+  changeRowgrid(index){
+    // this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
+    this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID 
+    this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["rate"]))*Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["quantity"])) : "0" 
+    this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["amt"])) - Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["discAmt"])) :'0'
+    this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) * Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxRate"])) / 100  :"0" 
+    this.invoiceForm.value.goodsDetails[index]["total"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]) ?  Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) + Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxAmt"])):'0'
+    this.invoiceForm.value.goodsDetails[index]["amtCcy"]=this.currencyName
+    this.dateFormArray.patchValue(this.invoiceForm.value.goodsDetails);
+}
+
+//old one
+// changeRowgrid(index){ 
+//   // this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
+//   this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID
+//   this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) : "0" 
+//   this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) :'0'
+//   this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ?parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100  :"0" 
+//   this.invoiceForm.value.goodsDetails[index]["total"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]) ?  parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]):'0'
+//   this.invoiceForm.value.goodsDetails[index]["amtCcy"]=this.currencyName
+//   this.dateFormArray.patchValue(this.invoiceForm.value.goodsDetails);
+// }
 
 private _filter(value: string): string[] {
   const filterValue = value.toLowerCase();
@@ -571,16 +615,7 @@ getAllCountry(){
   updateInvoicedate(event){
     this.InvoiceFdate = event.target.value;
   }
-  changeRowgrid(index){
-    // this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
-    this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID
-    this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) : "0" 
-    this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) :'0'
-    this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ?parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100  :"0" 
-    this.invoiceForm.value.goodsDetails[index]["total"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]) ?  parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]):'0'
-    this.invoiceForm.value.goodsDetails[index]["amtCcy"]=this.currencyName
-    this.dateFormArray.patchValue(this.invoiceForm.value.goodsDetails);
-}
+ 
   onItemSelect(event){
 
   }

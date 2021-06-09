@@ -64,6 +64,18 @@ export class IccAuthorizMatrixComponent implements OnInit {
     })
   }
 
+  public setTwoNumberDecimal($event,name) {
+    if(this.chkDecimalLength($event.target.value) >= 2){
+      $event.target.value = parseFloat($event.target.value).toFixed(2);
+      this.groupsForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
+    }
+  }
+  
+  chkDecimalLength (value) {
+    if(Math.floor(value) === value) return 0;
+    return value.toString().split(".")[1].length || 0;
+    }
+
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
       slab: ['', Validators.required],

@@ -192,7 +192,9 @@
                             <input type="text"
                                    matInput
                                    formControlName="anlScfTrnOver"
-                                   [readonly]="isView" />
+                                   [readonly]="isView" 
+                                   (input)="setTwoNumberDecimal($event,'anlScfTrnOver')"
+                                   />
                             <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint>
                           </mat-form-field>
                         </div>
@@ -217,7 +219,9 @@
                             <input type="number"
                                    matInput
                                    formControlName="transLimit"
-                                   [readonly]="isView" />
+                                   [readonly]="isView" 
+                                   (input)="setTwoNumberDecimal($event,'transLimit')"
+                                   />
                             <!-- <mat-hint>{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-hint> -->
                           </mat-form-field>
                         </div>
@@ -891,12 +895,42 @@
 
             <span class="uxg-h6"
                   id=grid> {{'FinancierOnboardingComponent.DirPartner' | translate}}</span>
-            <div class="table-responsive">
+            <div class="table-responsive more-table">
             <table mat-table
                    [dataSource]="dataSource1"
                    style="width: 90%;"
                    id=right
                    formArrayName="partnerDetails">
+
+                   
+                   <ng-container matColumnDef="uniqueId">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                        
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
+                      <input matInput
+                             type="text"
+                             formControlName="uniqueId"
+                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
+                             [readonly]="isView">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                    </td>
+                  </ng-container>
+                  
                    <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
@@ -904,11 +938,27 @@
                     <td mat-cell
                         *matCellDef="let element;let row; let index = index"
                         [formGroupName]="index">
+                        <!-- ========== -->
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
                       <input matInput
                              type="text"
                              formControlName="name"
                              placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
                              [readonly]="isView">
+
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <!-- ========= -->
                     </td>
                   </ng-container>
               <!-- <ng-container matColumnDef="LastName">
@@ -932,14 +982,26 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="text"
                          formControlName="position"
                          placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
-              <ng-container matColumnDef="Address">
+              <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column">{{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -952,7 +1014,7 @@
                          placeholder="{{'FinancierOnboardingComponent.Address' | translate}}"
                          [readonly]="isView">
                 </td>
-              </ng-container>
+              </ng-container> -->
               <ng-container matColumnDef="TelephoneNo">
                 <th mat-header-cell
                     *matHeaderCellDef
@@ -960,11 +1022,23 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="number"
                          formControlName="phoneNo"
                          placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
               <ng-container matColumnDef="Email">
@@ -978,12 +1052,24 @@
                   </span></th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                    [formGroupName]="index" class="input-pos">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="email"
                          formControlName="email"
                          placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                   <span class="minus-btn"
                         *ngIf="this.dataSource1.data.length > 1 && index >= 1"
                         mat-flat-button
@@ -1003,12 +1089,42 @@
             </div>
             <span class="uxg-h6"
                   id=grid> {{'FinancierOnboardingComponent.AuthorisedSign' | translate}}</span>
-            <div class="table-responsive">
+            <div class="table-responsive more-table">
             <table mat-table
                    [dataSource]="dataSource2"
                    style="width: 90%;"
                    id=right
                    formArrayName="authSign">
+
+                   
+                   <ng-container matColumnDef="uniqueId">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                        
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
+                      <input matInput
+                             type="text"
+                             formControlName="uniqueId"
+                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
+                             [readonly]="isView">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                    </td>
+                  </ng-container>
+                  
                    <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
@@ -1016,11 +1132,24 @@
                     <td mat-cell
                         *matCellDef="let element;let row; let index = index"
                         [formGroupName]="index">
+
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
                       <input matInput
                              type="text"
                              formControlName="name"
                              placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
                              [readonly]="isView">
+                            </mat-form-field>
+                          </div>
+                        </div>
                     </td>
                   </ng-container>
               <!-- <ng-container matColumnDef="LastName">
@@ -1044,14 +1173,26 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+  <div>
+    <mat-form-field floatLabel="never"
+                    dense
+                    appearance="fill"
+                    class="example-full-width">
+      <mat-icon color="primary"
+                dense
+                matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="text"
                          formControlName="position"
                          placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
-              <ng-container matColumnDef="Address">
+              <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column"> {{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -1064,7 +1205,7 @@
                          placeholder="{{'FinancierOnboardingComponent.Address' | translate}}"
                          [readonly]="isView">
                 </td>
-              </ng-container>
+              </ng-container> -->
               <ng-container matColumnDef="TelephoneNo">
                 <th mat-header-cell
                     *matHeaderCellDef
@@ -1072,11 +1213,23 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="number"
                          formControlName="phoneNo"
                          placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
               <ng-container matColumnDef="Email">
@@ -1090,13 +1243,24 @@
                   </span></th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                    [formGroupName]="index" class="input-pos">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="email"
                          formControlName="email"
                          placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
                          [readonly]="isView">
-
+                        </mat-form-field>
+                      </div>
+                    </div>
                   <span class="minus-btn"
                         *ngIf="this.dataSource2.data.length > 1 && index >= 1"
                         mat-flat-button
@@ -1116,12 +1280,43 @@
             </div>
             <span class="uxg-h6"
                   id=grid>{{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
-            <div class="table-responsive">
+            <div class="table-responsive more-table">
             <table mat-table
                    [dataSource]="dataSource3"
                    style="width: 90%;"
                    id=right
                    formArrayName="entityAdmin">
+
+                   <ng-container matColumnDef="uniqueId">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
+                    <td mat-cell
+                        *matCellDef="let element;let row; let index = index"
+                        [formGroupName]="index">
+                        
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
+                      <input matInput
+                             type="text"
+                             formControlName="uniqueId"
+                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
+                             [readonly]="isView">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                    </td>
+                  </ng-container>
+
+
+
                    <ng-container matColumnDef="name">
                     <th mat-header-cell
                         *matHeaderCellDef
@@ -1129,11 +1324,24 @@
                     <td mat-cell
                         *matCellDef="let element;let row; let index = index"
                         [formGroupName]="index">
+                        
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never"
+                                            dense
+                                            appearance="fill"
+                                            class="example-full-width">
+                              <mat-icon color="primary"
+                                        dense
+                                        matPrefix>person_outline</mat-icon>
                       <input matInput
                              type="text"
                              formControlName="name"
                              placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
                              [readonly]="isView">
+                            </mat-form-field>
+                          </div>
+                        </div>
                     </td>
                   </ng-container>
 
@@ -1158,14 +1366,26 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="text"
                          formControlName="position"
                          placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
-              <ng-container matColumnDef="Address">
+              <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column"> {{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -1178,7 +1398,7 @@
                          placeholder="{{'FinancierOnboardingComponent.Address' | translate}}"
                          [readonly]="isView">
                 </td>
-              </ng-container>
+              </ng-container> -->
               <ng-container matColumnDef="TelephoneNo">
                 <th mat-header-cell
                     *matHeaderCellDef
@@ -1186,11 +1406,23 @@
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
                     [formGroupName]="index">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="number"
                          formControlName="phoneNo"
                          placeholder=" {{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </td>
               </ng-container>
               <ng-container matColumnDef="Email">
@@ -1204,12 +1436,24 @@
                   </span></th>
                 <td mat-cell
                     *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                    [formGroupName]="index" class="input-pos">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never"
+                                        dense
+                                        appearance="fill"
+                                        class="example-full-width">
+                          <mat-icon color="primary"
+                                    dense
+                                    matPrefix>person_outline</mat-icon>
                   <input matInput
                          type="email"
                          formControlName="email"
                          placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
                          [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
                   <span class="minus-btn"
                         *ngIf="this.dataSource3.data.length > 1 && index >= 1"
                         mat-flat-button
