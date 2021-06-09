@@ -849,7 +849,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
             "limitNumber": "3553-6736-3636-0036"
           }
           this.financelimitMaintananceservices.postnewMainLimitForm(postdatas).subscribe(resp => {
-            this.toastr.success("Limit Maintanance Created Successfully")
+            this.toastr.success("Limit Maintanance Created Successfully");
+            this.getMainlimitScreenDatas()
           })
         } else {
           let puttdatas = {
@@ -870,6 +871,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           }
           this.financelimitMaintananceservices.putnewMainLimitForm(puttdatas).subscribe(resp => {
             this.toastr.success("Limit Maintanance Updated Successfully");
+            this.getMainlimitScreenDatas()
             this.callPutMethodEdit = true
           })
 

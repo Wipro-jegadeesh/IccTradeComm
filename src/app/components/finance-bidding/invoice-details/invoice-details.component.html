@@ -378,7 +378,7 @@
 
 <ng-template #template>
     <div class="modal-header">
-       <h4 class="modal-title pull-left">{{'You are about to send for authorization the following BID:' | translate}}</h4>
+       <h4 class="modal-title pull-left">{{'You are about to send the following Bid:' | translate}}</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">×</span>
        </button>
@@ -500,7 +500,8 @@
        </div>
     </div>
     <div class="modal-footer" style="justify-content: center;">
-       <button type="button" (click)="onSubmitBidForm()" class="btn model-btn-outline">{{'Accept' | translate}}</button>
+       <button type="button" (click)="onSubmitBidForm()" class="btn model-btn-outline">{{'Send Bid' | translate}}</button>
     </div>
  </ng-template>
 
+You are about to send for authorization the following BID
