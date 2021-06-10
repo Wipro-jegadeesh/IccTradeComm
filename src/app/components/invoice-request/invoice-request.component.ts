@@ -153,6 +153,7 @@ export class InvoiceRequestComponent implements OnInit {
   userDeatils: any;
   optionDatas: any;
   nonFilterOptions : any;
+  score:any;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -204,7 +205,7 @@ export class InvoiceRequestComponent implements OnInit {
 
   ngOnInit() {
    
-    
+    localStorage.removeItem('buyerDetails')
     // this.firstname.nativeElement.focus();
 
 
@@ -413,7 +414,7 @@ getAllCountry(){
           "invoiceCcy":item['invCcy'],
           "status" : "APR", 
           "buyerName": item.buyerName,
-          "buyerAddr":item['buyerAddr'],
+          // "buyerAddr":item['buyerAddr'],
           "buyerUEN":item['buyerUEN'],
           "dispDate":item['dispDate'],
            "invDueDate":item.invDueDate,
@@ -434,11 +435,11 @@ getAllCountry(){
     console.log(data,"testtt")
     this.invoiceDetails = data
     this.invoiceForm.patchValue({
-      buyerName: data.buyerName,
+      // buyerName: data.buyerName,
      // invDueDate: data.invDueDate.toString(),
       invId: data.invId,
-      buyerAddr: data.buyerAddr,
-      buyerUEN:data.buyerUEN,
+      // buyerAddr: data.buyerAddr,
+      // buyerUEN:data.buyerUEN,
       billNo: data.billNo,
       invAmt: data.invAmt,
       //invDate: data.invDate.toString(),
@@ -518,10 +519,18 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
         "invoiceDetails": this.invoiceForm.value,
         // "smeProfileId" :  userData['smeProfileId']
       }
+      params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
+      params['invoiceDetails'].goodsDetails[0].total =   parseInt(params['invoiceDetails'].goodsDetails[0].total)
       console.log(params,"params");
       if(this.UpdateInvoiceLable === true){
         this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id,params).subscribe(resp => {
           this.deletedRowedit = [];
+          let buyerDetails= this.sendBuyerDetails(1001)
+         this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
+           if(resp){
+            this.score=resp.score
+           }
+          })
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
           this.invoiceID = "";
@@ -538,6 +547,13 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
 
       }else{
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
+          
+          })
+          let buyerDetails= this.sendBuyerDetails("1001")
+          this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
+            if(resp){
+              this.score=resp.score
+            }
           console.log(resp)
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
@@ -579,6 +595,46 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       console.log(err,"errr")
     }
   }
+  
+  sendBuyerDetails(invoiceNo){
+    let userCred=JSON.parse(localStorage.getItem('userCred'))
+    let formValues=this.invoiceForm.value
+    let buyerdetails={
+      'name':formValues.buyerName,
+      'city':formValues.city,
+      'location':formValues.buyerLocation,
+      'postalCode':formValues.postalCode,
+      'addr1':formValues.addressLine1,
+      'addr2':formValues.addressLine2,
+      'companyName':userCred.companyName,
+      'uniqueId':formValues.buyerUEN,
+      'email':formValues.email,
+      'phoneNo':formValues.phoneNo
+    }
+    localStorage.setItem('buyerDetails',JSON.stringify(buyerdetails))
+      let buyerSubmitObj={
+        'name':userCred.name,
+        'registrationNumber':userCred.companyId,
+        'countryCode':'SGP',
+        'invoiceId':this.invoiceForm.value['invId'],
+        'invoiceNo':invoiceNo,
+        "sectionList":[{
+          "questionResponses":[
+            {"type": "QuestionResponseTextDto", "questionAlias": "customer-business-name", "value": formValues.companyName},
+            {"type": "QuestionResponseTextDto", "questionAlias": "address-line-1", "value": formValues.addressLine1},
+            {"type": "QuestionResponseTextDto", "questionAlias": "address-line-2", "value": formValues.addressLine2},
+            {"type": "QuestionResponseTextDto", "questionAlias": "city", "value": formValues.city},
+            {"type": "QuestionResponseTextDto", "questionAlias": "postcode", "value": formValues.postalCode},
+            {"type": "QuestionResponseMultipleChoiceDto", "questionAlias": "country", "optionAliases": ["SGP"]},
+            {"type": "QuestionResponseTextDto", "questionAlias": "contact-email", "value": formValues.email},
+            {"type": "QuestionResponseTextDto", "questionAlias": "contact-telephone", "value": formValues.phoneNo.toString()},
+            {"type": "QuestionResponseTextDto", "questionAlias": "contact-name", "value": formValues.buyerName},
+            {"type": "QuestionResponseTextDto", "questionAlias": "customer-company-registration-number", "value": formValues.buyerUEN}
+            ],
+        }]
+      }
+      return buyerSubmitObj;
+  }
   replaceCommaLine(data) {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
@@ -612,11 +668,9 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
   }
   invoiceFormBuild() {
     this.invoiceForm = this.fb.group({
-      buyerName: ['', Validators.required],
       invDueDate: ['', Validators.required],
       invId: ['', Validators.required],
-      buyerAddr: ['', Validators.required],
-      buyerUEN: ['', Validators.required],
+      // buyerAddr: ['', Validators.required],
       billNo: ['', Validators.required],
       invAmt: ['', Validators.required],
       invDate: ['', Validators.required], 
@@ -624,9 +678,35 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       smeId: localStorage.getItem("userId"),
       // invCcy: "",
       goodsDetails: this.fb.array([]),
-      invCcy:['',Validators.required]
-    });
+      invCcy:['',Validators.required],
 
+      // buyer details
+      email: ['',Validators.required],
+      buyerName: ['', Validators.required],
+      buyerUEN: ['', Validators.required],
+      phoneNo:['',Validators.required],
+      buyerLocation:['',Validators.required],
+      addressLine1:['',Validators.required],
+      addressLine2:['',Validators.required],
+      city:['',Validators.required],
+      postalCode:['',Validators.required],
+      companyName:['',Validators.required]
+    });
+    let buyerDetails=JSON.parse(localStorage.getItem('buyerDetails'))
+    if(buyerDetails){
+      this.invoiceForm.patchValue({
+        email:buyerDetails.email,
+        buyerName:buyerDetails.name,
+        phoneNo:buyerDetails.phoneNo,
+        buyerUEN:buyerDetails.uniqueId,
+        buyerLocation:buyerDetails.location,
+        addressLine1:buyerDetails.addr1,
+        addressLine2:buyerDetails.addr2,
+        city:buyerDetails.city,
+        postalCode:buyerDetails.postalCode,
+        companyName:buyerDetails.companyName
+      })
+    }
   }
   updateInvoiceId(event) {
     console.log(event.target.value)
