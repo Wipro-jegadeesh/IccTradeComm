@@ -722,7 +722,7 @@
                     
                     <ng-container matColumnDef="firstName">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
+                            matTooltip="{{biddingTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.firstName}}
                         </td>
@@ -730,7 +730,7 @@
               
                     <ng-container matColumnDef="lastName">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'FinancierOnboardingComponent.LastName' | translate}} 
+                            matTooltip="{{biddingTooltip.invoiceAmount | translate}}" [matTooltipPosition]="'below'"> {{'FinancierOnboardingComponent.LastName' | translate}} 
                         </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.lastName}}
@@ -740,7 +740,7 @@
               
                     <ng-container matColumnDef="emailId">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'"> {{'FinancierOnboardingComponent.EmailId' | translate}}  </th>
+                            matTooltip="{{biddingTooltip.buyerName | translate}}" [matTooltipPosition]="'below'"> {{'FinancierOnboardingComponent.EmailId' | translate}}  </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.emailId}}
                         </td>
@@ -748,7 +748,7 @@
               
                     <ng-container matColumnDef="phoneNumber">
                         <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                            matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.PhoneNo' | translate}}  </th>
+                            matTooltip="{{biddingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="'below'">  {{'FinancierOnboardingComponent.PhoneNo' | translate}}  </th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.phoneNumber }}
                         </td>

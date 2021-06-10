@@ -33,14 +33,14 @@
                 <mat-label>Password</mat-label>
                 <input matInput name="password" [(ngModel)]="password" required [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button (click)="hide = !hide" color="primary" matSuffix  #tooltip="matTooltip"
-                matTooltip="{{loginTooltip.shwPwd}}" [matTooltipPosition]="'below'">
+                matTooltip="{{loginTooltip.shwPwd | translate}}" [matTooltipPosition]="'below'">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-hint>Please enter your password</mat-hint>
             </mat-form-field>
 
             <button mat-flat-button (click)="login($event,template)" color="primary"  #tooltip="matTooltip"
-            matTooltip="{{loginTooltip.login}}" [matTooltipPosition]="'below'">
+            matTooltip="{{loginTooltip.login | translate}}" [matTooltipPosition]="'below'">
                 <!-- <mat-icon>arrow_right_alt</mat-icon> -->
                 Login
             </button>
@@ -49,7 +49,7 @@
         <div class="login-actions"> 
             <span class="uxg-body-3">Don't have an account? </span>
             <a style="text-decoration:underline" routerLink="/signup" color="primary"  #tooltip="matTooltip"
-            matTooltip="{{loginTooltip.signup}}" [matTooltipPosition]="'below'">
+            matTooltip="{{loginTooltip.signup | translate}}" [matTooltipPosition]="'below'">
                 <!-- <mat-icon>arrow_right_alt</mat-icon> -->
                 Sign Up
             </a>

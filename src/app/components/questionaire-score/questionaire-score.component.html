@@ -65,7 +65,7 @@
 
                 <ng-container matColumnDef="score">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Score' | translate}}
+                        matTooltip="{{'questionaireScore.Score' | translate}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Score' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.score}}
@@ -74,7 +74,7 @@
 
                 <ng-container matColumnDef="information">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Information' | translate}}
+                        matTooltip="{{'questionaireScore.Information' | translate}}" [matTooltipPosition]="'below'"> {{'questionaireScore.Information' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.information && element.information[0] && element.information[0] ? element.information[0].type + ':' +element.information[0].message : '-' }}

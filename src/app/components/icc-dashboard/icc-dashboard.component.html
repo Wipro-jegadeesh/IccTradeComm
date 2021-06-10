@@ -28,15 +28,15 @@
       <ng-container>
         <div #accountList class="accounts-list">
         <uxg-account-card  class="curs-pointer" name="{{'ICCDashboardComponent.Funding Request' | translate}}" (click)="naviageTiles('/icc-funding-request')"  number="{{fundingRequestObj?.CCY || 'SGD'}} {{fundingRequestObj?.AMOUNT? fundingRequestObj?.AMOUNT : '0'}}" #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltip.fundingRequest}}" [matTooltipPosition]="'below'"></uxg-account-card>
+        matTooltip="{{dashboardTooltip.fundingRequest | translate}}" [matTooltipPosition]="'below'"></uxg-account-card>
         <uxg-account-card  class="curs-pointer" name="{{'ICCDashboardComponent.Offer for Acceptance' | translate}}" (click)="naviageTiles('/icc-offer-acceptance')" number="{{OfferAcceptanceObj?.CCY || 'SGD'}} {{OfferAcceptanceObj?.AMOUNT? OfferAcceptanceObj?.AMOUNT : '0'}}"  #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltip.offerAcceptance}}" [matTooltipPosition]="'below'"></uxg-account-card>
+        matTooltip="{{dashboardTooltip.offerAcceptance | translate}}" [matTooltipPosition]="'below'"></uxg-account-card>
         <uxg-account-card  class="curs-pointer" name="{{'ICCDashboardComponent.Financed Today' | translate}}" number="{{getSumAllfinTdyCount?.FINANCECCY || 'SGD'}} {{getSumAllfinTdyCount?.FINANCEAMT ? getSumAllfinTdyCount?.FINANCEAMT : '0'}}" #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltip.financedToday}}" (click)="this.navigatefinancedToday()" [matTooltipPosition]="'below'"></uxg-account-card>
+        matTooltip="{{dashboardTooltip.financedToday | translate}}" (click)="this.navigatefinancedToday()" [matTooltipPosition]="'below'"></uxg-account-card>
         <uxg-account-card name="{{'ICCDashboardComponent.Finance Master' | translate}}" number="{{financeMasterCount?.CCY || 'SGD'}} {{financeMasterCount?.AMOUNT ? financeMasterCount?.AMOUNT : '0'}}" #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltip.financedMaster}}" (click)="this.navigatefinancedMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
+        matTooltip="{{dashboardTooltip.financedMaster | translate}}" (click)="this.navigatefinancedMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
         <uxg-account-card  class="curs-pointer" name="{{'ICCDashboardComponent.Invoice Master' | translate}}" number="{{getSumInvoiceMasterCount?.CCY || 'SGD'}} {{getSumInvoiceMasterCount?.AMOUNT? getSumInvoiceMasterCount?.AMOUNT : '0'}}" #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltip.invoiceMaster}}" (click)="this.navigateinvoiceMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
+        matTooltip="{{dashboardTooltip.invoiceMaster | translate}}" (click)="this.navigateinvoiceMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
         </div>
         </ng-container>
       <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
@@ -186,19 +186,19 @@
                   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="financierId">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.financierId}}" [matTooltipPosition]="'below'">{{'ICCDashboardComponent.Profile Id' | translate}}</th>
+                      matTooltip="{{dashboardTooltip.financierId | translate}}" [matTooltipPosition]="'below'">{{'ICCDashboardComponent.Profile Id' | translate}}</th>
                       <td mat-cell *matCellDef="let element"><nav></nav> {{element.profileID}} </td>
                     </ng-container>
                   
                     <ng-container matColumnDef="financierName">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.financierName}}" [matTooltipPosition]="'below'"> {{'ICCDashboardComponent.Financier Name' | translate}} </th>
+                      matTooltip="{{dashboardTooltip.financierName | translate}}" [matTooltipPosition]="'below'"> {{'ICCDashboardComponent.Financier Name' | translate}} </th>
                       <td mat-cell *matCellDef="let element"> {{element.financierNameConstitution}} </td>
                     </ng-container>
                   
                     <ng-container matColumnDef="regNumber">
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                      matTooltip="{{dashboardTooltip.regNo}}" [matTooltipPosition]="'below'">{{'ICCDashboardComponent.Register Date' | translate}}</th>
+                      matTooltip="{{dashboardTooltip.regNo | translate}}" [matTooltipPosition]="'below'">{{'ICCDashboardComponent.Register Date' | translate}}</th>
                       <td mat-cell *matCellDef="let element"> {{element.registerDate}} </td>
                     </ng-container>     
                     

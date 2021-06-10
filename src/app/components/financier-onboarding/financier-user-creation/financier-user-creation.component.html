@@ -13,7 +13,7 @@
                 
                 <ng-container matColumnDef="userId">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                    matTooltip="{{biddingTooltip.tradecommRef}}" [matTooltipPosition]="'below'">  {{'UserCreation.UserId' | translate}}</th>
+                    matTooltip="{{biddingTooltip.tradecommRef | translate}}" [matTooltipPosition]="'below'">  {{'UserCreation.UserId' | translate}}</th>
                     <td mat-cell *matCellDef="let element">
                                 {{element.userId}}
                     </td>
@@ -21,7 +21,7 @@
                 
                 <ng-container matColumnDef="firstName">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.invoiceId}}" [matTooltipPosition]="'below'"> {{'UserCreation.FirstName' | translate}} </th>
+                        matTooltip="{{biddingTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'"> {{'UserCreation.FirstName' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.firstName}}
                     </td>
@@ -29,7 +29,7 @@
 
                 <ng-container matColumnDef="lastName">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.invoiceAmount}}" [matTooltipPosition]="'below'"> {{'UserCreation.LastName' | translate}}
+                        matTooltip="{{biddingTooltip.invoiceAmount | translate}}" [matTooltipPosition]="'below'"> {{'UserCreation.LastName' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.lastName}}
@@ -46,7 +46,7 @@
 
                 <ng-container matColumnDef="emailId">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.buyerName}}" [matTooltipPosition]="'below'">{{'UserCreation.EmailId' | translate}} </th>
+                        matTooltip="{{biddingTooltip.buyerName | translate}}" [matTooltipPosition]="'below'">{{'UserCreation.EmailId' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.email}}
                     </td>
@@ -54,7 +54,7 @@
 
                 <ng-container matColumnDef="phoneNumber">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
-                        matTooltip="{{biddingTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'">  {{'UserCreation.PhoneNo' | translate}} </th>
+                        matTooltip="{{biddingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="'below'">  {{'UserCreation.PhoneNo' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                         {{ element.contactNo }}
                     </td>
@@ -66,7 +66,7 @@
                     <td mat-cell *matCellDef="let element">
                         <a  href="javascript:void(0)" (click)="navigateUserDetails(element.userKey)">
                             <mat-icon  #tooltip="matTooltip"
-                            matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                            matTooltip="{{'edit' | translate}}" [matTooltipPosition]="'below'">edit</mat-icon>
                           </a>&nbsp;
                         <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                             <mat-icon #tooltip="matTooltip" matTooltip="View" [matTooltipPosition]="'below'">visibility

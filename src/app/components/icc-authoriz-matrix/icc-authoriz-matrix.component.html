@@ -75,7 +75,7 @@
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="slab">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{groupTooltip.slab}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Slab' | translate}} </th>
+                    matTooltip="{{groupTooltip.slab | translate}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Slab' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.slab}}
                      </td>
@@ -83,7 +83,7 @@
 
                   <ng-container matColumnDef="smefin">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Sme/Fin' | translate}} </th>
+                        matTooltip="{{groupTooltip.fromAmt | translate}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.Sme/Fin' | translate}} </th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.smefin}}
                     </td>
@@ -91,7 +91,7 @@
 
                 <ng-container matColumnDef="currency">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.Currency' | translate}}</th>
+                        matTooltip="{{groupTooltip.toAmt| translate}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.Currency' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.currency}}
                     </td>
@@ -99,7 +99,7 @@
   
                 <ng-container matColumnDef="fromAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.fromAmt}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.From Amount' | translate}}</th>
+                        matTooltip="{{groupTooltip.fromAmt | translate}}" [matTooltipPosition]="'below'">{{'IccAuthorizationMatrix.From Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.fromAmt}}
                     </td>
@@ -107,7 +107,7 @@
 
                 <ng-container matColumnDef="toAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.toAmt}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.To Amount' | translate}}</th>
+                        matTooltip="{{groupTooltip.toAmt | translate}}" [matTooltipPosition]="'below'"> {{'IccAuthorizationMatrix.To Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let element"> 
                         {{element.toAmt}}
                     </td>
@@ -126,7 +126,7 @@
                   <td mat-cell *matCellDef="let element">
                     <a  href="javascript:void(0)" (click)="getEditData(element)">
                       <mat-icon  #tooltip="matTooltip"
-                      matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                      matTooltip="{{'edit' | translate}} " [matTooltipPosition]="'below'">edit</mat-icon>
                     </a>&nbsp;
                      </td>
                 </ng-container>

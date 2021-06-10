@@ -9,7 +9,7 @@
 
         <ng-container matColumnDef="invoiceRef">
           <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-          matTooltip="{{dashboardTooltip.invRefNo}}" [matTooltipPosition]="'below'"> {{'ICC Tradecomm Ref' | translate}} </th>
+          matTooltip="{{dashboardTooltip.invRefNo | translate}}" [matTooltipPosition]="'below'"> {{'ICC Tradecomm Ref' | translate}} </th>
           <td mat-cell *matCellDef="let element">
                       {{element.invNo}} 
           </td>
@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="invoiceNo">
           <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Id' | translate}}</th>
+            matTooltip="{{dashboardTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Id' | translate}}</th>
           <td mat-cell *matCellDef="let element">
             {{ element.invoiceId }} 
           </td>
@@ -25,7 +25,7 @@
 
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceId}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Bid ID' | translate}}</th>
+            matTooltip="{{dashboardTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Bid ID' | translate}}</th>
             <td mat-cell *matCellDef="let element">
             {{ element.id }}
             </td>
@@ -33,7 +33,7 @@
 
           <ng-container matColumnDef="invoiceAmt">
             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.buyerName}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Amount' | translate}}</th>
+            matTooltip="{{dashboardTooltip.buyerName | translate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Invoice Amount' | translate}}</th>
             <td mat-cell *matCellDef="let element">
             {{ element.invoiceAmt }}
               </td>
@@ -41,7 +41,7 @@
      
           <ng-container matColumnDef="baseCcyNetAmtPayable">
             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Bidding Amount' | translate}}</th>
+            matTooltip="{{dashboardTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Bidding Amount' | translate}}</th>
             <td mat-cell *matCellDef="let element">
 
             {{ element.baseCcyNetAmtPayable }} 
@@ -49,7 +49,7 @@
           </ng-container>
           <ng-container matColumnDef="offerExpDateTime">
             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-            matTooltip="{{dashboardTooltip.invoiceCreateDate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Offer Expired' | translate}}</th>
+            matTooltip="{{dashboardTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="'below'" mat-sort-header>{{'Offer Expired' | translate}}</th>
             <td mat-cell *matCellDef="let element">
 
             {{ element.offerExpDateTime | date}}
@@ -60,15 +60,15 @@
             <td mat-cell *matCellDef="let element"> 
               <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'edit')">
                 <mat-icon  #tooltip="matTooltip"
-                matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                matTooltip="{{'edit' | translate}}" [matTooltipPosition]="'below'">edit</mat-icon>
               </a>&nbsp;
               <a  href="javascript:void(0)" (click)="navigateFinanceDetails(element.id,'view')">
                   <mat-icon  #tooltip="matTooltip"
-                  matTooltip="View" [matTooltipPosition]="'below'">visibility</mat-icon>
+                  matTooltip="{{'view' | translate}}" [matTooltipPosition]="'below'">visibility</mat-icon>
               </a>&nbsp;
               <a  href="javascript:void(0)" (click)="openModal($event,'reject',element)">
                 <mat-icon  #tooltip="matTooltip"
-                matTooltip="Cancel" [matTooltipPosition]="'below'">
+                matTooltip="{{'Cancel' | translate}}" [matTooltipPosition]="'below'">
                   cancel_presentation
                   </mat-icon>
             </a>
@@ -109,11 +109,11 @@
               <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                 <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                     <mat-icon #tooltip="matTooltip"
-                    matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}} 
+                    matTooltip="{{'Search' | translate}} " [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}} 
                   </button>&nbsp;
                   <button  mat-raised-button style="color: #5e52a1;">
                     <mat-icon #tooltip="matTooltip"
-                    matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}} 
+                    matTooltip="{{'Reset' | translate}} " [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}} 
                   </button>
               </div>
              
@@ -143,11 +143,11 @@
                   <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                     <button  mat-raised-button style="color: #5e52a1;">
                         <mat-icon #tooltip="matTooltip"
-                        matTooltip="Done" [matTooltipPosition]="'below'">done</mat-icon>   {{'Search' | translate}} 
+                        matTooltip="{{'Search' | translate}} " [matTooltipPosition]="'below'">done</mat-icon>   {{'Search' | translate}} 
                       </button>&nbsp;
                       <button  mat-raised-button style="color: #5e52a1;">
                         <mat-icon #tooltip="matTooltip"
-                        matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>   {{'Reset' | translate}} 
+                        matTooltip="{{'Reset' | translate}} " [matTooltipPosition]="'below'">restart_alt</mat-icon>   {{'Reset' | translate}} 
                       </button>
                   </div>
              </th>

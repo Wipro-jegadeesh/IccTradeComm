@@ -53,7 +53,7 @@
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="groupCode">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{groupTooltip.groupCode}}" [matTooltipPosition]="'below'"> {{'ICCGroups.Group Code' | translate}} </th>
+                    matTooltip="{{groupTooltip.groupCode | translate}}" [matTooltipPosition]="'below'"> {{'ICCGroups.Group Code' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.groupCode}}
                      </td>
@@ -69,7 +69,7 @@
 
                 <ng-container matColumnDef="groupDescription">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                        matTooltip="{{groupTooltip.groupDescription}}" [matTooltipPosition]="'below'"> {{'ICCGroups.Group Description' | translate}}
+                        matTooltip="{{groupTooltip.groupDescription | translate}}" [matTooltipPosition]="'below'"> {{'ICCGroups.Group Description' | translate}}
                     </th>
                     <td mat-cell *matCellDef="let element">
                         {{element.groupDescription}}
@@ -81,7 +81,7 @@
                   <td mat-cell *matCellDef="let element">
                     <a  href="javascript:void(0)" (click)="getEditData(element)">
                       <mat-icon  #tooltip="matTooltip"
-                      matTooltip="Edit" [matTooltipPosition]="'below'">{{'ICCGroups.edit' | translate}}</mat-icon>
+                      matTooltip="{{'ICCGroups.edit' | translate}}" [matTooltipPosition]="'below'">edit</mat-icon>
                     </a>&nbsp;
                      </td>
                 </ng-container>
