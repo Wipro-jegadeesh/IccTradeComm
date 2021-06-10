@@ -21,7 +21,7 @@ const ELEMENT_DATA: any[] = [
   {
     Name: '',
     Position: '',
-    Address: '',
+    // Address: '',
     TelephoneNo: '',
     Email: ''
   }
@@ -61,7 +61,7 @@ export class FinancierOnboardingListComponent implements OnInit {
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
   displayedColumns1: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
-  displayedColumns: string[] = ['Name', 'Position', 'Address', 'TelephoneNo', 'Email'];
+  displayedColumns: string[] = ['Name', 'Position',  'TelephoneNo', 'Email']; //'Address',
   displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber'];
 
   name = "Angular";
@@ -161,7 +161,7 @@ export class FinancierOnboardingListComponent implements OnInit {
     this.isView = true
     this.isView && this.disableFields()
     this.buildFinancierForm()
-    this.financierId = element.namedPKKey  
+    this.financierId = element.profileID  
     this.financierId && this.getSpecificFinancier()
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }
@@ -172,7 +172,7 @@ export class FinancierOnboardingListComponent implements OnInit {
     const partnerRow = this.fb.group({
       name: [""],
       position: [""],
-      address: [""],
+      // address: [""],
       phoneNo: [""],
       email: [""]
     })
@@ -189,134 +189,315 @@ export class FinancierOnboardingListComponent implements OnInit {
       this.dataSource3.data = this.entityFormArray.controls;
     }
   }
-  getSpecificFinancier() {
-    this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
-      let respObj = resp
-      console.log(respObj,"respObj")
-      this.financierForm = this.fb.group({
-        financierId: [respObj.namedPKKey],
-        fName: [respObj.financierNameConstitution, Validators.required],
-        regNum: [respObj.locregno, Validators.required],
-        taxIdNum: [respObj.taxIdentificationNumber, Validators.required],
-        regDate: [respObj.registerDate],
-        fExpYears: [respObj.financeexpyears, Validators.required],
-        activity: [respObj.typeofact],
-        principalBankAccount: [respObj.principalBankAccount],
-        prncbankbranch: [respObj.prncbankbranch],
-        anlScfTrnOver: [respObj.annualSCFTurnOver],
-        transLimit: [respObj.transactionLimit],
-        headAddrLine1: [''],
-        headAddrLine2: [''],
-        headAddrLine3: [''],
-        headcity: [''],
-        headstate: [''],
-        headpostalCode: [''],
-        headtelephoneNumber: [''],
-        headcountry: [[]],
-        heademail: [''],
-        headswiftBic: [''],
-        headfaxNo: [''],
-        servAddrLine1: [''],
-        servAddrLine2: [''],
-        servAddrLine3: [''],
-        servcity: [''],
-        servstate: [''],
-        paymentCode: [''],
-        servpostalCode: [''],
-        servtelephoneNumber: [''],
-        servemail: [''],
-        servswiftBic: [''],
-        servfaxNo: [''],
-        servCountry: [[]],
-        partnerDetails: this.fb.array([]),
-        authSign: this.fb.array([]),
-        entityAdmin: this.fb.array([])
-      })
-      //head & service address 
-      respObj.addrlst && respObj.addrlst.length && respObj.addrlst.map((item) => {
-        if (item.addressType == 'H') {
-          item.faxno && this.financierForm.controls['headfaxNo'].setValue(item.faxno)
-          item.addressLine1 && this.financierForm.controls['headAddrLine1'].setValue(item.addressLine1)
-          item.addressLine2 && this.financierForm.controls['headAddrLine2'].setValue(item.addressLine2)
-          item.addressLine3 && this.financierForm.controls['headAddrLine3'].setValue(item.addressLine3)
-          if (item.country) {
-            let obj = {
-              'itemName': item.country
-            }
-            item.country == 'India' ? obj['id'] = 1 :
-              item.country == 'Australia' ? obj['id'] = 2 :
-                item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
-            this.financierForm.controls['headcountry'].setValue(item.country)
-          }
-          // item.country && this.financierForm.controls['headcountry'].setValue([{'id':1,itemName:item.country}])
-          item.state && this.financierForm.controls['headstate'].setValue(item.state)
-          item.city && this.financierForm.controls['headcity'].setValue(item.city)
-          item.postalCode && this.financierForm.controls['headpostalCode'].setValue(item.postalCode)
-          item.telephoneNumber && this.financierForm.controls['headtelephoneNumber'].setValue(item.telephoneNumber)
-          item.email && this.financierForm.controls['heademail'].setValue(item.email)
-          item.swiftBic && this.financierForm.controls['headswiftBic'].setValue(item.swiftBic)
-        }
-        else {
-          item.faxno && this.financierForm.controls['servfaxNo'].setValue(item.faxno)
-          item.addressLine1 && this.financierForm.controls['servAddrLine1'].setValue(item.addressLine1)
-          item.addressLine2 && this.financierForm.controls['servAddrLine2'].setValue(item.addressLine2)
-          item.addressLine3 && this.financierForm.controls['servAddrLine3'].setValue(item.addressLine3)
-          if (item.country) {
-            let obj = {
-              'itemName': item.country
-            }
-            item.country == 'India' ? obj['id'] = 1 :
-              item.country == 'Australia' ? obj['id'] = 2 :
-                item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
-            this.financierForm.controls['servCountry'].setValue(item.country)
-          }
-          // item.country && this.financierForm.controls['servCountry'].setValue([{'id':1,itemName:item.country}])
-          item.state && this.financierForm.controls['servstate'].setValue(item.state)
-          item.city && this.financierForm.controls['servcity'].setValue(item.city)
-          item.postalCode && this.financierForm.controls['servpostalCode'].setValue(item.postalCode)
-          item.telephoneNumber && this.financierForm.controls['servtelephoneNumber'].setValue(item.telephoneNumber)
-          item.email && this.financierForm.controls['servemail'].setValue(item.email)
-          item.swiftBic && this.financierForm.controls['servswiftBic'].setValue(item.swiftBic)
-        }
-      })
-      //more details datas
-      respObj.asocpartylst && respObj.asocpartylst.length && respObj.asocpartylst.map((item) => {
-        if (item.assocType == "Director/Partner") {
-          let partnerRow = this.fb.group({
-            name: [item.name ? item.name : ''],
-            position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
-          })
-          this.partnerFormArray.push(partnerRow);
-          this.dataSource1.data = this.partnerFormArray.controls;
-        }
-        else if (item.assocType == "Authorised Signat") {
-          let authRow = this.fb.group({
-            name: [item.name ? item.name : ''],
-            position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
-          })
-          this.authoriseFormArray.push(authRow);
-          this.dataSource2.data = this.authoriseFormArray.controls;
-        }
-        else {
-          let entityRow = this.fb.group({
-            name: [item.name ? item.name : ''],
-            position: [item.position ? item.position : ''],
-            address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
-            phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
-            email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
-          })
-          this.entityFormArray.push(entityRow)
-          this.dataSource3.data = this.entityFormArray.controls;
-        }
-      })
+  // getSpecificFinancier() {
+  //   debugger;
+  //   this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
+  //     let respObj = resp
+  //     console.log(respObj,"respObj")
+  //     this.financierForm = this.fb.group({
+  //       financierId: [respObj.namedPKKey],
+  //       fName: [respObj.financierNameConstitution, Validators.required],
+  //       regNum: [respObj.locregno, Validators.required],
+  //       taxIdNum: [respObj.taxIdentificationNumber, Validators.required],
+  //       regDate: [respObj.registerDate],
+  //       fExpYears: [respObj.financeexpyears, Validators.required],
+  //       activity: [respObj.typeofact],
+  //       principalBankAccount: [respObj.principalBankAccount],
+  //       prncbankbranch: [respObj.prncbankbranch],
+  //       anlScfTrnOver: [respObj.annualSCFTurnOver],
+  //       transLimit: [respObj.transactionLimit],
+  //       headAddrLine1: [''],
+  //       headAddrLine2: [''],
+  //       headAddrLine3: [''],
+  //       headcity: [''],
+  //       headstate: [''],
+  //       headpostalCode: [''],
+  //       headtelephoneNumber: [''],
+  //       headcountry: [[]],
+  //       heademail: [''],
+  //       headswiftBic: [''],
+  //       headfaxNo: [''],
+  //       servAddrLine1: [''],
+  //       servAddrLine2: [''],
+  //       servAddrLine3: [''],
+  //       servcity: [''],
+  //       servstate: [''],
+  //       paymentCode: [''],
+  //       servpostalCode: [''],
+  //       servtelephoneNumber: [''],
+  //       servemail: [''],
+  //       servswiftBic: [''],
+  //       servfaxNo: [''],
+  //       servCountry: [[]],
+  //       partnerDetails: this.fb.array([]),
+  //       authSign: this.fb.array([]),
+  //       entityAdmin: this.fb.array([])
+  //     })
+  //     //head & service address 
+  //     respObj.addrlst && respObj.addrlst.length && respObj.addrlst.map((item) => {
+  //       if (item.addressType == 'H') {
+  //         item.faxno && this.financierForm.controls['headfaxNo'].setValue(item.faxno)
+  //         item.addressLine1 && this.financierForm.controls['headAddrLine1'].setValue(item.addressLine1)
+  //         item.addressLine2 && this.financierForm.controls['headAddrLine2'].setValue(item.addressLine2)
+  //         item.addressLine3 && this.financierForm.controls['headAddrLine3'].setValue(item.addressLine3)
+  //         if (item.country) {
+  //           let obj = {
+  //             'itemName': item.country
+  //           }
+  //           item.country == 'India' ? obj['id'] = 1 :
+  //             item.country == 'Australia' ? obj['id'] = 2 :
+  //               item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+  //           this.financierForm.controls['headcountry'].setValue(item.country)
+  //         }
+  //         // item.country && this.financierForm.controls['headcountry'].setValue([{'id':1,itemName:item.country}])
+  //         item.state && this.financierForm.controls['headstate'].setValue(item.state)
+  //         item.city && this.financierForm.controls['headcity'].setValue(item.city)
+  //         item.postalCode && this.financierForm.controls['headpostalCode'].setValue(item.postalCode)
+  //         item.telephoneNumber && this.financierForm.controls['headtelephoneNumber'].setValue(item.telephoneNumber)
+  //         item.email && this.financierForm.controls['heademail'].setValue(item.email)
+  //         item.swiftBic && this.financierForm.controls['headswiftBic'].setValue(item.swiftBic)
+  //       }
+  //       else {
+  //         item.faxno && this.financierForm.controls['servfaxNo'].setValue(item.faxno)
+  //         item.addressLine1 && this.financierForm.controls['servAddrLine1'].setValue(item.addressLine1)
+  //         item.addressLine2 && this.financierForm.controls['servAddrLine2'].setValue(item.addressLine2)
+  //         item.addressLine3 && this.financierForm.controls['servAddrLine3'].setValue(item.addressLine3)
+  //         if (item.country) {
+  //           let obj = {
+  //             'itemName': item.country
+  //           }
+  //           item.country == 'India' ? obj['id'] = 1 :
+  //             item.country == 'Australia' ? obj['id'] = 2 :
+  //               item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+  //           this.financierForm.controls['servCountry'].setValue(item.country)
+  //         }
+  //         // item.country && this.financierForm.controls['servCountry'].setValue([{'id':1,itemName:item.country}])
+  //         item.state && this.financierForm.controls['servstate'].setValue(item.state)
+  //         item.city && this.financierForm.controls['servcity'].setValue(item.city)
+  //         item.postalCode && this.financierForm.controls['servpostalCode'].setValue(item.postalCode)
+  //         item.telephoneNumber && this.financierForm.controls['servtelephoneNumber'].setValue(item.telephoneNumber)
+  //         item.email && this.financierForm.controls['servemail'].setValue(item.email)
+  //         item.swiftBic && this.financierForm.controls['servswiftBic'].setValue(item.swiftBic)
+  //       }
+  //     })
+  //     //more details datas
+  //     respObj.asocpartylst && respObj.asocpartylst.length && respObj.asocpartylst.map((item) => {
+  //       if (item.assocType == "Director/Partner") {
+  //         let partnerRow = this.fb.group({
+  //           name: [item.name ? item.name : ''],
+  //           position: [item.position ? item.position : ''],
+  //           address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
+  //           phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
+  //           email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+  //         })
+  //         this.partnerFormArray.push(partnerRow);
+  //         this.dataSource1.data = this.partnerFormArray.controls;
+  //       }
+  //       else if (item.assocType == "Authorised Signat") {
+  //         let authRow = this.fb.group({
+  //           name: [item.name ? item.name : ''],
+  //           position: [item.position ? item.position : ''],
+  //           address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
+  //           phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
+  //           email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+  //         })
+  //         this.authoriseFormArray.push(authRow);
+  //         this.dataSource2.data = this.authoriseFormArray.controls;
+  //       }
+  //       else {
+  //         let entityRow = this.fb.group({
+  //           name: [item.name ? item.name : ''],
+  //           position: [item.position ? item.position : ''],
+  //           address: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].addressLine1 ? item.assocaddrlst[0].addressLine1 : ''],
+  //           phoneNo: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].telephoneNumber ? item.assocaddrlst[0].telephoneNumber : ''],
+  //           email: [item.assocaddrlst && item.assocaddrlst[0] && item.assocaddrlst[0].email ? item.assocaddrlst[0].email : '']
+  //         })
+  //         this.entityFormArray.push(entityRow)
+  //         this.dataSource3.data = this.entityFormArray.controls;
+  //       }
+  //     })
+  //   })
+  // }
+
+    getSpecificFinancier() {
+  this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
+    let respObj = resp
+    //  this.getUserList(respObj.companyid)
+    //  this.companyid = respObj.companyid
+    this.financierForm = this.fb.group({
+      financierId: [respObj.namedPKKey],
+      fName: [respObj.financierNameConstitution, Validators.required],
+      regNum: [respObj.locregno,[Validators.required, Validators.pattern(/^[0-9a-zA-Z]+$/)] ],
+      taxIdNum: [respObj.taxIdentificationNumber, Validators.required],
+      regDate: [respObj.registerDate],
+      fExpYears: [respObj.financeexpyears, Validators.required],
+      activity: [respObj.typeofact],
+      principalBankAccount: [respObj.principalBankAccount,[Validators.required, Validators.pattern(/^[0-9a-zA-Z]+$/),Validators.maxLength(34)]],
+      prncbankbranch: [respObj.prncbankbranch],
+      anlScfTrnOver: [respObj.annualSCFTurnOver],
+      transLimit: [respObj.transactionLimit],
+      currency: [respObj.currency],
+
+
+      // userName : [respObj.userlst[0] && respObj.userlst[0].userName], email : [respObj.userlst[0] && respObj.userlst[0].email],contactNo: [respObj.userlst[0] && respObj.userlst[0].contactNo], 
+      // companyName : [respObj.userlst[0] && respObj.userlst[0].companyName],userCreationDate: [respObj.userlst[0] && respObj.userlst[0].userCreationDate],
+      //  address: [respObj.userlst[0] && respObj.userlst[0].address], language: [respObj.userlst[0] && respObj.userlst[0].language], country: [respObj.userlst[0] && respObj.userlst[0].country],
+
+      headAddrLine1: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine1,Validators.required],
+      headAddrLine2: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine2],
+      headAddrLine3: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine3],
+      headcity: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].city],
+      headstate: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].state],
+      headpostalCode: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].postalCode],
+      headtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneNumber,Validators.required],
+      headcountry: [[]],
+      heademail: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].email,Validators.required],
+    
+      // postalCode: [respObj.postalCode],
+
+      headswiftBic: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].swiftBic],
+      headfaxNo: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].faxno],
+
+      servAddrLine1: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine1,Validators.required],
+      servAddrLine2: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine2],
+      servAddrLine3: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine3],
+      servcity: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].city],
+      servstate: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].state],
+      paymentCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].paymentCode],
+      servpostalCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].postalCode],
+      servtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].telephoneNumber,Validators.required],
+      servemail: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].email,Validators.required],
+      servswiftBic: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].swiftBic],
+      servfaxNo: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].faxno],
+      servCountry: [[],Validators.required],
+      partnerDetails: this.fb.array([]),
+      authSign: this.fb.array([]),
+      entityAdmin: this.fb.array([])
     })
+
+    //head & service address 
+    respObj.finAdressLst && respObj.finAdressLst.length && respObj.finAdressLst.map((item) => {
+      if (item.addressType == 'H') {
+        item.faxno && this.financierForm.controls['headfaxNo'].setValue(item.faxno)
+        item.addressLine1 && this.financierForm.controls['headAddrLine1'].setValue(item.addressLine1)
+        item.addressLine2 && this.financierForm.controls['headAddrLine2'].setValue(item.addressLine2)
+        item.addressLine3 && this.financierForm.controls['headAddrLine3'].setValue(item.addressLine3)
+        if (item.country) {
+          let obj = {
+            'itemName': item.country
+          }
+
+          const result = this.cities && this.cities.filter(country => country.itemName == item.country);
+          obj['id'] = result['id']
+
+
+          // item.country == 'India' ? obj['id'] = 1 :
+          //   item.country == 'Australia' ? obj['id'] = 2 :
+          //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+          this.financierForm.controls['headcountry'].setValue(obj.itemName)
+        }
+        // item.country && this.financierForm.controls['headcountry'].setValue([{'id':1,itemName:item.country}])
+        item.state && this.financierForm.controls['headstate'].setValue(item.state)
+        item.city && this.financierForm.controls['headcity'].setValue(item.city)
+        item.postalCode && this.financierForm.controls['headpostalCode'].setValue(item.postalCode)
+        item.telephoneNumber && this.financierForm.controls['headtelephoneNumber'].setValue(item.telephoneNumber)
+        item.email && this.financierForm.controls['heademail'].setValue(item.email)
+        item.swiftBic && this.financierForm.controls['headswiftBic'].setValue(item.swiftBic)
+      }
+      else {
+        item.faxno && this.financierForm.controls['servfaxNo'].setValue(item.faxno)
+        item.addressLine1 && this.financierForm.controls['servAddrLine1'].setValue(item.addressLine1)
+        item.addressLine2 && this.financierForm.controls['servAddrLine2'].setValue(item.addressLine2)
+        item.addressLine3 && this.financierForm.controls['servAddrLine3'].setValue(item.addressLine3)
+        if (item.country) {
+          let obj = {
+            'itemName': item.country
+          }
+          const result = this.cities && this.cities.filter(country => country.itemName == item.country);
+          obj['id'] = result['id']
+          // item.country == 'India' ? obj['id'] = 1 :
+          //   item.country == 'Australia' ? obj['id'] = 2 :
+          //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
+          this.financierForm.controls['servCountry'].setValue(obj.itemName)
+        }
+        // item.country && this.financierForm.controls['servCountry'].setValue([{'id':1,itemName:item.country}])
+        item.state && this.financierForm.controls['servstate'].setValue(item.state)
+        item.city && this.financierForm.controls['servcity'].setValue(item.city)
+        item.postalCode && this.financierForm.controls['servpostalCode'].setValue(item.postalCode)
+        item.telephoneNumber && this.financierForm.controls['servtelephoneNumber'].setValue(item.telephoneNumber)
+        item.email && this.financierForm.controls['servemail'].setValue(item.email)
+        item.swiftBic && this.financierForm.controls['servswiftBic'].setValue(item.swiftBic)
+      }
+    })
+    //more details datas
+    if( respObj.asocpartylst && respObj.asocpartylst.length >= 1){      
+    respObj.asocpartylst && respObj.asocpartylst.length && respObj.asocpartylst.map((item) => {
+      if (item.assocType == "Director/Partner") {
+        let partnerRow = this.fb.group({
+          name: [item.name ? item.name : ''],
+          position: [item.position ? item.position : ''],
+          // address: [ item.addressLine1 ? item.addressLine1 : ''],
+          phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+          email: [ item.email ? item.email : '']
+        })
+        this.partnerFormArray.push(partnerRow);
+        this.dataSource1.data = this.partnerFormArray.controls;
+      }
+      else if (item.assocType == "Authorised Signat") {
+        let authRow = this.fb.group({
+          name: [item.name ? item.name : ''],
+          position: [item.position ? item.position : ''],
+          // address: [ item.addressLine1 ? item.addressLine1 : ''],
+          phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+          email: [ item.email ? item.email : '']
+        })
+        this.authoriseFormArray.push(authRow);
+        this.dataSource2.data = this.authoriseFormArray.controls;
+      }
+      else {
+        let entityRow = this.fb.group({
+          name: [item.name ? item.name : ''],
+          position: [item.position ? item.position : ''],
+          // address: [ item.addressLine1 ? item.addressLine1 : ''],
+          phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+          email: [ item.email ? item.email : ''] 
+        })
+        this.entityFormArray.push(entityRow)
+        this.dataSource3.data = this.entityFormArray.controls;
+      }
+    })
+  }else{
+    const partnerRow = this.fb.group({
+      name: [""],
+      position: [""],
+      // address: [""],
+      phoneNo: [""],
+      email: [""]
+    })
+    const authRow = this.fb.group({
+      name: [""],
+      position: [""],
+      // address: [""],
+      phoneNo: [""],
+      email: [""]
+    })
+    const entityRow = this.fb.group({
+      name: [""],
+      position: [""],
+      // address: [""],
+      phoneNo: [""],
+      email: [""]
+    })
+    this.partnerFormArray.push(partnerRow);
+    this.authoriseFormArray.push(authRow);
+    this.entityFormArray.push(entityRow)
+    this.dataSource1.data = this.partnerFormArray.controls;
+    this.dataSource2.data = this.authoriseFormArray.controls;
+    this.dataSource3.data = this.entityFormArray.controls;
   }
+  })
+}
+
   buildFinancierForm() {
     this.financierForm = this.fb.group({
       fName: ['', Validators.required],
@@ -359,21 +540,21 @@ export class FinancierOnboardingListComponent implements OnInit {
     const partnerRow = this.fb.group({
       name: [""],
       position: [""],
-      address: [""],
+      // address: [""],
       phoneNo: [""],
       email: [""]
     })
     const authRow = this.fb.group({
       name: [""],
       position: [""],
-      address: [""],
+      // address: [""],
       phoneNo: [""],
       email: [""]
     })
     const entityRow = this.fb.group({
       name: [""],
       position: [""],
-      address: [""],
+      // address: [""],
       phoneNo: [""],
       email: [""]
     })
