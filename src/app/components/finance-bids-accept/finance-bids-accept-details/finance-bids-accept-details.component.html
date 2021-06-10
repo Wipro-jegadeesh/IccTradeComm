@@ -73,7 +73,7 @@
       </tbody>
     </table>
     <mat-tab-group>
-        <mat-tab label="BIDDING Economic Details Section">
+        <mat-tab label="{{'BIDDING Economic Details Section' | translate}}">
           <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
            <mat-card>
                 <mat-card-content>
@@ -238,8 +238,8 @@
                             </ng-container>
                           <ng-container matColumnDef="Net Amt payable (Base CCY)">
                             <th mat-header-cell *matHeaderCellDef scope="column" >
-                                     Net Amt
-                             <br> payable (Base CCY)</th>
+                                     {{'Net Amt payable' | translate}}
+                             <br>(Base CCY)</th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
@@ -250,7 +250,7 @@
                             </td>
                           </ng-container>
                           <ng-container matColumnDef="Net Amt payable (Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable (Inv CCY)' | translate}}</th>
+                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable' | translate}} <br>(Inv CCY)</th>
                               <td mat-cell style="border-right: 1px solid grey;
                               align-self: stretch;
                               text-align: center" *matCellDef="let element;let row; let index = index"  >
