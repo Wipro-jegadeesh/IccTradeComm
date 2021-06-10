@@ -100,7 +100,9 @@ languageDropdownSettings:any={}
 languageSelectedItems=[]
 
   ngOnInit() {
-
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.type = this.activatedRoute.snapshot.paramMap.get("type");
+    
     this.LanguagesOptions = LANGUAGES
 
 this.languageDropdownSettings = {
@@ -130,8 +132,7 @@ this.languageDropdownSettings = {
       maxHeight	: 170
     };
 
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    this.type = this.activatedRoute.snapshot.paramMap.get("type");
+   
 
 
     if (window.innerWidth < 415) {

@@ -91,7 +91,7 @@
                     <a routerLink="#">Authorisation Matrix</a>
                   </div> 
                 </mat-tab> -->
-                <mat-tab label="Static Data Maintenance">
+                <mat-tab label="{{'Static Data Maintenance' | translate}}">
                   <div class="col-md-12">
                     <div class="row topbar_main">
                         <div  class="col-md-3 my-2 topbar_item">
@@ -103,7 +103,7 @@
                         <div class="col-md-3 my-2 topbar_item">
                           <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-roles')" >
                             <i class="fa fa-fw fa-3x fa-table"></i>&nbsp;
-                            <p class="mb-0 mt-3"><span>{{'ICCDashboardComponent.Roles' | translate}}</span></p>
+                            <p class="mb-0 mt-3"><span>{{'Roles' | translate}}</span></p>
                           </a>
                       </div>
                       <div class="col-md-3 my-2 topbar_item">
@@ -130,7 +130,7 @@
                       <div class="col-md-3 my-2 topbar_item">
                         <a [routerLinkActive]="['router-link-active']" class="list-group-item text-center tablecolour" (click)="this.navigatePages('/icc-sector')">
                           <i class="fa fa-fw fa-3x fa-code"></i>&nbsp;
-                          <p class="mb-0 mt-3"><span>{{'ICCDashboardComponent.Sector' | translate}}</span></p>
+                          <p class="mb-0 mt-3"><span>{{'Sector' | translate}}</span></p>
                         </a>
                     </div>
                     
@@ -160,7 +160,7 @@
                     matTooltip="{{dashboardTooltip.financierOnboard}}" [matTooltipPosition]="'below'" (click)="this.navigatePages('/icc-sector')">Sector</button>
                   </div> -->
                 </mat-tab>
-                <mat-tab label="Financier Maintenence">
+                <mat-tab label="{{'Financier Maintenence' | translate}}">
                   <div class="col-md-12">
                     <div class="row topbar_main">
                         <div  class="col-md-3 my-2 topbar_item">
@@ -221,7 +221,7 @@
                       <a href="javascript:void(0)"  (click)="financierOnBoardingList()">{{'ICCDashboardComponent.View All Financiers' | translate}}</a>
                   </div>
                 </mat-tab>
-                <mat-tab label="SME Maintenence">
+                <mat-tab label="{{'SME Maintenence' | translate}}">
                   <div class="col-md-12">
                     <div class="row topbar_main">
                         <div  class="col-md-3 my-2 topbar_item">

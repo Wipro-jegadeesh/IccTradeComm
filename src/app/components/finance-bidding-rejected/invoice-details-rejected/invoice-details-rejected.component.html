@@ -76,11 +76,11 @@
   <div style="text-align:right">
     <button mat-raised-button color="accent" (click)="openModalsecond($event,Rejecttemplate,'')" class="remarkbtn">
       <mat-icon #tooltip="matTooltip"
-      matTooltip="{{'Remark' | translate}}" [matTooltipPosition]="'below'">mode_comment</mat-icon>  {{'Remark' | translate}}
+      matTooltip="{{'Remarks' | translate}}" [matTooltipPosition]="'below'">mode_comment</mat-icon>  {{'Remarks' | translate}}
     </button>
   </div>
   <mat-tab-group>
-      <mat-tab label="BIDDING Economic Details Section">
+      <mat-tab label="{{'BIDDING Economic Details Section' | translate}}">
         <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
          <mat-card>
               <mat-card-content>
@@ -218,7 +218,7 @@
                           </td>
                         </ng-container>
                         <ng-container matColumnDef="Annual Yield (Basis a360)">
-                          <th mat-header-cell  *matHeaderCellDef scope="column" >Annual Yield <br>(Basis a360) %</th>
+                          <th mat-header-cell  *matHeaderCellDef scope="column" >{{'Annual Yield' | translate}} <br>(Basis a360) %</th>
                           <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.annualYield}" 
                           #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.annualYield === true ? 'Annual Yield (Basis a360) Too High' : ''" 
                           style="border-right: 1px solid grey; align-self: stretch; text-align: center;" *matCellDef="let element;let row; let index = index"  >
@@ -252,8 +252,8 @@
                           </ng-container>
                         <ng-container matColumnDef="Net Amt payable (Base CCY)">
                           <th mat-header-cell *matHeaderCellDef scope="column" >
-                                   Net Amt
-                           <br> payable (Base CCY)</th>
+                            {{'Net Amt payable' | translate}}
+                           <br>(Base CCY)</th>
                           <td mat-cell [ngClass]="{'RemarkClass': this.Rejectform.value.netPayable}" 
                           #tooltip="matTooltip" [matTooltip]="this.Rejectform.value.netPayable === true ? 'Net Amt payable (Base CCY) Low' : ''"
                           style="border-right: 1px solid grey;
@@ -266,7 +266,9 @@
                           </td>
                         </ng-container>
                         <ng-container matColumnDef="Net Amt payable (Inv CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable (Inv CCY)' | translate}}</th>
+                            <th mat-header-cell *matHeaderCellDef scope="column" >
+                              {{'Net Amt payable' | translate}}<br>(Inv CCY)
+                            </th>
                             <td mat-cell style="border-right: 1px solid grey;
                             align-self: stretch;
                             text-align: center" *matCellDef="let element;let row; let index = index"  >
