@@ -347,6 +347,7 @@
     },
     "FinancierOnboardingComponent":{ 
       "FinancierOnBoarding": "Incorporación financiera",
+      "FinancierView" : "View Financier Onboarding",
       "FinancierId": "ID de financiero",
       "FinancierNameConstitution": "Nombre Financiero Constitución",
       "EnterNameConstution": "Especifique el nombre financiero Constitución",
