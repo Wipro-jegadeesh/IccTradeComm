@@ -123,10 +123,12 @@ export class InvoiceRequestComponent implements OnInit {
     'TaxRate',
     'TaxAmount',
     'Total',
+    'status'
   ];
 
   // addGoods=new MatTableDataSource(this.ELEMENT_DATA1); 
   // displayedColumnsn: string[] = ['StatusCode', 'DateTime', 'IdNo', 'Quantity','Rate','Amount','DiscAmount','NetAmount','TaxRate','TaxAmount', 'Status'];
+  public deletedRowedit: any = []
 
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
 
@@ -146,6 +148,7 @@ export class InvoiceRequestComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   UpdateInvoiceLable: boolean;
+  invoiceIdBoolean : boolean = false
   invoiceDetails: any;
   userDeatils: any;
   optionDatas: any;
@@ -425,20 +428,26 @@ getAllCountry(){
     })
   }
   UpdateInvoice(data){
+    this.invoiceIdBoolean = true;
+    this.dateFormArray.controls = [];
+    this.addRow()
     console.log(data,"testtt")
     this.invoiceDetails = data
     this.invoiceForm.patchValue({
       buyerName: data.buyerName,
-      invDueDate: data.invDueDate.toString(),
+     // invDueDate: data.invDueDate.toString(),
       invId: data.invId,
       buyerAddr: data.buyerAddr,
       buyerUEN:data.buyerUEN,
       billNo: data.billNo,
       invAmt: data.invAmt,
-      invDate: data.invDate.toString(),
-      dispDate: data.dispDate.toString(),
+      //invDate: data.invDate.toString(),
+     // dispDate: data.dispDate.toString(),
       smeId: localStorage.getItem("userId"),
-      invCcy:data.invCcy
+      invCcy:data.invCcy,
+      invDueDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
+  invDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
+   dispDate: moment(data.dispDate, 'YYYY - MM - DD HH: mm').toDate(),
     });
     this.invoiceID = data.invId;
     this.currencyName=data.invCcy
@@ -462,7 +471,8 @@ getAllCountry(){
       taxRate: element.taxRate,
       taxAmt: element.taxAmt,
       total: element.total,
-      goodsId: element.goodsId
+      goodsId: element.goodsId,
+      status: element.status
       // goodsId: "GD101"
       })
       this.dateFormArray.push(row);
@@ -493,7 +503,17 @@ getAllCountry(){
       }
       this.invoiceForm.value['invoiceDetailsSequenceNumber']={}     
       this.invoiceForm.value.smeProfileId = this.userDeatils['smeProfileId']
-
+      // this.invoiceForm.value.goodsDetails.concat(this.deletedRowedit);
+if (this.deletedRowedit.length > 0) {
+this.deletedRowedit.forEach(element => {
+this.invoiceForm.value.goodsDetails.push(element);
+});
+}
+this.invoiceForm.value.goodsDetails.forEach(element => {
+  if (element.status == 'isActive') {
+  element.status = 'Active'
+  }
+  });
       let params = {
         "invoiceDetails": this.invoiceForm.value,
         // "smeProfileId" :  userData['smeProfileId']
@@ -501,6 +521,7 @@ getAllCountry(){
       console.log(params,"params");
       if(this.UpdateInvoiceLable === true){
         this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id,params).subscribe(resp => {
+          this.deletedRowedit = [];
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
           this.invoiceID = "";
@@ -582,8 +603,9 @@ getAllCountry(){
       taxRate: [""],
       taxAmt: [""],
       total: [""],
-      goodsId: [""]
+      goodsId: [""],
       // goodsId: "GD101",
+      status: "isActive"
     })
     this.dateFormArray.push(row);
     this.dataSourceTwo.data = this.dateFormArray.controls;
@@ -624,12 +646,84 @@ getAllCountry(){
   invoiceId(Id){
     this.invoiceID=Id
     }
-    removeRow(index) {
+    // removeRow(index) {
+    //   let removeEntry = this.dataSourceTwo.data
+    //  this.invoiceForm.value.goodsDetails.splice(index, 1)
+    //    removeEntry.splice(index, 1)
+    //   this.dataSourceTwo.data = removeEntry
+    // }
+    // removeRow(index) {
+    //   if (this.invoiceIdBoolean) {
+    //     if (this.invoiceForm.value.goodsDetails[index].status) {
+    //       let removeEntry = this.dataSourceTwo.data
+    //       this.invoiceForm.value.goodsDetails[index]["status"] = "delete"
+    //       this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
+    //       removeEntry.splice(index, 1);
+    //       this.dataSourceTwo.data = removeEntry
+    //     } else {
+    //       let removeEntry = this.dataSourceTwo.data
+    //       this.invoiceForm.value.goodsDetails.splice(index, 1)
+    //       removeEntry.splice(index, 1)
+    //       this.dataSourceTwo.data = removeEntry
+    //     }
+  
+    //   } else {
+    //     let removeEntry = this.dataSourceTwo.data
+    //     this.invoiceForm.value.goodsDetails.splice(index, 1)
+    //     removeEntry.splice(index, 1)
+    //     this.dataSourceTwo.data = removeEntry
+    //   }
+    // }
+    removeRo1w(index) {
+      if (this.invoiceIdBoolean) {
+      if (this.invoiceForm.value.goodsDetails[index].status == 'active') {
       let removeEntry = this.dataSourceTwo.data
-     this.invoiceForm.value.goodsDetails.splice(index, 1)
-       removeEntry.splice(index, 1)
+      this.invoiceForm.value.goodsDetails[index]["status"] = "Deleted"
+      this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
+      this.invoiceForm.value.goodsDetails.splice(index, 1)
+      console.log(this.deletedRowedit, "remo v this.deletedRowedit")
+      removeEntry.splice(index, 1);
       this.dataSourceTwo.data = removeEntry
-    }
+      } else {
+      let removeEntry = this.dataSourceTwo.data
+      this.invoiceForm.value.goodsDetails.splice(index, 1)
+      removeEntry.splice(index, 1)
+      this.dataSourceTwo.data = removeEntry
+      }
+      
+      } else {
+      let removeEntry = this.dataSourceTwo.data
+      this.invoiceForm.value.goodsDetails.splice(index, 1)
+      removeEntry.splice(index, 1)
+      this.dataSourceTwo.data = removeEntry
+      }
+      }
+      
+
+  removeRow(index) {
+  if (this.invoiceIdBoolean) {
+  if (this.invoiceForm.value.goodsDetails[index].status == 'active' || this.invoiceForm.value.goodsDetails[index].status == 'Active') {
+  let removeEntry = this.dataSourceTwo.data
+  this.invoiceForm.value.goodsDetails[index]["status"] = "Deleted"
+  this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
+  this.invoiceForm.value.goodsDetails.splice(index, 1)
+  console.log(this.deletedRowedit, "remo v this.deletedRowedit")
+  removeEntry.splice(index, 1);
+  this.dataSourceTwo.data = removeEntry
+  } else {
+  let removeEntry = this.dataSourceTwo.data
+  this.invoiceForm.value.goodsDetails.splice(index, 1)
+  removeEntry.splice(index, 1)
+  this.dataSourceTwo.data = removeEntry
+  }
+  
+  } else {
+  let removeEntry = this.dataSourceTwo.data
+  this.invoiceForm.value.goodsDetails.splice(index, 1)
+  removeEntry.splice(index, 1)
+  this.dataSourceTwo.data = removeEntry
+  }
+}
     clear() {
       this.currencyName = ''
       this.invoiceID = ''
