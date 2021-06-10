@@ -256,9 +256,11 @@ chkDecimalLength (value) {
     // this.invoiceForm.value.goodsDetails.forEach(element => { element.ID=this.invoiceID });
     this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID 
     this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"])*parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["rate"]))*Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["quantity"])) : "0" 
-    this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["amt"])) - Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["discAmt"])) :'0'
-    this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) * Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxRate"])) / 100  :"0" 
-    this.invoiceForm.value.goodsDetails[index]["total"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]) ?  Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) + Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxAmt"])):'0'
+    this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? (Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["amt"])) - Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["discAmt"]))).toFixed(2) :'0'
+
+    this.invoiceForm.value.goodsDetails[index]["taxAmt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["taxRate"]) / 100 ? (Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) * Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxRate"])) / 100).toFixed(2)  :"0" 
+   
+    this.invoiceForm.value.goodsDetails[index]["total"] = parseInt(this.invoiceForm.value.goodsDetails[index]["netAmtPay"]) + parseInt(this.invoiceForm.value.goodsDetails[index]["taxAmt"]) ?  (Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["netAmtPay"])) + Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["taxAmt"]))).toFixed(2):'0'
     this.invoiceForm.value.goodsDetails[index]["amtCcy"]=this.currencyName
     this.dateFormArray.patchValue(this.invoiceForm.value.goodsDetails);
 }

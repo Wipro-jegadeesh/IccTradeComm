@@ -393,6 +393,8 @@
 		},
 		"FinancierOnboardingComponent":{
 			"FinancierOnBoarding": "Financier Onboarding",
+			"FinancierView" : "View Financier Onboarding",
+			"Country" : "Country",
 			"FinancierId": "Financier ID",
 			"FinancierNameConstitution": "Financing Institution Name",
 			"EnterNameConstution": "Please Enter Financing Institution Name",
