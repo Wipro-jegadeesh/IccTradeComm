@@ -321,7 +321,6 @@
                       type="number" 
                       formControlName="amt" 
                       placeholder="{{'Amount' | translate}}" 
-                      value="{{element.amt}}"
                       required readonly
                       (input)="setGoodsDetails_TwoNumberDecimal($event,'amt',index)">
                     </td>
@@ -398,10 +397,21 @@
                       required readonly (input)="setGoodsDetails_TwoNumberDecimal($event,'taxAmt',index)">
                     </td>
                   </ng-container>
+                  <!-- status -->
+                  <ng-container matColumnDef="status">
+                    <th [hidden]=true mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{fundingTooltip.goodsId | translate}}" [matTooltipPosition]="tooltipPosition">
+                      {{'goodsId' | translate}}</th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                      <input matInput type="text" formControlName="status" [hidden]=true
+                        placeholder="{{'goodsId' | translate}}">
+                    </td>
+                  </ng-container>
+                  <!-- status -->
                   <ng-container matColumnDef="Total">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip" matTooltip="{{fundingTooltip.total | translate}}" [matTooltipPosition]="tooltipPosition">
                       {{'Total' | translate}}
-                    <span *ngIf="!UpdateInvoiceLable" class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+                    <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
                     matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span></th>
                     <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
                       <input matInput type="number"  formControlName="total"  placeholder="{{'Total' | translate}}" required readonly>
@@ -411,6 +421,7 @@
                       </span>
                     </td>
                   </ng-container>
+                  
                   <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#B4A6EA"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
               
