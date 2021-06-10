@@ -66,7 +66,7 @@
 
             <ng-container matColumnDef="country">
               <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-              matTooltip="{{countryTooltip.country}}" [matTooltipPosition]="'below'">{{'IccCountry.country' | translate}} </th>
+              matTooltip="{{countryTooltip.country | translate}}" [matTooltipPosition]="'below'">{{'IccCountry.country' | translate}} </th>
               <td mat-cell *matCellDef="let element">
                            {{element.country}}
                </td>
@@ -74,7 +74,7 @@
 
                 <ng-container matColumnDef="countrycode2">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{countryTooltip.countrycode2}}" [matTooltipPosition]="'below'"> {{'IccCountry.Country Code(3 digit)' | translate}} </th>
+                    matTooltip="{{countryTooltip.countrycode2 | translate}}" [matTooltipPosition]="'below'"> {{'IccCountry.Country Code(3 digit)' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.countrycode2}}
                      </td>
@@ -82,7 +82,7 @@
 
                   <ng-container matColumnDef="countrycode3">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{countryTooltip.countrycode3}}" [matTooltipPosition]="'below'"> {{'IccCountry.Country Code(3 digit)' | translate}} </th>
+                    matTooltip="{{countryTooltip.countrycode3 | translate}}" [matTooltipPosition]="'below'"> {{'IccCountry.Country Code(3 digit)' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.countrycode3}}
                      </td>
@@ -90,7 +90,7 @@
 
                   <ng-container matColumnDef="numeric">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
-                    matTooltip="{{countryTooltip.numeric}}" [matTooltipPosition]="'below'">  {{'IccCountry.Numeric' | translate}}</th>
+                    matTooltip="{{countryTooltip.numeric | translate}}" [matTooltipPosition]="'below'">  {{'IccCountry.Numeric' | translate}}</th>
                     <td mat-cell *matCellDef="let element">
                                  {{element.numeric}}
                      </td>
@@ -112,7 +112,7 @@
                   <td mat-cell *matCellDef="let element">
                     <a  href="javascript:void(0)" (click)="getEditData(element)">
                       <mat-icon  #tooltip="matTooltip"
-                      matTooltip="Edit" [matTooltipPosition]="'below'">edit</mat-icon>
+                      matTooltip="{{'edit' | translate}} " [matTooltipPosition]="'below'">edit</mat-icon>
                     </a>&nbsp;
                      </td>
                 </ng-container>

@@ -30,23 +30,23 @@
         <ng-container>
             <div #accountList class="accounts-list">
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Open Funding Requests' | translate}}" number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.bidDetails}}"
+                matTooltip="{{dashboardTooltips.bidDetails | translate}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()"></uxg-account-card>
                 
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funding Bids' | translate}}" number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"  #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.financeBidReceive}}"
+                matTooltip="{{dashboardTooltips.financeBidReceive | translate}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()" ></uxg-account-card>
                 <!-- <uxg-account-card class="curs-pointer" name="Invoice Creation" number="New"(click)="this.navigateInvoiceCreation()" ></uxg-account-card> -->
                 
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funded' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.acceptedDetails}}"
+                matTooltip="{{dashboardTooltips.acceptedDetails | translate}}"
                 [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}" ></uxg-account-card>
                
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Due Today' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.todayDue}}" (click)="this.navigateAcceptedRepayment()"
+                matTooltip="{{dashboardTooltips.todayDue | translate}}" (click)="this.navigateAcceptedRepayment()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Overdue' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.pastDue}}" (click)="this.navigateRepaymentOverDue()"
+                matTooltip="{{dashboardTooltips.pastDue | translate}}" (click)="this.navigateRepaymentOverDue()"
                 [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
             </div>
         </ng-container>
@@ -127,13 +127,13 @@
                         <table class="table-bordered table" id="customers">
                             <tr>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financePeriod}}"
+                              matTooltip="{{dashboardTooltips.financePeriod | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Period' | translate}}</th>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeNumber}}"
+                              matTooltip="{{dashboardTooltips.financeNumber | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeAmount}}"
+                              matTooltip="{{dashboardTooltips.financeAmount | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
                             </tr>   
                            <tr *ngFor="let getFinMaturityDatas of getFinMaturityData" >
@@ -160,13 +160,13 @@
                         <table class="table-bordered table" id="customers">
                             <tr>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeNo}}"
+                              matTooltip="{{dashboardTooltips.financeNo | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Invoice size' | translate}}</th>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeMonth}}"
+                              matTooltip="{{dashboardTooltips.financeMonth | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
                               <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financePeriodAmount}}"
+                              matTooltip="{{dashboardTooltips.financePeriodAmount | translate}}"
                               [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
                             </tr>
                             <tr *ngFor="let getFinnSizeDatas of getFinnSizeData" >

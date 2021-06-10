@@ -37,7 +37,7 @@ export const DASHBOARDCONSTANTS={
     'financeBidReceive':'Received Bid Details',
     'bidDetails':'Finance Bid Details',
     'acceptedDetails':'Accepted Details',
-    'todayDue':"Today's Due Details ",
+    'todayDue':"Today's Due Details",
     'pastDue':'Past Due Details',
     'financePeriod':'Finance Period (In Dates)',
     'financeNumber':'Finance Number (Unique)',

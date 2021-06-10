@@ -168,8 +168,6 @@ export class AcceptedDetailsComponent implements OnInit {
       const diffDays = Math.round(Math.abs((new Date(invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
       console.log(diffDays,"diffDays")
       return baseCcyAmt / tenor * diffDays
-    }else{
-      return '0'
     }
         
   }

@@ -26,7 +26,11 @@ header {
         z-index: 10;
     }
 }
-
+.custom{
+    .mat-card.mat-focus-indicator{
+        min-width: 230px;
+    }
+}
 .app-content {
     bottom: 0;
     left: 0;
@@ -57,8 +61,7 @@ header {
     margin-left: -30px;
     padding-bottom: 27px;
 
-    uxg-account-card,
-    uxg-account-card-skeleton {
+    uxg-account-card,uxg-account-card-skeleton {
         display: inline-grid;
         margin-left: $margin;
     }
