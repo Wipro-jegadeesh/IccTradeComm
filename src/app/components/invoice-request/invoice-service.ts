@@ -41,4 +41,8 @@ export class InvoiceRequestServices {
   invoicePDFSave(body: any){
     return this.apiService.post(environment.api_url+'invoice-request/ocr', body);
   }
+  submitBuyerDetails(body: any){
+    // http://localhost:8083/coriolis/Deal/Rating
+    return this.apiService.post(environment.coriolisServicePath + 'coriolis/Deal/Rating' , body)
+  }
 }
