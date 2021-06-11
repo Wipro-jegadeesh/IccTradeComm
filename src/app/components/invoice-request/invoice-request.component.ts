@@ -18,35 +18,6 @@ import { IccCountryServices } from '../icc-country/icc-country.services'
 import {TranslateService} from '@ngx-translate/core';
 // import { MatInput } from '@angular/material/input';
 
-const ELEMENT_DATA: any[] = [
-  {
-    Name: 'INV64320',
-    Position: 'ISBGF5643',
-    DateOfInvoice: '11/3/2021',
-    Seller: 'SME1',
-    Buyer: 'BUYER1',
-    InvoiceAmount: '563489',
-    Status: 'Active'
-  },
-  {
-    Name: 'INV64320',
-    Position: 'ISBGF5643',
-    DateOfInvoice: '11/3/2021',
-    Seller: 'SME1',
-    Buyer: 'BUYER1',
-    InvoiceAmount: '563489',
-    Status: 'Active'
-  },
-  {
-    Name: 'INV64320',
-    Position: 'ISBGF5643',
-    DateOfInvoice: '11/3/2021',
-    Seller: 'SME1',
-    Buyer: 'BUYER1',
-    InvoiceAmount: '563489',
-    Status: 'Active'
-  },
-];
 // const DATA_TWO: any[] = [
 //   {
 //     BidID: 'BID03456',
@@ -94,8 +65,8 @@ export class InvoiceRequestComponent implements OnInit {
   InvoiceFdate:any
   moment: any = moment;
   invoicedata: invoiceData = {
-    id: "",
     RefNo: "",
+    id: "",
     invId:"",
     invoiceId: "",
     invoiceDate: "",
@@ -132,7 +103,7 @@ export class InvoiceRequestComponent implements OnInit {
 
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
 
-  displayedColumns: string[] = ['select', 'DateTime','InvoiceRefNo', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount','Ccy','Status'];
+  displayedColumns: string[] = ['select','InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount','Ccy','Score','Status'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   // @ViewChild('firstname', {static: true}) firstname:any;
   // tslint:disable-next-line: typedef
@@ -154,6 +125,7 @@ export class InvoiceRequestComponent implements OnInit {
   optionDatas: any;
   nonFilterOptions : any;
   score:any;
+  invoiceRefNo
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -205,7 +177,7 @@ export class InvoiceRequestComponent implements OnInit {
 
   ngOnInit() {
    
-    localStorage.removeItem('buyerDetails')
+    // localStorage.removeItem('buyerDetails')
     // this.firstname.nativeElement.focus();
 
 
@@ -394,6 +366,7 @@ getAllCountry(){
     console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
+    debugger
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();
@@ -449,10 +422,24 @@ getAllCountry(){
       invDueDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
   invDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
    dispDate: moment(data.dispDate, 'YYYY - MM - DD HH: mm').toDate(),
+   
+   email:data.email,
+   buyerName:data.buyerName,
+   phoneNo:data.phoneNo,
+   buyerUEN:data.buyerUEN,
+   buyerAddr:data.buyerAddr,
+   addressLine1:data.addressLine1,
+   addressLine2:data.addressLine2,
+   city:data.city,
+   postalCode:data.postalCode,
+   companyName:data.companyName
     });
     this.invoiceID = data.invId;
     this.currencyName=data.invCcy
+    this.invoiceRefNo=data.invref
     this.InvoiceFdate=data.invDueDate
+    this.score=data.buyerScore
+    // this.score=data.score
     // console.log(this.dateFormArray,"this.dateFormArray")
     // this.dateFormArray.controls.splice(0,0);
 
@@ -521,20 +508,23 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       }
       params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
       params['invoiceDetails'].goodsDetails[0].total =   parseInt(params['invoiceDetails'].goodsDetails[0].total)
+
       console.log(params,"params");
       if(this.UpdateInvoiceLable === true){
+        let buyerDetails= this.sendBuyerDetails(this.invoiceRefNo)
+        this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
+          if(resp){
+           this.score=resp.score
+          params['invoiceDetails']['buyerScore'] = resp.score
+           
         this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id,params).subscribe(resp => {
           this.deletedRowedit = [];
-          let buyerDetails= this.sendBuyerDetails(1001)
-         this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
-           if(resp){
-            this.score=resp.score
-           }
-          })
+
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
           this.invoiceID = "";
-          this.InvoiceFdate = ""
+          this.InvoiceFdate = "";
+          this.invoiceRefNo = "";
           for (const key in this.invoiceForm.controls) {
             this.invoiceForm.get(key).clearValidators();
             this.invoiceForm.get(key).updateValueAndValidity();
@@ -545,16 +535,27 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
         }, error => {
         })
 
-      }else{
+          }
+         })
+      }
+      else{
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
-          
-          })
-          let buyerDetails= this.sendBuyerDetails("1001")
+
+          console.log(resp)
+          let buyerDetails= this.sendBuyerDetails(resp)
           this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
             if(resp){
               this.score=resp.score
+              // let obj={
+              //   'buyerScore':resp.Score
+              // }
+              // this.invoiceRequestServices.updateScore(resp,obj).subscribe(resp =>{
+
+              // })
             }
-          console.log(resp)
+          })
+
+          
           this.invoiceFormBuild();
           this.dataSourceTwo.data = [];
           this.invoiceID = "";
@@ -575,6 +576,16 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
 
             // this.toastr.error(error.error);
           }else{
+            let buyerDetails= this.sendBuyerDetails(error.error.text)
+            this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
+              if(resp){
+                this.score=resp.Score
+                let obj={
+                  'buyerScore':resp.Score
+                }
+                // this.invoiceRequestServices.updateScore(resp,obj).subscribe(resp =>{
+  
+                // })
             this.invoiceFormBuild();
             this.dataSourceTwo.data = [];
             this.invoiceID = "";
@@ -585,7 +596,10 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
             }
             this.addRow()
             this.getInvDetailsLists();
-            this.toastr.success(error.error.text);
+            this.toastr.success('Data Added Successfully')
+          }
+        })
+            // (error.error.text);
           }
           
 
@@ -597,27 +611,28 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
   }
   
   sendBuyerDetails(invoiceNo){
+    debugger
     let userCred=JSON.parse(localStorage.getItem('userCred'))
     let formValues=this.invoiceForm.value
-    let buyerdetails={
-      'name':formValues.buyerName,
-      'city':formValues.city,
-      'location':formValues.buyerLocation,
-      'postalCode':formValues.postalCode,
-      'addr1':formValues.addressLine1,
-      'addr2':formValues.addressLine2,
-      'companyName':userCred.companyName,
-      'uniqueId':formValues.buyerUEN,
-      'email':formValues.email,
-      'phoneNo':formValues.phoneNo
-    }
-    localStorage.setItem('buyerDetails',JSON.stringify(buyerdetails))
+    // let buyerdetails={
+    //   'name':formValues.buyerName,
+    //   'city':formValues.city,
+    //   'location':formValues.buyerAddr,
+    //   'postalCode':formValues.postalCode,
+    //   'addr1':formValues.addressLine1,
+    //   'addr2':formValues.addressLine2,
+    //   'companyName':userCred.companyName,
+    //   'uniqueId':formValues.buyerUEN,
+    //   'email':formValues.email,
+    //   'phoneNo':formValues.phoneNo
+    // }
+    // localStorage.setItem('buyerDetails',JSON.stringify(buyerdetails))
       let buyerSubmitObj={
         'name':userCred.name,
-        'registrationNumber':userCred.companyId,
+        'registrationnumber':userCred.companyId,
         'countryCode':'SGP',
-        'invoiceId':this.invoiceForm.value['invId'],
-        'invoiceNo':invoiceNo,
+        'invoiceid':invoiceNo,
+        'invoiceno':this.invoiceForm.value['invId'],
         "sectionList":[{
           "questionResponses":[
             {"type": "QuestionResponseTextDto", "questionAlias": "customer-business-name", "value": formValues.companyName},
@@ -681,32 +696,32 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       invCcy:['',Validators.required],
 
       // buyer details
-      email: ['',Validators.required],
+      email: [''],
       buyerName: ['', Validators.required],
       buyerUEN: ['', Validators.required],
-      phoneNo:['',Validators.required],
-      buyerLocation:['',Validators.required],
-      addressLine1:['',Validators.required],
-      addressLine2:['',Validators.required],
-      city:['',Validators.required],
-      postalCode:['',Validators.required],
+      phoneNo:[''],
+      buyerAddr:[''],
+      addressLine1:[''],
+      addressLine2:[''],
+      city:[''],
+      postalCode:[''],
       companyName:['',Validators.required]
     });
-    let buyerDetails=JSON.parse(localStorage.getItem('buyerDetails'))
-    if(buyerDetails){
-      this.invoiceForm.patchValue({
-        email:buyerDetails.email,
-        buyerName:buyerDetails.name,
-        phoneNo:buyerDetails.phoneNo,
-        buyerUEN:buyerDetails.uniqueId,
-        buyerLocation:buyerDetails.location,
-        addressLine1:buyerDetails.addr1,
-        addressLine2:buyerDetails.addr2,
-        city:buyerDetails.city,
-        postalCode:buyerDetails.postalCode,
-        companyName:buyerDetails.companyName
-      })
-    }
+    // let buyerDetails=JSON.parse(localStorage.getItem('buyerDetails'))
+    // if(buyerDetails){
+    //   this.invoiceForm.patchValue({
+    //     email:buyerDetails.email,
+    //     buyerName:buyerDetails.name,
+    //     phoneNo:buyerDetails.phoneNo,
+    //     buyerUEN:buyerDetails.uniqueId,
+    //     buyerAddr:buyerDetails.location,
+    //     addressLine1:buyerDetails.addr1,
+    //     addressLine2:buyerDetails.addr2,
+    //     city:buyerDetails.city,
+    //     postalCode:buyerDetails.postalCode,
+    //     companyName:buyerDetails.companyName
+    //   })
+    // }
   }
   updateInvoiceId(event) {
     console.log(event.target.value)
@@ -809,6 +824,8 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       this.invoiceID = ''
       this.InvoiceFdate = ''
       this.invoiceFormBuild();
+      this.invoiceRefNo=''
+      this.score=0
       this.dataSourceTwo = new MatTableDataSource();
       // this.dataSourceTwo.data = []
       this.addRow();

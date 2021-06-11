@@ -48,4 +48,7 @@ export class InvoiceRequestServices {
   getBidingAcceptAllDetails(id) {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id);
  }
+  updateScore(id,body: any) {
+    return this.apiService.put(environment.api_url+'bidding-details/updateBidStatusInitiated/'+id,body);
+  }
 }
