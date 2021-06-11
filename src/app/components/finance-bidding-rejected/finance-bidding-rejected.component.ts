@@ -5,7 +5,6 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import { InvoiceDetailsRejectedComponent } from './invoice-details-rejected/invoice-details-rejected.component'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FinanceBiddingRejectedServices } from './finance-bidding-rejected-service'
-import { FinanceBiddingService } from '../../service/finance_bidding/finance-bidding.service';
 import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
@@ -21,7 +20,7 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   @Input() InvoiceDetailsRejectedComponent: InvoiceDetailsRejectedComponent;
  
   constructor(private fb: FormBuilder,public router: Router, public authenticationService: AuthenticationService,
-    private modalService: BsModalService, private FinanceBiddingRejectedServices: FinanceBiddingRejectedServices, private FinanceBiddingService: FinanceBiddingService) { }
+    private modalService: BsModalService, private FinanceBiddingRejectedServices: FinanceBiddingRejectedServices) { }
 
   dataSource;//data
   displayedColumns: string[] = [

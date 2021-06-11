@@ -6,7 +6,6 @@ import { AuthenticationService } from "../../service/authentication/authenticati
 import { InvoiceDetailsExpiredComponent } from "./invoice-details-expired/invoice-details-expired.component";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { FinanceBiddingExpiryServices } from "./finance-bidding-expiry-service";
-import { FinanceBiddingService } from "../../service/finance_bidding/finance-bidding.service";
 import { FINANCIERDASHBOARDCONSTANTS } from "../../shared/constants/constants";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options,LabelType } from '@angular-slider/ngx-slider';
@@ -24,7 +23,6 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     public authenticationService: AuthenticationService,
     private modalService: BsModalService,
     private FinanceBiddingExpiryServices: FinanceBiddingExpiryServices,
-    private FinanceBiddingService: FinanceBiddingService
   ) { }
 
   dataSource; //data

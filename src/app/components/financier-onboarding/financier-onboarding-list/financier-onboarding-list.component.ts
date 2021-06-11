@@ -1,11 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { Customer } from '../../../model/customer';
-import { CustomerService } from '../../../service/customer/customer.service';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
 
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { DatePipe } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinancierOnboardingService } from '../financier-onboarding.service';
@@ -41,7 +38,6 @@ interface ICity {
 })
 export class FinancierOnboardingListComponent implements OnInit {
   modalRef: BsModalRef;
-  customer: Customer;
   isOpen = '';
   financierForm: FormGroup
   financierId = ''
@@ -50,9 +46,8 @@ export class FinancierOnboardingListComponent implements OnInit {
 
 
   constructor(private modalService: BsModalService,private iccDashboardServices: IccDashboardServices,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
-    private customerService: CustomerService, public authenticationService: AuthenticationService, private toastr: ToastrService,
+    public authenticationService: AuthenticationService, private toastr: ToastrService,
     private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService) {
-    this.customer = new Customer();
 
   }
   dataSource:any;

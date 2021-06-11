@@ -46,4 +46,7 @@ export class SmeBiddingServices {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchBiddingInvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
   }
+  getInvoiceDetails() {
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allBiddingInvoicesBySmeId/'+localStorage.getItem("userId"));
+  }
 }

@@ -1,76 +1,48 @@
-<!-- <p>navbar works!</p> -->
 <mat-toolbar class="uxg-toolbar uxg-toolbar-elevated">
-    <!-- <button mat-icon-button class="uxg-toolbar-menu" (click)="[sidenav.toggle(),this.isOpenHandle(isOpen) ]">
-        <mat-icon>menu</mat-icon>
-    </button> -->
+
     <div class="uxg-logo" dense></div>
     <ul class="uxg-breadcrumb uxg-breadcrumb-responsive">
         <button mat-icon-button color="accent" class="uxg-breadcrumb-back" (click)="backNavigation()">
             <mat-icon>chevron_left</mat-icon>
-          </button>
+        </button>
         <li class="uxg-h6">{{currentHeaderName | translate}}</li>
-        <!-- <li class="curs-pointer" (click)="goHome()">Home</li> -->
-        <li *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">{{item.pathName | translate}}</li>
+        <li *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">
+            {{item.pathName | translate}}</li>
 
     </ul>
     <span class="fill-remaining-space"></span>
-    <!-- *ngIf="!isHide" -->
-    <div class="uxg-toolbar-actions" >
-        <!-- <div>
-            <label>
-               <select #langSelect (change)="translate.use(langSelect.value)"> -->
-                <!-- <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option> -->
-                  <!-- <option *ngFor="let lang of this.languages" [value]="lang.id" [selected]="lang.id === translate.currentLang">{{ lang.itemName }}</option> -->
+    <div class="uxg-toolbar-actions">
 
-              <!-- </select> -->
-                <!-- <div class="multiselect-dropdown-dsgn">
-                  <angular2-multiselect [data]="LanguagesOptions"
-                name='language'  [(ngModel)]="selectedItems"  (onSelect)="translate.use($event.id)"
-                [settings]="languageDropdownSettings"></angular2-multiselect> 
-            </div> -->
-
-      
         <mat-form-field dense class="lang-res">
             <mat-label>{{'navbarComponet.Language' | translate}}</mat-label>
             <mat-icon matPrefix>language</mat-icon>
-            <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+            <mat-select #selectedLang [value]="translate.currentLang"
+                (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
                 <mat-option *ngFor="let lang of languages" [value]="lang.id">
-                  {{ lang.nativeName }}
+                    {{ lang.nativeName }}
                 </mat-option>
-              </mat-select>
-          </mat-form-field> 
+            </mat-select>
+        </mat-form-field>
 
-          <!-- <countdown [config]="{leftTime: timestamp }"></countdown> -->
-            <ul class="timedateul">
-                <li  class="curr-time">Time : {{currentTime}}</li>
-                <li class="curr-date">Date : {{currentDate}}</li>
-            </ul>
-            <button mat-icon-button color="neutral">
-                <mat-icon>notifications</mat-icon>
-                </button>
-           
-        <!-- <button mat-icon-button color="neutral">
-            <mat-icon>search</mat-icon>
+        <ul class="timedateul">
+            <li class="curr-time">Time : {{currentTime}}</li>
+            <li class="curr-date">Date : {{currentDate}}</li>
+        </ul>
+        <button mat-icon-button color="neutral">
+            <mat-icon>notifications</mat-icon>
         </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>notifications</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>help_outline</mat-icon>
-        </button>
-            <button mat-icon-button color="neutral">
-        <mat-icon>apps</mat-icon>
-        </button> -->
+
+
     </div>
-    <button mat-icon-button [matMenuTriggerFor]="menuHero" >
+    <button mat-icon-button [matMenuTriggerFor]="menuHero">
         <mat-icon>account_circle</mat-icon>
     </button>
     <button mat-icon-button class="uxg-toolbar-icon-menu">
         <mat-icon>more_vert</mat-icon>
     </button>
 
-  </mat-toolbar>
-  <mat-menu #menuHero="matMenu" class="uxg-user-profile s">
+</mat-toolbar>
+<mat-menu #menuHero="matMenu" class="uxg-user-profile s">
     <div class="uxg-menu-header">
         <div class="uxg-avatar-hero-block">
             <div class="uxg-avatar">U</div>
@@ -85,47 +57,7 @@
             <mat-icon>exit_to_app</mat-icon>
             {{'navbarComponet.Logout' | translate}}
         </button>
-        <button mat-button color="primary" (click)="profile()" dense> {{'navbarComponet.View profile' | translate}} </button>
+        <button mat-button color="primary" (click)="profile()" dense> {{'navbarComponet.View profile' | translate}}
+        </button>
     </div>
-  </mat-menu>
-  <!-- <mat-sidenav #sidenav mode="over">
-    <div class="uxg-nav-header">
-        <mat-card class="uxg-card-product" extra-dense>
-            <span class="uxg-h5 uxg-card-product-name">PRO</span>
-        </mat-card>
-    </div>
-    <mat-nav-list class="uxg-nav-list">
-        <a mat-list-item class="uxg-list-item-selected">
-            <mat-icon mat-list-icon>home</mat-icon>
-            <p>Home</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Applications</p>
-            <mat-icon>chevron_right</mat-icon>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>notifications</mat-icon>
-            <p>Notifications</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>extension</mat-icon>
-            <p>Tools</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>settings</mat-icon>
-            <p>Settings</p>
-        </a>
-        <mat-divider></mat-divider>
-    </mat-nav-list>
-    <mat-nav-list class="uxg-link-list">
-        <a mat-list-item>
-            <mat-icon mat-list-icon>help</mat-icon>
-            <p>Help</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>Sign out</p>
-        </a>
-    </mat-nav-list>
-  </mat-sidenav> -->
+</mat-menu>

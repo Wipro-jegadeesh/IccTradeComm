@@ -13,5 +13,7 @@ export class FinancebidsRequestServices {
     CancelBidingAccept(id,params) {
        return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/cancelBidStatus/'+id,params);
     }
-  
+    getBidingAcceptDetails() {
+       return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allInitatedBidsList/'+localStorage.getItem("userId"));
+    }
 }

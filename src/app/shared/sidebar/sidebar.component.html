@@ -1,130 +1,66 @@
-<!-- <p>sidebar works!</p> -->
 <button mat-icon-button class="uxg-toolbar-menu" (click)="[this.isOpenHandle(isOpen,'open'),sidenav.toggle()]">
-    <mat-icon>menu</mat-icon>
+  <mat-icon>menu</mat-icon>
 </button>
 
 <mat-sidenav #sidenav mode="over" [(opened)]="opened">
-    <!-- <div class="uxg-nav-header">
-        <mat-card class="uxg-card-product" extra-dense>
-            <span class="uxg-h5 uxg-card-product-name">PRO</span>
-        </mat-card>
-    </div> -->
-    <mat-nav-list class="uxg-nav-list">
-        <!-- class="uxg-list-item-selected" -->
-        <a mat-list-item >
-            <mat-icon mat-list-icon>home</mat-icon>
-            <p>{{'sideBarComponet.Home' | translate}}</p>
-        </a>
-        <a mat-list-item (click)="navigatePage('/sme-onboarding')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Questionnaire Details' | translate}}</p>
-        </a>
-        <a mat-list-item (click)="navigatePage('/score-received')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Score Received' | translate}}</p>
-        </a>
-        <a mat-list-item (click)="navigatePage('/sme-user-creation')" *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.User Creation' | translate}}</p>
-        </a>
-        <a *ngIf="roleName == 'financier'" mat-list-item (click)="navigatePage('/finanance-limit-maintanance')" >
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Limit Maintanance' | translate}}</p>
-        </a>
-        <a *ngIf="roleName == 'financier' && checkRolesPer && checkRolesPer.role == 'admin'" mat-list-item (click)="navigatePage('/financier-onboarding/edit/'+ this.checkRolesPer.profileID)" >
+  <mat-nav-list class="uxg-nav-list">
+    <a mat-list-item>
+      <mat-icon mat-list-icon>home</mat-icon>
+      <p>{{'sideBarComponet.Home' | translate}}</p>
+    </a>
+    <a mat-list-item (click)="navigatePage('/sme-onboarding')"
+      *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Questionnaire Details' | translate}}</p>
+    </a>
+    <a mat-list-item (click)="navigatePage('/score-received')"
+      *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Score Received' | translate}}</p>
+    </a>
+    <a mat-list-item (click)="navigatePage('/sme-user-creation')"
+      *ngIf="roleName == 'sme' && checkRolesPer && checkRolesPer.role == 'admin'">
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.User Creation' | translate}}</p>
+    </a>
+    <a *ngIf="roleName == 'financier'" mat-list-item (click)="navigatePage('/finanance-limit-maintanance')">
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Limit Maintanance' | translate}}</p>
+    </a>
+    <a *ngIf="roleName == 'financier' && checkRolesPer && checkRolesPer.role == 'admin'" mat-list-item
+      (click)="navigatePage('/financier-onboarding/edit/'+ this.checkRolesPer.profileID)">
 
-          <mat-icon mat-list-icon>dashboard</mat-icon>
-          <p matBadge="6" class="uxg-side-badge">{{'Profile' | translate}}</p>
-        </a>
-        <!-- <a *ngIf="roleName == 'icc'" mat-list-item (click)="navigatePage('/icc-list-smes')" >
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">Sme's</p>
-        </a> -->
-        <a mat-list-item>
-            <mat-icon mat-list-icon>dashboard</mat-icon>
-            <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Applications' | translate}}</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>notifications</mat-icon>
-            <p>{{'sideBarComponet.Notifications' | translate}}</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>extension</mat-icon>
-            <p>{{'sideBarComponet.Tools' | translate}}</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>settings</mat-icon>
-            <p>{{'sideBarComponet.Settings' | translate}}</p>
-        </a>
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'Profile' | translate}}</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>dashboard</mat-icon>
+      <p matBadge="6" class="uxg-side-badge">{{'sideBarComponet.Applications' | translate}}</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>notifications</mat-icon>
+      <p>{{'sideBarComponet.Notifications' | translate}}</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>extension</mat-icon>
+      <p>{{'sideBarComponet.Tools' | translate}}</p>
+    </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>settings</mat-icon>
+      <p>{{'sideBarComponet.Settings' | translate}}</p>
+    </a>
 
-        <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-        <a mat-list-item>
-            <mat-icon mat-list-icon>help</mat-icon>
-            <p>{{'sideBarComponet.Help' | translate}}</p>
-        </a>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>help</mat-icon>
+      <p>{{'sideBarComponet.Help' | translate}}</p>
+    </a>
 
-        <a mat-list-item>
-            <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>{{'sideBarComponet.Sign out' | translate}}</p>
-        </a>
-        <!-- <mat-divider></mat-divider> -->
-    </mat-nav-list>
-    <!-- <mat-nav-list class="uxg-link-list">
-        <a mat-list-item>
-            <mat-icon mat-list-icon>help</mat-icon>
-            <p>Help</p>
-        </a>
-        <a mat-list-item>
-            <mat-icon mat-list-icon>power_settings_new</mat-icon>
-            <p>Sign out</p>
-        </a>
-    </mat-nav-list> -->
-  </mat-sidenav>
+    <a mat-list-item>
+      <mat-icon mat-list-icon>power_settings_new</mat-icon>
+      <p>{{'sideBarComponet.Sign out' | translate}}</p>
+    </a>
+  </mat-nav-list>
 
-
-
-
-  <!-- =============
-
--->
-
-<!-- <mat-sidenav-container class="uxg-nav">
-    <mat-sidenav #sidenavdemo>
-      <div class="uxg-nav-header">
-        <div class="uxg-logo"></div>
-      </div>
-      <mat-nav-list class="uxg-nav-list">
-        <a mat-list-item class="uxg-list-item-selected">
-          <p>Getting Started</p>
-        </a>
-        <a mat-list-item>
-          <p matBadge="4" class="uxg-side-badge">Foundations</p>
-        </a>
-        <a mat-list-item>
-          <p matBadge="12" class="uxg-side-badge">UI Elements</p>
-        </a>
-        <a mat-list-item>
-          <p matBadge="7" class="uxg-side-badge">Components</p>
-        </a>
-        <a mat-list-item>
-          <p matBadge="2" class="uxg-side-badge">Patterns</p>
-        </a>
-        <a mat-list-item>
-          <p matBadge="1" class="uxg-side-badge">Applications</p>
-        </a>
-        <a mat-list-item>
-          <p>Tutorials</p>
-        </a>
-        <a mat-list-item>
-          <p>About</p>
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <button class="uxg-nav-header-button" mat-icon-button color="primary" (click)="sidenavdemo.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
-  
+</mat-sidenav>

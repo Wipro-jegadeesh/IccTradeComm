@@ -56,7 +56,6 @@ import { LoginComponent } from './components/login/login.component';
 import { SmeOnboardingComponent } from './components/sme-onboarding/sme-onboarding.component';
 import { FinancierOnboardingComponent } from './components/financier-onboarding/financier-onboarding.component';
 import { FinancierOnboardingListComponent } from './components/financier-onboarding/financier-onboarding-list/financier-onboarding-list.component';
-import { CustomerService } from './service/customer/customer.service';
 import { FinancierDashboardComponent } from './components/financier-dashboard/financier-dashboard.component';
 import { SmeDashboardComponent } from './components/sme-dashboard/sme-dashboard.component';
 import { SmeBiddingComponent } from './components/sme-bidding/sme-bidding.component';
@@ -69,8 +68,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { IccDashboardComponent } from './components/icc-dashboard/icc-dashboard.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { FinancierService } from './service/financier/financier.service';
-import { FinanceBiddingService } from './service/finance_bidding/finance-bidding.service';
 import { SmeFinanceforBiddingComponent } from './components/sme-financefor-bidding/sme-financefor-bidding.component';
 import { SmeFinancierForBiddingServices } from './components/sme-financefor-bidding/sme-financefor-bidding-service';
 import { SmeDashboardServices } from './components/sme-dashboard/sme-dashboard-service';
@@ -306,8 +303,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
-  providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
-    FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
+  providers: [LoaderService,FinancebidsRequestServices, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
+    FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
     FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
     DialogDataExampleService,FinanceLimitMaintananceServices,IccCountryServices,

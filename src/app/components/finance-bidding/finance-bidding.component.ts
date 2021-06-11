@@ -5,7 +5,6 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FinanceRequestServices } from './finance-service'
-import { FinanceBiddingService } from '../../service/finance_bidding/finance-bidding.service';
 import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
@@ -17,8 +16,7 @@ import { Options,LabelType } from '@angular-slider/ngx-slider';
 })
 export class FinanceBiddingComponent implements OnInit {
   @Input() InvoiceDetailsComponent: InvoiceDetailsComponent;
-  constructor(public router: Router, public authenticationService: AuthenticationService,
-    private modalService: BsModalService, private FinanceRequestServices: FinanceRequestServices, private FinanceBiddingService: FinanceBiddingService) { }
+  constructor(public router: Router, public authenticationService: AuthenticationService,private FinanceRequestServices: FinanceRequestServices) { }
 
   dataSource;//data
   displayedColumns: string[] = [
@@ -94,7 +92,7 @@ export class FinanceBiddingComponent implements OnInit {
     // this.dataSource.paginator = this.paginator
 
 
-    this.FinanceBiddingService.getInvoiceDetails().subscribe(resp => {
+    this.FinanceRequestServices.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
