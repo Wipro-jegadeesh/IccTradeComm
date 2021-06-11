@@ -355,14 +355,33 @@ getAllCountry(){
   }
   authoriseInvoice() {
     let invoiceIds = []
-    this.selection.selected.forEach(s =>
-      invoiceIds.push(s.id)
-    );
+    let scoreCheck = false
+    // this.selection.selected.forEach((item) => {
+    //   // invoiceIds.push(s.id)
+    //   if(item.buyerScore >= 500){
+
+    //   }
+    // });
+    for(let i=0;i < this.selection.selected.length;i++){
+      if(this.selection.selected[i].buyerScore >= 500 && this.selection.selected[i].id){
+        invoiceIds.push(this.selection.selected[i].id)
+        scoreCheck = true
+      }
+      else{
+        scoreCheck = false
+        break;
+      }
+    }
+    if(scoreCheck){
     if(invoiceIds.length > 0){
       this.updateInvoice(invoiceIds)
     }else{
       return this.toastr.error(this.translate.instant('Please select invoice details'));
     }
+  }
+  else{
+    this.toastr.error('Your score is less to authorize')
+  }
     console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
