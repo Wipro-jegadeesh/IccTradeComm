@@ -363,7 +363,8 @@ getAllCountry(){
     //   }
     // });
     for(let i=0;i < this.selection.selected.length;i++){
-      if(this.selection.selected[i].buyerScore >= 500 && this.selection.selected[i].id){
+      if(this.selection.selected[i].buyerScore >= 500){
+        //  && this.selection.selected[i].id){
         invoiceIds.push(this.selection.selected[i].id)
         scoreCheck = true
       }
@@ -380,7 +381,7 @@ getAllCountry(){
     }
   }
   else{
-    this.toastr.error('Your score is less to authorize')
+   this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
   }
     console.log("invoiceIds", invoiceIds);
   }
