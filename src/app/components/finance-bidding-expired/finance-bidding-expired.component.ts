@@ -33,6 +33,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     "Invoice Amount",
     "BIDing Amount",
     "offer Expires",
+    'status',
     "action",
   ];
   displayedColumnsload: string[] = [

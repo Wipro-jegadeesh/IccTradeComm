@@ -16,33 +16,27 @@
           <ng-container matColumnDef="invId">
             <th mat-header-cell *matHeaderCellDef> {{'Invoice Id' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
-              <!-- <mat-chip-list>
-                     <mat-chip color="primary" selected (click)="openModal($event,template,element)"> -->
+          
                          {{element.invoiceNo}} 
-                        <!-- </mat-chip>
-                 </mat-chip-list> -->
+                       
              </td>
           </ng-container>
 
           <ng-container matColumnDef="invAmt">
             <th mat-header-cell *matHeaderCellDef> {{'Invoice Amount' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
-              <!-- <mat-chip-list>
-                     <mat-chip >  -->
+          
                          {{element.invoiceCcy}} {{element.invoiceAmt}} 
-                        <!-- </mat-chip>
-                 </mat-chip-list> -->
+                
              </td>
           </ng-container>
         
           <ng-container matColumnDef="smeId">
             <th mat-header-cell *matHeaderCellDef> {{'SME Name' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
-              <!-- <mat-chip-list>
-                     <mat-chip> -->
+ 
                          {{element.smeId}} 
-                        <!-- </mat-chip>
-                 </mat-chip-list> -->
+                
              </td>
           </ng-container>
           
@@ -50,11 +44,9 @@
           <ng-container matColumnDef="buyerName">
             <th mat-header-cell *matHeaderCellDef> {{'Buyer Name' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
-               <!-- <mat-chip-list>
-                      <mat-chip> -->
+            
                           {{element.buyerName}} 
-                        <!-- </mat-chip>
-                  </mat-chip-list> -->
+                     
               </td>
           </ng-container>
         
@@ -62,42 +54,34 @@
           <ng-container matColumnDef="invDate">
             <th mat-header-cell *matHeaderCellDef> {{'Inv Date' | translate}}  </th>
             <td mat-cell *matCellDef="let element"> 
-               <!-- <mat-chip-list>
-                      <mat-chip> -->
+           
                           {{element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}} 
-                        <!-- </mat-chip>
-                  </mat-chip-list> -->
+                    
               </td>
           </ng-container>
         
           <ng-container matColumnDef="invDueDate">
             <th mat-header-cell *matHeaderCellDef> {{'Inv Due date' | translate}} </th>
             <td mat-cell *matCellDef="let element"> 
-               <!-- <mat-chip-list>
-                      <mat-chip> -->
+               
                           {{ element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}} 
-                        <!-- </mat-chip>
-                  </mat-chip-list> -->
+                   
               </td>
           </ng-container>
   
           <ng-container matColumnDef="status">
               <th mat-header-cell *matHeaderCellDef>  {{'Status' | translate}} </th>
               <td mat-cell *matCellDef="let element"> 
-                 <!-- <mat-chip-list>
-                        <mat-chip> -->
+                
                             {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
-                            <!-- </mat-chip>
-                    </mat-chip-list> -->
+                          
                 </td>
             </ng-container>   
             
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                 <td mat-cell *matCellDef="let element"> 
-                  <!-- <a href="javascript:void(0)" (click)="openModal($event,template,element)">
-                      <mat-icon>edit</mat-icon>
-                    </a>&nbsp; -->
+                 
                   <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                       <mat-icon #tooltip="matTooltip"
                       matTooltip="{{'view' | translate}}" [matTooltipPosition]="'below'">visibility</mat-icon>
@@ -225,8 +209,7 @@
 
         
         <div style="overflow-x:auto;">
-            <!-- <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Bidding Details</p> -->
+       
             <table mat-table [dataSource]="dataSourceThree">
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef scope="column">{{'Financie Ref No' | translate}}</th>
@@ -279,45 +262,7 @@
                     <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
                 </ng-container> 
 
-                <!-- <ng-container matColumnDef="offerExpDateTime">
-                    <th mat-header-cell *matHeaderCellDef scope="column">offer Exp Date</th>
-                    <td mat-cell *matCellDef="let data">{{ data.offerExpDateTime }}</td>
-                </ng-container>  -->
-
-                <!-- <ng-container matColumnDef="finId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Fin Id</th>
-                    <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
-                </ng-container>  -->
-
-                <!-- <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Status</th>
-                    <td mat-cell *matCellDef="let data">{{ data.status }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="smeId">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Sme Id</th>
-                    <td mat-cell *matCellDef="let data">{{ data.smeId }}</td>
-                </ng-container>  -->
-
-                <!-- <ng-container matColumnDef="offerExpPeriod7">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Payment Ref No</th>
-                    <td mat-cell *matCellDef="let data">{{ data.offerExpPeriod7 }}</td>
-                </ng-container>  -->
-
-                <!-- <ng-container matColumnDef="paymentDate">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Payment Date</th>
-                    <td mat-cell *matCellDef="let data">{{ data.paymentDate }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="relInvRef">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Related Inv Ref</th>
-                    <td mat-cell *matCellDef="let data">{{ data.relInvRef }}</td>
-                </ng-container> 
-
-                <ng-container matColumnDef="relBidRef">
-                    <th mat-header-cell *matHeaderCellDef scope="column">Related Bid Ref</th>
-                    <td mat-cell *matCellDef="let data">{{ data.relBidRef }}</td>
-                </ng-container>  -->
+                
         
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsThree" style="background-color:#B4A6EA"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
@@ -339,8 +284,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
           <div class="table-res">
-            <!-- <p style="font-weight: 500;
-            color: #a899e4;margin-left: 14px;">Invoice Details</p> -->
+     
             <table mat-table [dataSource]="dataSourceTwo">
                 <ng-container matColumnDef="invId">
                     <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice No' | translate}}</th>
@@ -394,15 +338,7 @@
                         <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                     </ng-container>
         
-                    <!-- <ng-container matColumnDef="idNo">
-                        <th mat-header-cell *matHeaderCellDef scope="column">ID No</th>
-                        <td mat-cell *matCellDef="let element">{{ element.idNo }}</td>
-                    </ng-container> -->
-        
-                    <!-- <ng-container matColumnDef="dateOfInvoice">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Date Of Invoice</th>
-                        <td mat-cell *matCellDef="let element">{{ element.dateOfInvoice }}</td>
-                    </ng-container> -->
+                  
         
                     <ng-container matColumnDef="quantity">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Quantity' | translate}}</th>
@@ -421,11 +357,6 @@
         
                    
         
-                    <!-- <ng-container matColumnDef="netAmtPay">
-                        <th mat-header-cell *matHeaderCellDef scope="column">Net Amount</th>
-                        <td mat-cell *matCellDef="let element">{{ element.netAmtPay }}</td>
-                    </ng-container>
-         -->
                     <ng-container matColumnDef="taxRate">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Rate' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
@@ -454,24 +385,8 @@
         </mat-expansion-panel>
         </mat-accordion>
         <br>
-
-
-
-
-
-
-
-
-       
-          
-              
-
-        
-  
-          
        </div>
        <div class="modal-footer">
-          <!-- <button type="button" class="btn model-btn-outline">Submit</button> -->
           <button type="button" class="btn btn-default" (click)="modalRef.hide()"> {{'Close' | translate}}</button>
        </div>
     </ng-template>

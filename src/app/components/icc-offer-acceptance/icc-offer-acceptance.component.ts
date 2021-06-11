@@ -1,11 +1,9 @@
 
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IccOfferAcceptServices } from './icc-offer-accept-service';
 import { BIDDINGCONSTANTS, SMEDASHBOARDCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
@@ -31,11 +29,8 @@ export class IccOfferAcceptanceComponent implements OnInit {
   displayed2Columns: string[] = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
   financierTooltip=SMEDASHBOARDCONSTANTS;
 
-
   displayedColumnsOne: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
   dataSourceOne; //data
-
-
 
   dataSourceTwo; //data
   displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
@@ -96,8 +91,7 @@ export class IccOfferAcceptanceComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private IccOfferAcceptServices: IccOfferAcceptServices) { }
+  constructor(public router: Router, private IccOfferAcceptServices: IccOfferAcceptServices) { }
 
 
   ngOnInit() {
@@ -153,78 +147,9 @@ export class IccOfferAcceptanceComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-
-  openModal(event, template, data) {
-    event.preventDefault();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
-    this.IccOfferAcceptServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      // let status = "";
-      // if (resp.status == "I") {
-      //   status = "Initiated"
-      // }
-      // else if (resp.status == "A") {
-      //   status = "Waiting for bid"
-      // }
-      // else if (resp.status == "B") {
-      //   status = "Bid Created"
-      // }
-      // else {
-      //   status = "Financed Successfully"
-      // }
-      this.dataSourceTwo = new MatTableDataSource([
-        { 'invId': resp.invId, 'invDate': resp.invDate,'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
-      ]);
-
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-      
-    })
-  }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
-  }
+ 
   navigateFinanceDetails(id, type) {
     this.router.navigateByUrl('/icc-offer-acceptance-details/' + type + '/' + id);
-  }
-
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout() {
-    this.authenticationService.logout()
   }
 }
 

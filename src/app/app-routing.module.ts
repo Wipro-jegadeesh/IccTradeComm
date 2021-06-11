@@ -24,8 +24,6 @@ import { FinanceBiddingAcceptsDetailsComponent } from './components/finance-bids
 import {InvoiceDetailsExpiredComponent} from './components/finance-bidding-expired/invoice-details-expired/invoice-details-expired.component'
 import {FinanceBiddingRejectedComponent} from './components/finance-bidding-rejected/finance-bidding-rejected.component'
 import {InvoiceDetailsRejectedComponent} from './components/finance-bidding-rejected/invoice-details-rejected/invoice-details-rejected.component'
-import {FinanceBiddingCancelComponent} from './components/finance-bidding-cancel/finance-bidding-cancel.component'
-import {InvoiceDetailsCancelComponent} from './components/finance-bidding-cancel/invoice-details-cancel/invoice-details-cancel.component'
 import {ICCacceptancedetailsComponent} from './components/icc-offer-acceptance/icc-acceptance-details/icc-acceptance-details.component'
 import {IccFundingRequestComponent} from './components/icc-funding-request/icc-funding-request.component'
 import {IccOfferAcceptanceComponent}  from './components/icc-offer-acceptance/icc-offer-acceptance.component'
@@ -42,7 +40,6 @@ import {IccAuthorizMatrixComponent} from './components/icc-authoriz-matrix/icc-a
 import {SignUpDetailsComponent} from './components/signup/sign-up-details/sign-up-details.component'
 import {QuestionaireScoreComponent} from './components/questionaire-score/questionaire-score.component'
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
-import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 import { FinananceLimitMaintananceComponent } from './components/finanance-limit-maintanance/finanance-limit-maintanance.component';
 import {IccCountryComponent} from './components/icc-country/icc-country.component'
 
@@ -88,10 +85,7 @@ const routes: Routes = [
   { path: 'finance-bidding-expired-details/:type/:id', component: InvoiceDetailsExpiredComponent , data : {"HeaderName" : "Invoice Details", "headerPaths" : [{ path : "/finance-bidding-expired",pathName : "Financier Offer Expired"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-bidding-rejected', component: FinanceBiddingRejectedComponent, data : {"HeaderName" : "Financier Offer Rejected","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
   { path: 'finance-bidding-rejected/:type/:id', component: InvoiceDetailsRejectedComponent , data : {"HeaderName" : "Invoice Details","headerPaths" : [{ path : "/finance-bidding-rejected",pathName : "Financier Offer Rejected"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
-  { path: 'finance-bidding-cancel', component: FinanceBiddingCancelComponent, data : {"HeaderName" : "Financier Offer Cancel","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
-  { path: 'finance-bidding-cancel/:type/:id', component: InvoiceDetailsCancelComponent , data : {"HeaderName" : "Invoice Details","headerPaths" : [{ path : "/finance-bidding-cancel",pathName : "Financier Offer Cancel"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-funded', component: FinancierFundedComponent, data : {"HeaderName" : "Financier Funded Deals","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
-  { path: 'limit-maintanance', component: FinancierLimitMaintanaceComponent, data : {"HeaderName" : "Financier Limit Maintance Component","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
   { path: 'finanance-limit-maintanance', component: FinananceLimitMaintananceComponent, data : {"HeaderName" : "Financier Limit Maintance Component","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
 
   

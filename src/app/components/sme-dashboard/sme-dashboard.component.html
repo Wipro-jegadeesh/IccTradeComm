@@ -1,17 +1,6 @@
-
-
-
 <div class="app-content {{isOpen}} ">
     <header class="mmt20">
         <div class="account-services-headline">
-            <ng-container>
-                <div class="global-balance">
-                    <!-- <h6 class="uxg-h6">S$ 765,067.98</h6> -->
-                    <!-- <p class="font-13">Global Balance in S$</p> -->
-                    <!-- <p class="uxg-caption font-13" >Rate (1.0934566)</p> -->
-                    <mat-divider></mat-divider>
-                </div>
-            </ng-container>
             <ng-template #loadingGlobalBalance>
                 <div style="z-index: 10">
                     <uxg-skeleton-text style="width: 300px; height: 50px;" animated></uxg-skeleton-text>
@@ -19,7 +8,7 @@
                 </div>
             </ng-template>
             <div class="paginator">
-                <button mat-icon-button (click)="scrollLeft()"  [disabled]="start">
+                <button mat-icon-button (click)="scrollLeft()" [disabled]="start">
                     <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
                 <button mat-icon-button (click)="scrollRight()" [disabled]="end">
@@ -29,226 +18,184 @@
         </div>
         <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Open Funding Requests' | translate}}" number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.bidDetails | translate}}"
-                [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()"></uxg-account-card>
-                
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funding Bids' | translate}}" number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"  #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.financeBidReceive | translate}}"
-                [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()" ></uxg-account-card>
-                <!-- <uxg-account-card class="curs-pointer" name="Invoice Creation" number="New"(click)="this.navigateInvoiceCreation()" ></uxg-account-card> -->
-                
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funded' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.acceptedDetails | translate}}"
-                [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()" number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}" ></uxg-account-card>
-               
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Due Today' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.todayDue | translate}}" (click)="this.navigateAcceptedRepayment()"
-                [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Overdue' | translate}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltips.pastDue | translate}}" (click)="this.navigateRepaymentOverDue()"
-                [matTooltipPosition]="tooltipPosition" number="SGD 0" ></uxg-account-card>
+                <uxg-account-card class="curs-pointer"
+                    name="{{'SMEDashboardComponent.Open Funding Requests' | translate}}"
+                    number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltips.bidDetails | translate}}"
+                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()">
+                </uxg-account-card>
+
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funding Bids' | translate}}"
+                    number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltips.financeBidReceive | translate}}"
+                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()"></uxg-account-card>
+
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funded' | translate}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltips.acceptedDetails | translate}}"
+                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()"
+                    number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}">
+                </uxg-account-card>
+
+                <uxg-account-card class="curs-pointer"
+                    name="{{'SMEDashboardComponent.Repayments Due Today' | translate}}" #tooltip="matTooltip"
+                    matTooltip="{{dashboardTooltips.todayDue | translate}}" (click)="this.navigateAcceptedRepayment()"
+                    [matTooltipPosition]="tooltipPosition" number="SGD 0"></uxg-account-card>
+                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Overdue' | translate}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltips.pastDue | translate}}"
+                    (click)="this.navigateRepaymentOverDue()" [matTooltipPosition]="tooltipPosition" number="SGD 0">
+                </uxg-account-card>
             </div>
         </ng-container>
-        <!-- <div class="col-md-12"> -->
-            <!-- <mat-tab-group dynamicHeight>
-                 <mat-tab label="DashBoard Over View">
 
-                 </mat-tab>
-                 <mat-tab label="Funding Request">
+        <mat-menu #menu="matMenu">
+            <div
+                [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
+                <button
+                    [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"
+                    (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
+                    <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
+                    <span>
+                        {{'Invoice Request Manual' | translate}}
+                    </span>
+                </button>
+            </div>
+            <div
+                [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
+                <input hidden #uploader type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
+                <button
+                    [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"
+                    [matTooltip]="this.userDetails.status === 'D' ? 'Deactive' : null" style="color: #7c49cb;"
+                    (click)="uploader.click()" mat-menu-item>
+                    <i class="fas fa-2x fa-upload"></i>&nbsp;
+                    <span>
+                        {{'Invoice Request Upload' | translate}}
+                    </span>
+                </button>
+            </div>
+            <div
+                [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
+                <button
+                    [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"
+                    style="color: #7c49cb;" mat-menu-item>
+                    <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
+                    <span>
+                        {{'Invoice repository Download' | translate}}
+                    </span>
+                </button>
+            </div>
+        </mat-menu>
 
-                </mat-tab> -->
-        <!-- <button type="button" class="btn btn-outline fundreq-btn"  #tooltip="matTooltip"
-        matTooltip="{{dashboardTooltips.fundingRequest}}"
-        [matTooltipPosition]="tooltipPosition"  (click)="this.navigateInvoiceCreation()">+ Funding Request</button> -->
-
-        <!-- <mat-form-field class="fundreq-btn" (change)="onRequestChange($event)">
-            <mat-label>Funding Request</mat-label>
-            <select matNativeControl >
-              <option value="">select</option>
-              <option value="manual">Invoice Request manual</option>
-              <option value="bulk">Invoice Request Bulk Upload</option>
-            </select>
-          </mat-form-field> -->
-            <!-- <div class="row topbar_main" style="justify-content: flex-end;">
-                <div  class="col-md-3 my-2 topbar_item">
-                    <a [routerLinkActive]="['router-link-active']"  [matMenuTriggerFor]="menu" class="list-group-item text-center tablecolour">
-                        <i class="fas fa-2x fa-file-invoice"></i>
-                        <p class="mb-0 mt-1"><span>+ Funding Request</span></p>
-                    </a>
-                </div>
-            </div> -->
-          <!-- <button type="button" class="btn btn-outline fundreq-btn topbar_main"  #tooltip="matTooltip"
-          matTooltip="{{dashboardTooltips.fundingRequest}}"
-          [matTooltipPosition]="tooltipPosition" [matMenuTriggerFor]="menu"> + Funding Request</button> -->
-            <mat-menu #menu="matMenu">
-                <div [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
-                    <button [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"  (click)="onRequestChange('manual')" style="color: #7c49cb;" mat-menu-item>
-                        <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
-                        <span>
-                            {{'Invoice Request Manual' | translate}} 
-                        </span>
-                        </button>
-                </div>
-                <div [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
-            <input  hidden #uploader type="file" accept=".xlsx,.xls,.csv,.pdf" (change)="onFileChange($event)" />
-            <button  [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false" [matTooltip]="this.userDetails.status === 'D' ? 'Deactive' : null" style="color: #7c49cb;" (click)="uploader.click()" mat-menu-item>
-                <i class="fas fa-2x fa-upload"></i>&nbsp;
-                <span>
-                    {{'Invoice Request Upload' | translate}}
-                </span>
-            </button>
-                </div>
-                <div [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
-                    <button [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"  style="color: #7c49cb;" mat-menu-item>
-                        <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
-                        <span>
-                            {{'Invoice repository Download' | translate}} 
-                        </span>
-                        </button>
-                </div>
-            </mat-menu>
-           
         <!-- </div> -->
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12 col-xl-6">
-                    <div class="col-md-3" style="margin-bottom: 40px;">
-                        <div class="trans-table">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h6>{{'Finance Maturity' | translate}}</h6>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12 col-xl-6">
+                            <div class="col-md-3" style="margin-bottom: 40px;">
+                                <div class="trans-table">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h6>{{'Finance Maturity' | translate}}</h6>
+                                        </div>
                                     </div>
-                            </div>
-                            <div>
-                        <table class="table-bordered table" id="customers">
-                            <tr>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financePeriod | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Period' | translate}}</th>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeNumber | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeAmount | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
-                            </tr>   
-                           <tr *ngFor="let getFinMaturityDatas of getFinMaturityData" >
-                              <td>{{getFinMaturityDatas.PERIOD}}</td>
-                              <td>{{getFinMaturityDatas.NUMBER}}</td>
-                              <td>{{getFinMaturityDatas.AMOUNT}}</td>
-                            </tr>
-                            <tr *ngIf="!getFinMaturityData?.length">
-                                <td colspan="3">{{'No Records Found' | translate}}</td>
-                            </tr>
-                          </table>
-                        </div>
-                        </div>
-                    </div>
-                   <div class="col-md-3">
-                        <div class="trans-table">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h6>{{'Finance Size' | translate}}</h6>
+                                    <div>
+                                        <table class="table-bordered table" id="customers">
+                                            <tr>
+                                                <th #tooltip="matTooltip"
+                                                    matTooltip="{{dashboardTooltips.financePeriod | translate}}"
+                                                    [matTooltipPosition]="tooltipPosition">{{'Period' | translate}}</th>
+                                                <th #tooltip="matTooltip"
+                                                    matTooltip="{{dashboardTooltips.financeNumber | translate}}"
+                                                    [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
+                                                <th #tooltip="matTooltip"
+                                                    matTooltip="{{dashboardTooltips.financeAmount | translate}}"
+                                                    [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
+                                            </tr>
+                                            <tr *ngFor="let getFinMaturityDatas of getFinMaturityData">
+                                                <td>{{getFinMaturityDatas.PERIOD}}</td>
+                                                <td>{{getFinMaturityDatas.NUMBER}}</td>
+                                                <td>{{getFinMaturityDatas.AMOUNT}}</td>
+                                            </tr>
+                                            <tr *ngIf="!getFinMaturityData?.length">
+                                                <td colspan="3">{{'No Records Found' | translate}}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        <table class="table-bordered table" id="customers">
-                            <tr>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeNo | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Invoice size' | translate}}</th>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financeMonth | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
-                              <th #tooltip="matTooltip"
-                              matTooltip="{{dashboardTooltips.financePeriodAmount | translate}}"
-                              [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
-                            </tr>
-                            <tr *ngFor="let getFinnSizeDatas of getFinnSizeData" >
-                                <td>{{getFinnSizeDatas.INVOICE_SIZE}}</td>
-                                <td>{{getFinnSizeDatas.NUMBER}}</td>
-                                <td>{{getFinnSizeDatas.AMOUNT}}</td>
-                              </tr>
-                              <tr *ngIf="!getFinnSizeData?.length">
-                                <td colspan="3">{{'No Records Found' | translate}}</td>
-                            </tr>
-                            </table>
+                            <div class="col-md-3">
+                                <div class="trans-table">
+                                    <div class="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h6>{{'Finance Size' | translate}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table-bordered table" id="customers">
+                                        <tr>
+                                            <th #tooltip="matTooltip"
+                                                matTooltip="{{dashboardTooltips.financeNo | translate}}"
+                                                [matTooltipPosition]="tooltipPosition">{{'Invoice size' | translate}}
+                                            </th>
+                                            <th #tooltip="matTooltip"
+                                                matTooltip="{{dashboardTooltips.financeMonth | translate}}"
+                                                [matTooltipPosition]="tooltipPosition">{{'Number' | translate}}</th>
+                                            <th #tooltip="matTooltip"
+                                                matTooltip="{{dashboardTooltips.financePeriodAmount | translate}}"
+                                                [matTooltipPosition]="tooltipPosition">{{'Amount' | translate}}</th>
+                                        </tr>
+                                        <tr *ngFor="let getFinnSizeDatas of getFinnSizeData">
+                                            <td>{{getFinnSizeDatas.INVOICE_SIZE}}</td>
+                                            <td>{{getFinnSizeDatas.NUMBER}}</td>
+                                            <td>{{getFinnSizeDatas.AMOUNT}}</td>
+                                        </tr>
+                                        <tr *ngIf="!getFinnSizeData?.length">
+                                            <td colspan="3">{{'No Records Found' | translate}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="col-md-12 col-xl-6">
-                        <div class="row">
+                        <div class="col-md-12 col-xl-6">
+                            <div class="row">
                                 <div class="col-md-10 topbar_item">
-                                    <a [routerLinkActive]="['router-link-active']"  [matMenuTriggerFor]="menu" class="list-group-item text-center tablecolour">
+                                    <a [routerLinkActive]="['router-link-active']" [matMenuTriggerFor]="menu"
+                                        class="list-group-item text-center tablecolour">
                                         <i class="fas fa-2x fa-file-invoice"></i>
                                         <p class="mb-0 mt-1"><span>+ {{'Funding Request' | translate}} </span></p>
                                     </a>
                                 </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" >
-                                <h6>{{'Chart' | translate}}</h6>
-                                <ng-container>
-                                    <div class="chart {{isOpen}}">
-                                        <div class="col-lg-10 grid-margin stretch-card p-0">
-                                          <div class="card" >
-                                            <div class="card-body">
-                                                <div style="display: block;">
-                                                    <canvas baseChart
-                                                    [chartType]="chartType"
-                                                    [datasets]="chartData"
-                                                    [labels]="chartLabels"
-                                                    [colors]="chartColors"
-                                                    [options]="chartOptions"
-                                                    [legend]="true"
-                                                    (chartHover)="chartHovered($event)">
-                                                    </canvas>
-                                                    </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </ng-container>
                             </div>
-                           
-                        </div>
-                
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6 p-0">
-                        <h6>Chart</h6>
-                        <ng-container>
-                            <div class="chart {{isOpen}}">
-                                <div class="col-lg-10 grid-margin stretch-card p-0">
-                                  <div class="card" >
-                                    <div class="card-body">
-                                      <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
-                                    </div>
-                                  </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>{{'Chart' | translate}}</h6>
+                                    <ng-container>
+                                        <div class="chart {{isOpen}}">
+                                            <div class="col-lg-10 grid-margin stretch-card p-0">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div style="display: block;">
+                                                            <canvas baseChart [chartType]="chartType"
+                                                                [datasets]="chartData" [labels]="chartLabels"
+                                                                [colors]="chartColors" [options]="chartOptions"
+                                                                [legend]="true" (chartHover)="chartHovered($event)">
+                                                            </canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
                                 </div>
-                              </div>
-                            </ng-container>
+
+                            </div>
+
+                        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
-    </div> -->
-</header>
+    </header>
 </div>
-
-  
-  
-  

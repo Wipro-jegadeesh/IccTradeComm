@@ -9,12 +9,12 @@ import { SmeFinancierForBiddingServices } from './sme-financefor-bidding-service
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 // import * as moment from 'moment';
 declare var require: any
-const moment = require('moment'); 
+const moment = require('moment');
 
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import {MatSort} from '@angular/material/sort';
-import { Validators, FormGroup ,FormBuilder} from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export interface goodsDetails {
   descGoods: String;
@@ -43,7 +43,7 @@ const INVOICE_DATA: invoiceDetails[] = [];
 
 export class SmeFinanceforBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef','invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource;
 
 
@@ -92,7 +92,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
-    'buyerName' : String,
+    'buyerName': String,
     'invoiceDate': String,
     'invoiceDueDate': String
 
@@ -125,10 +125,10 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.mobileScreen = true;
     }
 
-    this.dataSource = new MatTableDataSource([{'invoiceRef' : "22",'invoiceNo' : "22", 'invAmt' : "22", 'smeId' : "22", 'buyerName' : "22", 'invDate' : "2021-07-24T05:30:00.000+0000", 'invDueDate' : "2021-07-24T05:30:00.000+0000", 'status' : "A"}]);
+    this.dataSource = new MatTableDataSource([{ 'invoiceRef': "22", 'invoiceNo': "22", 'invAmt': "22", 'smeId': "22", 'buyerName': "22", 'invDate': "2021-07-24T05:30:00.000+0000", 'invDueDate': "2021-07-24T05:30:00.000+0000", 'status': "A" }]);
     this.dataSource.paginator = this.paginator
 
-    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => { 
+    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
@@ -151,14 +151,14 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  SearchAPI(){
+  SearchAPI() {
     this.SmeFinancierForBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
   }
-  ResetAPI(){
+  ResetAPI() {
     this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
@@ -183,55 +183,13 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     }
   }
 
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
 
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg sme-fin-modal' });
 
     this.SmeFinancierForBiddingServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      // let status = "";
-      // if (resp.status == "I") {
-      //   status = "Initiated"
-      // }
-      // else if (resp.status == "A") {
-      //   status = "Waiting for bid"
-      // }
-      // else if (resp.status == "B") {
-      //   status = "Bid Created"
-      // }
-      // else {
-      //   status = "Financed Successfully"
-      // }
+
       this.dataSourceTwo = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'invCcy': resp.invCcy, 'status': resp.status }
       ]);
@@ -246,17 +204,5 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     })
   }
 
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
-  }
-
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout() {
-    this.authenticationService.logout()
-  }
 }
 
