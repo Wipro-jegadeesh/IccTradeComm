@@ -49,6 +49,10 @@ export class InvoiceRequestServices {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id);
  }
   updateScore(id,body: any) {
-    return this.apiService.put(environment.api_url+'bidding-details/updateBidStatusInitiated/'+id,body);
+    // http://localhost:8080/invoice-request/reformscore/%7BInvId%7D
+    let invoiceDetails={
+      'invoiceDetails' : body
+    }
+    return this.apiService.put(environment.api_url+'invoice-request/reformscore/'+id,invoiceDetails);
   }
 }

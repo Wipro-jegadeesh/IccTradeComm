@@ -366,7 +366,6 @@ getAllCountry(){
     console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
-    debugger
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();
@@ -516,7 +515,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
           if(resp){
            this.score=resp.score
           params['invoiceDetails']['buyerScore'] = resp.score
-           
         this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id,params).subscribe(resp => {
           this.deletedRowedit = [];
 
@@ -540,18 +538,18 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       }
       else{
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
-
+          this.invoiceRefNo=resp
           console.log(resp)
           let buyerDetails= this.sendBuyerDetails(resp)
           this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
             if(resp){
               this.score=resp.score
-              // let obj={
-              //   'buyerScore':resp.Score
-              // }
-              // this.invoiceRequestServices.updateScore(resp,obj).subscribe(resp =>{
-
-              // })
+              let obj={
+                'buyerScore':resp.score
+              }
+              this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
+                this.invoiceRefNo=''
+              })
             }
           })
 
@@ -581,11 +579,10 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
               if(resp){
                 this.score=resp.Score
                 let obj={
-                  'buyerScore':resp.Score
+                  'buyerScore':resp.score
                 }
-                // this.invoiceRequestServices.updateScore(resp,obj).subscribe(resp =>{
-  
-                // })
+                this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
+                  this.invoiceRefNo=''
             this.invoiceFormBuild();
             this.dataSourceTwo.data = [];
             this.invoiceID = "";
@@ -596,6 +593,7 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
             }
             this.addRow()
             this.getInvDetailsLists();
+                })
             this.toastr.success('Data Added Successfully')
           }
         })
@@ -611,7 +609,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
   }
   
   sendBuyerDetails(invoiceNo){
-    debugger
     let userCred=JSON.parse(localStorage.getItem('userCred'))
     let formValues=this.invoiceForm.value
     // let buyerdetails={

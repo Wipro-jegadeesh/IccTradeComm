@@ -16,7 +16,8 @@ export class IccCountryServices  {
   }
 
   getAllcountry(){
-    return this.apiService.tempGet(environment.financierServicePath+'countrylistdetails/allcountrylistdetails');
+    return  this.apiService.tempGet('https://tradecomm-userprofile.ffdcdev.fusionfabric.io/countrylistdetails/allCountryListDetails')
+    // return this.apiService.tempGet(environment.financierServicePath+'countrylistdetails/allcountrylistdetails');
   }
 
   getParticularcountry(id){
