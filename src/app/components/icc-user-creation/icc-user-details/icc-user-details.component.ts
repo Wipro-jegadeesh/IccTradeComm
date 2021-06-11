@@ -341,7 +341,7 @@ removeImage() {
   onSubmitInvoiceForm() {
     
     let role=''
-     this.selectedProducts.forEach((item)=>{
+    this.selectedProducts && this.selectedProducts.forEach((item)=>{
         role=role+item.roleId
      })
 
