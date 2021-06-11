@@ -574,6 +574,7 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
 
             // this.toastr.error(error.error);
           }else{
+            this.invoiceRefNo=error.error.text
             let buyerDetails= this.sendBuyerDetails(error.error.text)
             this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
               if(resp){
