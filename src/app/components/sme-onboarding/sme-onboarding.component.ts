@@ -475,12 +475,12 @@ export class SmeOnboardingComponent implements OnInit {
           let data=JSON.parse(localStorage.getItem('userCred'))
           this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
             if(resp && resp.score >= 900){
-           !type && this.apiService.put(environment.financierServicePath + 'sme-profile/updateQuestionnaireStatus/' + data.companyId , {} ).subscribe(resp=>{
+           !type && this.apiService.put(environment.financierServicePath + 'sme-profile/questionnairestatus/' + data.companyId , {} ).subscribe(resp=>{
             })
             let obj={
               status : 'A'
             }
-            this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+data.companyId,obj).subscribe(resp=>{
+            this.apiService.put(environment.financierServicePath+'sme-profile/smeprofilestatus/'+data.companyId,obj).subscribe(resp=>{
               this.toastr.success('Status Update Sucessfully')
             })
             this.router.navigateByUrl('/sme-dashboard')

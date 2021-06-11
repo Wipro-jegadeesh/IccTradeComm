@@ -11,7 +11,7 @@ export class IccUserCreationService {
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   
   getAllFundingList(){
-    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allUserProfileDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/alluserprofiledetails');
   }
   UpdateUser(id,body: any) {
     return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
@@ -37,10 +37,10 @@ export class IccUserCreationService {
   
   }
   statusChange(regNumber,body){
-    return this.apiService.put(environment.financierServicePath+'sme-profile/updateSmeProfileStatus/'+​regNumber,body);
+    return this.apiService.put(environment.financierServicePath+'sme-profile/smeprofilestatus/'+​regNumber,body);
   }
   getIccRelaterUsers(regNo){
-    return this.apiService.tempGet(environment.financierServicePath+'sme-profile/getIccSmeUserProfileDetails/'+regNo);
+    return this.apiService.tempGet(environment.financierServicePath+'sme-profile/details/'+regNo);
   }
   getAllSector(){
     return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');

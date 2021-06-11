@@ -25,6 +25,6 @@ export class SmeUserCreationService {
             // 'sme-userprofile/'+id);
       }
       getIccRelaterUsers(regNo){
-        return this.apiService.tempGet(environment.financierServicePath+'sme-profile/getIccSmeUserProfileDetails/'+regNo);
+        return this.apiService.tempGet(environment.financierServicePath+'sme-profile/details/'+regNo);
       }
 }

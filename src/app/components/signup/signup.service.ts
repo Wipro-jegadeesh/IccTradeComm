@@ -11,7 +11,7 @@ export class SignupService {
         return this.apiService.generalServiceget(params)
     }
     singUpCheck(body: any){
-        return this.apiService.post(environment.financierServicePath+'sme-userprofile/checkUser', body);
+        return this.apiService.post(environment.financierServicePath+'sme-userprofile/checkuser', body);
     }
     Usersave(body: any) {
         return this.apiService.post(environment.financierServicePath+'smeonboard', body);
