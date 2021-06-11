@@ -5,8 +5,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import {ThemePalette} from '@angular/material/core';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
-import { Financier } from '../../../model/financier-bidding/financier';
-import { FinancierService } from '../../../service/financier/financier.service';
 import { Observable } from 'rxjs';
 import {DataSource} from '@angular/cdk/collections';
 import { SMEDASHBOARDCONSTANTS } from '../../../shared/constants/constants';
@@ -145,7 +143,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
 
   
   constructor(private fb: FormBuilder,private activatedRoute: ActivatedRoute,public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService
-    ,private financierService: FinancierService,private smeBiddingServices : SmeBiddingServices,private toastr: ToastrService) { }
+    ,private smeBiddingServices : SmeBiddingServices,private toastr: ToastrService) { }
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
   dataSourceTwo; //data
   dataBIDDetails;
@@ -403,14 +401,3 @@ rejectQustionTwo = {
     }
 }
 
-export class UserDataSource extends DataSource<any> {
-  constructor(private financierService: FinancierService) {
-    super();
-    
-  }
-  connect(): Observable<Financier[]> {
-    return this.financierService.getUser();
-   
-  }
-  disconnect() {}
-}

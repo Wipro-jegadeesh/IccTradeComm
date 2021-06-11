@@ -4,7 +4,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import {FinancebidsRequestServices} from './finance-bids-accept'
-import {FinanceBiddingService} from '../../service/finance_bidding/finance-bidding.service';
 import { FINANCIERDASHBOARDCONSTANTS} from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -43,7 +42,7 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   datafinancier: any;
   canceldiv: boolean;
   constructor(private smeBiddingServices : SmeBiddingServices,private toastr: ToastrService,private fb: FormBuilder,public router: Router, public authenticationService:AuthenticationService,
-  private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices,private FinanceBiddingService:FinanceBiddingService) { }
+  private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @HostListener('window:resize', ['$event'])
@@ -119,7 +118,7 @@ public issubmitTrue: boolean = false;
     //   this.dataSource.paginator = this.paginator
     //   this.dataSource.sort = this.sort;
 
-   this.FinanceBiddingService.getBidingAcceptDetails().subscribe(resp => {
+   this.FinanceRequestServices.getBidingAcceptDetails().subscribe(resp => {
      if(resp){
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

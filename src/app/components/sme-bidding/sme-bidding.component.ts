@@ -5,8 +5,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemePalette } from '@angular/material/core';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { Financier } from '../../model/financier-bidding/financier';
-import { FinancierService } from '../../service/financier/financier.service';
 import { Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { SMEDASHBOARDCONSTANTS } from '../../shared/constants/constants';
@@ -57,7 +55,7 @@ export class SmeBiddingComponent implements OnInit {
 
   financierTooltip = SMEDASHBOARDCONSTANTS;
 
-  constructor(public router: Router,private fb: FormBuilder, private financierService: FinancierService, private smeBiddingServices: SmeBiddingServices) { }
+  constructor(public router: Router,private fb: FormBuilder, private smeBiddingServices: SmeBiddingServices) { }
   dataSourceInvoiceDetails; //data
   invoiceReference: string;
   invoiceId: string;
@@ -106,7 +104,7 @@ export class SmeBiddingComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.financierService.getInvoiceDetails().subscribe(resp => {
+    this.smeBiddingServices.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

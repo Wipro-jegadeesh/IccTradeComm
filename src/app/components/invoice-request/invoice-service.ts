@@ -45,4 +45,7 @@ export class InvoiceRequestServices {
     // http://localhost:8083/coriolis/Deal/Rating
     return this.apiService.post(environment.coriolisServicePath + 'coriolis/Deal/Rating' , body)
   }
+  getBidingAcceptAllDetails(id) {
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id);
+ }
 }

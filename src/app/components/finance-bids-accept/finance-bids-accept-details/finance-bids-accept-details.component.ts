@@ -10,7 +10,6 @@ import { MatSort } from '@angular/material/sort';
 import { DatePipe } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
-import {FinanceBiddingService} from '../../../service/finance_bidding/finance-bidding.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -74,7 +73,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   isView: boolean;
   FinancebiddingDetails: any;
 
-  constructor(public translate: TranslateService,private FinanceBiddingService:FinanceBiddingService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService) { }
+  constructor(public translate: TranslateService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService) { }
   finBidform: FormGroup;
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
@@ -177,7 +176,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.buildform()
-    this.FinanceBiddingService.getBidingAcceptAllDetails(this.id).subscribe(resp => {
+    this.invoiceRequestServices.getBidingAcceptAllDetails(this.id).subscribe(resp => {
       if (resp) {
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
