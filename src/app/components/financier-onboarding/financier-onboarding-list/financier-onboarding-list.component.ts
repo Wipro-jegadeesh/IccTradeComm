@@ -161,7 +161,7 @@ export class FinancierOnboardingListComponent implements OnInit {
     this.isView = true
     this.isView && this.disableFields()
     this.buildFinancierForm()
-    this.financierId = element.profileID  
+    this.financierId = element.profileId 
     this.financierId && this.getSpecificFinancier()
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
   }

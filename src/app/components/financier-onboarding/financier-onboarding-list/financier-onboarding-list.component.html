@@ -26,7 +26,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
           <td mat-cell *matCellDef="let element"> 
-            <a href="javascript:void(0)" (click)="editFinancier(element.profileID,'edit')">
+            <a href="javascript:void(0)" (click)="editFinancier(element.profileId,'edit')">
                 <mat-icon>edit</mat-icon>
               </a>&nbsp;
             <a href="javascript:void(0)" (click)="openModal($event,template,element)">
