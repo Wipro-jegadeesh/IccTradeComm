@@ -22,7 +22,7 @@ export class FinancierOnboardingService {
         let findetobj={
             'findetobj' : data
         }
-        let params=environment.financierServicePath+'financier-onboarding/updateFinancierOnboarding/'+data.namedPKKey
+        let params=environment.financierServicePath+'financier-onboarding/financieronboarding/'+data.namedPKKey
         return this.apiService.put(params,findetobj)
     }
 }

@@ -9,7 +9,7 @@ export class IccDashboardServices  {
     return this.apiService.generalServiceget('https://jsonplaceholder.typicode.com/posts',);
   }
   getFinancierList(){
-    let params=environment.financierServicePath+'financier-details/allfinancierDetails'
+    let params=environment.financierServicePath+'financier-details/allfinancierdetails'
     return this.apiService.generalServiceget(params)
   }
 

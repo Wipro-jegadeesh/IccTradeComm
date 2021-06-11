@@ -14,7 +14,7 @@ export class FinancierUserCreationService {
         return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
       }
       UpdateUser(id,body: any) {
-        return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
+        return this.apiService.put(environment.financierServicePath+'user-profile/userprofile/'+id,body);
       }
       Usersave(body: any) {
         return this.apiService.post(environment.financierServicePath+'adduser', body);

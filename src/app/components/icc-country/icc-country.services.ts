@@ -8,15 +8,15 @@ export class IccCountryServices  {
 
 
   submitIcccountry(body: any) {
-    if(body.countryId){
-      return this.apiService.put(environment.financierServicePath+'country-details/updateCountryDetails/'+body.countryId, body);
+    if(body.id){
+      return this.apiService.put(environment.financierServicePath+'countrydetails/countrydetails/'+body.id, body);
     }else{
       return this.apiService.post(environment.financierServicePath+'countrydetails', body);
     }
   }
 
   getAllcountry(){
-    return this.apiService.tempGet(environment.financierServicePath+'countrylistdetails/allCountryListDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'countrylistdetails/allcountrylistdetails');
   }
 
   getParticularcountry(id){

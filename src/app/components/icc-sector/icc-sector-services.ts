@@ -9,17 +9,17 @@ export class IccSectorServices  {
 
   submitIccRoles(body: any) {
     if(body.id){
-      return this.apiService.put(environment.financierServicePath+'sector/update/'+body.id, body);
+      return this.apiService.put(environment.financierServicePath+'sector/modifysector/'+body.id, body);
     } else{
-     return this.apiService.post(environment.financierServicePath+'sector/create', body);
+     return this.apiService.post(environment.financierServicePath+'sector/initialize', body);
     }
   }
 
   getAllRoles(){
-    return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+    return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
   }
 
   getParticularRoles(id){
-    return this.apiService.tempGet(environment.financierServicePath+'sector/get/'+id);
+    return this.apiService.tempGet(environment.financierServicePath+'sector/'+id);
   }
 }

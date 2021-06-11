@@ -9,14 +9,14 @@ export class IccGroupServices  {
 
   submitIccGroups(body: any) {
     if(body.groupId){
-      return this.apiService.put(environment.financierServicePath+'groups-details/updateGroupsDetails/'+body.groupId, body);
+      return this.apiService.put(environment.financierServicePath+'groups-details/groupsdetails/'+body.groupId, body);
     }else{
       return this.apiService.post(environment.financierServicePath+'groupinfo', body);
     }
   }
 
   getAllGroups(){
-    return this.apiService.tempGet(environment.financierServicePath+'groups-profile/allgroupsDetails');
+    return this.apiService.tempGet(environment.financierServicePath+'groups-profile/allgroupsdetails');
   }
 
   getParticularGroups(id){
