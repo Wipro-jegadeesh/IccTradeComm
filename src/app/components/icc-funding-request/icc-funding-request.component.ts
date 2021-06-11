@@ -10,7 +10,7 @@ import { IccFundingServices } from './icc-funding-service';
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
-import { Options,LabelType } from '@angular-slider/ngx-slider';
+import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-icc-funding-request',
@@ -24,7 +24,7 @@ export class IccFundingRequestComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   @HostListener('window:resize', ['$event'])
-  displayedColumns: string[] = ['invoiceRef','invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  displayedColumns: string[] = ['invoiceRef', 'invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
   displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
@@ -79,8 +79,8 @@ export class IccFundingRequestComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-      private authenticationService: AuthenticationService, private IccFundingServices: IccFundingServices) { }
+  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
+    private authenticationService: AuthenticationService, private IccFundingServices: IccFundingServices) { }
 
 
   ngOnInit() {
@@ -99,14 +99,14 @@ constructor(public router: Router, private modalService: BsModalService, private
       this.mobileScreen = false;
     }
   }
-  SearchAPI(){
+  SearchAPI() {
     this.IccFundingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI(){
-    this.SearchModel={
+  ResetAPI() {
+    this.SearchModel = {
       'invoiceRef': String,
       'invoiceDate': String,
       'invoiceDueDate': String
@@ -118,72 +118,27 @@ constructor(public router: Router, private modalService: BsModalService, private
 
     })
   }
-  searchDiv(){
-    if(this.filterDivOpen === true){
-    this.searchDivOpen = !this.searchDivOpen
-    this.filterDivOpen = !this.filterDivOpen
-    }else{
-      this.searchDivOpen = !this.searchDivOpen
-    }
-  }
-  filterDiv(){
-    if(this.searchDivOpen === true){
+  searchDiv() {
+    if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
-    }else{
-      this.filterDivOpen = !this.filterDivOpen
-    }
-  }
-
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
     } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
+      this.searchDivOpen = !this.searchDivOpen
     }
   }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
     }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
 
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
     this.IccFundingServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-      // let status = "";
-      // if (resp.status == "I") {
-      //   status = "Initiated"
-      // }
-      // else if (resp.status == "A") {
-      //   status = "Waiting for bid"
-      // }
-      // else if (resp.status == "B") {
-      //   status = "Bid Created"
-      // }
-      // else {
-      //   status = "Financed Successfully"
-      // }
       this.dataSourceTwo = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
@@ -191,18 +146,4 @@ constructor(public router: Router, private modalService: BsModalService, private
     })
 
   }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
-  }
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout() {
-    this.authenticationService.logout()
-  }
 }
-
-

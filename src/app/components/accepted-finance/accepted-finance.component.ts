@@ -23,31 +23,6 @@ export interface financeForBiddingData {
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
 
-export interface goodsDetails {
-  descGoods: String;
-  idNo: String;
-  dateOfInvoice: String;
-  quantity: String;
-  rate: String;
-  amt: String;
-  discAmt: String;
-  netAmtPay: String;
-  taxRate: String;
-  taxAmount: String;
-  total: String;
-}
-const GOODS_DATA: goodsDetails[] = [];
-
-
-export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
-const INVOICE_DATA: invoiceDetails[] = [];
-
-
-export interface biddingDetails {
-  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
-}
-const BIDDING_DATA: biddingDetails[] = [];
-
 @Component({
   selector: 'app-accepted-finance',
   templateUrl: './accepted-finance.component.html',
@@ -58,41 +33,10 @@ export class AcceptedFinanceComponent implements OnInit {
   displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
-
-
-
-  dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-
-  dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
-  displayedColumnsThree: string[] = [
-    'id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate',
-    'baseCcyNetAmtPayable', 'annualYeild']
-
   @ViewChild(MatSort) sort: MatSort;
-
-  isOpen = ""
-  mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
   modalRef: BsModalRef;
-  color: ThemePalette = 'warn';
-  ischecked = "true"
-  bidpanelOpenState = false;
   moment: any = moment;
-
-
-  @ViewChild('accountList', { read: ElementRef })
-  public accountList: ElementRef<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  @HostListener('window:resize', ['$event'])
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -129,14 +73,9 @@ export class AcceptedFinanceComponent implements OnInit {
   searchDivOpen: boolean;
   Searchform: FormGroup;
 
-  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private fb: FormBuilder, private authenticationService: AuthenticationService, private AcceptedFinanceServices: AcceptedFinanceServices) { }
-
+  constructor(public router: Router,private fb: FormBuilder,private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
   ngOnInit() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    }
     this.dataSource = new MatTableDataSource([{
       buyerAddr: "Singapore",
       buyerName: "Tata Steel",
@@ -159,13 +98,6 @@ export class AcceptedFinanceComponent implements OnInit {
     })
     this.buildform()
 
-  }
-  onResize() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
-    }
   }
   buildform() {
     this.Searchform = this.fb.group({
@@ -206,59 +138,8 @@ export class AcceptedFinanceComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
   navigateInvoiceDetails(id) {
     this.router.navigateByUrl('/accepted-detail/' + Number(id));
-  }
-  openModal(event, template, data) {
-    event.preventDefault();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-   
-
-
-  }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
-  }
-
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout() {
-    this.authenticationService.logout()
   }
 }
 

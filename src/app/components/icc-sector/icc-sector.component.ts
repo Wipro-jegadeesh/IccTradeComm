@@ -1,17 +1,9 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { IccSectorServices } from './icc-sector-services';
 import { DatePipe } from '@angular/common';
-// import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
@@ -24,22 +16,22 @@ import { TranslateService } from '@ngx-translate/core';
 export class IccSectorComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['code','description','action'];
+  displayedColumns: string[] = ['code', 'description', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
-  isEdit : boolean
-  id : any
+  isEdit: boolean
+  id: any
 
-  constructor(public translate: TranslateService,public router: Router, private IccRolesServices: IccSectorServices, 
-     private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
-       this.groupsFormBuild()
-     }
+  constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccSectorServices,
+    private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
+    this.groupsFormBuild()
+  }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'id' : '1','code' : 'sector123','description' : 'description of sector'}]);
+    this.dataSource = new MatTableDataSource([{ 'id': '1', 'code': 'sector123', 'description': 'description of sector' }]);
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
-      if(listResp){
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
       }
     })
@@ -53,7 +45,7 @@ export class IccSectorComponent implements OnInit {
 
   }
 
-  getEditData(data){
+  getEditData(data) {
 
     // **** Start Need to hide *****
     // this.isEdit = true
@@ -64,54 +56,54 @@ export class IccSectorComponent implements OnInit {
     //   description : respData.description
     // })
     // **** End Need to hide  *****
-   
 
-        this.IccRolesServices.getParticularRoles(data.id).subscribe(resp => { 
-          if(resp){
-            let respData = resp;
-            this.groupsForm.patchValue({  
-              code : respData.code,
-              description : respData.description
-            })
-            this.isEdit = true
-            this.id = respData.id
 
-          }
-
+    this.IccRolesServices.getParticularRoles(data.id).subscribe(resp => {
+      if (resp) {
+        let respData = resp;
+        this.groupsForm.patchValue({
+          code: respData.code,
+          description: respData.description
         })
- 
-}
+        this.isEdit = true
+        this.id = respData.id
 
-  onSubmitRoleForm(){
+      }
 
-     // **** Start Need to hide *****
+    })
+
+  }
+
+  onSubmitRoleForm() {
+
+    // **** Start Need to hide *****
     //  this.id = "";
     //  this.isEdit = false
     //  this.groupsForm.reset();
-     // End Need to hide **********
+    // End Need to hide **********
 
     // this.IccGroupServices.getParticularGroups(1).subscribe(resp => { })
-    if(this.groupsForm.value && this.groupsForm.status == "VALID"){
+    if (this.groupsForm.value && this.groupsForm.status == "VALID") {
       let value = this.groupsForm.value
-      if(this.isEdit){
+      if (this.isEdit) {
         value.id = this.id
       }
-      console.log(this.id,"this.id")
-      console.log(value,"value.id")
+      console.log(this.id, "this.id")
+      console.log(value, "value.id")
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
-        if(resp){
+        if (resp) {
           this.toastr.success(this.translate.instant('Saved Successfully'))
           this.groupsForm.reset();
           this.id = "";
           this.isEdit = false
           this.IccRolesServices.getAllRoles().subscribe(listResp => {
-            if(listResp){
+            if (listResp) {
               this.dataSource = new MatTableDataSource(listResp);
             }
           })
         }
       })
-    }else{
+    } else {
       this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }

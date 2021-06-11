@@ -1,17 +1,11 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl,NgForm } from '@angular/forms';
+
+import { Validators, FormGroup, FormBuilder, FormArray, FormControl, NgForm } from '@angular/forms';
 import { IccRolesServices } from './icc-roles-services';
 import { DatePipe } from '@angular/common';
-// import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import * as moment from 'moment';
+
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
@@ -24,23 +18,23 @@ import { TranslateService } from '@ngx-translate/core';
 export class IccRolesComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['code','roleDescription','action'];
+  displayedColumns: string[] = ['code', 'roleDescription', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
-  isEdit : boolean
-  roleId : any
+  isEdit: boolean
+  roleId: any
   @ViewChild('formDirective') private formDirective: NgForm;
 
-  constructor(public translate: TranslateService,public router: Router, private IccRolesServices: IccRolesServices, 
-     private fb: FormBuilder,private datePipe: DatePipe,private toastr: ToastrService) { 
-       this.groupsFormBuild()
-     }
+  constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccRolesServices,
+    private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
+    this.groupsFormBuild()
+  }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource([{'roleId' : '1','code' : 'CODE123','roleDescription' : 'description of role'}]);
+    this.dataSource = new MatTableDataSource([{ 'roleId': '1', 'code': 'CODE123', 'roleDescription': 'description of role' }]);
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
-      if(listResp){
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
       }
     })
@@ -54,7 +48,7 @@ export class IccRolesComponent implements OnInit {
 
   }
 
-  getEditData(data){
+  getEditData(data) {
 
     // **** Start Need to hide *****
     // this.isEdit = true
@@ -65,53 +59,50 @@ export class IccRolesComponent implements OnInit {
     //   roleDescription : respData.roleDescription
     // })
     // **** End Need to hide  *****
-   
 
-        this.IccRolesServices.getParticularRoles(data.roleId).subscribe(resp => { 
-          if(resp){
-            let respData = resp;
-            this.groupsForm.patchValue({  
-              code : respData.code,
-              roleDescription : respData.roleDescription
-            })
-            this.isEdit = true
-            this.roleId = respData.roleId
-
-          }
-
+    this.IccRolesServices.getParticularRoles(data.roleId).subscribe(resp => {
+      if (resp) {
+        let respData = resp;
+        this.groupsForm.patchValue({
+          code: respData.code,
+          roleDescription: respData.roleDescription
         })
- 
-}
+        this.isEdit = true
+        this.roleId = respData.roleId
 
-  onSubmitRoleForm(){
+      }
+    })
+  }
 
-     // **** Start Need to hide *****
+  onSubmitRoleForm() {
+
+    // **** Start Need to hide *****
     //  this.roleId = "";
     //  this.isEdit = false
     //  this.groupsForm.reset();
-     // End Need to hide **********
+    // End Need to hide **********
 
     // this.IccGroupServices.getParticularGroups(1).subscribe(resp => { })
-    if(this.groupsForm.value && this.groupsForm.status == "VALID"){
+    if (this.groupsForm.value && this.groupsForm.status == "VALID") {
       let value = this.groupsForm.value
-      if(this.isEdit){
+      if (this.isEdit) {
         value.roleId = this.roleId
       }
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
-        if(resp){
+        if (resp) {
           this.toastr.success(this.translate.instant('Saved Successfully'))
           // this.groupsForm.reset();
           this.formDirective.resetForm();
           this.roleId = "";
           this.isEdit = false
           this.IccRolesServices.getAllRoles().subscribe(listResp => {
-            if(listResp){
+            if (listResp) {
               this.dataSource = new MatTableDataSource(listResp);
             }
           })
         }
       })
-    }else{
+    } else {
       this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }

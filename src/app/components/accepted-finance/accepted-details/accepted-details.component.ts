@@ -13,11 +13,11 @@ export class AcceptedDetailsComponent implements OnInit {
 
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-  displayedColumnsThree: string[] = ['id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate','baseCcyNetAmtPayable', 'annualYeild'];
-  displayedColumnsFour: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount','ActualRate','InterestAmount','RepaymentDate','RepaymentAmount'];
-  displayedColumnsFive: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount','ActualRate','InterestAmount','RepaymentDate'];
+  displayedColumnsThree: string[] = ['id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate', 'baseCcyNetAmtPayable', 'annualYeild'];
+  displayedColumnsFour: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate', 'RepaymentAmount'];
+  displayedColumnsFive: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate'];
   displayedColumnsSix: string[] = ['Day', 'Date', 'InterestCurrency', 'InterestDay', 'InterestDate'];
-  displayedColumnsSeven: string[] = ['Payment Id', 'Payment Type', 'Payment Date', 'Payment Amount', 'Ben Name','Ben Account','Ben IFSC','Net Amount'];
+  displayedColumnsSeven: string[] = ['Payment Id', 'Payment Type', 'Payment Date', 'Payment Amount', 'Ben Name', 'Ben Account', 'Ben IFSC', 'Net Amount'];
   dataSourceOne = new MatTableDataSource(); //data
   dataSourceTwo = new MatTableDataSource(); //data
   dataSourceThree = new MatTableDataSource(); //data
@@ -30,56 +30,55 @@ export class AcceptedDetailsComponent implements OnInit {
   bidpanelOpenState = false;
   id: any;
 
-  constructor(private activatedRoute: ActivatedRoute,private AcceptedFinanceServices:AcceptedFinanceServices) { }
+  constructor(private activatedRoute: ActivatedRoute, private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-
     this.AcceptedFinanceServices.getInvoiceRequestLists(this.id).subscribe(resp => {
       this.dataSourceTwo = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
 
-// [{
-//   "id": 127,
-//   "smeId": "user110",
-//   "invId": "1111",
-//   "invref": "INV202100127",
-//   "invAmt": 1000,
-//   "invCcy": "SGD",
-//   "buyerName": "gold",
-//   "invDate": "2021-06-01",
-//   "invDueDate": "2021-06-24",
-//   "buyerAddr": "AFG",
-//   "billNo": "123",
-//   "dispDate": "2021-06-10",
-//   "baseAmt": 0,
-//   "baseCcy": null,
-//   "fxRate": 0,
-//   "source": null,
-//   "smeRating": null,
-//   "transactionRating": null,
-//   "status": "APR",
-//   "smeProfileId": "SME44",
-//   "financierProfileId": null,
-//   "buyerUEN": null,
-//   "goodsDetails": [
-//       {
-//           "key97": 145,
-//           "descGoods": "giold",
-//           "quantity": 10,
-//           "quantityType": null,
-//           "rate": 100,
-//           "amtCcy": "SGD",
-//           "amt": 1000,
-//           "discAmt": 0,
-//           "netAmtPay": 1000,
-//           "taxRate": 0,
-//           "taxAmt": 0,
-//           "total": 1000
-//       }
-//   ]
-// }]
+      // [{
+      //   "id": 127,
+      //   "smeId": "user110",
+      //   "invId": "1111",
+      //   "invref": "INV202100127",
+      //   "invAmt": 1000,
+      //   "invCcy": "SGD",
+      //   "buyerName": "gold",
+      //   "invDate": "2021-06-01",
+      //   "invDueDate": "2021-06-24",
+      //   "buyerAddr": "AFG",
+      //   "billNo": "123",
+      //   "dispDate": "2021-06-10",
+      //   "baseAmt": 0,
+      //   "baseCcy": null,
+      //   "fxRate": 0,
+      //   "source": null,
+      //   "smeRating": null,
+      //   "transactionRating": null,
+      //   "status": "APR",
+      //   "smeProfileId": "SME44",
+      //   "financierProfileId": null,
+      //   "buyerUEN": null,
+      //   "goodsDetails": [
+      //       {
+      //           "key97": 145,
+      //           "descGoods": "giold",
+      //           "quantity": 10,
+      //           "quantityType": null,
+      //           "rate": 100,
+      //           "amtCcy": "SGD",
+      //           "amt": 1000,
+      //           "discAmt": 0,
+      //           "netAmtPay": 1000,
+      //           "taxRate": 0,
+      //           "taxAmt": 0,
+      //           "total": 1000
+      //       }
+      //   ]
+      // }]
 
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
 
@@ -120,27 +119,24 @@ export class AcceptedDetailsComponent implements OnInit {
         //       "smeId": "user110"
         //   }
         // ]
-        console.log(resp,"jlsllsls")
-
+        console.log(resp, "jlsllsls")
         this.dataSourceThree = new MatTableDataSource(resp);
         this.dataSourceFour = new MatTableDataSource(resp);
         this.dataSourceFive = new MatTableDataSource(resp);
         var ddatae = new Date();
-        console.log(ddatae.setDate(ddatae.getDate() - 1),"ddatae")
-
-
+        console.log(ddatae.setDate(ddatae.getDate() - 1), "ddatae")
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         const diffDays = Math.round(Math.abs((new Date(resp[0].invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
-        console.log(diffDays,"diffDays")
+        console.log(diffDays, "diffDays")
         let arrayobj = []
         let Tentor = diffDays
         for (var i = 0; i < Tentor; i++) {
           arrayobj.push(resp[0])
         }
         let aromzition = []
-        arrayobj.forEach((element,i) => {
+        arrayobj.forEach((element, i) => {
           var start = new Date(element.invoiceDate);
-          var end =  new Date(element.invoiceDueDate);
+          var end = new Date(element.invoiceDueDate);
           var dt = new Date(start);
           let arr = []
           while (dt <= end) {
@@ -148,27 +144,29 @@ export class AcceptedDetailsComponent implements OnInit {
             dt.setDate(dt.getDate() + 1);
           }
           // console.log(i,"iiiiii")
-          aromzition.push({days:i,date:arr[i],
-            InterestCurrency:element.baseCcyAmt,
-            Interestperday:element.baseCcyDiscAmt,InteresttillDate:element.baseCcyDiscAmt/element.tenor})
+          aromzition.push({
+            days: i, date: arr[i],
+            InterestCurrency: element.baseCcyAmt,
+            Interestperday: element.baseCcyDiscAmt, InteresttillDate: element.baseCcyDiscAmt / element.tenor
+          })
         });
         console.log(arrayobj)
-        console.log(aromzition,"aromzition")
+        console.log(aromzition, "aromzition")
         this.dataSourceSix = new MatTableDataSource(aromzition);
-        
+
       }
     })
   }
-  tillDateCalu(invoiceDate,baseCcyAmt,tenor){
-    console.log(baseCcyAmt,tenor,"baseCcyAmt,tenor")
-    if(invoiceDate){
+  tillDateCalu(invoiceDate, baseCcyAmt, tenor) {
+    console.log(baseCcyAmt, tenor, "baseCcyAmt,tenor")
+    if (invoiceDate) {
       var ddatae = new Date();
-      console.log(ddatae.setDate(ddatae.getDate() - 1),"ddatae")
+      console.log(ddatae.setDate(ddatae.getDate() - 1), "ddatae")
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
       const diffDays = Math.round(Math.abs((new Date(invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
-      console.log(diffDays,"diffDays")
+      console.log(diffDays, "diffDays")
       return baseCcyAmt / tenor * diffDays
     }
-        
+
   }
 }

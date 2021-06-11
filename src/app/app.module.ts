@@ -91,14 +91,11 @@ import { FinanceBiddingComponent } from './components/finance-bidding/finance-bi
 import { InvoiceDetailsComponent } from './components/finance-bidding/invoice-details/invoice-details.component';
 import { FinanceBiddingExpiredComponent } from './components/finance-bidding-expired/finance-bidding-expired.component';
 import { InvoiceDetailsExpiredComponent } from './components/finance-bidding-expired/invoice-details-expired/invoice-details-expired.component';
-import { FinanceBiddingCancelComponent } from './components/finance-bidding-cancel/finance-bidding-cancel.component';
-import { InvoiceDetailsCancelComponent } from './components/finance-bidding-cancel/invoice-details-cancel/invoice-details-cancel.component';
 import {FinanceBiddingExpiryServices} from './components/finance-bidding-expired/finance-bidding-expiry-service';
 import { FinanceBiddingRejectedComponent } from './components/finance-bidding-rejected/finance-bidding-rejected.component';
 import { ICCacceptancedetailsComponent } from './components/icc-offer-acceptance/icc-acceptance-details/icc-acceptance-details.component';
 import { InvoiceDetailsRejectedComponent } from './components/finance-bidding-rejected/invoice-details-rejected/invoice-details-rejected.component'
 import {FinanceBiddingRejectedServices} from './components/finance-bidding-rejected/finance-bidding-rejected-service'
-import {FinanceBiddingCancelServices} from './components/finance-bidding-cancel/finance-bidding-cancel-service'
 import {IccFundingServices} from './components/icc-funding-request/icc-funding-service'
 import {IccOfferAcceptServices} from './components/icc-offer-acceptance/icc-offer-accept-service'
 import {FinancierUserCreationService} from './components/financier-onboarding/financier-user-creation/financier-user-creation.service'
@@ -142,7 +139,6 @@ import {IccAuthorizeServices} from './components/icc-authoriz-matrix/icc-authori
 import { AuthConfigModule } from '../app/service/auth.config.module';
 import { QuestionaireScoreComponent } from './components/questionaire-score/questionaire-score.component';
 import { InvoiceBulkUploadComponent } from './components/invoice-bulk-upload/invoice-bulk-upload.component';
-import { FinancierLimitMaintanaceComponent } from './components/financier-limit-maintanace/financier-limit-maintanace.component';
 import { SmeUserCreationComponent } from './components/sme-user-creation/sme-user-creation.component';
 import { SmeUserDetailsComponent } from './components/sme-user-creation/sme-user-details/sme-user-details.component';
 import { IccListSmesComponent } from './components/icc-list-smes/icc-list-smes.component';
@@ -210,8 +206,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     Repayment_overdueComponent,
     FinanceBiddingExpiredComponent,
     InvoiceDetailsExpiredComponent,
-    FinanceBiddingCancelComponent,
-    InvoiceDetailsCancelComponent,
     FinanceBiddingRejectedComponent,
     ICCacceptancedetailsComponent,
     InvoiceDetailsRejectedComponent,
@@ -230,7 +224,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionaireScoreComponent,
     ModalComponent,
     InvoiceBulkUploadComponent,
-    FinancierLimitMaintanaceComponent,
     SmeUserCreationComponent,
     SmeUserDetailsComponent,
     IccListSmesComponent,
@@ -313,7 +306,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],
-  providers: [LoaderService,FinanceBiddingCancelServices,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
+  providers: [LoaderService,FinancebidsRequestServices,CustomerService, SmeDashboardComponent, ModalDialogService,ApiService,InvoiceRequestServices,MatRadioModule,
     FinanceRequestServices,IccSectorServices,FinanceBiddingRejectedServices,FinanceBiddingExpiryServices,DatePipe,FinancierService,FinanceBiddingService,SmeFinancierForBiddingServices,SmeDashboardServices,
     FinancierDashboardServices,IccDashboardServices,AcceptedFinanceServices,SmeBiddingServices,FinancierOnboardingService,IccFinanceTodayServices,IccFinanceMasterServices,IccInvoiceMasterServices,IccFundingServices,IccOfferAcceptServices,
     FinancierFundedServices,Repayment_todayServices,Repayment_overdueServices,SignupService,IccUserCreationService,IccGroupServices,IccRolesServices,IccAuthorizeServices,QuestionaireScoreServices,IccListSmeServices,FinancierUserCreationService,
