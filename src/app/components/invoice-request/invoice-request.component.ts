@@ -554,6 +554,25 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
         })
 
           }
+         },error =>{
+          params['invoiceDetails']['buyerScore'] = this.score
+          this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id,params).subscribe(resp => {
+            this.deletedRowedit = [];
+  
+            this.invoiceFormBuild();
+            this.dataSourceTwo.data = [];
+            this.invoiceID = "";
+            this.InvoiceFdate = "";
+            this.invoiceRefNo = "";
+            for (const key in this.invoiceForm.controls) {
+              this.invoiceForm.get(key).clearValidators();
+              this.invoiceForm.get(key).updateValueAndValidity();
+            }
+            this.UpdateInvoiceLable = false
+            this.addRow()
+            this.getInvDetailsLists();
+          }, error => {
+          })
          })
       }
       else{
@@ -571,6 +590,14 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
                 this.invoiceRefNo=''
               })
             }
+          },error=>{
+            let obj={
+              'buyerScore':0
+            }
+            this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
+              this.invoiceRefNo=''
+            })
+            
           })
 
           
@@ -617,6 +644,23 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
                 })
             this.toastr.success('Data Added Successfully')
           }
+        },error =>{
+          let obj={
+            'buyerScore':0
+          }
+          this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
+            this.invoiceRefNo=''
+      this.invoiceFormBuild();
+      this.dataSourceTwo.data = [];
+      this.invoiceID = "";
+      this.InvoiceFdate = ""
+      for (const key in this.invoiceForm.controls) {
+        this.invoiceForm.get(key).clearValidators();
+        this.invoiceForm.get(key).updateValueAndValidity();
+      }
+      this.addRow()
+      this.getInvDetailsLists();
+          })
         })
             // (error.error.text);
           }
