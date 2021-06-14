@@ -599,7 +599,12 @@
             <ng-container matColumnDef="InvoiceRefNo">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
               matTooltip="{{fundingTooltip.refno | translate}}" [matTooltipPosition]="tooltipPosition">{{'Invoice Ref No' | translate}}</th>
-              <td mat-cell *matCellDef="let element">{{element && element.invref}}</td>
+              <td mat-cell *matCellDef="let element">
+                <!-- {{element && element.invref}} -->
+                <mat-chip-list>
+                  <mat-chip color="primary" selected (click)="UpdateInvoice(element)">{{element.invref}} </mat-chip>
+              </mat-chip-list>
+              </td>
              </ng-container>
             <ng-container matColumnDef="DateTime">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
@@ -607,9 +612,11 @@
               [matTooltipPosition]="tooltipPosition">{{'Invoice No' | translate}}</th>
               
               <td mat-cell *matCellDef="let element">
-                <mat-chip-list>
+                {{element && element.invId}}
+                <!-- <mat-chip-list>
                   <mat-chip color="primary" selected (click)="UpdateInvoice(element)">{{element.invId}} </mat-chip>
-              </mat-chip-list>
+              </mat-chip-list> -->
+
               </td>
             </ng-container>
             <mat-checkbox name="box"></mat-checkbox>
