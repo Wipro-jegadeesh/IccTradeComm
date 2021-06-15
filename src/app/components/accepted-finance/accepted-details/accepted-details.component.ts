@@ -123,8 +123,9 @@ export class AcceptedDetailsComponent implements OnInit {
         this.dataSourceThree = new MatTableDataSource(resp);
         this.dataSourceFour = new MatTableDataSource(resp);
         this.dataSourceFive = new MatTableDataSource(resp);
-        var ddatae = new Date();
-        console.log(ddatae.setDate(ddatae.getDate() - 1), "ddatae")
+        var dated = new Date();
+        var ddatae = dated.setDate(dated.getDate() - 1)
+        console.log(dated.setDate(dated.getDate() - 1), "ddatae")
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         const diffDays = Math.round(Math.abs((new Date(resp[0].invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
         console.log(diffDays, "diffDays")
@@ -160,11 +161,11 @@ export class AcceptedDetailsComponent implements OnInit {
   tillDateCalu(invoiceDate, baseCcyAmt, tenor) {
     console.log(baseCcyAmt, tenor, "baseCcyAmt,tenor")
     if (invoiceDate) {
-      var ddatae = new Date();
-      console.log(ddatae.setDate(ddatae.getDate() - 1), "ddatae")
+      var dated = new Date();
+      var ddatae = dated.setDate(dated.getDate() - 1)
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
       const diffDays = Math.round(Math.abs((new Date(invoiceDate).valueOf() - ddatae.valueOf()) / oneDay));
-      console.log(diffDays, "diffDays")
+      // console.log(diffDays, "diffDays")
       return baseCcyAmt / tenor * diffDays
     }
 
