@@ -34,4 +34,7 @@ export class SmeFinancierForBiddingServices {
 
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchInvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
   }
+  getsmeNameId() {
+    return this.apiService.tempGet(environment.serviePath_2 + 'api/v1/user-profile/smeNameFromId');
+    }
 }
