@@ -155,7 +155,7 @@ export class SmeUserDetailsComponent implements OnInit {
                     error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
                   })
                 }else{
-                  this.smeUserCreationService.Usersave(this.userForm.value).subscribe(resp => {
+                  this.smeUserCreationService.smeUserCreation(this.userForm.value).subscribe(resp => {
                     if(resp && resp.status == 200){
                     this.invoiceFormBuild();
                     this.router.navigateByUrl('/sme-user-creation');

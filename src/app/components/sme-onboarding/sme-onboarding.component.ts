@@ -413,6 +413,7 @@ export class SmeOnboardingComponent implements OnInit {
   }
   onSave(type) {
     let onboardingResp=[]
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
     this.questionnaireSections.forEach((item)=>{
     let compSecObj={
         "sectionAlias":item.alias,
@@ -474,6 +475,14 @@ export class SmeOnboardingComponent implements OnInit {
 
           let data=JSON.parse(localStorage.getItem('userCred'))
           this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+            let obj={
+                "smeRating":resp.score,
+            }
+            
+              this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
+
+              })
+              
             if(resp && resp.score >= 900){
            !type && this.apiService.put(environment.financierServicePath + 'sme-profile/questionnairestatus/' + data.companyId , {} ).subscribe(resp=>{
             })
