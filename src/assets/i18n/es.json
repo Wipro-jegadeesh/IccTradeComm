@@ -17,7 +17,6 @@
   "You are about to send the following Bid:":"Está a punto de enviar la siguiente oferta:",
   "Bids to be accepted": "Ofertas realizadas",
 	"Bid Details:": "Detalles de la puja:",
-  "Invoice repository Download":"Descargar Factura Repositorio",
 
 
   
@@ -436,20 +435,7 @@
       "Role": "Función",
       "EnterRole": "El rol es obligatorio"
     },
-    "finaniceBidding":{
-      "FX rate":"FX rate",
-      "Base CCY":"Base CCY",
-      "Repay Amount (Base CCY)":"Repay Amount (Base CCY)",
-      "Disc Amt": "Discount Amount",
-      "Net Amt payable": "Net Amount Payable",
-      "Off Exp date /time": "Offer Expiry",
-      "Date / Time":"Date / Time",
-      "Penal ROI":"Penal ROI",
-      "Offer Exp": "Offer Expiry",
-      "Period":"Period",
-      "BIDDING Economic Details Section":"BIDDING Economic Details Section"
-    },
-
+    
       "Invoice Master": "Maestro de Facturas",
       "View all Invoice Master": "Ver todo el maestro de facturas",
       "Modify": "Modificar",
@@ -704,7 +690,6 @@
     "Local Registration Number":"Número de registro local",
     "Authorize Invoice":"Autorizar factura",
     "edit": "Editar",
-
     "Static Data Maintenance":"Mantenimiento de datos estáticos",
     "Financier Maintenence":"Mantenimiento financiero",
     "SME Maintenence":"Mantenimiento de PYME",
@@ -717,5 +702,60 @@
     "Company Register Id":"ID de registro de la empresa",
     "Bids Placed":"Pujas realizadas",
     "Cancel to Bids":"Cancelar ofertas",
-    "Offer Rejected":"Oferta rechazada"
+    "Offer Rejected":"Oferta rechazada",
+    "finaniceBidding":{
+      "FX rate": "Tipo de cambio",
+      "Base CCY": "CCY base",
+      "Repay Amount (Base CCY)": "Importe de reembolso (CCY base)",
+      "Disc Amt": "Importe de descuento",
+      "Net Amt payable": "Importe neto a pagar",
+      "Off Exp date /time": "Caducidad de la oferta",
+      "Date / Time": "Fecha / Hora",
+      "Penal ROI": "Rentabilidad penal",
+      "Offer Exp": "Caducidad de la oferta",
+      "Period": "Período",
+      "BIDDING Economic Details Section": "Sección Detalles Económicos de Pujas"
+    },
+      "limitMaintanance":{
+        "Limit Maintanance": "Limitar mantenimiento",
+        "Currency": "Moneda",
+        "Global Limit": "Límite global",
+        "Country Limit": "Límite de país",
+        "SME Limit": "Límite SME",
+        "Sector Limit": "Límite de sector",
+        "Transaction Limit": "Límite de transacciones",
+        "Buyer Limit": "Límite de comprador",
+        "Global Available Limit": "Límite disponible global",
+        "Create Limit": "Crear límite",
+        "Edit Limit": "Editar límite",
+        "Cancel": "Cancelar",
+        "Update": "Actualización",
+        "Utilization Slabs": "Losas de uso",
+        "Number of Transactions": "Número de transacciones",
+        "Graph Representation": "Representación gráfica",
+        "Data Representation": "Representación de datos",
+        "Invoice Number": "Número de factura",
+        "Invoice Date": "Fecha de factura",
+        "SME Id": "ID PYME",
+        "SME Name": "Nombre PYME",
+        "SME Country": "País PYME",
+        "Sector": "Sector",
+        "Limit Percent": "Porcentaje límite",
+        "Status": "Estado",
+        "submit": "Enviar",
+        "Edit": "Editar",
+        "Number of Countries": "Número De Países",
+        "Country Limit Maintanance": "Mantenimiento de límite de país",
+        "Invoice Value": "Valor de factura",
+        "Address": "Dirección",
+        "Bid Value": "Valor de puja",
+        "Number of SMEs": "Número de PYME",
+        "SME Limit Sub Screen (Based On Limit Slot)": "Subpantalla SME Limit (Basada en la ranura Limit)",
+        "Number of Sectors": "Número De Sectores",
+        "Sector Limit Sub Screen (Based On Limit Slot)": "Subpantalla Sector Limit (Basada en la ranura Limit)",
+        "Number of Buyers": "Número de compradores",
+        "Buyer Limit Sub Screen (Based On Limit Slot)": "Subpantalla Límite de comprador (basada en la ranura de límite)",
+        "Buyer Uen": "Comprador UEN"
+      },
+      "Invoice repository Download": "Descarga del repositorio de facturas"
 }
