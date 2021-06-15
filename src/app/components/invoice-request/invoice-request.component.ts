@@ -410,8 +410,16 @@ getAllCountry(){
           "buyerUEN":item['buyerUEN'],
           "dispDate":item['dispDate'],
            "invDueDate":item.invDueDate,
-           "smeProfileId" : this.userDeatils['smeProfileId']
+           "smeProfileId" : this.userDeatils['smeProfileId'],
 
+           "email": item['email'],
+           "phoneNo": item['phoneNo'],
+           "addressLine1": item['addressLine1'],
+           "addressLine2": item['addressLine2'],
+           "city": item['city'],
+           "postalCode": item['postalCode'],
+           "companyName": item['companyName'],
+           "buyerScore" : item['buyerScore']
         }
         reqParams.push(obj)
       }
@@ -690,7 +698,7 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
     // }
     // localStorage.setItem('buyerDetails',JSON.stringify(buyerdetails))
       let buyerSubmitObj={
-        'name':userCred.name,
+        'name':userCred && userCred.name,
         'registrationnumber':userCred.companyId,
         'countryCode':'SGP',
         'invoiceid':invoiceNo,
