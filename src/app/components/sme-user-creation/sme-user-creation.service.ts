@@ -20,6 +20,9 @@ export class SmeUserCreationService {
       Usersave(body: any) {
         return this.apiService.post(environment.financierServicePath+'smeonboard', body);
       }
+      smeUserCreation(body: any){
+        return this.apiService.post(environment.financierServicePath+ 'adduser' ,body)
+      }
       getUserDetails(id) {
         return this.apiService.tempGet(environment.financierServicePath+'sme-fetchdetails/' + id)
             // 'sme-userprofile/'+id);

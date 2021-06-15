@@ -616,7 +616,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
         taxRate: element.taxRate,
         taxAmt: element.taxAmt,
         total: element.total,
-        goodsId: "GD101"
+        goodsId: element.goodsId
       })
       this.dateFormArray.push(row);
     });
@@ -636,7 +636,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
       taxRate: [""],
       taxAmt: [""],
       total: [""],
-      goodsId: "GD101",
+      goodsId: [""],
     })
       this.dateFormArray.push(row);
     }

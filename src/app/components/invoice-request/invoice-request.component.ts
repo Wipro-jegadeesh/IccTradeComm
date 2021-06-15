@@ -472,26 +472,44 @@ getAllCountry(){
 
    
     this.dataSourceTwo.data = []
-    data.goodsDetails.forEach(element => {
+    data.goodsDetails.length &&  data.goodsDetails.forEach(element => {
       const row = this.fb.group({
-      ID: this.invoiceID,
-      descGoods: element.descGoods,
-      dateOfInvoice:this.datePipe.transform(this.InvoiceFdate,"dd/MM/yyyy"),
-      quantity: element.quantity,
-      rate:element.rate,
-      amt: element.amt,
-      amtCcy: this.currencyName,
-      discAmt: element.discAmt, 
-      netAmtPay: element.netAmtPay,
-      taxRate: element.taxRate,
-      taxAmt: element.taxAmt,
-      total: element.total,
-      goodsId: element.goodsId,
-      status: element.status
-      // goodsId: "GD101"
+        ID: this.invoiceID,
+        descGoods: element.descGoods,
+        dateOfInvoice: this.datePipe.transform(this.InvoiceFdate, "dd/MM/yyyy"),
+        quantity: element.quantity,
+        rate: element.rate,
+        amt: element.amt,
+        amtCcy: this.currencyName,
+        discAmt: element.discAmt,
+        netAmtPay: element.netAmtPay,
+        taxRate: element.taxRate,
+        taxAmt: element.taxAmt,
+        total: element.total,
+        goodsId: element.goodsId
       })
       this.dateFormArray.push(row);
     });
+
+   if(!data.goodsDetails.length){
+    const row = this.fb.group({
+      ID: this.invoiceID,
+      descGoods: [""],
+      // idNo: [""],
+      dateOfInvoice: this.datePipe.transform(this.InvoiceFdate, "dd/MM/yyyy"),
+      quantity: [""],
+      rate: [""],
+      amt: [""],
+      amtCcy: this.currencyName,
+      discAmt: [""],
+      netAmtPay: [""],
+      taxRate: [""],
+      taxAmt: [""],
+      total: [""],
+      goodsId: [""],
+    })
+      this.dateFormArray.push(row);
+    }
     this.delete(0)
     this.dataSourceTwo.data = this.dateFormArray.controls;
     this.UpdateInvoiceLable = true
