@@ -9,6 +9,8 @@ import {LANGUAGES} from '../../../shared/constants/Languages'
 import { IccCountryServices } from '../../icc-country/icc-country.services'
 import {TranslateService} from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ApiService } from 'src/app/service/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-up-details',
@@ -31,7 +33,8 @@ export class SignUpDetailsComponent implements OnInit {
 ]
 
 
-  constructor(public translate: TranslateService,private toastr: ToastrService,private router: Router,private SignupServices: SignupService,private fb: FormBuilder,private IccCountryServices:IccCountryServices) { }
+  constructor(public translate: TranslateService,private toastr: ToastrService,private router: Router,private SignupServices: SignupService,
+    private fb: FormBuilder,private IccCountryServices:IccCountryServices,private apiService:ApiService) { }
 
   name = "";
   optionDatas=[]
@@ -343,17 +346,29 @@ export class SignUpDetailsComponent implements OnInit {
       };
       let smeboards = {
         smeboard:smeboard
-      } 
+      }
       console.log(smeboards,"smeboards")
        
     this.SignupServices.Usersave(smeboards).subscribe(resp => {
             if(resp && resp.status == 200){
                     this.signupFormBuild();
+                    // this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + smeboard.registrationNumber + '/' + smeboard.name + '/' + smeboard.country).subscribe(resp=>{
+                    //   let obj={
+                    //       "smeRating":resp.score,
+                    //   }
+                      
+                    //     this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
+          
+                    //     })
+                    // })
                     this.toastr.success("SME created succesfully kindly login with your credentials")
-                    this.router.navigateByUrl('/login');
+                    window.location.href = "/"
             }
           },error => {
-            error && error.error && error.error.msg ? this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
+            error && error.error && error.error.msg ? 
+            this.toastr.error(this.replaceCommaLine(error.error.msg),'',
+            {timeOut: 4000, progressBar: true, enableHtml: true}) :
+             this.toastr.error('Error')
       })
                 
     } catch (err) {
