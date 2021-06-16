@@ -352,20 +352,11 @@ export class SignUpDetailsComponent implements OnInit {
     this.SignupServices.Usersave(smeboards).subscribe(resp => {
             if(resp && resp.status == 200){
                     this.signupFormBuild();
-                    // this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + smeboard.registrationNumber + '/' + smeboard.name + '/' + smeboard.country).subscribe(resp=>{
-                    //   let obj={
-                    //       "smeRating":resp.score,
-                    //   }
-                      
-                    //     this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
-          
-                    //     })
-                    // })
                     this.toastr.success("SME created succesfully kindly login with your credentials")
                     window.location.href = "/"
             }
           },error => {
-            error && error.error && error.error.msg ? 
+            error && error.error && error.error.msg ?
             this.toastr.error(this.replaceCommaLine(error.error.msg),'',
             {timeOut: 4000, progressBar: true, enableHtml: true}) :
              this.toastr.error('Error')
