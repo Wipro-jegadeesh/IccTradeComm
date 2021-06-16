@@ -8,6 +8,7 @@ import { FinanceRequestServices } from './finance-service'
 import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 @Component({
   selector: 'app-finance-bidding',
@@ -16,7 +17,7 @@ import { Options,LabelType } from '@angular-slider/ngx-slider';
 })
 export class FinanceBiddingComponent implements OnInit {
   @Input() InvoiceDetailsComponent: InvoiceDetailsComponent;
-  constructor(public router: Router, public authenticationService: AuthenticationService,private FinanceRequestServices: FinanceRequestServices) { }
+  constructor(public router: Router, public authenticationService: AuthenticationService,private FinanceRequestServices: FinanceRequestServices,private SmeFinancierForBiddingServices:SmeFinancierForBiddingServices) { }
 
   dataSource;//data
   displayedColumns: string[] = [
@@ -76,6 +77,7 @@ export class FinanceBiddingComponent implements OnInit {
   dashboardTooltip = FINANCIERDASHBOARDCONSTANTS;
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  public getSmeName: any = []
 
   ngOnInit() {
     console.log(this.SearchModel,"SearchModel")
@@ -91,13 +93,25 @@ export class FinanceBiddingComponent implements OnInit {
     // 'invDate' : "22/3/2333",}]);
     // this.dataSource.paginator = this.paginator
 
-
+    this.getsmeNameId();
     this.FinanceRequestServices.getInvoiceDetails().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+    }
   SearchAPI(){
     console.log(this.SearchModel,"SearchModel")
   }

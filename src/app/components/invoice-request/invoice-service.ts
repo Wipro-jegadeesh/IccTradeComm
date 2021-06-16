@@ -55,4 +55,8 @@ export class InvoiceRequestServices {
     }
     return this.apiService.put(environment.api_url+'invoice-request/reformscore/'+id,invoiceDetails);
   }
+  getuserProfile(id) {
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/user-profile/smeRating/' + id);
+
+  }
 }

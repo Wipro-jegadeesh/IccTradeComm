@@ -130,9 +130,11 @@ export class AuthConfigService {
                     let isQuesSucc = resp[0].questionnaire
                     let status = resp[0].status
                     if (status == 'P') {
+                      localStorage.setItem("roleName", "sme");
                       this.router.navigateByUrl('/notActivated')
                     }
                     else if (isQuesSucc == 'N') {
+                      localStorage.setItem("roleName", "sme");
                       this.router.navigateByUrl('/sme-onboarding')
                     }
                     else {

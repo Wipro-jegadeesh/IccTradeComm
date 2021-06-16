@@ -170,6 +170,13 @@ export class SmeFinanceforBiddingComponent implements OnInit {
   ResetAPI() {
     this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
