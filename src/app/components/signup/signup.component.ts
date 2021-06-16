@@ -68,7 +68,9 @@ export class SignupComponent implements OnInit {
       allowSearchFilter: true,
       showCheckbox: false,
       // position:'bottom',
+      searchAutofocus : true,
       text:'Select Country',
+      
       enableSearchFilter : true,
       autoPosition : false,
       maxHeight	: 170
@@ -133,7 +135,7 @@ export class SignupComponent implements OnInit {
     console.log('dropdown closed');
   }
   onChange(event){
-   this.showCountSignBtn= this.selectedItems.length ? true : false
+   this.showCountSignBtn= this.selectedItems && this.selectedItems.length ? true : false
    if(event.itemName == "Singapore"){
     this.countryId = "UEN"
    }else if(event.itemName == "Equatorial Guinea"){
