@@ -4,7 +4,7 @@
 
 <mat-sidenav #sidenav mode="over" [(opened)]="opened">
   <mat-nav-list class="uxg-nav-list">
-    <a mat-list-item>
+    <a mat-list-item (click)="navigateDashboardPage()">
       <mat-icon mat-list-icon>home</mat-icon>
       <p>{{'sideBarComponet.Home' | translate}}</p>
     </a>
@@ -57,7 +57,7 @@
       <p>{{'sideBarComponet.Help' | translate}}</p>
     </a>
 
-    <a mat-list-item>
+    <a mat-list-item (click)="logout()">
       <mat-icon mat-list-icon>power_settings_new</mat-icon>
       <p>{{'sideBarComponet.Sign out' | translate}}</p>
     </a>

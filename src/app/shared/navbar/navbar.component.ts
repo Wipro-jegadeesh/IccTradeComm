@@ -1,12 +1,12 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { Router,NavigationEnd, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
-import {TranslateService} from '@ngx-translate/core';
-import {LANGUAGES} from '../constants/Languages';
+import { TranslateService } from '@ngx-translate/core';
+import { LANGUAGES } from '../constants/Languages';
 import { CountdownComponent } from 'ngx-countdown';
-import {MatSnackBar, MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -18,27 +18,26 @@ export class NavbarComponent implements OnInit {
   userName
   homePath = "";
   headerPaths = [];
-  isHide=false; 
+  isHide = false;
   userDeatils: any;
   roleName: string;
   // languages = LANGUAGES
-  languages  = [{"id":"en","itemName":"English","nativeName":"English"},
-  {"id":"es","itemName":"Espano","nativeName":"Español"}
-]
+  languages = [{ "id": "en", "itemName": "English", "nativeName": "English" },
+  { "id": "es", "itemName": "Espano", "nativeName": "Español" }
+  ]
   // languages = LANGUAGES;
-  timestamp : any;
+  timestamp: any;
   @ViewChild('cd', { static: false })
-   private countdown: CountdownComponent;
+  private countdown: CountdownComponent;
 
 
-  constructor(private _snackBar: MatSnackBar,public translate: TranslateService,private readonly oauthService: OAuthService,
-    public router: Router, private route: ActivatedRoute,public authenticationService:AuthenticationService,private _location: Location)
-   { }
+  constructor(private _snackBar: MatSnackBar, public translate: TranslateService, private readonly oauthService: OAuthService,
+    public router: Router, private route: ActivatedRoute, public authenticationService: AuthenticationService, private _location: Location) { }
 
-  LanguagesOptions=[]
-  languageDropdownSettings:any={}
-  languageSelectedItems=[]
-  selectedItems=[]
+  LanguagesOptions = []
+  languageDropdownSettings: any = {}
+  languageSelectedItems = []
+  selectedItems = []
 
   //currentTimeDate start
   public currentTime: any;
@@ -49,54 +48,54 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentTimeDate();
-    this.userName = localStorage.getItem("userId") ?  localStorage.getItem("userId") : ''
+    this.userName = localStorage.getItem("userId") ? localStorage.getItem("userId") : ''
     this.roleName = localStorage.getItem("roleName") ? localStorage.getItem("roleName") : ''
-    this.userDeatils = JSON.parse(localStorage.getItem('userCred'))? JSON.parse(localStorage.getItem('userCred')) : ''
+    this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : ''
 
     // const result = this.router.config && this.router.config.filter(item => '/'+item.path == this.router.url);
     // this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.getModuleDependencies()
 
-       this.LanguagesOptions = LANGUAGES
+    this.LanguagesOptions = LANGUAGES
     this.languageDropdownSettings = {
-      singleSelection: true ,
+      singleSelection: true,
       defaultOpen: false,
       idField: "item_id",
       textField: "item_text",
       allowSearchFilter: true,
       showCheckbox: false,
-      position:'bottom',
-      text:'Select Language',
-      enableSearchFilter : true,
-      autoPosition : false,
-      maxHeight	: 170
+      position: 'bottom',
+      text: 'Select Language',
+      enableSearchFilter: true,
+      autoPosition: false,
+      maxHeight: 170
     };
 
-    this.selectedItems = [{"id":"en","itemName":"English"}]
+    this.selectedItems = [{ "id": "en", "itemName": "English" }]
 
     // this.setTime()
 
-    if(this.userDeatils.status === 'D' && this.roleName === 'sme' || this.userDeatils.status === 'I' && this.roleName === 'sme'){
+    if (this.userDeatils.status === 'D' && this.roleName === 'sme' || this.userDeatils.status === 'I' && this.roleName === 'sme') {
       this.openSnackBar()
     }
   }
 
   openSnackBar() {
-    this._snackBar.open('Repayments overdue,please complete payment to get ICC TRADECOMM features enabled','', {
+    this._snackBar.open('Repayments overdue,please complete payment to get ICC TRADECOMM features enabled', '', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: ['blue-snackbar']
     });
   }
-  setTime(){
+  setTime() {
 
     var timestamp = this.oauthService.getAccessTokenExpiration()
 
-              const date1 : any = new Date();
-              var date2 : any = new Date(timestamp);
-           
-              const diffTime = Math.abs(date2 - date1);
-              
+    const date1: any = new Date();
+    var date2: any = new Date(timestamp);
+
+    const diffTime = Math.abs(date2 - date1);
+
     // var timestamp = this.oauthService.getAccessTokenExpiration()
     // var date = new Date(timestamp);
     // var milliseconds : any = date.getMilliseconds();
@@ -106,29 +105,29 @@ export class NavbarComponent implements OnInit {
     //  this.timestamp = date.getSeconds();
     //  var millis : any = date.getMilliseconds();
 
-      // var minutes = Math.floor(millis / 60000);
-      // var seconds = ((millis % 60000) / 1000).toFixed(0);
-      // this.timestamp = minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds;
+    // var minutes = Math.floor(millis / 60000);
+    // var seconds = ((millis % 60000) / 1000).toFixed(0);
+    // this.timestamp = minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds;
 
-      // 
-      // this.timestamp = parseInt(minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds);
+    // 
+    // this.timestamp = parseInt(minutes + ":" + (Number(seconds) < 10 ? 0 : '') + seconds);
 
 
-      // this.timestamp = (minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-    
-    
+    // this.timestamp = (minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+
+
 
     ;
     this.countdown.begin();
 
     ;
   }
-  setlocalstroageLanguage(value){
-    localStorage.setItem("DefultLanguage",value);
-    console.log(this.translate,"this.translate")
-    console.log(this.translate.instant('Select Country'),"this.translate.instant('Select Country')")
+  setlocalstroageLanguage(value) {
+    localStorage.setItem("DefultLanguage", value);
+    console.log(this.translate, "this.translate")
+    console.log(this.translate.instant('Select Country'), "this.translate.instant('Select Country')")
   }
-  ngDoCheck(){
+  ngDoCheck() {
     this.getModuleDependencies()
     // let componentName =  this.route.firstChild && this.route.firstChild.data && this.route.firstChild.data['_value'] && this.route.firstChild.data['_value'].HeaderName ? this.route.firstChild.data['_value'].HeaderName : '';   
     // const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
@@ -148,66 +147,66 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  getModuleDependencies(){    
-    let componentName =  this.route.firstChild && this.route.firstChild.data && this.route.firstChild.data['_value'] && this.route.firstChild.data['_value'].HeaderName ? this.route.firstChild.data['_value'].HeaderName : '';   
+  getModuleDependencies() {
+    let componentName = this.route.firstChild && this.route.firstChild.data && this.route.firstChild.data['_value'] && this.route.firstChild.data['_value'].HeaderName ? this.route.firstChild.data['_value'].HeaderName : '';
     const result = this.router.config && this.router.config.filter(item => item.data && item.data.HeaderName == componentName);
     this.currentHeaderName = result && result[0] && result[0].data && result[0].data.HeaderName
     this.homePath = result && result[0] && result[0].data && result[0].data.homePath
-    let userData=JSON.parse(localStorage.getItem('userCred'))
+    let userData = JSON.parse(localStorage.getItem('userCred'))
     // console.log(result,"result")
-    if(this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire){
-      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
-    }else if(this.router.url == '/view-profile/sme'){
-      this.headerPaths =[{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
-    }else if(this.router.url == '/view-profile/financier'){
-      this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
-    }else if(this.router.url == '/view-profile/icc'){
-      this.headerPaths =[{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
-    }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'sme'){
-      this.headerPaths =[{ path : "/accepted-finance",pathName : "Accepted Finance"},{path:"/sme-dashboard",pathName:"Seller Dashboard"}]
-    }else if(result[0].data.HeaderName === "Finance Details" && this.roleName === 'financier'){
-      this.headerPaths =[{ path : "/finance-funded",pathName : "Funded Deals"},{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
-    }else if(result[0].data.HeaderName === "Finance Details" &&  this.roleName === 'icc'){
-      this.headerPaths =[{ path : "/icc-finance-today",pathName : "Finance-Today"},{path:"/icc-dashboard",pathName:"ICC TradeComm Administrator Dashboard"}]
-    }else if(result[0].data.HeaderName === "Financier Onboarding Details" && this.roleName === 'financier'){
-      this.headerPaths =[{path:"/financier-dashboard",pathName:"Financier Dashboard"}]
+    if (this.router.url == '/sme-onboarding' || this.router.url == '/score-received' && userData && userData.questionnaire) {
+      this.headerPaths = [{ path: "/sme-dashboard", pathName: "Seller Dashboard" }]
+    } else if (this.router.url == '/view-profile/sme') {
+      this.headerPaths = [{ path: "/sme-dashboard", pathName: "Seller Dashboard" }]
+    } else if (this.router.url == '/view-profile/financier') {
+      this.headerPaths = [{ path: "/financier-dashboard", pathName: "Financier Dashboard" }]
+    } else if (this.router.url == '/view-profile/icc') {
+      this.headerPaths = [{ path: "/icc-dashboard", pathName: "ICC TradeComm Administrator Dashboard" }]
+    } else if (result[0].data.HeaderName === "Finance Details" && this.roleName === 'sme') {
+      this.headerPaths = [{ path: "/accepted-finance", pathName: "Accepted Finance" }, { path: "/sme-dashboard", pathName: "Seller Dashboard" }]
+    } else if (result[0].data.HeaderName === "Finance Details" && this.roleName === 'financier') {
+      this.headerPaths = [{ path: "/finance-funded", pathName: "Funded Deals" }, { path: "/financier-dashboard", pathName: "Financier Dashboard" }]
+    } else if (result[0].data.HeaderName === "Finance Details" && this.roleName === 'icc') {
+      this.headerPaths = [{ path: "/icc-finance-today", pathName: "Finance-Today" }, { path: "/icc-dashboard", pathName: "ICC TradeComm Administrator Dashboard" }]
+    } else if (result[0].data.HeaderName === "Financier Onboarding Details" && this.roleName === 'financier') {
+      this.headerPaths = [{ path: "/financier-dashboard", pathName: "Financier Dashboard" }]
     }
-    else{
-    this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
-    // console.log(this.headerPaths ,"this.homePath ")
+    else {
+      this.headerPaths = result && result[0] && result[0].data && result[0].data.headerPaths ? result[0].data.headerPaths : []
+      // console.log(this.headerPaths ,"this.homePath ")
     }
   }
 
-  onChange(event){
+  onChange(event) {
     // translate.use(event.id)
-  //  this.showCountSignBtn= this.selectedItems.length ? true : false
-  //  this.CountryPinLabel=event.regNo ? event.regNo : 'No'
+    //  this.showCountSignBtn= this.selectedItems.length ? true : false
+    //  this.CountryPinLabel=event.regNo ? event.regNo : 'No'
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl(this.homePath);
   }
 
-  logout(){
+  logout() {
     this.oauthService.logOut();
-    localStorage.clear(); 
+    localStorage.clear();
 
-  // this.authenticationService.logout()
+    // this.authenticationService.logout()
 
-    }
+  }
 
-    backNavigation() {
+  backNavigation() {
     //  !this.isHide ? this._location.back() : this.router.navigateByUrl('/signup')
     this._location.back()
-    }
+  }
 
-    navigationHeadersPath(path){
-      this.router.navigateByUrl(path);
-    }
-    profile(){
-      this.router.navigateByUrl('/view-profile/'+this.roleName)
-    } 
-      //currentTimeDate start
+  navigationHeadersPath(path) {
+    this.router.navigateByUrl(path);
+  }
+  profile() {
+    this.router.navigateByUrl('/view-profile/' + this.roleName)
+  }
+  //currentTimeDate start
   currentTimeDate() {
     var x = new Date()
     var ampm = x.getHours() >= 12 ? ' PM' : ' AM';

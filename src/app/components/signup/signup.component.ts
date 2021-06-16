@@ -67,7 +67,7 @@ export class SignupComponent implements OnInit {
       textField: "item_text",
       allowSearchFilter: true,
       showCheckbox: false,
-      position:'bottom',
+      // position:'bottom',
       text:'Select Country',
       enableSearchFilter : true,
       autoPosition : false,
@@ -95,7 +95,10 @@ export class SignupComponent implements OnInit {
   getAllCountry(){
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
-      resp && resp.map(item =>{
+      resp && resp.map((item,index) =>{
+        // if(item.country == "Singapore"){
+        //   debugger;
+        // }
         let obj =  { id: item.countrycode3, itemName: item.country }
         countryArray.push(obj)
       })
