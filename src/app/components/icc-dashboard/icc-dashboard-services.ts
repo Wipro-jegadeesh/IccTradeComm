@@ -30,6 +30,8 @@ export class IccDashboardServices  {
   }
   getFinanceMasterCount(){
     return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/icc-dashboard/getFinanceMaster');
-    }
-
+  }
+  getallSmeProfileDetails(){
+      return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allsmeprofiledetails'); 
+  }
 }
