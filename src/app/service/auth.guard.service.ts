@@ -144,6 +144,7 @@ export class AuthConfigService {
                       this.router.navigateByUrl('/sme-dashboard')
                     }
                     localStorage.setItem('userCred', JSON.stringify(userObj))
+                    this.updateScore()
                   }
                   else {
                     this.oauthService.logOut()
@@ -206,5 +207,17 @@ export class AuthConfigService {
   logoutSession() {
     this.userIdle.stopWatching();
     this.oauthService.logOut();
+  }
+  updateScore(){
+    let userCred=JSON.parse(localStorage.getItem('userCred'))
+          this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
+            let obj={
+                "smeRating":resp.score,
+            }
+            
+              this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
+
+              })
+          })
   }
 }
