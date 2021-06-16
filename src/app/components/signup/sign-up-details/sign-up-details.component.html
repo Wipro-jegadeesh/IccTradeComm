@@ -217,8 +217,8 @@
                 <mat-form-field dense class="mat-box">
                   <mat-label>{{'Language' | translate}}</mat-label>
                   <mat-select formControlName="language">
-                    <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search" (keyup)="onKey($event.target.value)">
-                    <mat-option>None</mat-option>
+                    <!-- <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search" (keyup)="onKey($event.target.value)">
+                    <mat-option>None</mat-option> -->
                     <mat-option *ngFor="let item of LanguagesOptions" [value]="item.id">{{item.itemName}}</mat-option>
                   </mat-select>
                 </mat-form-field>

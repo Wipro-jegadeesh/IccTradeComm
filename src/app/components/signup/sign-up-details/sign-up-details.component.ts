@@ -74,7 +74,7 @@ export class SignUpDetailsComponent implements OnInit {
     this.getAllCountry()
     this.signUpDetails =  JSON.parse(localStorage.getItem("signUpDetails"))
     this.sectorOptionsDatas = SIGNUPSECTORS
-    this.LanguagesOptions = LANGUAGES
+    this.LanguagesOptions = [{"id":"en","itemName":"English","nativeName":"English"},{"id":"es","itemName":"Espano","nativeName":"Español"}]
 
     
     this.languageDropdownSettings = {
