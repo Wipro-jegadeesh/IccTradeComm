@@ -213,7 +213,7 @@ export class NavbarComponent implements OnInit {
     let hours = x.getHours() % 12;
     hours = hours ? hours : 12;
     this.currentDate = x.getDate() + "/" + (x.getMonth() + 1) + "/" + x.getFullYear();
-    this.currentTime = hours + ":" + x.getMinutes() + ":" + x.getSeconds() + ampm;
+    this.currentTime = hours + ":" + x.getMinutes() + ampm;
     this.displayRefresh()
   }
   displayRefresh() {
