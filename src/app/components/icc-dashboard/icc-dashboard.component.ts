@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router,NavigationExtras } from "@angular/router";
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IccDashboardServices } from './icc-dashboard-services'
 import { ICCDASHBOARDCONSTANTS } from '../../shared/constants/constants'
@@ -19,7 +19,9 @@ export class IccDashboardComponent implements OnInit {
   limit = 7;
   isOpen = "active";
   displayedColumns: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
+  displayedSMEColumns: string[] = ['smeprofileID','registrationNumber','companyId','action'];
   dataSource;
+  dataSMESource;
   @ViewChild("accountList", { read: ElementRef })
   public accountList: ElementRef<any>;
   fundingRequestObj;
@@ -47,7 +49,7 @@ export class IccDashboardComponent implements OnInit {
     this.getInvoiceMasterCount();
     this.getAllfinTdyCount();
     this.getFinanceMasterCount();
-    this.dataSource = new MatTableDataSource([{ profileID: "4", "financierType": "Praj", "regNumber": "TT$%$%" }]);
+    this.dataSource = new MatTableDataSource([{ profileID: "4", financierType: "Praj", regNumber: "TT$%$%" }]);
     this.getFinancierDetails()
   }
   getFinancierDetails() {
@@ -60,6 +62,19 @@ export class IccDashboardComponent implements OnInit {
           }
         })
         this.dataSource = new MatTableDataSource(respData);
+      }
+    })
+  }
+  getSMEDetails() {
+    this.iccDashboardServices.getallSmeProfileDetails().subscribe(resp => {
+      if (resp) {
+        let respData = []
+        resp.map((item, index) => {
+          if (index <= 4) {
+            respData.push(item)
+          }
+        })
+        this.dataSMESource = new MatTableDataSource(respData);
       }
     })
   }
@@ -140,5 +155,14 @@ export class IccDashboardComponent implements OnInit {
       this.financeMasterCount = resp
     })
   }
-
+  navigateToSmeDetails(path,smeData){
+    let data: NavigationExtras = {
+      queryParams: {
+      "companyId":smeData.registrationNumber, 
+      "companyName":smeData.name,
+      "country": "SGP"
+      }
+    }
+    this.router.navigate([path], { state: { smeData: data } });
+  }
 }
