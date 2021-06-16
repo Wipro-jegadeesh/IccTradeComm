@@ -103,7 +103,7 @@ languageSelectedItems=[]
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     
-    this.LanguagesOptions = LANGUAGES
+    this.LanguagesOptions = [{"id":"en","itemName":"English","nativeName":"English"},{"id":"es","itemName":"Espano","nativeName":"Español"}]
 
 this.languageDropdownSettings = {
     singleSelection: true ,
