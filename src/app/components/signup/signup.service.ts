@@ -23,6 +23,6 @@ export class SignupService {
         return this.apiService.generalServiceget(environment.coriolisServicePath + 'test/questionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
     }
     getAllRoles(){
-        return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+        return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
       }
 }
