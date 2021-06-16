@@ -211,7 +211,17 @@ export class SignUpDetailsComponent implements OnInit {
               break;
             case 'city':
             this.userForm.get("city").setValue(item.value);
-            break;
+              break;
+            case 'postcode':
+              this.userForm.get("postalCode").setValue(item.value);
+               break;
+            case 'address-line-2':
+              this.userForm.get("address1").setValue(item.value);
+               break;
+            case 'sector':
+              // this.sectors.filter(x => x.alias == item.questionAlias)
+            this.userForm.get("sector").setValue(item.optionAliases);
+              break;
             default:
            }
          })
