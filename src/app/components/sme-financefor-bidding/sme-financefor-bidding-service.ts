@@ -10,7 +10,7 @@ export class SmeFinancierForBiddingServices {
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   
   getFinanceForBiddingLists(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allInvoicesBySmeId/'+localStorage.getItem("userId"));
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/invoicesbysmeid/'+localStorage.getItem("userId"));
   }
   getInvoiceRequestLists(id){
     // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
@@ -19,10 +19,7 @@ export class SmeFinancierForBiddingServices {
   }
 
   getFinanceBiddingLists(id){
-    // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
-    // 
-    // bidding-details/getBiddingDetails/{invoiceId}    http://950f76a46a8b.ngrok.io/api/v1
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingDetails/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingdetails/'+id);
   }
   searchFinanceFunded(params){
     console.log(params,"params")    
@@ -32,7 +29,7 @@ export class SmeFinancierForBiddingServices {
     let invoiceDate  = params.invoiceDate == undefined ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
     let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
 
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchInvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchinvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
   }
   getsmeNameId() {
     return this.apiService.tempGet(environment.serviePath_2 + 'api/v1/user-profile/smeNameFromId');

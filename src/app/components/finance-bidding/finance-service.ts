@@ -11,6 +11,6 @@ export class FinanceRequestServices {
         return this.apiService.get('invoiceRequestSave', params);
     }
     getInvoiceDetails() {
-       return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allFinanceInvoices/'+localStorage.getItem("userId"));
+       return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/financeinvoices/'+localStorage.getItem("userId"));
     }
 }

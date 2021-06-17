@@ -9,15 +9,15 @@ export class FinanceBiddingExpiryServices {
 
 
   getInvoiceDetails(userData) {
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allExpiredBidsList/'+userData.finId);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/expbids/'+userData.finId);
   }
 
     getFinancierBidding(params : any){
-        return this.apiService.get('allExpiredBids', params);
+        return this.apiService.get('expiredbids', params);
     }
 
     getInvDetailsLists_ForFinanceBidding(id){
-      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id); 
+      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingbyid/'+id); 
     }
 
     getInvDetailsLists(id){
@@ -29,7 +29,7 @@ export class FinanceBiddingExpiryServices {
       return this.apiService.post(environment.serviePath_2+'api/v1/bidding-details', body);
     }
     UpdateBiddingSave(id,body: any) {
-      return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatusInitiated/'+id,body);
+      return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/initbidstatus/'+id,body);
     }
 
     // getInvDetailsLists_ForFinanceBidding(id){

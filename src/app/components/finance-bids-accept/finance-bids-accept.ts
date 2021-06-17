@@ -11,9 +11,9 @@ export class FinancebidsRequestServices {
         return this.apiService.get('/financing-details/allInitatedBids/{finId}', params);
     }
     CancelBidingAccept(id,params) {
-       return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/cancelBidStatus/'+id,params);
+       return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/canbidstatus/'+id,params);
     }
     getBidingAcceptDetails() {
-       return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allInitatedBidsList/'+localStorage.getItem("userId"));
+       return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/initbids/'+localStorage.getItem("userId"));
     }
 }

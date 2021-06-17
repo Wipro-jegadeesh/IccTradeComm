@@ -15,21 +15,21 @@ export class IccDashboardServices  {
 
 
   getFundingRequestTileList(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/getFundingRequests');
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/fundingrequests');
   }
 
   getOfferAcceptanceTileList(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/getOfferForAcceptance');
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/offerforacceptance');
   }
 
   getInvoiceMasterCount(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/icc-dashboard/getInvoiceMaster');
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/icc-dashboard/invoicemaster');
   }
   getAllfinTdyCount(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/allFinanceToday');
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/financetoday');
   }
   getFinanceMasterCount(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/icc-dashboard/getFinanceMaster');
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/icc-dashboard/financemaster');
   }
   getallSmeProfileDetails(){
       return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allsmeprofiledetails'); 

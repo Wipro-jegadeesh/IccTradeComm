@@ -6,13 +6,13 @@ import { environment } from '../../../environments/environment';
 export class SmeDashboardServices {
   constructor(private apiService: ApiService) { }
   getFinForBid(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/getOpenFundingRequests/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/openfundingrequestsbysmeid/'+localStorage.getItem("userId"));
   }
   getFundingBids(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/getSumOfIntiatedBidAmt/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/sumofinitbidamtbysmeid/'+localStorage.getItem("userId"));
   }
   getFunded(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/getSumOfFinancingDue/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/sumoffinancingduebysmeid/'+localStorage.getItem("userId"));
   }
   getFinDueTdy(){
     return this.apiService.generalServiceget(environment.dboardServerPath4+'getFinDueTdy');
@@ -21,16 +21,16 @@ export class SmeDashboardServices {
     return this.apiService.generalServiceget(environment.dboardServerPath5+'getFinPastDue');
   }
   getFinMatData(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinMatDataForSme/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/finmatdataforsme/'+localStorage.getItem("userId"));
   }
   getFinSizeData(){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/getFinSizeDataForSme/'+localStorage.getItem("userId"));
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/financing-details/finsizedataforsme/'+localStorage.getItem("userId"));
   }
   getChartData(){
     return this.apiService.tempGet(environment.serviePath_1+'invoice-request/smefundreqchartdata/'+localStorage.getItem("userId")); 
   }
   getActualFundingChartData(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/getSmeActualFundingChartData/'+localStorage.getItem("userId")); 
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/smeactualfundingchartdata/'+localStorage.getItem("userId")); 
   }
   
 }

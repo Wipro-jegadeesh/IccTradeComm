@@ -8,7 +8,7 @@ export class IccFinanceTodayServices {
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   
   getFinanceTodayLists(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/allFinanceTodayList');
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/financetodaylist');
   }
   getInvoiceRequestLists(id){
     // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
@@ -17,14 +17,11 @@ export class IccFinanceTodayServices {
   }
 
   getFinanceBiddingLists(id){
-    // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
-    // 
-    // bidding-details/getBiddingDetails/{invoiceId}    http://950f76a46a8b.ngrok.io/api/v1
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingDetails/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingdetails/'+id);
   }
 
   getAcceptedFinanceDetails(id){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/getFinancingDetails/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/financingdetails/'+id);
   }  
   
 }

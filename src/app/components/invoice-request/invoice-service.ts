@@ -32,7 +32,7 @@ export class InvoiceRequestServices {
     return this.apiService.post(environment.serviePath_2+'api/v1/invoice-details',data)
   }
   UpdateBiddingSave(id,body: any) {
-    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatusInitiated/'+id,body);
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/initbidstatus/'+id,body);
   }
   getMainlimitScreenDatas(){
     let userCred = JSON.parse(localStorage.getItem('userCred'))
@@ -46,7 +46,7 @@ export class InvoiceRequestServices {
     return this.apiService.post(environment.coriolisServicePath + 'coriolis/Deal/Rating' , body)
   }
   getBidingAcceptAllDetails(id) {
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingbyid/'+id);
  }
   updateScore(id,body: any) {
     // http://localhost:8080/invoice-request/reformscore/%7BInvId%7D

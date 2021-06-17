@@ -25,7 +25,7 @@
 
         <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Open for Offer' | translate}}" number="{{getSumofgetOpenForOffer?.CCY || 'SGD'}} {{getSumofgetOpenForOffer?.INVOICEAMT? getSumofgetOpenForOffer?.INVOICEAMT : '0'}}" #tooltip="matTooltip"
+                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Open for Offer' | translate}}" number="{{getSumofgetOpenForOffer?.CCY || 'SGD'}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : '0'}}" #tooltip="matTooltip"
                 matTooltip="{{dashboardTooltip.offerDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding')"></uxg-account-card>
                 <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Financier Funded' | translate}}"  #tooltip="matTooltip" number="{{getSumofgetFinancierFunded?.INVCCY || 'SGD'}} {{ getSumofgetFinancierFunded?.INVTOTALAMT ? getSumofgetFinancierFunded?.INVTOTALAMT : '0'}}"
                 matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-funded')" currency=""></uxg-account-card>
