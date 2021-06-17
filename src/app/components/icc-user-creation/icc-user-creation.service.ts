@@ -42,6 +42,10 @@ export class IccUserCreationService {
   getIccRelaterUsers(regNo){
     return this.apiService.tempGet(environment.financierServicePath+'sme-profile/details/'+regNo);
   }
+  
+  getParticularSmeUser(id){
+    return this.apiService.tempGet(environment.financierServicePath+'sme-companynationaldata/'+id)
+  }
   getAllSector(){
     return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
   }

@@ -125,8 +125,7 @@ export class IccSmeDetailsComponent implements OnInit {
     })
     
     this.companyid =this.smeData.smeData.queryParams.companyId
-    // getUserSMEDetails
-    this.iccListSmeServices.getParticularSmeUser(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
+    this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       console.log(resp)
       //  resp[0].companyid
       this.userForm.patchValue({
@@ -340,7 +339,7 @@ export class IccSmeDetailsComponent implements OnInit {
     getIccRelaterUsers(){
       let regNo = this.smeData.smeData.queryParams.companyId
       console.log("regNo",regNo);
-      this.IccUserCreationService.getIccRelaterUsers(regNo).subscribe(resp => {
+      this.IccUserCreationService.getParticularSmeUser(regNo).subscribe(resp => {
         this.dataSource1 = new MatTableDataSource(resp);
         this.dataSource1.paginator = this.paginator
       })    

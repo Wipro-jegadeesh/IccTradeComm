@@ -403,7 +403,7 @@
                         matTooltip="{{'IccSmeDetails.User Id' | translate }}" [matTooltipPosition]="'below'">
                         {{'IccSmeDetails.User Id' | translate }} </th>
                       <td mat-cell *matCellDef="let element">
-                        {{element.usersId}}
+                        {{element.usersid}}
                       </td>
                     </ng-container>
 
@@ -412,7 +412,7 @@
                         matTooltip="{{'First Name' |translate}} " [matTooltipPosition]="'below'">
                         {{'First Name' |translate}} </th>
                       <td mat-cell *matCellDef="let element">
-                        {{element.firstName}}
+                        {{element.fname}}
                       </td>
                     </ng-container>
 
@@ -421,7 +421,7 @@
                         matTooltip="{{'Last name' | translate }}" [matTooltipPosition]="'below'"> {{'Last name' | translate }}
                       </th>
                       <td mat-cell *matCellDef="let element">
-                        {{element.lastName}}
+                        {{element.lname}}
                       </td>
                     </ng-container>
 
@@ -430,7 +430,7 @@
                         matTooltip="{{'Company name' | translate }}" [matTooltipPosition]="'below'">
                         {{'Company name' | translate }} </th>
                       <td mat-cell *matCellDef="let element">
-                        {{element.companyName}}
+                        {{element.companyname}}
                       </td>
                     </ng-container>
 
@@ -446,7 +446,7 @@
                       <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{'Phone Number'| translate}}" [matTooltipPosition]="'below'">{{'Phone Number'| translate}} </th>
                       <td mat-cell *matCellDef="let element">
-                        {{ element.contact }}
+                        {{ element.contactnum }}
                       </td>
                     </ng-container>
                     <!-- <ng-container matColumnDef="status">
@@ -462,7 +462,7 @@
                     <ng-container matColumnDef="action">
                       <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                       <td mat-cell *matCellDef="let element">
-                        <a href="javascript:void(0)" (click)="navigateFinanceDetails(element.usersKey,'EDIT')">
+                        <a href="javascript:void(0)" (click)="navigateFinanceDetails(element.userKey,'EDIT')">
                           <mat-icon #tooltip="matTooltip" matTooltip="{{'edit' | translate}}" [matTooltipPosition]="'below'">edit
                           </mat-icon>
                         </a>&nbsp;
