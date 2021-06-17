@@ -177,7 +177,7 @@ export class SignUpDetailsComponent implements OnInit {
       state:['',Validators.required],
       city:['',Validators.required],
       postalCode:['',Validators.required],
-      sector:[''],
+      sector:['',Validators.required],
       country:[[],Validators.required],
       language:[[],Validators.required],
       // country:[this.signUpDetails ? this.signUpDetails.country[0].itemName : '' ,Validators.required],
