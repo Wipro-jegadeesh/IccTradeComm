@@ -10,13 +10,13 @@ export class FinancierFundedServices {
   constructor(private apiService: ApiService) { this.baseUrl = "http://2aefcdf3e17f.ngrok.io/ "; }
   
   getFinanceForBiddingLists(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/getFundedListByFinId/'+localStorage.getItem("userId"));
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/fundedlist/'+localStorage.getItem("userId"));
   }
   getInvoiceRequestLists(id){
     return this.apiService.tempGet(environment.serviePath_1+'invoice-request/invoice/'+id); 
   }
   getAcceptedFinanceDetails(id){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/getFinancingDetails/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/financingdetails/'+id);
   }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);
@@ -27,7 +27,7 @@ export class FinancierFundedServices {
     let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
     
     https://tradecomm-userprofile.ffdcdev.fusionfabric.io/api/v1/financing-details/searchFinanceFunded?finId=FIN001&invNo=1234&smeId=SME101&buyerName=steel&invoiceDate=2021-04-01&invDueDate=2021-04-17
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/searchFinanceFunded?finId='+localStorage.getItem("userId")+'&invNo='+invoiceRef+'&smeId='+smeId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/searchfinancefunded?finId='+localStorage.getItem("userId")+'&invNo='+invoiceRef+'&smeId='+smeId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
   }
 }

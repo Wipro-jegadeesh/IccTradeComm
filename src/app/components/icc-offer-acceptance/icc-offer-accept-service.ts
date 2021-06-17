@@ -10,7 +10,7 @@ export class IccOfferAcceptServices {
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   
   getOfferAcceptanceLists(){
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/getAllOfferForAcceptance');
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/icc-dashboard/allofferforacceptance');
   }
   getInvoiceRequestLists(id){
     // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
@@ -19,23 +19,20 @@ export class IccOfferAcceptServices {
   }
 
   getFinanceBiddingLists(id){
-    // let stringifyObj = JSON.stringify( { invoiceDetails : { id : 1} })
-    // 
-    // bidding-details/getBiddingDetails/{invoiceId}    http://950f76a46a8b.ngrok.io/api/v1
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingDetails/'+id);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingdetails/'+id);
   }
   
   getFinancierBidding(params : any){
     return this.apiService.get('invoiceRequestSave', params);
 }
 getInvoiceDetails(id) {
-  return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allBiddingInvoicesBySmeId/'+id);
+  return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allbiddinginvoicesbysmeid/'+id);
 }
 UpdateBiddingSave(id,body: any) {
-  return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatusInitiated/'+id,body);
+  return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/initbidstatus/'+id,body);
 }
 getInvDetailsLists_ForFinanceBidding(id){
-  return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/getBiddingFromId/'+id); 
+  return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/biddingbyid/'+id); 
 }
 searchFinanceFunded(params){
   console.log("params.invoiceDate",params.invoiceDate);
@@ -45,7 +42,7 @@ searchFinanceFunded(params){
   let invoiceDate  = params.invoiceDate == undefined ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
   let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
   
-  return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchInvoiceFinancing?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+  return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchinvoicefinancing?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
 }
 }

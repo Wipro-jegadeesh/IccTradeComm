@@ -199,11 +199,6 @@ export class IccFinanceMasterComponent implements OnInit {
       ]);
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
     })
-    this.IccFinanceMasterServices.getFinanceBiddingLists(data.invId).subscribe(resp => {
-      if (resp) {
-        this.dataSourceThree = new MatTableDataSource(resp);
-      }
-    })
   }
 }
 

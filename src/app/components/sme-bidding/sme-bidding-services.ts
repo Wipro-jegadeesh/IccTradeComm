@@ -12,28 +12,28 @@ export class SmeBiddingServices {
     return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
   getBiddingDetails(invId){
-    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/bidding-details/getBiddingDetails/'+invId);
+    return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/bidding-details/biddingdetails/'+invId);
   } 
   getInvoiceGoodsDetails(invId){
     return this.apiService.generalServiceget(environment.serviePath_1+'invoice-request/invoice/'+invId);
   }
   saveFinBid(body: any) {
-    return this.apiService.post(environment.serviePath_2+'api/v1/financing-details/addFinancingBidDetails', body);
+    return this.apiService.post(environment.serviePath_2+'api/v1/financing-details', body);
   }
   updateFinBid(id){
-    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatus/'+id,'');
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/aprbidstatus/'+id,'');
   }
   updateFinStatusBid(id,body){
-    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/updateBidStatus/'+id,body);
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/aprbidstatus/'+id,body);
   }
   updatepaymentsBid(body){
-    return this.apiService.post(environment.serviePath_2+'api/v1/payment-details/addPaymentDetails',body);
+    return this.apiService.post(environment.serviePath_2+'api/v1/payment-details/paymentdetails',body);
   }
   updateAcceptStatusBid(FINID,BASEAMOUNT,body){
     return this.apiService.put(environment.serviePath_4+'limit-update/overAmountAvailable?finId='+FINID+'&OverallUtilizedLimit='+BASEAMOUNT,{});
   }
   rejectFinBid(id,body){
-    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/rejectBidStatus/'+id,body);
+    return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/rejbidstatus/'+id,body);
   }
   searchFinanceFunded(params){
     console.log("params.invoiceDate",params.invoiceDate);
@@ -43,10 +43,10 @@ export class SmeBiddingServices {
     let invoiceDate  = params.invoiceDate == undefined ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
     let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
     
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchBiddingInvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchbiddinginvoices?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
   }
   getInvoiceDetails() {
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allBiddingInvoicesBySmeId/'+localStorage.getItem("userId"));
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/allbiddinginvoicesbysmeid/'+localStorage.getItem("userId"));
   }
 }
