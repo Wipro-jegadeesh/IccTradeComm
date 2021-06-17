@@ -423,8 +423,8 @@ removeImage() {
       // groupname:['',Validators.required],
       role:resp.role,
       profileType:resp.profileType,
-      address1: resp.address1,
-      postalCode:resp.postalCode,
+      address1: resp.address2,
+      postalCode:resp.postalcode,
       state:resp.state,
 
         });
