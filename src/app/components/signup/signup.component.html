@@ -20,15 +20,25 @@
   <div class="uxg-signup-container">
     <span class="fill-remaining-space"></span>
     <img src="../../../assets/img/icctradelogo.png" class="log-logo" />
-    <form #signupForm="ngForm" class="sign-form">
+    <form [formGroup]="countryForm" class="sign-form">
       <mat-form-field floatLabel="never" style="margin-bottom:unset" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label>{{'Name' | translate}}</mat-label>
-        <input matInput type="text" name="name" class="input-text" [(ngModel)]="name" required />
+        <input matInput type="text"class="input-text"  formControlName="name"  />
       </mat-form-field>
-      <angular2-multiselect [data]="optionDatas" class="sign-select" style="margin-bottom:10px" name='country'
-        (onDeSelectAll)="onDeSelect($event)" [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-        [settings]="dropdownSettings"></angular2-multiselect>
+      <!-- <angular2-multiselect [data]="optionDatas" class="sign-select" style="margin-bottom:10px" 
+        (onDeSelectAll)="onDeSelect($event)" formControlName="country" (onSelect)="onChange($event)"
+        [settings]="dropdownSettings"></angular2-multiselect> -->
+
+
+        <!-- <div class="col-sm-4"> -->
+          <div class="sign-select">                   
+          <angular2-multiselect [data]="optionDatas" style="margin-bottom:10px" 
+          (onDeSelectAll)="onDeSelect($event)"
+                        formControlName="country" (onSelect)="onChange($event)"
+                        [settings]="dropdownSettings"></angular2-multiselect> 
+            </div>
+<!-- </div> -->
       <!-- <mat-form-field *ngIf="showCountSignBtn">
         <mat-icon matPrefix>person</mat-icon>
         <mat-label>{{CountryPinLabel}}</mat-label>
@@ -38,7 +48,7 @@
       <mat-form-field *ngIf="showCountSignBtn" floatLabel="never" style="margin-bottom:10px" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label >{{countryId}}</mat-label>
-        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required
+        <input matInput formControlName="CountryPin"
          required  />
         <!-- <mat-error>InValid Email</mat-error> -->
       </mat-form-field>
