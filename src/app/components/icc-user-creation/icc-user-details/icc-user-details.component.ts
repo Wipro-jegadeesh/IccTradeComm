@@ -132,8 +132,6 @@ this.languageDropdownSettings = {
       maxHeight	: 170
     };
 
-   
-
 
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
