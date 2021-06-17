@@ -359,7 +359,7 @@
                         {{'IccSmeDetails.Information' | translate}}
                       </th>
                       <td mat-cell *matCellDef="let element">
-                        {{element.information && element.information[0]?.information[0]?.message || ''}}
+                        {{element.information && element.information[0] && element.information[0].message || ''}}
                       </td>
                     </ng-container>
                     <!-- <ng-container matColumnDef="action">

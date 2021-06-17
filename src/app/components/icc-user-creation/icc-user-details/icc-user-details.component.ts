@@ -1,22 +1,15 @@
 
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
-import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { FUNDINGREQUESTCONSTANTS } from '../../../shared/constants/constants';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { DatePipe,Location } from '@angular/common';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IccUserCreationService } from '../icc-user-creation.service';
 import { IccRolesServices } from '../../icc-roles/icc-roles-services';
 import * as _ from 'lodash';
-import { MatListOption } from '@angular/material/list';
 import { IccCountryServices } from '../../icc-country/icc-country.services'
 import {LANGUAGES} from '../../../shared/constants/Languages'
 
@@ -83,7 +76,7 @@ export class IccUserDetailsComponent implements OnInit {
   RolesType:any;
  
   constructor(private IccRolesServices: IccRolesServices,private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
-    private IccUserCreationssService: IccUserCreationService, private fb: FormBuilder,
+    private IccUserCreationssService: IccUserCreationService, private fb: FormBuilder,private location:Location,
     private datePipe: DatePipe,private toastr: ToastrService,private IccCountryServices:IccCountryServices) {
     this.invoiceFormBuild()
   }
@@ -103,7 +96,7 @@ languageSelectedItems=[]
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     
-    this.LanguagesOptions = [{"id":"en","itemName":"English","nativeName":"English"},{"id":"es","itemName":"Espano","nativeName":"Español"}]
+    this.LanguagesOptions = [{"id":"english","itemName":"English","nativeName":"English"},{"id":"espano","itemName":"Espano","nativeName":"Español"}]
 
 this.languageDropdownSettings = {
     singleSelection: true ,
@@ -358,12 +351,12 @@ removeImage() {
                     "lastName": this.userForm.value.lastName,
                     "locale": this.userForm.value.locale,
                     "nationalId": this.userForm.value.nationalId,
-                    "postalCode": this.userForm.value.postalCode,
+                    "postalcode": this.userForm.value.postalCode,
                     "profileType": this.userForm.value.profileType,
                     "role": role,
                     "state": this.userForm.value.state,
                     "address": this.userForm.value.address,
-                    "address1": this.userForm.value.address1,
+                    "address2": this.userForm.value.address1,
                     "companyName": this.userForm.value.companyName,
                     "contactNo": this.userForm.value.contactNo,
                     "country": this.userForm.value.country,
@@ -382,7 +375,8 @@ removeImage() {
                       "country": "SGP"
                       }
                     }
-                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    // this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    this.location.back()
                     // this.router.navigateByUrl('/icc-sme-details/1');
                   }
                   }, error => {
@@ -399,7 +393,8 @@ removeImage() {
                       "country": "SGP"
                       }
                     }
-                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    this.location.back()
+                    // this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
                     // this.router.navigateByUrl('/icc-sme-details/1');
                   }
                   }, error => {
