@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
       resp && resp.map((item,index) =>{
-        // if(item.country == "Singapore"){
+        // if(item.country == "Bonaire, Sint Eustatius and Saba"){
         //   debugger;
         // }
         let obj =  { id: item.countrycode3, itemName: item.country }
