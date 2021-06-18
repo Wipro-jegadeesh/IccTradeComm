@@ -129,7 +129,7 @@ export class AuthConfigService {
                     }
                     let isQuesSucc = resp[0].questionnaire
                     let status = resp[0].status
-                    if (status == 'P') {
+                    if (status == 'P' || status == 'I') {
                       localStorage.setItem("roleName", "sme");
                       this.router.navigateByUrl('/notActivated')
                     }
@@ -210,14 +210,13 @@ export class AuthConfigService {
   }
   updateScore(){
     let userCred=JSON.parse(localStorage.getItem('userCred'))
-          this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
-            let obj={
-                "smeRating":resp.score,
-            }
-            
-              this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
+      this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
+        let obj={
+            "smeRating":resp.score,
+        }
+          this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
 
-              })
           })
+      })
   }
 }

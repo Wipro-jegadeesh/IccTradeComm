@@ -375,8 +375,8 @@ removeImage() {
                       "country": "SGP"
                       }
                     }
-                    // this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
-                    this.location.back()
+                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    // this.location.back()
                     // this.router.navigateByUrl('/icc-sme-details/1');
                   }
                   }, error => {
@@ -393,8 +393,8 @@ removeImage() {
                       "country": "SGP"
                       }
                     }
-                    this.location.back()
-                    // this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
+                    // this.location.back()
+                    this.router.navigate(['/icc-sme-details/1'], { state: { smeData: data } });
                     // this.router.navigateByUrl('/icc-sme-details/1');
                   }
                   }, error => {
