@@ -86,7 +86,7 @@
                    </td>
               </ng-container>
               <ng-container matColumnDef="TopBar">
-                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                <th colspan="10" mat-header-cell *matHeaderCellDef> 
                   <div style="justify-content:flex-end;cursor: pointer;">
                   <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                   <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -94,7 +94,7 @@
                  </th>
               </ng-container>
               <ng-container matColumnDef="Search">
-                <th colspan="8" mat-header-cell *matHeaderCellDef> 
+                <th colspan="10" mat-header-cell *matHeaderCellDef> 
                     <h6>{{'Search By' | translate}}</h6>
                     <form [formGroup]="Searchform">
                   <div class="row">
@@ -148,7 +148,7 @@
                  </th>
               </ng-container>
               <ng-container matColumnDef="Filter">
-                <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef> 
+                <th class="class2" colspan="10" mat-header-cell *matHeaderCellDef> 
                     <div class="row">
                         <div class="col-sm-3">
                             <label>{{'invoiceAmount' | translate}}</label>

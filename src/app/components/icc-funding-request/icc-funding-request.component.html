@@ -90,7 +90,7 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="TopBar">
-                        <th colspan="8" mat-header-cell *matHeaderCellDef>
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <div style="justify-content:flex-end;cursor: pointer;">
                                 <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                                 <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -98,33 +98,32 @@
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Search">
-                        <th colspan="8" mat-header-cell *matHeaderCellDef>
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <h6>{{'Search By' | translate}}</h6>
                             <div class="row">
                                 <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Id' | translate}}</mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                                        <input type="text"  matInput />
                                     </mat-form-field>
                                 </div>
 
                                 <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Sme Name' | translate}} </mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                                        <input type="text"  matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'StbuyerNameatus' | translate}} </mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                                        <input type="text"  matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Date' | translate}}</mat-label>
-                                        <input matInput readonly="true" [matDatepicker]="picker"
-                                            [(ngModel)]="SearchModel.invoiceDate">
+                                        <input matInput readonly="true" [matDatepicker]="picker">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
@@ -132,8 +131,7 @@
                                 <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
-                                        <input matInput readonly="true" [matDatepicker]="picker1"
-                                            [(ngModel)]="SearchModel.invoiceDueDate">
+                                        <input matInput readonly="true" [matDatepicker]="picker1">
                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
                                     </mat-form-field>
@@ -154,8 +152,8 @@
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Filter">
-                        <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
-                            <!-- <div class="row">
+                        <th class="class2" colspan="10" mat-header-cell *matHeaderCellDef>
+                            <div class="row">
                             <div class="col-sm-3">
                                 <label>{{'invoiceAmount' | translate}}</label>
                                 <div class="custom-slider">
@@ -173,17 +171,6 @@
                                     <mat-date-range-picker #picker></mat-date-range-picker>
                                   </mat-form-field>
                               </div>
-                              <div class="col-sm-3" style="padding-top: 22px;">
-                                <mat-form-field appearance="fill">
-                                    <mat-label>InvDueDate</mat-label>
-                                    <mat-date-range-input [rangePicker]="picker1">
-                                      <input matStartDate placeholder="Start date">
-                                      <input matEndDate placeholder="End date">
-                                    </mat-date-range-input>
-                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    <mat-date-range-picker #picker1></mat-date-range-picker>
-                                  </mat-form-field>
-                              </div>
                         </div>
                           <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                             <button  mat-raised-button style="color: #5e52a1;">
@@ -194,7 +181,7 @@
                                 <mat-icon #tooltip="matTooltip"
                                 matTooltip="Done" [matTooltipPosition]="'below'">restart_alt</mat-icon>  Reset
                               </button>
-                          </div> -->
+                          </div>
                         </th>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
