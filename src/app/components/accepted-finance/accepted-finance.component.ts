@@ -9,9 +9,11 @@ import { AuthenticationService } from '../../service/authentication/authenticati
 import { AcceptedFinanceServices } from './accepted-finance-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
-import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
+import { Options, LabelType } from '@angular-slider/ngx-slider';
+
 export interface financeForBiddingData {
   invId: String;
   invAmt: String;
@@ -37,6 +39,7 @@ export class AcceptedFinanceComponent implements OnInit {
   modalRef: BsModalRef;
   moment: any = moment;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  // ======
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -72,7 +75,7 @@ export class AcceptedFinanceComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-
+// ======
   constructor(public router: Router,private fb: FormBuilder,private AcceptedFinanceServices: AcceptedFinanceServices) { }
 
   ngOnInit() {
