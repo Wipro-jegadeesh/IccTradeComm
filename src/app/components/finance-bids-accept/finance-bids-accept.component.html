@@ -76,7 +76,7 @@
                </td>
           </ng-container>
           <ng-container matColumnDef="TopBar">
-            <th colspan="8" mat-header-cell *matHeaderCellDef> 
+            <th colspan="10" mat-header-cell *matHeaderCellDef> 
               <div style="justify-content:flex-end;cursor: pointer;">
               <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
               <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -84,28 +84,28 @@
              </th>
           </ng-container>
           <ng-container matColumnDef="Search">
-            <th colspan="8" mat-header-cell *matHeaderCellDef> 
+            <th colspan="10" mat-header-cell *matHeaderCellDef> 
                 <h6>{{'Search By' | translate}}</h6>
-              <!-- <div class="row">
+              <div class="row">
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bid ID' | translate}}</mat-label>
-                        <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
+                        <input type="text" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>invoiceAmt</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
+                        <input type="text" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bidding Amount' | translate}}</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                        <input type="text" matInput />
                       </mat-form-field>
                   </div>
-              </div> -->
+              </div>
               <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                 <button  mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
                     <mat-icon #tooltip="matTooltip"

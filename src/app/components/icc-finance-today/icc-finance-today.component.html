@@ -81,8 +81,95 @@
                             </a>
                         </td>
                     </ng-container>
+                    <ng-container matColumnDef="TopBar">
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
+                            <div style="justify-content:flex-end;cursor: pointer;">
+                                <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+                                <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                            </div>
+                        </th>
+                    </ng-container>
+                    <ng-container matColumnDef="Search">
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
+                            <h6>{{'Search By' | translate}}</h6>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Invoice No' | translate}}</mat-label>
+                                        <input type="text"  matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'SME Id' | translate}}</mat-label>
+                                        <input type="text"  matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Net Amt payable' | translate}}</mat-label>
+                                        <input type="text"  matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Invoice Date' | translate}}</mat-label>
+                                        <input matInput readonly="true" [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
+                                        <input matInput readonly="true" [matDatepicker]="picker1">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row"
+                                style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                                        [matTooltipPosition]="'below'">done</mat-icon> {{'Search' | translate}}
+                                </button>&nbsp;
+                                <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
+                                        [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
+                                </button>
+                            </div>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        </th>
+                    </ng-container>
+                    <ng-container matColumnDef="Filter">
+                        <th class="class2" colspan="10" mat-header-cell *matHeaderCellDef>
+                            <div class="row">
+                                <div class="col-sm-3 col-3">
+                                    <label>Funding AMT</label>
+                                    <div class="custom-slider">
+                                        <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                                        </ngx-slider>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"
+                                style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                <button mat-raised-button style="color: #5e52a1;">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                                        [matTooltipPosition]="'below'">done</mat-icon> {{'Search' | translate}}
+                                </button>&nbsp;
+                                <button mat-raised-button style="color: #5e52a1;">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
+                                        [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
+                                </button>
+                            </div>
+                        </th>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+                    <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+                    <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
                     <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>

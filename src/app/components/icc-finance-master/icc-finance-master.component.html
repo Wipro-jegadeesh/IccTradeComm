@@ -74,7 +74,7 @@
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="TopBar">
-                        <th colspan="9" mat-header-cell *matHeaderCellDef>
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <div style="justify-content:flex-end;cursor: pointer;">
                                 <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
                                 <span (click)="filterDiv()" class="material-icons">filter_list</span>
@@ -82,32 +82,32 @@
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Search">
-                        <th colspan="8" mat-header-cell *matHeaderCellDef>
+                        <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <h6>{{'Search By' | translate}}</h6>
                             <div class="row">
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice No' | translate}}</mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.invoiceRef" matInput />
+                                        <input type="text" matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'SME Id' | translate}}</mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                                        <input type="text"  matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Net Amt payable' | translate}}</mat-label>
-                                        <input type="text" [(ngModel)]="SearchModel.NetAmt" matInput />
+                                        <input type="text"  matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Date' | translate}}</mat-label>
                                         <input matInput readonly="true" [matDatepicker]="picker"
-                                            [(ngModel)]="SearchModel.invoiceDate">
+                                           >
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
@@ -116,7 +116,7 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
                                         <input matInput readonly="true" [matDatepicker]="picker1"
-                                            [(ngModel)]="SearchModel.invoiceDueDate">
+                                            >
                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
                                     </mat-form-field>
@@ -137,7 +137,7 @@
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Filter">
-                        <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
+                        <th class="class2" colspan="10" mat-header-cell *matHeaderCellDef>
                             <div class="row">
                                 <div class="col-sm-3 col-3">
                                     <label>Funding AMT</label>
@@ -161,12 +161,10 @@
                         </th>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-                    <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
-                        *matHeaderRowDef="displayedColumnsearch"></tr>
+                    <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
                     <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"
-                        style="background-color:#B4A6EA"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#B4A6EA"></tr>
+                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>

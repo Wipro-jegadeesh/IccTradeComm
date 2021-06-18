@@ -12,6 +12,7 @@ import { IccFinanceTodayServices } from "./icc-finance-today-service";
 import { BIDDINGCONSTANTS } from "../../shared/constants/constants";
 import * as moment from "moment";
 import { MatPaginator } from "@angular/material/paginator";
+import { Options, LabelType } from '@angular-slider/ngx-slider';
 
 export interface financeForBiddingData {
   invId: String;
@@ -41,6 +42,41 @@ export class IccFinanceTodayComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {
+    'invoiceRef': String,
+    'smeId': String,
+    'NetAmt': Number,
+    'invoiceDate': String,
+    'invoiceDueDate': String
+
+  }
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
   mobileScreen = false;
   currentPage = 0;
   pageCount = 1;
@@ -85,7 +121,34 @@ export class IccFinanceTodayComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
-
+  SearchAPI() {
+  
+  }
+  ResetAPI() {
+    this.SearchModel = {
+      'invoiceRef': String,
+      'smeId': String,
+      'NetAmt': Number,
+      'invoiceDate': String,
+      'invoiceDueDate': String
+    };
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
   navigateInvoiceDetails(id) {
     this.router.navigateByUrl("/accepted-detail/" + id);
   }
