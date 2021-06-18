@@ -50,7 +50,8 @@ export class IccDashboardComponent implements OnInit {
     this.getAllfinTdyCount();
     this.getFinanceMasterCount();
     this.dataSource = new MatTableDataSource([{ profileID: "4", financierType: "Praj", regNumber: "TT$%$%" }]);
-    this.getFinancierDetails()
+    this.getFinancierDetails();
+    this.getSMEDetails();
   }
   getFinancierDetails() {
     this.iccDashboardServices.getFinancierList().subscribe(resp => {
