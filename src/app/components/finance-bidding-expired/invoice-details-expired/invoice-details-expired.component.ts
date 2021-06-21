@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
 interface Status {
   value: string;
@@ -98,7 +99,8 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   isView: boolean;
   
   constructor(public translate: TranslateService,private invoiceRequestServices: InvoiceRequestServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,private router :Router,
-    private modalDialogService:ModalDialogService,private fb: FormBuilder,private FinanceBiddingExpiryServices:FinanceBiddingExpiryServices,private toastr: ToastrService) { }
+    private modalDialogService:ModalDialogService,private fb: FormBuilder,private FinanceBiddingExpiryServices:FinanceBiddingExpiryServices,private toastr: ToastrService, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  public getSmeName: any = []
 
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
@@ -193,6 +195,8 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
 
   ngOnInit(): void {
+    this.getsmeNameId();
+
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -206,6 +210,11 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
       if(resp){
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
+          this.getSmeName.forEach(element2 => {
+            if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              resp.smeId = element2.smeName
+            }
+          });
           this.invoiceDetails = resp
           this.buildfinBidform()
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
@@ -217,6 +226,11 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
     })
 
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   buildfinBidform() {
     var ddatae = new Date();
     this.finBidform = this.fb.group({

@@ -10,6 +10,7 @@ import { FINANCIERDASHBOARDCONSTANTS } from "../../shared/constants/constants";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options,LabelType } from '@angular-slider/ngx-slider';
 import {MatSort} from '@angular/material/sort';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 @Component({
   selector: "app-finance-bidding-expired",

@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import {FinanceBiddingRejectedServices} from '../finance-bidding-rejected-service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
 interface Status {
   value: string;
@@ -97,7 +98,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
   FinancebiddingDetailsRemarks: any;
   
   constructor(public translate: TranslateService,private FinanceBiddingRejectedServices:FinanceBiddingRejectedServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,
-    private router :Router,private modalDialogService:ModalDialogService,private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService) { }
+    private router :Router,private modalDialogService:ModalDialogService,private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
@@ -183,7 +184,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
   bidpanelOpenState = false;
   // @Input() id: "";
   id:any
-
+  public getSmeName: any = []
   // invoiceDetails = {
   //   billNo : String,
   //         invId : String,
@@ -230,6 +231,7 @@ updateAllComplete(text){
   }
 }
   ngOnInit(): void {
+    this.getsmeNameId();
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -245,7 +247,13 @@ updateAllComplete(text){
       if(resp){
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
-          this.invoiceDetails = resp
+          
+        this.getSmeName.forEach(element2 => {
+          if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+            resp.smeId = element2.smeName
+          }
+        });
+        this.invoiceDetails = resp
           this.buildfinBidform()
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
         })
@@ -264,6 +272,12 @@ updateAllComplete(text){
       }
     })
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
+
   buildfinBidform() {
     var ddatae = new Date();
     this.finBidform = this.fb.group({

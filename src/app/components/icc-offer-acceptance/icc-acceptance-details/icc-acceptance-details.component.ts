@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import {IccOfferAcceptServices} from '../icc-offer-accept-service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
 interface Status {
   value: string;
@@ -98,7 +99,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
   financierTooltip=SMEDASHBOARDCONSTANTS;
   data2Source: MatTableDataSource<unknown>;
   constructor(public translate: TranslateService,private IccOfferAcceptServices:IccOfferAcceptServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,private router :Router,
-    private modalDialogService:ModalDialogService,private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService) { }
+    private modalDialogService:ModalDialogService,private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
@@ -199,8 +200,10 @@ export class ICCacceptancedetailsComponent implements OnInit {
   FinancebiddingDetails: any;
   type: string;
   isView: boolean;
+  public getSmeName: any = []
 
   ngOnInit(): void {
+    this.getsmeNameId();
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -211,10 +214,21 @@ export class ICCacceptancedetailsComponent implements OnInit {
     }
     this.IccOfferAcceptServices.getInvoiceDetails(this.id).subscribe(resp => {
       console.log(resp);
+      this.getSmeName.forEach(element2 => {
+        if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          resp.smeId = element2.smeName
+        }
+      });
+
       this.data2Source = new MatTableDataSource(resp);
     })
     this.buildform()
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   OpenAllFundingBids(id, type){
     this.AllFundingOpen = !this.AllFundingOpen
     this.IccOfferAcceptServices.getInvDetailsLists_ForFinanceBidding(id).subscribe(resp => {

@@ -39,8 +39,8 @@
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense>
                     <mat-label>{{'SME Rating' | translate}}</mat-label>
-                    <!-- <input type="text" matInput value="7/10" readonly /> -->
-                    <input type="text" matInput [value]="smeRatingDetails && smeRatingDetails.smeRating ? smeRatingDetails.smeRating : '0'" readonly />
+                    <!-- <input type="text" matInput value="600" readonly /> -->
+                    <input type="text" matInput [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'" readonly />
 
                   </mat-form-field>
                 </td>
@@ -402,18 +402,16 @@
                           <td rowspan="1" colspan="1">
                               <mat-form-field dense>
                                 <mat-label>{{'Transaction Rating' | translate}}</mat-label>
-                                <input type="text" matInput value="9/10"  />
+                                <input type="text" matInput [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'" readonly />
                               </mat-form-field>
                             </td>
                             <td rowspan="1" colspan="1">
                                 <mat-form-field dense>
                                   <mat-label>{{'SME Rating' | translate}}</mat-label>
-                                  <input type="text" matInput value="7/10"  />
+                                  <input type="text" matInput [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'" />
                                 </mat-form-field>
-                              </td>
-                    
-                    </tr>
-                
+                             </td>
+                          </tr>
                   </tbody>
                 </table>
                   <br>
