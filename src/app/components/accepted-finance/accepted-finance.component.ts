@@ -13,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 export interface financeForBiddingData {
   invId: String;
@@ -75,8 +76,9 @@ export class AcceptedFinanceComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-// ======
-  constructor(public router: Router,private fb: FormBuilder,private AcceptedFinanceServices: AcceptedFinanceServices) { }
+  public getSmeName: any = []
+
+  constructor(public router: Router,private fb: FormBuilder,private AcceptedFinanceServices: AcceptedFinanceServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource([{
@@ -92,8 +94,15 @@ export class AcceptedFinanceComponent implements OnInit {
       smeId: "SME101",
       status: "A"
     }]);
-
+    this.getsmeNameId();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
@@ -102,6 +111,13 @@ export class AcceptedFinanceComponent implements OnInit {
     this.buildform()
 
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+    
+
+}
   buildform() {
     this.Searchform = this.fb.group({
       invoiceRef: [''],
@@ -111,8 +127,16 @@ export class AcceptedFinanceComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
+  
   SearchAPI() {
     this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
@@ -120,6 +144,13 @@ export class AcceptedFinanceComponent implements OnInit {
   ResetAPI() {
     this.buildform();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 

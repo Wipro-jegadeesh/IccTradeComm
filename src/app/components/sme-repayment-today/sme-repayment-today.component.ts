@@ -8,6 +8,7 @@ import { Repayment_todayServices } from './sme-repayment-today-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 
 export interface financeForBiddingData {
@@ -117,11 +118,13 @@ export class Repayment_todayComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  public getSmeName: any = []
 
-  constructor(public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_todayServices) { }
+  constructor(public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_todayServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
+    this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -141,11 +144,23 @@ export class Repayment_todayComponent implements OnInit {
     }]);
 
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

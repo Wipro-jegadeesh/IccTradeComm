@@ -12,6 +12,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
 
 
@@ -73,7 +74,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   isView: boolean;
   FinancebiddingDetails: any;
 
-  constructor(public translate: TranslateService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService) { }
+  constructor(public translate: TranslateService,private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService, private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices,private toastr: ToastrService, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
   finBidform: FormGroup;
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
@@ -165,8 +166,10 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   @ViewChild('accountList', { read: ElementRef })
   @HostListener('window:resize', ['$event'])
   public accountList: ElementRef<any>;
+  public getSmeName: any = []
 
   ngOnInit(): void {
+    this.getsmeNameId();
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -180,7 +183,12 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
       if (resp) {
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
-          this.invoiceDetails = resp
+          this.getSmeName.forEach(element2 => {
+            if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              resp.smeId = element2.smeName
+            }
+          });
+           this.invoiceDetails = resp
           this.buildfinBidform()
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
         })
@@ -189,6 +197,11 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
       }
     })
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   buildform() {
     this.finBidform = this.fb.group({
       fundingCcy: ['SGD', Validators.required],

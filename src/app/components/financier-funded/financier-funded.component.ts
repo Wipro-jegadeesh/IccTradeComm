@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 export interface financeForBiddingData {
   invoiceRef: String;
@@ -78,6 +79,7 @@ export class FinancierFundedComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  public getSmeName: any = []
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -87,10 +89,11 @@ export class FinancierFundedComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(public router: Router, private FinancierFundedServices: FinancierFundedServices) { }
+  constructor(public router: Router, private FinancierFundedServices: FinancierFundedServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
+    this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -117,6 +120,13 @@ export class FinancierFundedComponent implements OnInit {
     }]);
 
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
@@ -124,8 +134,20 @@ export class FinancierFundedComponent implements OnInit {
     })
 
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   SearchAPI() {
     this.FinancierFundedServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
@@ -139,6 +161,13 @@ export class FinancierFundedComponent implements OnInit {
       'invDueDate': String,
     };
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 
