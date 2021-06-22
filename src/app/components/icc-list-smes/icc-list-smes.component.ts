@@ -12,6 +12,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { map,filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 // const ELEMENT_DATA: any[] = [
 //   {
@@ -75,7 +77,7 @@ export class IccListSmesComponent implements OnInit {
   displayedColumnsOne: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
   dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
@@ -98,16 +100,53 @@ export class IccListSmesComponent implements OnInit {
   bidpanelOpenState = false;
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
-  // displayedColumnsload: string[] = [
-  //   'TopBar',
-  // ]
-  // displayedColumnsearch: string[] = [
-  //   'Search',
-  // ]
-  // displayedColumnFilter: string[] = [
-  //   'Filter',
-  // ]
-  SearchModel = {}
+  // // displayedColumnsload: string[] = [
+  // //   'TopBar',
+  // // ]
+  // // displayedColumnsearch: string[] = [
+  // //   'Search',
+  // // ]
+  // // displayedColumnFilter: string[] = [
+  // //   'Filter',
+  // // ]
+  // SearchModel = {}
+  // value: number = 0;
+  // highValue: number = 50;
+  // options: Options = {
+  //   floor: 0,
+  //   ceil: 5000,
+  //   translate: (value: number, label: LabelType): string => {
+  //     switch (label) {
+  //       case LabelType.Low:
+  //         return "<b>Min</b> $" + value;
+  //       case LabelType.High:
+  //         return "<b>Max</b> $" + value;
+  //       default:
+  //         return "$" + value;
+  //     }
+  //   }
+  // };
+  // filterDivOpen: boolean;
+  // searchDivOpen: boolean;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {
+    'invoiceRef': String,
+    'smeId': String,
+    // 'buyerName': String,
+    // 'invoiceDate': String,
+    // 'invoiceDueDate': String
+  }
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -126,6 +165,7 @@ export class IccListSmesComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  Searchform: FormGroup;
   
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
@@ -141,7 +181,7 @@ export class IccListSmesComponent implements OnInit {
     }
   }
   constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private iccListSmeServices: IccListSmeServices) { }
+    private authenticationService: AuthenticationService, private iccListSmeServices: IccListSmeServices,private fb: FormBuilder) { }
 
 
   ngOnInit() {
@@ -176,8 +216,62 @@ export class IccListSmesComponent implements OnInit {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
+    this.buildform()
 
   }
+
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      // buyerName: [''],
+      // invoiceDate: [''],
+      // invoiceDueDate: ['']
+    })
+  }
+
+  getSearchList(){
+    this.iccListSmeServices.search_getallSmeProfileDetails(this.Searchform.value).subscribe(listResp => {
+      if (listResp) { 
+        this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
+      }
+    })
+  }
+
+  SearchAPI() {
+    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+    //   this.dataSource = new MatTableDataSource(resp);
+    //   this.dataSource.paginator = this.paginator
+    // })
+    this.getSearchList()
+  }
+  ResetAPI() {
+    this.buildform();
+    this.getSearchList()
+    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+    //   this.dataSource = new MatTableDataSource(resp);
+    //   this.dataSource.paginator = this.paginator
+
+    // })
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
+
 
  displayMessage(e,template,regNumb){
   console.log(e,"uii")
@@ -227,29 +321,29 @@ Activeuser(data){
    })
  })
 }
-  SearchAPI(){
-    // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
-  }
+  // SearchAPI(){
+  //   // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+  //   //   this.dataSource = new MatTableDataSource(resp);
+  //   //   this.dataSource.paginator = this.paginator
+  //   // })
+  // }
  
-  searchDiv() {
-    if (this.filterDivOpen === true) {
-      this.searchDivOpen = !this.searchDivOpen
-      this.filterDivOpen = !this.filterDivOpen
-    } else {
-      this.searchDivOpen = !this.searchDivOpen
-    }
-  }
-  filterDiv() {
-    if (this.searchDivOpen === true) {
-      this.searchDivOpen = !this.searchDivOpen
-      this.filterDivOpen = !this.filterDivOpen
-    } else {
-      this.filterDivOpen = !this.filterDivOpen
-    }
-  }
+  // searchDiv() {
+  //   if (this.filterDivOpen === true) {
+  //     this.searchDivOpen = !this.searchDivOpen
+  //     this.filterDivOpen = !this.filterDivOpen
+  //   } else {
+  //     this.searchDivOpen = !this.searchDivOpen
+  //   }
+  // }
+  // filterDiv() {
+  //   if (this.searchDivOpen === true) {
+  //     this.searchDivOpen = !this.searchDivOpen
+  //     this.filterDivOpen = !this.filterDivOpen
+  //   } else {
+  //     this.filterDivOpen = !this.filterDivOpen
+  //   }
+  // }
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =

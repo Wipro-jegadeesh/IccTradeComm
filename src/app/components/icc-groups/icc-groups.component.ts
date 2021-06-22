@@ -9,6 +9,7 @@ import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
 
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class IccGroupsComponent implements OnInit {
   groupId: any
   @ViewChild('formDirective') private formDirective: NgForm;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -37,9 +40,9 @@ export class IccGroupsComponent implements OnInit {
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
-    'buyerName': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    // 'buyerName': String,
+    // 'invoiceDate': String,
+    // 'invoiceDueDate': String
   }
   value: number = 0;
   highValue: number = 50;
@@ -71,6 +74,7 @@ export class IccGroupsComponent implements OnInit {
     this.IccGroupServices.getAllGroups().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
       }
     })
     this.buildform()
@@ -80,16 +84,17 @@ export class IccGroupsComponent implements OnInit {
     this.Searchform = this.fb.group({
       invoiceRef: [''],
       smeId: [''],
-      buyerName: [''],
-      invoiceDate: [''],
-      invoiceDueDate: ['']
+      // buyerName: [''],
+      // invoiceDate: [''],
+      // invoiceDueDate: ['']
     })
   }
 
   getSearchList(){
     this.IccGroupServices.search_getAllGroups(this.Searchform.value).subscribe(listResp => {
-      if (listResp) {
+      if (listResp) { 
         this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
       }
     })
   }

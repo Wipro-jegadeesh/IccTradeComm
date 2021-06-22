@@ -107,7 +107,7 @@
                                 <input type="text" formControlName="smeId" matInput />
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-2">
+                        <!-- <div class="col-sm-2">
                             <mat-form-field appearance="outline">
                                 <mat-label>{{'Buyer Name' | translate}}</mat-label>
                                 <input type="text" formControlName="buyerName" matInput />
@@ -130,7 +130,7 @@
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker #picker1></mat-datepicker>
                             </mat-form-field>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row"
                         style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
@@ -195,6 +195,8 @@
           <tr mat-header-row style="background-color:#B4A6EA" *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+
       </div>
     </div>
   </header>
