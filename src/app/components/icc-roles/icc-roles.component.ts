@@ -10,6 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
 
+import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { MatPaginator } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-icc-roles',
   templateUrl: './icc-roles.component.html',
@@ -25,6 +28,44 @@ export class IccRolesComponent implements OnInit {
   roleId: any
   @ViewChild('formDirective') private formDirective: NgForm;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  displayedColumnsload: string[] = [
+    'TopBar',
+  ]
+  displayedColumnsearch: string[] = [
+    'Search',
+  ]
+  displayedColumnFilter: string[] = [
+    'Filter',
+  ]
+  SearchModel = {
+    'invoiceRef': String,
+    'smeId': String,
+    // 'buyerName': String,
+    // 'invoiceDate': String,
+    // 'invoiceDueDate': String
+  }
+  value: number = 0;
+  highValue: number = 50;
+  options: Options = {
+    floor: 0,
+    ceil: 5000,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return "<b>Min</b> $" + value;
+        case LabelType.High:
+          return "<b>Max</b> $" + value;
+        default:
+          return "$" + value;
+      }
+    }
+  };
+  filterDivOpen: boolean;
+  searchDivOpen: boolean;
+  Searchform: FormGroup;
+
   constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccRolesServices,
     private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
     this.groupsFormBuild()
@@ -36,9 +77,65 @@ export class IccRolesComponent implements OnInit {
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
+      }
+    })
+    this.buildform()
+
+  }
+
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      // buyerName: [''],
+      // invoiceDate: [''],
+      // invoiceDueDate: ['']
+    })
+  }
+
+  getSearchList(){
+    this.IccRolesServices.search_getAllRoles(this.Searchform.value).subscribe(listResp => {
+      if (listResp) { 
+        this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
       }
     })
   }
+
+  SearchAPI() {
+    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+    //   this.dataSource = new MatTableDataSource(resp);
+    //   this.dataSource.paginator = this.paginator
+    // })
+    this.getSearchList()
+  }
+  ResetAPI() {
+    this.buildform();
+    this.getSearchList()
+    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
+    //   this.dataSource = new MatTableDataSource(resp);
+    //   this.dataSource.paginator = this.paginator
+
+    // })
+  }
+  searchDiv() {
+    if (this.filterDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.searchDivOpen = !this.searchDivOpen
+    }
+  }
+  filterDiv() {
+    if (this.searchDivOpen === true) {
+      this.searchDivOpen = !this.searchDivOpen
+      this.filterDivOpen = !this.filterDivOpen
+    } else {
+      this.filterDivOpen = !this.filterDivOpen
+    }
+  }
+
 
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
