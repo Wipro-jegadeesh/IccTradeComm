@@ -10,6 +10,7 @@ import { Repayment_overdueServices } from './sme-repayment-overdue-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 
@@ -115,8 +116,9 @@ export class Repayment_overdueComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  Searchform: FormGroup;
 
-  constructor(public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_overdueServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_overdueServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
@@ -124,6 +126,7 @@ export class Repayment_overdueComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+    this.buildform()
     this.dataSource = new MatTableDataSource([{
       buyerAddr: "Singapore",
       buyerName: "Tata Steel",
@@ -163,8 +166,28 @@ export class Repayment_overdueComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      invoiceId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
   SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+    this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI() {
+    this.buildform();
+    this.AcceptedFinanceServices.searchFinanceFunded('').subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {

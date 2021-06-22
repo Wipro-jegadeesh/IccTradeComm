@@ -81,23 +81,24 @@
           <ng-container matColumnDef="Search">
             <th colspan="10" mat-header-cell *matHeaderCellDef> 
                 <h6>{{'Search By' | translate}}</h6>
+                <form [formGroup]="Searchform">
               <div class="row">
                   <div class="col-sm-4 col-xl-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bid ID' | translate}}</mat-label>
-                        <input type="text"[(ngModel)]="SearchModel.invoiceRef" matInput />
+                        <input type="text"formControlName="BidId" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-4 col-xl-2">
                     <mat-form-field appearance="outline">
                         <mat-label>invoiceAmt</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.invoiceAmt" matInput />
+                        <input type="text" formControlName="invoiceAmt" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-4 col-xl-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bidding Amount' | translate}}</mat-label>
-                        <input type="text" [(ngModel)]="SearchModel.smeId" matInput />
+                        <input type="text" formControlName="BiddingAmt" matInput />
                       </mat-form-field>
                   </div>
               </div>
@@ -111,7 +112,7 @@
                     matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}}
                   </button>
               </div>
-             
+                </form>
              </th>
           </ng-container>
           <ng-container matColumnDef="Filter">

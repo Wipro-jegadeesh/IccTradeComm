@@ -8,6 +8,7 @@ import { Repayment_todayServices } from './sme-repayment-today-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 
@@ -118,9 +119,11 @@ export class Repayment_todayComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
+  Searchform: FormGroup;
   public getSmeName: any = []
 
-  constructor(public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_todayServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_todayServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+
 
 
   ngOnInit() {
@@ -168,8 +171,29 @@ export class Repayment_todayComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      invoiceId: [''],
+      smeId:[''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
   SearchAPI() {
-    console.log(this.SearchModel, "SearchModel")
+    this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI() {
+    this.buildform();
+    this.AcceptedFinanceServices.searchFinanceFunded('').subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {
