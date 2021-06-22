@@ -9,6 +9,7 @@ import { FINANCIERDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options,LabelType } from '@angular-slider/ngx-slider';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-finance-bidding',
@@ -17,7 +18,7 @@ import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-fi
 })
 export class FinanceBiddingComponent implements OnInit {
   @Input() InvoiceDetailsComponent: InvoiceDetailsComponent;
-  constructor(public router: Router, public authenticationService: AuthenticationService,private FinanceRequestServices: FinanceRequestServices,private SmeFinancierForBiddingServices:SmeFinancierForBiddingServices) { }
+  constructor(private fb: FormBuilder,public router: Router, public authenticationService: AuthenticationService,private FinanceRequestServices: FinanceRequestServices,private SmeFinancierForBiddingServices:SmeFinancierForBiddingServices) { }
 
   dataSource;//data
   displayedColumns: string[] = [
@@ -78,13 +79,14 @@ export class FinanceBiddingComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   public getSmeName: any = []
+  Searchform: FormGroup;
 
   ngOnInit() {
     console.log(this.SearchModel,"SearchModel")
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-
+    this.buildform()
     // this.dataSource = new MatTableDataSource([{ 'invoiceRef' : "12",
     // 'invId' : "21",
     // 'invoiceAmt' : "21",
@@ -112,9 +114,28 @@ export class FinanceBiddingComponent implements OnInit {
     this.getSmeName = resp;
     })
     }
-  SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
-  }
+    buildform() {
+      this.Searchform = this.fb.group({
+        invoiceRef: [''],
+        invoiceAmount:[''],
+        smeId: [''],
+        buyerName: ['']
+      })
+    }
+    SearchAPI() {
+      this.FinanceRequestServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+        this.dataSource = new MatTableDataSource(resp);
+        this.dataSource.paginator = this.paginator
+      })
+    }
+    ResetAPI() {
+      this.buildform();
+      this.FinanceRequestServices.getInvoiceDetails().subscribe(resp => {
+        this.dataSource = new MatTableDataSource(resp);
+        this.dataSource.paginator = this.paginator
+  
+      })
+    }
   searchDiv(){
     if(this.filterDivOpen === true){
     this.searchDivOpen = !this.searchDivOpen

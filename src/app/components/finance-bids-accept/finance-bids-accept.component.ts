@@ -103,6 +103,7 @@ rejectQustionTwo = {
   ]
 }
 TextAreaDiv: boolean;
+Searchform: FormGroup;
 public issubmitTrue: boolean = false;
   ngOnInit() {
     if (window.innerWidth < 415) {
@@ -126,8 +127,27 @@ public issubmitTrue: boolean = false;
      }
     })
   }
-  SearchAPI(){
-    // console.log(this.SearchModel,"SearchModel")
+  buildsearchform() {
+    this.Searchform = this.fb.group({
+      BidId: [''],
+      invoiceAmount:[''],
+      BiddingAmt: [''],
+    })
+  }
+  SearchAPI() {
+    this.FinanceRequestServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI() {
+    this.buildsearchform();
+  
+    this.FinanceRequestServices.getBidingAcceptDetails().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){

@@ -62,6 +62,7 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
+  Searchform: FormGroup;
   SearchModel = {
     'invoiceRef': String,
     'invoiceAmt': Number,
@@ -120,6 +121,7 @@ updateAllComplete(text){
       this.mobileScreen = true;
     }
     this.buildfromReload()
+    this.buildsearchform()
     this.FinanceBiddingRejectedServices.getInvoiceDetails().subscribe(resp => {
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
@@ -128,8 +130,27 @@ updateAllComplete(text){
     })
   }
  
-  SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+  buildsearchform() {
+    this.Searchform = this.fb.group({
+      BidId: [''],
+      invoiceAmount:[''],
+      BiddingAmt: [''],
+    })
+  }
+  SearchAPI() {
+    this.FinanceBiddingRejectedServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI() {
+    this.buildsearchform();
+  
+    this.FinanceBiddingRejectedServices.getInvoiceDetails().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){

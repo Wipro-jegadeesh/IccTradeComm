@@ -10,6 +10,7 @@ import { FINANCIERDASHBOARDCONSTANTS } from "../../shared/constants/constants";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options,LabelType } from '@angular-slider/ngx-slider';
 import {MatSort} from '@angular/material/sort';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: "app-finance-bidding-expired",
@@ -19,6 +20,7 @@ import {MatSort} from '@angular/material/sort';
 export class FinanceBiddingExpiredComponent implements OnInit {
   @Input() InvoiceDetailsExpiredComponent: InvoiceDetailsExpiredComponent;
   constructor(
+    private fb: FormBuilder,
     public router: Router,
     public authenticationService: AuthenticationService,
     private modalService: BsModalService,
@@ -84,7 +86,8 @@ export class FinanceBiddingExpiredComponent implements OnInit {
   dashboardTooltip = FINANCIERDASHBOARDCONSTANTS;
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  
+  Searchform: FormGroup;
+
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -101,8 +104,30 @@ export class FinanceBiddingExpiredComponent implements OnInit {
       }
     );
   }
-  SearchAPI(){
-    console.log(this.SearchModel,"SearchModel")
+  buildform() {
+    this.Searchform = this.fb.group({
+      BidId: [''],
+      invoiceAmount:[''],
+      BiddingAmt: [''],
+      BuyerName:['']
+    })
+  }
+  SearchAPI() {
+    this.FinanceBiddingExpiryServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
+  }
+  ResetAPI() {
+    this.buildform();
+    let obj = {
+      finId: localStorage.getItem("userId"),
+    };
+    this.FinanceBiddingExpiryServices.getInvoiceDetails(obj).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv(){
     if(this.filterDivOpen === true){
