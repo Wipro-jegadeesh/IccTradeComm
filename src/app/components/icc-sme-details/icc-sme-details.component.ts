@@ -339,7 +339,7 @@ export class IccSmeDetailsComponent implements OnInit {
     getIccRelaterUsers(){
       let regNo = this.smeData.smeData.queryParams.companyId
       console.log("regNo",regNo);
-      this.IccUserCreationService.getIccRelaterUsers(regNo).subscribe(resp => {
+      this.IccUserCreationService.getParticularSmeUser(regNo).subscribe(resp => {
         this.dataSource1 = new MatTableDataSource(resp);
         this.dataSource1.paginator = this.paginator
       })    

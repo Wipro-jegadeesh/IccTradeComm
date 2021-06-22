@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from "../../service/api.service"
 import { environment } from '../../../environments/environment';
+const queryString = require('query-string');
+
 @Injectable()
 export class IccListSmeServices {
   public baseUrl: string;
@@ -17,6 +19,11 @@ export class IccListSmeServices {
     return this.apiService.tempGet(environment.financierServicePath+'sme-nationalinfo/'+id);
   }
   getAllSector(){
-    return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+    return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
+  }
+
+  search_getallSmeProfileDetails(obj){ 
+    let params = queryString.stringify(obj);
+    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allsmeprofiledetails?'+params);
   }
 }

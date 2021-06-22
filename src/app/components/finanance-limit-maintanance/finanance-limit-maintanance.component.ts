@@ -20,6 +20,7 @@ import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { FinanceLimitMaintananceServices } from './finanance-limit-maintanance-service';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 
 
@@ -468,9 +469,11 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //buyer limit form start
   public buyerLimitForm: FormGroup;
   public buyerLimitBoolean: boolean = true;
+  public getSmeName: any = []
+
   //sector limit form end
   constructor(public router: Router,
-    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices) {
+    private fb: FormBuilder, private apiService: ApiService, private datePipe: DatePipe, private toastr: ToastrService, private financelimitMaintananceservices: FinanceLimitMaintananceServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) {
     this.mainlimitMaintanceFormBuild()
     this.newlimitExposureFormBuild();
     this.groupsFormBuild()
@@ -483,6 +486,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getsmeNameId()
     this.overallLimitMaintananceGraph();
     this.countryExposureGraph();
     this.smeExposureGraph();
@@ -509,9 +513,17 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
 
   }
+
   isOpenHandle(isTrue) {
     this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+    
+
+}
   //not used yet start
   limitMaintance() {
     this.totalExposure = 0;
@@ -1130,6 +1142,13 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(overALLtransApiData);
     this.financelimitMaintananceservices.overALLtransApiDependDataService(item).subscribe(resp => {
       if (resp) {
+        resp.forEach(element1 => {
+          this.getSmeName.forEach(element2 => {
+          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          element1.smeId = element2.smeName
+          }
+          });
+          });
         this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
       }
     })
@@ -1187,6 +1206,13 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     // this.dataSourceSmeExposureTable = new MatTableDataSource(smetabledenpendData);
     this.financelimitMaintananceservices.smeApiDependDataService(data).subscribe(resp => {
       if (resp) {
+        resp.forEach(element1 => {
+          this.getSmeName.forEach(element2 => {
+          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          element1.smeId = element2.smeName
+          }
+          });
+          });
         this.dataSourceSmeExposureTable = new MatTableDataSource(resp);
       }
     })
@@ -1347,6 +1373,13 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.dataSourceCountryExposureTable = new MatTableDataSource(counrtytabledenpendData);
     this.financelimitMaintananceservices.countryApiDependDataService(items).subscribe(resp => {
       if (resp) {
+        resp.forEach(element1 => {
+          this.getSmeName.forEach(element2 => {
+          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          element1.smeId = element2.smeName
+          }
+          });
+          });
         this.dataSourceCountryExposureTable = new MatTableDataSource(resp);
       }
     })
@@ -1439,6 +1472,13 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     this.dataSourcebuyerExposureTable = new MatTableDataSource(buyertabledenpendData);
     this.financelimitMaintananceservices.buyerApiDependDataService(items).subscribe(resp => {
       if (resp) {
+        resp.forEach(element1 => {
+          this.getSmeName.forEach(element2 => {
+          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          element1.smeId = element2.smeName
+          }
+          });
+          });
         this.dataSourcebuyerExposureTable = new MatTableDataSource(resp);
       }
     })

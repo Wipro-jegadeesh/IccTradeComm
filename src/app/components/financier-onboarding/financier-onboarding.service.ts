@@ -25,4 +25,6 @@ export class FinancierOnboardingService {
         let params=environment.financierServicePath+'financier-onboarding/financieronboarding/'+data.namedPKKey
         return this.apiService.put(params,findetobj)
     }
+
+   
 }

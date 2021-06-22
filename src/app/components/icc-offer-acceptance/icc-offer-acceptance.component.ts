@@ -9,6 +9,7 @@ import { BIDDINGCONSTANTS, SMEDASHBOARDCONSTANTS} from '../../shared/constants/c
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
      
 @Component({
@@ -91,21 +92,44 @@ export class IccOfferAcceptanceComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  constructor(public router: Router, private IccOfferAcceptServices: IccOfferAcceptServices) { }
+  public getSmeName: any = []
+
+  constructor(public router: Router, private IccOfferAcceptServices: IccOfferAcceptServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
+    this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
     this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1['smeIdValue'] =  element1.smeId
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
 
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   SearchAPI(){
     this.IccOfferAcceptServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
@@ -119,6 +143,13 @@ export class IccOfferAcceptanceComponent implements OnInit {
       'invoiceDueDate': String
     };
     this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 

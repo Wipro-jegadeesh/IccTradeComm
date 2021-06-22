@@ -14,7 +14,7 @@ export class IccUserCreationService {
     return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/alluserprofiledetails');
   }
   UpdateUser(id,body: any) {
-    return this.apiService.put(environment.financierServicePath+'user-profile/updateUserProfile/'+id,body);
+    return this.apiService.put(environment.financierServicePath+'user-profile/userprofile/'+id,body);
   }
   Usersave(body: any) {
     return this.apiService.post(environment.financierServicePath+'adduser', body);
@@ -42,7 +42,11 @@ export class IccUserCreationService {
   getIccRelaterUsers(regNo){
     return this.apiService.tempGet(environment.financierServicePath+'sme-profile/details/'+regNo);
   }
+  
+  getParticularSmeUser(id){
+    return this.apiService.tempGet(environment.financierServicePath+'sme-companynationaldata/'+id)
+  }
   getAllSector(){
-    return this.apiService.tempGet(environment.financierServicePath+'sector/getAll');
+    return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
   }
 }

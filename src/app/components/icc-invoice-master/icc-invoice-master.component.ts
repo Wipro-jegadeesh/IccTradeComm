@@ -7,6 +7,7 @@ import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 export interface financeForBiddingData {
   invoiceRef : String;
@@ -87,6 +88,8 @@ export class IccInvoiceMasterComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
+  public getSmeName: any = []
+
   SearchModel = {}
   value: number = 0;
   highValue: number = 50;
@@ -119,10 +122,11 @@ export class IccInvoiceMasterComponent implements OnInit {
     }
   }
   constructor(public router: Router, private modalService: BsModalService,
-   private IccInvoiceMasterServices: IccInvoiceMasterServices) { }
+   private IccInvoiceMasterServices: IccInvoiceMasterServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
+    this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -142,12 +146,24 @@ export class IccInvoiceMasterComponent implements OnInit {
     }]);
 
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
 
   }
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+    this.getSmeName = resp;
+    })
+}
   SearchAPI(){
     // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
@@ -157,6 +173,13 @@ export class IccInvoiceMasterComponent implements OnInit {
   ResetAPI(){
     this.SearchModel={};
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
+      resp.forEach(element1 => {
+        this.getSmeName.forEach(element2 => {
+        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+        element1.smeId = element2.smeName
+        }
+        });
+        });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 

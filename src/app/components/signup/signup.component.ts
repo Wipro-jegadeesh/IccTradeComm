@@ -28,6 +28,8 @@ interface ICity{
 export class SignupComponent implements OnInit {
 
   country: string;
+  countryForm : FormGroup;
+
   CountryPin: string;
   invalidLogin = false
   selectedItem;
@@ -57,7 +59,6 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     // this.optionDatas = COUNTRYNAMES
-    this.getAllCountry()
 
     this.sectorOptionsDatas = SIGNUPSECTORS
     this.dropdownSettings = {
@@ -66,11 +67,9 @@ export class SignupComponent implements OnInit {
       idField: "item_id",
       textField: "item_text",
       allowSearchFilter: true,
-      showCheckbox: false,
+      // showCheckbox: false,
       // position:'bottom',
-      searchAutofocus : true,
       text:'Select Country',
-      
       enableSearchFilter : true,
       autoPosition : false,
       maxHeight	: 170
@@ -89,6 +88,14 @@ export class SignupComponent implements OnInit {
       maxHeight	: 170
     };
     this.selectedItems=[]
+
+    this.countryForm = this.fb.group({
+      name: ['', Validators.required],
+      country: ['', Validators.required],
+      CountryPin: ['', Validators.required]
+    })
+
+    this.getAllCountry()
     localStorage.clear();
   }
   setlocalstroageLanguage(value){
@@ -98,7 +105,7 @@ export class SignupComponent implements OnInit {
     this.IccCountryServices.getAllcountry().subscribe(resp => {    
       let countryArray = []
       resp && resp.map((item,index) =>{
-        // if(item.country == "Singapore"){
+        // if(item.country == "Bonaire, Sint Eustatius and Saba"){
         //   debugger;
         // }
         let obj =  { id: item.countrycode3, itemName: item.country }
@@ -135,7 +142,7 @@ export class SignupComponent implements OnInit {
     console.log('dropdown closed');
   }
   onChange(event){
-   this.showCountSignBtn= this.selectedItems && this.selectedItems.length ? true : false
+   this.showCountSignBtn= event && event.itemName ? true : false
    if(event.itemName == "Singapore"){
     this.countryId = "UEN"
    }else if(event.itemName == "Equatorial Guinea"){
@@ -159,11 +166,14 @@ export class SignupComponent implements OnInit {
     // } else
     //  { this.invalidLogin = true }
 
-    if(this.name && this.CountryPin && this.selectedItems.length){
+    if(this.countryForm && this.countryForm.valid){
+      let formValues = this.countryForm.value
+
+    // if(this.name && this.CountryPin && this.selectedItems.length){
       let signUpDetailss = {
-        companyName : this.name,
-        nationalId : this.CountryPin,
-        country : this.selectedItems,
+        companyName : formValues.name,
+        nationalId : formValues.CountryPin,
+        country : formValues.country,
       }
       localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
        
@@ -183,14 +193,19 @@ export class SignupComponent implements OnInit {
   }
   openModal(event, template) {
     event.preventDefault();
+    if(this.countryForm && this.countryForm.valid){
+      let formValues = this.countryForm.value
+
+   
+
     let signUpDetailss = {
-      companyName : this.name,
-      nationalId : this.CountryPin,
-      country : this.selectedItems,
+      companyName : formValues.name,
+      nationalId : formValues.CountryPin,
+      country : formValues.country,
     }
     let RegisteNo = {
-      name : this.name,
-      registrationNumber : this.CountryPin,
+      name : formValues.name,
+      registrationNumber : formValues.CountryPin,
     }
     localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
     this.signupService.singUpCheck(RegisteNo).subscribe(resp=>{
@@ -198,9 +213,9 @@ export class SignupComponent implements OnInit {
           this.toastr.error("This company already exists in Icc tradecomm Market place");
         }else{
           let data={
-            'companyId':this.CountryPin,
-            'country':this.selectedItems[0].id,
-            'companyName':this.name
+            'companyId':formValues.CountryPin,
+            'country':formValues.country && formValues.country[0] && formValues.country[0].id,
+            'companyName':formValues.name
           }
           // this.modalRef = this.modalService.show(template, { class: 'modal-md' });
           this.signupService.companyCheck(data).subscribe(resp =>{
@@ -218,14 +233,19 @@ export class SignupComponent implements OnInit {
         }
 
       })
+    }else{
+      this.toastr.error("Mandatory fields are missing")
+    }
   }
   signUpPage(type){
+    if(this.countryForm && this.countryForm.valid){
+      let formValues = this.countryForm.value
     this.modalRef.hide();
     localStorage.setItem("existingCUS",type);
     let signUpDetailss = {
-      companyName : this.name,
-      nationalId : this.CountryPin,
-      country : this.selectedItems,
+      companyName : formValues.name,
+      nationalId : formValues.CountryPin,
+      country : formValues.country,
     }
     localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
     if(type === 'yes'){
@@ -233,6 +253,9 @@ export class SignupComponent implements OnInit {
     }else{
       this.router.navigateByUrl('/signup-details');
     }
+  }else{
+    this.toastr.error("Mandatory fields are missing")
+  }
   }
   GotoLogin(){
     window.location.href = "/"
