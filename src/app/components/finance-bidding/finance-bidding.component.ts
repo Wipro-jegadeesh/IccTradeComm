@@ -129,6 +129,7 @@ export class FinanceBiddingComponent implements OnInit {
       })
     }
     ResetAPI() {
+      this.Searchform.reset();
       this.buildform();
       this.FinanceRequestServices.getInvoiceDetails().subscribe(resp => {
         this.dataSource = new MatTableDataSource(resp);

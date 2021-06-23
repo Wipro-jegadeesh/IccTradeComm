@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invoiceRef : String;
@@ -112,6 +113,8 @@ export class IccInvoiceMasterComponent implements OnInit {
   
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
+  Searchform: FormGroup;
+
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -121,7 +124,7 @@ export class IccInvoiceMasterComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(public router: Router, private modalService: BsModalService,
+  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService,
    private IccInvoiceMasterServices: IccInvoiceMasterServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
@@ -164,14 +167,24 @@ export class IccInvoiceMasterComponent implements OnInit {
     this.getSmeName = resp;
     })
 }
+buildform() {
+  this.Searchform = this.fb.group({
+    invoiceRef: [''],
+    smeId: [''],
+    buyerName: [''],
+    invoiceDate: [''],
+    invoiceDueDate: ['']
+  })
+}
   SearchAPI(){
-    // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
+    this.IccInvoiceMasterServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
   }
   ResetAPI(){
-    this.SearchModel={};
+    this.Searchform.reset();
+    this.buildform()
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {

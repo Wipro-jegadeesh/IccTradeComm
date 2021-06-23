@@ -107,7 +107,7 @@
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="{{'Search' | translate}}" [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}}
                   </button>&nbsp;
-                  <button  mat-raised-button style="color: #5e52a1;">
+                  <button  mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}}
                   </button>

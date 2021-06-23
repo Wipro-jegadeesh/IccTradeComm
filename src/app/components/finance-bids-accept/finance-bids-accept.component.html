@@ -88,10 +88,22 @@
                 <h6>{{'Search By' | translate}}</h6>
                 <form [formGroup]="Searchform">
               <div class="row">
+                <div class="col-sm-2">
+                  <mat-form-field appearance="outline">
+                      <mat-label>{{'Icc Refernce ID' | translate}}</mat-label>
+                      <input type="text" formControlName="iccrefer" matInput />
+                    </mat-form-field>
+                </div>
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bid ID' | translate}}</mat-label>
                         <input type="text" formControlName="BidId" matInput />
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'invoice ID' | translate}}</mat-label>
+                        <input type="text" formControlName="invoiceID" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">
@@ -103,7 +115,7 @@
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Bidding Amount' | translate}}</mat-label>
-                        <input type="text"formControlName="invoiceAmt"  matInput />
+                        <input type="text"formControlName="BiddingAmt"  matInput />
                       </mat-form-field>
                   </div>
               </div>
@@ -112,7 +124,7 @@
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="{{'Search' | translate}} " [matTooltipPosition]="'below'">done</mat-icon>  {{'Search' | translate}} 
                   </button>&nbsp;
-                  <button  mat-raised-button style="color: #5e52a1;">
+                  <button  mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
                     <mat-icon #tooltip="matTooltip"
                     matTooltip="{{'Reset' | translate}} " [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}} 
                   </button>

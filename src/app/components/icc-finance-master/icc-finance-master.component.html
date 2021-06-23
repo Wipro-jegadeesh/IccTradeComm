@@ -84,39 +84,40 @@
                     <ng-container matColumnDef="Search">
                         <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <h6>{{'Search By' | translate}}</h6>
+                            <form [formGroup]="Searchform">
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>{{'Invoice No' | translate}}</mat-label>
-                                        <input type="text" matInput />
+                                        <mat-label>{{'Invoice Id' | translate}}</mat-label>
+                                        <input type="text" formControlName="invoiceRef"  matInput />
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+
+                                <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>{{'SME Id' | translate}}</mat-label>
-                                        <input type="text"  matInput />
+                                        <mat-label>{{'Sme Name' | translate}} </mat-label>
+                                        <input type="text"  formControlName="smeId" matInput />
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>{{'Net Amt payable' | translate}}</mat-label>
-                                        <input type="text"  matInput />
+                                        <mat-label>{{'buyerName' | translate}} </mat-label>
+                                        <input type="text" formControlName="buyerName" matInput />
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3 col-xl-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'Invoice Date' | translate}}</mat-label>
-                                        <input matInput readonly="true" [matDatepicker]="picker"
-                                           >
+                                        <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 col-xl-2">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
-                                        <input matInput readonly="true" [matDatepicker]="picker1"
-                                            >
+                                        <mat-label>{{'Inv Due date' | translate}}</mat-label>
+                                        <input matInput readonly="true" formControlName="invoiceDueDate"
+                                            [matDatepicker]="picker1">
                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
                                     </mat-form-field>
@@ -133,7 +134,7 @@
                                         [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
                                 </button>
                             </div>
-
+</form>
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Filter">

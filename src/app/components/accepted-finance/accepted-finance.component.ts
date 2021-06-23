@@ -142,6 +142,7 @@ export class AcceptedFinanceComponent implements OnInit {
     })
   }
   ResetAPI() {
+    this.Searchform.reset();
     this.buildform();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
       resp.forEach(element1 => {

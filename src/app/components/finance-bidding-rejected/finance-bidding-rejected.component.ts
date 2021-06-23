@@ -144,6 +144,7 @@ updateAllComplete(text){
     })
   }
   ResetAPI() {
+    this.Searchform.reset();
     this.buildsearchform();
   
     this.FinanceBiddingRejectedServices.getInvoiceDetails().subscribe(resp => {

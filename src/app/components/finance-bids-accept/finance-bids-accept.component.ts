@@ -106,6 +106,7 @@ TextAreaDiv: boolean;
 Searchform: FormGroup;
 public issubmitTrue: boolean = false;
   ngOnInit() {
+    this.buildsearchform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -129,7 +130,9 @@ public issubmitTrue: boolean = false;
   }
   buildsearchform() {
     this.Searchform = this.fb.group({
+      iccrefer:[''],
       BidId: [''],
+      invoiceID:[''],
       invoiceAmount:[''],
       BiddingAmt: [''],
     })
@@ -141,6 +144,7 @@ public issubmitTrue: boolean = false;
     })
   }
   ResetAPI() {
+    this.Searchform.reset();
     this.buildsearchform();
   
     this.FinanceRequestServices.getBidingAcceptDetails().subscribe(resp => {

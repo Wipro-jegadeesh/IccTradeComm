@@ -79,43 +79,35 @@
           <ng-container matColumnDef="Search">
             <th colspan="10" mat-header-cell *matHeaderCellDef> 
                 <h6>{{'Search By' | translate}}</h6>
+                <form [formGroup]="Searchform">
               <div class="row">
                   <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
                         <mat-label> {{'invoiceRef' | translate}}</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" formControlName="invoiceRef" matInput />
                       </mat-form-field>
                   </div>
               
                   <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline"> 
                         <mat-label> {{'smeId' | translate}}</mat-label>
-                        <input type="text" matInput />
+                        <input type="text" formControlName="smeId" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
                         <mat-label>{{'Buyer Name' | translate}}</mat-label>
-                        <input type="text"  matInput />
+                        <input type="text" formControlName="buyerName"  matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-3 col-xl-2">
                     <mat-form-field  appearance="outline">
                         <mat-label>{{'Invoice Date' | translate}}</mat-label>
-                        <input matInput readonly="true"  [matDatepicker]="picker"  >
+                        <input matInput readonly="true" formControlName="invoiceDate"  [matDatepicker]="picker"  >
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                 
-                  </div>
-                  <div class="col-sm-3 col-xl-2">
-                
-                      <mat-form-field  appearance="outline">
-                        <mat-label>{{'Invoice Date' | translate}}</mat-label>
-                        <input matInput readonly="true"  [matDatepicker]="picker1" >
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                      </mat-form-field>
                   </div>
               </div>
               <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
@@ -128,7 +120,7 @@
                     matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">restart_alt</mat-icon>  {{'Reset' | translate}}
                   </button>
               </div>
-             
+             </form>
              </th>
           </ng-container>
           <ng-container matColumnDef="Filter">

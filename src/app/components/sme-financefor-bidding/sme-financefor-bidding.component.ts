@@ -168,6 +168,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     })
   }
   ResetAPI() {
+      this.Searchform.reset();
     this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
       resp.forEach(element1 => {
