@@ -38,8 +38,11 @@ export class IccGroupsComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    // 'invoiceRef': String,
+    // 'smeId': String,
+
+    'groupCode' : String, 'groupName' : String, 'groupDescription': String,
+    
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -70,20 +73,26 @@ export class IccGroupsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource([{ 'groupId': '1', 'groupCode': 'CODE123', 'groupName': 'test', 'groupDescription': 'description of group' }]);
+   this.getList()
+    this.buildform()
+  }
+
+  getList(){
+    // this.dataSource = new MatTableDataSource([{ 'groupId': '1', 'groupCode': 'CODE123', 'groupName': 'test', 'groupDescription': 'description of group' }]);
     this.IccGroupServices.getAllGroups().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
-    this.buildform()
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
+      // invoiceRef: [''],
+      // smeId: [''],
+
+      'groupCode': [''], 'groupName': [''], 'groupDescription': ['']
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -108,7 +117,8 @@ export class IccGroupsComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    // this.getSearchList()
+    this.getList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
