@@ -159,6 +159,9 @@ import { CountdownModule } from 'ngx-countdown';
 import { AcceptedDetailsComponent } from './components/accepted-finance/accepted-details/accepted-details.component';
 
 
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+
+
 
 
 export const createTranslateLoader = (http: HttpClient) => {
@@ -300,6 +303,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserIdleModule.forRoot({}),
     // UserIdleModule.forRoot({idle: 30, timeout: 30, ping: 0}),
     CountdownModule, 
+    NgIdleKeepaliveModule.forRoot(),
     // UserIdleModule.forRoot({idle: Number(localStorage.getItem('timeoutLimit')), timeout: Number(localStorage.getItem('timeoutLimit')), ping: 0}),
     AuthConfigModule // Keyclock Checkings For Live Enable , For Local Hide
   ],

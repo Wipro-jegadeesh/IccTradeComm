@@ -6,7 +6,8 @@ import {SidebarComponent} from './shared/sidebar/sidebar.component';
 import { DialogDataExampleService } from './shared/dialogBox/dialogBox.component';
 import { UserIdleService } from 'angular-user-idle';
 import { TranslateService } from '@ngx-translate/core';
-
+import {Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core';
+import {Keepalive} from '@ng-idle/keepalive';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,11 +24,14 @@ export class AppComponent {
   private subscription: Subscription
   showLoadingIcon = false;
   timeoutId;
+  idleState = 'Not started.';
+  timedOut = false;
+  lastPing?: Date = null;
 
   @ViewChild(SidebarComponent) sidebar:SidebarComponent
 
   constructor(public translate: TranslateService,private loaderService: LoaderService,private router: Router,private cdr: ChangeDetectorRef,
-    private renderer: Renderer2,private dialogBox:DialogDataExampleService,private userIdle: UserIdleService) {
+    private renderer: Renderer2,private dialogBox:DialogDataExampleService,private userIdle: UserIdleService,private idle: Idle, private keepalive: Keepalive) {
       let lang = localStorage.getItem("DefultLanguage")
       console.log(lang,"lang")
       if(lang){
@@ -39,6 +43,32 @@ export class AppComponent {
         translate.use('en');
         localStorage.setItem("DefultLanguage",'en');
       }
+      // sets an idle timeout of 5 seconds, for testing purposes.
+    idle.setIdle(5);
+    // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
+    idle.setTimeout(5);
+    // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
+    idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+
+    idle.onIdleEnd.subscribe(() => this.idleState = 'No longer idle.');
+    idle.onTimeout.subscribe(() => {
+      this.idleState = 'Timed out!';
+      this.timedOut = true;
+    });
+    idle.onIdleStart.subscribe(() => this.idleState = 'You\'ve gone idle!');
+    idle.onTimeoutWarning.subscribe((countdown) => this.idleState = 'You will time out in ' + countdown + ' seconds!');
+
+    // sets the ping interval to 15 seconds
+    keepalive.interval(15);
+
+    keepalive.onPing.subscribe(() => this.lastPing = new Date());
+
+    this.reset();
+  }
+  reset() {
+    this.idle.watch();
+    this.idleState = 'Started.';
+    this.timedOut = false;
   }
 
   emitIsOpen(value){
@@ -69,8 +99,14 @@ export class AppComponent {
   ngAfterViewInit() {
     this.showLoadingIcon = false
 }
+
   ngDoCheck() {
     this.check();
+    setTimeout(() => {
+      console.log(this.idleState, this.lastPing, 'onini', "this.idleStatecons")
+    }, 1000);
+
+
   }
 
   check() {
