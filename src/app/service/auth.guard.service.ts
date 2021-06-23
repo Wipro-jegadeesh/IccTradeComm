@@ -90,7 +90,15 @@ export class AuthConfigService {
             else {
               // event.info
               if (e['info'] == "access_token" && e['type'] == 'token_expires') {
-                this.dialogBox.openDialog();
+                if (this.idleState == 'Timed out!') {
+                  this.dialogBox.openDialog();
+                  this.reset();
+                } else {
+                  console.log("refreshes  calles")
+                  this.reset();
+                  this.oauthService.refreshToken()
+                  // this.oauthService.setupAutomaticSilentRefresh();
+                }
 
                 // if (confirm('Session TimeOut : Click Ok to continue with this session')) {
                 // //  this.handleNewToken();
