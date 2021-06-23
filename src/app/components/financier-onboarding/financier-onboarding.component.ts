@@ -105,7 +105,7 @@ export class FinancierOnboardingComponent implements OnInit {
 
     this.buildFinancierForm()
     this.isView && this.disableFields()
-     this.getSpecificFinancier()
+    this.financierId && this.getSpecificFinancier()
 
     // this.userDataSource = new MatTableDataSource([{'userId':1,
     // 'firstName':"11",

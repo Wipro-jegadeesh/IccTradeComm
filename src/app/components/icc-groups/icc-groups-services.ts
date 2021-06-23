@@ -27,6 +27,6 @@ export class IccGroupServices  {
 
   search_getAllGroups(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'groups-profile/allgroupsdetails?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'groupsDetails?'+params);
   }
 }

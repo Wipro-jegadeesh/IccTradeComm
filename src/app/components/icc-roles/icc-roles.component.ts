@@ -40,8 +40,8 @@ export class IccRolesComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    'code': String,
+    'roleDescription': String,
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -72,22 +72,24 @@ export class IccRolesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getList()
+    this.buildform()
+  }
 
-    this.dataSource = new MatTableDataSource([{ 'roleId': '1', 'code': 'CODE123', 'roleDescription': 'description of role' }]);
+  getList(){
+    // this.dataSource = new MatTableDataSource([{ 'roleId': '1', 'code': 'CODE123', 'roleDescription': 'description of role' }]);
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
-    this.buildform()
-
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
+      code: [''],
+      roleDescription: [''],
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -112,7 +114,8 @@ export class IccRolesComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    this.getList();
+    // this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator

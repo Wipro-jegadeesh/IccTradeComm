@@ -1492,7 +1492,7 @@
 
         
                 <!-- ===================== -->
-                <mat-step completed="true">
+                <mat-step completed="true" *ngIf='this.financierId'>
                   <ng-template matStepLabel>  {{'FinancierOnboardingComponent.UserDetails' | translate}}</ng-template>
                   <mat-card>
                     <!-- <mat-tab-group dynamicHeight>

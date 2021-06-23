@@ -73,7 +73,7 @@
             <th colspan="9" mat-header-cell *matHeaderCellDef>
                 <div style="justify-content:flex-end;cursor: pointer;">
                     <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-                    <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                    <!-- <span (click)="filterDiv()" class="material-icons">filter_list</span> -->
                 </div>
             </th>
         </ng-container>
@@ -84,14 +84,14 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <mat-form-field appearance="outline">
-                                <mat-label>{{'invoice Id' | translate}}</mat-label>
-                                <input type="text" formControlName="invoiceRef" matInput />
+                                <mat-label>{{'IccRoles.code' | translate}}</mat-label>
+                                <input type="text" formControlName="code" matInput />
                             </mat-form-field>
                         </div>
                         <div class="col-sm-2">
                             <mat-form-field appearance="outline">
-                                <mat-label>{{'SME Name' | translate}}</mat-label>
-                                <input type="text" formControlName="smeId" matInput />
+                                <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
+                                <input type="text" formControlName="roleDescription" matInput />
                             </mat-form-field>
                         </div>
                         <!-- <div class="col-sm-2">
