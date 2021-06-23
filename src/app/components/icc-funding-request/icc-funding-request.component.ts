@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-icc-funding-request',
@@ -81,13 +82,15 @@ export class IccFundingRequestComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   public getSmeName: any = []
+  Searchform: FormGroup;
 
-  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
+  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
     private authenticationService: AuthenticationService, private IccFundingServices: IccFundingServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
     this.getsmeNameId()
+    this.buildform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -115,8 +118,17 @@ export class IccFundingRequestComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
   SearchAPI() {
-    this.IccFundingServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.IccFundingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {
         if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
@@ -129,12 +141,8 @@ export class IccFundingRequestComponent implements OnInit {
     })
   }
   ResetAPI() {
-    this.SearchModel = {
-      'invoiceRef': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
-
-    };
+    this.Searchform.reset();
+    this.buildform()
     this.IccFundingServices.getAllFundingList().subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {

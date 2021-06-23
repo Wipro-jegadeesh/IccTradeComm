@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface financeForBiddingData {
   invoiceRef: String;
@@ -80,6 +81,7 @@ export class FinancierFundedComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   public getSmeName: any = []
+  Searchform: FormGroup;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -89,10 +91,11 @@ export class FinancierFundedComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(public router: Router, private FinancierFundedServices: FinancierFundedServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  constructor(private fb: FormBuilder,public router: Router, private FinancierFundedServices: FinancierFundedServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
+    this.buildsearchform()
     this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -139,8 +142,16 @@ export class FinancierFundedComponent implements OnInit {
     this.getSmeName = resp;
     })
 }
+buildsearchform() {
+  this.Searchform = this.fb.group({
+    invoiceRef: [''],
+    invoiceDate:[''],
+    smeId: [''],
+    buyerName: ['']
+  })
+}
   SearchAPI() {
-    this.FinancierFundedServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.FinancierFundedServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {
         if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
@@ -153,13 +164,8 @@ export class FinancierFundedComponent implements OnInit {
     })
   }
   ResetAPI() {
-    this.SearchModel = {
-      'invoiceRef': String,
-      'smeId': String,
-      'buyerName': String,
-      'invoiceDate': String,
-      'invDueDate': String,
-    };
+    this.Searchform.reset();
+    this.buildsearchform()
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {

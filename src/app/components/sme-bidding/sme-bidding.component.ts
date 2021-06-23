@@ -114,7 +114,6 @@ export class SmeBiddingComponent implements OnInit {
   }
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
       invoiceId: [''],
       buyerName: [''],
       invoiceDate: [''],
@@ -128,6 +127,7 @@ export class SmeBiddingComponent implements OnInit {
     })
   }
   ResetAPI() {
+    this.Searchform.reset();
     this.buildform();
     this.smeBiddingServices.searchFinanceFunded('').subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);

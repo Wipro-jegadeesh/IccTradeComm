@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
      
 @Component({
@@ -93,12 +94,14 @@ export class IccOfferAcceptanceComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   public getSmeName: any = []
+  Searchform: FormGroup;
 
-  constructor(public router: Router, private IccOfferAcceptServices: IccOfferAcceptServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  constructor(private fb: FormBuilder,public router: Router, private IccOfferAcceptServices: IccOfferAcceptServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
     this.getsmeNameId()
+    this.buildform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -121,8 +124,17 @@ export class IccOfferAcceptanceComponent implements OnInit {
     this.getSmeName = resp;
     })
 }
+buildform() {
+  this.Searchform = this.fb.group({
+    invoiceRef: [''],
+    smeId: [''],
+    buyerName: [''],
+    invoiceDate: [''],
+    invoiceDueDate: ['']
+  })
+}
   SearchAPI(){
-    this.IccOfferAcceptServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.IccOfferAcceptServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {
         if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
@@ -135,13 +147,8 @@ export class IccOfferAcceptanceComponent implements OnInit {
     })
   }
   ResetAPI(){
-    this.SearchModel={
-      'invoiceRef': String,
-      'smeId': String,
-      'buyerName': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
-    };
+    this.Searchform.reset();
+    this.buildform()
     this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {

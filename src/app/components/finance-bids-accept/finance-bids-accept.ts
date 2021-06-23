@@ -19,11 +19,13 @@ export class FinancebidsRequestServices {
        return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/initbids/'+localStorage.getItem("userId"));
     }
     searchFinanceFunded(params){
-      let biddingamount  = params.BiddingAmt == undefined ? "" : params.BiddingAmt;
-      let bidId  = params.BidId == undefined ? "" : params.BidId;
-      let invoiceAmt  = params.invoiceAmount == undefined ? "" : params.invoiceAmount;
+      let biddingamount  = params.BiddingAmt == "" ? "" : params.BiddingAmt;
+      let bidId  = params.BidId == "" ? "" : params.BidId;
+      let invoiceAmt  = params.invoiceAmount == "" ? "" : params.invoiceAmount;
+      let invoiceID  = params.invoiceID == "" ? "" : params.invoiceID;
+      let iccrefer  = params.iccrefer == "" ? "" : params.iccrefer;
 
-      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/searchinitiatedbids?finId='+localStorage.getItem("userId")+'&bidId='+bidId+'&biddingamount='+biddingamount+'&invoiceAmt='+invoiceAmt);
+      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/searchinitiatedbids?finId='+localStorage.getItem("userId")+'&iccrefer='+iccrefer+'&invoiceID='+invoiceID+'&bidId='+bidId+'&biddingamount='+biddingamount+'&invoiceAmt='+invoiceAmt);
   
     }
 }

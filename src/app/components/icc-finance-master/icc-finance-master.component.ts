@@ -10,6 +10,7 @@ import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invoiceNo: String;
@@ -129,10 +130,13 @@ export class IccFinanceMasterComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  constructor(public router: Router, private modalService: BsModalService, private IccFinanceMasterServices: IccFinanceMasterServices) { }
+  Searchform: FormGroup;
+
+  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private IccFinanceMasterServices: IccFinanceMasterServices) { }
 
 
   ngOnInit() {
+    this.buildform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -153,20 +157,24 @@ export class IccFinanceMasterComponent implements OnInit {
     })
 
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
   SearchAPI() {
-    this.IccFinanceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
+    this.IccFinanceMasterServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
   ResetAPI() {
-    this.SearchModel = {
-      'invoiceRef': String,
-      'smeId': String,
-      'NetAmt': Number,
-      'invoiceDate': String,
-      'invoiceDueDate': String
-    };
+    this.Searchform.reset();
+    this.buildform()
     this.IccFinanceMasterServices.getFinanceMasterLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

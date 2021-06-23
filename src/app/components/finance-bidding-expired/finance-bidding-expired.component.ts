@@ -90,6 +90,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
   Searchform: FormGroup;
 
   ngOnInit() {
+    this.buildform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -120,6 +121,7 @@ export class FinanceBiddingExpiredComponent implements OnInit {
     })
   }
   ResetAPI() {
+    this.Searchform.reset();
     this.buildform();
     let obj = {
       finId: localStorage.getItem("userId"),

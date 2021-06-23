@@ -19,15 +19,13 @@ export class FinancierFundedServices {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/financingdetails/'+id);
   }
   searchFinanceFunded(params){
-    console.log("params.invoiceDate",params.invoiceDate);
-    let invoiceRef  = params.invoiceRef == undefined ? "" : params.invoiceRef;
-    let smeId  = params.smeId == undefined ? "" : params.smeId;
-    let buyerName  = params.buyerName == undefined ? "" : params.buyerName;
-    let invoiceDate  = params.invoiceDate == undefined ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
-    let invDueDate  = params.invDueDate == undefined ? "" :  moment(params.invDueDate).format('YYYY-MM-DD');
+
+    let invoiceRef  = params.invoiceRef == "" ? "" : params.invoiceRef;
+    let smeId  = params.smeId == "" ? "" : params.smeId;
+    let buyerName  = params.buyerName == "" ? "" : params.buyerName;
+    let invoiceDate  = params.invoiceDate == "" ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
     
-    https://tradecomm-userprofile.ffdcdev.fusionfabric.io/api/v1/financing-details/searchFinanceFunded?finId=FIN001&invNo=1234&smeId=SME101&buyerName=steel&invoiceDate=2021-04-01&invDueDate=2021-04-17
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/searchfinancefunded?finId='+localStorage.getItem("userId")+'&invNo='+invoiceRef+'&smeId='+smeId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/searchfinancefunded?finId='+localStorage.getItem("userId")+'&invNo='+invoiceRef+'&smeId='+smeId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate);
 
   }
 }
