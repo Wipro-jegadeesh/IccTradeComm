@@ -40,8 +40,16 @@ export class IccAuthorizMatrixComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    // 'invoiceRef': String,
+    // 'smeId': String,
+
+    'slab': String,
+    'smefin': String,
+    'currency': String,
+    'fromAmt': String,
+    'toAmt': String,
+    'noofPersons': String
+
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -72,21 +80,31 @@ export class IccAuthorizMatrixComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource([{ 'id': '1', 'slab': '1', 'smefin': 'sme123', 'currency': '212', 'fromAmt': '20', 'toAmt': '100', 'noofPersons': 2 }]);
+   this.getList()
+    this.buildform()
+  }
+
+  getList(){
+    // this.dataSource = new MatTableDataSource([{ 'id': '1', 'slab': '1', 'smefin': 'sme123', 'currency': '212', 'fromAmt': '20', 'toAmt': '100', 'noofPersons': 2 }]);
     this.IccAuthorizeServices.getAllAuthorizeMatrix().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
-    this.buildform()
-
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
+      // invoiceRef: [''],
+      // smeId: [''],
+
+      slab: ['', Validators.required],
+      smefin: ['', Validators.required],
+      currency: ['', Validators.required],
+      fromAmt: ['', Validators.required],
+      toAmt: ['', Validators.required],
+      noofPersons: ['', Validators.required]
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -111,7 +129,8 @@ export class IccAuthorizMatrixComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    this.getList();
+    // this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
@@ -133,6 +152,27 @@ export class IccAuthorizMatrixComponent implements OnInit {
     } else {
       this.filterDivOpen = !this.filterDivOpen
     }
+  }
+
+  getFilteredData(){
+    
+    let obj = {
+      fromAmt : this.value,
+      toAmt : this.highValue
+    }
+
+    this.IccAuthorizeServices.getFilteredData(obj).subscribe(listResp => {
+      if (listResp) { 
+        this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
+      }
+    })
+  }
+
+  resetFilteredData(){
+    this.value = 0
+    this.highValue = 50
+    this.getList()
   }
 
 
