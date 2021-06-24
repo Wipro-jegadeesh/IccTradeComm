@@ -16,13 +16,13 @@ export class FinanceRequestServices {
        return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/financeinvoices/'+localStorage.getItem("userId"));
     }
     searchFinanceFunded(params){
-      console.log("params.invoiceDate",params.invoiceDate);
-      let invoiceRef  = params.invoiceRef == undefined ? "" : params.invoiceRef;
-      let smeId  = params.smeId == undefined ? "" : params.smeId;
-      let buyerName  = params.buyerName == undefined ? "" : params.buyerName;
-  
-      
-      return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchinvoicefinancing?smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName);
+      console.log("params.invoiceDate",params);
+      let iccrefer = params.iccrefer == "" ? "" : params.iccrefer;
+      let invoiceRef  = params.invoiceRef == "" ? "" : params.invoiceRef;
+      let smeId  = params.smeId == "" ? "" : params.smeId;
+      let buyerName  = params.buyerName == "" ? "" : params.buyerName;
+
+      return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchinvoicefinancing?finId='+localStorage.getItem("userId")+'&smeId='+smeId+'&invoiceNo='+invoiceRef+'&buyerName='+buyerName+'&iccrefer='+iccrefer);
   
     }
 }

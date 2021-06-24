@@ -75,16 +75,16 @@
               <h6>{{'Search By' | translate}}</h6>
               <form [formGroup]="Searchform">
             <div class="row">
+              <div class="col-sm-3 col-xl-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'Icc Reference' | translate}}</mat-label>
+                    <input type="text"  formControlName="iccrefer" matInput />
+                  </mat-form-field>
+              </div>
                 <div class="col-sm-3 col-xl-2">
                   <mat-form-field appearance="outline">
                       <mat-label>{{'Invoice Id' | translate}}</mat-label>
                       <input type="text" formControlName="invoiceRef" matInput />
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-3 col-xl-2">
-                  <mat-form-field appearance="outline">
-                      <mat-label>{{'Invoice Amount' | translate}}</mat-label>
-                      <input type="text"  formControlName="invoiceAmount" matInput />
                     </mat-form-field>
                 </div>
                 <div class="col-sm-3 col-xl-2">

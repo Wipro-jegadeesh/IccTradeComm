@@ -111,7 +111,6 @@ export class FinanceBiddingExpiredComponent implements OnInit {
       BidId: [''],
       invoiceAmount:[''],
       BiddingAmt: [''],
-      BuyerName:['']
     })
   }
   SearchAPI() {

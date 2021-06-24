@@ -38,9 +38,8 @@ export class FinanceBiddingExpiryServices {
       let biddingamount  = params.BiddingAmt == "" ? "" : params.BiddingAmt;
       let bidId  = params.BidId == "" ? "" : params.BidId;
       let invoiceAmt  = params.invoiceAmount == "" ? "" : params.invoiceAmount;
-      let BuyerName  = params.BuyerName == "" ? "" : params.BuyerName;
 
-      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/searchexpiredbids?finId='+localStorage.getItem("userId")+'&bidId='+bidId+'&biddingamount='+biddingamount+'&invoiceAmt='+invoiceAmt+'&BuyerName='+BuyerName);
+      return this.apiService.tempGet(environment.serviePath_2+'api/v1/bidding-details/searchexpiredbids?finId='+localStorage.getItem("userId")+'&bidId='+bidId+'&biddingamount='+biddingamount+'&invoiceAmt='+invoiceAmt);
     }
 
   
