@@ -111,7 +111,7 @@ export class IccRolesComponent implements OnInit {
     //   this.dataSource.paginator = this.paginator
     // })
     this.getSearchList()
-  }
+  } 
   ResetAPI() {
     this.buildform();
     this.getList();
