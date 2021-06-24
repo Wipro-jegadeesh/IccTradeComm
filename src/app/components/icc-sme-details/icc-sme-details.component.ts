@@ -69,7 +69,7 @@ export class IccSmeDetailsComponent implements OnInit {
   getSumInvoiceMasterCount;
   getSumAllfinTdyCount;
   financeMasterCount;
-  questionnaireSections;
+  questionnaireSections=[];
   sectionIndex;
   questions;
   radioChecked;
@@ -78,6 +78,7 @@ export class IccSmeDetailsComponent implements OnInit {
   smeData;
   biddingTooltip = BIDDINGCONSTANTS;
   sectors: any;
+
   constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,
     private iccDashboardServices: IccDashboardServices ,private apiService:ApiService,public IccUserCreationService:IccUserCreationService,public translate: TranslateService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
@@ -129,9 +130,10 @@ export class IccSmeDetailsComponent implements OnInit {
     
     this.companyid =this.smeData.smeData.queryParams.companyId
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
+      if(resp){
       console.log(resp)
       //  resp[0].companyid
-      this.userForm.patchValue({
+    this.userForm.patchValue({
     nationalId:resp[0].companyid,
     address: resp[0].address,
     email: resp[0].email,
@@ -145,7 +147,7 @@ export class IccSmeDetailsComponent implements OnInit {
     state:resp[0].state,
     sector:resp[0].state
       });
-
+    }
     })
    
   }
@@ -253,26 +255,26 @@ export class IccSmeDetailsComponent implements OnInit {
         else{
           quesItem.show=true
           quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
-          switch(quesItem.alias){
-              case 'name':
-                quesItem.response=data.name
-                break;
-              case 'address-line-1':
-                  quesItem.response=data.address
-                  break;
-              case 'telephone-mobile':
-                quesItem.response=data.mobile
-                break;
-              case 'email':
-                quesItem.response=data.email
-                break;
-              case 'city':
-                quesItem.response=data.city
-                break;
-            default:
-                quesItem.response=''
-          }
-        //   quesItem.response=''
+          // switch(quesItem.alias){
+          //     case 'name':
+          //       quesItem.response=data.name
+          //       break;
+          //     case 'address-line-1':
+          //         quesItem.response=data.address
+          //         break;
+          //     case 'telephone-mobile':
+          //       quesItem.response=data.mobile
+          //       break;
+          //     case 'email':
+          //       quesItem.response=data.email
+          //       break;
+          //     case 'city':
+          //       quesItem.response=data.city
+          //       break;
+          //   default:
+          //       quesItem.response=''
+          // }
+          // quesItem.response=''
           quesItem.itHasValue=quesItem.required && !quesItem.response ? false :
            !quesItem.required && quesItem.response ? true : quesItem.required && quesItem.response ? true : false
         //    quesItem.itHasValue=quesItem.required ? false : true
@@ -317,7 +319,9 @@ export class IccSmeDetailsComponent implements OnInit {
                         secResp.response= item.value
                       }
                     }
-                    secResp.itHasValue=true
+                    // secResp.itHasValue=true
+                    secResp.itHasValue= secResp.required && !secResp.response ? false :
+           !secResp.required && secResp.response ? true : secResp.required && secResp.response ? true : false
             })
             //   this.questionnaireSections.map((questionItem)=>{
             //     questionItem.questions.map((item)=>{
