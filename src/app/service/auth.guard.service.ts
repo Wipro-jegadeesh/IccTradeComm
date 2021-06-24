@@ -140,7 +140,12 @@ export class AuthConfigService {
             const diffTime = Math.abs(date2 - date1);
             // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             var actualMilliSecond = (diffTime - 120000) //less 2 mins
-            this.userIdle.setConfigValues({ idle: actualMilliSecond, timeout: actualMilliSecond, ping: 0 })
+            // this.userIdle.setConfigValues({ idle: actualMilliSecond, timeout: actualMilliSecond, ping: 0 })
+
+            // milliseconds to  seconds
+            let milliToSeconds=(diffTime/1000)
+            
+            this.userIdle.setConfigValues({ idle:milliToSeconds,timeout:5,ping:0})
 
 
 

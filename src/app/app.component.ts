@@ -81,20 +81,21 @@ export class AppComponent {
         this.showLoadingIcon = value;
       }
     );
-    this.check();
-     //Start watching for user inactivity.
-     if(this.showNavbar){
-     this.userIdle.startWatching();
-    
+    // this.userIdle.startWatching();
+
      // Start watching when user idle is starting.
      this.userIdle.onTimerStart().subscribe((count) =>{ 
-     });
-
-    //   // Start watch when time is up.
-    this.userIdle.onTimeout().subscribe(() =>{
-      this.dialogBox.openDialog()
+      console.log('idle timer')
     });
-  }
+
+   //   // Start watch when time is up.
+   this.userIdle.onTimeout().subscribe(() =>{
+     console.log('idle timer2')
+     if(this.showNavbar){
+     this.dialogBox.openDialog()
+     }
+   });
+   this.check();
   }
   ngAfterViewInit() {
     this.showLoadingIcon = false
