@@ -33,6 +33,6 @@ export class IccRolesServices  {
 
   search_getAllRoles(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'rolessearch?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'roles-profile/allrolesdetails?'+params);
   }
 }

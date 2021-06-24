@@ -29,11 +29,6 @@ export class IccAuthorizeServices  {
 
   search_getAllAuthorizeMatrix(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'authorizesearch?'+params);
-  }
-
-  getFilteredData(obj){
-    let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'authorize-matrix/filteramount?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'authorize-matrix/allmatrixdetails?'+params);
   }
 }

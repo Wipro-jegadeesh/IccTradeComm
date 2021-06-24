@@ -136,41 +136,40 @@
                               <div class="row">
                                   <div class="col-sm-2">
                                       <mat-form-field appearance="outline">
-                                          <mat-label>{{'IccAuthorizationMatrix.Slab' | translate}}</mat-label>
-                                          <input type="text" formControlName="slab" matInput />
+                                          <mat-label>{{'invoice Id' | translate}}</mat-label>
+                                          <input type="text" formControlName="invoiceRef" matInput />
                                       </mat-form-field>
                                   </div>
                                   <div class="col-sm-2">
                                       <mat-form-field appearance="outline">
-                                          <mat-label>{{'IccAuthorizationMatrix.SME/FIN' | translate}}</mat-label>
-                                          <input type="text" formControlName="smefin" matInput />
+                                          <mat-label>{{'SME Name' | translate}}</mat-label>
+                                          <input type="text" formControlName="smeId" matInput />
+                                      </mat-form-field>
+                                  </div>
+                                  <!-- <div class="col-sm-2">
+                                      <mat-form-field appearance="outline">
+                                          <mat-label>{{'Buyer Name' | translate}}</mat-label>
+                                          <input type="text" formControlName="buyerName" matInput />
                                       </mat-form-field>
                                   </div>
                                   <div class="col-sm-2">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>{{'IccAuthorizationMatrix.Currency' | translate}}</mat-label>
-                                        <input type="text" formControlName="currency" matInput />
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-2">
-                                  <mat-form-field appearance="outline">
-                                      <mat-label>{{'IccAuthorizationMatrix.From Amount' | translate}}</mat-label>
-                                      <input type="text" formControlName="fromAmt" matInput />
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'IccAuthorizationMatrix.To Amount' | translate}}</mat-label>
-                                    <input type="text" formControlName="toAmt" matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                              <mat-form-field appearance="outline">
-                                  <mat-label>{{'IccAuthorizationMatrix.No of persons' | translate}}</mat-label>
-                                  <input type="text" formControlName="noofPersons" matInput />
-                              </mat-form-field>
-                          </div>
-                                
+                                      <mat-form-field appearance="outline">
+                                          <mat-label>{{'Inv Date' | translate}}</mat-label>
+                                          <input matInput readonly="true" formControlName="invoiceDate"
+                                              [matDatepicker]="picker">
+                                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
+                                  </div>
+                                  <div class="col-sm-2">
+                                      <mat-form-field appearance="outline">
+                                          <mat-label>{{'Inv Due date' | translate}}</mat-label>
+                                          <input matInput readonly="true" formControlName="invoiceDueDate"
+                                              [matDatepicker]="picker1">
+                                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker1></mat-datepicker>
+                                      </mat-form-field>
+                                  </div> -->
                               </div>
                               <div class="row"
                                   style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
@@ -191,8 +190,7 @@
                   </ng-container>
                   <ng-container matColumnDef="Filter">
                       <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
-                        <form [formGroup]="Searchform">
-                            <div class="row">
+                          <div class="row">
                               <div class="col-sm-3">
                                   <label>{{'Invoice Amount' | translate}}</label>
                                   <div class="custom-slider">
@@ -200,20 +198,31 @@
                                       </ngx-slider>
                                   </div>
                               </div>
+                              <div class="col-sm-3" style="padding-top: 22px;">
+                                  <mat-form-field appearance="fill">
+                                      <mat-label>{{'Inv Date' | translate}}</mat-label>
+                                      <mat-date-range-input [rangePicker]="picker">
+                                          <input matStartDate placeholder="Start date">
+                                          <input matEndDate placeholder="End date">
+                                      </mat-date-range-input>
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-date-range-picker #picker></mat-date-range-picker>
+                                  </mat-form-field>
+                              </div>
+          
                           </div>
                           <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                              <button mat-raised-button style="color: #5e52a1;" (click)="getFilteredData()">
+                              <button mat-raised-button style="color: #5e52a1;">
                                   <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
                                       [matTooltipPosition]="'below'">done
                                   </mat-icon>{{'Search' | translate}}
                               </button>&nbsp;
-                              <button mat-raised-button style="color: #5e52a1;" (click)="resetFilteredData()">
+                              <button mat-raised-button style="color: #5e52a1;">
                                   <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
                                       [matTooltipPosition]="'below'">
-                                      restart_alt</mat-icon>{{'Reset' | translate}}
+                                      restart_alt</mat-icon>
                               </button>
                           </div>
-                        </form>
                       </th>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
