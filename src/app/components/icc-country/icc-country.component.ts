@@ -38,8 +38,13 @@ export class IccCountryComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    // 'invoiceRef': String,
+    // 'smeId': String,
+
+    'country': String,
+    'countrycode2': String,
+    'countrycode3': String,
+    'numeric': String
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -71,21 +76,29 @@ export class IccCountryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource([{ 'id': '1', 'countrycode2': 'CODE123', 'countrycode3': 'CODE123', 'numeric': '676767', 'country': 'test' }]);
+    this.getList()
+    this.buildform()
+  }
+
+  getList(){
+    // this.dataSource = new MatTableDataSource([{ 'id': '1', 'countrycode2': 'CODE123', 'countrycode3': 'CODE123', 'numeric': '676767', 'country': 'test' }]);
     this.IccCountryServices.getAllcountry().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
-    this.buildform()
-
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
+      // invoiceRef: [''],
+      // smeId: [''],
+
+      country: ['', Validators.required],
+      countrycode2: ['', Validators.required],
+      countrycode3: ['', Validators.required],
+      numeric: ['', Validators.required]
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -110,7 +123,8 @@ export class IccCountryComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    this.getList();
+    // this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
