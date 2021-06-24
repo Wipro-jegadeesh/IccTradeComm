@@ -15,7 +15,7 @@ export class RadioButtonComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.radioChecked=this.questionDatas.response == 'true' ? 'true': this.questionDatas.response == 'false' ?  'false' : ''
+        this.radioChecked=(this.questionDatas.response == 'true') || (this.questionDatas.response == true) ? 'true' : (this.questionDatas.response == 'false') || (this.questionDatas.response == false) ?  'false' : ''
      }
 
     radioChange(event){
