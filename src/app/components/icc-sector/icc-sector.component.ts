@@ -36,11 +36,8 @@ export class IccSectorComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    // 'invoiceRef': String,
-    // 'smeId': String,
-
-    'code': String,
-    'description': String
+    'invoiceRef': String,
+    'smeId': String,
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -72,26 +69,22 @@ export class IccSectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.getList()
-    this.buildform()
-  }
 
-  getList(){
-    // this.dataSource = new MatTableDataSource([{ 'id': '1', 'code': 'sector123', 'description': 'description of sector' }]);
+    this.dataSource = new MatTableDataSource([{ 'id': '1', 'code': 'sector123', 'description': 'description of sector' }]);
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
+    this.buildform()
+
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      // invoiceRef: [''],
-      // smeId: [''],
-      code: ['', Validators.required],
-      description: ['', Validators.required]
+      invoiceRef: [''],
+      smeId: [''],
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -99,7 +92,7 @@ export class IccSectorComponent implements OnInit {
   }
 
   getSearchList(){
-    this.IccRolesServices.search_getAllSector(this.Searchform.value).subscribe(listResp => {
+    this.IccRolesServices.search_getAllRoles(this.Searchform.value).subscribe(listResp => {
       if (listResp) { 
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
@@ -116,8 +109,7 @@ export class IccSectorComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getList()
-    // this.getSearchList()
+    this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
