@@ -101,7 +101,12 @@ table#customers {
 .chart.inActive{
     // margin-left: 300px;
 }
-
+button:focus, 
+button:active:focus, 
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+}
 .tableView.inActive{
     margin-left: 300px;
 }
@@ -1057,6 +1062,9 @@ input.custom-autofill {
 
 .mat-form-field-appearance-fill[dense] .mat-form-field-wrapper .mat-form-field-flex {
     padding-top: 0.2px;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
 }
 .multiselectCus{
     .multiselect-dropdown{

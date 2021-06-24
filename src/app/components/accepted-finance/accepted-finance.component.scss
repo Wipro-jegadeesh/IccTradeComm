@@ -25,7 +25,9 @@ header {
         z-index: 10;
     }
 }
-
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
+}
 .app-content {
     bottom: 0;
     left: 0;

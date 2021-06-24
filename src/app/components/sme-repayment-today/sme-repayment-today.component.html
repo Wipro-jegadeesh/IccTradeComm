@@ -103,31 +103,31 @@
                   <div class="row">
                       <div class="col-sm-2">
                         <mat-form-field appearance="outline">
-                            <mat-label> {{'invoiceRef' | translate}}</mat-label>
+                            <mat-label> {{'Invoice Id' | translate}}</mat-label>
                             <input type="text" formControlName="invoiceRef" matInput/>
                           </mat-form-field>
                       </div>
                       <div class="col-sm-2">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{'invoiceAmt' | translate}}</mat-label>
+                            <mat-label>{{'Invoice Amount' | translate}}</mat-label>
                             <input type="text" formControlName="invoiceId"  matInput />
                           </mat-form-field>
                       </div>
                       <div class="col-sm-2">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{'smeId' | translate}}</mat-label>
+                            <mat-label>{{'SME Name' | translate}}</mat-label>
                             <input type="text" formControlName="smeId" matInput/>
                           </mat-form-field>
                       </div>
                       <div class="col-sm-2">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{'buyerName' | translate}}</mat-label>
+                            <mat-label>{{'Buyer Name' | translate}}</mat-label>
                             <input type="text" formControlName="buyerName" matInput/>
                           </mat-form-field>
                       </div>
                       <div class="col-sm-2">
                           <mat-form-field appearance="outline">
-                            <mat-label>{{'Invoice Date' | translate}}</mat-label>
+                            <mat-label>{{'Inv Date' | translate}}</mat-label>
                             <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker" >
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -135,7 +135,7 @@
                       </div>
                       <div class="col-sm-2">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
+                            <mat-label>{{'Inv Due date' | translate}}</mat-label>
                             <input matInput readonly="true" formControlName="invoiceDueDate" [matDatepicker]="picker1" >
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
