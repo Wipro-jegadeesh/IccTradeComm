@@ -25,8 +25,8 @@ export class IccSectorServices  {
     return this.apiService.tempGet(environment.financierServicePath+'sector/'+id);
   }
 
-  search_getAllRoles(obj){ 
+  search_getAllSector(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'sector/allsector?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'sectorsearch?'+params);
   }
 }

@@ -24,13 +24,13 @@
 
 
 //General Service
-let BASE_PATH = "http://localhost:8082/";
+let BASE_PATH = "http://localhost:8080/";
 
 // Invoice Service Url 8080
 let serviePath_1 = "http://localhost:8080/";
 
 // Bidding Service Url 8081
-let serviePath_2 = "http://localhost:8081/";
+let serviePath_2 = "http://localhost:8082/";
 let serviePath_3 = "http://localhost:8082/";
 
 // Limit Path
@@ -42,7 +42,7 @@ let serviePath_5 = "http://localhost:8091/";
 
 
 //Financier onboard path
-let financierServicePath="http://localhost:8080/"
+let financierServicePath="http://localhost:8085/"
 
 // Coriolis service path
 let coriolisServicePath="http://localhost:8083/"
