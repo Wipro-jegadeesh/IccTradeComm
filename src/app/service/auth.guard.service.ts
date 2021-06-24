@@ -61,7 +61,7 @@ export class AuthConfigService {
 
   }
    reset() {
-    this.idle.watch();
+    // this.idle.watch();
     this.idleState = 'Started.';
     this.timedOut = false;
   }
@@ -145,7 +145,7 @@ export class AuthConfigService {
             // milliseconds to  seconds
             let milliToSeconds=(diffTime/1000)
             
-            this.userIdle.setConfigValues({ idle:milliToSeconds,timeout:5,ping:0})
+            this.userIdle.setConfigValues({ idle:milliToSeconds,timeout:1,ping:0})
 
 
 

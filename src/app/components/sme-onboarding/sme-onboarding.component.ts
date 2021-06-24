@@ -123,16 +123,14 @@ export class SmeOnboardingComponent implements OnInit {
                         resp[0].response.push(obj)
                       }
                     }
-                    else{
-                      if(item.type == "QuestionResponseBoolDto"){
+                    else if(item.type == "QuestionResponseBoolDto"){
                         secResp.response=item.value == true ? 'true' : 'false'
-                      }
-                      else{
-                    secResp.response= item.value
+                    }
+                    else{
+                        secResp.response= item.value
                       }
                     }
                     secResp.itHasValue=true
-                }
             })
             //   this.questionnaireSections.map((questionItem)=>{
             //     questionItem.questions.map((item)=>{
