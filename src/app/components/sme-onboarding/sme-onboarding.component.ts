@@ -130,7 +130,9 @@ export class SmeOnboardingComponent implements OnInit {
                         secResp.response= item.value
                       }
                     }
-                    secResp.itHasValue=true
+                    // secResp.itHasValue=true
+                    secResp.itHasValue= secResp.required && !secResp.response ? false :
+                    !secResp.required && secResp.response ? true : secResp.required && secResp.response ? true : false
             })
             //   this.questionnaireSections.map((questionItem)=>{
             //     questionItem.questions.map((item)=>{
