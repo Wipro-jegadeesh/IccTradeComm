@@ -10,7 +10,9 @@ table {
 .uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
     height: 60px;
 }
-
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
+}
 .table-section {
     margin-left: auto;
     margin-right: auto;

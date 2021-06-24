@@ -15,6 +15,7 @@ import { FinancierUserCreationService } from '../financier-user-creation/financi
 import { BIDDINGCONSTANTS } from '../../../shared/constants/constants'
 
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { TranslateService } from '@ngx-translate/core';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -85,7 +86,7 @@ export class FinancierOnboardingListComponent implements OnInit {
   Searchform: FormGroup;
 
 
-  constructor(private modalService: BsModalService,private iccDashboardServices: IccDashboardServices,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
+  constructor(public translate: TranslateService,private modalService: BsModalService,private iccDashboardServices: IccDashboardServices,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
     public authenticationService: AuthenticationService, private toastr: ToastrService,
     private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService) {
 
@@ -762,12 +763,12 @@ export class FinancierOnboardingListComponent implements OnInit {
     }
     !this.financierId && this.financierService.submitFinancier(findetobj).subscribe(result => {
       //  this.toastr.success('Financier onboard Sucessfully')
-      this.toastr.success('Financier onboard Sucessfully')
+      this.toastr.success(this.translate.instant('Financier onboard Sucessfully'))
       this.gotoPage();
     })
     this.financierId && this.financierService.updateFinancier(findetobj).subscribe(result => {
       // this.toastr.success('Financier Updated Sucessfully')
-      this.toastr.success('Financier details updated Sucessfully')
+      this.toastr.success(this.translate.instant('Financier details updated Sucessfully'))
       this.gotoPage();
     })
   }

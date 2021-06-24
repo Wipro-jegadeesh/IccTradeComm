@@ -757,5 +757,9 @@
         "Buyer Limit Sub Screen (Based On Limit Slot)": "Subpantalla Límite de comprador (basada en la ranura de límite)",
         "Buyer Uen": "Comprador UEN"
       },
-      "Invoice repository Download": "Descarga del repositorio de facturas"
+      "Invoice repository Download": "Descarga del repositorio de facturas",
+      "Financier onboard Sucessfully":"Financiero abordo exitosamente",
+	"Financier details updated Sucessfully":"Detalles financieros actualizados exitosamente",
+	"invoice Id":"ID de factura",
+	"Icc Reference":"Referencia Icc"
 }

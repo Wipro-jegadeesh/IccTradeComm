@@ -11,6 +11,7 @@ import {Validation} from '../../service/Validation'
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import { FinancierUserCreationService } from './financier-user-creation/financier-user-creation.service'
 import { IccCountryServices } from '../icc-country/icc-country.services'
+import { TranslateService } from '@ngx-translate/core';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -48,7 +49,7 @@ export class FinancierOnboardingComponent implements OnInit {
   errorColor1 = ""
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
+  constructor(public translate: TranslateService,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
      public authenticationService: AuthenticationService, private toastr: ToastrService,
     private activatedRoute: ActivatedRoute, private financierService: FinancierOnboardingService, private FinancierUserCreationService: FinancierUserCreationService,
     private IccCountryServices:IccCountryServices) {
@@ -588,7 +589,7 @@ if(data && data.itemName){
       this.checkHeadCountryData(this.financierForm.value && this.financierForm.value.headcountry && this.financierForm.value.headcountry[0])
       this.checkServeCountryData(this.financierForm.value && this.financierForm.value.servCountry && this.financierForm.value.servCountry[0])
 
-      this.toastr.error("Please Enter All Mandatory Fields")
+      this.toastr.error(this.translate.instant("Please fill Mandatory fields"))
     }
   }
 
@@ -696,7 +697,7 @@ if(data && data.itemName){
     }
     !this.financierId && this.financierService.submitFinancier(findetobj).subscribe(result => {
       if(result){
-        this.toastr.success('Financier onboard Sucessfully')
+        this.toastr.success(this.translate.instant('Financier onboard Sucessfully'))
         // this.router.navigate(['financier-user-creation', {  finDetailId: result.profileID }]);  
         // this.router.navigate(['/financier-user-creation'], {queryParams: {finDetailId: result.profileID}});
         this.router.navigateByUrl('/financier-user-creation/'+result.profileID+'/'+result.companyid);
@@ -706,7 +707,7 @@ if(data && data.itemName){
     })
     this.financierId && this.financierService.updateFinancier(findetobj).subscribe(result => {
       if(result){
-        this.toastr.success('Financier details updated Sucessfully')
+        this.toastr.success(this.translate.instant('Financier details updated Sucessfully'))
         this.gotoPage()
       } 
     })

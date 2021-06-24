@@ -750,5 +750,10 @@
 			"Buyer Limit Sub Screen (Based On Limit Slot)": "Buyer Limit Sub Screen (Based On Limit Slot)",
 			"Buyer Uen": "Buyer UEN"
 	},
-	"Invoice repository Download": "Invoice Repository Download"	
+	"Invoice repository Download": "Invoice Repository Download",
+	"Financier onboard Sucessfully":"Financier onboard Sucessfully",
+	"Financier details updated Sucessfully":"Financier details updated Sucessfully",
+	"invoice Id":"Invoice id",
+	"Icc Reference":"Icc Reference"
+
 }

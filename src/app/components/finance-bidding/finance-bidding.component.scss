@@ -17,7 +17,9 @@ table {
     margin-top: $uxg-spacing-4 * 2;
     
 }
-
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
+}
 $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 .BID-Details:hover {
     background-color:rgb(181, 171, 221)
