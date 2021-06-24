@@ -90,8 +90,14 @@
               <div class="row">
                 <div class="col-sm-2">
                   <mat-form-field appearance="outline">
-                      <mat-label>{{'Icc Refernce ID' | translate}}</mat-label>
+                      <mat-label>{{'Icc Reference' | translate}}</mat-label>
                       <input type="text" formControlName="iccrefer" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                  <mat-form-field appearance="outline">
+                      <mat-label>{{'invoice ID' | translate}}</mat-label>
+                      <input type="text" formControlName="invoiceID" matInput />
                     </mat-form-field>
                 </div>
                   <div class="col-sm-2">
@@ -102,14 +108,8 @@
                   </div>
                   <div class="col-sm-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'invoice ID' | translate}}</mat-label>
-                        <input type="text" formControlName="invoiceID" matInput />
-                      </mat-form-field>
-                  </div>
-                  <div class="col-sm-2">
-                    <mat-form-field appearance="outline">
-                        <mat-label>invoiceAmt</mat-label>
-                        <input type="text" formControlName="invoiceAmt" matInput />
+                        <mat-label>Invoice Amount</mat-label>
+                        <input type="text" formControlName="invoiceAmount" matInput />
                       </mat-form-field>
                   </div>
                   <div class="col-sm-2">

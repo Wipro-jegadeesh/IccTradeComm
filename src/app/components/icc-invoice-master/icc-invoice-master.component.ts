@@ -130,6 +130,7 @@ export class IccInvoiceMasterComponent implements OnInit {
 
   ngOnInit() {
     this.getsmeNameId()
+    this.buildform()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }

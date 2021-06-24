@@ -41,7 +41,7 @@ export class SmeBiddingServices {
     let invoiceDate  = params.invoiceDate == "" ? "" : moment(params.invoiceDate).format('YYYY-MM-DD');
     let invDueDate  = params.invoiceDueDate == "" ? "" :  moment(params.invoiceDueDate).format('YYYY-MM-DD');
     
-    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchbiddinginvoices?invoiceNo='+invoiceId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
+    return this.apiService.tempGet(environment.serviePath_2+'api/v1/invoice-request/searchbiddinginvoices?smeId='+localStorage.getItem("userId")+'&invoiceNo='+invoiceId+'&buyerName='+buyerName+'&invoiceDate='+invoiceDate+'&invDueDate='+invDueDate);
 
   }
   getInvoiceDetails() {

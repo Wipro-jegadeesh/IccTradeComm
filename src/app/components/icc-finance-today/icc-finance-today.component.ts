@@ -13,6 +13,7 @@ import { BIDDINGCONSTANTS } from "../../shared/constants/constants";
 import * as moment from "moment";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options, LabelType } from '@angular-slider/ngx-slider';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invId: String;
@@ -33,11 +34,11 @@ export class IccFinanceTodayComponent implements OnInit {
   displayedColumns: string[] = [
     "invoiceRef",
     "invoiceNo",
+    "smeId",
     "baseCcyAmt",
     "fundablePercent",
     "baseCcyFundingAmt",
     "baseCcyNetAmtPayable",
-    "smeId",
     "action",
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -84,6 +85,7 @@ export class IccFinanceTodayComponent implements OnInit {
   modalRef: BsModalRef;
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
+  Searchform: FormGroup;
 
   @HostListener("window:resize", ["$event"])
   onResize() {
@@ -93,12 +95,13 @@ export class IccFinanceTodayComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(public router: Router,private IccFinanceTodayServices: IccFinanceTodayServices) {}
+  constructor(private fb: FormBuilder,public router: Router,private IccFinanceTodayServices: IccFinanceTodayServices) {}
 
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+    this.buildform()
     this.dataSource = new MatTableDataSource([
       {
         buyerAddr: "Singapore",
@@ -121,17 +124,27 @@ export class IccFinanceTodayComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      iccrefer:[''],
+      smeId: ['']
+    })
+  }
   SearchAPI() {
-  
+    this.IccFinanceTodayServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+    })
   }
   ResetAPI() {
-    this.SearchModel = {
-      'invoiceRef': String,
-      'smeId': String,
-      'NetAmt': Number,
-      'invoiceDate': String,
-      'invoiceDueDate': String
-    };
+    this.Searchform.reset();
+    this.buildform()
+    this.IccFinanceTodayServices.getFinanceTodayLists().subscribe(resp => {
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
+
+    })
   }
   searchDiv() {
     if (this.filterDivOpen === true) {

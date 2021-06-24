@@ -160,10 +160,7 @@ export class IccFinanceMasterComponent implements OnInit {
   buildform() {
     this.Searchform = this.fb.group({
       invoiceRef: [''],
-      smeId: [''],
-      buyerName: [''],
-      invoiceDate: [''],
-      invoiceDueDate: ['']
+      smeId: ['']
     })
   }
   SearchAPI() {
