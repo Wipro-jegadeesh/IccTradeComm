@@ -24,7 +24,7 @@ export class IccFinanceTodayServices {
     return this.apiService.tempGet(environment.serviePath_2+'api/v1/financing-details/financingdetails/'+id);
   }  
   searchFinanceFunded(params){
-   
+   console.log(params,"params")
     let invoiceRef  = params.invoiceRef == "" ? "" : params.invoiceRef;
     let smeId  = params.smeId == "" ? "" : params.smeId;
     let iccrefer  = params.iccrefer == "" ? "" : params.iccrefer;
