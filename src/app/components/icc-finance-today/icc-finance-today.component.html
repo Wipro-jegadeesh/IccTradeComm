@@ -90,6 +90,7 @@
                     <ng-container matColumnDef="Search">
                         <th colspan="10" mat-header-cell *matHeaderCellDef>
                             <h6>{{'Search By' | translate}}</h6>
+                            <form [formGroup]="Searchform">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
@@ -122,7 +123,7 @@
                                         [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
                                 </button>
                             </div>
-
+</form>
                         </th>
                     </ng-container>
                     <ng-container matColumnDef="Filter">

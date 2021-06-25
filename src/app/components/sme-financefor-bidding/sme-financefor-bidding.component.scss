@@ -35,6 +35,9 @@ header {
     right: 0;
     top: 33px;
 }
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
+}
 .accounts-list {
     // float: left;
     // position: relative;

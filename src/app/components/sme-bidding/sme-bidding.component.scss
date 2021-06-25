@@ -75,7 +75,9 @@ header {
     bottom: $uxg-spacing-0;
     z-index: 1;
 }
-
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(161, 92, 201);
+}
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
