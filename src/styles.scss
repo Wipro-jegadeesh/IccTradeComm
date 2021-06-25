@@ -37,7 +37,7 @@ body {
 
 .account-number {
     font-weight: 400 !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     text-align: center !important;
 }
 .mat-slide-toggle {
@@ -136,7 +136,7 @@ mat-card {
     width: 500px;
     #customers td, #customers th{
         padding: 5px;
-        font-size: 13px;
+        font-size: 12px;
     }
     .table-bordered{
         margin-bottom: 0;
@@ -159,7 +159,7 @@ mat-card {
     }
 }
 .font-13{
-    font-size: 13px;
+    font-size: 12px;
     margin: 1px;
 }
 .mat-card-content .uxg-icon-category{
@@ -180,10 +180,10 @@ table#financBidding {
     width: 100%;
 }
 .container-fluid {
-    font-size: 14px;
+    font-size: 12px;
 }
 #financBidding th {
-    font-size: 13px;
+    font-size: 12px;
     background-color: #7c49cb;
     color: white;
     font-weight: inherit;
@@ -191,7 +191,7 @@ table#financBidding {
 }
 #financBidding td {
     padding: 0px;
-    font-size: 14px;
+    font-size: 12px;
   }
   uxg-account-card.mat-tooltip-trigger {
     cursor: pointer;
@@ -543,7 +543,7 @@ header{
     padding: 3% 12% 6% 11%;
     margin: 0px;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 12px;
     cursor: pointer;
 }
 .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
@@ -557,7 +557,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
 }
 .uxg-body-1.account-name {
     margin-top: 11px;
-    font-size: 13px !important;
+    font-size: 12px !important;
     font-weight: 400;
     text-align: center;
 }
@@ -586,7 +586,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     border-radius: 4px;    
     }
     label{
-        font-size: 14px;
+        font-size: 12px;
     }
     .number-field{
     .mat-form-field-label-wrapper{
@@ -596,14 +596,14 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
 .step-min{
     margin: -36px 0px 0px 0px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 .step-max{
     margin: -36px 0px 0px 0px;
     left: 50%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 }
@@ -612,7 +612,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         height: unset;
     }
     .mat-form-field-appearance-fill .mat-form-field-label{
-        font-size: 14px;
+        font-size: 12px;
     font-weight: 400;
     } 
 }
@@ -634,7 +634,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
             .c-btn{
                 border-bottom: none;
                 color:#616065;
-                font-size: 14px;
+                font-size: 12px;
                 span{
                     span{
                     background-color: #7e63eceb;
@@ -669,7 +669,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
         .c-btn{
             border-bottom: none;
             color:#616065;
-            font-size: 14px;
+            font-size: 12px;
             span{
                 span{
                 background-color: #7e63eceb;
@@ -712,7 +712,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     h6{
         color: #616065;
     font: 500 16px/24px Roboto, roboto, "Helvetica Neue", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     padding-left: 10px;
     }
@@ -742,13 +742,13 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     left: 40%;
 }
 .selected-list .c-btn{
-    border-bottom: 2px solid #B4A6EA;
+    border-bottom: 2px solid #A48FF5;
     border-radius: 0;
 }
 .multi-srch{
     margin: 20px 0;
     label{
-        font-size: 13px;
+        font-size: 12px;
         margin-bottom: 0;
     }
 }
@@ -757,7 +757,7 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     width: 100%;
     height: 42px;
     line-height: 2;
-    border-bottom: 2px solid #B4A6EA;
+    border-bottom: 2px solid #A48FF5;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     text-align: center;
@@ -1140,7 +1140,7 @@ input.custom-autofill {
                 }
              }
              .ngx-slider-bubble{
-                font-size: 14px; 
+                font-size: 12px; 
            }
            .ngx-slider-selection{
             background: #664dcd !important; 
@@ -1285,3 +1285,23 @@ margin:auto;
         height: 41px;
     }
 }
+
+//Same Font-size CSS
+.mat-form-field-label-wrapper{
+    font-size:12px }
+    * {
+        font-size: 13px;
+    }
+    .mat-cell, .mat-footer-cell {
+        font-size: 12px;
+    }
+    .mat-sort-header-content{
+        color : #ffff;
+    }
+    th.mat-header-cell {
+        color: #ffff;
+    }
+    h5{
+        color: #7a05f9;
+    }
+//Same Font-size CSS
