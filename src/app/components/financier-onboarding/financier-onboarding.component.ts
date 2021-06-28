@@ -126,6 +126,10 @@ export class FinancierOnboardingComponent implements OnInit {
     this.getAllCountry()
   }
 
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.financierForm.controls[controlName].hasError(errorName);
+  }
+
   public setTwoNumberDecimal($event,name) {
     if(this.chkDecimalLength($event.target.value) >= 2){
       $event.target.value = parseFloat($event.target.value).toFixed(2);

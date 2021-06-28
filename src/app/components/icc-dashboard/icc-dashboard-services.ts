@@ -39,6 +39,6 @@ export class IccDashboardServices  {
 
   search_getFinancierList(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'financier-details/allfinancierdetails?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'financiersearch?'+params);
   }
 }

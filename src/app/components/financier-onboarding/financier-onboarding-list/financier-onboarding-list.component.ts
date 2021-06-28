@@ -59,8 +59,9 @@ export class FinancierOnboardingListComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    'profileID': String,
+    'financierNameConstitution': String,
+    'locregno' : String
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -143,21 +144,21 @@ export class FinancierOnboardingListComponent implements OnInit {
     this.financierId && this.getSpecificFinancier()
 
     
-    this.userDataSource = new MatTableDataSource([{'userId':1,
-    'firstName':"11",
-    'lastName':"980",
-    'companyName':"lkjlk",
-    'email':"jklk",
-    'contactNo':"ipoip",
-    'status':'A'
-    },{'userId':1,
-    'firstName':"11",
-    'lastName':"980",
-    'companyName':"lkjlk",
-    'email':"jklk",
-    'contactNo':"ipoip",
-    'status':'A'
-    }])
+    // this.userDataSource = new MatTableDataSource([{'userId':1,
+    // 'firstName':"11",
+    // 'lastName':"980",
+    // 'companyName':"lkjlk",
+    // 'email':"jklk",
+    // 'contactNo':"ipoip",
+    // 'status':'A'
+    // },{'userId':1,
+    // 'firstName':"11",
+    // 'lastName':"980",
+    // 'companyName':"lkjlk",
+    // 'email':"jklk",
+    // 'contactNo':"ipoip",
+    // 'status':'A'
+    // }])
 
    
     this.buildform()
@@ -166,8 +167,9 @@ export class FinancierOnboardingListComponent implements OnInit {
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
+      profileID: [''],
+      financierNameConstitution: [''],
+      locregno : ['']
       // buyerName: [''],
       // invoiceDate: [''],
       // invoiceDueDate: ['']
@@ -192,7 +194,8 @@ export class FinancierOnboardingListComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    this.getFinancierDetails()
+    // this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator

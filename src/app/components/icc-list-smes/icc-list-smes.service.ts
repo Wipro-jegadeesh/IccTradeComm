@@ -24,6 +24,6 @@ export class IccListSmeServices {
 
   search_getallSmeProfileDetails(obj){ 
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath+'sme-userprofile/allsmeprofiledetails?'+params);
+    return this.apiService.tempGet(environment.financierServicePath+'smesearch?'+params);
   }
 }
