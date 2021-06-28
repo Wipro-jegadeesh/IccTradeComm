@@ -356,12 +356,10 @@ getAllCountry(){
   authoriseInvoice() {
     let invoiceIds = []
     let scoreCheck = false
-    // this.selection.selected.forEach((item) => {
-    //   // invoiceIds.push(s.id)
-    //   if(item.buyerScore >= 500){
-
-    //   }
+    // this.selection.selected.forEach((s) => {
+    //   invoiceIds.push(s.id)  
     // });
+    // this.updateInvoice(invoiceIds)
     for(let i=0;i < this.selection.selected.length;i++){
       if(this.selection.selected[i].buyerScore >= 500){
         //  && this.selection.selected[i].id){
@@ -389,6 +387,8 @@ getAllCountry(){
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();
+      this.dataSourceTwo.data = []
+      this.invoiceFormBuild();
     }, error => {
     })
 
