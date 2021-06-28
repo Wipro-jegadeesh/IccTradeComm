@@ -5,8 +5,6 @@
     <div class="mat-elevation-z8 table-responsive table-post">
       <div class="table-res">
         <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" (mouseleave)="isHover=false">
-
-
           <ng-container matColumnDef="invoiceRef">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
               matTooltip="{{biddingTooltip.tradecommRef  | translate}}" [matTooltipPosition]="'below'">
@@ -15,13 +13,11 @@
               {{element.invoiceRef}}
             </td>
           </ng-container>
-
           <ng-container matColumnDef="invNo">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
               matTooltip="{{biddingTooltip.invoiceId  | translate}}" [matTooltipPosition]="'below'">
               {{'Invoice Id' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               {{element.invoiceNo}}
             </td>
           </ng-container>
@@ -31,7 +27,6 @@
               matTooltip="{{biddingTooltip.invoiceAmount  | translate}}" [matTooltipPosition]="'below'">
               {{'Invoice Amount' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               {{element.invoiceAmt}}
             </td>
           </ng-container>
@@ -41,18 +36,14 @@
               matTooltip="{{biddingTooltip.smeName  | translate}}" [matTooltipPosition]="'below'">
               {{'SME Name' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
-              {{element.smeId}}
+              {{element.smeName}}
             </td>
           </ng-container>
-
-
           <ng-container matColumnDef="buyerName">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
               matTooltip="{{biddingTooltip.buyerName  | translate}}" [matTooltipPosition]="'below'">
               {{'Buyer Name' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               {{element.buyerName}}
             </td>
           </ng-container>
@@ -62,7 +53,6 @@
               matTooltip="{{biddingTooltip.invoiceCreateDate  | translate}}" [matTooltipPosition]="'below'">
               {{'Inv Date' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               {{ element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
             </td>
           </ng-container>
@@ -72,7 +62,6 @@
               matTooltip="{{biddingTooltip.invoiceDueDate  | translate}}" [matTooltipPosition]="'below'">
               {{'Inv Due date' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               {{element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}}
             </td>
           </ng-container>
@@ -88,7 +77,6 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
             <td mat-cell *matCellDef="let element">
-
               <a href="javascript:void(0)" (click)="navigateFinanceDetails(element.smeIdValue,'view')">
                 <mat-icon #tooltip="matTooltip" matTooltip="{{'view' | translate}}" [matTooltipPosition]="'below'">
                   visibility</mat-icon>

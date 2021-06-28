@@ -195,7 +195,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
 
   ngOnInit(): void {
-    this.getsmeNameId();
+    // this.getsmeNameId();
 
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -210,11 +210,13 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
       if(resp){
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
-          this.getSmeName.forEach(element2 => {
-            if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-              resp.smeId = element2.smeName
-            }
-          });
+
+          // this.getSmeName.forEach(element2 => {
+          //   if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          //     resp.smeId = element2.smeName
+          //   }
+          // });
+
           this.invoiceDetails = resp
           this.buildfinBidform()
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);

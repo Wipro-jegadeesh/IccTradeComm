@@ -203,7 +203,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
   public getSmeName: any = []
 
   ngOnInit(): void {
-    this.getsmeNameId();
+    // this.getsmeNameId();
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -214,11 +214,12 @@ export class ICCacceptancedetailsComponent implements OnInit {
     }
     this.IccOfferAcceptServices.getInvoiceDetails(this.id).subscribe(resp => {
       console.log(resp);
-      this.getSmeName.forEach(element2 => {
-        if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          resp.smeId = element2.smeName
-        }
-      });
+
+      // this.getSmeName.forEach(element2 => {
+      //   if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //     resp.smeId = element2.smeName
+      //   }
+      // });
 
       this.data2Source = new MatTableDataSource(resp);
     })
