@@ -92,6 +92,7 @@ export class AppComponent {
    this.userIdle.onTimeout().subscribe(() =>{
      console.log('idle timer2')
      if(this.showNavbar){
+      this.userIdle.stopWatching();
      this.dialogBox.openDialog()
      }
    });

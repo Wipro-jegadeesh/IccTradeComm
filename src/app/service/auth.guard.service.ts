@@ -86,6 +86,10 @@ export class AuthConfigService {
             console.log(e['type'], "type");
             if (e instanceof OAuthErrorEvent) {
               console.error(event, "error");
+              
+               if(e['type'] == 'token_refresh_error'){
+                this.logoutSession();
+              }
             }
             else {
               // event.info
