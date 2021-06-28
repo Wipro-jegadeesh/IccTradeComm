@@ -379,4 +379,8 @@ export class SignUpDetailsComponent implements OnInit {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
+  GotoLogin(){
+    window.location.href = "/"
+    // this.router.navigateByUrl('/'); 
+  }
 }
