@@ -95,15 +95,17 @@ export class FinanceBiddingComponent implements OnInit {
     // 'invDate' : "22/3/2333",}]);
     // this.dataSource.paginator = this.paginator
 
-    this.getsmeNameId();
+    // this.getsmeNameId();
     this.FinanceRequestServices.getInvoiceDetails().subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
+
       console.log(resp);
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator

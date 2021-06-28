@@ -215,17 +215,18 @@ export class InvoiceDetailsComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.buildform()
-    this.getsmeNameId();
+    // this.getsmeNameId();
 
 
     // this.dateMinus(this.datePipe.transform('2021-08-20T00:00:00.000+0000','MM/dd/yyyy'),this.datePipe.transform('2021-06-09T00:00:00.000+0000','MM/dd/yyyy'))
     this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(this.id).subscribe(resp => {
       if (resp) {
-          this.getSmeName.forEach(element2 => {
-            if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-              resp.smeId = element2.smeName
-            }
-          });
+
+          // this.getSmeName.forEach(element2 => {
+          //   if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+          //     resp.smeId = element2.smeName
+          //   }
+          // });
       
         this.invoiceDetails = resp
         this.getuserProfile();

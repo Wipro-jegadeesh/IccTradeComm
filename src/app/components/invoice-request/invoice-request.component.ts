@@ -411,7 +411,7 @@ getAllCountry(){
           "dispDate":item['dispDate'],
            "invDueDate":item.invDueDate,
            "smeProfileId" : this.userDeatils['smeProfileId'],
-
+           "smeName" : this.userDeatils['companyName'],
            "email": item['email'],
            "phoneNo": item['phoneNo'],
            "addressLine1": item['addressLine1'],
@@ -519,6 +519,7 @@ getAllCountry(){
 }
   onSubmitInvoiceForm() {
     let grandtotal = 0;
+    this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {} 
     this.invoiceForm.value.goodsDetails.forEach(element => {
        grandtotal += Number(element.total)
     });
@@ -532,10 +533,10 @@ getAllCountry(){
     try {
       if (this.invoiceForm.status === "INVALID") {
         this.toastr.error("Please fill mandatory fields")
-        throw { "mes": "Please fill mendatory  fields" }
       }
       this.invoiceForm.value['invoiceDetailsSequenceNumber']={}     
       this.invoiceForm.value.smeProfileId = this.userDeatils['smeProfileId']
+      this.invoiceForm.value.smeName = this.userDeatils['companyName']
       // this.invoiceForm.value.goodsDetails.concat(this.deletedRowedit);
 if (this.deletedRowedit.length > 0) {
 this.deletedRowedit.forEach(element => {

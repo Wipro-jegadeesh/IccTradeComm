@@ -94,15 +94,17 @@ export class AcceptedFinanceComponent implements OnInit {
       smeId: "SME101",
       status: "A"
     }]);
-    this.getsmeNameId();
+    // this.getsmeNameId();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
+
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
@@ -130,13 +132,15 @@ export class AcceptedFinanceComponent implements OnInit {
   
   SearchAPI() {
     this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
+
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
@@ -145,13 +149,15 @@ export class AcceptedFinanceComponent implements OnInit {
     this.Searchform.reset();
     this.buildform();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
+
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 

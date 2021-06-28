@@ -129,15 +129,18 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     this.dataSource = new MatTableDataSource([{ 'invoiceRef': "22", 'invoiceNo': "22", 'invAmt': "22", 'smeId': "22", 'buyerName': "22", 'invDate': "2021-07-24T05:30:00.000+0000", 'invDueDate': "2021-07-24T05:30:00.000+0000", 'status': "A" }]);
     this.dataSource.paginator = this.paginator
 
-    this.getsmeNameId();
+    // this.getsmeNameId();
+
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
-    resp.forEach(element1 => {
-    this.getSmeName.forEach(element2 => {
-    if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-    element1.smeId = element2.smeName
-    }
-    });
-    });
+
+    // resp.forEach(element1 => {
+    // this.getSmeName.forEach(element2 => {
+    // if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+    // element1.smeId = element2.smeName
+    // }
+    // });
+    // });
+
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort;
@@ -171,13 +174,15 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.Searchform.reset();
     this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
+
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;

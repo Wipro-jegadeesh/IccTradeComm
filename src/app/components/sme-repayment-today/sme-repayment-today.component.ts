@@ -127,7 +127,7 @@ export class Repayment_todayComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getsmeNameId()
+    // this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
@@ -147,13 +147,14 @@ export class Repayment_todayComponent implements OnInit {
     }]);
 
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-      resp.forEach(element1 => {
-        this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
-        });
-        });
+
+      // resp.forEach(element1 => {
+      //   this.getSmeName.forEach(element2 => {
+      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+      //   element1.smeId = element2.smeName
+      //   }
+      //   });
+      //   });
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
