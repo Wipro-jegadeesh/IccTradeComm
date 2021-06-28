@@ -71,7 +71,7 @@
                         </td>
                     </ng-container>
                  
-                    <tr mat-header-row  *matHeaderRowDef="displayedColumnsTwo" style="background-color:#a48ff5">
+                    <tr mat-header-row  *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0">
                     </tr>
                     <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumnsTwo"></tr>
                 </table>
@@ -118,7 +118,7 @@
                 </ng-container>
               
 
-                <tr mat-header-row *matHeaderRowDef="displayedInvDetailsColumns" style="background-color:#a48ff5"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedInvDetailsColumns" style="background-color:#694ed6e0"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedInvDetailsColumns"></tr>
             </table>
             </div>
@@ -186,7 +186,7 @@
                             <th mat-header-cell *matHeaderCellDef scope="column">{{'Total Currency' | translate}}</th>
                             <td mat-cell *matCellDef="let element">{{ element.totalCcy }}</td>
                         </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#a48ff5"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
                         </table>
                         </div>
@@ -254,7 +254,7 @@
                         </td>
                     </ng-container>
                     
-                    <tr mat-header-row *matHeaderRowDef="displayedsmeOne" style="background-color:#a48ff5">
+                    <tr mat-header-row *matHeaderRowDef="displayedsmeOne" style="background-color:#694ed6e0">
                     </tr>
                     <tr mat-row *matRowDef="let row; columns: displayedsmeOne"></tr>
                 </table>
@@ -307,7 +307,7 @@
                 <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.offerExpDateTime | date}}
                 </td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedsmeTwo" style="background-color:#a48ff5">
+            <tr mat-header-row *matHeaderRowDef="displayedsmeTwo" style="background-color:#694ed6e0">
             </tr>
             <tr mat-row *matRowDef="let row; columns: displayedsmeTwo"></tr>
         </table>

@@ -163,7 +163,7 @@
                                   <mat-datepicker #picker></mat-datepicker> -->
                                 </td>
                               </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#a48ff5"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
                     
                        </table>
@@ -285,7 +285,7 @@
                                       required>
                                     </td>
                                   </ng-container>
-                      <tr mat-header-row *matHeaderRowDef="displayedInvoiceTwo" style="background-color:#a48ff5"></tr>
+                      <tr mat-header-row *matHeaderRowDef="displayedInvoiceTwo" style="background-color:#694ed6e0"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedInvoiceTwo"></tr>
                   
                      </table>
@@ -361,7 +361,7 @@
                       </ng-container>
                   
                   
-                      <tr mat-header-row *matHeaderRowDef="displayedInvoiceFormsColumns" style="background-color:#a48ff5"></tr>
+                      <tr mat-header-row *matHeaderRowDef="displayedInvoiceFormsColumns" style="background-color:#694ed6e0"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedInvoiceFormsColumns"></tr>
                   </table>
               </div>            
@@ -437,7 +437,7 @@
                   matTooltip="{{detailsTooltip.total | translate}}" [matTooltipPosition]="'below'">{{'Total' | translate}}</th>
                   <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                   </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#a48ff5"></tr>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
                   </table>
                   </mat-expansion-panel>
@@ -523,7 +523,7 @@
                     <td mat-cell *matCellDef="let element"> {{element?.repaymentDate || '' }}  </td>
                   </ng-container>
                 
-                  <tr mat-header-row *matHeaderRowDef="launchBidPopup" style="background-color:#a48ff5"></tr>
+                  <tr mat-header-row *matHeaderRowDef="launchBidPopup" style="background-color:#694ed6e0"></tr>
                   <tr mat-row *matRowDef="let row; columns: launchBidPopup;"></tr>
                 </table>
                 
@@ -567,7 +567,7 @@
                         <td mat-cell *matCellDef="let element"> {{element?.offerExpDateTime || '' }}   </td>
                       </ng-container>
                 
-                  <tr mat-header-row *matHeaderRowDef="launchBidTableTwoPopup" style="background-color:#a48ff5"></tr>
+                  <tr mat-header-row *matHeaderRowDef="launchBidTableTwoPopup" style="background-color:#694ed6e0"></tr>
                   <tr mat-row *matRowDef="let row; columns: launchBidTableTwoPopup;"></tr>
                 </table>
                 

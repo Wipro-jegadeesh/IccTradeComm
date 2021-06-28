@@ -293,7 +293,7 @@
           justify-content: flex-end;
           padding-top: 15px;" >
             <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
-            <button type="button" mat-raised-button color="warn" routerLink='/login'>{{'Cancel' | translate}}</button>
+            <button type="button" mat-raised-button color="warn" (click)="GotoLogin()">{{'Cancel' | translate}}</button>
           </div>
         </form>
       </div>
