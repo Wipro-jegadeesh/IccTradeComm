@@ -584,6 +584,7 @@
 	"ICCGroups":{
 		"Groups": "Groups",
 		"Group Code": "Group Code",
+		"EnterGroup" : "Group Name is required",
 		"Group Name": "Group Name",
 		"Group Description": "Group Description",
 		"Add": "Add",

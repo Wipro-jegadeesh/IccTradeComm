@@ -80,14 +80,50 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <mat-form-field appearance="outline">
-                                <mat-label>{{'invoice Id' | translate}}</mat-label>
-                                <input type="text" formControlName="invoiceRef" matInput />
+                                <mat-label>{{'SME profile ID' | translate}}</mat-label>
+                                <input type="text" formControlName="smeprofileID" matInput />
                             </mat-form-field>
                         </div>
                         <div class="col-sm-2">
                             <mat-form-field appearance="outline">
-                                <mat-label>{{'SME Name' | translate}}</mat-label>
-                                <input type="text" formControlName="smeId" matInput />
+                                <mat-label>{{'Registration Number' | translate}}</mat-label>
+                                <input type="text" formControlName="registrationNumber" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'Company ID' | translate}}</mat-label>
+                                <input type="text" formControlName="companyId" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'Company Name' | translate}}</mat-label>
+                                <input type="text" formControlName="name" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'SME Rating' | translate}}</mat-label>
+                                <input type="text" formControlName="smeRating" matInput />
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-sm-2">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'Status' | translate}}</mat-label>
+                                <input type="text" formControlName="status" matInput />
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="col-sm-2">
+                            <mat-form-field dense class="">
+                              <mat-label> {{'Status' | translate}}</mat-label>
+                              <select matNativeControl formControlName="status" >
+                                <!-- (change)="updateCurrency($event)" -->
+                                <!-- <option value=""></option> -->
+                                <option value="A">A</option>
+                                <option value="I">I</option>
+                              </select>
                             </mat-form-field>
                         </div>
                   

@@ -28,7 +28,7 @@
                     <mat-label>Financier Name Constitution</mat-label>
                     <input matInput type="text" formControlName="fName" required
                        />
-                    <mat-hint>Please Enter Financier Name Constitution</mat-hint>
+                    <mat-error *ngIf="hasError('contactNo', 'required')">Please Enter Financier Name Constitution</mat-error>
                   </mat-form-field>
                 </td>
               </tr> -->
@@ -43,7 +43,7 @@
                                type="text"
                                value="{{'FIN' + financierId}}"
                                readonly />
-                        <!-- <mat-hint>Please Enter Financier Name Constitution</mat-hint> -->
+                        <!-- <mat-error *ngIf="hasError('contactNo', 'required')">Please Enter Financier Name Constitution</mat-error> -->
                       </mat-form-field>
                     </td>
                   </tr>
@@ -61,7 +61,7 @@
                                formControlName="fName"
                                [readonly]="isView"
                                required />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterNameConstution' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('fName', 'required')">{{'FinancierOnboardingComponent.EnterNameConstution' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                     <td rowspan="1"
@@ -76,7 +76,7 @@
                                formControlName="regNum"
                                [readonly]="isView"
                                required />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterLocalRegNo' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('regNum', 'required')">{{'FinancierOnboardingComponent.EnterLocalRegNo' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
 
@@ -92,7 +92,7 @@
                            formControlName="taxIdNum"
                            [readonly]="isView"
                            required />
-                    <mat-hint> {{'FinancierOnboardingComponent.EnterTaxNo' | translate}}</mat-hint>
+                    <mat-error *ngIf="hasError('taxIdNum', 'required')"> {{'FinancierOnboardingComponent.EnterTaxNo' | translate}}</mat-error>
                   </mat-form-field>
                 </td>
                   </tr>
@@ -111,7 +111,7 @@
                         <mat-datepicker-toggle matSuffix
                                                [for]="pickers"></mat-datepicker-toggle>
                         <mat-datepicker #pickers></mat-datepicker>
-                        <mat-hint> {{'FinancierOnboardingComponent.EnterRegDate' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('regDate', 'required')"> {{'FinancierOnboardingComponent.EnterRegDate' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                  
@@ -127,7 +127,7 @@
                                formControlName="fExpYears"
                                required
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterSCFyears' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('fExpYears', 'required')">{{'FinancierOnboardingComponent.EnterSCFyears' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                     <td rowspan="1"
@@ -141,7 +141,7 @@
                                type="text"
                                formControlName="activity"
                                [readonly]="isView" />
-                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-hint> -->
+                        <mat-error *ngIf="hasError('activity', 'required')">{{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                   </tr>
@@ -158,7 +158,7 @@
                                type="text"
                                formControlName="principalBankAccount"
                                [readonly]="isView" />
-                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-hint> -->
+                        <mat-error *ngIf="hasError('principalBankAccount', 'required')">{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                     <td rowspan="1"
@@ -172,7 +172,7 @@
                                type="text"
                                formControlName="prncbankbranch"
                                [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('prncbankbranch', 'required')">{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-error>
                       </mat-form-field>
                     </td>
                   
@@ -195,7 +195,7 @@
                                    [readonly]="isView" 
                                    (input)="setTwoNumberDecimal($event,'anlScfTrnOver')"
                                    />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-hint>
+                            <mat-error *ngIf="hasError('anlScfTrnOver', 'required')">{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-error>
                           </mat-form-field>
                         </div>
                       </div>
@@ -222,49 +222,23 @@
                                    [readonly]="isView" 
                                    (input)="setTwoNumberDecimal($event,'transLimit')"
                                    />
-                            <!-- <mat-hint>{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-hint> -->
+                            <mat-error *ngIf="hasError('transLimit', 'required')">{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-error>
                           </mat-form-field>
                         </div>
                       </div>
                     </td>
-                
-
-                    <!-- <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div>
-                      <mat-form-field floatLabel="never"
-                                      dense
-                                      appearance="fill"
-                                      class="example-full-width">
-                        <mat-icon color="primary"
-                                  dense
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.Currency' | translate}}</mat-label>
-                        <input type="text"
-                               matInput
-                               formControlName="currency"
-                               [readonly]="isView" />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </td> -->
 
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense class="select-split-input">
                     <mat-label> {{'Currency' | translate}}</mat-label>
                     <select matNativeControl formControlName="currency" >
-                      <!-- (change)="updateCurrency($event)" -->
-                      <!-- <option value=""></option> -->
                       <option value="SGD">SGD</option>
                       <option value="USD">USD</option>
                       <option value="GBP">GBP</option>
                       <option value="EUR">EUR</option>
                       <option value="JPY">JPY</option>
                     </select>
-                    <mat-hint>{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-hint>
+                    <mat-error *ngIf="hasError('currency', 'required')">{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-error>
                   </mat-form-field>
                 </td>
 
@@ -318,7 +292,7 @@
                                matInput
                                formControlName="heademail"
                                [readonly]="isView" required />
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('heademail', 'required')">{{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -341,7 +315,7 @@
                            matInput
                            formControlName="headtelephoneNumber"
                            [readonly]="isView" required />
-                    <mat-hint>{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
+                    <mat-error *ngIf="hasError('headtelephoneNumber', 'required')">{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -364,7 +338,7 @@
                        matInput
                        formControlName="headfaxNo"
                        [readonly]="isView" />
-                <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
+                <mat-error *ngIf="hasError('headfaxNo', 'required')">{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -374,9 +348,6 @@
 
                     <tr class="form-group"
                     data-always-visible="false">
-
-                   
-
                     <td class="T1"
                     rowspan="1"
                     colspan="1">
@@ -394,7 +365,7 @@
                                matInput
                                formControlName="headAddrLine1"
                                [readonly]="isView" required/>
-                        <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
+                        <mat-error *ngIf="hasError('headAddrLine1', 'required')">{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
                   </div>
@@ -417,7 +388,7 @@
                                matInput
                                formControlName="headAddrLine2"
                                [readonly]="isView" />
-                        <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
+                        <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
                       </mat-form-field>
                     </div>
                   </div>
@@ -440,7 +411,7 @@
                            matInput
                            formControlName="headAddrLine3"
                            [readonly]="isView" />
-                    <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
+                    <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>
@@ -467,7 +438,7 @@
                                    matInput
                                    formControlName="headcity"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
+                            <mat-error *ngIf="hasError('headcity', 'required')">{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
                           </mat-form-field>
                         </div>
                       </div>
@@ -506,7 +477,7 @@
                              matInput
                              formControlName="headpostalCode"
                              [readonly]="isView" />
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('headpostalCode', 'required')">{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                   </div>
@@ -531,7 +502,7 @@
                              matInput
                              formControlName="headstate"
                              [readonly]="isView" />
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('headstate', 'required')">{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -554,7 +525,7 @@
                                    matInput
                                    formControlName="headswiftBic"
                                    [readonly]="isView" />
-                            <mat-hint>{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
+                            <mat-error *ngIf="hasError('headswiftBic', 'required')">{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
                           </mat-form-field>
                         </div>
                       </div>
@@ -618,7 +589,7 @@
                              matInput
                              formControlName="servemail"
                              [readonly]="isView" required/>
-                      <mat-hint> {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('servemail', 'required')"> {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -641,7 +612,7 @@
                                  matInput
                                  formControlName="servtelephoneNumber"
                                  [readonly]="isView" required />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-hint>
+                          <mat-error *ngIf="hasError('servtelephoneNumber', 'required')"> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
                         </mat-form-field>
                       </div>
                     </div>
@@ -664,7 +635,7 @@
                              matInput
                              formControlName="servfaxNo"
                              [readonly]="isView" />
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('servfaxNo', 'required')">{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -678,8 +649,6 @@
                   <tr class="form-group"
                   data-always-visible="false">
                   
-
-
                   <td class="T1"
                   rowspan="1"
                   colspan="1">
@@ -697,7 +666,7 @@
                              matInput
                              formControlName="servAddrLine1"
                              [readonly]="isView" required/>
-                      <mat-hint>{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('servAddrLine1', 'required')">{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                 </div>
@@ -720,7 +689,7 @@
                          matInput
                          formControlName="servAddrLine2"
                          [readonly]="isView" />
-                  <!-- <mat-hint> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-hint> -->
+                  <!-- <mat-error *ngIf="hasError('contactNo', 'required')"> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
                 </mat-form-field>
               </div>
             </div>
@@ -743,7 +712,7 @@
                                  matInput
                                  formControlName="servAddrLine3"
                                  [readonly]="isView" />
-                          <!-- <mat-hint>{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-hint> -->
+                          <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
                         </mat-form-field>
                       </div>
                     </div>
@@ -769,7 +738,7 @@
                                  matInput
                                  formControlName="servcity"
                                  [readonly]="isView" />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-hint>
+                          <mat-error *ngIf="hasError('servcity', 'required')"> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
                         </mat-form-field>
                       </div>
                     </div>
@@ -808,38 +777,14 @@
                              matInput
                              formControlName="servpostalCode"
                              [readonly]="isView" />
-                      <mat-hint> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-hint>
+                      <mat-error *ngIf="hasError('servpostalCode', 'required')"> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
                     </mat-form-field>
                   </div>
                   </div>
                   </td>   
 
                   <tr class="form-group"
-                  data-always-visible="false">
-                 
-                <!-- <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div>
-                      <mat-form-field floatLabel="never"
-                                      dense
-                                      appearance="fill"
-                                      class="example-full-width">
-                        <mat-icon color="primary"
-                                  dense
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>Local Payment Code</mat-label>
-                        <input type="text"
-                               matInput
-                               formControlName="paymentCode"
-                               [readonly]="isView" />
-                        <mat-hint>Please enter local payment code</mat-hint>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </td> -->
-                             
+                  data-always-visible="false">        
                   <td class="T1"
                       rowspan="1"
                       colspan="1">
@@ -857,7 +802,7 @@
                                  matInput
                                  formControlName="servswiftBic"
                                  [readonly]="isView" />
-                          <mat-hint> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-hint>
+                          <mat-error *ngIf="hasError('servswiftBic', 'required')"> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
                         </mat-form-field>
                       </div>
                     </div>

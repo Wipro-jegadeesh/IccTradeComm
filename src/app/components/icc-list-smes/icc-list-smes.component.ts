@@ -141,8 +141,12 @@ export class IccListSmesComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    'smeprofileID': String,
+    'registrationNumber': String,
+      'companyId': String,
+      'name': String,
+      'smeRating': String,
+      'status': String,
     // 'buyerName': String,
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
@@ -196,37 +200,42 @@ export class IccListSmesComponent implements OnInit {
     //   })
     //   );
 
-    this.dataSource = new MatTableDataSource([{
-      invoiceRef : 'TR123',
-      buyerAddr: "Singapore",
-      buyerName: "Tata Steel",
-      dispDate: "17/03/2021",
-      id: 2,
-      invAmt: "10000",
-      invCcy: "SGD",
-      invDate: "17/03/2021",
-      invDueDate: "17/06/2021",
-      invId: "INV102",
-      smeId: "SME101",
-      status: "A"
-    }]);
+   this.getList()
+    this.buildform()
+
+  }
+
+  getList(){
+    // this.dataSource = new MatTableDataSource([{
+    //   invoiceRef : 'TR123',
+    //   buyerAddr: "Singapore",
+    //   buyerName: "Tata Steel",
+    //   dispDate: "17/03/2021",
+    //   id: 2,
+    //   invAmt: "10000",
+    //   invCcy: "SGD",
+    //   invDate: "17/03/2021",
+    //   invDueDate: "17/06/2021",
+    //   invId: "INV102",
+    //   smeId: "SME101",
+    //   status: "A"
+    // }]);
 
     this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
-    this.buildform()
-
   }
 
   buildform() {
     this.Searchform = this.fb.group({
-      invoiceRef: [''],
-      smeId: [''],
-      // buyerName: [''],
-      // invoiceDate: [''],
-      // invoiceDueDate: ['']
+      smeprofileID: [''],
+      registrationNumber: [''],
+      companyId: [''],
+      name: [''],
+      smeRating: [''],
+      status: [''],
     })
   }
 
@@ -248,7 +257,8 @@ export class IccListSmesComponent implements OnInit {
   }
   ResetAPI() {
     this.buildform();
-    this.getSearchList()
+    this.getList();
+    // this.getSearchList()
     // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
