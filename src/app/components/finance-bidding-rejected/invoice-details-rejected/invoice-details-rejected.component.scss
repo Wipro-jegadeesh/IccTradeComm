@@ -94,6 +94,9 @@ header {
     bottom: $uxg-spacing-0;
     z-index: 1;
 }
+table.table-responsive{
+    display:inline-table;
+}
 
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
@@ -143,8 +146,21 @@ header {
             }
         }
     }
+    table.table-responsive{
+        display:block;
+    }
 }
+@media screen and (min-width: 768px) and (max-width: 991px) {
 
+    table{
+        &.table-responsive{
+            display: block;
+            &.gd-table{
+                display: inline-table;
+            }
+        }   
+    }
+}
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {
@@ -155,6 +171,13 @@ header {
             overflow: hidden;
             ::ng-deep svg {
                 height: 300px;
+            }
+        }
+    }
+    table{
+        &.table-responsive{
+            &.bid-table, &.mod-table{
+                display: block;
             }
         }
     }
@@ -274,33 +297,6 @@ mat-form-field {
     // margin-left: $uxg-spacing-3 * 6;
     width: 400px;
 }
-
-.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
-    height: 60px;
-}
-
-.data-section {
-    // width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: $uxg-spacing-5;
-}
-
-.table-section {
-    // width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: $uxg-spacing-4;
-}
-::ng-deep .cdk-overlay-container {
-    z-index: 1200 !important;
-}
-
-.ebtn {
-    display: flex;
-    justify-content: flex-end;
-}
-//new css
 @media only screen and (max-width: 1030px)
 {
     .dis-block 
@@ -359,6 +355,31 @@ mat-form-field {
 .RemarkClass{
     background-color: yellow;  
 }
+.uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
+    height: 60px;
+}
+
+.data-section {
+    // width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-5;
+}
+
+.table-section {
+    // width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: $uxg-spacing-4;
+}
+::ng-deep .cdk-overlay-container {
+    z-index: 1200 !important;
+}
+
+.ebtn {
+    display: flex;
+    justify-content: flex-end;
+} 
 ::ng-deep .toast-container .ngx-toastr{
     width: fit-content !important;
     font-size:small;
