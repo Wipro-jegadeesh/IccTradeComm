@@ -205,12 +205,15 @@ export class SignupComponent implements OnInit {
     }
     let RegisteNo = {
       name : formValues.name,
+      country : formValues.country,
       registrationNumber : formValues.CountryPin,
     }
     localStorage.setItem("signUpDetails",JSON.stringify(signUpDetailss))
     this.signupService.singUpCheck(RegisteNo).subscribe(resp=>{
         if(resp.status === "true"){
           this.toastr.error("This company already exists in Icc tradecomm Market place");
+        }else if(resp.status === "invalid"){
+          this.toastr.error(resp.message);
         }else{
           let data={
             'companyId':formValues.CountryPin,

@@ -37,7 +37,7 @@
                       </label> -->
                       <mat-form-field dense>
                         <mat-label> {{'Company Register ID​' | translate}}</mat-label>
-                        <input type="text"  matInput formControlName="nationalId" />
+                        <input type="text"  matInput formControlName="nationalId" readonly/>
                         <mat-error *ngIf="hasError('nationalId', 'required')">{{'nationalId is required' | translate}}</mat-error>
                       </mat-form-field>
                     </div>
