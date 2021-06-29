@@ -629,7 +629,7 @@ if(data && data.itemName){
       'country': formValues.servCountry && formValues.servCountry[0] && formValues.servCountry[0].itemName,
       'telephoneNumber': formValues.servtelephoneNumber,
       'email': formValues.servemail,
-      'faxNo': formValues.servfaxNo,
+      'faxno': formValues.servfaxNo,
       'postalCode':formValues.servpostalCode, 
       'paymentCode' : formValues.paymentCode, 
       'swiftBic': formValues.servswiftBic,
