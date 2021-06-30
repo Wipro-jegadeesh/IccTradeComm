@@ -76,7 +76,7 @@
                 [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
                 <button
                     [disabled]="this.userDetails.status === 'D'? true : this.userDetails.status === 'I' ? true : false"
-                    style="color: #7c49cb;" mat-menu-item>
+                    (click)="onRequestChange('repository')" style="color: #7c49cb;" mat-menu-item>
                     <i class="fas fa-2x fa-file-invoice"></i>&nbsp;
                     <span>
                         {{'Invoice repository Download' | translate}}
