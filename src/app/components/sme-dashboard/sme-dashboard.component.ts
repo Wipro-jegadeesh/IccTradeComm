@@ -97,8 +97,8 @@ export class SmeDashboardComponent implements OnInit {
   navigateFinancieForBidding() {
     this.router.navigateByUrl('/sme-finance-for-bidding');
   }
-  navigateInvoiceCreation() {
-    this.router.navigateByUrl('/invoice-request');
+  navigateInvoiceCreation(type) {
+    this.router.navigateByUrl('/invoice-request/'+type);
   }
   navigateAcceptedFinance() {
     this.router.navigateByUrl('/accepted-finance');
@@ -193,9 +193,9 @@ export class SmeDashboardComponent implements OnInit {
 
   }
 
-  onRequestChange(event) {
-    if (event == 'manual') {
-      this.navigateInvoiceCreation()
+  onRequestChange(type) {
+    if (type == 'manual' || type == 'repository') {
+      this.navigateInvoiceCreation(type)
     } else {
       // this.router.navigateByUrl('/invoice-request/bulk')
     }

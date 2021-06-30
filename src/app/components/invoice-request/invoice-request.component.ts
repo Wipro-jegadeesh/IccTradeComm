@@ -16,26 +16,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IccCountryServices } from '../icc-country/icc-country.services'
 import {TranslateService} from '@ngx-translate/core';
-// import { MatInput } from '@angular/material/input';
 
-// const DATA_TWO: any[] = [
-//   {
-//     BidID: 'BID03456',
-//     FinOffAmt: 102700,
-//     Ccy: 'SGD',
-//     FxRateDiff: '1.35',
-//     Margin: 10,
-//     DiscRate: 3,
-//     DiscAmt: 760,
-//     NetAmtPay: 101940,
-//     DueDate: '90D/10Mar21',
-//     OffExpPrd: '4 PM',
-//     Status: 'A'
-//   }
-// ];
-// const RATE = ['', '', '', '', '', '', '',
-//  ];
-// const NAMES = ['', '', '', '', '', '',];
 
 export interface invoiceData {
   invref: any;
@@ -78,13 +59,9 @@ export class InvoiceRequestComponent implements OnInit {
 
   hide = true;
   dataSourceTwo = new MatTableDataSource(); //data
-  // dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
   displayedColumnsTwo: string[] = [
-    // 'ID',
     'goodsId',
     'DescGoods',
-    // 'IdNo',
-    // 'DateOfInvoice',
     'Quantity',
     'Rate',
     'Amt',
@@ -97,16 +74,13 @@ export class InvoiceRequestComponent implements OnInit {
     'status'
   ];
 
-  // addGoods=new MatTableDataSource(this.ELEMENT_DATA1); 
-  // displayedColumnsn: string[] = ['StatusCode', 'DateTime', 'IdNo', 'Quantity','Rate','Amount','DiscAmount','NetAmount','TaxRate','TaxAmount', 'Status'];
   public deletedRowedit: any = []
 
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
 
   displayedColumns: string[] = ['select','InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount','Ccy','Score','Status'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  // @ViewChild('firstname', {static: true}) firstname:any;
-  // tslint:disable-next-line: typedef
+
   isOpen = ""
   mobileScreen = false;
   end = false;
@@ -126,6 +100,8 @@ export class InvoiceRequestComponent implements OnInit {
   nonFilterOptions : any;
   score:any;
   invoiceRefNo
+  isDisabled: boolean;
+  currencyAMT: string;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -159,48 +135,55 @@ export class InvoiceRequestComponent implements OnInit {
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
-  myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
   disableSelect = new FormControl(false);
   states = COUNTRYNAMES
   // public variables = COUNTRYNAMES;
   public variables = ['One','Two','County', 'Three', 'Zebra', 'XiOn'];
-  constructor(public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
+  type:any
+  constructor(private activatedRoute: ActivatedRoute,public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService
-    // ,private matInput: MatInput
     ) {
+    this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
 
   ngOnInit() {
-   
-    // localStorage.removeItem('buyerDetails')
-    // this.firstname.nativeElement.focus();
-
-
-    // setTimeout(() => this.matInput.focus());
-    
     this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    let obj = {
-      role : 'Authorise'
-    }
-    this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : obj 
-    console.log(this.userDeatils,"this.userDeatils")
+    this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
+    this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role : 'Authorise' } 
     this.getInvDetailsLists()
     this.addRow();
-    
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+   
 }
-
+repositoryFetch(){
+  this.invoiceForm.patchValue({
+    billNo: "IVAPPLE30062021",
+    invAmt: "3500",
+    smeId: localStorage.getItem("userId"),
+    invCcy:"SGD",
+    invDueDate: moment('2020-08-05', 'YYYY - MM - DD HH: mm').toDate(),
+    invDate: moment('2020-06-02', 'YYYY - MM - DD HH: mm').toDate(),
+    dispDate: moment('2020-09-09', 'YYYY - MM - DD HH: mm').toDate(),
+    email:"APPle@mail.com",
+    buyerName:"APPLE",
+    phoneNo:"987654321",
+    buyerUEN:"IVAPPLE",
+    buyerAddr:"BEL",
+    addressLine1:"32 victory",
+    addressLine2:"london",
+    city:"london",
+    postalCode:"34567",
+    companyName:"MacBook APPLE"
+  });
+  this.currencyName="SGD"
+  this.currencyAMT = "3500"
+}
 public setTwoNumberDecimal($event,name) {
   if(this.chkDecimalLength($event.target.value) >= 2){
     $event.target.value = parseFloat($event.target.value).toFixed(2);
@@ -774,13 +757,11 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
     this.invoiceForm = this.fb.group({
       invDueDate: ['', Validators.required],
       invId: ['', Validators.required],
-      // buyerAddr: ['', Validators.required],
       billNo: ['', Validators.required],
       invAmt: ['', Validators.required],
       invDate: ['', Validators.required], 
       dispDate: ['', Validators.required],
       smeId: localStorage.getItem("userId"),
-      // invCcy: "",
       goodsDetails: this.fb.array([]),
       invCcy:['',Validators.required],
 
