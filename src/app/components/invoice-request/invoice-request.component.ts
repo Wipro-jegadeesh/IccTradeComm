@@ -258,7 +258,7 @@ private _filter(value: string): string[] {
 getAllCountry(){
   this.IccCountryServices.getAllcountry().subscribe(resp => {    
     let countryArray = []
-    resp && resp.map(item =>{
+    resp && resp.map(item =>{ 
       let obj =  { id: item.countrycode3, itemName: item.country }
       countryArray.push(obj)
     })
@@ -520,14 +520,16 @@ getAllCountry(){
     let grandtotal = 0;
     this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {} 
     this.invoiceForm.value.goodsDetails.forEach(element => {
-       grandtotal += Number(element.total)
+       grandtotal += parseFloat(element.total)
     });
-    if (grandtotal != this.invoiceForm.value.invAmt) {
+    if (grandtotal != parseFloat(this.invoiceForm.value.invAmt)) {
       if (this.dataSourceTwo.data.length < 1) {
-        return this.toastr.error("Please add goods details");
+         this.toastr.error("Please add goods details");
+         return
       }
-      return this.toastr.error(this.translate.instant('Please check Good Details !! Grant Total Should Be Equal to Funding Request Amount'));
-    }
+       this.toastr.error(this.translate.instant('Please check Good Details !! Grant Total Should Be Equal to Funding Request Amount'));
+       return
+      }
 
     try {
       if (this.invoiceForm.status === "INVALID") {
