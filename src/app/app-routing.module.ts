@@ -12,6 +12,7 @@ import { SmeBiddingComponent } from './components/sme-bidding/sme-bidding.compon
 import { Repayment_todayComponent } from './components/sme-repayment-today/sme-repayment-today.component';
 import { SmeBiddingDetailsComponent } from './components/sme-bidding/sme-bidding-details/sme-bidding-details.component';
 import { InvoiceRequestComponent } from './components/invoice-request/invoice-request.component';
+import { InvoiceRepositoryComponent } from './components/invoice-repository/invoice-repository.component';
 import { FinanceBiddingComponent } from './components/finance-bidding/finance-bidding.component';
 import {FinanceBiddingExpiredComponent} from './components/finance-bidding-expired/finance-bidding-expired.component'
 import { InvoiceDetailsComponent } from './components/finance-bidding/invoice-details/invoice-details.component';
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'accepted-finance', component: AcceptedFinanceComponent , data : {"HeaderName" : "Accepted Finance", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'accepted-detail/:id', component: AcceptedDetailsComponent , data : {"HeaderName" : "Finance Details", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'invoice-request/:type', component: InvoiceRequestComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
+  { path: 'invoice-Repository', component: InvoiceRepositoryComponent , data : {"HeaderName" : "New Funding Request", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'repayment_today', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Today", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   { path: 'repayment_overdue', component: Repayment_todayComponent , data : {"HeaderName" : "Repayment Over Due", "headerPaths" : [{ path : "/sme-dashboard",pathName : "Seller Dashboard"}]}},
   
@@ -80,7 +82,7 @@ const routes: Routes = [
   { path: 'financier-bids-accept-Details/:type/:id', component: FinanceBiddingAcceptsDetailsComponent ,  data : {"HeaderName" : "Accepted Details","headerPaths" : [{ path : "/financier-bids-accept",pathName : "Bids Placed"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-bidding', component: FinanceBiddingComponent, data : {"HeaderName" : "Financier Requested","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
   { path: 'finance-bidding/:id', component: InvoiceDetailsComponent , data : {"HeaderName" : "Invoice Details","headerPaths" : [{ path : "/finance-bidding",pathName : "Financier Bidding"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
-  { path: 'invoice-request', component: InvoiceRequestComponent , data : {"HeaderName" : "New Funding Request","homePath" : "/financier-dashboard","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
+  // { path: 'invoice-request', component: InvoiceRequestComponent , data : {"HeaderName" : "New Funding Request","homePath" : "/financier-dashboard","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-bidding-expired', component: FinanceBiddingExpiredComponent, data : {"HeaderName" : "Financier Offer Expired","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },
   { path: 'finance-bidding-expired-details/:type/:id', component: InvoiceDetailsExpiredComponent , data : {"HeaderName" : "Invoice Details", "headerPaths" : [{ path : "/finance-bidding-expired",pathName : "Financier Offer Expired"},{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]}},
   { path: 'finance-bidding-rejected', component: FinanceBiddingRejectedComponent, data : {"HeaderName" : "Financier Offer Rejected","headerPaths" : [{ path : "/financier-dashboard",pathName : "Financier Dashboard"}]} },

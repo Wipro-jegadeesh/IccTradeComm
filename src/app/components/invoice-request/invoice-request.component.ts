@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params,NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
@@ -141,10 +141,12 @@ export class InvoiceRequestComponent implements OnInit {
   // public variables = COUNTRYNAMES;
   public variables = ['One','Two','County', 'Three', 'Zebra', 'XiOn'];
   type:any
+  FileData:any;
   constructor(private activatedRoute: ActivatedRoute,public translate: TranslateService,private IccCountryServices:IccCountryServices,public router: Router, private authenticationService: AuthenticationService, 
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe,private toastr: ToastrService
     ) {
+    this.FileData = this.router.getCurrentNavigation().extras.state;
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
@@ -156,33 +158,46 @@ export class InvoiceRequestComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
+    console.log(this.type,"this.type")
+    if(this.type === 'repository'){
+      this.isDisabled = true
+      // this.UpdateInvoice(this.FileData.FileData.queryParams.invoicedata)
+    }
     this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role : 'Authorise' } 
     this.getInvDetailsLists()
     this.addRow();
    
 }
 repositoryFetch(){
-  this.invoiceForm.patchValue({
-    billNo: "IVAPPLE30062021",
-    invAmt: "3500",
-    smeId: localStorage.getItem("userId"),
-    invCcy:"SGD",
-    invDueDate: moment('2020-08-05', 'YYYY - MM - DD HH: mm').toDate(),
-    invDate: moment('2020-06-02', 'YYYY - MM - DD HH: mm').toDate(),
-    dispDate: moment('2020-09-09', 'YYYY - MM - DD HH: mm').toDate(),
-    email:"APPle@mail.com",
-    buyerName:"APPLE",
-    phoneNo:"987654321",
-    buyerUEN:"IVAPPLE",
-    buyerAddr:"BEL",
-    addressLine1:"32 victory",
-    addressLine2:"london",
-    city:"london",
-    postalCode:"34567",
-    companyName:"MacBook APPLE"
-  });
-  this.currencyName="SGD"
-  this.currencyAMT = "3500"
+  let path = '/invoice-Repository'
+  let data: NavigationExtras = {
+    queryParams: {
+      "Type": "updateRepo",
+      "searchfield":'this.FileData.FileData.queryParams.searchfield'
+    }
+  }
+  this.router.navigate([path], { state: { FileData: data } });
+  // this.invoiceForm.patchValue({
+  //   billNo: "IVAPPLE30062021",
+  //   invAmt: "3500",
+  //   smeId: localStorage.getItem("userId"),
+  //   invCcy:"SGD",
+  //   invDueDate: moment('2020-08-05', 'YYYY - MM - DD HH: mm').toDate(),
+  //   invDate: moment('2020-06-02', 'YYYY - MM - DD HH: mm').toDate(),
+  //   dispDate: moment('2020-09-09', 'YYYY - MM - DD HH: mm').toDate(),
+  //   email:"APPle@mail.com",
+  //   buyerName:"APPLE",
+  //   phoneNo:"987654321",
+  //   buyerUEN:"IVAPPLE",
+  //   buyerAddr:"BEL",
+  //   addressLine1:"32 victory",
+  //   addressLine2:"london",
+  //   city:"london",
+  //   postalCode:"34567",
+  //   companyName:"MacBook APPLE"
+  // });
+  // this.currencyName="SGD"
+  // this.currencyAMT = "3500"
 }
 public setTwoNumberDecimal($event,name) {
   if(this.chkDecimalLength($event.target.value) >= 2){
@@ -416,6 +431,7 @@ getAllCountry(){
     this.dateFormArray.controls = [];
     this.addRow()
     console.log(data,"testtt")
+    this.isDisabled = false
     this.invoiceDetails = data
     this.invoiceForm.patchValue({
       // buyerName: data.buyerName,

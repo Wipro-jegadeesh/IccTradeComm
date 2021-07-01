@@ -64,6 +64,7 @@ import {InvoiceRequestServices} from '../app/components/invoice-request/invoice-
 import {FinanceRequestServices} from '../app/components/finance-bidding/finance-service';
 import { ModalComponent } from './shared/modals';
 import { InvoiceRequestComponent } from './components/invoice-request/invoice-request.component';
+import { InvoiceRepositoryComponent } from './components/invoice-repository/invoice-repository.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { IccDashboardComponent } from './components/icc-dashboard/icc-dashboard.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -188,6 +189,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FinanceBiddingComponent,
     InvoiceDetailsComponent,
     InvoiceRequestComponent,
+    InvoiceRepositoryComponent,
     IccDashboardComponent,
     NavbarComponent,
     SidebarComponent,
