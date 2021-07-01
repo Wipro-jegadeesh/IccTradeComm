@@ -137,7 +137,9 @@ table{
 
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
+        margin-bottom: $uxg-spacing-5;
         height: 35%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -156,6 +158,9 @@ table{
                 }
             }
         }
+    }
+    .score-margin {
+        margin : 10px 0; 
     }
 }
 
@@ -164,6 +169,7 @@ table{
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -182,7 +188,13 @@ table{
                 }
             }
         }
+
     }
+
+    .score-margin {
+        margin : 10px 0; 
+    }
+
     table{
         &.table-responsive{
             display: block;
@@ -205,6 +217,7 @@ table{
     header {
         margin-bottom: $margin;
         height: 30%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -236,6 +249,23 @@ table{
     table.table-responsive.inv-detail-table{
         display: inline-table;
     }
+    .table-responsive.inv-table{
+        width: 100%;
+        td{
+            padding-right: 13px;
+        }
+        mat-form-field,
+        table.fun-table{
+            width: 310px;
+        }
+        .spilt-input,
+        .select-split-input{
+            width: 145px;
+        }
+        table.fun-table td{
+            padding-right: 0;
+        }
+    }
 }
 
 /* Desktop Styles */
@@ -254,6 +284,21 @@ table{
         overflow: hidden;
         // padding-top: $margin;
         // padding-top: $margin;
+    }
+    .table-responsive.inv-table{
+        width: 100%;
+        td{
+            padding-right: 13px;
+        }
+        mat-form-field,
+        .spilt-input,
+        .select-split-input,
+        table.fun-table{
+            width: 100%;
+        }
+        table.fun-table td{
+            padding-right: 0;
+        }
     }
 }
 

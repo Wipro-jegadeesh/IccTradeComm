@@ -47,6 +47,7 @@
             </div>
         </ng-container>
 
+        <!-- <button (click)="this.navigateInvoiceCreation('manual')">Click</button> -->
         <mat-menu #menu="matMenu">
             <div
                 [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
