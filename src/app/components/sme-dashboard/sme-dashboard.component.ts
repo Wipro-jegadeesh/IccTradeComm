@@ -194,8 +194,10 @@ export class SmeDashboardComponent implements OnInit {
   }
 
   onRequestChange(type) {
-    if (type == 'manual' || type == 'repository') {
+    if (type == 'manual') {
       this.navigateInvoiceCreation(type)
+    }else if(type == 'repository'){
+      this.router.navigateByUrl('/invoice-Repository')
     } else {
       // this.router.navigateByUrl('/invoice-request/bulk')
     }

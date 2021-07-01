@@ -29,7 +29,9 @@
                     <mat-label>{{'Invoice No' | translate}}</mat-label>
                     <input type="text" matInput formControlName="invId" (keyup)="updateInvoiceId($event)"/>
                     <button type="button" *ngIf="this.isDisabled" matSuffix mat-icon-button  (click)="repositoryFetch()">
-                      <mat-icon>sync</mat-icon>
+                      <mat-icon>
+                        help_outline
+                       </mat-icon>
                     </button>
                     <!-- <mat-hint>Please enter {{'Invoice Id' | translate}}</mat-hint> -->
                   </mat-form-field>
@@ -574,7 +576,6 @@
       
       </mat-card>
     </form>
-
       <div id="container">
         <span class="uxg-h6" id=grid>{{'Invoice Details' | translate}}</span>
         <div class="mat-elevation-z8">
@@ -668,13 +669,8 @@
         <span class="fill-remaining-space"></span>
         <button mat-flat-button color="primary" #tooltip="matTooltip"
         matTooltip="{{fundingTooltip.submit | translate}}" [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'" [matTooltipPosition]="tooltipPosition" disabled>
-          
           {{'Submit' | translate}}
         </button>
-        <!-- <button mat-flat-button color="primary" #tooltip="matTooltip"
-        matTooltip="{{fundingTooltip.pendingInvoice}}" [matTooltipPosition]="tooltipPosition">
-          Pend
-        </button> -->
         <button mat-flat-button color="primary" [disabled]="this.userDeatils && this.userDeatils.role === 'Input'" (click)="authoriseInvoice()" #tooltip="matTooltip"
         matTooltip="{{fundingTooltip.invoiceAuthorise | translate}}" [matTooltipPosition]="tooltipPosition">
           {{'Authorise' | translate}}
