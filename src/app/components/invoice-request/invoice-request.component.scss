@@ -288,13 +288,13 @@ table{
     .table-responsive.inv-table{
         width: 100%;
         td{
-            padding-right: 13px;
+            padding-right: 3px;
         }
         mat-form-field,
         .spilt-input,
         .select-split-input,
         table.fun-table{
-            width: 100%;
+            min-width: 100%;
         }
         table.fun-table td{
             padding-right: 0;
