@@ -164,6 +164,21 @@ table{
     }
 }
 
+.table-md{
+    width: 140px;
+    input{
+        width: 100px;
+    }
+    .add-good-plusbtn{
+        padding: 2px 5px;
+        margin-right: 2px;
+    }
+}
+
+.table-sm{
+    width: 125px;
+}
+
 /* Mobile Styles Small Screen */
 @media only screen and (max-width: 376px) {
     header {

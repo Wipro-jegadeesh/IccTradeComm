@@ -41,4 +41,9 @@ export class IccDashboardServices  {
     let params = queryString.stringify(obj);
     return this.apiService.tempGet(environment.financierServicePath+'financiersearch?'+params);
   }
+
+  getFilteredData(obj){
+    let params = queryString.stringify(obj);
+    return this.apiService.tempGet(environment.financierServicePath+'financierfilter?'+params);
+  }
 }

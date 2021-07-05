@@ -16,6 +16,7 @@ import { BIDDINGCONSTANTS } from '../../../shared/constants/constants'
 
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -82,6 +83,8 @@ export class FinancierOnboardingListComponent implements OnInit {
       }
     }
   };
+  fromdate : "";
+  todate : "";
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
@@ -217,6 +220,29 @@ export class FinancierOnboardingListComponent implements OnInit {
     } else {
       this.filterDivOpen = !this.filterDivOpen
     }
+  }
+
+  getFilteredData(){
+    
+    let obj = {
+      fromexp : this.value,
+      toexp : this.highValue,
+      fromdate : moment(this.fromdate).format('YYYY/MM/DD'),
+      todate : moment(this.todate).format('YYYY/MM/DD') 
+    }
+
+    this.iccDashboardServices.getFilteredData(obj).subscribe(listResp => {
+      if (listResp) { 
+        this.dataSource = new MatTableDataSource(listResp);
+        this.dataSource.paginator = this.paginator
+      }
+    })
+  }
+
+  resetFilteredData(){
+    this.value = 0
+    this.highValue = 50
+    this.getFinancierDetails()
   }
 
 

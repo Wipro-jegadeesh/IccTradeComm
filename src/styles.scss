@@ -224,7 +224,8 @@ table#financBidding {
     //     border-bottom: 4px solid #fff!important;    
     // }
     .mat-tab-label-active {
-        background-image: linear-gradient(to bottom right, #d706dafa, #790cdc, #4d00e4) !important;
+        // background-image: linear-gradient(to bottom right, #d706dafa, #790cdc, #4d00e4) !important;
+      background-image: linear-gradient(to bottom right, #d706daad, #790cdc, #4e07dba6) !important;
         .mat-tab-label-content{
             color: #fff !important;
         }
