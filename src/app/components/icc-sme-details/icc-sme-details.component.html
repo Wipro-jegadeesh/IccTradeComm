@@ -17,7 +17,7 @@
                           <div class="form-group">
                             <!-- <label for="National ID​">Company Register ID​
                                 </label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense class="readOnlyCls">
                               <mat-label>{{'Company Register Id' | translate }}</mat-label>
                               <!-- {{'IccSmeDetails.CompanyRegisterId' | translate​}} </mat-label> -->
                               <input type="text" placeholder="{{'Company Register Id' | translate }}" matInput
@@ -30,7 +30,7 @@
                           <div class="form-group">
                             <!-- <label for="First name​">Company name​
                                 </label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense class="readOnlyCls" >
                               <mat-label>{{'Company Name' | translate }}</mat-label>
                               <mat-icon matPrefix>business</mat-icon>
                               <input type="text" matInput placeholder="{{'Company Name' | translate }}" formControlName="companyName"
@@ -43,7 +43,7 @@
                           <div class="form-group">
                             <!-- <label for="Country​">Country
                                 </label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'IccSmeDetails.Country' | translate }}</mat-label>
                               <mat-icon matPrefix>flag</mat-icon>
                               <input type="text" matInput placeholder="{{'Country' | translate }}"
@@ -57,7 +57,7 @@
                         <div class="col-sm-4">
                           <!-- <label for="Address">Address 1</label> -->
                           <div class="form-group">
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Address 1' | translate }}</mat-label>
                               <mat-icon matPrefix>home</mat-icon>
                               <input type="text" matInput formControlName="address" readonly />
@@ -68,7 +68,7 @@
                         <div class="col-sm-4">
                           <!-- <label for="Address">Address 2</label> -->
                           <div class="form-group">
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Address 2' | translate }}</mat-label>
                               <mat-icon matPrefix>home</mat-icon>
                               <input type="text" matInput formControlName="address1" readonly />
@@ -79,7 +79,7 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <!-- <label for="National ID​">Phone Number</label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Phone Number' | translate }}</mat-label>
                               <mat-icon matPrefix>call</mat-icon>
                               <input type="text" matInput placeholder="{{'Phone Number' | translate }}"
@@ -93,7 +93,7 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <!-- <label for="Locale">State</label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'State' | translate }}</mat-label>
                               <mat-icon matPrefix>add_location</mat-icon>
                               <input type="text" matInput formControlName="state" readonly />
@@ -104,7 +104,7 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <!-- <label for="Locale">City</label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'City' | translate }}</mat-label>
                               <mat-icon matPrefix>add_location</mat-icon>
                               <input type="text" matInput formControlName="locale" readonly />
@@ -115,7 +115,7 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <!-- <label for="Locale">Postal Code</label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Postal Code' | translate}}</mat-label>
                               <mat-icon matPrefix>local_shipping</mat-icon>
                               <input type="text" matInput formControlName="postalCode" readonly />
@@ -129,7 +129,7 @@
                           <div class="form-group">
                             <!-- <label for="National ID​">Email Id
                             </label> -->
-                            <mat-form-field dense>
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Email Id' | translate}}</mat-label>
                               <mat-icon matPrefix>email</mat-icon>
                               <input type="text" matInput placeholder="{{'Email Id' | translate}}"
@@ -140,7 +140,8 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="form-group">
-                            <mat-form-field dense>
+                            <!-- readonly -->
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Sector' | translate }}</mat-label>
                               <mat-select formControlName="sector">
                                 <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}
@@ -152,7 +153,8 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <!-- <label for="Status">Status</label> -->
-                            <mat-form-field dense>
+                            <!-- readonly -->
+                            <mat-form-field dense  class="readOnlyCls">
                               <mat-label>{{'Status' | translate }}</mat-label>
                               <mat-select formControlName="status" panelClass="myPanelClass">
                                 <mat-option value="A">Active</mat-option>

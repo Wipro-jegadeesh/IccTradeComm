@@ -1321,3 +1321,14 @@ margin:auto;
        // color: #ffff !important;
     }
 //Same Font-size CSS
+
+
+// read only text css
+
+.mat-form-field{
+        &.readOnlyCls{
+        .mat-form-field-flex{
+            background-color: rgb(209 206 206 / 59%);
+        }
+    }
+}
