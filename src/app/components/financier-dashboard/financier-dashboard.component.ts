@@ -130,16 +130,16 @@ export class FinancierDashboardComponent implements OnInit {
   chartLabels = ["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   chartColors = [
   {
-  backgroundColor: "rgba(204, 51, 0, .3)",
-  borderColor: "rgba(204, 51, 0, .7)",
+  backgroundColor: "rgba(222 63 232 / 82%)",
+  borderColor: "rgb(108 81 216 / 79%)",
   },
   {
-  backgroundColor: "rgba(0, 137, 132, .3)",
-  borderColor: "rgba(0, 10, 130, .7)",
+  backgroundColor: "rgba(222 63 232 / 82%)",
+  borderColor: "rgb(108 81 216 / 79%)",
   },
   {
-  backgroundColor: "rgba(0, 128, 43, .3)",
-  borderColor: "rgba(0, 128, 43, .7)",
+  backgroundColor: "rgba(222 63 232 / 82%)",
+  borderColor: "rgb(108 81 216 / 79%)",
   }
   ];
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {

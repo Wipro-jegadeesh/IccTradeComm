@@ -83,7 +83,14 @@ export class AuthConfigService {
           .pipe(
           ).subscribe(e => {
             console.log(e['info'], "info");
+            console.log(e, "info");
             console.log(e['type'], "type");
+            if(e['type'] == 'invalid_nonce_in_state'){
+              // this.oauthService.tryLogin().then((arg) => {
+              //   console.log("this.oauthService.tryLogin()",arg)
+              // });
+              this.oauthService.refreshToken();
+            }
             if (e instanceof OAuthErrorEvent) {
               console.error(event, "error");
               

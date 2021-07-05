@@ -111,7 +111,7 @@
 <table class="fun-table">
   <tr>
     <td rowspan="1" colspan="1">
-      <mat-form-field dense class="spilt-input" >
+      <mat-form-field dense class="spilt-input" [ngClass]="{'readOnlyCls': this.isDisabled}" >
         <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
         <input type="number" matInput value="" autocomplete="on" formControlName="invAmt" [readonly]="this.isDisabled" (input)="setTwoNumberDecimal($event,'invAmt')"/>
         <!-- <mat-hint>Please enter the Invoice Amount</mat-hint> -->
@@ -155,7 +155,7 @@
                   
               
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense >
                     <mat-label>{{'Funding Request Due Date' | translate}} </mat-label>
                     <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" />
                     <mat-datepicker-toggle [disabled]="this.isDisabled" matSuffix [for]="pickers"></mat-datepicker-toggle>
@@ -163,7 +163,7 @@
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
-                    <mat-form-field dense>
+                    <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                       <!-- <mat-icon dense color="primary" matPrefix>person_outline</mat-icon> -->
                       <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
                       <input type="text"[readonly]="this.isDisabled"  matInput value="" formControlName="billNo" />
@@ -259,19 +259,19 @@
             
               <tr>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label> {{'Buyer Name' | translate}} </mat-label>
                     <input type="text"[readonly]="this.isDisabled" matInput value="" formControlName="buyerName"/>
                   </mat-form-field>
                 </td>
                  <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="buyerUEN" />
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>Contact Name</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="companyName" />
                   </mat-form-field>
@@ -283,7 +283,7 @@
                   
                 
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>{{'Email' | translate}}</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="email" />
                     <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
@@ -294,7 +294,7 @@
                   <mat-form-field floatLabel="never"
                                   dense
                                   appearance="fill"
-                                  class="">
+                                  class="" [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <!-- <mat-icon color="primary"
                               dense
                               matPrefix>person_outline</mat-icon> -->
@@ -307,7 +307,7 @@
                 </td>
                
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>Address Line 1</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput formControlName="addressLine1" />
                   </mat-form-field>
@@ -318,20 +318,20 @@
               <tr>
                 
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>Address Line 2</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput formControlName="addressLine2" />
                   </mat-form-field>
                 </td>
                 
               <td rowspan="1" colspan="1">
-                <mat-form-field dense>
+                <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                   <mat-label>Postal Code</mat-label>
                   <input type="text" [readonly]="this.isDisabled" matInput formControlName="postalCode" />
                 </mat-form-field>
               </td>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>City</mat-label>
                     <input type="text" [readonly]="this.isDisabled" matInput formControlName="city" />
                   </mat-form-field>
