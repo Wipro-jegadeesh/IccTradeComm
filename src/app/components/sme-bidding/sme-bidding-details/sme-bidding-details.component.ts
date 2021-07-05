@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -128,6 +129,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
   smeDetails: any;
   TextAreaDiv: boolean;
   public issubmitTrue: boolean = false;
+  moment: any = moment;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -376,7 +378,7 @@ rejectQustionTwo = {
         invoiceId : data.filteredData[0].invoiceId,
         invNo :data.filteredData[0].invNo,
         bidId :data.filteredData[0].bidId,
-        updatedTime:ddatae.setDate(ddatae.getDate() + 1)
+        updatedTime: moment(ddatae, 'YYYY - MM - DD HH: mm').toDate()
       }
       if (this.Rejectform.valid){
       this.smeBiddingServices.rejectFinBid(data.filteredData[0].id,obj).subscribe(resp => {
