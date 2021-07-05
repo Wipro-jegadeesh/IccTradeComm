@@ -24,7 +24,7 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
     // margin: -32px 30px 0;
-    // padding: $margin;
+    // //padding: $margin;
     position: relative;
     height: 45%;
     width: 100%;
@@ -49,10 +49,10 @@ header {
     bottom: 0;
     left: 0;
     overflow-x: auto;
-    padding: 2rem;
+    padding: 0.6rem;
     position: absolute;
     right: 0;
-    top: 33px;
+    top: 40px;
 }
 
 .accounts-list {
@@ -332,7 +332,7 @@ mat-form-field {
     {
         white-space: normal;
         margin-bottom: 20px;
-        margin-top: 10px;
+        margin-top: 40px;
     }
     .table-res
     {

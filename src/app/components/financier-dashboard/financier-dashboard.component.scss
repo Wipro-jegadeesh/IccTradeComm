@@ -33,9 +33,10 @@ header {
 }
 .app-content {
     bottom: 0;
-    left: 0;
+    // left: 0;
+    left: -57px;
     overflow-x: auto;
-    padding: 2rem;
+    padding: 1rem;
     position: absolute;
     right: 0;
     top: 33px;

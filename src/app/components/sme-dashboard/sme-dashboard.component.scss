@@ -29,7 +29,8 @@ header {
 
 .app-content {
     bottom: 0;
-    left: 0;
+    // left: 0;
+    left: -50px;
     overflow-x: auto;
     padding: 2rem;
     position: absolute;
