@@ -6,8 +6,8 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
   }
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
-    margin: -32px 30px 0;
-    padding: $margin;
+   // margin: -32px 30px 0;
+    //padding: $margin;
     position: relative;
     height: 45%;
     width: 100%;
@@ -34,10 +34,10 @@ header {
     bottom: 0;
     left: 0;
     overflow-x: auto;
-    padding: 2rem;
+    padding: 0.6rem;
     position: absolute;
     right: 0;
-    top: 33px;
+    top: 40px;
 }
 .table-post{
     position: relative;
@@ -265,7 +265,7 @@ mat-card-content[_ngcontent-njk-c181]
    }
    .searchInput{
     th{
-        padding-top: 10px;
+        padding-top: 40px;
         .mat-form-field-infix{
             width: 110px;
         }
@@ -275,7 +275,7 @@ mat-card-content[_ngcontent-njk-c181]
     }
 }
 .class2{
-    min-width: 233px;
+    min-width: 210px;
     vertical-align: middle;
     position: relative;
     padding-top:30px !important;

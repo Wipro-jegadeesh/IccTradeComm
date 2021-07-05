@@ -31,10 +31,10 @@ header {
   bottom: 0;
   left: 0;
   overflow-x: auto;
-  padding: 2rem;
+  padding: 0.6rem;
   position: absolute;
   right: 0;
-  top: 33px;
+  top: 40px;
   // top: 56px;
 }
 
@@ -371,10 +371,10 @@ mat-form-field {
     }
   }
   .caption {
-    margin-top: 10px;
+    margin-top: 40px;
     font-size: 15px;
     color: black;
-    margin-top: 10px;
+    margin-top: 40px;
     font-weight: 500;
       &.subSecSel{
         border-radius: 3px;

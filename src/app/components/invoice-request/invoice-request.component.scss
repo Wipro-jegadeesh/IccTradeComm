@@ -34,8 +34,8 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
-    // margin: -32px 30px 0;
-    // padding: $margin;
+    // margin: 0;
+    // //padding: $margin;
     position: relative;
     height: 45%;
     width: 100%;
@@ -60,10 +60,10 @@ header {
     bottom: 0;
     left: 0;
     overflow-x: auto;
-    padding: 2rem;
+    padding: 1rem;
     position: absolute;
     right: 0;
-    top: 10px;
+    top: 40px;
 }
 .multiselect-dropdown {
     align-self: stretch;
@@ -429,7 +429,7 @@ mat-form-field {
 }
 .multiselect-dropdown{
     position: absolute;
-    width: 233px;
+    width: 210px;
     left:6px;
  }
 
@@ -481,3 +481,16 @@ mat-form-field {
     padding: 2px 7px 2px 9px;
     color: white;
 }
+.matButton {
+    border-radius: 3px !important;
+    pointer-events: none;
+    cursor: default;
+    }
+    .matBadge{
+    left: 60px !important;
+    width: 30px !important;
+    // border-radius: 179px !important;
+    }
+    .matPara{
+    margin-left: 135px;
+    }

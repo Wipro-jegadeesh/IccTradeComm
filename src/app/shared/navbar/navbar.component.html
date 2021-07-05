@@ -6,8 +6,8 @@
             <mat-icon>chevron_left</mat-icon>
         </button>
         <li class="uxg-h6">{{currentHeaderName | translate}}</li>
-        <li style="font-weight: bold;
-        color: #760aea;"  *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">
+        <li style="font-weight: 400;
+        color: #737171;"  *ngFor="let item of headerPaths" class="curs-pointer" (click)="navigationHeadersPath(item.path)">
             {{item.pathName | translate}}</li>
 
     </ul>

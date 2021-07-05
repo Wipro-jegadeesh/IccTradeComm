@@ -46,8 +46,8 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
-    margin: -32px 30px 0;
-    padding: $margin;
+   // margin: -32px 30px 0;
+    //padding: $margin;
     position: relative;
     height: 45%;
     width: 100%;
@@ -72,10 +72,10 @@ header {
     bottom: 0;
     left: -50px;
     overflow-x: auto;
-    padding: 2rem;
+    padding: 0.6rem;
     position: absolute;
     right: 0;
-    top: 33px;
+    top: 40px;
 }
  .multiselect-dropdown-dsgn{
         width: 351px;
@@ -129,7 +129,7 @@ header {
 @media only screen and (max-width: 575px) {
     .app-content{
         left: -12px;
-        padding: 2rem 6px;
+        padding: 0.6rem 6px;
     }
     header{
         padding: 10px;

@@ -10,9 +10,22 @@
             <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
           </div>
           <div class="col-md-3 col-lg-2 col-12">
-            <div class="score-margin">
+            <!-- <div class="score-margin">
               <span class="uxg-h6 score-label" id=grid>Score : {{score ? score : 0}} </span>
-            </div>
+            </div> -->
+            <div class="score-margin">
+              <p class="matPara">
+              <button mat-raised-button="" color="primary" matbadge="8" matbadgeposition="before"
+              matbadgecolor="accent"
+              class="mat-focus-indicator mat-badge mat-raised-button mat-button-base mat-primary mat-badge-accent mat-badge-overlap mat-badge-above mat-badge-before mat-badge-medium matButton"><span
+              class="mat-button-wrapper"> Score </span><span matripple=""
+              class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span><span
+              id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score :
+              0}}</span>
+              </button>
+              </p>
+              <!-- <span class="uxg-h6 score-label" id=grid>Score : {{score ? score : 0}} </span> -->
+              </div>
           </div>
             </div>
           <table  class="table-responsive inv-table">
