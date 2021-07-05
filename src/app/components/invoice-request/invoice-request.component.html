@@ -395,7 +395,7 @@
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                     matTooltip="{{fundingTooltip.desc | translate}}"
                     [matTooltipPosition]="tooltipPosition">{{'Description of Goods' | translate}}</th>
-                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="desc-goods">
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="desc-goods table-sm">
                       <input matInput 
                       type="text" 
                       formControlName="descGoods" 
@@ -557,13 +557,15 @@
                       {{'Total' | translate}}
                     <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
                     matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span></th>
-                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="table-md">
                       <input matInput type="number"  formControlName="total"  placeholder="{{'Total' | translate}}" required readonly>
-                      <span class="minus-btn" mat-flat-button color="primary" (click)="removeRow(index)">
-                        <mat-icon (click)="removeRow(index)" style="cursor: pointer;margin-left: -13px;">cancel
-                        </mat-icon>
-                      </span>
-                    </td>
+                        <span class="minus-btn" mat-flat-button color="primary" (click)="removeRow(index)">
+                          <mat-icon (click)="removeRow(index)" style="cursor: pointer;margin-left: -13px;">cancel
+                          </mat-icon>
+                        </span>
+                        <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+                        matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span>
+                  </td>
                   </ng-container>
                   
                   <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>

@@ -101,8 +101,8 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>{{'Inv Date' | translate}}</mat-label>
                                     <mat-date-range-input [rangePicker]="picker">
-                                        <input matStartDate placeholder="Start date">
-                                        <input matEndDate placeholder="End date">
+                                        <input matStartDate placeholder="Start date" [(ngModel)]="fromdate">
+                                        <input matEndDate placeholder="End date" [(ngModel)]="todate">
                                     </mat-date-range-input>
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-date-range-picker #picker></mat-date-range-picker>
@@ -111,12 +111,12 @@
         
                         </div>
                         <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                            <button mat-raised-button style="color: #5e52a1;">
+                            <button mat-raised-button style="color: #5e52a1;" (click)="getFilteredData()">
                                 <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
                                     [matTooltipPosition]="'below'">done
                                 </mat-icon>{{'Search' | translate}}
                             </button>&nbsp;
-                            <button mat-raised-button style="color: #5e52a1;">
+                            <button mat-raised-button style="color: #5e52a1;" (click)="resetFilteredData()">
                                 <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
                                     [matTooltipPosition]="'below'">
                                     restart_alt</mat-icon>
