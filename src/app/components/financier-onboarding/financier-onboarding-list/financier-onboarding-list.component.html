@@ -161,20 +161,20 @@
                         <tbody>
                           <tr>
                             <td>
-                              <mat-form-field dense>
+                              <mat-form-field dense class="readOnlyCls">
                                 <mat-label>{{'FinancierOnboardingComponent.FinancierId' | translate}}</mat-label>
                                 <input matInput type="text" value="{{'FIN' + financierId}}"  readonly/>
                               </mat-form-field>
                             </td>
-                            <td rowspan="1" colspan="1">
-                                <mat-form-field dense>
+                            <td rowspan="1" colspan="1" >
+                                <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                   <mat-label> {{'FinancierOnboardingComponent.FinancierNameConstitution' | translate}}</mat-label>
                                   <input matInput type="text" formControlName="fName" [readonly]="isView"  required />
                                 </mat-form-field>
                               </td>
                               <td rowspan="1" colspan="1">
-                                  <mat-form-field dense>
+                                  <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                     <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                     <mat-label>{{'FinancierOnboardingComponent.LocalRegNo' | translate}}</mat-label>
                                     <input matInput type="number" formControlName="regNum" [readonly]="isView" required/>
@@ -183,14 +183,14 @@
                           </tr>
                           <tr>
                             <td rowspan="1" colspan="1">
-                              <mat-form-field dense>
+                              <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                 <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                 <mat-label>{{'FinancierOnboardingComponent.TaxId' | translate}}</mat-label>
                                 <input matInput type="text" formControlName="taxIdNum" [readonly]="isView" required />
                               </mat-form-field>
                             </td>
                             <td rowspan="1" colspan="1">
-                              <mat-form-field dense>
+                              <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                 <mat-label>{{'FinancierOnboardingComponent.RegDate' | translate}}</mat-label>
                                 <input matInput formControlName="regDate"  [matDatepicker]="pickers" [readonly]="isView"  />
                                  <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
@@ -198,7 +198,7 @@
                             </mat-form-field>
                             </td>
                             <td rowspan="1" colspan="1">
-                                <mat-form-field dense>
+                                <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.SCFYears' | translate}}</mat-label>
                                   <input matInput type="number" formControlName="fExpYears" required [readonly]="isView" />
@@ -207,7 +207,7 @@
                           </tr>
                           <tr>
                             <td rowspan="1" colspan="1">
-                              <mat-form-field dense>
+                              <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                 <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                 <mat-label>{{'FinancierOnboardingComponent.TypeOfActivity' | translate}}</mat-label>
                                 <input matInput type="text" formControlName="activity" [readonly]="isView"  />
@@ -215,14 +215,14 @@
                             </td>
                       
                             <td rowspan="1" colspan="1">
-                              <mat-form-field dense>
+                              <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                 <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                 <mat-label>{{'FinancierOnboardingComponent.PrincipalAc' | translate}}</mat-label>
                                 <input matInput type="text" formControlName="principalBankAccount" [readonly]="isView"/>
                               </mat-form-field>
                             </td>
                             <td rowspan="1" colspan="1">
-                              <mat-form-field dense>
+                              <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                                 <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
                                 <mat-label>{{'FinancierOnboardingComponent.PrincipalBankBrn' | translate}}</mat-label>
                                 <input matInput type="text" formControlName="prncbankbranch" [readonly]="isView"/>
@@ -234,7 +234,7 @@
                             <td class="T1" rowspan="1" colspan="1">
                               <div class="card-form-container">
                                 <div>
-                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                     <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                     <mat-label>{{'FinancierOnboardingComponent.AnnualSCF' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="anlScfTrnOver" [readonly]="isView"/>
@@ -245,7 +245,7 @@
                             <td class="T1" rowspan="1" colspan="1">
                               <div class="card-form-container">
                                 <div>
-                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                     <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                     <mat-label>{{'FinancierOnboardingComponent.TransactionLimit' | translate}}</mat-label>
                                     <input type="text" matInput  formControlName="transLimit" [readonly]="isView" />
@@ -286,7 +286,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
                                       <input type="text" matInput  formControlName="headAddrLine1" [readonly]="isView"/>
@@ -325,7 +325,7 @@
                                 </mat-select>
                               </mat-form-field> -->
                                   <!-- </div> -->
-                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-label>{{'FinancierOnboardingComponent.Country' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headcountry" [readonly]="isView" />
                                     </mat-form-field>
@@ -334,7 +334,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                   <div class="card-form-container">
                                     <div>
-                                      <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                      <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                         <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
                                         <input type="text" matInput formControlName="headAddrLine2" [readonly]="isView" />
@@ -347,7 +347,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headtelephoneNumber" [readonly]="isView" />
@@ -359,7 +359,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headAddrLine3" [readonly]="isView" />
@@ -370,7 +370,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headfaxNo" [readonly]="isView"/>
@@ -383,7 +383,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.City' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headcity" [readonly]="isView" />
@@ -394,7 +394,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="heademail" [readonly]="isView"/>
@@ -405,7 +405,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                   <div class="card-form-container">
                                     <div>
-                                      <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                      <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                         <mat-label>{{'FinancierOnboardingComponent.State' | translate}}</mat-label>
                                         <input type="text" matInput formControlName="headstate"  [readonly]="isView"/>
@@ -419,7 +419,7 @@
                               <td class="T1" rowspan="1" colspan="1">
                                 <div class="card-form-container">
                                   <div>
-                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                    <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                       <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                       <mat-label>{{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
                                       <input type="text" matInput formControlName="headswiftBic" [readonly]="isView"/>
@@ -462,7 +462,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servAddrLine1"  [readonly]="isView"/>
@@ -472,7 +472,7 @@
                           </td>
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                     <mat-label>{{'FinancierOnboardingComponent.Country' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="servCountry" [readonly]="isView" />
                                   </mat-form-field>
@@ -499,7 +499,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                               <div class="card-form-container">
                                 <div>
-                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                  <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                     <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                     <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
                                     <input type="text" matInput formControlName="servAddrLine2" [readonly]="isView"/>
@@ -513,7 +513,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servtelephoneNumber" [readonly]="isView" />
@@ -525,7 +525,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servAddrLine3" [readonly]="isView" />
@@ -536,7 +536,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servfaxNo" [readonly]="isView" />
@@ -549,7 +549,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.City' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servcity" [readonly]="isView"/>
@@ -560,7 +560,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.Email' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servemail" [readonly]="isView" />
@@ -572,7 +572,7 @@
                           <td class="T1" rowspan="1" colspan="1">
                             <div class="card-form-container">
                               <div>
-                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                                <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                                   <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
                                   <mat-label>{{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
                                   <input type="text" matInput formControlName="servswiftBic" [readonly]="isView" />
