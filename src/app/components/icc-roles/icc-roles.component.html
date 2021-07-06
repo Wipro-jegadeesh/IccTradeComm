@@ -1,191 +1,155 @@
 <div class="app-content">
-  <header>
-    <div class="data-section">
-      <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()" #formDirective="ngForm">
-      <h5 class="text-center">{{'IccRoles.Roles' | translate}}</h5>
-          <mat-card>
-        <mat-card-content>
-          <table  class="table-responsive inv-table">
-            <tbody>
+    <header>
+        <div class="data-section">
+            <!-- Form section started -->
+            <form [formGroup]="groupsForm" autocomplete="off" (ngSubmit)="onSubmitRoleForm()" #formDirective="ngForm">
+                <h5 class="text-center">{{'IccRoles.Roles' | translate}}</h5>
+                <mat-card>
+                    <mat-card-content>
+                        <table class="table-responsive inv-table">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>{{'IccRoles.code' | translate}}</mat-label>
+                                            <input type="text" matInput value="" formControlName="code" />
 
-<tr>
-                
-  <td rowspan="1" colspan="1">
-    <mat-form-field dense class="icc-mat">
-      <mat-label>{{'IccRoles.code' | translate}}</mat-label>
-      <input type="text" matInput value="" formControlName="code" />
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <mat-form-field dense class="icc-mat">
+                                            <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
+                                            <input type="text" matInput value="" formControlName="roleDescription" />
 
-    </mat-form-field>
-  </td>
-  <td rowspan="1" colspan="1">
-    <mat-form-field dense class="icc-mat">
-      <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
-      <input type="text" matInput value="" formControlName="roleDescription" />
-
-    </mat-form-field>
-  </td>
-
-
-  <td rowspan="1" colspan="1">      
-      <button *ngIf="!isEdit" mat-flat-button color="primary"id=grid>{{'IccRoles.add' | translate}}</button>
-      <button *ngIf="isEdit" mat-flat-button color="primary"id=grid>{{'IccRoles.update' | translate}}</button>
-  
-      </td>
-  
-</tr>
-
-</tbody>
-</table>
-</mat-card-content>
-</mat-card>
-
-</form>
-
-<br>
-      <div class="mat-elevation-z8 table-responsive table-post">
-          <table mat-table [dataSource]="dataSource" matSort>
-              <ng-container matColumnDef="code">
-                  <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{'IccRoles.code' | translate}} </th>
-                  <td mat-cell *matCellDef="let element">
-                               {{element.code}}
-                   </td>
-                </ng-container>
-
-              <ng-container matColumnDef="roleDescription">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'IccRoles.roleDescription' | translate}} </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      {{element.roleDescription}}
-                  </td>
-              </ng-container>
-
-              <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
-                <td mat-cell *matCellDef="let element">
-                  <a  href="javascript:void(0)" (click)="getEditData(element)">
-                    <mat-icon  #tooltip="matTooltip"
-                    matTooltip="{{'edit' | translate}}" [matTooltipPosition]="'below'">edit</mat-icon>
-                  </a>&nbsp;
-                   </td>
-              </ng-container>
-
-                        <!-- ============ -->
-          <ng-container matColumnDef="TopBar">
-            <th colspan="9" mat-header-cell *matHeaderCellDef>
-                <div style="justify-content:flex-end;cursor: pointer;">
-                    <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-                    <!-- <span (click)="filterDiv()" class="material-icons">filter_list</span> -->
-                </div>
-            </th>
-        </ng-container>
-        <ng-container matColumnDef="Search">
-            <th colspan="8" mat-header-cell *matHeaderCellDef>
-                <h6>{{'Search By' | translate}}</h6>
-                <form [formGroup]="Searchform">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{'IccRoles.code' | translate}}</mat-label>
-                                <input type="text" formControlName="code" matInput />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-2">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
-                                <input type="text" formControlName="roleDescription" matInput />
-                            </mat-form-field>
-                        </div>
-                        <!-- <div class="col-sm-2">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{'Buyer Name' | translate}}</mat-label>
-                                <input type="text" formControlName="buyerName" matInput />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-2">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{'Inv Date' | translate}}</mat-label>
-                                <input matInput readonly="true" formControlName="invoiceDate"
-                                    [matDatepicker]="picker">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-2">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{'Inv Due date' | translate}}</mat-label>
-                                <input matInput readonly="true" formControlName="invoiceDueDate"
-                                    [matDatepicker]="picker1">
-                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-                        </div> -->
-                    </div>
-                    <div class="row"
-                        style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                        <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
-                            <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
-                                [matTooltipPosition]="'below'">
-                                done
-                            </mat-icon> {{'Search' | translate}}
-                        </button>&nbsp;
-                        <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
-                            <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
-                                [matTooltipPosition]="'below'">
-                                restart_alt</mat-icon> {{'Reset' | translate}}
-                        </button>
-                    </div>
-                </form>
-            </th>
-        </ng-container>
-        <ng-container matColumnDef="Filter">
-            <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label>{{'Invoice Amount' | translate}}</label>
-                        <div class="custom-slider">
-                            <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
-                            </ngx-slider>
-                        </div>
-                    </div>
-                    <div class="col-sm-3" style="padding-top: 22px;">
-                        <mat-form-field appearance="fill">
-                            <mat-label>{{'Inv Date' | translate}}</mat-label>
-                            <mat-date-range-input [rangePicker]="picker">
-                                <input matStartDate placeholder="Start date">
-                                <input matEndDate placeholder="End date">
-                            </mat-date-range-input>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker #picker></mat-date-range-picker>
-                        </mat-form-field>
-                    </div>
-
-                </div>
-                <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                    <button mat-raised-button style="color: #5e52a1;">
-                        <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
-                            [matTooltipPosition]="'below'">done
-                        </mat-icon>{{'Search' | translate}}
-                    </button>&nbsp;
-                    <button mat-raised-button style="color: #5e52a1;">
-                        <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
-                            [matTooltipPosition]="'below'">
-                            restart_alt</mat-icon>
-                    </button>
-                </div>
-            </th>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-        <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
-            *matHeaderRowDef="displayedColumnsearch"></tr>
-        <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-       
-          <!-- ============ -->
-
-    
-              <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>               
-          </table>
-          <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
-          </div>
-</div>
-</header>
+                                        </mat-form-field>
+                                    </td>
+                                    <td rowspan="1" colspan="1">
+                                        <button *ngIf="!isEdit" mat-flat-button color="primary" id=grid>{{'IccRoles.add'
+                                            | translate}}</button>
+                                        <button *ngIf="isEdit" mat-flat-button color="primary"
+                                            id=grid>{{'IccRoles.update' | translate}}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </mat-card-content>
+                </mat-card>
+            </form> <!-- Form section Ended -->
+            <br>
+            <div class="mat-elevation-z8 table-responsive table-post">
+                <!-- Table section started -->
+                <table mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="code">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'IccRoles.code' | translate}} </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.code}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="roleDescription">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'IccRoles.roleDescription' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.roleDescription}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
+                        <td mat-cell *matCellDef="let element">
+                            <a href="javascript:void(0)" (click)="getEditData(element)">
+                                <mat-icon #tooltip="matTooltip" matTooltip="{{'edit' | translate}}"
+                                    [matTooltipPosition]="'below'">edit</mat-icon>
+                            </a>&nbsp;
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TopBar">
+                        <th colspan="9" mat-header-cell *matHeaderCellDef>
+                            <div style="justify-content:flex-end;cursor: pointer;">
+                                <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+                            </div>
+                        </th>
+                    </ng-container><!-- Search section started -->
+                    <ng-container matColumnDef="Search">
+                        <th colspan="8" mat-header-cell *matHeaderCellDef>
+                            <h6>{{'Search By' | translate}}</h6>
+                            <form [formGroup]="Searchform">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{'IccRoles.code' | translate}}</mat-label>
+                                            <input type="text" formControlName="code" matInput />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>{{'IccRoles.roleDescription' | translate}}</mat-label>
+                                            <input type="text" formControlName="roleDescription" matInput />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row"
+                                    style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                    <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
+                                        <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                                            [matTooltipPosition]="'below'">
+                                            done
+                                        </mat-icon> {{'Search' | translate}}
+                                    </button>&nbsp;
+                                    <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
+                                        <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
+                                            [matTooltipPosition]="'below'">
+                                            restart_alt</mat-icon> {{'Reset' | translate}}
+                                    </button>
+                                </div>
+                            </form>
+                        </th>
+                    </ng-container><!-- Search section Ended -->
+                    <!-- Filter section started -->
+                    <ng-container matColumnDef="Filter">
+                        <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>{{'Invoice Amount' | translate}}</label>
+                                    <div class="custom-slider">
+                                        <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                                        </ngx-slider>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px;">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>{{'Inv Date' | translate}}</mat-label>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                            <input matStartDate placeholder="Start date">
+                                            <input matEndDate placeholder="End date">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row"
+                                style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                <button mat-raised-button style="color: #5e52a1;">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                                        [matTooltipPosition]="'below'">done
+                                    </mat-icon>{{'Search' | translate}}
+                                </button>&nbsp;
+                                <button mat-raised-button style="color: #5e52a1;">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
+                                        [matTooltipPosition]="'below'">
+                                        restart_alt</mat-icon>
+                                </button>
+                            </div>
+                        </th>
+                    </ng-container><!-- Filter section ended -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+                    <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
+                        *matHeaderRowDef="displayedColumnsearch"></tr>
+                    <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
+                    <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table><!-- Form section Ended -->
+                <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </header>
 </div>

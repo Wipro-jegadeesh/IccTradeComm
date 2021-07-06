@@ -561,6 +561,10 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
     font-size: 12px !important;
     font-weight: 400;
     text-align: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .main-container{
     padding: 0px  !important;

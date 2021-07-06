@@ -5,7 +5,7 @@
       <tbody>
           <tr>
               <td rowspan="1" colspan="1">
-                <mat-form-field dense>
+                <mat-form-field dense class="readOnlyCls">
                   <mat-label>{{'Invoice Reference No' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''"  readonly/>
                 </mat-form-field>
@@ -17,13 +17,13 @@
                 </mat-form-field>
               </td> -->
               <td rowspan="1" colspan="1">
-                <mat-form-field dense>
+                <mat-form-field dense class="readOnlyCls">
                   <mat-label>{{'SME Name' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeName : ''"   readonly/>
                 </mat-form-field>
               </td>
               <td rowspan="1" colspan="1">
-                <mat-form-field dense>
+                <mat-form-field dense class="readOnlyCls">
                   <mat-label>{{'Buyer Name' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" readonly />
                 </mat-form-field>
@@ -31,19 +31,19 @@
             </tr>
             <tr>
               <td rowspan="1" colspan="1">
-                <mat-form-field dense>
+                <mat-form-field dense class="readOnlyCls">
                   <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
                   <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" readonly />
                 </mat-form-field>
               </td>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense class="readOnlyCls">
                     <mat-label>{{'SME Rating' | translate}}</mat-label>
                     <input type="text" matInput value="7/10" readonly />
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense class="readOnlyCls">
                     <mat-label>{{'Transaction Rating' | translate}}</mat-label>
                     <input type="text" matInput value="9/10"readonly />
                   </mat-form-field>
@@ -52,19 +52,19 @@
               </tr>
               <tr>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense>
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'Invoice Date' | translate}}</mat-label>
                       <input type="text" matInput  value="{{invoiceDetails ? invoiceDetails.invDate && moment(invoiceDetails.invDate).format('DD/MM/YYYY') : '' | date}}" readonly />
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense>
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'Inv Due date' | translate}}</mat-label>
                       <input type="text" matInput value="{{invoiceDetails ? invoiceDetails.invDueDate && moment(invoiceDetails.invDueDate).format('DD/MM/YYYY') : '' | date}}" readonly/>
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense>
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'Invoice Amount' | translate}}</mat-label>
                       <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" readonly/>
                     </mat-form-field>

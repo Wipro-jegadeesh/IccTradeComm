@@ -308,18 +308,30 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   ];
   chartLabels = ['25%', '50%', '75%', '100%', 'FULL'];
   chartColors = [
+    // {
+    //   backgroundColor: "rgba(204, 51, 0, .3)",
+    //   borderColor: "rgba(204, 51, 0, .7)",
+    // },
+    // {
+    //   backgroundColor: "rgba(0, 128, 43, .3)",
+    //   borderColor: "rgba(0, 128, 43, .7)",
+    // },
+    // {
+    //   backgroundColor: "rgba(0, 137, 132, .3)",
+    //   borderColor: "rgba(0, 10, 130, .7)",
+    // },
     {
-      backgroundColor: "rgba(204, 51, 0, .3)",
-      borderColor: "rgba(204, 51, 0, .7)",
-    },
-    {
-      backgroundColor: "rgba(0, 128, 43, .3)",
-      borderColor: "rgba(0, 128, 43, .7)",
-    },
-    {
-      backgroundColor: "rgba(0, 137, 132, .3)",
-      borderColor: "rgba(0, 10, 130, .7)",
-    },
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      },
+      {
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      },
+      {
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      }
 
   ];
   callPutMethod = false;
