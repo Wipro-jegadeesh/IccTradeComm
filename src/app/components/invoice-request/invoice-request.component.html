@@ -113,7 +113,7 @@
     <td rowspan="1" colspan="1">
       <mat-form-field dense class="spilt-input" [ngClass]="{'readOnlyCls': this.isDisabled}" >
         <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
-        <input type="number" matInput value="" autocomplete="on" formControlName="invAmt" [readonly]="this.isDisabled" (input)="setTwoNumberDecimal($event,'invAmt')"/>
+        <input type="number" matInput autocomplete="on" formControlName="invAmt" [readonly]="this.isDisabled" (input)="setTwoNumberDecimal($event,'invAmt')"/>
         <!-- <mat-hint>Please enter the Invoice Amount</mat-hint> -->
       </mat-form-field>
     </td>
@@ -166,7 +166,7 @@
                     <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                       <!-- <mat-icon dense color="primary" matPrefix>person_outline</mat-icon> -->
                       <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
-                      <input type="text"[readonly]="this.isDisabled"  matInput value="" formControlName="billNo" />
+                      <input type="text"[readonly]="this.isDisabled"  matInput  formControlName="billNo" />
                       <!-- <mat-hint>Please enter the BL/Roadway Bill No</mat-hint> -->
                       <mat-icon class="info_icon" matSuffix  #tooltip="matTooltip"
                       matTooltip="{{fundingTooltip.billInfo | translate}}"
@@ -261,19 +261,19 @@
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label> {{'Buyer Name' | translate}} </mat-label>
-                    <input type="text"[readonly]="this.isDisabled" matInput value="" formControlName="buyerName"/>
+                    <input type="text"[readonly]="this.isDisabled" matInput  formControlName="buyerName"/>
                   </mat-form-field>
                 </td>
                  <td rowspan="1" colspan="1">
                   <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
-                    <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="buyerUEN" />
+                    <input type="text" [readonly]="this.isDisabled" matInput  formControlName="buyerUEN" />
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>Contact Name</mat-label>
-                    <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="companyName" />
+                    <input type="text" [readonly]="this.isDisabled" matInput formControlName="companyName" />
                   </mat-form-field>
                 </td>
 
@@ -285,7 +285,7 @@
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
                     <mat-label>{{'Email' | translate}}</mat-label>
-                    <input type="text" [readonly]="this.isDisabled" matInput value="" formControlName="email" />
+                    <input type="text" [readonly]="this.isDisabled" matInput  formControlName="email" />
                     <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
                   </mat-form-field>
                 </td>
@@ -371,7 +371,7 @@
                   <ng-container matColumnDef="goodsId">
                     <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                       matTooltip="{{fundingTooltip.goodsId | translate}}" [matTooltipPosition]="tooltipPosition">
-                      {{'goodsId' | translate}}</th>
+                      {{'GoodsId' | translate}}</th>
                     <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                       <input matInput type="text" formControlName="goodsId" placeholder="{{'goodsId' | translate}}"
                         required>

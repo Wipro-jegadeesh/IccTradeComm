@@ -161,11 +161,53 @@ export class InvoiceRequestComponent implements OnInit {
     console.log(this.type,"this.type")
     if(this.type === 'repository'){
       this.isDisabled = true
+      console.log("testtstts")
+      this.invoiceForm.patchValue({
+        invId:"1790899780001",
+    billNo: "1709155632001",
+    invAmt: "27",
+    invCcy:"USD",
+    invDueDate: moment('2020-09-15', 'YYYY - MM - DD HH: mm').toDate(),
+    invDate: moment('2020-06-15', 'YYYY - MM - DD HH: mm').toDate(),
+    dispDate:  moment('2020-09-15', 'YYYY - MM - DD HH: mm').toDate(),
+    email:"agb_andrea@yahoo.com.ar",
+    buyerName:"GARCIA BENITEZ ANDREA MARIA",
+    phoneNo:"987654321",
+    buyerUEN:"1709155632001",
+    buyerAddr:"BEL",
+    addressLine1:"LAS PALMERAS N46-226 AND N46D DE LAS GARDENI",
+    addressLine2:"GARDENI",
+    city:"ECU",
+    postalCode:"34567",
+    companyName:"MacBook APPLE"
+  });
+  this.currencyName="USD"
+  this.currencyAMT = "27"
+  this.invoiceID = "1790899780001"
+  this.InvoiceFdate = moment('2020-06-15', 'YYYY - MM - DD HH: mm').toDate()
+  const row = this.fb.group({
+    ID: this.invoiceID,
+    descGoods: "NO MEMBER ELECTRONIC",
+    dateOfInvoice: this.datePipe.transform(this.InvoiceFdate, "dd/MM/yyyy"),
+    quantity: '1',
+    rate: '27',
+    amt: '27',
+    amtCcy: this.currencyName,
+    discAmt: '0',
+    netAmtPay: '0',
+    taxRate: '0',
+    taxAmt: '0',
+    total: '27',
+    goodsId: '1790899780001'
+  })
+      this.dateFormArray.push(row);
       // this.UpdateInvoice(this.FileData.FileData.queryParams.invoicedata)
     }
+   
     this.userDeatils= JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role : 'Authorise' } 
     this.getInvDetailsLists()
     this.addRow();
+    this.removeRow(1)
    
 }
 repositoryFetch(){
