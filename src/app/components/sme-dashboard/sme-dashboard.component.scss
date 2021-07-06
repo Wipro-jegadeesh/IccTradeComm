@@ -131,6 +131,10 @@ a.list-group-item.text-center.tablecolour.mat-menu-trigger{
     width: 378px;
 }
 
+.space-m{
+    margin-top: 30px;
+}
+
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
@@ -203,8 +207,36 @@ a.list-group-item.text-center.tablecolour.mat-menu-trigger{
     }
     .topbar_item{
         margin-bottom: 20px;
+        margin-top: 30px;
+        display: block;
+    }
+    .trans-table{
+        height: auto;
+        padding-left: 12px;
+        width: 600px;
+    }
+    table#customers{
+        width: 600px;
+    }
+    .space-p{
+        padding: 0;
     }
 }
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .trans-table{
+        height: auto;
+        padding-left: 12px;
+        width: 800px;
+    }
+    table#customers{
+        width: 800px;
+    }
+    .space-p{
+        padding: 0;
+    }
+}
+
 .app-content.active{
     @media only screen and (min-width: 1025px) {
         .wave {
@@ -212,6 +244,7 @@ a.list-group-item.text-center.tablecolour.mat-menu-trigger{
         }
     }
 }
+
 /* Desktop Styles */
 @media only screen and (min-width: 1025px) {
     .wave {
@@ -304,7 +337,25 @@ mat-card-content[_ngcontent-njk-c181]
 }
 .topbar_item{
     margin-bottom: 20px;
+    margin-top: 30px;
 }
+.trans-table{
+    height: auto;
+    padding-left: 12px;
+}
+table#customers{
+    width: 500px;
+}
+.space-p{
+    padding: 0;
+}
+// .chart{
+//     .card-body{
+//         >div{
+//             overflow-x: auto;
+//         }
+//     }
+// }
 }
 @media screen and (max-width: 1030px) {
     .mmt20{

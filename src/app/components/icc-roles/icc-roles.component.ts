@@ -1,15 +1,12 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Validators, FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { IccRolesServices } from './icc-roles-services';
 import { DatePipe } from '@angular/common';
-
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
-
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -20,16 +17,13 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class IccRolesComponent implements OnInit {
   groupsForm: FormGroup;
-
   displayedColumns: string[] = ['code', 'roleDescription', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean
   roleId: any
   @ViewChild('formDirective') private formDirective: NgForm;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -41,10 +35,7 @@ export class IccRolesComponent implements OnInit {
   ]
   SearchModel = {
     'code': String,
-    'roleDescription': String,
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
+    'roleDescription': String
   }
   value: number = 0;
   highValue: number = 50;
@@ -65,19 +56,15 @@ export class IccRolesComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-
   constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccRolesServices,
-    private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
+    private fb: FormBuilder, private toastr: ToastrService) {
     this.groupsFormBuild()
   }
-
-  ngOnInit(): void {
+  ngOnInit(): void { //Initially this func execute
     this.getList()
     this.buildform()
   }
-
-  getList(){
-    // this.dataSource = new MatTableDataSource([{ 'roleId': '1', 'code': 'CODE123', 'roleDescription': 'description of role' }]);
+  getList() { //This function calls initially to get list from api call
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
@@ -86,43 +73,30 @@ export class IccRolesComponent implements OnInit {
     })
   }
 
-  buildform() {
+  buildform() { //this function is to build search form group initially
     this.Searchform = this.fb.group({
       code: [''],
-      roleDescription: [''],
-      // buyerName: [''],
-      // invoiceDate: [''],
-      // invoiceDueDate: ['']
+      roleDescription: ['']
     })
   }
 
-  getSearchList(){
+  getSearchList() { // This func is to get searched data from list api
     this.IccRolesServices.search_getAllRoles(this.Searchform.value).subscribe(listResp => {
-      if (listResp) { 
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
   }
 
-  SearchAPI() {
-    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
+  SearchAPI() { //This func is call from html when search button click
     this.getSearchList()
-  } 
-  ResetAPI() {
+  }
+  ResetAPI() { //This func is call to reset searched data
     this.buildform();
     this.getList();
-    // this.getSearchList()
-    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-
-    // })
   }
-  searchDiv() {
+  searchDiv() { //This func is used for hide and show "search input fields"
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -130,7 +104,7 @@ export class IccRolesComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  filterDiv() { //This func is used for hide and show "filter input fields"
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -138,28 +112,13 @@ export class IccRolesComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
-  groupsFormBuild() {
+  groupsFormBuild() { //This func is used for assigning form to add data
     this.groupsForm = this.fb.group({
       code: ['', Validators.required],
       roleDescription: ['', Validators.required]
     });
-
   }
-
-  getEditData(data) {
-
-    // **** Start Need to hide *****
-    // this.isEdit = true
-    // this.roleId = 1
-    // let respData = {'roleId' : '1','code' : 'CODE123','roleDescription' : 'description of role'}
-    // this.groupsForm.patchValue({  
-    //   code : respData.code,
-    //   roleDescription : respData.roleDescription
-    // })
-    // **** End Need to hide  *****
-
+  getEditData(data) { //To get Particular data to prepopulate in form for Edit func
     this.IccRolesServices.getParticularRoles(data.roleId).subscribe(resp => {
       if (resp) {
         let respData = resp;
@@ -169,20 +128,10 @@ export class IccRolesComponent implements OnInit {
         })
         this.isEdit = true
         this.roleId = respData.roleId
-
       }
     })
   }
-
-  onSubmitRoleForm() {
-
-    // **** Start Need to hide *****
-    //  this.roleId = "";
-    //  this.isEdit = false
-    //  this.groupsForm.reset();
-    // End Need to hide **********
-
-    // this.IccGroupServices.getParticularGroups(1).subscribe(resp => { })
+  onSubmitRoleForm() { // To submit form for add and update flow
     if (this.groupsForm.value && this.groupsForm.status == "VALID") {
       let value = this.groupsForm.value
       if (this.isEdit) {
@@ -191,7 +140,6 @@ export class IccRolesComponent implements OnInit {
       this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
         if (resp) {
           this.toastr.success(this.translate.instant('Saved Successfully'))
-          // this.groupsForm.reset();
           this.formDirective.resetForm();
           this.roleId = "";
           this.isEdit = false
@@ -206,5 +154,4 @@ export class IccRolesComponent implements OnInit {
       this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
-
 }

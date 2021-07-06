@@ -6,10 +6,10 @@
       <mat-card>
         <mat-card-content>
           <div id="container" class=" row col-md-12 col-12" >
-            <div class="col-md-9 col-lg-10 col-12">
+            <div class="col-md-8 col-xl-10 col-lg-9 col-12">
             <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
           </div>
-          <div class="col-md-3 col-lg-2 col-12">
+          <div class="col-md-4 col-xl-2 col-lg-3 col-12">
             <!-- <div class="score-margin">
               <span class="uxg-h6 score-label" id=grid>Score : {{score ? score : 0}} </span>
             </div> -->
@@ -558,13 +558,15 @@
                     <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
                     matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span></th>
                     <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" class="table-md">
-                      <input matInput type="number"  formControlName="total"  placeholder="{{'Total' | translate}}" required readonly>
-                        <span class="minus-btn" mat-flat-button color="primary" (click)="removeRow(index)">
-                          <mat-icon (click)="removeRow(index)" style="cursor: pointer;margin-left: -13px;">cancel
-                          </mat-icon>
-                        </span>
-                        <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
-                        matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span>
+                      <div>
+                        <input matInput type="number"  formControlName="total"  placeholder="{{'Total' | translate}}" required readonly>
+                          <span class="minus-btn" mat-flat-button color="primary" (click)="removeRow(index)">
+                            <mat-icon (click)="removeRow(index)" style="cursor: pointer;margin-left: -13px;">cancel
+                            </mat-icon>
+                          </span>
+                          <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid  #tooltip="matTooltip"
+                          matTooltip="{{fundingTooltip.addGoods | translate}}" [matTooltipPosition]="tooltipPosition">+</span>
+                      </div>
                   </td>
                   </ng-container>
                   
