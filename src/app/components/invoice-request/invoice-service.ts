@@ -10,6 +10,10 @@ export class InvoiceRequestServices {
     return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
 
+  getInvoice(​​​​​​​ruc,​​​​​​​documentnumber){
+      // http://localhost:8080/invoice-request/invoicefromdoce/{​​​​​​​ruc}​​​​​​​/{​​​​​​​documentnumber}​​​​​​​
+    return this.apiService.get('invoice-request/invoicefromdoce/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
+  }
   getInvDetailsLists_ForFinanceBidding(id){
     return this.apiService.get('invoice-request/invoice/'+id);
   }
