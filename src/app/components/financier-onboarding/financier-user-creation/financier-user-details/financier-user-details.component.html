@@ -10,7 +10,7 @@
                     <div class="form-group">
                       <label for="National ID​">​ {{'FinancieruserCreation.CompRegId' | translate}}
                       </label>
-                      <mat-form-field dense>
+                      <mat-form-field dense class="readOnlyCls">
                         <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="{{'FinancieruserCreation.CompRegId' | translate}}" matInput formControlName="finDetailId" [readonly]="true"/>
                         <mat-error *ngIf="hasError('finDetailId', 'required')"> {{'FinancieruserCreation.EnterCompReg' | translate}}</mat-error>
                       </mat-form-field>

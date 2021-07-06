@@ -37,7 +37,7 @@
                     <td rowspan="1"
                         colspan="1"
                         *ngIf="financierId">
-                      <mat-form-field dense>
+                      <mat-form-field dense class="readOnlyCls">
                         <mat-label>{{'FinancierOnboardingComponent.FinancierId' | translate}}</mat-label>
                         <input matInput
                                type="text"
@@ -51,7 +51,7 @@
                   <tr>
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -66,7 +66,7 @@
                     </td>
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -82,7 +82,7 @@
 
                     <td rowspan="1"
                     colspan="1">
-                  <mat-form-field dense>
+                  <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                     <mat-icon dense
                               color="primary"
                               matPrefix>person_outline</mat-icon>
@@ -117,7 +117,7 @@
                  
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -132,7 +132,7 @@
                     </td>
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -149,7 +149,7 @@
                   <tr>
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -163,7 +163,7 @@
                     </td>
                     <td rowspan="1"
                         colspan="1">
-                      <mat-form-field dense>
+                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon dense
                                   color="primary"
                                   matPrefix>person_outline</mat-icon>
@@ -184,7 +184,7 @@
                           <mat-form-field floatLabel="never"
                                           dense
                                           appearance="fill"
-                                          class="example-full-width">
+                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                             <mat-icon color="primary"
                                       dense
                                       matPrefix>person_outline</mat-icon>
@@ -211,7 +211,7 @@
                           <mat-form-field floatLabel="never"
                                           dense
                                           appearance="fill"
-                                          class="example-full-width">
+                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                             <mat-icon color="primary"
                                       dense
                                       matPrefix>person_outline</mat-icon>
@@ -283,7 +283,7 @@
                       <mat-form-field floatLabel="never"
                                       dense
                                       appearance="fill"
-                                      class="example-full-width">
+                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon color="primary"
                                   dense
                                   matPrefix>person_outline</mat-icon>
@@ -306,7 +306,7 @@
                   <mat-form-field floatLabel="never"
                                   dense
                                   appearance="fill"
-                                  class="example-full-width">
+                                  class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                     <mat-icon color="primary"
                               dense
                               matPrefix>person_outline</mat-icon>
@@ -329,7 +329,7 @@
               <mat-form-field floatLabel="never"
                               dense
                               appearance="fill"
-                              class="example-full-width">
+                              class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                 <mat-icon color="primary"
                           dense
                           matPrefix>person_outline</mat-icon>
@@ -356,7 +356,7 @@
                       <mat-form-field floatLabel="never"
                                       dense
                                       appearance="fill"
-                                      class="example-full-width">
+                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon color="primary"
                                   dense
                                   matPrefix>person_outline</mat-icon>
@@ -379,7 +379,7 @@
                       <mat-form-field floatLabel="never"
                                       dense
                                       appearance="fill"
-                                      class="example-full-width">
+                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                         <mat-icon color="primary"
                                   dense
                                   matPrefix>person_outline</mat-icon>
@@ -402,7 +402,7 @@
                   <mat-form-field floatLabel="never"
                                   dense
                                   appearance="fill"
-                                  class="example-full-width">
+                                  class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                     <mat-icon color="primary"
                               dense
                               matPrefix>person_outline</mat-icon>
@@ -429,7 +429,7 @@
                           <mat-form-field floatLabel="never"
                                           dense
                                           appearance="fill"
-                                          class="example-full-width">
+                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                             <mat-icon color="primary"
                                       dense
                                       matPrefix>person_outline</mat-icon>
@@ -468,7 +468,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -493,7 +493,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -516,7 +516,7 @@
                           <mat-form-field floatLabel="never"
                                           dense
                                           appearance="fill"
-                                          class="example-full-width">
+                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                             <mat-icon color="primary"
                                       dense
                                       matPrefix>person_outline</mat-icon>
@@ -580,7 +580,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -603,7 +603,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -626,7 +626,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -657,7 +657,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -680,7 +680,7 @@
                 <mat-form-field floatLabel="never"
                                 dense
                                 appearance="fill"
-                                class="example-full-width">
+                                class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                   <mat-icon color="primary"
                             dense
                             matPrefix>person_outline</mat-icon>
@@ -703,7 +703,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -729,7 +729,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -768,7 +768,7 @@
                     <mat-form-field floatLabel="never"
                                     dense
                                     appearance="fill"
-                                    class="example-full-width">
+                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                       <mat-icon color="primary"
                                 dense
                                 matPrefix>person_outline</mat-icon>
@@ -793,7 +793,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -861,7 +861,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -889,7 +889,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -932,7 +932,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -972,7 +972,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1003,7 +1003,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1055,7 +1055,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -1083,7 +1083,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -1123,7 +1123,7 @@
     <mat-form-field floatLabel="never"
                     dense
                     appearance="fill"
-                    class="example-full-width">
+                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
       <mat-icon color="primary"
                 dense
                 matPrefix>person_outline</mat-icon>
@@ -1163,7 +1163,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1194,7 +1194,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1245,7 +1245,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -1275,7 +1275,7 @@
                             <mat-form-field floatLabel="never"
                                             dense
                                             appearance="fill"
-                                            class="example-full-width">
+                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                               <mat-icon color="primary"
                                         dense
                                         matPrefix>person_outline</mat-icon>
@@ -1316,7 +1316,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1356,7 +1356,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>
@@ -1387,7 +1387,7 @@
                         <mat-form-field floatLabel="never"
                                         dense
                                         appearance="fill"
-                                        class="example-full-width">
+                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
                           <mat-icon color="primary"
                                     dense
                                     matPrefix>person_outline</mat-icon>

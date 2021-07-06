@@ -163,18 +163,30 @@ export class SmeDashboardComponent implements OnInit {
   ];
   chartLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   chartColors = [
+    // {
+    //   backgroundColor: "rgba(0, 137, 132, .3)",
+    //   borderColor: "rgba(0, 10, 130, .7)",
+    // },
+    // {
+    //   backgroundColor: "#2ca92c",
+    //   borderColor: "green",
+    // },
+    // {
+    //   backgroundColor: "rgba(0, 137, 132, .3)",
+    //   borderColor: "rgba(0, 10, 130, .7)",
+    // },
     {
-      backgroundColor: "rgba(0, 137, 132, .3)",
-      borderColor: "rgba(0, 10, 130, .7)",
-    },
-    {
-      backgroundColor: "#2ca92c",
-      borderColor: "green",
-    },
-    {
-      backgroundColor: "rgba(0, 137, 132, .3)",
-      borderColor: "rgba(0, 10, 130, .7)",
-    },
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      },
+      {
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      },
+      {
+      backgroundColor: "rgba(193 55 162 1)",
+      borderColor: "rgba(124 73 203 1)",
+      }
   ];
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
