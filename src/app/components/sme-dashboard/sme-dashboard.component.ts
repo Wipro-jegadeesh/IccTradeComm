@@ -230,6 +230,7 @@ export class SmeDashboardComponent implements OnInit {
         console.log(flName, "flName")
         // console.log(ev.target.files, "ev.target.files")
         this.PDFData = data
+        console.log(data,"data")
         let fileName = {
           'fileName': file.name,
           'data': (<string>data).split(',')[1],
