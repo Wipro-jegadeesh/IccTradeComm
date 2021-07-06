@@ -34,7 +34,7 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
-    // margin: -32px 30px 0;
+    // margin: 0;
     // //padding: $margin;
     position: relative;
     height: 45%;
@@ -60,7 +60,7 @@ header {
     bottom: 0;
     left: 0;
     overflow-x: auto;
-    padding: 0.6rem;
+    padding: 1rem;
     position: absolute;
     right: 0;
     top: 40px;
@@ -137,7 +137,9 @@ table{
 
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
+        margin-bottom: $uxg-spacing-5;
         height: 35%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -157,6 +159,24 @@ table{
             }
         }
     }
+    .score-margin {
+        margin : 10px 0; 
+    }
+}
+
+.table-md{
+    width: 140px;
+    input{
+        width: 100px;
+    }
+    .add-good-plusbtn{
+        padding: 2px 5px;
+        margin-right: 2px;
+    }
+}
+
+.table-sm{
+    width: 125px;
 }
 
 /* Mobile Styles Small Screen */
@@ -164,6 +184,7 @@ table{
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -182,7 +203,13 @@ table{
                 }
             }
         }
+
     }
+
+    .score-margin {
+        margin : 10px 0; 
+    }
+
     table{
         &.table-responsive{
             display: block;
@@ -205,6 +232,7 @@ table{
     header {
         margin-bottom: $margin;
         height: 30%;
+        margin-top: 74px;
 
         .wave {
             overflow: hidden;
@@ -236,6 +264,23 @@ table{
     table.table-responsive.inv-detail-table{
         display: inline-table;
     }
+    .table-responsive.inv-table{
+        width: 100%;
+        td{
+            padding-right: 13px;
+        }
+        mat-form-field,
+        table.fun-table{
+            width: 310px;
+        }
+        .spilt-input,
+        .select-split-input{
+            width: 145px;
+        }
+        table.fun-table td{
+            padding-right: 0;
+        }
+    }
 }
 
 /* Desktop Styles */
@@ -254,6 +299,21 @@ table{
         overflow: hidden;
         // padding-top: $margin;
         // padding-top: $margin;
+    }
+    .table-responsive.inv-table{
+        width: 100%;
+        td{
+            padding-right: 3px;
+        }
+        mat-form-field,
+        .spilt-input,
+        .select-split-input,
+        table.fun-table{
+            min-width: 100%;
+        }
+        table.fun-table td{
+            padding-right: 0;
+        }
     }
 }
 
@@ -436,3 +496,16 @@ mat-form-field {
     padding: 2px 7px 2px 9px;
     color: white;
 }
+.matButton {
+    border-radius: 3px !important;
+    pointer-events: none;
+    cursor: default;
+    }
+    .matBadge{
+    left: 60px !important;
+    width: 30px !important;
+    // border-radius: 179px !important;
+    }
+    .matPara{
+    margin-left: 135px;
+    }

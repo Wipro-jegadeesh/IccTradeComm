@@ -5,9 +5,7 @@
       <mat-card>
         <mat-card-content>
           <div id="container" class="row col-md-12 col-12">
-            <div class="col-md-10 col-10">
               <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
-            </div>
           </div>
           <table class="table-responsive inv-table">
             <tbody>
@@ -71,22 +69,24 @@
                 </mat-chip-list>
               </td>
             </ng-container> -->
+            <ng-container matColumnDef="DocumentNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
+                matTooltip="{{fundingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="tooltipPosition">
+                {{'DocumentNumber' | translate}}</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list>
+                  <mat-chip color="primary" selected (click)="navigateToSmeDetails(element)">{{element.DocumentNumber}}
+                  </mat-chip>
+                </mat-chip-list>
+                </td>
+            </ng-container>
             <ng-container matColumnDef="RUC">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                 matTooltip="{{fundingTooltip.invoiceNumber | translate}}" [matTooltipPosition]="tooltipPosition">
                 {{'RUC' | translate}}</th>
               <td mat-cell *matCellDef="let element">
-                <mat-chip-list>
-                  <mat-chip color="primary" selected (click)="navigateToSmeDetails(element)">{{element.RUC}}
-                  </mat-chip>
-                </mat-chip-list>
+                {{element.RUC}}
               </td>
-            </ng-container>
-            <ng-container matColumnDef="DocumentNumber">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="tooltipPosition">
-                {{'DocumentNumber' | translate}}</th>
-              <td mat-cell *matCellDef="let element">{{element.DocumentNumber }}</td>
             </ng-container>
             <ng-container matColumnDef="AuthorizationDate">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
@@ -107,18 +107,18 @@
               <td mat-cell *matCellDef="let element">{{ element.IdentificatioNumberBuyer }}</td>
             </ng-container>
             <ng-container matColumnDef="PDF">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" >PDF View </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" >PDF</th>
               <td mat-cell *matCellDef="let element" >
-                <a href="javascript:void(0)" (click)="openModal($event,template,element.EncryptedFilePDF)">
+                <a href="javascript:void(0)" (click)="openModal($event,template,element.EncryptedFilePDF,'PDF')">
                   <mat-icon #tooltip="matTooltip" matTooltip="{{'View' | translate}}"
                       [matTooltipPosition]="'below'">visibility</mat-icon>
               </a>
               </td>
             </ng-container>
             <ng-container matColumnDef="XML">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" (click)="openModal($event,template)">XML View </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" (click)="openModal($event,template)">XML</th>
               <td mat-cell *matCellDef="let element">
-                <a href="javascript:void(0)" (click)="openModal($event,template,element.EncryptedFileXML)">
+                <a href="javascript:void(0)" (click)="openModal($event,template,element.EncryptedFileXML,'XML')">
                   <mat-icon #tooltip="matTooltip" matTooltip="{{'View' | translate}}"
                       [matTooltipPosition]="'below'">visibility</mat-icon>
               </a>
@@ -142,8 +142,13 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
-          <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
+        <div class="modal-body" style="height: 400px;">
+          <div *ngIf="XMLdata">
+              {{XMLdata}}
+          </div>
+          <div *ngIf="pdfSrc">
+            <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" (click)="modalRef.hide()"> {{'Close' | translate}}</button>
