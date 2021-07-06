@@ -136,7 +136,9 @@ export class InvoiceRepositoryComponent implements OnInit {
     if(this.invoiceForm.value.invId){
       this.invoiceRequestServices.getInvoice('1790899780001',this.invoiceForm.value.invId).subscribe(resp => {
         const INVOICE_ARRAY: invoiceData[] = resp
-        this.dataSource = new MatTableDataSource(INVOICE_ARRAY);
+        let array = []
+        array.push(resp)
+        this.dataSource = new MatTableDataSource(array);
       }, error => {
       })
       // this.dataSource = new MatTableDataSource([{
