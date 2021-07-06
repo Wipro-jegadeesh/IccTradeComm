@@ -125,7 +125,7 @@ export class SmeDashboardComponent implements OnInit {
   getFunded() {
     this.getsumOfFunded = {
       INVCCY: "SGD",
-      INVTOTALAMT: 144
+      INVTOTALAMT: 0
     }
     this.smeDashboardServices.getFunded().subscribe(resp => {
       this.getsumOfFunded = resp;
@@ -233,6 +233,7 @@ export class SmeDashboardComponent implements OnInit {
     console.log(file, "file")
     console.log(file.type, "file")
     this.FileType = file.type
+
     if (file.type === "text/csv") {
       this.PDFData = ''
       this.onChangess(file)
