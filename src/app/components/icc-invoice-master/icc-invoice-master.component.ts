@@ -179,13 +179,13 @@ buildform() {
     invoiceDueDate: ['']
   })
 }
-  SearchAPI(){
+  searchApi(){
     this.IccInvoiceMasterServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI(){
+  resetApi(){
     this.Searchform.reset();
     this.buildform()
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {

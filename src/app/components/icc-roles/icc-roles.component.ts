@@ -56,7 +56,7 @@ export class IccRolesComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-  constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccRolesServices,
+  constructor(public translate: TranslateService, public router: Router, private iccRolesServices: IccRolesServices,
     private fb: FormBuilder, private toastr: ToastrService) {
     this.groupsFormBuild()
   }
@@ -65,7 +65,7 @@ export class IccRolesComponent implements OnInit {
     this.buildform()
   }
   getList() { //This function calls initially to get list from api call
-    this.IccRolesServices.getAllRoles().subscribe(listResp => {
+    this.iccRolesServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
@@ -81,7 +81,7 @@ export class IccRolesComponent implements OnInit {
   }
 
   getSearchList() { // This func is to get searched data from list api
-    this.IccRolesServices.search_getAllRoles(this.Searchform.value).subscribe(listResp => {
+    this.iccRolesServices.search_getAllRoles(this.Searchform.value).subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
@@ -89,10 +89,10 @@ export class IccRolesComponent implements OnInit {
     })
   }
 
-  SearchAPI() { //This func is call from html when search button click
+  searchApi() { //This func is call from html when search button click
     this.getSearchList()
   }
-  ResetAPI() { //This func is call to reset searched data
+  resetApi() { //This func is call to reset searched data
     this.buildform();
     this.getList();
   }
@@ -119,7 +119,7 @@ export class IccRolesComponent implements OnInit {
     });
   }
   getEditData(data) { //To get Particular data to prepopulate in form for Edit func
-    this.IccRolesServices.getParticularRoles(data.roleId).subscribe(resp => {
+    this.iccRolesServices.getParticularRoles(data.roleId).subscribe(resp => {
       if (resp) {
         let respData = resp;
         this.groupsForm.patchValue({
@@ -137,13 +137,13 @@ export class IccRolesComponent implements OnInit {
       if (this.isEdit) {
         value.roleId = this.roleId
       }
-      this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
+      this.iccRolesServices.submitIccRoles(value).subscribe(resp => {
         if (resp) {
           this.toastr.success(this.translate.instant('Saved Successfully'))
           this.formDirective.resetForm();
           this.roleId = "";
           this.isEdit = false
-          this.IccRolesServices.getAllRoles().subscribe(listResp => {
+          this.iccRolesServices.getAllRoles().subscribe(listResp => {
             if (listResp) {
               this.dataSource = new MatTableDataSource(listResp);
             }

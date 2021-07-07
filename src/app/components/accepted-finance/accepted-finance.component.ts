@@ -130,7 +130,7 @@ export class AcceptedFinanceComponent implements OnInit {
     })
   }
   
-  SearchAPI() {
+  searchApi() {
     this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
 
       // resp.forEach(element1 => {
@@ -145,7 +145,7 @@ export class AcceptedFinanceComponent implements OnInit {
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildform();
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {

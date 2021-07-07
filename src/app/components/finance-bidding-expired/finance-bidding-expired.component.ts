@@ -113,13 +113,13 @@ export class FinanceBiddingExpiredComponent implements OnInit {
       BiddingAmt: [''],
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.FinanceBiddingExpiryServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildform();
     let obj = {

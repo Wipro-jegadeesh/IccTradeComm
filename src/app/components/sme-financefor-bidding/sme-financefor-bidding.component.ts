@@ -163,14 +163,14 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.SmeFinancierForBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
   }
-  ResetAPI() {
+  resetApi() {
       this.Searchform.reset();
     this.buildform();
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {

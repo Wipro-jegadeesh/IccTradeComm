@@ -152,7 +152,7 @@ buildsearchform() {
     buyerName: ['']
   })
 }
-  SearchAPI() {
+  searchApi() {
     this.FinancierFundedServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
 
       // resp.forEach(element1 => {
@@ -167,7 +167,7 @@ buildsearchform() {
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildsearchform()
     this.FinancierFundedServices.getFinanceForBiddingLists().subscribe(resp => {

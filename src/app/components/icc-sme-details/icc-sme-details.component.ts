@@ -12,21 +12,9 @@ import { IccListSmeServices } from "../icc-list-smes/icc-list-smes.service";
 import { ToastrService } from 'ngx-toastr';
 import { IccUserCreationService } from '../icc-user-creation/icc-user-creation.service'
 import { MatPaginator } from '@angular/material/paginator';
-
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import { TranslateService } from "@ngx-translate/core";
-
 import * as moment from 'moment';
-
-export interface FinancierDatas {
-  financierId: string;
-  financierName: string;
-  regNumber: number;
-  action: string;
-}
-let FINANACIERLIST: FinancierDatas[] = [
-  // {financierId: 1, financierName: 'Jack', regNumber: 1.0079, action: 'edit'},
-]
 @Component({
   selector: 'app-icc-sme-details',
   templateUrl: './icc-sme-details.component.html',
@@ -47,15 +35,12 @@ export class IccSmeDetailsComponent implements OnInit {
   searchDivOpen: boolean;
   displayedColumns: string[] = ['scoreName', 'score', 'information'];
   displayedColumns1: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
-
   dataSource = [];
-  // dataSource1 = [];
   @ViewChild("accountList", { read: ElementRef })
   public accountList: ElementRef<any>;
   fundingRequestObj;
   OfferAcceptanceObj;
   companyid: any;
-
   @HostListener("window:resize", ["$event"])
   onResize() {
     if (window.innerWidth < 415) {
@@ -78,46 +63,18 @@ export class IccSmeDetailsComponent implements OnInit {
   smeData;
   biddingTooltip = BIDDINGCONSTANTS;
   sectors: any;
-
-  constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,private authenticationService: AuthenticationService,
-    private iccDashboardServices: IccDashboardServices ,private apiService:ApiService,public IccUserCreationService:IccUserCreationService,public translate: TranslateService) { 
+  constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,
+    private apiService:ApiService,public IccUserCreationService:IccUserCreationService,public translate: TranslateService) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
     this.invoiceFormBuild()
-
-//  console.log(this.smeData.smeData.queryParams,"smeDatasmeData");
   }
-
-  ngOnInit() {
-    // this.smeData = this.router.getCurrentNavigation().extras.state;
-    // console.log(this.smeData,"smeDatasmeData");
-   
+  ngOnInit() {//Initially works after constructor
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
     this.dataSource=[]
-    //  this.dataSource1=[]
     this.sectionIndex=0;
-    this.dataSource1 = new MatTableDataSource([{'userId':1,
-    'firstName':"11",
-    'lastName':"980",
-    'companyName':"lkjlk",
-    'email':"jklk",
-    'contactNo':"ipoip",
-    'status':'A'
-    },{'userId':1,
-    'firstName':"11",
-    'lastName':"980",
-    'companyName':"lkjlk",
-    'email':"jklk",
-    'contactNo':"ipoip",
-    'status':'R'
-    }])
-    this.dataSource2 = new MatTableDataSource([{
-      // scoreName : 'Business Planning',
-      // score: "586",
-      // information: "Lot of Questions Not Answered",
-    }])
     this.getQuestionnaireSection()
     this.getscore();
     this.getIccRelaterUsers();
@@ -127,12 +84,9 @@ export class IccSmeDetailsComponent implements OnInit {
         this.sectors = listResp
       }
     })
-    
     this.companyid =this.smeData.smeData.queryParams.companyId
     this.iccListSmeServices.getUserSMEDetails(this.smeData.smeData.queryParams.companyId).subscribe(resp => {
       if(resp){
-      console.log(resp)
-      //  resp[0].companyid
     this.userForm.patchValue({
     nationalId:resp[0].companyid,
     address: resp[0].address,
@@ -149,17 +103,14 @@ export class IccSmeDetailsComponent implements OnInit {
       });
     }
     })
-   
   }
-  groupsFormBuild() {
+  groupsFormBuild() { //Set Form build for add and edit form
     this.groupsForm = this.fb.group({
       state: ['', Validators.required], 
       score: ['', Validators.required],
-      // groupDescription: ['', Validators.required]
     });
-
   }
-  invoiceFormBuild() {
+  invoiceFormBuild() {//Set Form build for add and edit form
     this.userForm = this.fb.group({
       address: [''],
       address1:[''],
@@ -174,70 +125,29 @@ export class IccSmeDetailsComponent implements OnInit {
       state:[''],
       sector:['']
     });
-  
   }
- 
-  public hasError = (controlName: string, errorName: string) =>{
+  public hasError = (controlName: string, errorName: string) =>{ //Checking Validation for forms
     return this.userForm.controls[controlName].hasError(errorName);
   }
-  onSubmitInvoiceForm() {
+  onSubmitInvoiceForm() { // Form submit for sme-details
     try {
       if (this.userForm.status === "INVALID"){
-        // throw { "mes": "Please fill mendatory  fields" }
-        // this.toastr.error('Please fill mendatory  fields')
       }
       let obj = {
         status: this.userForm.value.status
       }
       this.iccListSmeServices.statusChange(this.smeData.smeData.queryParams.companyId,obj).subscribe(resp => {
-        // this.invoiceFormBuild();
         this.toastr.success('Status Update Sucessfully')
-        }, error => {
-
         })
-                
-     
     } catch (err) {
     }
   }
- 
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: "smooth",
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: "smooth",
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive";
-  }
-    navigatePages(path){
+    navigatePages(path){ //Navaiagtion based on path name
       this.router.navigateByUrl(path);
     }
-      getQuestionnaireSection(){
+      getQuestionnaireSection(){  //Get questionare details
         let data=JSON.parse(localStorage.getItem('userCred'))
       this.apiService.generalServiceget(environment.coriolisServicePath +'coriolis/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
-        // this.apiService.generalServiceget(environment.coriolisServicePath + 'getallquestionaire/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
           if(resp){
             this.questionnaireSections=resp.sectionDtoList
             localStorage.setItem('uuid',resp.uuid)
@@ -255,26 +165,6 @@ export class IccSmeDetailsComponent implements OnInit {
         else{
           quesItem.show=true
           quesItem.parentNumber= (quesItem.number - Math.floor(quesItem.number)) !== 0 ? parseInt(quesItem.number) : ''
-          // switch(quesItem.alias){
-          //     case 'name':
-          //       quesItem.response=data.name
-          //       break;
-          //     case 'address-line-1':
-          //         quesItem.response=data.address
-          //         break;
-          //     case 'telephone-mobile':
-          //       quesItem.response=data.mobile
-          //       break;
-          //     case 'email':
-          //       quesItem.response=data.email
-          //       break;
-          //     case 'city':
-          //       quesItem.response=data.city
-          //       break;
-          //   default:
-          //       quesItem.response=''
-          // }
-          // quesItem.response=''
           quesItem.itHasValue=quesItem.required && !quesItem.response ? false :
            !quesItem.required && quesItem.response ? true : quesItem.required && quesItem.response ? true : false
         //    quesItem.itHasValue=quesItem.required ? false : true
@@ -286,7 +176,6 @@ export class IccSmeDetailsComponent implements OnInit {
     })
     secItem.itHasValue=false
     //PARTIAL RESPONSE & Completed Response
-
         if(secItem && secItem.sectionResponse){
           secItem.questions.map((secResp,index)=>{
             let fileAlias=[]
@@ -319,23 +208,11 @@ export class IccSmeDetailsComponent implements OnInit {
                         secResp.response= item.value
                       }
                     }
-                    // secResp.itHasValue=true
                     secResp.itHasValue= secResp.required && !secResp.response ? false :
            !secResp.required && secResp.response ? true : secResp.required && secResp.response ? true : false
             })
-            //   this.questionnaireSections.map((questionItem)=>{
-            //     questionItem.questions.map((item)=>{
-            //         if(item.alias ==)
-            //     })
-            //   })
-
-            //   let resp=  secItem.sectionResponse.responses.filter(x => x.questionAlias == secResp.alias)
-            //   if(resp && resp.length){
-            //   this.questionnaireSections[secIndex].questions[index].response=resp[0].optionAliases
-            //   }
           })
         }
-
     //SUBSECTION ARRAY
     secItem.subSections.length && secItem.subSections.map((subSecItem,subSecIndex)=>{
       subSecItem.questions.forEach((subQuesItem,subQuesIndex)=>{
@@ -351,11 +228,10 @@ export class IccSmeDetailsComponent implements OnInit {
   })
   this.questions=this.questionnaireSections[this.sectionIndex].questions
   localStorage.setItem('questionSections',JSON.stringify(this.questionnaireSections))
-  console.log(this.questionnaireSections)
         }
         })
     }
-    getscore(){
+    getscore(){  //Get score data from api call
       this.apiService.generalServiceget( environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
         if(listResp){
           this.dataSource2 = new MatTableDataSource(listResp.scores);
@@ -367,15 +243,14 @@ export class IccSmeDetailsComponent implements OnInit {
 
       })
     }
-    getIccRelaterUsers(){
+    getIccRelaterUsers(){  //Get icc related users
       let regNo = this.smeData.smeData.queryParams.companyId
-      console.log("regNo",regNo);
       this.IccUserCreationService.getParticularSmeUser(regNo).subscribe(resp => {
         this.dataSource1 = new MatTableDataSource(resp);
         this.dataSource1.paginator = this.paginator
       })    
     }
-      checkParentresp(secIndex,parNum){
+      checkParentresp(secIndex,parNum){ //check resp when get questionaire
         let itHasResp=false
        this.questionnaireSections[secIndex].questions.forEach((item) => { 
          if(item.number == parNum && !item.response){
@@ -385,7 +260,7 @@ export class IccSmeDetailsComponent implements OnInit {
         return itHasResp
       }
       
-      onTextBoxChange(data,secIndex,quesIndex){
+      onTextBoxChange(data,secIndex,quesIndex){  //onchange when typing in text field
         if(data.questionDatas.isSubSection){
             let subIndex=data.questionDatas.subSecIndex
           this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
@@ -408,7 +283,7 @@ export class IccSmeDetailsComponent implements OnInit {
       this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
       }
     }
-    onDropdownChange(data,secIndex,quesIndex){
+    onDropdownChange(data,secIndex,quesIndex){  //calls when select option in droopdown
         if(data.questionDatas.isSubSection){
           let subIndex=data.questionDatas.subSecIndex
       let respArr=[]
@@ -433,9 +308,8 @@ export class IccSmeDetailsComponent implements OnInit {
       this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=respArr && respArr.length ? true : false
       this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
       }
-      console.log(this.questionnaireSections)
     }
-    checkDropdownCond(selectedItems,conditionAlias){
+    checkDropdownCond(selectedItems,conditionAlias){ //check dropdown condition inside onDropdownChange function 
         let returnValue=false
       selectedItems.length &&  selectedItems.map((item)=>{
           if(item.id == conditionAlias){
@@ -444,15 +318,14 @@ export class IccSmeDetailsComponent implements OnInit {
       })
       return returnValue
     }
-    onRadioChange(data,secIndex,quesIndex){
-      let subIndex=data.questionDatas.subSecIndex
-      
+    onRadioChange(data,secIndex,quesIndex){ //calls when changing radio button option
+      let subIndex=data && data.questionDatas && data.questionDatas.subSecIndex
       this.radioChecked={
         isTrue:data.condition,
         secIndex:data.secIndex,
         quesIndex:data.quesIndex
        }
-       if(data.questionDatas.isSubSection){
+       if(data && data.questionDatas && data.questionDatas.isSubSection){
       this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.condition == "true" ? "true" : "false"
       this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex].itHasValue=true 
       this.questionnaireSections[secIndex].subSections[subIndex].itHasValue=this.checkFormComp(secIndex,'subSec',subIndex)
@@ -470,7 +343,7 @@ export class IccSmeDetailsComponent implements OnInit {
       }
       //  this.radioChecked && this.radioChecked['isTrue'] && this.checkCon(data,data.secIndex,data.quesIndex)
   }
-    onFileChange(data,secIndex,quesIndex){
+    onFileChange(data,secIndex,quesIndex){ //Calls when file upload
       let subIndex=data.questionDatas.subSecIndex
       if(data.questionDatas.isSubSection){
       this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value && data.value.length ? data.value : ''
@@ -482,9 +355,8 @@ export class IccSmeDetailsComponent implements OnInit {
           this.questionnaireSections[secIndex].questions[quesIndex].itHasValue=data.value && data.value.length ? true : false
           this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
       }
-      console.log(this.questionnaireSections)
     }
-    onDateChange(data,secIndex,quesIndex){
+    onDateChange(data,secIndex,quesIndex){//Calls when date change
       let subIndex=data.questionDatas.subSecIndex
       if(data.questionDatas.isSubSection){
       this.questionnaireSections[secIndex].subSections[subIndex].questions[quesIndex]['response']=data.value
@@ -497,7 +369,7 @@ export class IccSmeDetailsComponent implements OnInit {
       this.questionnaireSections[secIndex].itHasValue=this.checkFormComp(secIndex,'mainSec',null)
       }
     }
-    checkCon(data,secIndex,questionIndex){
+    checkCon(data,secIndex,questionIndex){//check condition radio button change
       let number=parseFloat(data.number)
       if(!Number.isInteger(number)){
         if(data.questionDatas){
@@ -512,15 +384,14 @@ export class IccSmeDetailsComponent implements OnInit {
         }
         else{
           return false
-        }
-          
+        } 
       }
       else{
       return true
       }
     }
   
-    onSectionClick(index){
+    onSectionClick(index){ //when calls clicking section 
         this.questionnaireSections[index].subSections && 
          this.questionnaireSections[index].subSections.forEach((item)=>{
           item.isSelected=false
@@ -542,7 +413,7 @@ export class IccSmeDetailsComponent implements OnInit {
           }
       this.sectionIndex=index
     }
-    onSubSection(index,subIndex){
+    onSubSection(index,subIndex){ //when calls clicking in subsection 
         this.questions=this.questionnaireSections[index].subSections[subIndex].questions
         this.questionnaireSections[index].subSections.forEach((item,secIndex)=>{
                   item.isSelected= secIndex == subIndex ? true : false
@@ -592,10 +463,10 @@ export class IccSmeDetailsComponent implements OnInit {
       }
       return isFormComp
     }
-onSubmit(){
+onSubmit(){  //calls when submitting form
   this.router.navigateByUrl('/sme-dashboard')
 }
-onSave(type) {
+onSave(type) { //when submitting coriolis part
   let onboardingResp=[]
   let userCred = JSON.parse(localStorage.getItem('userCred'))
   this.questionnaireSections.forEach((item)=>{
@@ -689,9 +560,8 @@ onSave(type) {
      
       }
   })
-  console.log(onboardingResp)
 }
-buildSubSecResp(Data){
+buildSubSecResp(Data){ //Setting up resp for respective fields
   let obj={
       'subSectionAlias':Data.alias,
   }
@@ -732,7 +602,7 @@ buildSubSecResp(Data){
   return obj
 }
 
-boolRespBuild(Data){
+boolRespBuild(Data){ //object construct for submit
   let obj={
       "type":'QuestionResponseBoolDto',
       "questionAlias":Data.alias,
@@ -740,7 +610,7 @@ boolRespBuild(Data){
   }
   return obj
 }
-textRespBuild(Data){
+textRespBuild(Data){ //object construct for submit
     let obj={
         "type":'QuestionResponseTextDto',
         "questionAlias":Data.alias,
@@ -748,16 +618,7 @@ textRespBuild(Data){
     }
     return obj
 }
-filesRespBuild(Data,fileData){
-//   let fileName=[]
-//   let data=[]
-//  Data.response.length && Data.response.map((item)=>{
-//       fileName.push(item.name)
-//       if(item.base64data){
-//       let validData=item.base64data.split('base64,')
-//       data.push(validData[1])
-//       }
-//   })
+filesRespBuild(Data,fileData){//object construct for submit
 let validData=fileData.base64data.split('base64,')
   let obj={
       "type":'QuestionResponseFileDto',
@@ -768,7 +629,7 @@ let validData=fileData.base64data.split('base64,')
   }
   return obj
 }
-numberRespBuild(Data){
+numberRespBuild(Data){//object construct for submit
   let obj={
       "type":'QuestionResponseNumberDto',
       "questionAlias":Data.alias,
@@ -776,7 +637,7 @@ numberRespBuild(Data){
   }
   return obj
 }
-dropdownRespBuild(Data){
+dropdownRespBuild(Data){//object construct for submit
   let obj={
       "type":'QuestionResponseMultipleChoiceDto',
       "questionAlias":Data.alias,
@@ -784,7 +645,7 @@ dropdownRespBuild(Data){
   }
   return obj 
 }
-dateRespBuild(Data){
+dateRespBuild(Data){//object construct for submit
   let obj={
       "type":'QuestionResponseDateDto',
       "questionAlias":Data.alias,
@@ -793,7 +654,7 @@ dateRespBuild(Data){
   }
   return obj
 }
-textListRespBuild(Data){
+textListRespBuild(Data){//object construct for submit
   let obj={
       "type":'QuestionResponseTextListDto',
       "questionAlias":Data.alias,
@@ -801,10 +662,10 @@ textListRespBuild(Data){
   }
   return obj
 }
-navigateFinanceDetails(id,type) {
+navigateFinanceDetails(id,type) { //navigation to user details page
   this.router.navigateByUrl('/icc-user-details/'+id+'/'+type);
 }
-searchDiv(){
+searchDiv(){// hide and show for filter section
   if(this.filterDivOpen === true){
   this.searchDivOpen = !this.searchDivOpen
   this.filterDivOpen = !this.filterDivOpen
@@ -812,7 +673,7 @@ searchDiv(){
     this.searchDivOpen = !this.searchDivOpen
   }
 }
-filterDiv(){
+filterDiv(){// hide and show for search section
   if(this.searchDivOpen === true){
     this.searchDivOpen = !this.searchDivOpen
     this.filterDivOpen = !this.filterDivOpen

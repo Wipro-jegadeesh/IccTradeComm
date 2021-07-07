@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 ]
   constructor(public translate: TranslateService,private modalService: BsModalService,private router: Router,private apiService:ApiService,
     private authService: AuthenticationService,private toastr: ToastrService) { }
-  ngOnInit(): void {
+  ngOnInit(): void { //Initially works after constructor
   }
   // tslint:disable-next-line: typedef
   login(event,template) {
