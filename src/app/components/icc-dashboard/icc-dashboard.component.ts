@@ -1,10 +1,8 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from "@angular/core";
-import { Router,NavigationExtras } from "@angular/router";
-import { AuthenticationService } from '../../service/authentication/authentication.service';
+import { Router, NavigationExtras } from "@angular/router";
 import { IccDashboardServices } from './icc-dashboard-services'
 import { ICCDASHBOARDCONSTANTS } from '../../shared/constants/constants'
 import { MatTableDataSource } from '@angular/material/table';
-
 @Component({
   selector: "app-icc-dashboard",
   templateUrl: "./icc-dashboard.component.html",
@@ -19,7 +17,7 @@ export class IccDashboardComponent implements OnInit {
   limit = 7;
   isOpen = "active";
   displayedColumns: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
-  displayedSMEColumns: string[] = ['smeprofileID','registrationNumber','companyId','action'];
+  displayedSMEColumns: string[] = ['smeprofileID', 'registrationNumber', 'companyId', 'action'];
   dataSource;
   dataSMESource;
   @ViewChild("accountList", { read: ElementRef })
@@ -39,8 +37,7 @@ export class IccDashboardComponent implements OnInit {
   getSumInvoiceMasterCount;
   getSumAllfinTdyCount;
   financeMasterCount
-  constructor(public router: Router, private authenticationService: AuthenticationService, private iccDashboardServices: IccDashboardServices) { }
-
+  constructor(public router: Router, private iccDashboardServices: IccDashboardServices) { }
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -53,6 +50,7 @@ export class IccDashboardComponent implements OnInit {
     this.getFinancierDetails()
     this.getSMEDetails();
   }
+  /** To get the top financier list **/
   getFinancierDetails() {
     this.iccDashboardServices.getFinancierList().subscribe(resp => {
       if (resp) {
@@ -66,6 +64,7 @@ export class IccDashboardComponent implements OnInit {
       }
     })
   }
+  /** To get the top sme list **/
   getSMEDetails() {
     this.iccDashboardServices.getallSmeProfileDetails().subscribe(resp => {
       if (resp) {
@@ -79,6 +78,7 @@ export class IccDashboardComponent implements OnInit {
       }
     })
   }
+  /** To get SGD of funding request and offer acceptance **/
   getDashboardDetailsDetails() {
     this.iccDashboardServices.getFundingRequestTileList().subscribe(resp => {
       this.fundingRequestObj = resp
@@ -87,12 +87,12 @@ export class IccDashboardComponent implements OnInit {
       this.OfferAcceptanceObj = resp
     })
   }
+  /** To scroll the tiles right under the responsiveness **/
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =
       this.accountList.nativeElement.scrollWidth -
       this.accountList.nativeElement.clientWidth;
-
     if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
       this.end = true;
     } else {
@@ -102,6 +102,7 @@ export class IccDashboardComponent implements OnInit {
       });
     }
   }
+  /** To scroll the tiles left under the responsiveness **/
   public scrollLeft(): void {
     this.end = false;
     if (this.accountList.nativeElement.scrollLeft === 0) {
@@ -112,12 +113,15 @@ export class IccDashboardComponent implements OnInit {
       behavior: "smooth",
     });
   }
+  /** To navigate to respective page based on tiles click events **/
   navigatePages(path) {
     this.router.navigateByUrl(path);
   }
+  /** To navigate to respective page based on tiles click events **/
   navigateToSmeList(path) {
     this.router.navigateByUrl(path);
   }
+  /** To navigate to respective individual financier page based on click events on edit or view icon **/
   editFinancier(id, type) {
     if (type == 'edit') {
       this.router.navigateByUrl('/financier-onboarding/edit/' + id)
@@ -126,42 +130,51 @@ export class IccDashboardComponent implements OnInit {
       this.router.navigateByUrl('/financier-onboarding/view/' + id)
     }
   }
+  /** To navigate to respective page based on card click events **/
   financierOnBoardingList() {
     this.router.navigateByUrl('/financier-onboarding-list')
   }
+  /** To navigate to respective page based on tiles click events **/
   navigatefinancedToday() {
     this.router.navigateByUrl('/icc-finance-today');
   }
+  /** To navigate to respective page based on tiles click events **/
   navigatefinancedMaster() {
     this.router.navigateByUrl('/icc-finance-master');
   }
+  /** To navigate to respective page based on tiles click events **/
   navigateinvoiceMaster() {
     this.router.navigateByUrl('/icc-invoice-master');
   }
+  /** To navigate to respective page based on tiles click events **/
   naviageTiles(path) {
     this.router.navigateByUrl(path)
   }
+  /** To get SGD of invoice master **/
   getInvoiceMasterCount() {
     this.iccDashboardServices.getInvoiceMasterCount().subscribe(resp => {
       this.getSumInvoiceMasterCount = resp;
     })
   }
+  /** To get SGD of financed today **/
   getAllfinTdyCount() {
     this.iccDashboardServices.getAllfinTdyCount().subscribe(resp => {
       this.getSumAllfinTdyCount = resp;
     })
   }
+  /** To get SGD of financed master **/
   getFinanceMasterCount() {
     this.iccDashboardServices.getFinanceMasterCount().subscribe(resp => {
       this.financeMasterCount = resp
     })
   }
-  navigateToSmeDetails(path,smeData){
+  /** To navigate to respective individual sme details page based on click events on edit or view icon **/
+  navigateToSmeDetails(path, smeData) {
     let data: NavigationExtras = {
       queryParams: {
-      "companyId":smeData.registrationNumber, 
-      "companyName":smeData.name,
-      "country": "SGP"
+        "companyId": smeData.registrationNumber,
+        "companyName": smeData.name,
+        "country": "SGP"
       }
     }
     this.router.navigate([path], { state: { smeData: data } });

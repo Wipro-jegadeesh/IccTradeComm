@@ -1,6 +1,7 @@
 <div class="app-content">
   <header>
     <div class="data-section">
+      <!-- Country form start -->
       <form [formGroup]="countryForm" autocomplete="off" (ngSubmit)="onSubmitcountryForm()" #formDirective="ngForm">
         <h5 class="text-center">{{'IccCountry.country' | translate}}</h5>
         <mat-card>
@@ -45,8 +46,10 @@
         </mat-card>
 
       </form>
+      <!-- Country form end -->
       <br>
       <div class="mat-elevation-z8 table-responsive table-post">
+        <!-- country list table start -->
         <table mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="country">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
@@ -89,113 +92,108 @@
               </a>&nbsp;
             </td>
           </ng-container>
+          <ng-container matColumnDef="TopBar">
+            <th colspan="9" mat-header-cell *matHeaderCellDef>
+              <div style="justify-content:flex-end;cursor: pointer;">
+                <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
+                <!-- <span (click)="filterDiv()" class="material-icons">filter_list</span> -->
+              </div>
+            </th>
+          </ng-container>
+          <!-- Search container start -->
+          <ng-container matColumnDef="Search">
+            <th colspan="8" mat-header-cell *matHeaderCellDef>
+              <h6>{{'Search By' | translate}}</h6>
+              <form [formGroup]="Searchform">
+                <div class="row">
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'IccCountry.Country Name' | translate}}</mat-label>
+                      <input type="text" formControlName="country" matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'IccCountry.Country Code(2 digit)' | translate}}</mat-label>
+                      <input type="text" formControlName="countrycode2" matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'IccCountry.Country Code(3 digit)' | translate}}</mat-label>
+                      <input type="text" formControlName="countrycode3" matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'IccCountry.Numeric' | translate}}</mat-label>
+                      <input type="text" formControlName="numeric" matInput />
+                    </mat-form-field>
+                  </div>
 
-                    <!-- ============ -->
-                    <ng-container matColumnDef="TopBar">
-                      <th colspan="9" mat-header-cell *matHeaderCellDef>
-                          <div style="justify-content:flex-end;cursor: pointer;">
-                              <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-                              <!-- <span (click)="filterDiv()" class="material-icons">filter_list</span> -->
-                          </div>
-                      </th>
-                  </ng-container>
-                  <ng-container matColumnDef="Search">
-                      <th colspan="8" mat-header-cell *matHeaderCellDef>
-                          <h6>{{'Search By' | translate}}</h6>
-                          <form [formGroup]="Searchform">
-                              <div class="row">
-                                  <div class="col-sm-2">
-                                      <mat-form-field appearance="outline">
-                                          <mat-label>{{'IccCountry.Country Name' | translate}}</mat-label>
-                                          <input type="text" formControlName="country" matInput />
-                                      </mat-form-field>
-                                  </div>
-                                  <div class="col-sm-2">
-                                      <mat-form-field appearance="outline">
-                                          <mat-label>{{'IccCountry.Country Code(2 digit)' | translate}}</mat-label>
-                                          <input type="text" formControlName="countrycode2" matInput />
-                                      </mat-form-field>
-                                  </div>
-                                  <div class="col-sm-2">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>{{'IccCountry.Country Code(3 digit)' | translate}}</mat-label>
-                                        <input type="text" formControlName="countrycode3" matInput />
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-sm-2">
-                                  <mat-form-field appearance="outline">
-                                      <mat-label>{{'IccCountry.Numeric' | translate}}</mat-label>
-                                      <input type="text" formControlName="numeric" matInput />
-                                  </mat-form-field>
-                              </div>
-                               
-                              </div>
-                              <div class="row"
-                                  style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                                  <button mat-raised-button style="color: #5e52a1;" (click)="SearchAPI()">
-                                      <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
-                                          [matTooltipPosition]="'below'">
-                                          done
-                                      </mat-icon> {{'Search' | translate}}
-                                  </button>&nbsp;
-                                  <button mat-raised-button style="color: #5e52a1;" (click)="ResetAPI()">
-                                      <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
-                                          [matTooltipPosition]="'below'">
-                                          restart_alt</mat-icon> {{'Reset' | translate}}
-                                  </button>
-                              </div>
-                          </form>
-                      </th>
-                  </ng-container>
-                  <ng-container matColumnDef="Filter">
-                      <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
-                          <div class="row">
-                              <div class="col-sm-3">
-                                  <label>{{'Invoice Amount' | translate}}</label>
-                                  <div class="custom-slider">
-                                      <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
-                                      </ngx-slider>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3" style="padding-top: 22px;">
-                                  <mat-form-field appearance="fill">
-                                      <mat-label>{{'Inv Date' | translate}}</mat-label>
-                                      <mat-date-range-input [rangePicker]="picker">
-                                          <input matStartDate placeholder="Start date">
-                                          <input matEndDate placeholder="End date">
-                                      </mat-date-range-input>
-                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                      <mat-date-range-picker #picker></mat-date-range-picker>
-                                  </mat-form-field>
-                              </div>
-          
-                          </div>
-                          <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                              <button mat-raised-button style="color: #5e52a1;">
-                                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
-                                      [matTooltipPosition]="'below'">done
-                                  </mat-icon>{{'Search' | translate}}
-                              </button>&nbsp;
-                              <button mat-raised-button style="color: #5e52a1;">
-                                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
-                                      [matTooltipPosition]="'below'">
-                                      restart_alt</mat-icon>
-                              </button>
-                          </div>
-                      </th>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-                  <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
-                      *matHeaderRowDef="displayedColumnsearch"></tr>
-                  <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-                 
-                    <!-- ============ -->
-                    
+                </div>
+                <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                  <button mat-raised-button style="color: #5e52a1;" (click)="searchApi()">
+                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                      [matTooltipPosition]="'below'">
+                      done
+                    </mat-icon> {{'Search' | translate}}
+                  </button>&nbsp;
+                  <button mat-raised-button style="color: #5e52a1;" (click)="resetApi()">
+                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">
+                      restart_alt</mat-icon> {{'Reset' | translate}}
+                  </button>
+                </div>
+              </form>
+            </th>
+          </ng-container>
+          <!-- Search container end -->
+          <!-- filter container start -->
+          <ng-container matColumnDef="Filter">
+            <th class="class2" colspan="8" mat-header-cell *matHeaderCellDef>
+              <div class="row">
+                <div class="col-sm-3">
+                  <label>{{'Invoice Amount' | translate}}</label>
+                  <div class="custom-slider">
+                    <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options">
+                    </ngx-slider>
+                  </div>
+                </div>
+                <div class="col-sm-3" style="padding-top: 22px;">
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{'Inv Date' | translate}}</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Start date">
+                      <input matEndDate placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                <button mat-raised-button style="color: #5e52a1;">
+                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}" [matTooltipPosition]="'below'">
+                    done
+                  </mat-icon>{{'Search' | translate}}
+                </button>&nbsp;
+                <button mat-raised-button style="color: #5e52a1;">
+                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">
+                    restart_alt</mat-icon>
+                </button>
+              </div>
+            </th>
+          </ng-container>
+          <!-- filter container end -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
+          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch">
+          </tr>
+          <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
           <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <!-- country list table end -->
         <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
-
       </div>
     </div>
   </header>
