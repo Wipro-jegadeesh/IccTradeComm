@@ -93,7 +93,7 @@ export class InvoiceRepositoryComponent implements OnInit {
     this.dataSourceTwo = new MatTableDataSource();
   }
 
-  ngOnInit() {
+  ngOnInit() { //Initially works after constructor
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role: 'Authorise' }
     if(this.FileData && this.FileData.FileData.queryParams.type === 'updateRepo'){
@@ -132,7 +132,6 @@ export class InvoiceRepositoryComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
   getInvDetailsLists() {
-    console.log(this.invoiceForm.value,"this.invoiceForm")
     if(this.invoiceForm.value.invId){
       this.invoiceRequestServices.getInvoice('1790899780001',this.invoiceForm.value.invId).subscribe(resp => {
         const INVOICE_ARRAY: invoiceData[] = resp
@@ -163,7 +162,6 @@ export class InvoiceRepositoryComponent implements OnInit {
     }
   }
   SearchInovice() {
-    console.log(this.invoiceForm.value,"this.invoiceForm")
     this.getInvDetailsLists()
   }
   navigateToSmeDetails(datas) {
@@ -210,7 +208,6 @@ export class InvoiceRepositoryComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    this.selection.selected.forEach(s => console.log(s.name));
   }
   authoriseInvoice() {
     let invoiceIds = []
@@ -236,7 +233,6 @@ export class InvoiceRepositoryComponent implements OnInit {
     else {
       this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
     }
-    console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
@@ -249,7 +245,6 @@ export class InvoiceRepositoryComponent implements OnInit {
     let reqParams = []
     this.dataSource.data.map((item) => {
       if (invoiceIds.includes(item.id)) {
-        console.log(item, 'tem');
         let obj = {
           "invoiceId": item.id,
           "invoiceNo": item.invId,

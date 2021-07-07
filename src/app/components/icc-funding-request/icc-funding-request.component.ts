@@ -127,7 +127,7 @@ export class IccFundingRequestComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.IccFundingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
 
       // resp.forEach(element1 => {
@@ -142,7 +142,7 @@ export class IccFundingRequestComponent implements OnInit {
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildform()
     this.IccFundingServices.getAllFundingList().subscribe(resp => {

@@ -152,16 +152,14 @@ export class InvoiceRequestComponent implements OnInit {
     this.dataSourceTwo = new MatTableDataSource();
   }
 
-  ngOnInit() {
+  ngOnInit() { //Initially works after constructor
     this.getAllCountry()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
-    console.log(this.type,"this.type")
     if(this.type === 'repository'){
       this.isDisabled = true
-      console.log("testtstts")
       this.invoiceForm.patchValue({
         invId:"1790899780001",
     billNo: "1709155632001",
@@ -391,7 +389,6 @@ getAllCountry(){
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    this.selection.selected.forEach(s => console.log(s.name));
   }
   authoriseInvoice() {
     let invoiceIds = []
@@ -421,7 +418,6 @@ getAllCountry(){
   else{
    this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
   }
-    console.log("invoiceIds", invoiceIds);
   }
   updateInvoice(invoiceIds) {
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
@@ -435,7 +431,6 @@ getAllCountry(){
     let reqParams=[]
     this.dataSource.data.map((item)=>{
       if(invoiceIds.includes(item.id)){
-        console.log(item,'tem');
         let obj={
           "invoiceId":item.id,
           "invoiceNo":item.invId,
@@ -472,7 +467,6 @@ getAllCountry(){
     this.invoiceIdBoolean = true;
     this.dateFormArray.controls = [];
     this.addRow()
-    console.log(data,"testtt")
     this.isDisabled = false
     this.invoiceDetails = data
     this.invoiceForm.patchValue({
@@ -507,9 +501,6 @@ getAllCountry(){
     this.invoiceRefNo=data.invref
     this.InvoiceFdate=data.invDueDate
     this.score=data.buyerScore
-    // this.score=data.score
-    // console.log(this.dateFormArray,"this.dateFormArray")
-    // this.dateFormArray.controls.splice(0,0);
 
    
     this.dataSourceTwo.data = []
@@ -598,7 +589,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
       params['invoiceDetails'].goodsDetails[0].total =   parseInt(params['invoiceDetails'].goodsDetails[0].total)
 
-      console.log(params,"params");
       if(this.UpdateInvoiceLable === true){
         let buyerDetails= this.sendBuyerDetails(this.invoiceRefNo)
         this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
@@ -648,7 +638,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       else{
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
           this.invoiceRefNo=resp
-          console.log(resp)
           let buyerDetails= this.sendBuyerDetails(resp)
           this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
             if(resp){
@@ -739,7 +728,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
         })
       }
     } catch (err) {
-      console.log(err,"errr")
     }
   }
   
@@ -790,7 +778,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
     return this.invoiceForm.get('goodsDetails') as FormArray;
   }
   addRow() {
-    console.log(this.invoiceForm, "adasdasd")
     this.dataSourceTwo.filter = "";
     const row = this.fb.group({
       ID: this.invoiceID,
@@ -854,7 +841,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
     // }
   }
   updateInvoiceId(event) {
-    console.log(event.target.value)
     this.invoiceID = event.target.value;
     // this.invoiceForm.value.goodsDetails.findIndex((obj => obj.ID == 1));
   }
@@ -906,7 +892,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
       this.invoiceForm.value.goodsDetails[index]["status"] = "Deleted"
       this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
       this.invoiceForm.value.goodsDetails.splice(index, 1)
-      console.log(this.deletedRowedit, "remo v this.deletedRowedit")
       removeEntry.splice(index, 1);
       this.dataSourceTwo.data = removeEntry
       } else {
@@ -932,7 +917,6 @@ this.invoiceForm.value.goodsDetails.forEach(element => {
   this.invoiceForm.value.goodsDetails[index]["status"] = "Deleted"
   this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
   this.invoiceForm.value.goodsDetails.splice(index, 1)
-  console.log(this.deletedRowedit, "remo v this.deletedRowedit")
   removeEntry.splice(index, 1);
   this.dataSourceTwo.data = removeEntry
   } else {

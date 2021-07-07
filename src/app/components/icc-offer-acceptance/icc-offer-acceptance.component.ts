@@ -135,7 +135,7 @@ buildform() {
     invoiceDueDate: ['']
   })
 }
-  SearchAPI(){
+  searchApi(){
     this.IccOfferAcceptServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
 
       // resp.forEach(element1 => {
@@ -150,7 +150,7 @@ buildform() {
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI(){
+  resetApi(){
     this.Searchform.reset();
     this.buildform()
     this.IccOfferAcceptServices.getOfferAcceptanceLists().subscribe(resp => {

@@ -1,16 +1,14 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IccSectorServices } from './icc-sector-services';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
-
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatPaginator } from '@angular/material/paginator';
-
 @Component({
   selector: 'app-icc-sector',
   templateUrl: './icc-sector.component.html',
@@ -18,14 +16,12 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class IccSectorComponent implements OnInit {
   groupsForm: FormGroup;
-
   displayedColumns: string[] = ['code', 'description', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean
   id: any
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -36,14 +32,8 @@ export class IccSectorComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    // 'invoiceRef': String,
-    // 'smeId': String,
-
     'code': String,
     'description': String
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
   }
   value: number = 0;
   highValue: number = 50;
@@ -63,68 +53,45 @@ export class IccSectorComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  Searchform: FormGroup;
-
-
-  constructor(public translate: TranslateService, public router: Router, private IccRolesServices: IccSectorServices,
-    private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
+  searchForm: FormGroup;
+  constructor(public translate: TranslateService, public router: Router, private iccSectorServices: IccSectorServices,
+    private fb: FormBuilder, private toastr: ToastrService) {
     this.groupsFormBuild()
   }
-
-  ngOnInit(): void {
-   this.getList()
-    this.buildform()
+  ngOnInit(): void {//Initially works after constructor
+    this.getList()
+    this.buildForm()
   }
-
-  getList(){
-    // this.dataSource = new MatTableDataSource([{ 'id': '1', 'code': 'sector123', 'description': 'description of sector' }]);
-    this.IccRolesServices.getAllRoles().subscribe(listResp => {
+  getList() { //Get sector total list from api call
+    this.iccSectorServices.getAllRoles().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
   }
-
-  buildform() {
-    this.Searchform = this.fb.group({
-      // invoiceRef: [''],
-      // smeId: [''],
+  buildForm() { //Set Search form basic fields
+    this.searchForm = this.fb.group({
       code: ['', Validators.required],
       description: ['', Validators.required]
-      // buyerName: [''],
-      // invoiceDate: [''],
-      // invoiceDueDate: ['']
     })
   }
-
-  getSearchList(){
-    this.IccRolesServices.search_getAllSector(this.Searchform.value).subscribe(listResp => {
-      if (listResp) { 
+  getSearchList() { //Get Searched data from api 
+    this.iccSectorServices.search_getAllSector(this.searchForm.value).subscribe(listResp => {
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
   }
-
-  SearchAPI() {
-    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
+  searchApi() {//This func is called from html when search button click
     this.getSearchList()
   }
-  ResetAPI() {
-    this.buildform();
+  resetApi() {// reset Searched data and get All list
+    this.buildForm();
     this.getList()
-    // this.getSearchList()
-    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-
-    // })
   }
-  searchDiv() {
+  searchDiv() { // hide and show "search input fields"
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -132,7 +99,7 @@ export class IccSectorComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  filterDiv() {//hide and show "filter input fields"
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -140,30 +107,14 @@ export class IccSectorComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
-  groupsFormBuild() {
+  groupsFormBuild() { // used for assigning form to add data
     this.groupsForm = this.fb.group({
       code: ['', Validators.required],
       description: ['', Validators.required]
     });
-
   }
-
-  getEditData(data) {
-
-    // **** Start Need to hide *****
-    // this.isEdit = true
-    // this.id = 1
-    // let respData = {'id' : '1','code' : 'CODE123','description' : 'description of role'}
-    // this.groupsForm.patchValue({  
-    //   code : respData.code,
-    //   description : respData.description
-    // })
-    // **** End Need to hide  *****
-
-
-    this.IccRolesServices.getParticularRoles(data.id).subscribe(resp => {
+  getEditData(data) { //To get Particular data to prepopulate in form for Edit func
+    this.iccSectorServices.getParticularRoles(data.id).subscribe(resp => {
       if (resp) {
         let respData = resp;
         this.groupsForm.patchValue({
@@ -172,36 +123,23 @@ export class IccSectorComponent implements OnInit {
         })
         this.isEdit = true
         this.id = respData.id
-
       }
-
     })
-
   }
 
-  onSubmitRoleForm() {
-
-    // **** Start Need to hide *****
-    //  this.id = "";
-    //  this.isEdit = false
-    //  this.groupsForm.reset();
-    // End Need to hide **********
-
-    // this.IccGroupServices.getParticularGroups(1).subscribe(resp => { })
+  onSubmitRoleForm() {  // To submit form for add and update flow
     if (this.groupsForm.value && this.groupsForm.status == "VALID") {
       let value = this.groupsForm.value
       if (this.isEdit) {
         value.id = this.id
       }
-      console.log(this.id, "this.id")
-      console.log(value, "value.id")
-      this.IccRolesServices.submitIccRoles(value).subscribe(resp => {
+      this.iccSectorServices.submitIccRoles(value).subscribe(resp => {
         if (resp) {
           this.toastr.success(this.translate.instant('Saved Successfully'))
           this.groupsForm.reset();
           this.id = "";
           this.isEdit = false
-          this.IccRolesServices.getAllRoles().subscribe(listResp => {
+          this.iccSectorServices.getAllRoles().subscribe(listResp => {
             if (listResp) {
               this.dataSource = new MatTableDataSource(listResp);
             }
@@ -212,5 +150,4 @@ export class IccSectorComponent implements OnInit {
       this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
-
 }

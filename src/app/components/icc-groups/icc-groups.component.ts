@@ -108,14 +108,14 @@ export class IccGroupsComponent implements OnInit {
     })
   }
 
-  SearchAPI() {
+  searchApi() {
     // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
     // })
     this.getSearchList()
   }
-  ResetAPI() {
+  resetApi() {
     this.buildform();
     // this.getSearchList()
     this.getList()

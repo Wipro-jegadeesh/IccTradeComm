@@ -92,7 +92,7 @@ export class IccUserDetailsComponent implements OnInit {
 languageDropdownSettings:any={}
 languageSelectedItems=[]
 
-  ngOnInit() {
+  ngOnInit() {//Initially works after constructor
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     
@@ -135,7 +135,6 @@ this.languageDropdownSettings = {
 
     this.IccRolesServices.getAllRoles().subscribe(listResp => {
       if(listResp){
-        console.log(listResp)
         this.RolesType = listResp
       }
     })
@@ -168,7 +167,6 @@ getAllCountry(){
 
 UserADDFormBuild(){
   this.IccUserCreationssService.getUserSMEDetails(this.id).subscribe(resp => {
-    console.log(resp)
     this.userForm.patchValue({
   firstName:'',
   email: '' ,
@@ -202,7 +200,6 @@ selectionChange(option) {
       }
     })
   })
-  console.log(option,this.selectedProducts,'ddd');
 }
 
   public scrollRight(): void {
@@ -247,10 +244,8 @@ selectionChange(option) {
   }
   
   blurFunction(){
-    console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
     this.IccUserCreationssService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
       if(resp && resp.length){
-      console.log(resp)
       this.userForm.patchValue({
     firstName: ['',Validators.required],
     email: ['',Validators.required] ,
@@ -299,7 +294,6 @@ selectionChange(option) {
               image.onload = rs => {
                   const img_height = rs.currentTarget['height'];
                   const img_width = rs.currentTarget['width'];
-                  console.log(img_height, img_width);
   
                   if (img_height > max_height && img_width > max_width) {
                       this.imageError = 'Maximum dimentions allowed ' + max_height + '*' + max_width +'px';

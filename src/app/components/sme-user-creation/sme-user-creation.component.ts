@@ -112,13 +112,13 @@ constructor(public router: Router, private modalService: BsModalService, private
       this.mobileScreen = false;
     }
   }
-  SearchAPI(){
+  searchApi(){
     // this.IccUserCreationsService.searchFinanceFunded(this.SearchModel).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
     // })
   }
-  ResetAPI(){
+  resetApi(){
     this.SearchModel={
       'invoiceRef': String,
       'invoiceDate': String,

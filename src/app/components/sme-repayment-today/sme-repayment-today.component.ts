@@ -182,13 +182,13 @@ export class Repayment_todayComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.buildform();
     this.AcceptedFinanceServices.searchFinanceFunded('').subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);

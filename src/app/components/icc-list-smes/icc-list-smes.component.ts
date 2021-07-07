@@ -248,14 +248,14 @@ export class IccListSmesComponent implements OnInit {
     })
   }
 
-  SearchAPI() {
+  searchApi() {
     // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
     // })
     this.getSearchList()
   }
-  ResetAPI() {
+  resetApi() {
     this.buildform();
     this.getList();
     // this.getSearchList()
@@ -331,7 +331,7 @@ Activeuser(data){
    })
  })
 }
-  // SearchAPI(){
+  // searchApi(){
   //   // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
   //   //   this.dataSource = new MatTableDataSource(resp);
   //   //   this.dataSource.paginator = this.paginator

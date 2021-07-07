@@ -174,13 +174,13 @@ Activeuser(data){
   })
 }
 
-  SearchAPI(){
+  searchApi(){
     this.IccUserCreationsService.searchFinanceFunded(this.SearchModel).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI(){
+  resetApi(){
     this.SearchModel={
       'invoiceRef': String,
       'invoiceDate': String,

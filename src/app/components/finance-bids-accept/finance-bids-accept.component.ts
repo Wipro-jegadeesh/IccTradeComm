@@ -137,13 +137,13 @@ public issubmitTrue: boolean = false;
       BiddingAmt: [''],
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.FinanceRequestServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildsearchform();
   

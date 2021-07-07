@@ -86,16 +86,14 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.dataSourceTwo = new MatTableDataSource();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {//Initially works after constructor
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : 'obj'
     this.getInvDetailsLists()
     this.addRow();
     this.getAllCountry()
 
-    console.log(this.FileData,"this.FileData")
     if(this.FileData.FileData.queryParams.uploadType === "text/csv"){
       this.invoicedata = this.FileData.FileData.queryParams.invoicedata
-      console.log(this.invoicedata,"this.invoicedata")
       this.InvoiceAPI()
     }else if(this.FileData.FileData.queryParams.uploadType === "application/pdf"){
       this.pdfDivEnable = true
@@ -132,7 +130,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    this.selection.selected.forEach(s => console.log(s.name));
   }
   isOpenHandle(isTrue) {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
@@ -168,7 +165,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     else{
      this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
     }
-      console.log("invoiceIds", invoiceIds);
     }
   updateInvoice(invoiceIds) {
     this.toastr.success("Selected Invoices has been Authorized !");
@@ -180,7 +176,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     let reqParams = []
     this.dataSource.data.map((item) => {
       if (invoiceIds.includes(item.id)) {
-        console.log(item, 'tem');
         let obj = {
           "invoiceId": item.id,
           "invoiceNo": item.invId,
@@ -208,16 +203,12 @@ export class InvoiceBulkUploadComponent implements OnInit {
     let jsonData = null;
     const reader = new FileReader();
     const file = ev.target.files[0];
-    console.log(file, "file")
-    console.log(file.type, "file")
     if (file.type === "text/csv") {
       this.onChangess(file)
     } else if (file.type === "application/pdf") {
       this.getBase64(<File>ev.target.files[0]).then((data) => {
         this.pdfDivEnable = true
         let flName = ev.target.files[0].name
-        console.log(flName, "flName")
-        console.log(ev.target.files, "ev.target.files")
         this.pdfSrc = data
         let fileName = {
           'fileName': ev.target.files[0].name,
@@ -225,8 +216,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
           'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
         }
         this.fileNames = fileName
-        console.log(fileName, "fileName.fileName")
-        console.log(this.fileNames, "this.fileNames")
         this.pdfApi()
       });
 
@@ -234,15 +223,11 @@ export class InvoiceBulkUploadComponent implements OnInit {
       reader.onload = event => {
         const data = reader.result;
         workBook = XLSX.read(data, { type: "binary" });
-        console.log(workBook);
         jsonData = workBook.SheetNames.reduce((initial, name) => {
-          console.log(name)
           const sheet = workBook.Sheets[name];
-          console.log(sheet, "sheet")
           initial['invoice'] = XLSX.utils.sheet_to_json(sheet);
           return initial;
         }, {});
-        console.log(jsonData, "jsonData")
         this.invoicedata = jsonData.invoice
         this.InvoiceAPI()
       };
@@ -284,7 +269,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
       params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
       params['invoiceDetails'].goodsDetails[0].total =   parseInt(params['invoiceDetails'].goodsDetails[0].total)
       
-      console.log(params, "params");
       if (this.UpdateInvoiceLable === true) {
         let buyerDetails= this.sendBuyerDetails(this.invoiceRefNo)
         this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
@@ -488,17 +472,13 @@ export class InvoiceBulkUploadComponent implements OnInit {
     let json = {
       invoiceDetails: invoiceDetailss
     }
-    console.log(invoiceDetailss, "invoiceDetailss")
-    console.log(json, "json")
     this.invoiceRequestServices.invoiceRequestSave(json).subscribe(resp => {
       this.getInvDetailsLists()
     }, error => {
     })
   }
   pdfApi() {
-    console.log(this.fileNames)
     this.invoiceRequestServices.invoicePDFSave(this.fileNames).subscribe(resp => {
-      console.log(resp,"resp")
      setTimeout(() => {
       this.invoiceForm.patchValue({
         invId: resp.invoiceId === null ? '' : resp.invoiceId,
@@ -549,14 +529,11 @@ export class InvoiceBulkUploadComponent implements OnInit {
     link.click();
   }
   onChangess(files: File[]) {
-    console.log(files, "files")
     if (files) {
-      console.log(files);
       Papa.parse(files, {
         header: true,
         skipEmptyLines: true,
         complete: (result, file) => {
-          console.log(result, "sksksk");
           this.invoicedata = result.data[0]
           this.InvoiceAPI()
           // this.dataSource = new MatTableDataSource(result);
@@ -566,7 +543,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     }
   }
   UpdateInvoice(data) {
-    console.log(data, "testtt")
     this.invoiceDetails = data
     this.invoiceForm.patchValue({
       // buyerName: data.buyerName,
@@ -649,7 +625,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.dateFormArray.removeAt(index)
   }
   addRow() {
-    console.log(this.invoiceForm, "adasdasd")
     this.dataSourceTwo.filter = "";
     const row = this.fb.group({
       ID: this.invoiceID,
@@ -671,7 +646,6 @@ export class InvoiceBulkUploadComponent implements OnInit {
     this.dataSourceTwo.data = this.dateFormArray.controls;
   }
   updateInvoiceId(event) {
-    console.log(event.target.value)
     this.invoiceID = event.target.value;
   }
   updateCurrency(event) {

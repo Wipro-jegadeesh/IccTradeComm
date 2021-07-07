@@ -188,14 +188,14 @@ export class FinancierOnboardingListComponent implements OnInit {
     })
   }
 
-  SearchAPI() {
+  searchApi() {
     // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
     //   this.dataSource.paginator = this.paginator
     // })
     this.getSearchList()
   }
-  ResetAPI() {
+  resetApi() {
     this.buildform();
     this.getFinancierDetails()
     // this.getSearchList()

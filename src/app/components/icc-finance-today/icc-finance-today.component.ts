@@ -131,13 +131,13 @@ export class IccFinanceTodayComponent implements OnInit {
       smeId: ['']
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.IccFinanceTodayServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildform()
     this.IccFinanceTodayServices.getFinanceTodayLists().subscribe(resp => {

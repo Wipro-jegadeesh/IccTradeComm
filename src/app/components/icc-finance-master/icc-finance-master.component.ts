@@ -163,13 +163,13 @@ export class IccFinanceMasterComponent implements OnInit {
       smeId: ['']
     })
   }
-  SearchAPI() {
+  searchApi() {
     this.IccFinanceMasterServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  ResetAPI() {
+  resetApi() {
     this.Searchform.reset();
     this.buildform()
     this.IccFinanceMasterServices.getFinanceMasterLists().subscribe(resp => {
