@@ -56,32 +56,6 @@ header {
     top: 40px;
 }
 
-.accounts-list {
-    // float: left;
-    // position: relative;
-    // overflow: auto;
-    // z-index: 10;
-    // width: 100%;
-    // white-space: nowrap;
-    // padding-right: $margin * 2;
-    // margin-left: -$margin;
-    // padding-bottom: 3px;
-    float: left;
-    position: relative;
-    overflow: auto;
-    z-index: 10;
-    width: 100%;
-    white-space: nowrap;
-    padding-right: 50px;
-    margin-left: -30px;
-    padding-bottom: 27px;
-
-    uxg-account-card,
-    uxg-account-card-skeleton {
-        display: inline-grid;
-        margin-left: $margin;
-    }
-}
 
 .uxg-breadcrumb {
     margin-left: 50px !important;
@@ -183,10 +157,6 @@ header {
         }
     }
 
-    .accounts-list {
-        overflow: hidden;
-        padding-top: $margin;
-    }
 }
 .app-content.active{
     @media only screen and (min-width: 1025px) {
@@ -198,7 +168,6 @@ header {
 /* Desktop Styles */
 @media only screen and (min-width: 1025px) {
     .wave {
-        // top: -10%;
         top: -22%;
         height: 100px;
     }
@@ -207,22 +176,16 @@ header {
         padding: $margin $margin * 2 $uxg-spacing-0 $margin;
     }
 
-    .accounts-list {
-        overflow: hidden;
-        // padding-top: $margin;
-        // padding-top: $margin;
-    }
+  
 }
 
 .uxg-nav {
     position: absolute;
-    // height: 850px;
     border: 1px solid #eaeaea;
 }
 
 .mat-drawer-container {
     width: 100%;
-    // height: 100%;
     background-color: white;
 }
 

@@ -9,9 +9,10 @@ export class InvoiceRequestServices {
   getInvDetailsLists(){
     return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
-
+  getInvRepositryDetailsLists(ruc,​​​​​​​documentnumber){
+    return this.apiService.get('invoice-request/doceinvoicedetails/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
+  }
   getInvoice(​​​​​​​ruc,​​​​​​​documentnumber){
-      // http://localhost:8080/invoice-request/invoicefromdoce/{​​​​​​​ruc}​​​​​​​/{​​​​​​​documentnumber}​​​​​​​
     return this.apiService.get('invoice-request/invoicefromdoce/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
   }
   getInvDetailsLists_ForFinanceBidding(id){

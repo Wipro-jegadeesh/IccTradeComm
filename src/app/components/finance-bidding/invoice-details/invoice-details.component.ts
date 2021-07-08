@@ -97,6 +97,7 @@ export class InvoiceDetailsComponent implements OnInit {
       this.limitDetails = resp
     })
   }
+  //SME Rate Getting 
   getuserProfile() {
     this.invoiceRequestServices.getuserProfile(this.invoiceDetails.smeProfileId).subscribe(resp => {
       if (resp) {
@@ -233,10 +234,12 @@ export class InvoiceDetailsComponent implements OnInit {
     catch (err) {
     }
   }
+  //Comma Replacement 
   replaceCommaLine(data) {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
+  //calculationRate For FX rate 
   calculationRate() {
     this.finBidform.value.baseCcyAmt = Number(this.invoiceDetails.invAmt) * Number(this.finBidform.value.fxRate)
     this.finBidform.value.baseCcyFundingAmt = Number(this.finBidform.value.baseCcyAmt) * Number(this.finBidform.value.fundablePercent) / 100;
