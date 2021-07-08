@@ -219,6 +219,10 @@ export class SignUpDetailsComponent implements OnInit {
       reader.readAsDataURL(fileInput.target.files[0]);
     }
   }
+  //set language in local storage
+  setlocalstroageLanguage(value) {
+    localStorage.setItem("DefultLanguage", value);
+  }
   //Image removal functionality
   removeImage() {
     this.cardImageBase64 = null;
