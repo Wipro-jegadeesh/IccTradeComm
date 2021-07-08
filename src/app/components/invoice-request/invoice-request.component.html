@@ -164,7 +164,6 @@
                 </td>
                 <td rowspan="1" colspan="1">
                     <mat-form-field dense [ngClass]="{'readOnlyCls': this.isDisabled}">
-                      <!-- <mat-icon dense color="primary" matPrefix>person_outline</mat-icon> -->
                       <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
                       <input type="text"[readonly]="this.isDisabled"  matInput  formControlName="billNo" />
                       <!-- <mat-hint>Please enter the BL/Roadway Bill No</mat-hint> -->
@@ -547,8 +546,7 @@
                       matTooltip="{{fundingTooltip.goodsId | translate}}" [matTooltipPosition]="tooltipPosition">
                       {{'goodsId' | translate}}</th>
                     <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                      <input matInput type="text" formControlName="status" [hidden]=true
-                        placeholder="{{'goodsId' | translate}}">
+                      <input matInput type="text" formControlName="status" [hidden]=true placeholder="{{'goodsId' | translate}}">
                     </td>
                   </ng-container>
                   <!-- status -->
