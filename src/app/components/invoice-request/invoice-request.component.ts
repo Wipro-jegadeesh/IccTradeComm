@@ -144,7 +144,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.addRow();
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
     if (this.type === 'repository') {
-      // this.isDisabled = true
+      this.isDisabled = true
       // this.FileData.FileData.queryParams.invoicedata
       this.UpdateReposInvoice(this.FileData.FileData.queryParams.invoicedata)
     }
