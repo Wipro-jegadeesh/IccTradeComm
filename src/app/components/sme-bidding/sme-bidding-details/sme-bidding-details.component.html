@@ -323,7 +323,7 @@
            <div class="row">
                <div class="col-sm-6"> 
                 <ul>
-                    <li *ngFor="let subskill of rejectQustionOne.subrejectQustionOne">
+                    <li *ngFor="let subskill of rejectQuestionOne.subrejectQuestionOne">
                       <mat-checkbox [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" > {{subskill.name}} </mat-checkbox>
                     </li>
                   </ul>
@@ -333,7 +333,7 @@
                     <mat-card-content>
                       <section class="example-section">
                         <ul>
-                            <li *ngFor="let subskill of rejectQustionTwo.subrejectQustionTwo">
+                            <li *ngFor="let subskill of rejectQuestionTwo.subrejectQuestionTwo">
                                     <mat-checkbox matInput [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateBidRejection(subskill.name)"> {{subskill.name}} </mat-checkbox>
                             </li>
                           </ul>
