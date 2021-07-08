@@ -1,166 +1,137 @@
 <div class="app-content">
-    <header>
-      <div class="data-section">
-        <div class="row">
-          <div class="col-lg-4 col-sm-4">
-            <img src="../../../assets/img/icctradelogo.png" class="log-logoss" />
-          </div>
-          <div class="col-lg-6 col-sm-5" style="padding: 14px 29px;">
-            <h4>{{'Welcome TO ICC TradeComm' | translate}}</h4>
-          </div>
-            <div class="col-lg-2 col-sm-3 language">
-                <mat-form-field dense>
-                    <mat-label>Language</mat-label>
-                    <mat-icon matPrefix>language</mat-icon>
-                    <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
-                      <mat-option *ngFor="let lang of languages" [value]="lang.id">
-                        {{ lang.nativeName }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-            </div>
+  <header>
+    <div class="data-section">
+      <!-- Tradecomm logo /language section -->
+      <div class="row" style="padding-top: 10px;">
+        <div class="col-lg-4 col-sm-4">
+          <img src="../../../assets/img/icctradelogo.png" class="log-logoss" />
         </div>
-        <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
-          <mat-accordion>
-            <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                      {{'Basic Details' | translate}}
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-
+        <div class="col-lg-6 col-sm-5" style="padding: 14px 29px;">
+          <h5>{{'Welcome TO ICC TradeComm' | translate}}</h5>
+        </div>
+        <div class="col-lg-2 col-sm-3 language">
+          <mat-form-field dense>
+            <mat-label>Language</mat-label>
+            <mat-icon matPrefix>language</mat-icon>
+            <mat-select #selectedLang [value]="translate.currentLang"
+              (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+              <mat-option *ngFor="let lang of languages" [value]="lang.id">
+                {{ lang.nativeName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <form [formGroup]="signupForm" autocomplete="off" (ngSubmit)="onSignupSubmit()">
+        <!-- Basic details section -->
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true"
+            (closed)="bidpanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                {{'Basic Details' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
             <div class="row dis-block">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="National ID​">Company Register ID​
-                      </label> -->
-                      <mat-form-field dense  class="readOnlyCls">
-                        <mat-label> {{'Company Register ID​' | translate}}</mat-label>
-                        <input type="text"  matInput formControlName="nationalId" readonly/>
-                        <mat-error *ngIf="hasError('nationalId', 'required')">{{'nationalId is required' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="First name​">Company name​
-                      </label> -->
-                      <mat-form-field dense>
-                        <mat-label>{{'Company name' | translate}}​</mat-label>
-                        <mat-icon matPrefix>business</mat-icon>
-                        <input type="text" matInput  formControlName="companyName" />
-                        <mat-error *ngIf="hasError('companyName', 'required')">{{'companyName is required' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <!-- <div class="form-group"> -->
-                     
-                      <!-- <mat-form-field dense>
-                        <mat-label>Country</mat-label>
-                        <mat-icon matPrefix>flag</mat-icon>
-                        <input type="text" matInput  formControlName="country" />
-                        <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
-                      </mat-form-field> -->
-
-                      <!-- <angular2-multiselect  [data]="optionDatas"  class="sign-select" style="margin-bottom:10px"
-                      name='country'  (onDeSelectAll)="onDeSelect($event)" 
-                     [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-                     [settings]="dropdownSettings" ></angular2-multiselect> -->
-
-                      <ng-multiselect-dropdown class="sign-drop"
-                      [placeholder]="('Select Country' | translate)"
-                      [settings]="dropdownSettings"
-                      [data]="optionDatas"
-                      formControlName="country">
-                    </ng-multiselect-dropdown>
-                     <!-- <div class="multiselect-dropdown-dsgn">              
-                      <angular2-multiselect [data]="optionDatas"
-                     formControlName="country"
-                     [settings]="dropdownSettings"></angular2-multiselect>  
-                    </div> -->
-                  </div>
-                </div>
-            <!-- </div> -->
-          <div class="row dis-block">
-            <div class="col-sm-4">
+              <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="National ID​">Email Id
-                  </label> -->
+                  <mat-form-field dense class="readOnlyCls">
+                    <mat-label> {{'Company Register ID​' | translate}}</mat-label>
+                    <input type="text" matInput formControlName="nationalId" readonly />
+                    <mat-error *ngIf="hasError('nationalId', 'required')">{{'nationalId is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label>{{'Company name' | translate}}​</mat-label>
+                    <mat-icon matPrefix>business</mat-icon>
+                    <input type="text" matInput formControlName="companyName" />
+                    <mat-error *ngIf="hasError('companyName', 'required')">{{'companyName is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <ng-multiselect-dropdown class="sign-drop" [placeholder]="('Select Country' | translate)"
+                  [settings]="dropdownSettings" [data]="optionDatas" formControlName="country">
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="row dis-block">
+              <div class="col-sm-4">
+                <div class="form-group">
                   <mat-form-field dense>
                     <mat-label>{{'Email Id' | translate}}</mat-label>
                     <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput  formControlName="email" />
+                    <input type="text" matInput formControlName="email" />
                     <mat-error *ngIf="hasError('email', 'required')">{{'email is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="First name​">First name​
-                </label> -->
-                <mat-form-field dense>
-                  <mat-label>{{'First name' | translate}}</mat-label>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text"  matInput formControlName="firstName" />
-                  <mat-error *ngIf="hasError('firstName', 'required')">{{'firstName is required' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="First name​">Last name​
-                </label> -->
-                <mat-form-field dense>
-                  <mat-label>{{'Last name' | translate}}</mat-label>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" matInput  formControlName="lastName" />
-                  <mat-error *ngIf="hasError('lastName', 'required')">{{'lastName is required' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
-  
-            </div>
-          </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="National ID​">Phone Number</label> -->
-                <mat-form-field dense>
-                  <mat-label>{{'Phone Number' | translate}}</mat-label>
-                  <mat-icon matPrefix>call</mat-icon>
-                  <input type="text" matInput  formControlName="contactNo" />
-                  <mat-error *ngIf="hasError('contactNo', 'required')">{{'phoneNumber is required' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="col-sm-4">
-                <!-- <label for="Address">Address 1</label> -->
+              <div class="col-sm-4">
                 <div class="form-group">
-                <mat-form-field dense>
-                  <mat-label>{{'Address 1' | translate}}</mat-label>
-                  <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput formControlName="address" />
-                  <mat-error *ngIf="hasError('address', 'required')">{{'Address is required' | translate}}</mat-error>
-                </mat-form-field>
-            </div>
+                  <mat-form-field dense>
+                    <mat-label>{{'First name' | translate}}</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input type="text" matInput formControlName="firstName" />
+                    <mat-error *ngIf="hasError('firstName', 'required')">{{'firstName is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
               <div class="col-sm-4">
-                <!-- <label for="Address">Address 2</label> -->
                 <div class="form-group">
-                <mat-form-field dense>
-                  <mat-label>{{'Address 2' | translate}}</mat-label>
-                  <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput  formControlName="address1" />
-                  <mat-error *ngIf="hasError('address1', 'required')">{{'Address is required' | translate}}</mat-error>
-                </mat-form-field>
-            </div>
+                  <mat-form-field dense>
+                    <mat-label>{{'Last name' | translate}}</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input type="text" matInput formControlName="lastName" />
+                    <mat-error *ngIf="hasError('lastName', 'required')">{{'lastName is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
-          </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
+            </div>
+            <div class="row dis-block">
+              <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="Locale">State</label> -->
+                  <mat-form-field dense>
+                    <mat-label>{{'Phone Number' | translate}}</mat-label>
+                    <mat-icon matPrefix>call</mat-icon>
+                    <input type="text" matInput formControlName="contactNo" />
+                    <mat-error *ngIf="hasError('contactNo', 'required')">{{'phoneNumber is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label>{{'Address 1' | translate}}</mat-label>
+                    <mat-icon matPrefix>home</mat-icon>
+                    <input type="text" matInput formControlName="address" />
+                    <mat-error *ngIf="hasError('address', 'required')">{{'Address is required' | translate}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label>{{'Address 2' | translate}}</mat-label>
+                    <mat-icon matPrefix>home</mat-icon>
+                    <input type="text" matInput formControlName="address1" />
+                    <mat-error *ngIf="hasError('address1', 'required')">{{'Address is required' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row dis-block">
+              <div class="col-sm-4">
+                <div class="form-group">
                   <mat-form-field dense>
                     <mat-label>{{'State' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
@@ -171,131 +142,123 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="Locale">City</label> -->
                   <mat-form-field dense>
                     <mat-label>{{'City' | translate}}</mat-label>
                     <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput  formControlName="city" />
+                    <input type="text" matInput formControlName="city" />
                     <mat-error *ngIf="hasError('city', 'required')">{{'City is required' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="Locale">Postal Code</label> -->
                   <mat-form-field dense>
                     <mat-label>{{'Postal Code' | translate}}</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput  formControlName="postalCode" />
-                    <mat-error *ngIf="hasError('postalCode', 'required')">{{'postalCode is required' | translate}}</mat-error>
+                    <input type="text" matInput formControlName="postalCode" />
+                    <mat-error *ngIf="hasError('postalCode', 'required')">{{'postalCode is required' | translate}}
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
-          </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-             <mat-form-field dense class="mat-box">
-              <mat-label>{{'Sector' | translate}}</mat-label>
-              <mat-select formControlName="sector">
-                <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description | translate}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-
             </div>
-            <div class="col-sm-4">
-              <!-- <ng-multiselect-dropdown
-              [placeholder]="('Select Language' | translate)"
-              [settings]="languageDropdownSettings"
-              [data]="LanguagesOptions"
-              formControlName="language">
-            </ng-multiselect-dropdown> -->
-              <!-- <div class="multiselect-dropdown-dsgn">                   
-                <angular2-multiselect [data]="LanguagesOptions"
-                formControlName="language"
-                [settings]="languageDropdownSettings"></angular2-multiselect>    
-                </div>  -->
+            <div class="row dis-block">
+              <div class="col-sm-4">
+                <mat-form-field dense class="mat-box">
+                  <mat-label>{{'Sector' | translate}}</mat-label>
+                  <mat-select formControlName="sector">
+                    <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              <div class="col-sm-4">
                 <mat-form-field dense class="mat-box">
                   <mat-label>{{'Language' | translate}}</mat-label>
                   <mat-select formControlName="language">
-                    <!-- <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search" (keyup)="onKey($event.target.value)">
-                    <mat-option>None</mat-option> -->
                     <mat-option *ngFor="let item of LanguagesOptions" [value]="item.id">{{item.itemName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
+              </div>
             </div>
-          </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- Image Upload Section -->
+        <mat-accordion>
+          <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                {{'Upload' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row dis-block">
+              <div class="col-sm-4">
 
-            </mat-expansion-panel>
-          </mat-accordion>
-          <mat-accordion>
-            <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                      {{'Upload' | translate}}
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="row dis-block">
-                  <div class="col-sm-4">
-  
                 <div class="card-form-container">
-                  <div class="dynamic-radio-btn file-input" >
+                  <div class="dynamic-radio-btn file-input">
                     <h6>{{'Profile Image' | translate}}</h6>
-                      <div class="file-upload">
+                    <div class="file-upload">
                       <div class="upload-btn-wrapper">
-                        <button class="filebtn" >{{'Upload a file' | translate}}</button>
-                      <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
+                        <button class="filebtn">{{'Upload a file' | translate}}</button>
+                        <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)"
+                          accept=".png, .jpg, .jpeg" />
                       </div>
                       <div class="file-label">
                         <div class="img-space">
                           <ng-container *ngIf="isImageSaved; else elseTemplate">
-                              <img [src]="cardImageBase64" />
+                            <img [src]="cardImageBase64" />
                           </ng-container>
                           <ng-template #elseTemplate>
                           </ng-template>
-                      </div>
+                        </div>
+                        <!-- Image removal functionality(future use)********* -->
                         <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
                           <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
                       </div>
-                      </div>
+                    </div>
                   </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+
+                <div class="card-form-container">
+                  <div class="dynamic-radio-btn file-input">
+                    <h6>{{'KYC Image' | translate}}</h6>
+                    <div class="file-upload">
+                      <div class="upload-btn-wrapper">
+                        <button class="filebtn">{{'Upload a file' | translate}}</button>
+                        <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)"
+                          accept=".png, .jpg, .jpeg" />
+                      </div>
+                      <div class="file-label">
+                        <div class="img-space">
+                          <ng-container *ngIf="isImageSaved; else elseTemplate">
+                            <!-- <img [src]="cardImageBase64" /> -->
+                          </ng-container>
+                          <ng-template #elseTemplate>
+                          </ng-template>
+                        </div>
+                        <!-- Image removal functionality(future use)********* -->
+                        <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
+                        <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-              <div class="col-sm-4">
-  
-              <div class="card-form-container">
-                <div class="dynamic-radio-btn file-input" >
-                  <h6>{{'KYC Image' | translate}}</h6>
-                    <div class="file-upload">
-                    <div class="upload-btn-wrapper">
-                      <button class="filebtn" >{{'Upload a file' | translate}}</button>
-                    <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event)" accept=".png, .jpg, .jpeg" />
-                    </div>
-                    <div class="file-label">
-                      <div class="img-space">
-                        <ng-container *ngIf="isImageSaved; else elseTemplate">
-                            <!-- <img [src]="cardImageBase64" /> -->
-                        </ng-container>
-                        <ng-template #elseTemplate>
-                        </ng-template>
-                    </div>
-                      <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
-                        <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
-                    </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-                </div>
-              
+
           </mat-expansion-panel>
-          </mat-accordion>
-          <div class="row" style="padding-bottom: 10px;
+        </mat-accordion>
+        <div class="row" style="padding-bottom: 10px;
           justify-content: flex-end;
-          padding-top: 15px;" >
-            <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
-            <button type="button" mat-raised-button color="warn" (click)="GotoLogin()">{{'Cancel' | translate}}</button>
-          </div>
-        </form>
-      </div>
-    </header>
-  </div>
+          padding-top: 15px;">
+          <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
+          <button type="button" mat-raised-button color="warn" (click)="loginNavigation()">{{'Cancel' |
+            translate}}</button>
+        </div>
+      </form>
+    </div>
+  </header>
+</div>

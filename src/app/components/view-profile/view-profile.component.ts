@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -8,24 +8,25 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./view-profile.component.scss']
 })
 export class ViewProfileComponent implements OnInit {
-  userForm: FormGroup;
-  userDeatils: any;
+  profileDetailForm: FormGroup;
+  userDetails: any;
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {
-    this.invoiceFormBuild()
+    this.userProfileFormBuild()
   }
 
   ngOnInit(): void {
-    this.UserEditFormBuild()
+    this.profileDetails()
   }
   public hasError = (controlName: string, errorName: string) => {
-    return this.userForm.controls[controlName].hasError(errorName);
+    return this.profileDetailForm.controls[controlName].hasError(errorName);
   }
-  UserEditFormBuild() {
+  // set/patch profile details
+  profileDetails() {
     this.apiService.generalServiceget(environment.financierServicePath + 'userdata-details/' + localStorage.getItem("userId")).subscribe(resp => {
       if (resp) {
-        this.userDeatils = resp[0]
-        this.userForm.patchValue({
+        this.userDetails = resp[0]
+        this.profileDetailForm.patchValue({
           fname: resp[0].fname,
           email: resp[0].email,
           lname: resp[0].lname,
@@ -39,8 +40,9 @@ export class ViewProfileComponent implements OnInit {
       }
     })
   }
-  invoiceFormBuild() {
-    this.userForm = this.fb.group({
+  //function to build user profile form 
+  userProfileFormBuild() {
+    this.profileDetailForm = this.fb.group({
       fname: [''],
       email: [''],
       lname: [''],

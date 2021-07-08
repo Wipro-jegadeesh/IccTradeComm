@@ -176,17 +176,17 @@ export class SmeDashboardComponent implements OnInit {
     //   borderColor: "rgba(0, 10, 130, .7)",
     // },
     {
-      backgroundColor: "rgba(193 55 162 1)",
-      borderColor: "rgba(124 73 203 1)",
+      backgroundColor: "rgb(105, 78, 214)",
+      borderColor: "rgba(105, 96, 99, 1)",
       },
       {
-      backgroundColor: "rgba(193 55 162 1)",
-      borderColor: "rgba(124 73 203 1)",
+      backgroundColor: "rgba(193, 55, 162, 1)",
+      borderColor: "rgba(105, 96, 99, 1)",
       },
-      {
-      backgroundColor: "rgba(193 55 162 1)",
-      borderColor: "rgba(124 73 203 1)",
-      }
+    //   {
+    //   backgroundColor: "rgba(193 55 162 1)",
+    //   borderColor: "rgba(124 73 203 1)",
+    //   }
   ];
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);

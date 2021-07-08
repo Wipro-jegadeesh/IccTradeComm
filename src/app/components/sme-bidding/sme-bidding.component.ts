@@ -1,12 +1,7 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
-import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { Observable } from 'rxjs';
-import { DataSource } from '@angular/cdk/collections';
 import { SMEDASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { SmeBiddingServices } from './sme-bidding-services';
 import { INVOICEDETAILSCONSTANTS } from '../../shared/constants/constants';
@@ -14,8 +9,7 @@ import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-sme-bidding',
@@ -25,10 +19,9 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 export class SmeBiddingComponent implements OnInit {
 
-
-
-  displayedColumns: string[] = ['invoiceRef', 'invoiceId', 'invoiceAmt', 'invDate', 'invDueDate', 'buyer', 'financiercount', 'action'];
-  dataSource;
+  displayedColumns: string[] = ['invoiceRef', 'invoiceId', 'invoiceAmt', 'invDate',
+    'invDueDate', 'buyer', 'financiercount', 'action'];
+  smeBiddingList;
   isOpen = ""
   mobileScreen = false;
   currentPage = 0;
@@ -55,16 +48,14 @@ export class SmeBiddingComponent implements OnInit {
 
   financierTooltip = SMEDASHBOARDCONSTANTS;
 
-  constructor(public router: Router,private fb: FormBuilder, private smeBiddingServices: SmeBiddingServices) { }
-  dataSourceInvoiceDetails; //data
-  invoiceReference: string;
+  constructor(public router: Router, private fb: FormBuilder, private smeBiddingServices: SmeBiddingServices) { }
   invoiceId: string;
   buyerName: string;
   amount: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
+  //filter options &  variables
   displayedColumnsload: string[] = [
     'TopBar',
   ]
@@ -74,7 +65,7 @@ export class SmeBiddingComponent implements OnInit {
   displayedColumnFilter: string[] = [
     'Filter',
   ]
-  SearchModel = {
+  searchModel = {
     'invoiceRef': String,
     'invoiceId': String,
     'invoiceDate': String,
@@ -97,45 +88,51 @@ export class SmeBiddingComponent implements OnInit {
       }
     }
   };
-  Searchform: FormGroup;
+  searchForm: FormGroup;
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.smeBiddingServices.getInvoiceDetails().subscribe(resp => {
-      console.log(resp);
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort;
-    })
-    this.buildform()
+    this.getInvoiceDetails()
+    this.buildForm()
   }
-  buildform() {
-    this.Searchform = this.fb.group({
+  //get Invoice data initiated by sme user
+  getInvoiceDetails() {
+    this.smeBiddingServices.getInvoiceDetails().subscribe(resp => {
+      this.smeBiddingList = new MatTableDataSource(resp);
+      this.smeBiddingList.paginator = this.paginator
+      this.smeBiddingList.sort = this.sort;
+    })
+  }
+  buildForm() {
+    this.searchForm = this.fb.group({
       invoiceId: [''],
       buyerName: [''],
       invoiceDate: [''],
       invoiceDueDate: ['']
     })
   }
-  searchApi() {
-    this.smeBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+  //search function
+  onSearch() {
+    this.smeBiddingServices.searchFinanceFunded(this.searchForm.value).subscribe(resp => {
+      this.smeBiddingList = new MatTableDataSource(resp);
+      this.smeBiddingList.paginator = this.paginator
     })
   }
-  resetApi() {
-    this.Searchform.reset();
-    this.buildform();
+  //function to reset a search datas
+  onReset() {
+    this.searchForm.reset();
+    this.buildForm();
     this.smeBiddingServices.searchFinanceFunded('').subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+      this.smeBiddingList = new MatTableDataSource(resp);
+      this.smeBiddingList.paginator = this.paginator
 
     })
   }
-  searchDiv() {
+  //function to open/close search section
+  searchContainer() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -143,7 +140,8 @@ export class SmeBiddingComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  //function to close/open a filter section
+  filterContainer() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -151,8 +149,8 @@ export class SmeBiddingComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
+  //Edit path (particular invoice router function)
   navigateSmeDetails(id) {
     this.router.navigateByUrl('/sme-bidding/' + id);
   }
-
 }

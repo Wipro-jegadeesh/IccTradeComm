@@ -10,19 +10,19 @@ export class SignupService {
         let params='/' + data.CountryPin +  '/' + data.name + '/' + data.country[0].id 
         return this.apiService.generalServiceget(params)
     }
-    singUpCheck(body: any){
+    checkSignup(body: any){
         return this.apiService.post(environment.financierServicePath+'sme-userprofile/checkuser', body);
     }
-    Usersave(body: any) {
+    submitSignupDetails(body: any) {
         return this.apiService.post(environment.financierServicePath+'smeonboard', body);
       }
-      companyCheck(data){
+    checkCompany(data){
         return this.apiService.generalServiceget(environment.coriolisServicePath + 'test/company/' + data.companyId + '/' + data.companyName + '/' + data.country);
     }
     getUserDetails(data){
         return this.apiService.generalServiceget(environment.coriolisServicePath + 'test/questionaire/' + data.registrationId + '/' + data.companyName + '/' + data.country )
     }
-    getAllRoles(){
+    getAllSectorList(){
         return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
       }
 }
