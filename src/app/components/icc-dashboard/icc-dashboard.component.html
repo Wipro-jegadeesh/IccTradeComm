@@ -17,32 +17,35 @@
       </div>
     </div>
     <!-- tiles start -->
+      <!-- tiles start -->
     <ng-container>
       <div #accountList class="accounts-list">
-        <uxg-account-card class="curs-pointer" name="{{'ICCDashboardComponent.Funding Request' | translate}}"
+        <uxg-account-card class="curs-pointer tile-name" name="{{'ICCDashboardComponent.Funding Request' | translate}}"
           (click)="naviageTiles('/icc-funding-request')"
           number="{{fundingRequestObj?.CCY || 'SGD'}} {{fundingRequestObj?.AMOUNT? fundingRequestObj?.AMOUNT : '0'}}"
           #tooltip="matTooltip" matTooltip="{{dashboardTooltip.fundingRequest | translate}}"
           [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card class="curs-pointer" name="{{'ICCDashboardComponent.Offer for Acceptance' | translate}}"
+        <uxg-account-card class="curs-pointer tile-name"
+          name="{{'ICCDashboardComponent.Offer for Acceptance' | translate}}"
           (click)="naviageTiles('/icc-offer-acceptance')"
           number="{{OfferAcceptanceObj?.CCY || 'SGD'}} {{OfferAcceptanceObj?.AMOUNT? OfferAcceptanceObj?.AMOUNT : '0'}}"
           #tooltip="matTooltip" matTooltip="{{dashboardTooltip.offerAcceptance | translate}}"
           [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card class="curs-pointer" name="{{'ICCDashboardComponent.Financed Today' | translate}}"
+        <uxg-account-card class="curs-pointer tile-name" name="{{'ICCDashboardComponent.Financed Today' | translate}}"
           number="{{getSumAllfinTdyCount?.FINANCECCY || 'SGD'}} {{getSumAllfinTdyCount?.FINANCEAMT ? getSumAllfinTdyCount?.FINANCEAMT : '0'}}"
           #tooltip="matTooltip" matTooltip="{{dashboardTooltip.financedToday | translate}}"
           (click)="this.navigatefinancedToday()" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card name="{{'ICCDashboardComponent.Finance Master' | translate}}"
+        <uxg-account-card class="curs-pointer tile-name" name="{{'ICCDashboardComponent.Finance Master' | translate}}"
           number="{{financeMasterCount?.CCY || 'SGD'}} {{financeMasterCount?.AMOUNT ? financeMasterCount?.AMOUNT : '0'}}"
           #tooltip="matTooltip" matTooltip="{{dashboardTooltip.financedMaster | translate}}"
           (click)="this.navigatefinancedMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
-        <uxg-account-card class="curs-pointer" name="{{'ICCDashboardComponent.Invoice Master' | translate}}"
+        <uxg-account-card class="curs-pointer tile-name" name="{{'ICCDashboardComponent.Invoice Master' | translate}}"
           number="{{getSumInvoiceMasterCount?.CCY || 'SGD'}} {{getSumInvoiceMasterCount?.AMOUNT? getSumInvoiceMasterCount?.AMOUNT : '0'}}"
           #tooltip="matTooltip" matTooltip="{{dashboardTooltip.invoiceMaster | translate}}"
           (click)="this.navigateinvoiceMaster()" [matTooltipPosition]="'below'"></uxg-account-card>
       </div>
     </ng-container>
+    <!-- tiles end -->
     <!-- tiles end -->
     <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
     <div class="container-fluid contnr-div">

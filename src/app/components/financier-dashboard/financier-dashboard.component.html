@@ -22,22 +22,39 @@
                 </button>
             </div>
         </div>
-
-        <ng-container>
+ <ng-container>
             <div #accountList class="accounts-list">
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Open for Offer' | translate}}" number="{{getSumofgetOpenForOffer?.CCY || 'SGD'}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : '0'}}" #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltip.offerDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding')"></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Financier Funded' | translate}}"  #tooltip="matTooltip" number="{{getSumofgetFinancierFunded?.INVCCY || 'SGD'}} {{ getSumofgetFinancierFunded?.INVTOTALAMT ? getSumofgetFinancierFunded?.INVTOTALAMT : '0'}}"
-                matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-funded')" currency=""></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Offer Rejected' | translate}}"  #tooltip="matTooltip"number="{{'count' | translate}} {{getSumofrejectrOffer?.COUNT? getSumofrejectrOffer?.COUNT : '0'}}"
-                matTooltip="{{dashboardTooltip.rejectedDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-rejected')" currency=""></uxg-account-card>                
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Bids to be accepted' | translate}}" number="{{getSumofgetbidsToBeAccepted?.CCY || 'SGD'}} {{getSumofgetbidsToBeAccepted?.AMOUNT? getSumofgetbidsToBeAccepted?.AMOUNT : '0'}}"  #tooltip="matTooltip"
-                matTooltip="{{dashboardTooltip.acceptedDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/financier-bids-accept')"  currency=""></uxg-account-card>
-                <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Offer Expired' | translate}}/{{'cancel' | translate}}"   #tooltip="matTooltip" number="{{'count' | translate}} {{getSumofexpeireOffer?.COUNT? getSumofexpeireOffer?.COUNT : '0'}}"
-                matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-expired')" currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'FinanceDashboardComponent.Open for Offer' | translate}}"
+                    number="{{getSumofgetOpenForOffer?.CCY || 'SGD'}} {{getSumofgetOpenForOffer?.AMOUNT? getSumofgetOpenForOffer?.AMOUNT : '0'}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltip.offerDetails | translate}}"
+                    [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding')">
+                </uxg-account-card>
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'FinanceDashboardComponent.Financier Funded' | translate}}" #tooltip="matTooltip"
+                    number="{{getSumofgetFinancierFunded?.INVCCY || 'SGD'}} {{ getSumofgetFinancierFunded?.INVTOTALAMT ? getSumofgetFinancierFunded?.INVTOTALAMT : '0'}}"
+                    matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'"
+                    (click)="this.navigateBiddingPage('/finance-funded')" currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'FinanceDashboardComponent.Offer Rejected' | translate}}" #tooltip="matTooltip"
+                    number="{{'count' | translate}} {{getSumofrejectrOffer?.COUNT? getSumofrejectrOffer?.COUNT : '0'}}"
+                    matTooltip="{{dashboardTooltip.rejectedDetails | translate}}" [matTooltipPosition]="'below'"
+                    (click)="this.navigateBiddingPage('/finance-bidding-rejected')" currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'FinanceDashboardComponent.Bids to be accepted' | translate}}"
+                    number="{{getSumofgetbidsToBeAccepted?.CCY || 'SGD'}} {{getSumofgetbidsToBeAccepted?.AMOUNT? getSumofgetbidsToBeAccepted?.AMOUNT : '0'}}"
+                    #tooltip="matTooltip" matTooltip="{{dashboardTooltip.acceptedDetails | translate}}"
+                    [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/financier-bids-accept')"
+                    currency=""></uxg-account-card>
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'FinanceDashboardComponent.Offer Expired' | translate}}/{{'cancel' | translate}}"
+                    #tooltip="matTooltip"
+                    number="{{'count' | translate}} {{getSumofexpeireOffer?.COUNT? getSumofexpeireOffer?.COUNT : '0'}}"
+                    matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'"
+                    (click)="this.navigateBiddingPage('/finance-bidding-expired')" currency=""></uxg-account-card>
                 <!-- <uxg-account-card class="curs-pointer" name="{{'FinanceDashboardComponent.Offer cancel' | translate}}" number="SGD 0" balance="" #tooltip="matTooltip" number="{{getSumofexpeireOffer?.CCY || 'SGD'}} {{getSumofexpeireOffer?.INVOICEAMT? getSumofexpeireOffer?.INVOICEAMT : '0'}}"
                 matTooltip="{{dashboardTooltip.expiredDetails | translate}}" [matTooltipPosition]="'below'" (click)="this.navigateBiddingPage('/finance-bidding-cancel')" currency=""></uxg-account-card> -->
-             </div>
+            </div>
         </ng-container>
         <div class="col-md-12" style="float:right;min-height: 50px;">
         </div>
