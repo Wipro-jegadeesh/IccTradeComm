@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Component, OnInit, ElementRef, HostListener, ViewChild, Input } from '@angular/core';
+import {  Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,61 +6,12 @@ import { ModalDialogService } from '../../../service/modal-dialog.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
 import { INVOICEDETAILSCONSTANTS } from '../../../shared/constants/constants';
-import { MatSort } from '@angular/material/sort';
 import { DatePipe } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
-
-
-
-const DATA_ONE: any[] = [
-  {
-    SNo: 1,
-    DescGoods: 'Steel Rod',
-    IdNo: 'a456',
-    Qty: '100t',
-    Rate: '678.0',
-    Amt: 67800,
-    DiscAmt: '-',
-    NetAmt: 67800,
-    TaxRate: 2,
-    TaxAmt: 1356,
-    Total: 63156
-  },
-  {
-    SNo: 2,
-    DescGoods: 'Nuts',
-    IdNo: 'D435',
-    Qty: '25t',
-    Rate: '876.0',
-    Amt: 21900,
-    DiscAmt: 900,
-    NetAmt: 21000,
-    TaxRate: 2,
-    TaxAmt: 420,
-    Total: 21420
-  }
-];
-
-const DATA_TWO: any[] = [
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A'
-  }
-];
-
 
 
 @Component({
@@ -78,7 +29,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   finBidform: FormGroup;
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
-  dataSourceOne = new MatTableDataSource(DATA_ONE); //data
+  dataSourceOne = new MatTableDataSource(); //data
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   displayedColumnsOne1: string[] = [
     'SNo',
@@ -93,7 +44,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'TaxAmt',
     'Total'
   ];
-  dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
+  dataSourceTwo = new MatTableDataSource(); //data
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',
@@ -134,15 +85,6 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   ]
 
   displayedInvoiceFormsColumns: string[] = [
-    // 'invRefNumber',
-    // 'invId',
-    // 'invDate',
-    // 'invDueDate',
-    // 'invAmt',
-    // 'buyerName',
-    // 'sellerName',
-    // 'buyerRating',
-    // 'sellerRating'
     'billNo',
     'invId',
     'invDate',
@@ -163,13 +105,9 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
 
   invoiceDetails: any
   moment: any = moment;
-  @ViewChild('accountList', { read: ElementRef })
-  @HostListener('window:resize', ['$event'])
-  public accountList: ElementRef<any>;
-  public getSmeName: any = []
+
 
   ngOnInit(): void {
-    // this.getsmeNameId();
     this.type = this.activatedRoute.snapshot.paramMap.get("type");
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if(this.type === 'view'){
@@ -183,13 +121,6 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
       if (resp) {
         this.FinancebiddingDetails = resp
         this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(resp.invoiceId).subscribe(resp => {
-
-          // this.getSmeName.forEach(element2 => {
-          //   if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          //     resp.smeId = element2.smeName
-          //   }
-          // });
-
            this.invoiceDetails = resp
           this.buildfinBidform()
           this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
@@ -199,11 +130,6 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
       }
     })
   }
-  getsmeNameId() {
-    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
-    })
-}
   buildform() {
     this.finBidform = this.fb.group({
       fundingCcy: ['SGD', Validators.required],
@@ -264,53 +190,6 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     console.log(time_difference, "time_difference")
     var days_difference = time_difference / (1000 * 60 * 60 * 24);
     return days_difference
-  }
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-  onResize() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
-    }
-  }
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-  logout() {
-    this.authenticationService.logout()
-  }
-  goHome() {
-    this.router.navigateByUrl('/financier-dashboard');
-  }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
   }
   openModal(event, template) {
     event.preventDefault();
