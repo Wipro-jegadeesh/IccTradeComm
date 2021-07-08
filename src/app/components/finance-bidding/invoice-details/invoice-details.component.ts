@@ -1,90 +1,14 @@
-import { Pipe, PipeTransform, Component, OnInit, ElementRef, HostListener, ViewChild, Input } from '@angular/core';
-import { AuthenticationService } from '../../../service/authentication/authentication.service';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModalDialogService } from '../../../service/modal-dialog.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
 import { INVOICEDETAILSCONSTANTS } from '../../../shared/constants/constants';
-import { MatSort } from '@angular/material/sort';
 import { DatePipe } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
-
-
-
-
-
-
-
-
-interface Status {
-  value: string;
-  viewValue: string;
-}
-
-const DATA_ONE: any[] = [
-  {
-    SNo: 1,
-    DescGoods: 'Steel Rod',
-    IdNo: 'a456',
-    Qty: '100t',
-    Rate: '678.0',
-    Amt: 67800,
-    DiscAmt: '-',
-    NetAmt: 67800,
-    TaxRate: 2,
-    TaxAmt: 1356,
-    Total: 63156
-  },
-  {
-    SNo: 2,
-    DescGoods: 'Nuts',
-    IdNo: 'D435',
-    Qty: '25t',
-    Rate: '876.0',
-    Amt: 21900,
-    DiscAmt: 900,
-    NetAmt: 21000,
-    TaxRate: 2,
-    TaxAmt: 420,
-    Total: 21420
-  }
-];
-
-const DATA_TWO: any[] = [
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A'
-  }
-];
-const displayInvDatas: any[] = [
-  {
-    invRefNumber: 'BID03456',
-    invId: 102700,
-    invDate: '10/12/2020',
-    invDueDate: '10/12/2020',
-    invAmt: 1000,
-    buyerName: "Test Buyer",
-    sellerName: "Test Seller",
-    buyerRating: 10,
-    sellerRating: '6.1'
-  }
-];
-
-
 @Component({
   selector: 'app-invoice-details',
   templateUrl: './invoice-details.component.html',
@@ -94,35 +18,21 @@ const displayInvDatas: any[] = [
 export class InvoiceDetailsComponent implements OnInit {
   finBidform: FormGroup;
   modalRef: BsModalRef;
-
-  status: Status[] = [
-    { value: 'A', viewValue: 'A' },
-    { value: 'R', viewValue: 'R' },
-  ];
   detailsTooltip = INVOICEDETAILSCONSTANTS
   limitDetails: any;
-  public getSmeName: any = []
+  currentPage = 0;
+  pageCount = 1;
+  limit = 7;
+  bidpanelOpenState = false;
+  id: any
+  invoiceDetails: any
+  moment: any = moment;
+  public smeRatingDetails: any = [];
 
-  constructor(public translate: TranslateService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService,
-    private authenticationService: AuthenticationService, private router: Router, private modalDialogService: ModalDialogService,
-    private fb: FormBuilder, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices, private invoiceRequestServices: InvoiceRequestServices, private toastr: ToastrService) { }
+  dataSourceOne = new MatTableDataSource(); //Good Details
+  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];//Good Details
 
-  dataSourceOne = new MatTableDataSource(DATA_ONE); //data
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  displayedColumnsOne1: string[] = [
-    'SNo',
-    'DescGoods',
-    'IdNo',
-    'Qty',
-    'Rate',
-    'Amt',
-    'DiscAmt',
-    'NetAmt',
-    'TaxRate',
-    'TaxAmt',
-    'Total'
-  ];
-  dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
+  dataSourceTwo = new MatTableDataSource(); //Funding Details 
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',
@@ -132,6 +42,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
+  //second Row
   displayedInvoiceTwo: string[] = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
@@ -144,6 +55,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
+  //popup Table
   launchBidPopup: string[] = [
     'Funding CCY',
     'Base CCY Amount',
@@ -152,6 +64,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Repayment Date'
   ]
   launchBid_Popup: any
+  //popup Table column second
   launchBidTableTwo_Popup: any
   launchBidTableTwoPopup: string[] = [
     'Inv Discount Rate',
@@ -161,110 +74,28 @@ export class InvoiceDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ]
-  displayInvDatas = new MatTableDataSource(displayInvDatas); //data
 
-  displayedInvoiceFormsColumns: string[] = [
-    // 'invRefNumber',
-    // 'invId',
-    // 'invDate',
-    // 'invDueDate',
-    // 'invAmt',
-    // 'buyerName',
-    // 'sellerName',
-    // 'buyerRating',
-    // 'sellerRating'
-    'billNo',
-    'invId',
-    'invDate',
-    'invDueDate',
-    'invAmt',
-    'buyerName',
-    'smeId',
-  ];
-  mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
-  isOpen = '';
-  bidpanelOpenState = false;
-  // @Input() id: "";
-  id: any
-
-  // invoiceDetails = {
-  //   billNo : String,
-  //         invId : String,
-  //         invDate : String,
-  //         invDueDate : String,
-  //         invAmt : String,
-  //         buyerName : String,
-  //         smeId : String,  
-  // }
-  invoiceDetails: any
-  moment: any = moment;
-
-  public smeRatingDetails: any = [];
-
+  constructor(public translate: TranslateService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService,
+    private router: Router, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices, private toastr: ToastrService) { }
 
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    // this.buildfinBidform()
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    }
-    this.buildform()
-    // this.getsmeNameId();
-
-
-    // this.dateMinus(this.datePipe.transform('2021-08-20T00:00:00.000+0000','MM/dd/yyyy'),this.datePipe.transform('2021-06-09T00:00:00.000+0000','MM/dd/yyyy'))
+    this.buildform() //From Invoice Details 
     this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(this.id).subscribe(resp => {
       if (resp) {
-
-          // this.getSmeName.forEach(element2 => {
-          //   if (resp.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          //     resp.smeId = element2.smeName
-          //   }
-          // });
-      
         this.invoiceDetails = resp
         this.getuserProfile();
-        this.buildfinBidform()
-        this.changeRowgrid()
-        this.displayInvDatas = new MatTableDataSource([
-          {
-            billNo: resp.billNo,
-            invId: resp.invId,
-            invDate: resp.invDate,
-            invDueDate: resp.invDueDate,
-            invAmt: resp.invAmt,
-            buyerName: resp.buyerName,
-            smeId: resp.smeId,
-          }
-
-        ])
+        this.buildfinBidform() //From set to Value 
+        this.calculationRate() //calculation
         this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
       } else {
-        this.buildfinBidform()
-
+        this.buildfinBidform() //From set to Value
       }
-
     })
-
     this.invoiceRequestServices.getMainlimitScreenDatas().subscribe(resp => {
       this.limitDetails = resp
     })
-    // this.limitDetails = {"key97":24,"limitNumber":"3553-6736-3636-0036","financierID":"FINANCIER90","transactions":"1000.0","overallLimit":7000.0,"smewiseMaxlimit":2000.0,"countryMaxLimit":2000.0,"sectorLimit":1000.0,"OverallUtilizedLimit":0.0,"smeWiseUtilized":2000.0,"CountryWiseUtilized":2000.0,"OverallAvailable":7000.0,"buyerLimit":200.0,"LimitAudit":null}
-    // console.log(this.limitDetails,"this.limitDetails")
-  }
-
-  getsmeNameId() {
-    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-      this.getSmeName = resp;
-    })
-
-
   }
   getuserProfile() {
     this.invoiceRequestServices.getuserProfile(this.invoiceDetails.smeProfileId).subscribe(resp => {
@@ -298,6 +129,7 @@ export class InvoiceDetailsComponent implements OnInit {
       invoiceAmt: ['']
     })
   }
+  //Form set to Value
   buildfinBidform() {
     var ddatae = new Date();
     console.log(this.datePipe.transform(this.invoiceDetails.invDueDate), "this.datePipe.transform(this.invoiceDetails.invDueDate)")
@@ -325,6 +157,7 @@ export class InvoiceDetailsComponent implements OnInit {
       invoiceAmt: ['']
     })
   }
+  //Dates calculation In B/W
   dateMinus(repaymentDate, cureentday) {
     var date1, date2;
     console.log(repaymentDate, cureentday)
@@ -336,63 +169,7 @@ export class InvoiceDetailsComponent implements OnInit {
     console.log(days_difference, "days_difference")
     return days_difference
   }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-
-  @ViewChild('accountList', { read: ElementRef })
-  public accountList: ElementRef<any>;
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
-    }
-  }
-
-
-
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-  logout() {
-    this.authenticationService.logout()
-  }
-  goHome() {
-    this.router.navigateByUrl('/financier-dashboard');
-  }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
-    })
-
-  }
+  //popup Open 
   openModal(event, template) {
     console.log(this.limitDetails, "this.limitDetails")
     if (Number(this.limitDetails && this.limitDetails.OverallAvailable) < this.finBidform.value.baseCcyNetAmtPayable) {
@@ -415,13 +192,9 @@ export class InvoiceDetailsComponent implements OnInit {
       }
     }
   }
-
+  //Submit Function 
   onSubmitBidForm() {
     try {
-      // for (const key in this.invoiceForm.controls) {
-      //   this.invoiceForm.get(key).setValidators(Validators.required);
-      //   this.invoiceForm.get(key).updateValueAndValidity();
-      //   }
       if (this.finBidform.status === "INVALID") {
         this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
       } else {
@@ -436,20 +209,11 @@ export class InvoiceDetailsComponent implements OnInit {
         params.smeRating = this.smeRatingDetails && this.smeRatingDetails.smeRating ? this.smeRatingDetails.smeRating : '0';
         params.transactionRating = this.invoiceDetails && this.invoiceDetails.buyerScore ? this.invoiceDetails.buyerScore : '0';
 
-        // this.invoiceFormBuild();
-        // this.dataSourceTwo.data = [];
-        // this.invoiceID = "";
-        // this.InvoiceFdate = ""
-        // for (const key in this.invoiceForm.controls) {
-        //   this.invoiceForm.get(key).clearValidators();
-        //   this.invoiceForm.get(key).updateValueAndValidity();
-        // }
         this.invoiceRequestServices.finbidSave(params).subscribe(resp => {
           this.toastr.success(this.translate.instant('Bid Launched successfully'))
           this.buildfinBidform();
           this.modalRef.hide()
           this.router.navigateByUrl('/financier-dashboard');
-          // this.getInvDetailsLists();
         }, error => {
           if (error.status != 200) {
             let availableData = error.error
@@ -457,15 +221,12 @@ export class InvoiceDetailsComponent implements OnInit {
             this.toastr.error(desiredData, '', {
               timeOut: 4000, progressBar: true, enableHtml: true
             });
-
-            // this.toastr.error(error.error);
           } else {
             this.toastr.success(error.error.text);
             this.buildfinBidform();
             this.modalRef.hide()
             this.router.navigateByUrl('/financier-dashboard');
           }
-
         })
       }
     }
@@ -476,22 +237,13 @@ export class InvoiceDetailsComponent implements OnInit {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
-  changeRowgrid() {
-    console.log(this.finBidform, "finnnn");
+  calculationRate() {
     this.finBidform.value.baseCcyAmt = Number(this.invoiceDetails.invAmt) * Number(this.finBidform.value.fxRate)
-
     this.finBidform.value.baseCcyFundingAmt = Number(this.finBidform.value.baseCcyAmt) * Number(this.finBidform.value.fundablePercent) / 100;
-
     this.finBidform.value.baseCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild / 100) / 360)
-
     this.finBidform.value.invDiscRate = Number(this.finBidform.value.baseCcyDiscAmt) / Number(this.finBidform.value.baseCcyFundingAmt) * 100;
-
-
     this.finBidform.value.invCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild / 100) / 360)
-
     this.finBidform.value.baseCcyNetAmtPayable = this.finBidform.value.baseCcyFundingAmt - (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild / 100) / 360)
-
-
     this.finBidform.patchValue({
       baseCcyAmt: this.finBidform.value.baseCcyAmt,
       baseCcyFundingAmt: this.finBidform.value.baseCcyFundingAmt,

@@ -1,508 +1,475 @@
-<div class="app-content {{isOpen}} ">
-    <header>
-  <div class="data-section">
-    <table class="table-responsive inv-table">
-      <tbody>
+<div class="app-content">
+  <header>
+    <div class="data-section">
+      <!-- Invoice Details  -->
+      <table class="table-responsive inv-table">
+        <tbody>
           <tr>
-              <td rowspan="1" colspan="1">
-                <mat-form-field dense class="readOnlyCls">
-                  <mat-label>{{'Invoice Reference No' | translate}}</mat-label>
-                  <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''"  readonly/>
-                </mat-form-field>
-              </td>
-              <!-- <td rowspan="1" colspan="1">
-                <mat-form-field dense>
-                  <mat-label>Internal BID ID</mat-label>
-                  <input type="text" matInput value="SGTR953" readonly/>
-                </mat-form-field>
-              </td> -->
-              <td rowspan="1" colspan="1" class="readOnlyCls">
-                <mat-form-field dense>
-                  <mat-label>{{'SME Name' | translate}}</mat-label>
-                  <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeName : ''"   readonly/>
-                </mat-form-field>
-              </td>
-              <td rowspan="1" colspan="1" >
-                <mat-form-field dense class="readOnlyCls">
-                  <mat-label>{{'Buyer Name' | translate}}</mat-label>
-                  <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" readonly />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td rowspan="1" colspan="1">
-                <mat-form-field dense class="readOnlyCls" >
-                  <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
-                  <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" readonly />
-                </mat-form-field>
-              </td>
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense class="readOnlyCls">
-                    <mat-label>{{'SME Rating' | translate}}</mat-label>
-                    <!-- <input type="text" matInput value="600" readonly /> -->
-                    <input type="text" matInput [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'" readonly />
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Invoice Reference No' | translate}}</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''" readonly />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1" class="readOnlyCls">
+              <mat-form-field dense>
+                <mat-label>{{'SME Name' | translate}}</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeName : ''" readonly />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Buyer Name' | translate}}</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" readonly />
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" readonly />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'SME Rating' | translate}}</mat-label>
+                <input type="text" matInput
+                  [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'"
+                  readonly />
 
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Transaction Rating' | translate}}</mat-label>
+                <input type="text" matInput
+                  [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'" readonly />
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Invoice Date' | translate}} </mat-label>
+                <input type="text" matInput
+                  value="{{invoiceDetails ? invoiceDetails.invDate && moment(invoiceDetails.invDate).format('DD/MM/YYYY') : '' | date}}"
+                  readonly />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Inv Due Date' | translate}}</mat-label>
+                <input type="text" matInput
+                  value="{{invoiceDetails ? invoiceDetails.invDueDate && moment(invoiceDetails.invDueDate).format('DD/MM/YYYY') : '' | date}}"
+                  readonly />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+              <mat-form-field dense class="readOnlyCls">
+                <mat-label>{{'Invoice Amount' | translate}}</mat-label>
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" readonly />
+              </mat-form-field>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <mat-tab-group>
+        <!-- Economic Details  -->
+        <mat-tab label="{{'finaniceBidding.BIDDING Economic Details Section' | translate}}">
+          <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
+            <mat-card>
+              <mat-card-content>
+                <div id="container">
+                  <div class="mat-elevation-z8">
+                    <form [formGroup]="finBidform">
+                      <table mat-table [dataSource]="dataSourceTwo" class="table-responsive bid-table">
+                        <ng-container matColumnDef="Funding CCY">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Funding CCY' | translate}}</th>
+                          <td mat-cell *matCellDef="let element;let row; let index = index" style="border-right: 1px solid grey;
+                                  align-self: stretch;
+                                  text-align: center">
+                            <input matInput formControlName="fundingCcy" placeholder="{{'Funding CCY' | translate}}">
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="FX rate Base CCY">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'FX rate Base CCY' | translate}}%</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="fxRate" placeholder="{{'FX rate Base CCY' | translate}}"
+                              (keyup)="calculationRate()">
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Base CCY Amount">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Base CCY Amount' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="baseCcyAmt" placeholder="{{'Base CCY Amount' | translate}}"
+                              (keyup)="calculationRate()" required>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Fundable percentage">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Fundable percentage' | translate}} %
+                          </th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="fundablePercent"
+                              placeholder="{{'Fundable percentage' | translate}}" required (keyup)="calculationRate()">
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Funding Amount' | translate}}<br>
+                            {{'finaniceBidding.Repay Amount (Base CCY)' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="baseCcyFundingAmt"
+                              placeholder="{{'finaniceBidding.Repay Amount (Base CCY)' | translate}}"
+                              (keyup)="calculationRate()" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Funding Amount / Repay Amount (Inv CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Funding Amount / Repay Amount (Inv CCY)' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="invCcyFundingAmt"
+                              placeholder="{{'Funding Amount / Repay Amount (Inv CCY)' | translate}}"
+                              (keyup)="calculationRate()" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Repayment Date">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Repayment Date' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                align-self: stretch;
+                                text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="repaymentDate"
+                              placeholder="{{'Repayment Date' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+
+                      </table>
+                      <table mat-table [dataSource]="dataSourceTwo" class="table-responsive bid-table">
+                        <ng-container matColumnDef="Inv Discount  Rate">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Inv Discount Rate' | translate}} %
+                          </th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="invDiscRate" (keyup)="calculationRate()"
+                              placeholder="{{'Inv Discount Rate' | translate}}" required>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Disc Amt (Base CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'finaniceBidding.Disc Amt' |
+                            translate}}<br>(Base CCY)</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="baseCcyDiscAmt" (keyup)="calculationRate()"
+                              placeholder="{{'Disc Amt (Base CCY)' | translate}}" required>
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Disc Amt (Inv CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'finaniceBidding.Disc Amt' |
+                            translate}}<br>(Invoice CCY)</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="invCcyDiscAmt" (keyup)="calculationRate()"
+                              placeholder="{{'Disc Amt (Inv CCY)' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Annual Yield (Basis a360)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Annual Yield' |
+                            translate}}<br>{{'(Basis a360)' | translate}}%</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput (keyup)="calculationRate()" formControlName="annualYeild"
+                              placeholder="{{'Annual Yield' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Tenor Days">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Tenor Days' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                              align-self: stretch;
+                              text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput (keyup)="calculationRate()" formControlName="tenor"
+                              placeholder="{{'Tenor Days' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Penal ROI">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Penal ROI' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                              align-self: stretch;
+                              text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="penalRate" placeholder="{{'Penal ROI' | translate}}"
+                              required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Net Amt payable (Base CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">
+                            {{'Net Amt payable' | translate}}
+                            <br>(Base CCY)
+                          </th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                            align-self: stretch;
+                            text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="baseCcyNetAmtPayable"
+                              placeholder="{{'Net Amt payable (Base CCY)' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Net Amt payable (Inv CCY)">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amt payable' |
+                            translate}}<br>(Invoice CCY)</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                              align-self: stretch;
+                              text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="invCcyNetAmtPayable"
+                              placeholder="{{'Net Amt payable (Inv CCY)' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Offer Exp period">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'finaniceBidding.Offer Exp' |
+                            translate}}<br>
+                            {{'finaniceBidding.Period' | translate}}</th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                  align-self: stretch;
+                                  text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="offerExpPeriod"
+                              placeholder="{{'Offer Exp period' | translate}}" required>
+
+                          </td>
+                        </ng-container>
+                        <ng-container matColumnDef="Off Exp date /time">
+                          <th mat-header-cell *matHeaderCellDef scope="column">{{'finaniceBidding.Off Exp date /time' |
+                            translate}}<br>
+                            {{'finaniceBidding.Date / Time' | translate}} </th>
+                          <td mat-cell style="border-right: 1px solid grey;
+                                    align-self: stretch;
+                                    text-align: center" *matCellDef="let element;let row; let index = index">
+                            <input matInput formControlName="offerExpDateTime"
+                              placeholder="{{'Off Exp date /time' | translate}}" required>
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedInvoiceTwo" style="background-color:#694ed6e0">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedInvoiceTwo"></tr>
+
+                      </table>
+                    </form>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <div class="modal-footer" style="justify-content:center">
+              <button type="button" class="btn model-btn-outline" style="background-color: #4CAF50;color: white;"
+                (click)="openModal($event,template)">{{'Launch Bid' | translate}}</button>
+            </div>
+          </form>
+          <br>
+        </mat-tab>
+        <!-- Good Details  -->
+        <mat-tab label="{{'Invoice Details' | translate}}  Section">
+          <div class="table-section">
+            <mat-accordion>
+              <mat-expansion-panel>
+              </mat-expansion-panel>
+              <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true"
+                (closed)="bidpanelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title style="font-weight:500;color: #a899e4;">
+                    {{'Goods Details' | translate}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table mat-table [dataSource]="dataSourceOne" class="table-responsive gd-table">
+                  <ng-container matColumnDef="descGoods">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.goodDesc | translate}}" [matTooltipPosition]="'below'">{{'Description of Goods' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.quantity | translate}}" [matTooltipPosition]="'below'">{{'Quantity' |
+                      translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="rate">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.ccyAmount | translate}}" [matTooltipPosition]="'below'">{{'Amt Ccy' |
+                      translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="amt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.amount | translate}}" [matTooltipPosition]="'below'">{{'Amount' |
+                      translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="taxRate">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.taxRate | translate}}" [matTooltipPosition]="'below'"> {{'Tax Rate' |
+                      translate}} %</th>
+                    <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="taxAmount">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.taxAmount | translate}}" [matTooltipPosition]="'below'">{{'Tax Amount' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="discAmt">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.ccyTaxAmount | translate}}" [matTooltipPosition]="'below'">{{'Tax Amt Ccy' | translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
+                      matTooltip="{{detailsTooltip.total | translate}}" [matTooltipPosition]="'below'">{{'Total' |translate}}</th>
+                    <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+                </table>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="button" class="btn model-btn-outline">{{'Invoice Preview (double click will pop up the PDF invoice)' | translate}}</button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </header>
+</div>
+<!-- Bidding Popup  -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{'You are about to send the following Bid:' | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="data-section">
+          <table class="table-responsive inv-table">
+            <tbody>
+              <tr>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>{{'SME Name' | translate}}</mat-label>
+                    <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeId : ''" />
                   </mat-form-field>
                 </td>
                 <td rowspan="1" colspan="1">
                   <mat-form-field dense class="readOnlyCls">
                     <mat-label>{{'Transaction Rating' | translate}}</mat-label>
-                    <!-- <input type="text" matInput value="9/10"readonly /> -->
-                    <input type="text" matInput [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'" readonly />
+                    <input type="text" matInput
+                      [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'"
+                      readonly />
+                  </mat-form-field>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <mat-form-field dense>
+                    <mat-label>{{'SME Rating' | translate}}</mat-label>
+                    <input type="text" matInput
+                      [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'" />
                   </mat-form-field>
                 </td>
               </tr>
-              <tr>
-                  <td rowspan="1" colspan="1">
-                    <mat-form-field dense class="readOnlyCls">
-                      <mat-label>{{'Invoice Date' | translate}} </mat-label>
-                      <input type="text" matInput  value="{{invoiceDetails ? invoiceDetails.invDate && moment(invoiceDetails.invDate).format('DD/MM/YYYY') : '' | date}}" readonly />
-                    </mat-form-field>
-                  </td>
-                  <td rowspan="1" colspan="1">
-                    <mat-form-field dense class="readOnlyCls">
-                      <mat-label>{{'Inv Due Date' | translate}}</mat-label>
-                      <input type="text" matInput value="{{invoiceDetails ? invoiceDetails.invDueDate && moment(invoiceDetails.invDueDate).format('DD/MM/YYYY') : '' | date}}" readonly/>
-                    </mat-form-field>
-                  </td>
-                  <td rowspan="1" colspan="1">
-                    <mat-form-field dense class="readOnlyCls">
-                      <mat-label>{{'Invoice Amount' | translate}}</mat-label>
-                      <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" readonly/>
-                    </mat-form-field>
-                  </td>
-                </tr>
-              
-      </tbody>
-    </table>
-    <mat-tab-group>
-        <mat-tab label="{{'finaniceBidding.BIDDING Economic Details Section' | translate}}">
-          <form [formGroup]="finBidform" (ngSubmit)="onSubmitBidForm()">
-           <mat-card>
-                <mat-card-content>
-                  <div id="container">
-                    <div class="mat-elevation-z8">
-                      <form [formGroup]="finBidform">
-                       <table mat-table [dataSource]="dataSourceTwo" class="table-responsive bid-table">
-                            <ng-container matColumnDef="Funding CCY" >
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'Funding CCY' | translate}}</th>
-                                  <td mat-cell *matCellDef="let element;let row; let index = index" style="border-right: 1px solid grey;
-                                  align-self: stretch;
-                                  text-align: center">
-                                  <input matInput  formControlName="fundingCcy"  placeholder="{{'Funding CCY' | translate}}"  >
-                                </td>
-                              </ng-container>
-                          
-                              <ng-container matColumnDef="FX rate Base CCY">
-                                <th mat-header-cell *matHeaderCellDef scope="column">{{'FX rate Base CCY' | translate}}%</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index">
-                                  <input matInput 
-                                  formControlName="fxRate" 
-                                  placeholder="{{'FX rate Base CCY' | translate}}" 
-                                  (keyup)="changeRowgrid()"
-                                   >
-                                </td>
-                              </ng-container>
-            
-                              <ng-container matColumnDef="Base CCY Amount">
-                                <th mat-header-cell *matHeaderCellDef scope="column" >{{'Base CCY Amount' | translate}}</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                  <input matInput 
-                                  formControlName="baseCcyAmt" 
-                                  placeholder="{{'Base CCY Amount' | translate}}" (keyup)="changeRowgrid()"
-                                   required>
-                                </td>
-                              </ng-container>
-            
-                              <ng-container matColumnDef="Fundable percentage">
-                                <th mat-header-cell *matHeaderCellDef scope="column" >{{'Fundable percentage' | translate}} %</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                  <input matInput 
-                                  formControlName="fundablePercent" 
-                                  placeholder="{{'Fundable percentage' | translate}}" 
-                                  required  (keyup)="changeRowgrid()">
-                                </td>
-                              </ng-container>
-                              <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
-                                <th mat-header-cell *matHeaderCellDef  scope="column" >{{'Funding Amount' | translate}}<br>
-                                   {{'finaniceBidding.Repay Amount (Base CCY)' | translate}}</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                  <input matInput 
-                                  formControlName="baseCcyFundingAmt" 
-                                  placeholder="{{'finaniceBidding.Repay Amount (Base CCY)' | translate}}" (keyup)="changeRowgrid()"
-                                  required>
-                                </td>
-                              </ng-container>
-                              <ng-container matColumnDef="Funding Amount / Repay Amount (Inv CCY)">
-                                <th mat-header-cell *matHeaderCellDef scope="column" >{{'Funding Amount / Repay Amount (Inv CCY)' | translate}}</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                  <input matInput 
-                                  formControlName="invCcyFundingAmt" 
-                                  placeholder="{{'Funding Amount / Repay Amount (Inv CCY)' | translate}}" (keyup)="changeRowgrid()"
-                                  required>
-                                </td>
-                              </ng-container>
-                              <ng-container matColumnDef="Repayment Date">
-                                <th mat-header-cell *matHeaderCellDef scope="column" >{{'Repayment Date' | translate}}</th>
-                                <td mat-cell style="border-right: 1px solid grey;
-                                align-self: stretch;
-                                text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                    <input matInput 
-                                    formControlName="repaymentDate" 
-                                    placeholder="{{'Repayment Date' | translate}}" 
-                                    required
-                                    >
-                                  <!-- <input matInput [matDatepicker]="picker" formControlName="RepaymentDate">
-                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker></mat-datepicker> -->
-                                </td>
-                              </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
-                    
-                       </table>
-                       <table mat-table [dataSource]="dataSourceTwo" class="table-responsive bid-table">
-                        <ng-container matColumnDef="Inv Discount  Rate">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Inv Discount Rate' | translate}} %</th>
-                            <td mat-cell style="border-right: 1px solid grey;
-                            align-self: stretch;
-                            text-align: center" *matCellDef="let element;let row; let index = index"  >
-                              <input matInput 
-                              formControlName="invDiscRate" (keyup)="changeRowgrid()"
-                              placeholder="{{'Inv Discount Rate' | translate}}" 
-                              required>
-                            </td>
-                          </ng-container>
-        
-                          <ng-container matColumnDef="Disc Amt (Base CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Disc Amt' | translate}}<br>(Base CCY)</th>
-                            <td mat-cell style="border-right: 1px solid grey;
-                            align-self: stretch;
-                            text-align: center" *matCellDef="let element;let row; let index = index" >
-                              <input matInput 
-                              formControlName="baseCcyDiscAmt" (keyup)="changeRowgrid()"
-                              placeholder="{{'Disc Amt (Base CCY)' | translate}}" 
-                              required>
-                            </td>
-                          </ng-container>
-        
-                          <ng-container matColumnDef="Disc Amt (Inv CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Disc Amt' | translate}}<br>(Invoice CCY)</th>
-                            <td mat-cell style="border-right: 1px solid grey;
-                            align-self: stretch;
-                            text-align: center" *matCellDef="let element;let row; let index = index"  >
-                              <input matInput 
-                              formControlName="invCcyDiscAmt" (keyup)="changeRowgrid()"
-                              placeholder="{{'Disc Amt (Inv CCY)' | translate}}" 
-                              required>
-                            </td>
-                          </ng-container>
-                          <ng-container matColumnDef="Annual Yield (Basis a360)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >{{'Annual Yield' | translate}}<br>{{'(Basis a360)' | translate}}%</th>
-                            <td mat-cell style="border-right: 1px solid grey;
-                            align-self: stretch;
-                            text-align: center" *matCellDef="let element;let row; let index = index"  >
-                              <input matInput (keyup)="changeRowgrid()"
-                              formControlName="annualYeild" 
-                              placeholder="{{'Annual Yield' | translate}}" 
-                              required>
-                            </td>
-                          </ng-container>
-                          <ng-container matColumnDef="Tenor Days">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Tenor Days' | translate}}</th>
-                              <td mat-cell style="border-right: 1px solid grey;
-                              align-self: stretch;
-                              text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                <input matInput (keyup)="changeRowgrid()"
-                                formControlName="tenor"
-                                placeholder="{{'Tenor Days' | translate}}" 
-                                required>
-                              </td>
-                            </ng-container>
-                            <ng-container matColumnDef="Penal ROI">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Penal ROI' | translate}}</th>
-                              <td mat-cell style="border-right: 1px solid grey;
-                              align-self: stretch;
-                              text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                <input matInput
-                                formControlName="penalRate"
-                                placeholder="{{'Penal ROI' | translate}}" 
-                                required>
-                              </td>
-                            </ng-container>
-                          <ng-container matColumnDef="Net Amt payable (Base CCY)">
-                            <th mat-header-cell *matHeaderCellDef scope="column" >
-                              {{'Net Amt payable' | translate}}
-                             <br>(Base CCY)</th>
-                            <td mat-cell style="border-right: 1px solid grey;
-                            align-self: stretch;
-                            text-align: center" *matCellDef="let element;let row; let index = index"  >
-                              <input matInput 
-                              formControlName="baseCcyNetAmtPayable" 
-                              placeholder="{{'Net Amt payable (Base CCY)' | translate}}" 
-                              required>
-                            </td>
-                          </ng-container>
-                          <ng-container matColumnDef="Net Amt payable (Inv CCY)">
-                              <th mat-header-cell *matHeaderCellDef scope="column" >{{'Net Amt payable' | translate}}<br>(Invoice CCY)</th>
-                              <td mat-cell style="border-right: 1px solid grey;
-                              align-self: stretch;
-                              text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                <input matInput 
-                                formControlName="invCcyNetAmtPayable" 
-                                placeholder="{{'Net Amt payable (Inv CCY)' | translate}}" 
-                                required>
-                              </td>
-                            </ng-container>
-                              <ng-container matColumnDef="Offer Exp period">
-                                  <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Offer Exp' | translate}}<br>
-                                    {{'finaniceBidding.Period' | translate}}</th>
-                                  <td mat-cell style="border-right: 1px solid grey;
-                                  align-self: stretch;
-                                  text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                    <input matInput 
-                                    formControlName="offerExpPeriod" 
-                                    placeholder="{{'Offer Exp period' | translate}}" 
-                                    required>
-                                    <!-- <input matInput [matDatepicker]="picker" formControlName="offerExpPeriod">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker> -->
-                                  </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Off Exp date /time">
-                                    <th mat-header-cell *matHeaderCellDef scope="column" >{{'finaniceBidding.Off Exp date /time' | translate}}<br>
-                                      {{'finaniceBidding.Date / Time' | translate}} </th>
-                                    <td mat-cell style="border-right: 1px solid grey;
-                                    align-self: stretch;
-                                    text-align: center" *matCellDef="let element;let row; let index = index"  >
-                                      <input matInput 
-                                      formControlName="offerExpDateTime" 
-                                      placeholder="{{'Off Exp date /time' | translate}}" 
-                                      required>
-                                    </td>
-                                  </ng-container>
-                      <tr mat-header-row *matHeaderRowDef="displayedInvoiceTwo" style="background-color:#694ed6e0"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedInvoiceTwo"></tr>
-                  
-                     </table>
-                      </form>
-                    </div>
-                  </div>
-                </mat-card-content>
-            </mat-card>
-            <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn model-btn-outline"  style="background-color: #4CAF50;color: white;" 
-                 (click)="openModal($event,template)" >{{'Launch Bid' | translate}}</button>
-             </div>
-          </form>
-              <br>
-            </mat-tab>
-        <mat-tab label="{{'Invoice Details' | translate}}  Section"> 
-       
-          <div class="table-section">
-              <mat-accordion>
-                  <mat-expansion-panel>
-                  </mat-expansion-panel>
-                  <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                  <mat-expansion-panel-header>
-                  <mat-panel-title style="font-weight:500;color: #a899e4;">
-                    {{'Goods Details' | translate}}
-                  </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <table mat-table [dataSource]="dataSourceOne" class="table-responsive gd-table">
-                  <ng-container matColumnDef="descGoods">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.goodDesc | translate}}" [matTooltipPosition]="'below'">{{'Description of Goods' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
-                  </ng-container>
-              
-                  <ng-container matColumnDef="quantity">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.quantity | translate}}" [matTooltipPosition]="'below'">{{'Quantity' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="rate">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.ccyAmount | translate}}" [matTooltipPosition]="'below'">{{'Amt Ccy' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="amt">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.amount | translate}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
-                  </ng-container>
-               
-                  <ng-container matColumnDef="taxRate">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.taxRate | translate}}" [matTooltipPosition]="'below'">  {{'Tax Rate' | translate}} %</th>
-                  <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="taxAmount">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.taxAmount | translate}}" [matTooltipPosition]="'below'">{{'Tax Amount' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="discAmt">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.ccyTaxAmount | translate}}" [matTooltipPosition]="'below'">{{'Tax Amt Ccy' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
-                  </ng-container>
-                
-                  
-                  <ng-container matColumnDef="total">
-                  <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                  matTooltip="{{detailsTooltip.total | translate}}" [matTooltipPosition]="'below'">{{'Total' | translate}}</th>
-                  <td mat-cell *matCellDef="let element">{{ element.total }}</td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
-                  </table>
-                  </mat-expansion-panel>
-                </mat-accordion>
-          </div>
-          <div class="modal-footer" style="justify-content: center;">
-              <button type="button" class="btn model-btn-outline">{{'Invoice Preview (double click will pop up the PDF invoice)' | translate}}</button>
-           </div>
-      </mat-tab>
-    </mat-tab-group>
-</div>
-</header>
-</div>
+            </tbody>
+          </table>
+          <br>
+        </div>
+      </div>
+      <div class="row">
 
-<ng-template #template>
-    <div class="modal-header">
-       <h4 class="modal-title pull-left">{{'You are about to send the following Bid:' | translate}}</h4>
-       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-          <span aria-hidden="true">×</span>
-       </button>
+        <table mat-table [dataSource]="launchBid_Popup" class="mat-elevation-z8 table-responsive mod-table">
+
+          <ng-container matColumnDef="Funding CCY">
+            <th mat-header-cell *matHeaderCellDef>{{'Funding CCY' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element?.fundingCcy || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Base CCY Amount">
+            <th mat-header-cell *matHeaderCellDef>{{'Base CCY Amount' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element?.baseCcyAmt || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Fundable percentage">
+            <th mat-header-cell *matHeaderCellDef>{{'Fundable percentage' | translate}}%</th>
+            <td mat-cell *matCellDef="let element">{{element?.fundablePercent || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
+            <th mat-header-cell *matHeaderCellDef>{{'Funding Amount / Repay Amount (Base CCY)' | translate}}</th>
+            <td mat-cell *matCellDef="let element" style="color:red"> {{element?.baseCcyFundingAmt || '' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Repayment Date">
+            <th mat-header-cell *matHeaderCellDef>{{'Repayment Date' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element?.repaymentDate || '' }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="launchBidPopup" style="background-color:#694ed6e0"></tr>
+          <tr mat-row *matRowDef="let row; columns: launchBidPopup;"></tr>
+        </table>
+
+
+      </div>
+      <div class="row">
+        <table mat-table [dataSource]="launchBid_Popup" class="mat-elevation-z8 table-responsive mod-table">
+
+          <ng-container matColumnDef="Inv Discount Rate">
+            <th mat-header-cell *matHeaderCellDef>{{'Inv Discount Rate' | translate}}%</th>
+            <td mat-cell *matCellDef="let element"> {{element?.invDiscRate || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Disc Amt (Base CCY)">
+            <th mat-header-cell *matHeaderCellDef>{{'Disc Amt (Base CCY)' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element?.baseCcyDiscAmt || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Net Amt payable (Base CCY)">
+            <th mat-header-cell *matHeaderCellDef>{{'Net Amt payable' | translate}}(Base CCY)</th>
+            <td mat-cell *matCellDef="let element" style="color:red"> {{element?.baseCcyNetAmtPayable || '' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Annual Yield (Basis a360)">
+            <th mat-header-cell *matHeaderCellDef>{{'Annual Yield' | translate}} (Basis a360)%</th>
+            <td mat-cell *matCellDef="let element"> {{element?.annualYeild || '' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Offer Exp period">
+            <th mat-header-cell *matHeaderCellDef>{{'Offer Exp period' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element?.offerExpPeriod || '' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="Off Exp date /time">
+            <th mat-header-cell *matHeaderCellDef>{{'Reset' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.offerExpDateTime || '' }} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="launchBidTableTwoPopup" style="background-color:#694ed6e0"></tr>
+          <tr mat-row *matRowDef="let row; columns: launchBidTableTwoPopup;"></tr>
+        </table>
+
+
+      </div>
     </div>
-    <div class="modal-body">          
-       <div class="container-fluid">
-           <div class="row">
-              <div class="data-section">
-                  <table class="table-responsive inv-table">
-                  <tbody>
-                    <tr>
-                        <td rowspan="1" colspan="1">
-                            <mat-form-field dense>
-                              <mat-label>{{'SME Name' | translate}}</mat-label>
-                              <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeId : ''"  />
-                            </mat-form-field>
-                          </td>
-                          <td rowspan="1" colspan="1">
-                              <mat-form-field dense class="readOnlyCls">
-                                <mat-label>{{'Transaction Rating' | translate}}</mat-label>
-                                <input type="text" matInput [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'" readonly />
-                              </mat-form-field>
-                            </td>
-                            <td rowspan="1" colspan="1">
-                                <mat-form-field dense>
-                                  <mat-label>{{'SME Rating' | translate}}</mat-label>
-                                  <input type="text" matInput [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'" />
-                                </mat-form-field>
-                             </td>
-                          </tr>
-                  </tbody>
-                </table>
-                  <br>
-            </div>
-           </div>     
-           <div class="row">
-             
-              <table mat-table [dataSource]="launchBid_Popup" class="mat-elevation-z8 table-responsive mod-table" >
-
-                  <ng-container matColumnDef="Funding CCY">
-                    <th mat-header-cell *matHeaderCellDef>{{'Funding CCY' | translate}}</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.fundingCcy || '' }} </td>
-                  </ng-container>
-                
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="Base CCY Amount">
-                    <th mat-header-cell *matHeaderCellDef>{{'Base CCY Amount' | translate}}</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.baseCcyAmt || '' }}  </td>
-                  </ng-container>
-                
-                  <!-- Weight Column -->
-                  <ng-container matColumnDef="Fundable percentage">
-                    <th mat-header-cell *matHeaderCellDef>{{'Fundable percentage' | translate}}%</th>
-                    <td mat-cell *matCellDef="let element">{{element?.fundablePercent || '' }}  </td>
-                  </ng-container>
-                
-                  <!-- Symbol Column -->
-                  <ng-container matColumnDef="Funding Amount / Repay Amount (Base CCY)">
-                    <th mat-header-cell *matHeaderCellDef>{{'Funding Amount / Repay Amount (Base CCY)' | translate}}</th>
-                    <td mat-cell *matCellDef="let element" style="color:red"> {{element?.baseCcyFundingAmt || '' }}  </td>
-                  </ng-container>
-                  <ng-container matColumnDef="Repayment Date">
-                    <th mat-header-cell *matHeaderCellDef>{{'Repayment Date' | translate}}</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.repaymentDate || '' }}  </td>
-                  </ng-container>
-                
-                  <tr mat-header-row *matHeaderRowDef="launchBidPopup" style="background-color:#694ed6e0"></tr>
-                  <tr mat-row *matRowDef="let row; columns: launchBidPopup;"></tr>
-                </table>
-                
-                
-           </div>
-           <div class="row">
-              <table mat-table [dataSource]="launchBid_Popup" class="mat-elevation-z8 table-responsive mod-table">
-
-                  <!--- Note that these columns can be defined in any order.
-                        The actual rendered columns are set as a property on the row definition" -->
-                
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="Inv Discount Rate">
-                    <th mat-header-cell *matHeaderCellDef>{{'Inv Discount Rate' | translate}}%</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.invDiscRate || '' }} </td>
-                  </ng-container>
-                
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="Disc Amt (Base CCY)">
-                    <th mat-header-cell *matHeaderCellDef>{{'Disc Amt (Base CCY)' | translate}}</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.baseCcyDiscAmt || '' }}   </td>
-                  </ng-container>
-                
-                  <!-- Weight Column -->
-                  <ng-container matColumnDef="Net Amt payable (Base CCY)">
-                    <th mat-header-cell *matHeaderCellDef>{{'Net Amt payable' | translate}}(Base CCY)</th>
-                    <td mat-cell *matCellDef="let element" style="color:red"> {{element?.baseCcyNetAmtPayable || '' }}   </td>
-                  </ng-container>
-                
-                  <!-- Symbol Column -->
-                  <ng-container matColumnDef="Annual Yield (Basis a360)">
-                    <th mat-header-cell *matHeaderCellDef>{{'Annual Yield' | translate}} (Basis a360)%</th>
-                    <td mat-cell *matCellDef="let element"> {{element?.annualYeild || '' }}   </td>
-                  </ng-container>
-                  <ng-container matColumnDef="Offer Exp period">
-                      <th mat-header-cell *matHeaderCellDef>{{'Offer Exp period' | translate}}</th>
-                      <td mat-cell *matCellDef="let element"> {{element?.offerExpPeriod || '' }}   </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Off Exp date /time">
-                        <th mat-header-cell *matHeaderCellDef>{{'Reset' | translate}} </th>
-                        <td mat-cell *matCellDef="let element"> {{element?.offerExpDateTime || '' }}   </td>
-                      </ng-container>
-                
-                  <tr mat-header-row *matHeaderRowDef="launchBidTableTwoPopup" style="background-color:#694ed6e0"></tr>
-                  <tr mat-row *matRowDef="let row; columns: launchBidTableTwoPopup;"></tr>
-                </table>
-                
-                
-           </div>          
-       </div>
-    </div>
-    <div class="modal-footer" style="justify-content: center;">
-       <button type="button" (click)="onSubmitBidForm()" class="btn model-btn-outline">{{'Send Bid' | translate}}</button>
-    </div>
- </ng-template>
-
-You are about to send for authorization the following BID
+  </div>
+  <div class="modal-footer" style="justify-content: center;">
+    <button type="button" (click)="onSubmitBidForm()" class="btn model-btn-outline">{{'Send Bid' | translate}}</button>
+  </div>
+</ng-template>

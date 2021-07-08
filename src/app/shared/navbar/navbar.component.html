@@ -29,9 +29,9 @@
             <li class="curr-time">Time : {{currentTime}}</li>
             <li class="curr-date">Date : {{currentDate}}</li>
         </ul>
-        <button mat-icon-button color="neutral">
+        <!-- <button mat-icon-button color="neutral">
             <mat-icon>notifications</mat-icon>
-        </button>
+        </button> -->
 
 
     </div>
@@ -58,7 +58,8 @@
             <mat-icon>exit_to_app</mat-icon>
             {{'navbarComponet.Logout' | translate}}
         </button>
-        <button mat-button color="primary" (click)="profile()" dense> {{'navbarComponet.View profile' | translate}}
+        <button mat-button color="primary" (click)="profile()" dense>
+             {{'navbarComponet.View profile' | translate}}
         </button>
     </div>
 </mat-menu>
