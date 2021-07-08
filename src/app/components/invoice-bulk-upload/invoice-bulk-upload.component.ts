@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,7 +14,6 @@ import { DatePipe } from '@angular/common';
 import { IccCountryServices } from '../icc-country/icc-country.services'
 import { Router } from "@angular/router";
 
-
 export interface invoiceData {
   invref: any;
   invDueDate: any;
@@ -26,20 +25,17 @@ export interface invoiceData {
   buyerName: String;
   buyerUEN: string;
   InvoiceAmount: String;
-
 }
 const INVOICE_ARRAY: invoiceData[] = [];
-
 @Component({
   selector: 'app-invoice-bulk-upload',
   templateUrl: './invoice-bulk-upload.component.html',
   styleUrls: ['./invoice-bulk-upload.component.scss']
 })
 export class InvoiceBulkUploadComponent implements OnInit {
-
   tooltipPosition = "below";
   fundingTooltip = FUNDINGREQUESTCONSTANTS;
-  displayedColumns: string[] = ['select', 'InvoiceRefNo','DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy','Score', 'Status'];
+  displayedColumns: string[] = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
   selection = new SelectionModel(true, []);
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
   fileNames
@@ -75,49 +71,46 @@ export class InvoiceBulkUploadComponent implements OnInit {
   optionDatas: any;
   userDeatils: any;
   UpdateInvoiceLable: boolean;
-  message:string;
-  FileData:any;
+  message: string;
+  FileData: any;
   score;
   invoiceRefNo;
 
-  constructor(public router: Router,private IccCountryServices: IccCountryServices, private datePipe: DatePipe, public translate: TranslateService, private fb: FormBuilder, private modalService: BsModalService, private toastr: ToastrService, private invoiceRequestServices: InvoiceRequestServices) {
+  constructor(public router: Router, private IccCountryServices: IccCountryServices, private datePipe: DatePipe, public translate: TranslateService, private fb: FormBuilder, private modalService: BsModalService, private toastr: ToastrService, private invoiceRequestServices: InvoiceRequestServices) {
     this.FileData = this.router.getCurrentNavigation().extras.state;
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
-
   ngOnInit(): void {//Initially works after constructor
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : 'obj'
     this.getInvDetailsLists()
     this.addRow();
     this.getAllCountry()
-
-    if(this.FileData.FileData.queryParams.uploadType === "text/csv"){
+    if (this.FileData.FileData.queryParams.uploadType === "text/csv") {
       this.invoicedata = this.FileData.FileData.queryParams.invoicedata
       this.InvoiceAPI()
-    }else if(this.FileData.FileData.queryParams.uploadType === "application/pdf"){
+    } else if (this.FileData.FileData.queryParams.uploadType === "application/pdf") {
       this.pdfDivEnable = true
       this.pdfSrc = this.FileData.FileData.queryParams.PDFData
       this.fileNames = this.FileData.FileData.queryParams.invoicedata
       this.pdfApi()
-    }else{
-      this.invoicedata =  this.FileData.FileData.queryParams.invoicedata
+    } else {
+      this.invoicedata = this.FileData.FileData.queryParams.invoicedata
       this.InvoiceAPI()
     }
-  
   }
 
-  public setTwoNumberDecimal($event,name) {
-    if(this.chkDecimalLength($event.target.value) >= 2){
+  public setTwoNumberDecimal($event, name) {  //validation for number field
+    if (this.chkDecimalLength($event.target.value) >= 2) {
       $event.target.value = parseFloat($event.target.value).toFixed(2);
-      this.invoiceForm.patchValue({ [name] : parseFloat($event.target.value).toFixed(2) })
+      this.invoiceForm.patchValue({ [name]: parseFloat($event.target.value).toFixed(2) })
     }
   }
-  
-  chkDecimalLength (value) {
-    if(Math.floor(value) === value) return 0;
+
+  chkDecimalLength(value) { //validation to check decimal
+    if (Math.floor(value) === value) return 0;
     return value.toString().split(".")[1].length || 0;
-    }
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -131,41 +124,30 @@ export class InvoiceBulkUploadComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-
   authoriseInvoice() {
-      let invoiceIds = []
-      let scoreCheck = false
-      // this.selection.selected.forEach((item) => {
-      //   // invoiceIds.push(s.id)
-      //   if(item.buyerScore >= 500){
-  
-      //   }
-      // });
-      for(let i=0;i < this.selection.selected.length;i++){
-        if(this.selection.selected[i].buyerScore >= 500){
-          //  && this.selection.selected[i].id){
-          invoiceIds.push(this.selection.selected[i].id)
-          scoreCheck = true
-        }
-        else{
-          scoreCheck = false
-          break;
-        }
+    let invoiceIds = []
+    let scoreCheck = false
+    for (let i = 0; i < this.selection.selected.length; i++) {
+      if (this.selection.selected[i].buyerScore >= 500) {
+        invoiceIds.push(this.selection.selected[i].id)
+        scoreCheck = true
       }
-      if(scoreCheck){
-      if(invoiceIds.length > 0){
+      else {
+        scoreCheck = false
+        break;
+      }
+    }
+    if (scoreCheck) {
+      if (invoiceIds.length > 0) {
         this.updateInvoice(invoiceIds)
-      }else{
+      } else {
         return this.toastr.error(this.translate.instant('Please select invoice details'));
       }
     }
-    else{
-     this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
+    else {
+      this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
     }
-    }
+  }
   updateInvoice(invoiceIds) {
     this.toastr.success("Selected Invoices has been Authorized !");
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
@@ -267,44 +249,44 @@ export class InvoiceBulkUploadComponent implements OnInit {
         // "smeProfileId" :  userData['smeProfileId']
       }
       params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
-      params['invoiceDetails'].goodsDetails[0].total =   parseInt(params['invoiceDetails'].goodsDetails[0].total)
-      
+      params['invoiceDetails'].goodsDetails[0].total = parseInt(params['invoiceDetails'].goodsDetails[0].total)
+
       if (this.UpdateInvoiceLable === true) {
-        let buyerDetails= this.sendBuyerDetails(this.invoiceRefNo)
-        this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
-          if(resp){
-            this.score=resp.score
-           params['invoiceDetails']['buyerScore'] = resp.score
-         
-        this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id, params).subscribe(resp => {
-          this.invoiceFormBuild();
-          this.dataSourceTwo.data = [];
-          this.invoiceID = "";
-          this.InvoiceFdate = ""
-          this.invoiceRefNo = "";
-          for (const key in this.invoiceForm.controls) {
-            this.invoiceForm.get(key).clearValidators();
-            this.invoiceForm.get(key).updateValueAndValidity();
+        let buyerDetails = this.sendBuyerDetails(this.invoiceRefNo)
+        this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp => {
+          if (resp) {
+            this.score = resp.score
+            params['invoiceDetails']['buyerScore'] = resp.score
+
+            this.invoiceRequestServices.UpdateInvoice(this.invoiceDetails.id, params).subscribe(resp => {
+              this.invoiceFormBuild();
+              this.dataSourceTwo.data = [];
+              this.invoiceID = "";
+              this.InvoiceFdate = ""
+              this.invoiceRefNo = "";
+              for (const key in this.invoiceForm.controls) {
+                this.invoiceForm.get(key).clearValidators();
+                this.invoiceForm.get(key).updateValueAndValidity();
+              }
+              this.UpdateInvoiceLable = false
+              this.addRow()
+              this.getInvDetailsLists();
+            }, error => {
+            })
           }
-          this.UpdateInvoiceLable = false
-          this.addRow()
-          this.getInvDetailsLists();
-        }, error => {
         })
-      }
-    })
       } else {
         this.invoiceRequestServices.invoiceRequestSave(params).subscribe(resp => {
-          this.invoiceRefNo=resp
-          let buyerDetails= this.sendBuyerDetails(resp)
-          this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
-            if(resp){
-              this.score=resp.score
-              let obj={
-                'buyerScore':resp.score
+          this.invoiceRefNo = resp
+          let buyerDetails = this.sendBuyerDetails(resp)
+          this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp => {
+            if (resp) {
+              this.score = resp.score
+              let obj = {
+                'buyerScore': resp.score
               }
-              this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
-                this.invoiceRefNo=''
+              this.invoiceRequestServices.updateScore(this.invoiceRefNo, obj).subscribe(scoreResp => {
+                this.invoiceRefNo = ''
               })
             }
           })
@@ -320,7 +302,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
           this.addRow()
           this.getInvDetailsLists();
         }, error => {
-          if(error.status != 200){
+          if (error.status != 200) {
             let availableData = error.error
             let desiredData = this.replaceCommaLine(availableData);
             this.toastr.error(desiredData, '', {
@@ -328,43 +310,43 @@ export class InvoiceBulkUploadComponent implements OnInit {
             });
 
             // this.toastr.error(error.error);
-          }else{
-            this.invoiceRefNo=error.error.text
-            let buyerDetails= this.sendBuyerDetails(error.error.text)
-            this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp =>{
-              if(resp){
-                this.score=resp.Score
-                let obj={
-                  'buyerScore':resp.score
+          } else {
+            this.invoiceRefNo = error.error.text
+            let buyerDetails = this.sendBuyerDetails(error.error.text)
+            this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp => {
+              if (resp) {
+                this.score = resp.Score
+                let obj = {
+                  'buyerScore': resp.score
                 }
-                this.invoiceRequestServices.updateScore(this.invoiceRefNo,obj).subscribe(scoreResp =>{
-                  this.invoiceRefNo=''
-            this.invoiceFormBuild();
-            this.dataSourceTwo.data = [];
-            this.invoiceID = "";
-            this.InvoiceFdate = ""
-            for (const key in this.invoiceForm.controls) {
-              this.invoiceForm.get(key).clearValidators();
-              this.invoiceForm.get(key).updateValueAndValidity();
-            }
-            this.addRow()
-            this.getInvDetailsLists();
+                this.invoiceRequestServices.updateScore(this.invoiceRefNo, obj).subscribe(scoreResp => {
+                  this.invoiceRefNo = ''
+                  this.invoiceFormBuild();
+                  this.dataSourceTwo.data = [];
+                  this.invoiceID = "";
+                  this.InvoiceFdate = ""
+                  for (const key in this.invoiceForm.controls) {
+                    this.invoiceForm.get(key).clearValidators();
+                    this.invoiceForm.get(key).updateValueAndValidity();
+                  }
+                  this.addRow()
+                  this.getInvDetailsLists();
                 })
-            this.toastr.success('Data Added Successfully')
-          }
-        })
+                this.toastr.success('Data Added Successfully')
+              }
+            })
             // (error.error.text);
           }
-          
+
         })
       }
     } catch (err) {
     }
   }
 
-  sendBuyerDetails(invoiceNo){
-    let userCred=JSON.parse(localStorage.getItem('userCred'))
-    let formValues=this.invoiceForm.value
+  sendBuyerDetails(invoiceNo) {
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
+    let formValues = this.invoiceForm.value
     // let buyerdetails={
     //   'name':formValues.buyerName,
     //   'city':formValues.city,
@@ -378,28 +360,28 @@ export class InvoiceBulkUploadComponent implements OnInit {
     //   'phoneNo':formValues.phoneNo
     // }
     // localStorage.setItem('buyerDetails',JSON.stringify(buyerdetails))
-      let buyerSubmitObj={
-        'name':userCred.name,
-        'registrationnumber':userCred.companyId,
-        'countryCode':'SGP',
-        'invoiceid':invoiceNo,
-        'invoiceno':this.invoiceForm.value['invId'],
-        "sectionList":[{
-          "questionResponses":[
-            {"type": "QuestionResponseTextDto", "questionAlias": "customer-business-name", "value": formValues.companyName},
-            {"type": "QuestionResponseTextDto", "questionAlias": "address-line-1", "value": formValues.addressLine1},
-            {"type": "QuestionResponseTextDto", "questionAlias": "address-line-2", "value": formValues.addressLine2},
-            {"type": "QuestionResponseTextDto", "questionAlias": "city", "value": formValues.city},
-            {"type": "QuestionResponseTextDto", "questionAlias": "postcode", "value": formValues.postalCode},
-            {"type": "QuestionResponseMultipleChoiceDto", "questionAlias": "country", "optionAliases": ["SGP"]},
-            {"type": "QuestionResponseTextDto", "questionAlias": "contact-email", "value": formValues.email},
-            {"type": "QuestionResponseTextDto", "questionAlias": "contact-telephone", "value": formValues.phoneNo.toString()},
-            {"type": "QuestionResponseTextDto", "questionAlias": "contact-name", "value": formValues.buyerName},
-            {"type": "QuestionResponseTextDto", "questionAlias": "customer-company-registration-number", "value": formValues.buyerUEN}
-            ],
-        }]
-      }
-      return buyerSubmitObj;
+    let buyerSubmitObj = {
+      'name': userCred.name,
+      'registrationnumber': userCred.companyId,
+      'countryCode': 'SGP',
+      'invoiceid': invoiceNo,
+      'invoiceno': this.invoiceForm.value['invId'],
+      "sectionList": [{
+        "questionResponses": [
+          { "type": "QuestionResponseTextDto", "questionAlias": "customer-business-name", "value": formValues.companyName },
+          { "type": "QuestionResponseTextDto", "questionAlias": "address-line-1", "value": formValues.addressLine1 },
+          { "type": "QuestionResponseTextDto", "questionAlias": "address-line-2", "value": formValues.addressLine2 },
+          { "type": "QuestionResponseTextDto", "questionAlias": "city", "value": formValues.city },
+          { "type": "QuestionResponseTextDto", "questionAlias": "postcode", "value": formValues.postalCode },
+          { "type": "QuestionResponseMultipleChoiceDto", "questionAlias": "country", "optionAliases": ["SGP"] },
+          { "type": "QuestionResponseTextDto", "questionAlias": "contact-email", "value": formValues.email },
+          { "type": "QuestionResponseTextDto", "questionAlias": "contact-telephone", "value": formValues.phoneNo.toString() },
+          { "type": "QuestionResponseTextDto", "questionAlias": "contact-name", "value": formValues.buyerName },
+          { "type": "QuestionResponseTextDto", "questionAlias": "customer-company-registration-number", "value": formValues.buyerUEN }
+        ],
+      }]
+    }
+    return buyerSubmitObj;
   }
   replaceCommaLine(data) {
     let dataToArray = data.split(',').map(item => item.trim());
@@ -479,14 +461,14 @@ export class InvoiceBulkUploadComponent implements OnInit {
   }
   pdfApi() {
     this.invoiceRequestServices.invoicePDFSave(this.fileNames).subscribe(resp => {
-     setTimeout(() => {
-      this.invoiceForm.patchValue({
-        invId: resp.invoiceId === null ? '' : resp.invoiceId,
-        buyerName: resp.buyerName  === null ? '' : resp.buyerName,
-        invDate: resp.invoiceDate === null ? '' : resp.invoiceDate = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
-      });
-      this.invoiceID = resp.invoiceId === null ? '' : resp.invoiceDate 
-    }, 1000);
+      setTimeout(() => {
+        this.invoiceForm.patchValue({
+          invId: resp.invoiceId === null ? '' : resp.invoiceId,
+          buyerName: resp.buyerName === null ? '' : resp.buyerName,
+          invDate: resp.invoiceDate === null ? '' : resp.invoiceDate = moment().format('YYYY-MM-DD') + "T00:00:00.000Z"
+        });
+        this.invoiceID = resp.invoiceId === null ? '' : resp.invoiceDate
+      }, 1000);
     }, error => {
     })
     // let obj = {
@@ -504,7 +486,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
     //   });
     //   this.invoiceID = '1400002432'
     // }, 1000);
-   
+
   }
 
 
@@ -557,28 +539,28 @@ export class InvoiceBulkUploadComponent implements OnInit {
       smeId: localStorage.getItem("userId"),
       invCcy: data.invCcy,
       invDueDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
-  invDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
-   dispDate: moment(data.dispDate, 'YYYY - MM - DD HH: mm').toDate(),
-   
-   email:data.email,
-   buyerName:data.buyerName,
-   phoneNo:data.phoneNo,
-   buyerUEN:data.buyerUEN,
-   buyerAddr:data.buyerAddr,
-   addressLine1:data.addressLine1,
-   addressLine2:data.addressLine2,
-   city:data.city,
-   postalCode:data.postalCode,
-   companyName:data.companyName
+      invDate: moment(data.invDueDate, 'YYYY - MM - DD HH: mm').toDate(),
+      dispDate: moment(data.dispDate, 'YYYY - MM - DD HH: mm').toDate(),
+
+      email: data.email,
+      buyerName: data.buyerName,
+      phoneNo: data.phoneNo,
+      buyerUEN: data.buyerUEN,
+      buyerAddr: data.buyerAddr,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
+      city: data.city,
+      postalCode: data.postalCode,
+      companyName: data.companyName
     });
     this.invoiceID = data.invId;
     this.currencyName = data.invCcy
-    this.invoiceRefNo=data.invref
-    this.InvoiceFdate=data.invDueDate
-    this.score=data.buyerScore
+    this.invoiceRefNo = data.invref
+    this.InvoiceFdate = data.invDueDate
+    this.score = data.buyerScore
 
     this.dataSourceTwo.data = []
-    data.goodsDetails.length &&  data.goodsDetails.forEach(element => {
+    data.goodsDetails.length && data.goodsDetails.forEach(element => {
       const row = this.fb.group({
         ID: this.invoiceID,
         descGoods: element.descGoods,
@@ -597,23 +579,23 @@ export class InvoiceBulkUploadComponent implements OnInit {
       this.dateFormArray.push(row);
     });
 
-   if(!data.goodsDetails.length){
-    const row = this.fb.group({
-      ID: this.invoiceID,
-      descGoods: [""],
-      // idNo: [""],
-      dateOfInvoice: this.datePipe.transform(this.InvoiceFdate, "dd/MM/yyyy"),
-      quantity: [""],
-      rate: [""],
-      amt: [""],
-      amtCcy: this.currencyName,
-      discAmt: [""],
-      netAmtPay: [""],
-      taxRate: [""],
-      taxAmt: [""],
-      total: [""],
-      goodsId: [""],
-    })
+    if (!data.goodsDetails.length) {
+      const row = this.fb.group({
+        ID: this.invoiceID,
+        descGoods: [""],
+        // idNo: [""],
+        dateOfInvoice: this.datePipe.transform(this.InvoiceFdate, "dd/MM/yyyy"),
+        quantity: [""],
+        rate: [""],
+        amt: [""],
+        amtCcy: this.currencyName,
+        discAmt: [""],
+        netAmtPay: [""],
+        taxRate: [""],
+        taxAmt: [""],
+        total: [""],
+        goodsId: [""],
+      })
       this.dateFormArray.push(row);
     }
 
@@ -661,24 +643,24 @@ export class InvoiceBulkUploadComponent implements OnInit {
       // buyerAddr: ['', Validators.required],
       billNo: ['', Validators.required],
       invAmt: ['', Validators.required],
-      invDate: ['', Validators.required], 
+      invDate: ['', Validators.required],
       dispDate: ['', Validators.required],
       smeId: localStorage.getItem("userId"),
       // invCcy: "",
       goodsDetails: this.fb.array([]),
-      invCcy:['',Validators.required],
+      invCcy: ['', Validators.required],
 
       // buyer details
       email: [''],
       buyerName: ['', Validators.required],
       buyerUEN: ['', Validators.required],
-      phoneNo:[''],
-      buyerAddr:[''],
-      addressLine1:[''],
-      addressLine2:[''],
-      city:[''],
-      postalCode:[''],
-      companyName:['',Validators.required]
+      phoneNo: [''],
+      buyerAddr: [''],
+      addressLine1: [''],
+      addressLine2: [''],
+      city: [''],
+      postalCode: [''],
+      companyName: ['', Validators.required]
     });
   }
   get dateFormArray(): FormArray {

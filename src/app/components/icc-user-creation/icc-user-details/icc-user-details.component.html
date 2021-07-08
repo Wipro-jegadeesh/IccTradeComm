@@ -1,324 +1,277 @@
-
-
-
 <div class="app-content {{isOpen}} ">
-    <header>
-      <div class="data-section">
-        <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
-          <mat-accordion>
-            <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                        {{'UserCreation.BasicDetails' | translate}}
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="row dis-block">
-                  <div class="col-sm-4">
-                      <div class="form-group">
-                        <mat-form-field dense>
-                          <mat-label>{{'UserCreation.CompanyRegisterId' | translate}} </mat-label>
-                          <input type="text" (blur)="blurFunction()" onblur="blurFunction()"  matInput formControlName="nationalId" />
-                          <mat-error *ngIf="hasError('nationalId', 'required')"> {{'UserCreation.EnterRegisterId' | translate}}</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <!-- <label for="First name​">Company name​
-                        </label> -->
-                        <mat-form-field dense>
-                          <mat-label> {{'UserCreation.CompanyName' | translate}}​</mat-label>
-                          <mat-icon matPrefix>business</mat-icon>
-                          <input type="text" matInput  formControlName="companyName" />
-                          <mat-error *ngIf="hasError('companyName', 'required')">{{'UserCreation.EnterCompanyName' | translate}}</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <!-- <div class="col-sm-4"> -->
-                      <!-- <div class="form-group"> -->
-                        <!-- <mat-form-field dense>
-                          <mat-label>Country</mat-label>
-                          <mat-icon matPrefix>flag</mat-icon>
-                          <input type="text" matInput  formControlName="country" />
-                          <mat-error *ngIf="hasError('country', 'required')">Country is required</mat-error>
-                        </mat-form-field> -->
-                    
-                      <!-- </div> -->
-
-
-                      <div class="col-sm-4">
-                              <div class="multiselect-dropdown-dsgn">                   
-                              <angular2-multiselect [data]="cities"
-                                            formControlName="country"
-                                            [settings]="dropdownSettings"></angular2-multiselect> 
-                                </div>
-                    </div>
-
-                    <!-- </div> -->
-              </div>
+  <header>
+    <div class="data-section">
+      <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitUserForm()">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true" (opened)="bidpanelOpenState = true"
+            (closed)="bidpanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight:500;color: #a899e4;">
+                {{'UserCreation.BasicDetails' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
             <div class="row dis-block">
               <div class="col-sm-4">
-                  <div class="form-group">
-                    <!-- <label for="National ID​">Email Id
-                    </label> -->
-                    <mat-form-field dense>
-                      <mat-label>{{'UserCreation.EmailId' | translate}}</mat-label>
-                      <mat-icon matPrefix>email</mat-icon>
-                      <input type="text" matInput  formControlName="email" />
-                      <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.EnterEmail' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="First name​">First name​
-                  </label> -->
                   <mat-form-field dense>
-                    <mat-label> {{'UserCreation.FirstName' | translate}}</mat-label>
-                    <mat-icon matPrefix>person</mat-icon>
-                    <input type="text"  matInput formControlName="firstName" />
-                    <mat-error *ngIf="hasError('firstName', 'required')"> {{'UserCreation.EnterFirstName' | translate}}</mat-error>
+                    <mat-label>{{'UserCreation.CompanyRegisterId' | translate}} </mat-label>
+                    <input type="text" (blur)="blurFunction()" onblur="blurFunction()" matInput
+                      formControlName="nationalId" />
+                    <mat-error *ngIf="hasError('nationalId', 'required')"> {{'UserCreation.EnterRegisterId' |
+                      translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="First name​">Last name​
-                  </label> -->
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.CompanyName' | translate}}​</mat-label>
+                    <mat-icon matPrefix>business</mat-icon>
+                    <input type="text" matInput formControlName="companyName" />
+                    <mat-error *ngIf="hasError('companyName', 'required')">{{'UserCreation.EnterCompanyName' |
+                      translate}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="multiselect-dropdown-dsgn">
+                  <angular2-multiselect [data]="cities" formControlName="country" [settings]="dropdownSettings">
+                  </angular2-multiselect>
+                </div>
+              </div>
+            </div>
+            <div class="row dis-block">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label>{{'UserCreation.EmailId' | translate}}</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input type="text" matInput formControlName="email" />
+                    <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.EnterEmail' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.FirstName' | translate}}</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input type="text" matInput formControlName="firstName" />
+                    <mat-error *ngIf="hasError('firstName', 'required')"> {{'UserCreation.EnterFirstName' | translate}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
                   <mat-form-field dense>
                     <mat-label>{{'UserCreation.LastName' | translate}}</mat-label>
                     <mat-icon matPrefix>person</mat-icon>
                     <input type="text" matInput formControlName="lastName" />
-                    <mat-error *ngIf="hasError('lastName', 'required')"> {{'UserCreation.Enterlastname' | translate}}</mat-error>
+                    <mat-error *ngIf="hasError('lastName', 'required')"> {{'UserCreation.Enterlastname' | translate}}
+                    </mat-error>
                   </mat-form-field>
                 </div>
-    
+
               </div>
             </div>
             <div class="row dis-block">
               <div class="col-sm-4">
                 <div class="form-group">
-                  <!-- <label for="National ID​">Phone Number</label> -->
                   <mat-form-field dense>
                     <mat-label>{{'UserCreation.PhoneNumber' | translate}}</mat-label>
                     <mat-icon matPrefix>call</mat-icon>
-                    <input type="text" matInput  formControlName="contactNo" />
-                    <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNumber' | translate}}</mat-error>
+                    <input type="text" matInput formControlName="contactNo" />
+                    <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNumber' |
+                      translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="col-sm-4">
-                  <!-- <label for="Address">Address 1</label> -->
-                  <div class="form-group">
+                <div class="form-group">
                   <mat-form-field dense>
                     <mat-label>{{'UserCreation.Addr1' | translate}}</mat-label>
                     <mat-icon matPrefix>home</mat-icon>
-                    <input type="text" matInput  formControlName="address" />
-                    <mat-error *ngIf="hasError('address', 'required')"> {{'UserCreation.EnterAddr1' | translate}}</mat-error>
+                    <input type="text" matInput formControlName="address" />
+                    <mat-error *ngIf="hasError('address', 'required')"> {{'UserCreation.EnterAddr1' | translate}}
+                    </mat-error>
                   </mat-form-field>
-              </div>
                 </div>
-                <div class="col-sm-4">
-                  <!-- <label for="Address">Address 2</label> -->
-                  <div class="form-group">
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
                   <mat-form-field dense>
                     <mat-label> {{'UserCreation.Addr2' | translate}}</mat-label>
                     <mat-icon matPrefix>home</mat-icon>
-                    <input type="text" matInput  formControlName="address1" />
-                    <mat-error *ngIf="hasError('address1', 'required')"> {{'UserCreation.EnterAddr2' | translate}}</mat-error>
+                    <input type="text" matInput formControlName="address1" />
+                    <mat-error *ngIf="hasError('address1', 'required')"> {{'UserCreation.EnterAddr2' | translate}}
+                    </mat-error>
                   </mat-form-field>
-              </div>
                 </div>
+              </div>
             </div>
             <div class="row dis-block">
               <div class="col-sm-4">
-                  <div class="form-group">
-                    <!-- <label for="Locale">State</label> -->
-                    <mat-form-field dense>
-                      <mat-label> {{'UserCreation.State' | translate}}</mat-label>
-                      <mat-icon matPrefix>add_location</mat-icon>
-                      <input type="text" matInput  formControlName="state" />
-                      <mat-error *ngIf="hasError('state', 'required')"> {{'UserCreation.EnterState' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.State' | translate}}</mat-label>
+                    <mat-icon matPrefix>add_location</mat-icon>
+                    <input type="text" matInput formControlName="state" />
+                    <mat-error *ngIf="hasError('state', 'required')"> {{'UserCreation.EnterState' | translate}}
+                    </mat-error>
+                  </mat-form-field>
                 </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <!-- <label for="Locale">City</label> -->
-                    <mat-form-field dense>
-                      <mat-label> {{'UserCreation.City' | translate}}</mat-label>
-                      <mat-icon matPrefix>add_location</mat-icon>
-                      <input type="text" matInput  formControlName="locale" />
-                      <mat-error *ngIf="hasError('locale', 'required')"> {{'UserCreation.EnterCity' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.City' | translate}}</mat-label>
+                    <mat-icon matPrefix>add_location</mat-icon>
+                    <input type="text" matInput formControlName="locale" />
+                    <mat-error *ngIf="hasError('locale', 'required')"> {{'UserCreation.EnterCity' | translate}}
+                    </mat-error>
+                  </mat-form-field>
                 </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <!-- <label for="Locale">Postal Code</label> -->
-                    <mat-form-field dense>
-                      <mat-label> {{'UserCreation.PostalCode' | translate}}</mat-label>
-                      <mat-icon matPrefix>local_shipping</mat-icon>
-                      <input type="text" matInput  formControlName="postalCode" />
-                      <mat-error *ngIf="hasError('postalCode', 'required')">{{'UserCreation.EnterPostalCode' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.PostalCode' | translate}}</mat-label>
+                    <mat-icon matPrefix>local_shipping</mat-icon>
+                    <input type="text" matInput formControlName="postalCode" />
+                    <mat-error *ngIf="hasError('postalCode', 'required')">{{'UserCreation.EnterPostalCode' | translate}}
+                    </mat-error>
+                  </mat-form-field>
                 </div>
+              </div>
             </div>
             <div class="row dis-block">
-                       <div class="col-sm-4">
-                          <div class="form-group">
-                             <!-- <label for="First name​">Group
-                             </label> -->
-                             <mat-form-field dense>
-                                 <mat-label> {{'UserCreation.Group' | translate}}</mat-label>
-                                <mat-select formControlName="profileType">
-                                  <mat-option>None</mat-option>
-                                  <mat-option value="SME">SME</mat-option>
-                                  <mat-option value="ICC">ICC</mat-option>
-                                  <mat-option value="FINANCE">FINANCE</mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="hasError('profileType', 'required')"> {{'UserCreation.EnterGroup' | translate}}</mat-error>
-                             </mat-form-field>
-                          </div>
-                      </div>
-
-
-                       <div class="col-sm-4">
-              <div class="multiselect-dropdown-dsgn">                   
-
-                <angular2-multiselect [data]="LanguagesOptions"
-                formControlName="language"
-                [settings]="languageDropdownSettings"></angular2-multiselect>    
-                </div> 
-            </div>
-                      <!-- <div class="col-sm-4">
-                        <mat-form-field dense>
-                         <mat-label>Sector</mat-label>
-                         <mat-select formControlName="sector">
-                           <mat-option *ngFor="let item of sectors" [value]="item.code">{{item.description}}</mat-option>
-                         </mat-select>
-                       </mat-form-field>
-                       </div> -->
-                    
-            </div>
-     
-  
-  </mat-expansion-panel>
-          </mat-accordion>
-          <mat-accordion>
-            <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title style="font-weight:500;color: #a899e4;">
-                         {{'UserCreation.Role' | translate}}
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="rowss dis-block">
-                 <div class="col-sm-4">
-                     <div class="form-group">
-                      <!-- <mat-form-field dense> -->
-                            <!-- <mat-label>Role</mat-label> -->
-                            <mat-panel-title style="font-weight:300;color: #a899e4;">
-                               {{'UserCreation.UnassignedRoles' | translate}}
-                          </mat-panel-title>
-                            <mat-selection-list matInput [ngModelOptions]="{standalone: true}" (selectionChange)="selectionChange($event)">
-                              <mat-list-option *ngFor="let item of RolesType" [value]="item.roleId">
-                                {{item.code}}
-                              </mat-list-option>
-                            </mat-selection-list>
-                          <!-- <mat-error *ngIf="hasError('role', 'required')">role is required</mat-error> -->
-                        <!-- </mat-form-field> -->
-                     </div>
-                
-                 </div>
-                 <div class="col-sm-4" *ngIf="selectedProducts">
-                  <div class="form-group">
-                         <!-- <mat-label>Assign Roles</mat-label> -->
-                         <mat-panel-title style="font-weight:300;color: #a899e4;">
-                          {{'UserCreation.AssignedRoles' | translate}}
-                      </mat-panel-title>
-                         <mat-list>
-                           <mat-list-item *ngFor="let item of selectedProducts">
-                             {{item.code}}
-                           </mat-list-item>
-                         </mat-list>
-                        </div>
-              </div>
-       </div>
-     
-  
-  </mat-expansion-panel>
-          </mat-accordion>
-        <mat-accordion>
-          <mat-expansion-panel  (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
-              <mat-expansion-panel-header>
-                  <mat-panel-title style="font-weight:500;color: #a899e4;">
-                       {{'UserCreation.Upload' | translate}}
-                  </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="row dis-block">
-                <div class="col-sm-4">
-
-              <div class="card-form-container">
-                <div class="dynamic-radio-btn file-input" >
-                  <h6>{{'UserCreation.ProfileImg' | translate}}</h6>
-                    <div class="file-upload">
-                    <div class="upload-btn-wrapper">
-                      <button class="filebtn" > {{'UserCreation.UploadFile' | translate}}</button>
-                    <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event,'profile')" accept=".png, .jpg, .jpeg" />
-                    </div>
-                    <div class="file-label">
-                      <div class="img-space">
-                        <ng-container *ngIf="isImageSaved; else elseTemplate">
-                            <img [src]="cardImageBase64" />
-                        </ng-container>
-                        <ng-template #elseTemplate>
-                        </ng-template>
-                    </div>
-                      <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
-                        <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
-                    </div>
-                    </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-form-field dense>
+                    <mat-label> {{'UserCreation.Group' | translate}}</mat-label>
+                    <mat-select formControlName="profileType">
+                      <mat-option>None</mat-option>
+                      <mat-option value="SME">SME</mat-option>
+                      <mat-option value="ICC">ICC</mat-option>
+                      <mat-option value="FINANCE">FINANCE</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hasError('profileType', 'required')"> {{'UserCreation.EnterGroup' | translate}}
+                    </mat-error>
+                  </mat-form-field>
                 </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="multiselect-dropdown-dsgn">
+                  <angular2-multiselect [data]="LanguagesOptions" formControlName="language"
+                    [settings]="languageDropdownSettings"></angular2-multiselect>
+                </div>
+              </div>
             </div>
-          </div>
-            <div class="col-sm-4">
-
-            <div class="card-form-container">
-              <div class="dynamic-radio-btn file-input" >
-                <h6> {{'UserCreation.KYCImage' | translate}}</h6>
-                  <div class="file-upload">
-                  <div class="upload-btn-wrapper">
-                    <button class="filebtn" > {{'UserCreation.UploadFile' | translate}}</button>
-                  <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event,'kyc')" accept=".png, .jpg, .jpeg" />
-                  </div>
-                  <div class="file-label">
-                    <div class="img-space">
-                      <ng-container *ngIf="isImageSavedKYC; else elseTemplate">
-                          <img [src]="cardImageKYCBase64" />
-                      </ng-container>
-                      <ng-template #elseTemplate>
-                      </ng-template>
-                  </div>
-                    <!-- <label *ngFor="let file of fileNames;let i=index" >{{file.name}}<span (click)="onFileRemove(i)">
-                      <i class="fa fa-times-circle" aria-hidden="true" style="margin-left: 3px;height: 10px;font-size: 16px;"></i></span></label> -->
-                  </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-              </div>
-            
-</mat-expansion-panel>
+          </mat-expansion-panel>
         </mat-accordion>
-                <div class="row" style="padding-bottom: 10px;
+        <mat-accordion>
+          <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight:500;color: #a899e4;">
+                {{'UserCreation.Role' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="rowss dis-block">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <mat-panel-title style="font-weight:300;color: #a899e4;">
+                    {{'UserCreation.UnassignedRoles' | translate}}
+                  </mat-panel-title>
+                  <mat-selection-list matInput [ngModelOptions]="{standalone: true}"
+                    (selectionChange)="selectionChange($event)">
+                    <mat-list-option *ngFor="let item of RolesType" [value]="item.roleId">
+                      {{item.code}}
+                    </mat-list-option>
+                  </mat-selection-list>
+                </div>
+              </div>
+              <div class="col-sm-4" *ngIf="selectedProducts">
+                <div class="form-group">
+                  <mat-panel-title style="font-weight:300;color: #a899e4;">
+                    {{'UserCreation.AssignedRoles' | translate}}
+                  </mat-panel-title>
+                  <mat-list>
+                    <mat-list-item *ngFor="let item of selectedProducts">
+                      {{item.code}}
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight:500;color: #a899e4;">
+                {{'UserCreation.Upload' | translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row dis-block">
+              <div class="col-sm-4">
+                <div class="card-form-container">
+                  <div class="dynamic-radio-btn file-input">
+                    <h6>{{'UserCreation.ProfileImg' | translate}}</h6>
+                    <div class="file-upload">
+                      <div class="upload-btn-wrapper">
+                        <button class="filebtn"> {{'UserCreation.UploadFile' | translate}}</button>
+                        <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event,'profile')"
+                          accept=".png, .jpg, .jpeg" />
+                      </div>
+                      <div class="file-label">
+                        <div class="img-space">
+                          <ng-container *ngIf="isImageSaved; else elseTemplate">
+                            <img [src]="cardImageBase64" />
+                          </ng-container>
+                          <ng-template #elseTemplate>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card-form-container">
+                  <div class="dynamic-radio-btn file-input">
+                    <h6> {{'UserCreation.KYCImage' | translate}}</h6>
+                    <div class="file-upload">
+                      <div class="upload-btn-wrapper">
+                        <button class="filebtn"> {{'UserCreation.UploadFile' | translate}}</button>
+                        <input type="file" class="dynamic-file-upload form" (change)="fileChangeEvent($event,'kyc')"
+                          accept=".png, .jpg, .jpeg" />
+                      </div>
+                      <div class="file-label">
+                        <div class="img-space">
+                          <ng-container *ngIf="isImageSavedKYC; else elseTemplate">
+                            <img [src]="cardImageKYCBase64" />
+                          </ng-container>
+                          <ng-template #elseTemplate>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div class="row" style="padding-bottom: 10px;
                 justify-content: flex-end;
                 padding-top: 38px;">
-                        <button mat-raised-button color="primary" > {{'Submit' | translate}}</button>
-                        <button type="button" mat-raised-button color="warn" routerLink='/icc-sme-details'> {{'Cancel' | translate}}</button>
-                </div>
+          <button mat-raised-button color="primary"> {{'Submit' | translate}}</button>
+          <button type="button" mat-raised-button color="warn" routerLink='/icc-sme-details'> {{'Cancel' |
+            translate}}</button>
+        </div>
       </form>
-  
-      </div>
-    </header>
-  </div>
+    </div>
+  </header>
+</div>
