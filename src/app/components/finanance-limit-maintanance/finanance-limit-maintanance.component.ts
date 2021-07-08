@@ -1,27 +1,17 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-// import { QuestionaireScoreServices } from './questionaire-score-services';
+import { Router } from '@angular/router';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-// import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { ApiService } from 'src/app/service/api.service';
-import { environment } from 'src/environments/environment';
 import { FUNDINGREQUESTCONSTANTS } from '../../shared/constants/constants';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { FinanceLimitMaintananceServices } from './finanance-limit-maintanance-service';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
-
 
 
 @Component({
@@ -36,14 +26,27 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   newLimitGraphForm: FormGroup;
   countrylimitMaintanceForm: FormGroup;
   mainlimitMaintanceForm: FormGroup;
-  displayedColumns: string[] = ['Exposure', 'Modified', 'Available Exposure', 'Created'];
-  dataSource: any;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean;
   isOk: boolean;
-  groupId: any;
   enableReadonly = true
-  invoiceForm: FormGroup;
+  newLimit: boolean = true;
+  newInitalLimits = [];
+  fundingTooltip = FUNDINGREQUESTCONSTANTS;
+  overAllLimit;
+  smeoverAllLimit;
+  countryoverLimitval;
+  countrysmeoverAllLimitVal;
+  totalExposure: number = 0;
+  countrytotalExposure: number = 0;
+  isOpen = '';
+  bidpanelOpenState
+  moment: any = moment;
+
+  displayedColumns: string[] = ['Exposure', 'Modified', 'Available Exposure', 'Created'];
+  dataSource: any;
+
+
   dataSourceTwo = new MatTableDataSource(); //data
   displayedColumnsTwo: string[] = [
     'sme',
@@ -66,203 +69,16 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     'utilTotlAmt',
     'amtAvailable'
   ];
-  newLimit: boolean = true;
-  newInitalLimits = [];
-  //data source 4 end
 
-  fundingTooltip = FUNDINGREQUESTCONSTANTS;
-  overAllLimit;
-  smeoverAllLimit;
-  countryoverLimitval;
-  countrysmeoverAllLimitVal;
-  totalExposure: number = 0;
-  countrytotalExposure: number = 0;
-  isOpen = '';
-  bidpanelOpenState
+  //data source 4 end
   //transLimitUtilTableDatas
   public transLimitUtilTableDatas: any = [];
-  // Charts
-  lineChartData = [{
-    label: '# of Votes',
-    data: [10, 19, 3, 5, 2, 3],
-    borderWidth: 1,
-    fill: false
-  }];
-
-  lineChartLabels = ['2013', '2014', '2014', '2015', '2016', '2017'];
-
-  lineChartOptions = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    },
-    legend: {
-      display: false
-    },
-    elements: {
-      point: {
-        radius: 0
-      }
-    }
-  };
-
-  lineChartColors = [
-    {
-      borderColor: 'rgba(255,99,132,1)'
-    }
-  ];
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-  areaChartData = [{
-    label: '# of Votes',
-    data: [10, 19, 3, 5, 2, 3],
-    borderWidth: 1,
-    fill: true
-  }];
-
-  areaChartLabels = ['2013', '2014', '2014', '2015', '2016', '2017'];
-
-  areaChartOptions = {};
-
-  areaChartColors = [
-    {
-      borderColor: 'rgba(255,99,132,1)',
-      backgroundColor: 'rgba(255,99,132,.2)'
-    }
-  ];
-
-
-  doughnutPieChartData = [
-    {
-      data: [30, 40, 30],
-    }
-  ];
-
-  doughnutPieChartLabels = ['Pink', 'Blue', 'Yellow'];
-
-  doughnutPieChartOptions = {
-    responsive: true,
-    animation: {
-      animateScale: true,
-      animateRotate: true
-    }
-  };
-
-  doughnutPieChartColors = [
-    {
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)'
-      ]
-    }
-  ];
-
-
-  scatterChartData = [
-    {
-      label: 'First Dataset',
-      data: [{
-        x: -10,
-        y: 0
-      },
-      {
-        x: 0,
-        y: 3
-      },
-      {
-        x: -25,
-        y: 5
-      },
-      {
-        x: 40,
-        y: 5
-      }
-      ],
-      borderWidth: 1
-    },
-    {
-      label: 'Second Dataset',
-      data: [{
-        x: 10,
-        y: 5
-      },
-      {
-        x: 20,
-        y: -30
-      },
-      {
-        x: -25,
-        y: 15
-      },
-      {
-        x: -10,
-        y: 5
-      }
-      ],
-      borderWidth: 1
-    }
-  ];
-
-  scatterChartOptions = {
-    scales: {
-      xAxes: [{
-        type: 'linear',
-        position: 'bottom'
-      }]
-    }
-  };
-
-  scatterChartColors = [
-    {
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)']
-    },
-    {
-      backgroundColor: [
-        'rgba(54, 162, 235, 0.2)'
-      ],
-      borderColor: [
-        'rgba(54, 162, 235, 1)'
-      ]
-    }
-  ];
-
-  mobileScreen = false;
   end = false;
   start = true;
   currentPage = 0;
   pageCount = 1;
   limit = 7;
+
   //multiple line chart
   // pie chart start
   public pieChartOptions: ChartOptions = {
@@ -287,7 +103,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     }
   };
   public horizontalBarChartLabels = ['25%', '50%', '75%', '100%', 'FULL'];
-  // public horizontalBarChartType: ChartType = 'horizontalBar';
   public horizontalBarChartType: ChartType = 'bar';
   public horizontalBarChartLegend = true;
   public horizontalBarChartData: ChartDataSets[] = [
@@ -308,40 +123,30 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   ];
   chartLabels = ['25%', '50%', '75%', '100%', 'FULL'];
   chartColors = [
-    // {
-    //   backgroundColor: "rgba(204, 51, 0, .3)",
-    //   borderColor: "rgba(204, 51, 0, .7)",
-    // },
-    // {
-    //   backgroundColor: "rgba(0, 128, 43, .3)",
-    //   borderColor: "rgba(0, 128, 43, .7)",
-    // },
-    // {
-    //   backgroundColor: "rgba(0, 137, 132, .3)",
-    //   borderColor: "rgba(0, 10, 130, .7)",
-    // },
     {
       backgroundColor: "rgba(193 55 162 1)",
       borderColor: "rgba(124 73 203 1)",
-      },
-      {
+    },
+    {
       backgroundColor: "rgba(193 55 162 1)",
       borderColor: "rgba(124 73 203 1)",
-      },
-      {
+    },
+    {
       backgroundColor: "rgba(193 55 162 1)",
       borderColor: "rgba(124 73 203 1)",
-      }
+    }
 
   ];
   callPutMethod = false;
   callPostMethod = false;
   callPutMethodEdit: boolean = false;
   mainlimitScreenDatas
+  //response LIMIT
   public smetransLimitUtilTableDatas: any = [];
+  //response Sector
   public sectorTableDatas: any = [];
+
   //over_all transaction limt start
-  moment: any = moment;
   dataSourceOverAllTransactionLimit = new MatTableDataSource(); //data
   displayedColumnsOverAllTransactionLimit: string[] = [
     'invoice',
@@ -356,7 +161,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   ];
   //over_all transaction Limit end 
-
   //Sme Exposure main start
   dataSourceSmeExposureTable = new MatTableDataSource(); //data
   displayedColumnsSmeExposureTable: string[] = [
@@ -523,19 +327,12 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   }
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue === 'inActive' ? 'active' : 'inActive';
   }
   getsmeNameId() {
     this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
+      this.getSmeName = resp;
     })
-    
-
-}
+  }
   //not used yet start
   limitMaintance() {
     this.totalExposure = 0;
@@ -632,7 +429,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   getnewLimitFinSmeDatas() {
     this.financelimitMaintananceservices.getnewLimitFinSmeDatas().subscribe(resp => {
-      console.log("---resp---",);
       this.dataSourceFour = new MatTableDataSource(resp);
 
     })
@@ -700,6 +496,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     });
   }
   //not used yet end
+
+
   //dummy form for all exposure start
   newlimitExposureFormBuild() {
     this.newLimitGraphForm = this.fb.group({
@@ -717,13 +515,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       if (this.newLimitGraphForm.value.newsmeLimit != this.newInitalLimits[0]) {
         alert("SME Limit has changed from" + ' ' + this.newInitalLimits[0] + ' ' + "to" + ' ' + this.newLimitGraphForm.value.newsmeLimit)
         this.toastr.success("SME limit successfully updated")
-        // if (confirm("SME Limit has changed from" + ' ' + this.newInitalLimits[0] + ' ' + "to" + ' ' + this.newLimitGraphForm.value.newsmeLimit + 'are you sure want to update')) {
-        //   this.newLimit = true;
-        //   this.toastr.success("SME limit successfully updated")
-        // } else {
-        //   this.newLimit = false;
-        // }
-        // }
       }
     } else {
       this.newLimit = false;
@@ -732,7 +523,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   }
   newLimitFn() {
     this.newLimit = false;
-    // this.newlimitExposureFormBuild()
   }
   onSubmitLimitForm() {
     this.isOk = false;
@@ -740,7 +530,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       var ddatae = new Date();
       let value = this.limitMaintanceForm.value;
       value.created = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
-      // value.modified = this.datePipe.transform(ddatae.setDate(ddatae.getDate()))
       console.log(value, "this.limitMaintanceForm.value");
       let array = []
       array.push(value)
@@ -797,8 +586,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     }
     else {
       this.getMainlimitScreenDatas()
-      // this.callPutMethodEdit = true;
-      // this.callPutMethod = true
     }
   }
   mainlimitMaintanceFormBuild() {
@@ -822,7 +609,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       this.countrylimitMaintanceFormBuild();
       this.limitMaintance();
       this.countrylimitMaintance();
-      // this.toastr.success("Limit Maintanance Updated Successfully")
       if ((Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.maincountryexposure)) &&
         (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsmeexposure)) &&
         (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) <= Number(this.mainlimitMaintanceForm.value.mainsector)) &&
@@ -882,11 +668,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
             "financierID": userCred['financierProfileId'],
             "overallLimit": this.mainlimitMaintanceForm.value.mainoverallexposure,
             "OverallAvailable": this.mainlimitScreenDatas.OverallAvailable,
-            // "OverallUtilizedLimit": this.mainlimitScreenDatas.OverallUtilizedLimit,
             "smewiseMaxlimit": this.mainlimitMaintanceForm.value.mainsmeexposure,
-            // "smeWiseUtilized": this.mainlimitScreenDatas.smeWiseUtilized,
             "countryMaxLimit": this.mainlimitMaintanceForm.value.maincountryexposure,
-            // "CountryWiseUtilized": this.mainlimitScreenDatas.CountryWiseUtilized,
             "sectorLimit": this.mainlimitMaintanceForm.value.mainsector,
             "transactions": this.mainlimitMaintanceForm.value.transactions,
             "buyerLimit": this.mainlimitMaintanceForm.value.buyerLimit,
@@ -928,13 +711,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
           this.mainlimitMaintanceForm.patchValue({
             transactions: this.globalLimitForm.value.globaltransactionLimit,
           });
-          // if (confirm("SME Limit has changed from" + ' ' + this.newInitalLimits[0] + ' ' + "to" + ' ' + this.newLimitGraphForm.value.newsmeLimit + 'are you sure want to update')) {
-          //   this.newLimit = true;
-          //   this.toastr.success("SME limit successfully updated")
-          // } else {
-          //   this.newLimit = false;
-          // }
-          // }
         } else {
           this.toastr.error("Could not update ,the transaction limit remain's same")
         }
@@ -949,7 +725,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       this.toastr.error(desiredData, '', {
         timeOut: 4000, progressBar: true, enableHtml: true
       });
-      // this.toastr.error("Please Fill Mandatory fields")
     }
   }
   replaceCommaLine(data) {
@@ -1017,6 +792,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       smeLimit: [this.mainlimitMaintanceForm.value.mainsmeexposure, Validators.required],
     });
   }
+
+  //SME Limit sumbit FROM
   smeLimitFormSubmit() {
     if (this.smeLimitForm.value && this.smeLimitForm.status == "VALID") {
       if (Number(this.mainlimitMaintanceForm.value.mainoverallexposure) > Number(this.smeLimitForm.value.smeLimit)) {
@@ -1138,29 +915,15 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     })
   }
   overtransTableDepenData(item) {
-    // let overALLtransApiData = [
-    //   {
-    //     "invoiceamount": 1000.0,
-    //     "LIMIT_PERCENT": "100",
-    //     "sector_description": "Agriculture, Forestry, Fishing",
-    //     "country": "Singapore",
-    //     "smename": "jhonson ss",
-    //     "status": "BFA",
-    //     "invoicedate": "2021-05-24T03:32:36.533+0000",
-    //     "invoice": "INV102",
-    //     "sme_profile_id": "SME75"
-    //   }
-    // ]
-    // this.dataSourceOverAllTransactionLimit = new MatTableDataSource(overALLtransApiData);
     this.financelimitMaintananceservices.overALLtransApiDependDataService(item).subscribe(resp => {
       if (resp) {
         resp.forEach(element1 => {
           this.getSmeName.forEach(element2 => {
-          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          element1.smeId = element2.smeName
-          }
+            if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              element1.smeId = element2.smeName
+            }
           });
-          });
+        });
         this.dataSourceOverAllTransactionLimit = new MatTableDataSource(resp);
       }
     })
@@ -1178,28 +941,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   checkSmeExpValue(value) {
     let transCount = 0;
     let respObj = this.smetransLimitUtilTableDatas
-    let obj = [
-      {
-        "LIMIT_PERCENT": "25",
-        "TRANS_COUNT": 3,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "LIMIT_PERCENT": "50",
-        "sme_profile_id": "SME44"
-      },
-      {
-        "LIMIT_PERCENT": "100",
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44",
-        "LIMIT_PERCENT": "FULL"
-      }
-    ]
+
     respObj.map((item, index) => {
       if (item.LIMIT_PERCENT == value) {
         transCount = item.TRANS_COUNT
@@ -1208,31 +950,23 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     return transCount
   }
   smeApiTableDependData(data) {
-    // let smetabledenpendData = [
-    //   {
-    //     "smename": "jhonson ss",
-    //     "bidvalue": 135.0,
-    //     "LIMIT_PERCENT": 6.75,
-    //   }
-    // ]
-    // this.dataSourceSmeExposureTable = new MatTableDataSource(smetabledenpendData);
     this.financelimitMaintananceservices.smeApiDependDataService(data).subscribe(resp => {
       if (resp) {
         resp.forEach(element1 => {
           this.getSmeName.forEach(element2 => {
-          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          element1.smeId = element2.smeName
-          }
+            if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              element1.smeId = element2.smeName
+            }
           });
-          });
+        });
         this.dataSourceSmeExposureTable = new MatTableDataSource(resp);
       }
     })
   }
 
   //smeTableDependData main table Api dependency end
-  //sectorApiTableDependData main table api dependency start
 
+  //sectorApiTableDependData main table api dependency start
   getsectorTableDatas() {
     this.financelimitMaintananceservices.getsectorexposeTableDatas().subscribe(resp => {
       if (resp) {
@@ -1243,28 +977,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   checkSectorExpValue(value) {
     let transCount = 0;
     let respObj = this.sectorTableDatas
-    let obj = [
-      {
-        "LIMIT_PERCENT": "25",
-        "TRANS_COUNT": 3,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "LIMIT_PERCENT": "50",
-        "sme_profile_id": "SME44"
-      },
-      {
-        "LIMIT_PERCENT": "100",
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44",
-        "LIMIT_PERCENT": "FULL"
-      }
-    ]
     respObj.map((item, index) => {
       if (item.LIMIT_PERCENT == value) {
         transCount = item.TRANS_COUNT
@@ -1273,21 +985,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     return transCount
   }
   sectorApiTableDependData(value) {
-    // let sectortabledenpendData = [
-    //   {
-    //     "sector_description": "Agriculture, Forestry, Fishing",
-    //     "country": "Singapore",
-    //     "smename": "jhonson ss",
-    //     "status": "BFA",
-    //     "bidvalue": 135.0,
-    //     "invoicedate": "2021-05-24T02:46:27.290+0000",
-    //     "LIMIT_PERCENT": 13.5,
-    //     "invoiceamount": 150.0,
-    //     "sme_profile_id": "SME75",
-    //     "invoice": "INV101"
-    //   }
-    // ]
-    // this.dataSourceSectorExposureTable = new MatTableDataSource(sectortabledenpendData);
     this.financelimitMaintananceservices.sectorApiDependDataService(value).subscribe(resp => {
       if (resp) {
         this.dataSourceSectorExposureTable = new MatTableDataSource(resp);
@@ -1324,28 +1021,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   checkcountryExpValue(value) {
     let transCount = 0;
     let respObj = this.countryTableDatas
-    let obj = [
-      {
-        "LIMIT_PERCENT": "25",
-        "TRANS_COUNT": 3,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "LIMIT_PERCENT": "50",
-        "sme_profile_id": "SME44"
-      },
-      {
-        "LIMIT_PERCENT": "100",
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44"
-      },
-      {
-        "TRANS_COUNT": 1,
-        "sme_profile_id": "SME44",
-        "LIMIT_PERCENT": "FULL"
-      }
-    ]
     respObj.map((item, index) => {
       if (item.LIMIT_PERCENT == value) {
         transCount = item.TRANS_COUNT
@@ -1354,49 +1029,21 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     return transCount
   }
   countryApiTableDependData(items) {
-    let counrtytabledenpendData = [
-      {
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "smename": "jhonson ss",
-        "status": "BFA",
-        "bidvalue": 135.0,
-        "addresss": "Singapore",
-        "invoicedate": "2021-05-24T02:46:27.290+0000",
-        "LIMIT_PERCENT": 6.75,
-        "invoiceamount": 150.0,
-        "sme_profile_id": "SME75",
-        "invoice": "INV101"
-      },
-      {
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "smename": "jhonson ss",
-        "invoiceamount": 450.0,
-        "status": "BFA",
-        "LIMIT_PERCENT": 20.25,
-        "addresss": "Singapore",
-        "sme_profile_id": "SME75",
-        "invoice": "L1",
-        "invoicedate": null,
-        "bidvalue": 405.0
-      }
-    ]
-    this.dataSourceCountryExposureTable = new MatTableDataSource(counrtytabledenpendData);
     this.financelimitMaintananceservices.countryApiDependDataService(items).subscribe(resp => {
       if (resp) {
         resp.forEach(element1 => {
           this.getSmeName.forEach(element2 => {
-          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          element1.smeId = element2.smeName
-          }
+            if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              element1.smeId = element2.smeName
+            }
           });
-          });
+        });
         this.dataSourceCountryExposureTable = new MatTableDataSource(resp);
       }
     })
   }
   // country Exposure Tables End
+
   //Buyer Exposure Tables  start
   getBuyerTableDatas() {
     this.financelimitMaintananceservices.getbuyerexposeTableDatas().subscribe(resp => {
@@ -1408,29 +1055,6 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   checkBuyerExpValue(value) {
     let transCount = 0;
     let respObj = this.buyerTableDatas
-    let obj = [
-      {
-        "LIMIT_PERCENT": "25",
-        "buyeruen": "1234",
-        "TRANS_COUNT": 2
-      },
-      {
-        "LIMIT_PERCENT": "100",
-        "buyeruen": "4321",
-        "TRANS_COUNT": 1
-      },
-      {
-        "buyeruen": "1234",
-        "TRANS_COUNT": 2,
-        "LIMIT_PERCENT": "50"
-      },
-      {
-        "buyeruen": "1234",
-        "TRANS_COUNT": 1,
-        "LIMIT_PERCENT": "75"
-      }
-    ]
-
     respObj.map((item, index) => {
       if (item.LIMIT_PERCENT == value) {
         transCount = item.TRANS_COUNT
@@ -1439,58 +1063,15 @@ export class FinananceLimitMaintananceComponent implements OnInit {
     return transCount
   }
   buyerApiTableDependData(items) {
-    let buyertabledenpendData = [
-      {
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "smename": "jhonson ss",
-        "status": "BFA",
-        "bidvalue": 135.0,
-        "buyeruen": "4321",
-        "invoicedate": "2021-05-24T02:46:27.290+0000",
-        "LIMIT_PERCENT": 6.75,
-        "invoiceamount": 150.0,
-        "sme_profile_id": "SME75",
-        "invoice": "INV101"
-      },
-      {
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "sme_profile_id": "SME81",
-        "status": "BFA",
-        "buyeruen": "1234",
-        "bidvalue": 135.0,
-        "smename": "Rubin Smith asd",
-        "LIMIT_PERCENT": 6.75,
-        "invoice": "L2",
-        "invoiceamount": 150.0,
-        "invoicedate": null
-      },
-      {
-        "sector_description": "Agriculture, Forestry, Fishing",
-        "country": "Singapore",
-        "smename": "jhonson ss",
-        "invoiceamount": 450.0,
-        "status": "BFA",
-        "LIMIT_PERCENT": 20.25,
-        "buyeruen": "1234",
-        "sme_profile_id": "SME75",
-        "invoice": "L1",
-        "invoicedate": null,
-        "bidvalue": 405.0
-      }
-    ]
-
-    this.dataSourcebuyerExposureTable = new MatTableDataSource(buyertabledenpendData);
     this.financelimitMaintananceservices.buyerApiDependDataService(items).subscribe(resp => {
       if (resp) {
         resp.forEach(element1 => {
           this.getSmeName.forEach(element2 => {
-          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-          element1.smeId = element2.smeName
-          }
+            if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+              element1.smeId = element2.smeName
+            }
           });
-          });
+        });
         this.dataSourcebuyerExposureTable = new MatTableDataSource(resp);
       }
     })
@@ -1498,21 +1079,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   // Buyer Exposure Tables End
 
   //graph Representation start
+  //LIMIT Graph API 
   overallLimitMaintananceGraph() {
-    // let Overall = {
-    //   "25": "2",
-    //   "50": "1",
-    //   "75": "1",
-    //   "100": "1",
-    //   "FULL": "0"
-    // }
-    // this.OverallhorizontalBarChartData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
-    // this.OverallpieChartData = Object.values(Overall).map(i => Number(i));
-    // this.OverallLineData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
     this.financelimitMaintananceservices.overallGraphService().subscribe(resp => {
       this.OverallhorizontalBarChartData = [
         { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
@@ -1523,21 +1091,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       ]
     })
   }
+
+  //Country Exposure Graph API 
   countryExposureGraph() {
-    // let Overall = {
-    //   "25": "2",
-    //   "50": "14",
-    //   "75": "18",
-    //   "100": "1",
-    //   "FULL": "0"
-    // }
-    // this.countryhorizontalBarChartData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
-    // this.countrypieChartData = Object.values(Overall).map(i => Number(i));
-    // this.countryLineData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
     this.financelimitMaintananceservices.countryGraphService().subscribe(resp => {
       this.countryhorizontalBarChartData = [
         { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
@@ -1548,21 +1104,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       ]
     })
   }
+
+  //SME Graph
   smeExposureGraph() {
-    // let Overall = {
-    //   "25": "2",
-    //   "50": "10",
-    //   "75": "20",
-    //   "100": "1",
-    //   "FULL": "0"
-    // }
-    // this.smehorizontalBarChartData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
-    // this.smepieChartData = Object.values(Overall).map(i => Number(i));
-    // this.smeLineData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
     this.financelimitMaintananceservices.smeGraphService().subscribe(resp => {
       this.smehorizontalBarChartData = [
         { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
@@ -1573,21 +1117,9 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       ]
     })
   }
+
+  //Sector Graph API 
   sectorExposureGraph() {
-    // let Overall = {
-    //   "25": "2",
-    //   "50": "4",
-    //   "75": "5",
-    //   "100": "1",
-    //   "FULL": "0"
-    // }
-    // this.sectorhorizontalBarChartData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
-    // this.sectorpieChartData = Object.values(Overall).map(i => Number(i));
-    // this.sectorLineData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
     this.financelimitMaintananceservices.sectorGraphService().subscribe(resp => {
       this.sectorhorizontalBarChartData = [
         { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
@@ -1598,21 +1130,8 @@ export class FinananceLimitMaintananceComponent implements OnInit {
       ]
     })
   }
+  //BUYER Graph API 
   buyerExposureGraph() {
-    // let Overall = {
-    //   "25": "1",
-    //   "50": "2",
-    //   "75": "1",
-    //   "100": "0",
-    //   "FULL": "0"
-    // }
-    // this.buyerhorizontalBarChartData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
-    // this.buyerpieChartData = Object.values(Overall).map(i => Number(i));
-    // this.buyerLineData = [
-    //   { data: Object.values(Overall).map(i => Number(i)), label: "Exposure Datas" },
-    // ]
     this.financelimitMaintananceservices.buyerGraphService().subscribe(resp => {
       this.buyerhorizontalBarChartData = [
         { data: Object.values(resp).map(i => Number(i)), label: "Exposure Datas" },
