@@ -25,12 +25,13 @@
                     [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()">
                 </uxg-account-card>
 
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funding Bids' | translate}}"
+                <uxg-account-card class="curs-pointer tile-name"
+                    name="{{'SMEDashboardComponent.Funding Bids' | translate}}"
                     number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.financeBidReceive | translate}}"
                     [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()"></uxg-account-card>
 
-                <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Funded' | translate}}"
+                <uxg-account-card class="curs-pointer dash-name" name="{{'SMEDashboardComponent.Funded' | translate}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.acceptedDetails | translate}}"
                     [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()"
                     number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}">
@@ -46,6 +47,7 @@
                 </uxg-account-card>
             </div>
         </ng-container>
+
 
         <!-- <button (click)="this.navigateInvoiceCreation('manual')">Click</button> -->
         <mat-menu #menu="matMenu">
