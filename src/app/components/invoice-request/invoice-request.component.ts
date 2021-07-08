@@ -145,14 +145,13 @@ export class InvoiceRequestComponent implements OnInit {
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
     if (this.type === 'repository') {
       this.isDisabled = true
-      // this.FileData.FileData.queryParams.invoicedata
       this.UpdateReposInvoice(this.FileData.FileData.queryParams.invoicedata)
     }
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role: 'Authorise' }
     this.getInvDetailsLists()
   }
   UpdateReposInvoice(item) {
-    // console.log(item,"item")
+    console.log(item,"item")
     this.invoiceRequestServices.getInvRepositryDetailsLists(item.RUC, item.DocumentNumber).subscribe(resp => {
       console.log(resp)
       let data = resp
@@ -252,7 +251,8 @@ export class InvoiceRequestComponent implements OnInit {
           taxRate: element.taxRate,
           taxAmt: element.taxAmt,
           total: element.total,
-          goodsId: element.goodsId
+          goodsId: element.goodsId,
+          status: "isActive"
         })
         this.dateFormArray.push(row);
       });
@@ -271,6 +271,7 @@ export class InvoiceRequestComponent implements OnInit {
           taxAmt: [""],
           total: [""],
           goodsId: [""],
+          status: "isActive"
         })
         this.dateFormArray.push(row);
       }
@@ -315,27 +316,6 @@ export class InvoiceRequestComponent implements OnInit {
       }
     }
     this.router.navigate([path], { state: { FileData: data } });
-    // this.invoiceForm.patchValue({
-    //   billNo: "IVAPPLE30062021",
-    //   invAmt: "3500",
-    //   smeId: localStorage.getItem("userId"),
-    //   invCcy:"SGD",
-    //   invDueDate: moment('2020-08-05', 'YYYY - MM - DD HH: mm').toDate(),
-    //   invDate: moment('2020-06-02', 'YYYY - MM - DD HH: mm').toDate(),
-    //   dispDate: moment('2020-09-09', 'YYYY - MM - DD HH: mm').toDate(),
-    //   email:"APPle@mail.com",
-    //   buyerName:"APPLE",
-    //   phoneNo:"987654321",
-    //   buyerUEN:"IVAPPLE",
-    //   buyerAddr:"BEL",
-    //   addressLine1:"32 victory",
-    //   addressLine2:"london",
-    //   city:"london",
-    //   postalCode:"34567",
-    //   companyName:"MacBook APPLE"
-    // });
-    // this.currencyName="SGD"
-    // this.currencyAMT = "3500"
   }
   public setTwoNumberDecimal($event, name) {
     if (this.chkDecimalLength($event.target.value) >= 2) {
@@ -390,7 +370,6 @@ export class InvoiceRequestComponent implements OnInit {
     let filter = value.toLowerCase();
     return this.optionDatas.filter(option => option.itemName.toLowerCase().startsWith(filter));
   }
-
 
   selection = new SelectionModel(true, []);
   /** Whether the number of selected elements matches the total number of rows. */
