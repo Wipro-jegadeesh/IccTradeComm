@@ -26,13 +26,13 @@ export class SmeBiddingServices {
   updateFinStatusBid(id,body){
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/aprbidstatus/'+id,body);
   }
-  updatepaymentsBid(body){
+  updateBidPayment(body){
     return this.apiService.post(environment.serviePath_2+'api/v1/payment-details/paymentdetails',body);
   }
-  updateAcceptStatusBid(FINID,BASEAMOUNT,body){
+  updateAcceptedBidStatus(FINID,BASEAMOUNT,body){
     return this.apiService.put(environment.serviePath_4+'limit-update/overAmountAvailable?finId='+FINID+'&OverallUtilizedLimit='+BASEAMOUNT,{});
   }
-  rejectFinBid(id,body){
+  rejectFinancierBid(id,body){
     return this.apiService.put(environment.serviePath_2+'api/v1/bidding-details/rejbidstatus/'+id,body);
   }
   searchFinanceFunded(params){

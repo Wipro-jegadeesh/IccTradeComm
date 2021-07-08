@@ -3,10 +3,10 @@
         <div class="mmt70"></div>
   <div class="data-section">
     <mat-tab-group>
+        <!-- Bid Detail tab section -->
         <mat-tab label="{{'Bid Details' | translate}}">
             <div style="overflow-x:auto;">
-                <table mat-table [dataSource]="dataSourceTwo" >
-                 
+                <table mat-table [dataSource]="bidListData" >
                      <ng-container matColumnDef="Bid ID">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.bidId | translate}}" [matTooltipPosition]="'below'">{{'Bid ID' | translate}}</th>
@@ -37,13 +37,11 @@
                         matTooltip="{{financierTooltip.margin | translate}}" [matTooltipPosition]="'below'">{{'Funding Amount' | translate}}</th>
                         <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.baseCcyFundingAmt }}</td>
                     </ng-container>
- 
                     <ng-container matColumnDef="Repayment Date">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.discAmount | translate}}" [matTooltipPosition]="'below'">{{'Repayment Date' | translate}}</th>
                         <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.repaymentDate | date }}</td>
                     </ng-container>
-                 
                     <ng-container matColumnDef="Annual Yield (Basis a360)">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.expPeriod | translate}}" [matTooltipPosition]="'below'">{{'Annual Yield' | translate}}%</th>
@@ -63,22 +61,22 @@
                         <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.baseCcyNetAmtPayable }}
                         </td>
                     </ng-container>
-                   
                     <ng-container matColumnDef="Off Exp date /time">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.expPeriod | translate}}" [matTooltipPosition]="'below'">{{'Off Exp date /time' | translate}}</th>
                         <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.offerExpDateTime | date }}
                         </td>
                     </ng-container>
-                 
-                    <tr mat-header-row  *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0">
+                    <tr mat-header-row  *matHeaderRowDef="bidTableHeaders" style="background-color:#694ed6e0">
                     </tr>
-                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: bidTableHeaders"></tr>
                 </table>
-
             </div>
             </mat-tab>
-        <mat-tab label="{{'Invoice And Goods Details Section' | translate}}"> 
+
+            <!-- Invoice & Goods section -->
+        <mat-tab label="{{'Invoice And Goods Details Section' | translate}}">
+            <!-- Invoice Details -->
             <mat-accordion>
                     <mat-expansion-panel>
                     </mat-expansion-panel>
@@ -90,7 +88,7 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div class="table-res">
-            <table mat-table [dataSource]="dataSourceInvoiceDetails">
+            <table mat-table [dataSource]="invoiceListData">
                 <ng-container matColumnDef="InvoiceID">
                     <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                     matTooltip="{{financierTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'">{{'Invoice Id' | translate}}</th>
@@ -116,15 +114,13 @@
                     matTooltip="{{financierTooltip.amount | translate}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
                     <td mat-cell *matCellDef="let element">{{ element.invAmt }}</td>
                 </ng-container>
-              
-
-                <tr mat-header-row *matHeaderRowDef="displayedInvDetailsColumns" style="background-color:#694ed6e0"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedInvDetailsColumns"></tr>
+                <tr mat-header-row *matHeaderRowDef="invoiceTableHeader" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: invoiceTableHeader"></tr>
             </table>
             </div>
         </mat-expansion-panel>
             </mat-accordion>
-       
+            <!-- Goods Details -->
             <mat-accordion>
                 <mat-expansion-panel hideToggle>
                 </mat-expansion-panel>
@@ -136,13 +132,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="table-res">
-                    <table mat-table [dataSource]="dataSourceOne">
+                    <table mat-table [dataSource]="goodsDetailsData">
                         <ng-container matColumnDef="descGoods">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{detailsTooltip.goodDesc | translate}}" [matTooltipPosition]="'below'">{{'Description of Goods' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                         </ng-container>
-                       
                         <ng-container matColumnDef="quantity">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{detailsTooltip.quantity | translate}}" [matTooltipPosition]="'below'">{{'Quantity' | translate}}</th>
@@ -158,7 +153,6 @@
                         matTooltip="{{detailsTooltip.amount | translate}}" [matTooltipPosition]="'below'">{{'Amount' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                         </ng-container>
-                    
                         <ng-container matColumnDef="taxRate">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{detailsTooltip.taxRate | translate}}" [matTooltipPosition]="'below'">{{'Tax Rate' | translate}} %</th>
@@ -174,31 +168,28 @@
                         matTooltip="{{detailsTooltip.ccyTaxAmount | translate}}" [matTooltipPosition]="'below'">{{'Tax Amt Ccy' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                         </ng-container>
-                      
-                        
                         <ng-container matColumnDef="total">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{detailsTooltip.total | translate}}" [matTooltipPosition]="'below'">{{'Total' | translate}}</th>
                         <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                         </ng-container>
-
                         <ng-container matColumnDef="TotalCurrency">
                             <th mat-header-cell *matHeaderCellDef scope="column">{{'Total Currency' | translate}}</th>
                             <td mat-cell *matCellDef="let element">{{ element.totalCcy }}</td>
                         </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+                        <tr mat-header-row *matHeaderRowDef="goodsTableHeaders" style="background-color:#694ed6e0"></tr>
+                        <tr mat-row *matRowDef="let row; columns: goodsTableHeaders"></tr>
                         </table>
                         </div>
                 </mat-expansion-panel>
             </mat-accordion>
-       
       </mat-tab>
     </mat-tab-group>
 </div>
 </header>
 </div>
 
+<!-- Bid details popup -->
 <ng-template #template>
     <div class="modal-header">
        <h4 class="modal-title pull-left">{{'Bid Details:' | translate}}</h4>
@@ -209,7 +200,7 @@
     <div class="modal-body">          
        <div class="container-fluid">
            <div class="table-res mat-elevation-z8 table-responsive table-post">
-                <table mat-table [dataSource]="dataBIDDetails" >
+                <table mat-table [dataSource]="bidDetailsData" >
                     <ng-container matColumnDef="Funding CCY">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.bidId | translate}}" [matTooltipPosition]="'below'">{{'Funding CCY' | translate}}</th>
@@ -253,14 +244,13 @@
                                 value="{{ financier.penalRate }}" />
                         </td>
                     </ng-container>
-                    
-                    <tr mat-header-row *matHeaderRowDef="displayedsmeOne" style="background-color:#694ed6e0">
+                    <tr mat-header-row *matHeaderRowDef="bidDetailsHeaderOne" style="background-color:#694ed6e0">
                     </tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedsmeOne"></tr>
+                    <tr mat-row *matRowDef="let row; columns: bidDetailsHeaderOne"></tr>
                 </table>
            </div>
            <div class="table-res mat-elevation-z8 table-responsive table-post">
-                <table mat-table [dataSource]="dataBIDDetails" >
+                <table mat-table [dataSource]="bidDetailsData" >
             <ng-container matColumnDef="Inv Discount  Rate">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                 matTooltip="{{financierTooltip.netAmount | translate}}" [matTooltipPosition]="'below'">{{'Inv Discount Rate' | translate}}</th>
@@ -307,19 +297,20 @@
                 <td mat-cell *matCellDef="let financier let index = index"  (click)="openModal($event,template,index,financier)">{{ financier.offerExpDateTime | date}}
                 </td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedsmeTwo" style="background-color:#694ed6e0">
+            <tr mat-header-row *matHeaderRowDef="bidDetailsHeaderTwo" style="background-color:#694ed6e0">
             </tr>
-            <tr mat-row *matRowDef="let row; columns: displayedsmeTwo"></tr>
+            <tr mat-row *matRowDef="let row; columns: bidDetailsHeaderTwo"></tr>
         </table>
            </div>          
        </div>
     </div>
     <div class="modal-footer" style="justify-content: center;">
-       <button type="button"  (click)="saveFinBid(dataBIDDetails)"class="btn model-btn-outline">{{'Accept' | translate}}</button>
-       <button type="button"  (click)="openModal($event,Rejecttemplate,'reject',dataBIDDetails)"class="btn model-btn-outline">{{'Reject' | translate}}</button>
+       <button type="button"  (click)="onAcceptBid(bidDetailsData)" class="btn model-btn-outline">{{'Accept' | translate}}</button>
+       <button type="button"  (click)="openModal($event,rejectTemplate,'reject',bidDetailsData)"class="btn model-btn-outline">{{'Reject' | translate}}</button>
     </div>
- </ng-template>
- <ng-template #Rejecttemplate>
+</ng-template>
+<!-- Rejection option popup -->
+ <ng-template #rejectTemplate>
     <div class="modal-header">
        <h4 class="modal-title pull-left">{{'Bid Details:' | translate}}</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -328,7 +319,7 @@
     </div>
     <div class="modal-body">       
        <div class="container-fluid">
-        <form [formGroup]="Rejectform" (ngSubmit)="submit()">
+        <form [formGroup]="rejectForm">
            <div class="row">
                <div class="col-sm-6"> 
                 <ul>
@@ -343,7 +334,7 @@
                       <section class="example-section">
                         <ul>
                             <li *ngFor="let subskill of rejectQustionTwo.subrejectQustionTwo">
-                                    <mat-checkbox matInput [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateAllComplete(subskill.name)"> {{subskill.name}} </mat-checkbox>
+                                    <mat-checkbox matInput [labelPosition]="subskill.labelPosition" formControlName="{{subskill.formControlName}}" (change)="updateBidRejection(subskill.name)"> {{subskill.name}} </mat-checkbox>
                             </li>
                           </ul>
                       </section>
@@ -352,7 +343,7 @@
                
                </div>
            </div>
-           <div class="row" *ngIf="TextAreaDiv">
+           <div class="row" *ngIf="textAreaDiv">
             <div class="col-sm-12"> 
                 <mat-form-field  class="col-sm-12 textarea-h">
                     <mat-label>{{'Remarks' | translate}}</mat-label>
@@ -372,6 +363,6 @@
        </div>
     </div>
     <div class="modal-footer" style="justify-content: center;">
-       <button type="button"  (click)="rejectBid(dataBIDDetails)"class="btn model-btn-outline">{{'Reject' | translate}}</button>
+       <button type="button"  (click)="rejectBid(bidDetailsData)"class="btn model-btn-outline">{{'Reject' | translate}}</button>
     </div>
  </ng-template>

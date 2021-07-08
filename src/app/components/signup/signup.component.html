@@ -1,21 +1,21 @@
+<!-- Language Dropdown Section -->
 <div class="signup-lang">
-  <div class="uxg-toolbar-actions" >
-  <div class="language">
-    <mat-form-field dense>
-      <mat-label>Language</mat-label>
-      <mat-icon matPrefix>language</mat-icon>
-      <mat-select #selectedLang [value]="translate && translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
-        <!-- <input style="border: 1px solid #a59f9f;padding: 11px;" matInput placeholder="Search"
-          (keyup)="onKey($event.target.value)"> -->
-        <!-- <mat-option>None</mat-option> -->
-        <mat-option *ngFor="let lang of languages" [value]="lang.id">
-          {{ lang.itemName }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <div class="uxg-toolbar-actions">
+    <div class="language">
+      <mat-form-field dense>
+        <mat-label>Language</mat-label>
+        <mat-icon matPrefix>language</mat-icon>
+        <mat-select #selectedLang [value]="translate && translate.currentLang"
+          (selectionChange)="setLanguage(selectedLang.value);translate.use(selectedLang.value)">
+          <mat-option *ngFor="let lang of languages" [value]="lang.id">
+            {{ lang.itemName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 </div>
-</div>
+<!-- Image & signup input section -->
 <div class="uxg-signup-page">
   <div class="uxg-signup-container">
     <span class="fill-remaining-space"></span>
@@ -24,51 +24,35 @@
       <mat-form-field floatLabel="never" style="margin-bottom:unset" dense appearance="fill">
         <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
         <mat-label>{{'Name' | translate}}</mat-label>
-        <input matInput type="text"class="input-text"  formControlName="name"  />
+        <input matInput type="text" class="input-text" formControlName="name" />
       </mat-form-field>
-      <!-- <angular2-multiselect [data]="optionDatas" class="sign-select" style="margin-bottom:10px" 
-        (onDeSelectAll)="onDeSelect($event)" formControlName="country" (onSelect)="onChange($event)"
-        [settings]="dropdownSettings"></angular2-multiselect> -->
 
-
-        <!-- <div class="col-sm-4"> -->
-          <div class="sign-select">                   
-          <angular2-multiselect [data]="optionDatas" style="margin-bottom:10px" 
-          (onDeSelectAll)="onDeSelect($event)"
-                        formControlName="country" (onSelect)="onChange($event)"
-                        [settings]="dropdownSettings"></angular2-multiselect> 
-            </div>
-<!-- </div> -->
-      <!-- <mat-form-field *ngIf="showCountSignBtn">
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-label>{{CountryPinLabel}}</mat-label>
-        <input matInput name="CountryPin" [(ngModel)]="CountryPin" required>
-        <mat-hint>Please enter {{CountryPinLabel}}</mat-hint>
-      </mat-form-field> -->
+      <div class="sign-select">
+        <angular2-multiselect [data]="optionDatas" style="margin-bottom:10px" (onDeSelectAll)="onDeSelect($event)"
+          formControlName="country" (onSelect)="onChange($event)" [settings]="dropdownSettings"></angular2-multiselect>
+      </div>
       <mat-form-field *ngIf="showCountSignBtn" floatLabel="never" style="margin-bottom:10px" dense appearance="fill">
-        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-        <mat-label >{{countryId}}</mat-label>
-        <input matInput formControlName="CountryPin"
-         required  />
-        <!-- <mat-error>InValid Email</mat-error> -->
+        <!-- <mat-icon color="primary" dense matPrefix>person_outline</mat-icon> -->
+        <mat-label>{{countryId}}</mat-label>
+        <input matInput formControlName="countryPin" required />
       </mat-form-field>
-      <!-- <angular2-multiselect [data]="sectorOptionsDatas"  class="sign-select" style="margin-bottom:10px"
-                  name='country'  (onDeSelectAll)="onDeSelect($event)" 
-                 [(ngModel)]="selectedItems" (onSelect)="onChange($event)"
-                 [settings]="sectordropdownSettings" ></angular2-multiselect> -->
 
-      <button (click)="openModal($event,template)" mat-flat-button color="primary" *ngIf="showCountSignBtn">{{'Sign Up' | translate}}</button>
+      <button (click)="onSignupFormSubmit($event,template)" mat-flat-button color="primary"
+        *ngIf="showCountSignBtn">{{'Sign Up'
+        | translate}}</button>
     </form>
     <div class="login-actions">
       <br>
-      <a class="uxg-body-2" (click)="GotoLogin()"
-        style="cursor: pointer;font-weight: bold;color: #8c0ed4;text-transform: uppercase;">{{'Back to Login Page' | translate}}</a>
+      <a class="uxg-body-2" (click)="loginNavigation()"
+        style="cursor: pointer;font-weight: bold;color: #8c0ed4;text-transform: uppercase;">{{'Back to Login Page' |
+        translate}}</a>
     </div>
     <span class="fill-remaining-space"></span>
   </div>
   <div class="uxg-illustration-container"></div>
 </div>
 
+<!-- Modal popup template -->
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title">{{'Sign Up' | translate}}</h4>
@@ -79,12 +63,14 @@
   <div class="modal-body">
     <div style="text-align: center;">
       <h5>{{'Are you existing coriolis customer' | translate}}</h5>
-      <div class="row"> 
+      <div class="row">
         <div class="col-sm-6" style="text-align: end;">
-          <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">{{'yes' | translate}}</button>
+          <button type="button" mat-flat-button color="primary" (click)="signUpPage('yes')">{{'yes' |
+            translate}}</button>
         </div>
         <div>
-          <button type="button" mat-flat-button color="primary" (click)="signUpPage('no')"> {{'no' | translate}}</button>
+          <button type="button" mat-flat-button color="primary" (click)="signUpPage('no')"> {{'no' |
+            translate}}</button>
         </div>
       </div>
     </div>

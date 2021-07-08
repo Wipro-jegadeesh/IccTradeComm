@@ -4,16 +4,18 @@
     <h5>{{'viewProfile.Profile' | translate}}</h5>
     <div class="container">
       <div class="row">
+        <!-- Profile Image Section -->
         <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <div style="width: 150px;" class="uxg-avatar">U</div>
-            <span class="font-weight-bold">{{this.userDeatils?.name || 'test'}}</span><span
-              class="text-black-50">{{this.userDeatils?.email || 'test@mail.com'}}</span><span> </span>
+            <span class="font-weight-bold">{{this.userDetails?.name || 'test'}}</span><span
+              class="text-black-50">{{this.userDetails?.email || 'test@mail.com'}}</span><span> </span>
           </div>
         </div>
+        <!-- Profile details Sections  -->
         <div class="col-md-9 border-right">
           <div class="p-3 py-5">
-            <form [formGroup]="userForm" autocomplete="off">
+            <form [formGroup]="profileDetailForm" autocomplete="off">
               <div class="row dis-block">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -37,7 +39,7 @@
               <div class="row dis-block">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.Phone Number' | translate}}</mat-label>
                       <mat-icon matPrefix>call</mat-icon>
                       <input type="text" matInput placeholder="Phone Number" formControlName="contactNo" readonly />
@@ -46,7 +48,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.Email Id' | translate}}</mat-label>
                       <mat-icon matPrefix>email</mat-icon>
                       <input type="text" matInput placeholder="Email" formControlName="email" readonly />
@@ -57,7 +59,7 @@
               <div class="row dis-block">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.Address 1' | translate}}</mat-label>
                       <mat-icon matPrefix>home</mat-icon>
                       <input type="text" matInput placeholder="Address" formControlName="address" readonly />
@@ -66,7 +68,7 @@
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.Country' | translate}}</mat-label>
                       <mat-icon matPrefix>flag</mat-icon>
                       <input type="text" matInput placeholder="Country" formControlName="country" readonly />
@@ -77,7 +79,7 @@
               <div class="row dis-block">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.State' | translate}}</mat-label>
                       <mat-icon matPrefix>add_location</mat-icon>
                       <input type="text" matInput placeholder="State" formControlName="state" readonly />
@@ -86,7 +88,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.City' | translate}}</mat-label>
                       <mat-icon matPrefix>add_location</mat-icon>
                       <input type="text" matInput placeholder="City" formControlName="city" readonly />
@@ -97,7 +99,7 @@
               <div class="row dis-block">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <mat-form-field dense  class="readOnlyCls">
+                    <mat-form-field dense class="readOnlyCls">
                       <mat-label>{{'viewProfile.Language' | translate}}</mat-label>
                       <mat-icon matPrefix>flag</mat-icon>
                       <input type="text" matInput placeholder="Language" formControlName="languages" readonly />

@@ -7,9 +7,10 @@ import {MatDialog} from '@angular/material/dialog';
   templateUrl: './static-page.component.html',
   styleUrls: ['./static-page.component.scss']
 })
+
+// STATIC PAGE COMPONENT FOR POPUP 
 export class StaticPageComponent implements OnInit {
-  
-  
+
   constructor(private router: Router,public dialog: MatDialog) { }
 
   ngOnInit():void{
@@ -18,9 +19,6 @@ export class StaticPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.router.navigateByUrl('/score-received')
     });
-  }
-  openDialog() {
-  
   }
  
 }

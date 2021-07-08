@@ -48,8 +48,6 @@
             </div>
         </ng-container>
 
-
-        <!-- <button (click)="this.navigateInvoiceCreation('manual')">Click</button> -->
         <mat-menu #menu="matMenu">
             <div
                 [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
@@ -121,7 +119,8 @@
                                                 <td style="text-align: center;">{{getFinMaturityDatas.AMOUNT}}</td>
                                             </tr>
                                             <tr *ngIf="!getFinMaturityData?.length">
-                                                <td style="text-align: center;" colspan="3">{{'No Records Found' | translate}}</td>
+                                                <td style="text-align: center;" colspan="3">{{'No Records Found' |
+                                                    translate}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -155,7 +154,8 @@
                                             <td style="text-align: center;">{{getFinnSizeDatas.AMOUNT}}</td>
                                         </tr>
                                         <tr *ngIf="!getFinnSizeData?.length">
-                                            <td style="text-align: center;" colspan="3">{{'No Records Found' | translate}}</td>
+                                            <td style="text-align: center;" colspan="3">{{'No Records Found' |
+                                                translate}}</td>
                                         </tr>
                                     </table>
                                 </div>

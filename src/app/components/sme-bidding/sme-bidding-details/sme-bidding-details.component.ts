@@ -1,158 +1,56 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModalDialogService } from '../../../service/modal-dialog.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
-import {ThemePalette} from '@angular/material/core';
 import { AuthenticationService } from '../../../service/authentication/authentication.service';
-import { Observable } from 'rxjs';
-import {DataSource} from '@angular/cdk/collections';
 import { SMEDASHBOARDCONSTANTS } from '../../../shared/constants/constants';
 import { SmeBiddingServices } from '../sme-bidding-services';
-import {INVOICEDETAILSCONSTANTS} from '../../../shared/constants/constants';
+import { INVOICEDETAILSCONSTANTS } from '../../../shared/constants/constants';
 import * as _ from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import * as moment from 'moment';
 
-const ELEMENT_DATA: any[] = [
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-  {
-    Name: '',
-    Position: '',
-    Address: '',
-    TelephoneNo: '',
-    Email: ''
-  },
-];
-const DATA_ONE: any[] = [
-  {
-    SNo: 1,
-    DescGoods: 'Steel Rod',
-    IdNo: 'a456',
-    Qty: '100t',
-    Rate: '678.0',
-    Amt: 67800,
-    DiscAmt: '-',
-    NetAmt: 67800,
-    TaxRate: 2,
-    TaxAmt: 1356,
-    Total: 63156
-  },
-  {
-    SNo: 2,
-    DescGoods: 'Nuts',
-    IdNo: 'D435',
-    Qty: '25t',
-    Rate: '876.0',
-    Amt: 21900,
-    DiscAmt: 900,
-    NetAmt: 21000,
-    TaxRate: 2,
-    TaxAmt: 420,
-    Total: 21420
-  }
-];
-const DATA_TWO: any[] = [
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A',
-  },
-  {
-    BidID: 'BID03456',
-    FinOffAmt: 102700,
-    Ccy: 'SGD',
-    FxRateDiff: '1.35',
-    Margin: 10,
-    DiscRate: 3,
-    DiscAmt: 760,
-    NetAmtPay: 101940,
-    DueDate: '90D/10Mar21',
-    OffExpPrd: '4 PM',
-    Status: 'A'
-  }
-];
-const DATA_INV_DETAILS: any[] = [
-  {
-    InvoiceDate: "13/12/2025",
-    InvoiceID: 'SGD01',
-    Buyer: "Jega",
-    Amount: 300,
-    Seller:'jega'
-  }
-];
+const DATA_ONE: any[] = [];
+const DATA_INV_DETAILS: any[] = [];
 @Component({
   selector: 'app-sme-bidding',
   templateUrl: './sme-bidding-details.component.html',
-  styleUrls: ['./sme-bidding-details.component.scss']  
+  styleUrls: ['./sme-bidding-details.component.scss']
 })
 
 export class SmeBiddingDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount'];
-  tabledataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','position1','name1'];
-    isOpen = ""
-    mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
+  isOpen = ""
   modalRef: BsModalRef;
-  color: ThemePalette = 'warn';
-  ischecked = "true"
-  detailsTooltip=INVOICEDETAILSCONSTANTS
+  detailsTooltip = INVOICEDETAILSCONSTANTS
   bidDetails
   financierProfileId;
   buyerUEN
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   id: any;
-  smeDetails: any;
-  TextAreaDiv: boolean;
+  textAreaDiv: boolean;
   public issubmitTrue: boolean = false;
   moment: any = moment;
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    } else {
-      this.mobileScreen = false;
-    }
-  }
   panelOpenState = false;
-  financierTooltip=SMEDASHBOARDCONSTANTS;
-  Rejectform: FormGroup;
+  financierTooltip = SMEDASHBOARDCONSTANTS;
+  rejectForm: FormGroup;
 
-  
-  constructor(private fb: FormBuilder,private activatedRoute: ActivatedRoute,public router: Router,private modalService: BsModalService,private modalDialogService:ModalDialogService,private authenticationService: AuthenticationService
-    ,private smeBiddingServices : SmeBiddingServices,private toastr: ToastrService) { }
-  dataSourceOne = new MatTableDataSource(DATA_ONE); //data
-  dataSourceTwo; //data
-  dataBIDDetails;
-  dataSourceInvoiceDetails = new MatTableDataSource(DATA_INV_DETAILS); //data
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, public router: Router, private modalService: BsModalService,
+    private modalDialogService: ModalDialogService, private authenticationService: AuthenticationService
+    , private smeBiddingServices: SmeBiddingServices, private toastr: ToastrService) { }
+  goodsDetailsData = new MatTableDataSource(DATA_ONE); //data
+  bidListData; //data
+  bidDetailsData;
+  invoiceListData = new MatTableDataSource(DATA_INV_DETAILS); //data
 
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
-  displayedsmeOne: string[] = [
+  // Goods table header
+  goodsTableHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  //Bid details table headers - 1
+  bidDetailsHeaderOne: string[] = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -162,7 +60,8 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Repayment Date',
     'Penal ROI'
   ];
-  displayedsmeTwo: string[] = [
+  //Bid details table headers - 2
+  bidDetailsHeaderTwo: string[] = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -173,7 +72,8 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
-  displayedColumnsTwo: string[] = [
+  //main bid table header
+  bidTableHeaders: string[] = [
     // 'Funding CCY',
     'Bid ID',
     'Financier Name',
@@ -194,55 +94,58 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Off Exp date /time',
     // 'Status'
   ];
-  displayedInvDetailsColumns: string[] = [
+  //Invoice detail table header
+  invoiceTableHeader: string[] = [
     'InvoiceID',
     'InvoiceDate',
     'smeId',
     'Buyer',
     'Amount',
   ];
- 
-  rejectQustionOne = {
-    subrejectQustionOne: [
-      { name: 'Inv Discount Rate High',labelPosition:'before',formControlName:'invDiscountLow'},
-      { name: 'Annual Yield (Basis a360) Too High',labelPosition:'before',formControlName:'annualYield'},
-      { name: 'Fundable percentage Less',labelPosition:'before',formControlName:'fundablepercentagelow'},
-      { name: 'Funding Amount Less',labelPosition:'before',formControlName:'fundingAmountHigh' },
+
+  //Rejection question options
+  rejectQuestionOne = {
+    subrejectQuestionOne: [
+      { name: 'Inv Discount Rate High', labelPosition: 'before', formControlName: 'invDiscountLow' },
+      { name: 'Annual Yield (Basis a360) Too High', labelPosition: 'before', formControlName: 'annualYield' },
+      { name: 'Fundable percentage Less', labelPosition: 'before', formControlName: 'fundablepercentagelow' },
+      { name: 'Funding Amount Less', labelPosition: 'before', formControlName: 'fundingAmountHigh' },
     ]
-};
-rejectQustionTwo = {
-  subrejectQustionTwo: [
-    { name: 'Net Amt payable (Base CCY) Low',labelPosition:'before',formControlName:'netPayable'},
-    { name: 'Repayment Date Less',labelPosition:'before',formControlName:'repaymentDate'},
-    { name: 'Off Exp date /time Less',labelPosition:'before',formControlName:'offDate'},
-    { name: 'Others',labelPosition:'before',formControlName:'others'},
-  ]
-}
- 
-  goods_array : object [];
+  };
+  rejectQuestionTwo = {
+    subrejectQuestionTwo: [
+      { name: 'Net Amt payable (Base CCY) Low', labelPosition: 'before', formControlName: 'netPayable' },
+      { name: 'Repayment Date Less', labelPosition: 'before', formControlName: 'repaymentDate' },
+      { name: 'Off Exp date /time Less', labelPosition: 'before', formControlName: 'offDate' },
+      { name: 'Others', labelPosition: 'before', formControlName: 'others' },
+    ]
+  }
+
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    if (window.innerWidth < 415) {
-      this.mobileScreen = true;
-    }
+    this.getFundingBidDetails();
+  }
+  //func to get specific bid details
+  getFundingBidDetails() {
     this.smeBiddingServices.getBiddingDetails(this.id).subscribe(resp => {
-      console.log(resp,"resp")
-      if(resp){
+      if (resp) {
         this.financierProfileId = resp[0] && resp[0].financierProfileId;
         this.buyerUEN = resp[0] && resp[0].buyerUEN
+        // get Invoice & goods details of the specific invoice
         this.smeBiddingServices.getInvoiceGoodsDetails(resp[0] && resp[0].invoiceId).subscribe(resp => {
-          this.dataSourceOne = new MatTableDataSource(resp.goodsDetails)
-          this.dataSourceInvoiceDetails = new MatTableDataSource([
-            { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status ,'smeId' : resp.smeId}
+          this.goodsDetailsData = new MatTableDataSource(resp.goodsDetails)
+          this.invoiceListData = new MatTableDataSource([
+            { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status, 'smeId': resp.smeId }
           ]);
-         })
-        this.dataSourceTwo = new MatTableDataSource(resp);
-       this.bidDetails = resp;
+        })
+        this.bidListData = new MatTableDataSource(resp);
+        this.bidDetails = resp;
       }
-    }) 
+    })
   }
-  buildform() {
-    this.Rejectform = this.fb.group({
+  //rejection form checkbox options
+  buildBidDetailForm() {
+    this.rejectForm = this.fb.group({
       invDiscountLow: [false],
       annualYield: [false],
       fundablepercentagelow: [false],
@@ -252,155 +155,97 @@ rejectQustionTwo = {
       invoiceAmt: [false],
       repaymentDate: [false],
       fundingCCY: [false],
-      offDate:[false],
-      others:[false],
-      othersRemarks:['']
+      offDate: [false],
+      others: [false],
+      othersRemarks: ['']
     })
   }
-  updateAllComplete(text){
-    console.log(text,"text")
-    if(text === 'Others'){
-      this.Rejectform.get('othersRemarks').setValidators([Validators.required]);
-      this.Rejectform.get('othersRemarks').updateValueAndValidity();
-      this.TextAreaDiv = !this.TextAreaDiv
+  //update rejection form 
+  updateBidRejection(text) {
+    if (text === 'Others') {
+      this.rejectForm.get('othersRemarks').setValidators([Validators.required]);
+      this.rejectForm.get('othersRemarks').updateValueAndValidity();
+      this.textAreaDiv = !this.textAreaDiv
     }
   }
-  submit(){
-
-  }
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
-    }
-  }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-  openModal(event, template,index,financier) {
-    console.log(template,"template")
-    console.log(financier,"financier")
-    console.log(index,"index")
-    console.log(event,"event")
-    if(index === 'reject'){
+  //invoice rejection popup function
+  openModal(event, template, index, financier) {
+    if (index === 'reject') {
       this.modalRef.hide()
-      this.TextAreaDiv = false
-      this.buildform()
+      this.textAreaDiv = false
+      this.buildBidDetailForm()
       event.preventDefault();
-      this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
-    }else{
-    let array = []
-    array.push(financier)
-    this.dataBIDDetails = new MatTableDataSource(array);
-    event.preventDefault();
-    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    }
+    else {
+      let array = []
+      array.push(financier)
+      this.bidDetailsData = new MatTableDataSource(array);
+      event.preventDefault();
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
   }
+  //Error validation function
   public errorHandling = (control: string, error: string) => {
-    return this.Rejectform.controls[control].hasError(error);
+    return this.rejectForm.controls[control].hasError(error);
   }
-  isOpenHandle(isTrue){
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-    }
-
-    saveFinBid(data){
-
-
-      let userData = JSON.parse(localStorage.getItem('userCred'))
-
-      data.filteredData[0]['smeId'] = localStorage.getItem("userId")
-      data.filteredData[0]['status'] = 'FIN'
-      data.filteredData[0]['invoiceId'] = data.filteredData[0].invoiceId
-      data.filteredData[0]['invoiceNo'] = data.filteredData[0].invNo
-
-      data.filteredData[0]['financierProfileId'] = this.financierProfileId
-      data.filteredData[0]['smeProfileId'] = userData['smeProfileId']
-      data.filteredData[0]['buyerUEN'] =this.buyerUEN
-      var element =  data.filteredData[0];
-      this.smeBiddingServices.saveFinBid(element).subscribe(resp => {
-        console.log(resp,"resp")
-        if(resp){
-          // this.smeBiddingServices.updateFinBid(data.filteredData[0].id).subscribe(resp => {
-          // })
-          let userData = JSON.parse(localStorage.getItem('userCred'))
-          let obj = {
-            "smeProfileId" : userData['smeProfileId'] 
-          }
-          this.smeBiddingServices.updateFinStatusBid(data.filteredData[0].id,obj).subscribe(resp => {
-          })
-          this.smeBiddingServices.updateAcceptStatusBid(data.filteredData[0].financierProfileId,data.filteredData[0].baseCcyNetAmtPayable,'').subscribe(resp => {
-          })
-          this.smeBiddingServices.updatepaymentsBid(element).subscribe(resp => {
-          })
-          this.toastr.success("Accepted successfully")
+  //Accept bid functionality
+  onAcceptBid(data) {
+    let userData = JSON.parse(localStorage.getItem('userCred'))
+    data.filteredData[0]['smeId'] = localStorage.getItem("userId")
+    data.filteredData[0]['status'] = 'FIN'
+    data.filteredData[0]['invoiceId'] = data.filteredData[0].invoiceId
+    data.filteredData[0]['invoiceNo'] = data.filteredData[0].invNo
+    data.filteredData[0]['financierProfileId'] = this.financierProfileId
+    data.filteredData[0]['smeProfileId'] = userData['smeProfileId']
+    data.filteredData[0]['buyerUEN'] = this.buyerUEN
+    var element = data.filteredData[0];
+    this.smeBiddingServices.saveFinBid(element).subscribe(resp => {
+      if (resp) {
+        let userData = JSON.parse(localStorage.getItem('userCred'))
+        let obj = {
+          "smeProfileId": userData['smeProfileId']
+        }
+        //API call for Update financier status
+        this.smeBiddingServices.updateFinStatusBid(data.filteredData[0].id, obj).subscribe(resp => {
+        })
+        //API call for Update particular bid status
+        this.smeBiddingServices.updateAcceptedBidStatus(data.filteredData[0].financierProfileId, data.filteredData[0].baseCcyNetAmtPayable, '').subscribe(resp => {
+        })
+        // API call for update payment bid
+        this.smeBiddingServices.updateBidPayment(element).subscribe(resp => {
+        })
+        this.toastr.success("Accepted successfully")
         this.modalRef.hide()
         this.router.navigateByUrl('/sme-dashboard');
-        }
-      })
-    }
-    
-    rejectBid(data){
-      console.log(data,"usus")
-      console.log(this.Rejectform.value,"this.finBidform.value")
-      console.log(this.Rejectform,"this.Rejectform")
-      this.issubmitTrue = true;
-      if (this.Rejectform.invalid) {
-        alert("Please fill Mandatory fields")
-        return;
       }
-      // let params = this.Rejectform.value
-      // params.invoiceId = data.filteredData[0].invoiceId,
-      // params.invNo = data.filteredData[0].invNo,
-      // params.bidId = data.filteredData[0].bidId,
-      // params.finId = data.filteredData[0].finId
-      var ddatae = new Date();
-      let array = []
-      array.push(this.Rejectform.value)
-      let obj = {
-        remarkValue : JSON.stringify(array),
-        invoiceId : data.filteredData[0].invoiceId,
-        invNo :data.filteredData[0].invNo,
-        bidId :data.filteredData[0].bidId,
-        updatedTime: moment(ddatae, 'YYYY - MM - DD HH: mm').toDate()
-      }
-      if (this.Rejectform.valid){
-      this.smeBiddingServices.rejectFinBid(data.filteredData[0].id,obj).subscribe(resp => {
-        this.toastr.success("Rejected successfully")
-          this.issubmitTrue = false;
-          this.modalRef.hide()
-          this.Rejectform.reset();
-          this.router.navigateByUrl('/sme-dashboard');
-        })
-   
-    }
-  }
-
-    handleToggle(e,status){
-      this.modalDialogService.confirm("Confirm Delete","Do you really want to change the status ?","Ok","Cancel").subscribe(result =>{       
     })
   }
-  goHome(){
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout(){
-    this.authenticationService.logout()
+  //reject bid functionality
+  rejectBid(data) {
+    this.issubmitTrue = true;
+    if (this.rejectForm.invalid) {
+      return;
     }
+    var date = new Date();
+    let array = []
+    array.push(this.rejectForm.value)
+    let obj = {
+      remarkValue: JSON.stringify(array),
+      invoiceId: data.filteredData[0].invoiceId,
+      invNo: data.filteredData[0].invNo,
+      bidId: data.filteredData[0].bidId,
+      updatedTime: moment(date, 'YYYY - MM - DD HH: mm').toDate()
+    }
+    if (this.rejectForm.valid) {
+      //API call for reject financier Bid
+      this.smeBiddingServices.rejectFinancierBid(data.filteredData[0].id, obj).subscribe(resp => {
+        this.toastr.success("Rejected successfully")
+        this.issubmitTrue = false;
+        this.modalRef.hide()
+        this.rejectForm.reset();
+        this.router.navigateByUrl('/sme-dashboard');
+      })
+    }
+  }
 }
-
