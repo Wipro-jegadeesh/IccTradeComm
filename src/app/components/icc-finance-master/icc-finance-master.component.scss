@@ -4,12 +4,11 @@ $margin: $uxg-spacing-4 + $uxg-spacing-2; // $margin;
 
 header {
     // margin: -$margin (-$margin) $uxg-spacing-0;
-   // margin: -32px 30px 0;
+    // margin: -32px 30px 0;
     //padding: $margin;
     position: relative;
     height: 45%;
     width: 100%;
-
     .account-services-headline {
         display: flex;
         justify-content: space-between;
@@ -18,14 +17,12 @@ header {
             z-index: 10;
         }
     }
-
     .paginator {
         display: flex;
         align-self: flex-end;
         z-index: 10;
     }
 }
-
 .app-content {
     bottom: 0;
     left: 0;
@@ -63,18 +60,15 @@ table.table-responsive{
     padding-right: 50px;
     margin-left: -30px;
     padding-bottom: 27px;
-
     uxg-account-card,
     uxg-account-card-skeleton {
         display: inline-grid;
         margin-left: $margin;
     }
 }
-
 .uxg-breadcrumb {
     margin-left: 50px !important;
 }
-
 .wave {
     margin: $uxg-spacing-0 (-$margin) -5px;
     position: absolute;
@@ -83,21 +77,17 @@ table.table-responsive{
     bottom: $uxg-spacing-0;
     z-index: 1;
 }
-
 @media only screen and (min-width: 377px) and (max-width: 415px) {
     header {
         height: 35%;
-
         .wave {
             overflow: hidden;
             ::ng-deep svg {
                 height: 200px;
             }
         }
-
         .account-services-headline {
             font-size: $margin;
-
             .global-balance {
                 .uxg-h3,
                 p {
@@ -113,17 +103,14 @@ table.table-responsive{
     header {
         margin-bottom: $uxg-spacing-5;
         height: 35%;
-
         .wave {
             overflow: hidden;
             ::ng-deep svg {
                 height: 200px;
             }
         }
-
         .account-services-headline {
             font-size: $margin;
-
             .global-balance {
                 .uxg-h3,
                 p {
@@ -133,7 +120,6 @@ table.table-responsive{
         }
     }
 }
-
 @media only screen and (max-width: 575px) {
     header{
         margin-left: 0;
@@ -142,7 +128,6 @@ table.table-responsive{
         margin-top: 20px;
     }
 }
-
 /* Tablet Styles */
 @media only screen and (min-width: 500px) and (max-width: 1024px) {
     header {
@@ -157,7 +142,6 @@ table.table-responsive{
             }
         }
     }
-
     .accounts-list {
         overflow: hidden;
         padding-top: $margin;
@@ -171,7 +155,6 @@ table.table-responsive{
         margin-top: 20px;
     }
 }
-
 .app-content.active{
     @media only screen and (min-width: 1025px) {
         .wave {
@@ -185,37 +168,31 @@ table.table-responsive{
         // top: -10%;
         top: -22%;
     }
-
     .content {
         padding: $margin $margin * 2 $uxg-spacing-0 $margin;
     }
-
     .accounts-list {
         overflow: hidden;
         // padding-top: $margin;
         // padding-top: $margin;
     }
 }
-
 .uxg-nav {
     position: absolute;
     // height: 850px;
     border: 1px solid #eaeaea;
 }
-
 .mat-drawer-container {
     width: 100%;
     // height: 100%;
     background-color: white;
 }
-
 .uxg-nav-header {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 80px !important;
 }
-
 .finastra-logo {
     width: 150px;
     height: auto;
@@ -224,22 +201,17 @@ mat-sidenav-container {
     padding: 0;
     position: relative;
 }
-
 .uxg-toolbar {
     z-index: 15;
     position: absolute;
 }
-
-
 .app-content.inActive
 {
 // margin-left: 300px;
 }
-
 .chart.inActive{
    margin-left: auto;
 }
-
 .tableView.inActive{
     margin-left: 300px;
 }
@@ -258,11 +230,9 @@ mat-card-content[_ngcontent-njk-c181]
 .modal-lg {
     max-width: 559px !important;
 }
-
 .example-margin {
     margin: 10px;
   }
-
   .table-heading {
     background:"";
     font-size: 16px;
