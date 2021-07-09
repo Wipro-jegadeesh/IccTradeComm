@@ -229,7 +229,7 @@
                     <ng-container matColumnDef="Funding Amount / Repay Amount (Inv CCY)">
                         <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                         matTooltip="{{financierTooltip.discRate | translate}}" [matTooltipPosition]="'below'">{{'Funding Amount / Repay Amount (Inv CCY)' | translate}}</th>
-                        <td mat-cell *matCellDef="let financier" style="color:red">{{ financier.invCcyFundingAmt }}
+                        <td mat-cell *matCellDef="let financier" style="color:a899e4">{{ financier.invCcyFundingAmt }}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="Repayment Date">
@@ -275,7 +275,7 @@
             <ng-container matColumnDef="Net Amt payable (Base CCY)">
                 <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
                 matTooltip="{{financierTooltip.expPeriod | translate}}" [matTooltipPosition]="'below'">{{'Net Amt Receivable' | translate}}</th>
-                <td mat-cell *matCellDef="let financier let index = index"  style="color:red">{{ financier.baseCcyNetAmtPayable }}
+                <td mat-cell *matCellDef="let financier let index = index"  style="color:a899e4">{{ financier.baseCcyNetAmtPayable }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Net Amt payable (Inv CCY)">

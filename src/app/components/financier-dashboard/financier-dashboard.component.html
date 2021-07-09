@@ -77,20 +77,20 @@
                             </div>
                         <table class="table-bordered table" id="customers">
                             <tr>
-                                <th  #tooltip="matTooltip"
+                                <th  style="text-align: center;" #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.financePeriod | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Period' | translate}}</th>
-                                <th  #tooltip="matTooltip"
+                                <th style="text-align: center;"  #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.financeNumber | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Number' | translate}}</th>
-                                <th  #tooltip="matTooltip"
+                                <th style="text-align: center;"  #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.financeAmount | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Amount' | translate}}</th>
                             </tr>
                             <tr *ngFor="let getFinMaturityDatas of getFinMaturityData" >
-                                <td>{{getFinMaturityDatas.PERIOD}}</td>
-                                <td>{{getFinMaturityDatas.NUMBER}}</td>
-                                <td>{{getFinMaturityDatas.AMOUNT}}</td>
+                                <td style="text-align: center;">{{getFinMaturityDatas.PERIOD}}</td>
+                                <td style="text-align: center;">{{getFinMaturityDatas.NUMBER}}</td>
+                                <td style="text-align: end;">{{getFinMaturityDatas.AMOUNT}}</td>
                               </tr>
                               <tr *ngIf="!getFinMaturityData?.length">
-                                <td colspan="3">{{'FinanceDashboardComponent.No Records Found' | translate}}</td>
+                                <td style="text-align: center;" colspan="3">{{'FinanceDashboardComponent.No Records Found' | translate}}</td>
                             </tr>
                           </table>
                         </div>
@@ -109,21 +109,21 @@
                             </div>
                         <table class="table-bordered table table-responsive" id="customers">
                             <tr>
-                                <th #tooltip="matTooltip"
+                                <th style="text-align: center;" #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.transactions | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Invoice Size' | translate}}</th>
-                                <th #tooltip="matTooltip"
+                                <th style="text-align: center;" #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.transactions | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Number' | translate}}</th>
-                                <th #tooltip="matTooltip"
+                                <th style="text-align: center;" #tooltip="matTooltip"
                                 matTooltip="{{dashboardTooltip.type | translate}}" [matTooltipPosition]="'below'">{{'FinanceDashboardComponent.Amount' | translate}}</th>
                               </tr>
                            
                               <tr *ngFor="let getFinnSizeDatas of getFinnSizeData" >
-                                <td>{{getFinnSizeDatas.INVOICE_SIZE}}</td>
-                                <td>{{getFinnSizeDatas.NUMBER}}</td>
-                                <td>{{getFinnSizeDatas.AMOUNT}}</td>
+                                <td style="text-align: center;">{{getFinnSizeDatas.INVOICE_SIZE}}</td>
+                                <td style="text-align: center;">{{getFinnSizeDatas.NUMBER}}</td>
+                                <td style="text-align: end;">{{getFinnSizeDatas.AMOUNT}}</td>
                               </tr>
                               <tr *ngIf="!getFinnSizeData?.length">
-                                <td colspan="3">{{'FinanceDashboardComponent.No Records Found' | translate}}</td>
+                                <td style="text-align: center;" colspan="3">{{'FinanceDashboardComponent.No Records Found' | translate}}</td>
                             </tr>
                             
                           </table>
