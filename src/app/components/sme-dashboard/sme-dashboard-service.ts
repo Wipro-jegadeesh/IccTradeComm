@@ -5,10 +5,10 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class SmeDashboardServices {
   constructor(private apiService: ApiService) { }
-  getFinForBid(){
+  getOpenFundRequest(){
     return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/openfundingrequestsbysmeid/'+localStorage.getItem("userId"));
   }
-  getFundingBids(){
+  getTotalFundingBids(){
     return this.apiService.generalServiceget(environment.serviePath_2+'api/v1/invoice-request/sumofinitbidamtbysmeid/'+localStorage.getItem("userId"));
   }
   getFunded(){
