@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild, EventEmitter, Input, Output } from '@angular/core';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SmeDashboardServices } from './sme-dashboard-service';
 import { DASHBOARDCONSTANTS } from '../../shared/constants/constants';
@@ -30,10 +30,10 @@ export class SmeDashboardComponent implements OnInit {
   commonTooltips = COMMONCONSTANTS;
   getSumOfOpenFinBidding;
   getSumofFundingBids;
-  getsumOfFunded;
+  getSumOfFunded;
   getFinMaturityData;
   getFinnSizeData;
-  getTblChartData
+  getTblChartData;
   FileType: any;
   PDFData: any;
   userDetails: any;
@@ -54,14 +54,14 @@ export class SmeDashboardComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.getFinForBid();
-    this.getFundingBids();
+    this.getOpenFundRequest();
+    this.getTotalFundingBids();
     this.getFunded();
     this.getFinMatData();
     this.getFinSizeData();
     this.getChartData();
   }
-
+  // scroll function for payment cards
   public scrollRight(): void {
     this.start = false;
     const scrollWidth =
@@ -77,7 +77,7 @@ export class SmeDashboardComponent implements OnInit {
       });
     }
   }
-
+  // scroll function for payment cards
   public scrollLeft(): void {
     this.end = false;
     if (this.accountList.nativeElement.scrollLeft === 0) {
@@ -91,59 +91,71 @@ export class SmeDashboardComponent implements OnInit {
   isOpenHandle(isTrue) {
     this.isOpen = isTrue == "inActive" ? "active" : "inActive"
   }
-  navigateFinancierBidding() {
+  // Funding bids page navigation
+  fundingBidNav() {
     this.router.navigateByUrl('/sme-bidding');
   }
-  navigateFinancieForBidding() {
+  //open funding request navigation
+  openFundReqNav() {
     this.router.navigateByUrl('/sme-finance-for-bidding');
   }
+  // Invoice creation page navigation
   navigateInvoiceCreation(type) {
-    this.router.navigateByUrl('/invoice-request/'+type);
+    this.router.navigateByUrl('/invoice-request/' + type);
   }
-  navigateAcceptedFinance() {
+  //Funded bid navigation
+  fundedBidNav() {
     this.router.navigateByUrl('/accepted-finance');
   }
-  navigateAcceptedRepayment() {
+  //Repayment due today navigation
+  tdyRepayNav() {
     this.router.navigateByUrl('/repayment_today');
   }
-  navigateRepaymentOverDue() {
+  //Repayment over due navigation
+  overDueNav() {
     this.router.navigateByUrl('/repayment_overdue');
   }
-  logout() {
-    this.authenticationService.logout()
-  }
-  getFinForBid() {
-    this.smeDashboardServices.getFinForBid().subscribe(resp => {
-      this.getSumOfOpenFinBidding = resp;
+  // get open funding request initiated by sme
+  getOpenFundRequest() {
+    this.smeDashboardServices.getOpenFundRequest().subscribe(resp => {
+      if (resp) {
+        this.getSumOfOpenFinBidding = resp;
+      }
     })
   }
-  getFundingBids() {
-    this.smeDashboardServices.getFundingBids().subscribe(resp => {
+  //get total of funcding amount  initiated by sme
+  getTotalFundingBids() {
+    this.smeDashboardServices.getTotalFundingBids().subscribe(resp => {
       this.getSumofFundingBids = resp;
     })
   }
+  //get funded amount by financier
   getFunded() {
-    this.getsumOfFunded = {
+    this.getSumOfFunded = {
       INVCCY: "SGD",
       INVTOTALAMT: 0
     }
     this.smeDashboardServices.getFunded().subscribe(resp => {
-      this.getsumOfFunded = resp;
+      this.getSumOfFunded = resp;
     })
   }
+  //function to  get today repayment due 
   getFinDueTdy() {
     this.smeDashboardServices.getFinDueTdy().subscribe(resp => {
     })
   }
+  //function to  get today repayment over due 
   getFinPastDue() {
     this.smeDashboardServices.getFinPastDue().subscribe(resp => {
     })
   }
+  // get data for Finance maturity table data
   getFinMatData() {
     this.smeDashboardServices.getFinMatData().subscribe(resp => {
       this.getFinMaturityData = resp;
     })
   }
+  // get data for Finance size table data
   getFinSizeData() {
     this.smeDashboardServices.getFinSizeData().subscribe(resp => {
       this.getFinnSizeData = resp;
@@ -163,34 +175,20 @@ export class SmeDashboardComponent implements OnInit {
   ];
   chartLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   chartColors = [
-    // {
-    //   backgroundColor: "rgba(0, 137, 132, .3)",
-    //   borderColor: "rgba(0, 10, 130, .7)",
-    // },
-    // {
-    //   backgroundColor: "#2ca92c",
-    //   borderColor: "green",
-    // },
-    // {
-    //   backgroundColor: "rgba(0, 137, 132, .3)",
-    //   borderColor: "rgba(0, 10, 130, .7)",
-    // },
     {
       backgroundColor: "rgb(105, 78, 214)",
       borderColor: "rgba(105, 96, 99, 1)",
-      },
-      {
+    },
+    {
       backgroundColor: "rgba(193, 55, 162, 1)",
       borderColor: "rgba(105, 96, 99, 1)",
-      },
-    //   {
-    //   backgroundColor: "rgba(193 55 162 1)",
-    //   borderColor: "rgba(124 73 203 1)",
-    //   }
+    }
   ];
+  //chart hover function
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
+  //get chart datas
   getChartData() {
     let FRresp;
     this.smeDashboardServices.getChartData().subscribe(resp => {
@@ -202,18 +200,18 @@ export class SmeDashboardComponent implements OnInit {
     this.smeDashboardServices.getActualFundingChartData().subscribe(AFresp => {
       this.chartData.push({ data: Object.values(AFresp), label: this.translate.instant('Actual Funding') })
     })
-
   }
-
+  //Invoice creation page navigation
   onRequestChange(type) {
     if (type == 'manual') {
       this.navigateInvoiceCreation(type)
-    }else if(type == 'repository'){
+    } else if (type == 'repository') {
       this.router.navigateByUrl('/invoice-Repository')
     } else {
       // this.router.navigateByUrl('/invoice-request/bulk')
     }
   }
+  //SME details page navigation
   navigateToSmeDetails() {
     let path = '/invoice-request/bulk'
     let data: NavigationExtras = {
@@ -225,6 +223,7 @@ export class SmeDashboardComponent implements OnInit {
     }
     this.router.navigate([path], { state: { FileData: data } });
   }
+  //Invoice request file upload function
   onFileChange(ev) {
     let workBook = null;
     let jsonData = null;
@@ -243,7 +242,7 @@ export class SmeDashboardComponent implements OnInit {
         console.log(flName, "flName")
         // console.log(ev.target.files, "ev.target.files")
         this.PDFData = data
-        console.log(data,"data")
+        console.log(data, "data")
         let fileName = {
           'fileName': file.name,
           'data': (<string>data).split(',')[1],
@@ -274,6 +273,7 @@ export class SmeDashboardComponent implements OnInit {
       reader.readAsBinaryString(file);
     }
   }
+  // function to change file format
   getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -299,6 +299,4 @@ export class SmeDashboardComponent implements OnInit {
       });
     }
   }
-
 }
-

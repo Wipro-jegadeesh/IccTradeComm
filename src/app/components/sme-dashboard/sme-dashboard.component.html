@@ -16,38 +16,36 @@
                 </button>
             </div>
         </div>
+        <!-- *******Toolbar section(funded bids,due,total funded) Section******** -->
         <ng-container>
             <div #accountList class="accounts-list">
                 <uxg-account-card class="curs-pointer"
                     name="{{'SMEDashboardComponent.Open Funding Requests' | translate}}"
                     number="{{getSumOfOpenFinBidding?.CCY || 'SGD'}} {{getSumOfOpenFinBidding?.AMOUNT? getSumOfOpenFinBidding?.AMOUNT : '0'}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.bidDetails | translate}}"
-                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancieForBidding()">
+                    [matTooltipPosition]="tooltipPosition" (click)="this.openFundReqNav()">
                 </uxg-account-card>
-
                 <uxg-account-card class="curs-pointer tile-name"
                     name="{{'SMEDashboardComponent.Funding Bids' | translate}}"
                     number="{{getSumofFundingBids?.INVCURRENCY || 'SGD'}} {{getSumofFundingBids?.AMOUNT? getSumofFundingBids?.AMOUNT : '0'}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.financeBidReceive | translate}}"
-                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateFinancierBidding()"></uxg-account-card>
-
+                    [matTooltipPosition]="tooltipPosition" (click)="this.fundingBidNav()"></uxg-account-card>
                 <uxg-account-card class="curs-pointer dash-name" name="{{'SMEDashboardComponent.Funded' | translate}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.acceptedDetails | translate}}"
-                    [matTooltipPosition]="tooltipPosition" (click)="this.navigateAcceptedFinance()"
-                    number="{{getsumOfFunded?.INVTOTALAMT? getsumOfFunded?.INVCCY + ' ' +getsumOfFunded?.INVTOTALAMT : '0'}}">
+                    [matTooltipPosition]="tooltipPosition" (click)="this.fundedBidNav()"
+                    number="{{getSumOfFunded?.INVTOTALAMT? getSumOfFunded?.INVCCY + ' ' +getSumOfFunded?.INVTOTALAMT : '0'}}">
                 </uxg-account-card>
-
                 <uxg-account-card class="curs-pointer"
                     name="{{'SMEDashboardComponent.Repayments Due Today' | translate}}" #tooltip="matTooltip"
-                    matTooltip="{{dashboardTooltips.todayDue | translate}}" (click)="this.navigateAcceptedRepayment()"
+                    matTooltip="{{dashboardTooltips.todayDue | translate}}" (click)="this.tdyRepayNav()"
                     [matTooltipPosition]="tooltipPosition" number="SGD 0"></uxg-account-card>
                 <uxg-account-card class="curs-pointer" name="{{'SMEDashboardComponent.Repayments Overdue' | translate}}"
                     #tooltip="matTooltip" matTooltip="{{dashboardTooltips.pastDue | translate}}"
-                    (click)="this.navigateRepaymentOverDue()" [matTooltipPosition]="tooltipPosition" number="SGD 0">
+                    (click)="this.overDueNav()" [matTooltipPosition]="tooltipPosition" number="SGD 0">
                 </uxg-account-card>
             </div>
         </ng-container>
-
+        <!-- **********Invoice request section********* -->
         <mat-menu #menu="matMenu">
             <div
                 [matTooltip]="this.userDetails.status === 'D' ? 'You can not access the features of ICC Tradecomm' : this.userDetails.status === 'I' ? 'You can not access the features of ICC Tradecomm' : null">
@@ -85,9 +83,8 @@
                 </button>
             </div>
         </mat-menu>
-
-        <!-- </div> -->
         <div class="wave" [inlineSVG]="'/assets/wave.svg'"></div>
+        <!-- ********Table & Chart Section -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 col-12">
