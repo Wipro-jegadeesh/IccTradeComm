@@ -1,19 +1,13 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  HostListener,
-  ViewChild,
-} from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { Component, OnInit, HostListener, ViewChild, } from "@angular/core";
+import { Router } from "@angular/router";
+import { BsModalRef } from "ngx-bootstrap/modal";
 import { MatTableDataSource } from "@angular/material/table";
 import { IccFinanceTodayServices } from "./icc-finance-today-service";
 import { BIDDINGCONSTANTS } from "../../shared/constants/constants";
 import * as moment from "moment";
 import { MatPaginator } from "@angular/material/paginator";
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invId: String;
@@ -43,22 +37,15 @@ export class IccFinanceTodayComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = [
-    'TopBar',
-  ]
-  displayedColumnsearch: string[] = [
-    'Search',
-  ]
-  displayedColumnFilter: string[] = [
-    'Filter',
-  ]
+  displayedColumnsload: string[] = ['TopBar']
+  displayedColumnsearch: string[] = ['Search']
+  displayedColumnFilter: string[] = ['Filter']
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
     'NetAmt': Number,
     'invoiceDate': String,
     'invoiceDueDate': String
-
   }
   value: number = 0;
   highValue: number = 50;
@@ -95,8 +82,7 @@ export class IccFinanceTodayComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(private fb: FormBuilder,public router: Router,private IccFinanceTodayServices: IccFinanceTodayServices) {}
-
+  constructor(private fb: FormBuilder, public router: Router, private IccFinanceTodayServices: IccFinanceTodayServices) { }
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -117,35 +103,38 @@ export class IccFinanceTodayComponent implements OnInit {
         status: "I",
       },
     ]);
-
+    /** Getting the list to display all finance today list **/
     this.IccFinanceTodayServices.getFinanceTodayLists().subscribe((resp) => {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator;
     });
   }
+  /** Constructing the empty search form ,invoked while performing search**/
   buildform() {
     this.Searchform = this.fb.group({
       invoiceRef: [''],
-      iccrefer:[''],
+      iccrefer: [''],
       smeId: ['']
     })
   }
+  /** Passing search parameter To get the search list  **/
   searchApi() {
     this.IccFinanceTodayServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
+  /** To reset the searched value and get back the list  **/
   resetApi() {
     this.Searchform.reset();
     this.buildform()
     this.IccFinanceTodayServices.getFinanceTodayLists().subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
-
     })
   }
+  /** To Hide the filter field and display the search field ,while event performed on search icon **/
   searchDiv() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -154,6 +143,7 @@ export class IccFinanceTodayComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
+  /** To Hide the search field and display the filter field, while event performed on filter icon **/
   filterDiv() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -162,6 +152,7 @@ export class IccFinanceTodayComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
+  /**To navigate to accept-details page by passing finance today  **/
   navigateInvoiceDetails(id) {
     this.router.navigateByUrl("/accepted-detail/" + id);
   }

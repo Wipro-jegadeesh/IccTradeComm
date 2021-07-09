@@ -1,17 +1,13 @@
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Validators, FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { IccGroupServices } from './icc-groups-services';
-import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { StaicDataMaintenance } from '../../shared/constants/constants'
 import { TranslateService } from '@ngx-translate/core';
-
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatPaginator } from '@angular/material/paginator';
-
-
 @Component({
   selector: 'app-icc-groups',
   templateUrl: './icc-groups.component.html',
@@ -25,11 +21,8 @@ export class IccGroupsComponent implements OnInit {
   isEdit: boolean
   groupId: any
   @ViewChild('formDirective') private formDirective: NgForm;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  displayedColumnsload: string[] = [
-    'TopBar',
+  displayedColumnsload: string[] = ['TopBar',
   ]
   displayedColumnsearch: string[] = [
     'Search',
@@ -38,14 +31,7 @@ export class IccGroupsComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    // 'invoiceRef': String,
-    // 'smeId': String,
-
-    'groupCode' : String, 'groupName' : String, 'groupDescription': String,
-    
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
+    'groupCode': String, 'groupName': String, 'groupDescription': String,
   }
   value: number = 0;
   highValue: number = 50;
@@ -66,19 +52,16 @@ export class IccGroupsComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-
   constructor(public translate: TranslateService, public router: Router, private IccGroupServices: IccGroupServices,
-    private fb: FormBuilder, private datePipe: DatePipe, private toastr: ToastrService) {
+    private fb: FormBuilder, private toastr: ToastrService) {
     this.groupsFormBuild()
   }
-
   ngOnInit(): void {
-   this.getList()
+    this.getList()
     this.buildform()
   }
-
-  getList(){
-    // this.dataSource = new MatTableDataSource([{ 'groupId': '1', 'groupCode': 'CODE123', 'groupName': 'test', 'groupDescription': 'description of group' }]);
+  /** Getting the list to display all groups **/
+  getList() {
     this.IccGroupServices.getAllGroups().subscribe(listResp => {
       if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
@@ -86,45 +69,31 @@ export class IccGroupsComponent implements OnInit {
       }
     })
   }
-
+  /** Constructing the empty search form ,invoked while performing search**/
   buildform() {
     this.Searchform = this.fb.group({
-      // invoiceRef: [''],
-      // smeId: [''],
-
       'groupCode': [''], 'groupName': [''], 'groupDescription': ['']
-      // buyerName: [''],
-      // invoiceDate: [''],
-      // invoiceDueDate: ['']
     })
   }
-
-  getSearchList(){
+  /** To display the list after passing search value **/
+  getSearchList() {
     this.IccGroupServices.search_getAllGroups(this.Searchform.value).subscribe(listResp => {
-      if (listResp) { 
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
   }
-
+  /** Invoking the search function to get the search list  **/
   searchApi() {
-    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
     this.getSearchList()
   }
+  /** To reset the searched value and get back the list  **/
   resetApi() {
     this.buildform();
-    // this.getSearchList()
     this.getList()
-    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-
-    // })
   }
+  /** To Hide the filter field and display the search field ,while event performed on search icon **/
   searchDiv() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -133,6 +102,7 @@ export class IccGroupsComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
+  /** To Hide the search field and display the filter field, while event performed on filter icon **/
   filterDiv() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -141,24 +111,16 @@ export class IccGroupsComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
+  // Building the empty form, used in Oninit function to initialize the form
   groupsFormBuild() {
     this.groupsForm = this.fb.group({
       groupCode: ['', Validators.required],
       groupName: ['', Validators.required],
       groupDescription: ['', Validators.required]
     });
-
   }
-
+  // Submitting the form and getting all the list after submission
   onSubmitgroupsForm() {
-
-    // **** Start Need to hide *****
-    // this.groupId = "";
-    // this.isEdit = false
-    // this.groupsForm.reset();
-    // End Need to hide **********
-
     if (this.groupsForm.value && this.groupsForm.status == "VALID") {
       let value = this.groupsForm.value
       if (this.isEdit) {
@@ -182,19 +144,8 @@ export class IccGroupsComponent implements OnInit {
       this.toastr.error(this.translate.instant('Please fill Mandatory fields'))
     }
   }
-
+  /** retrieving individual record based on id  and patched to the form to display  **/
   getEditData(data) {
-
-    // **** Start Need to hide *****
-    // this.isEdit = true
-    // this.groupId = 1
-    // let respData = {'groupId' : '1' ,'groupCode' : 'CODE123','groupName' : 'test', 'groupDescription' : 'description of group'}
-    // this.groupsForm.patchValue({  
-    //   groupCode : respData.groupCode,
-    //   groupName : respData.groupName,
-    //   groupDescription : respData.groupDescription
-    // })
-    // **** End Need to hide  *****
     this.IccGroupServices.getParticularGroups(data.groupId).subscribe(resp => {
       if (resp) {
         let respData = resp;
@@ -208,6 +159,4 @@ export class IccGroupsComponent implements OnInit {
       }
     })
   }
-
-  
 }
