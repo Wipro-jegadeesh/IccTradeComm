@@ -116,7 +116,7 @@
                                             <tr *ngFor="let getFinMaturityDatas of getFinMaturityData">
                                                 <td style="text-align: center;">{{getFinMaturityDatas.PERIOD}}</td>
                                                 <td style="text-align: center;">{{getFinMaturityDatas.NUMBER}}</td>
-                                                <td style="text-align: center;">{{getFinMaturityDatas.AMOUNT}}</td>
+                                                <td style="text-align: end;">{{getFinMaturityDatas.AMOUNT}}</td>
                                             </tr>
                                             <tr *ngIf="!getFinMaturityData?.length">
                                                 <td style="text-align: center;" colspan="3">{{'No Records Found' |
@@ -151,7 +151,7 @@
                                         <tr *ngFor="let getFinnSizeDatas of getFinnSizeData">
                                             <td style="text-align: center;">{{getFinnSizeDatas.INVOICE_SIZE}}</td>
                                             <td style="text-align: center;">{{getFinnSizeDatas.NUMBER}}</td>
-                                            <td style="text-align: center;">{{getFinnSizeDatas.AMOUNT}}</td>
+                                            <td style="text-align: end;">{{getFinnSizeDatas.AMOUNT}}</td>
                                         </tr>
                                         <tr *ngIf="!getFinnSizeData?.length">
                                             <td style="text-align: center;" colspan="3">{{'No Records Found' |

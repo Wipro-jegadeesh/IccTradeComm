@@ -217,9 +217,9 @@
           <mat-card-content>
             <div id="container">
               <span class="uxg-h6" id=grid>{{'Goods Details' | translate}}</span>
-              <div class="mat-elevation-z8">
                 <form [formGroup]="invoiceForm">
-                  <table class="table-responsive" mat-table [dataSource]="dataSourceTwo" style="width: 100%;"
+                  <div class="mat-elevation-z8">
+                  <table class="table-responsive inv-detail-table" mat-table [dataSource]="dataSourceTwo" summary="table of APIs" style="width: 101%;"
                     formArrayName="goodsDetails">
                     <ng-container matColumnDef="goodsId">
                       <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
@@ -350,9 +350,10 @@
                       <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                         matTooltip="{{fundingTooltip.total | translate}}" [matTooltipPosition]="tooltipPosition">
                         {{'Total' | translate}}
-                        <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid
+                        <!-- <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid
                           #tooltip="matTooltip" matTooltip="{{fundingTooltip.addGoods | translate}}"
-                          [matTooltipPosition]="tooltipPosition">+</span></th>
+                          [matTooltipPosition]="tooltipPosition">+</span> -->
+                        </th>
                       <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index"
                         class="table-md">
                         <div>
@@ -371,8 +372,8 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
                   </table>
+                </div>
                 </form>
-              </div>
             </div>
             <mat-card-actions class="ebtn">
               <span class="fill-remaining-space"></span>

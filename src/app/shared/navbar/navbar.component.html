@@ -13,17 +13,22 @@
     </ul>
     <span class="fill-remaining-space"></span>
     <div class="uxg-toolbar-actions">
-
-        <mat-form-field dense class="lang-res">
+        <button mat-button [matMenuTriggerFor]="menu" style="background: #f4f5f7;"> <i class="fas fa-globe-asia"></i>  {{'navbarComponet.Language' | translate}}<b class="caret"></b>
+        </button>
+            <mat-menu #menu="matMenu">
+                <a *ngFor="let lang of languages" (click)="setlocalstroageLanguage(lang.id);translate.use(lang.id)">
+                    <button mat-menu-item  [ngStyle]="{'color' : this.translate.store.currentLang === lang.id ? 'rgb(105 78 214)' : 'rgba(0,0,0,.54)' }">{{ lang.nativeName }} </button>
+                </a>
+            </mat-menu>
+        <!-- <mat-form-field dense class="lang-res">
             <mat-label>{{'navbarComponet.Language' | translate}}</mat-label>
             <mat-icon matPrefix>language</mat-icon>
-            <mat-select #selectedLang [value]="translate.currentLang"
-                (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
+            <mat-select #selectedLang [value]="translate.currentLang" (selectionChange)="setlocalstroageLanguage(selectedLang.value);translate.use(selectedLang.value)">
                 <mat-option *ngFor="let lang of languages" [value]="lang.id">
                     {{ lang.nativeName }}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <ul class="timedateul">
             <li class="curr-time">Time : {{currentTime}}</li>
