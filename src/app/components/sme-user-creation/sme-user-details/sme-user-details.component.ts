@@ -1,21 +1,10 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AuthenticationService } from '../../../service/authentication/authentication.service';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { FUNDINGREQUESTCONSTANTS } from '../../../shared/constants/constants';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import * as moment from 'moment';
 import { SmeUserCreationService } from '../sme-user-creation.service';
 import { ToastrService } from 'ngx-toastr';
-
-
-
 
 @Component({
   selector: 'app-sme-user-details',
@@ -24,21 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SmeUserDetailsComponent implements OnInit {
   userForm: FormGroup;
- 
- 
+
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  isOpen = ""
   mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
-  tooltipPosition= "below";
+  tooltipPosition = "below";
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  UpdateInvoiceLable: boolean;
-  invoiceDetails: any;
   id: string;
   companyId;
 
@@ -50,121 +31,65 @@ export class SmeUserDetailsComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
- 
-  dropdownSettings :IDropdownSettings = {
-  singleSelection: true,
-    idField: 'item_id',
-    textField: 'item_text',
-    allowSearchFilter: true  
-  }
- 
-
-  constructor(private activatedRoute: ActivatedRoute,public router: Router, private authenticationService: AuthenticationService, 
+  constructor(private activatedRoute: ActivatedRoute, public router: Router,
     private smeUserCreationService: SmeUserCreationService, private fb: FormBuilder,
-    private datePipe: DatePipe,private toastr:ToastrService) {
-      let userCred=JSON.parse(localStorage.getItem('userCred'))
-      this.companyId = userCred.companyId
-    this.invoiceFormBuild()  
+    private toastr: ToastrService) {
+    let userCred = JSON.parse(localStorage.getItem('userCred'))
+    this.companyId = userCred.companyId
+    this.userCreationFormBuild();
   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    if(this.id){
-      this.UserEditFormBuild()
-    }
-}
-
-
-  
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
-    } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
+    if (this.id) {
+      this.userEditFormBuild()
     }
   }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
-  }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-
-  openModal(event, template) {
-    event.preventDefault();
-  }
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
-  }
-  logout() {
-    this.authenticationService.logout()
-  }
-  
-  blurFunction(){
-    console.log(this.userForm.value.nationalId,"this.userForm.value.nationalId")
+  //function to get company details (country,state)
+  onLoadCmpyDetail() {
     this.smeUserCreationService.getUserSMEDetails(this.userForm.value.nationalId).subscribe(resp => {
-
-      if(resp){
-      this.userForm.patchValue({
-    firstName: '',
-    email:'' ,
-    lastName: '',
-    contactNo:'',
-    companyName: resp[0].companyname,
-    city: '',
-    address:'',
-    country:resp[0].country,
-    role:resp[0].role,
-    profileType:resp[0].profiletype,
-
-      });
-    }
+      if (resp) {
+        this.userForm.patchValue({
+          firstName: '',
+          email: '',
+          lastName: '',
+          contactNo: '',
+          companyName: resp[0].companyname,
+          city: '',
+          address: '',
+          country: resp[0].country,
+          role: resp[0].role,
+          profileType: resp[0].profiletype,
+        });
+      }
     })
   }
+  //submit/save function
   onSubmitUserForm() {
     try {
-      if (this.userForm.status === "INVALID"){
+      if (this.userForm.status === "INVALID") {
         throw { "mes": "Please fill mendatory  fields" }
       }
-                 if(this.id){
-                  this.smeUserCreationService.UpdateUser(this.id,this.userForm.value).subscribe(resp => {
-                    this.invoiceFormBuild();
-                    this.router.navigateByUrl('/sme-user-creation');
-          
-                  }, error => {
-                    error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
-                  })
-                }else{
-                  this.smeUserCreationService.smeUserCreation(this.userForm.value).subscribe(resp => {
-                    if(resp && resp.status == 200){
-                    this.invoiceFormBuild();
-                    this.router.navigateByUrl('/sme-user-creation');
-                    }
-                  }, error => {
-                    error && error.error && error.error.msg ?this.toastr.error(this.replaceCommaLine(error.error.msg),'',{timeOut: 4000, progressBar: true, enableHtml: true}) : this.toastr.error('Error')
-                  })
-                }
-     
+      if (this.id) {
+        this.smeUserCreationService.UpdateUser(this.id, this.userForm.value).subscribe(resp => {
+          this.userCreationFormBuild();
+          this.router.navigateByUrl('/sme-user-creation');
+
+        }, error => {
+          error && error.error && error.error.msg ? this.toastr.error(this.replaceCommaLine(error.error.msg), '', { timeOut: 4000, progressBar: true, enableHtml: true }) : this.toastr.error('Error')
+        })
+      } else {
+        this.smeUserCreationService.smeUserCreation(this.userForm.value).subscribe(resp => {
+          if (resp && resp.status == 200) {
+            this.userCreationFormBuild();
+            this.router.navigateByUrl('/sme-user-creation');
+          }
+        }, error => {
+          error && error.error && error.error.msg ? this.toastr.error(this.replaceCommaLine(error.error.msg), '', { timeOut: 4000, progressBar: true, enableHtml: true }) : this.toastr.error('Error')
+        })
+      }
     } catch (err) {
     }
   }
@@ -172,62 +97,63 @@ export class SmeUserDetailsComponent implements OnInit {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
-  UserEditFormBuild(){
+  //function to build form for user-details edit 
+  userEditFormBuild() {
     this.smeUserCreationService.getUserDetails(this.id).subscribe(resp => {
-      if(resp){
+      if (resp) {
         // this.FinancebiddingDetails = resp
-        let data=resp.userlst[0]
-        let addr=resp.addrlst[0]
+        let data = resp.userlst[0]
+        let addr = resp.addrlst[0]
         this.userForm.patchValue({
-      nationalId: data.nationalId,
-      firstName: data.firstName,
-      email: data.email ,
-      lastName: data.lastName,
-      contactNo: data.contactNo,
-      companyName: data.companyName, 
-      city: addr.city,
-      state:addr.state,
-      // ICCId: localStorage.getItem("userId"),
-      postalCode:addr.postalCode,
-      address:addr.addressLine1,
-      address1:addr.addressLine2,
-      country:data.country,
-      // groupname:['',Validators.required],
-      role:data.role,
-      profileType:data.profileType,
-      userId:data.userId 
+          nationalId: data.nationalId,
+          firstName: data.firstName,
+          email: data.email,
+          lastName: data.lastName,
+          contactNo: data.contactNo,
+          companyName: data.companyName,
+          city: addr.city,
+          state: addr.state,
+          // ICCId: localStorage.getItem("userId"),
+          postalCode: addr.postalCode,
+          address: addr.addressLine1,
+          address1: addr.addressLine2,
+          country: data.country,
+          // groupname:['',Validators.required],
+          role: data.role,
+          profileType: data.profileType,
+          userId: data.userId
         });
       }
     })
-   
+
   }
-  invoiceFormBuild() {
+  //Form build function
+  userCreationFormBuild() {
     this.userForm = this.fb.group({
       nationalId: [this.companyId, Validators.required],
       firstName: ['', Validators.required],
       email: ['', Validators.required],
       lastName: ['', Validators.required],
       contactNo: ['', Validators.required],
-      companyName: ['', Validators.required], 
+      companyName: ['', Validators.required],
       // locale: ['', Validators.required],
-      address:['',Validators.required],
-      address1:[''],
-      country:['',Validators.required],
-      state:['',Validators.required],
-      city:['',Validators.required],
-      postalCode:['',Validators.required],
+      address: ['', Validators.required],
+      address1: [''],
+      country: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      postalCode: ['', Validators.required],
       // groupname:['',Validators.required],
-      role:['',Validators.required],
-      profileType:['',Validators.required],
-      userId:['']
+      role: ['', Validators.required],
+      profileType: ['', Validators.required],
+      userId: ['']
       // language:['',Validators.required],
 
     });
-    this.blurFunction()
+    this.onLoadCmpyDetail()
   }
-  public hasError = (controlName: string, errorName: string) =>{
+  //validation function
+  public hasError = (controlName: string, errorName: string) => {
     return this.userForm.controls[controlName].hasError(errorName);
   }
-
 }
-

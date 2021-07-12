@@ -1,16 +1,13 @@
 
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
-import { ThemePalette } from '@angular/material/core';
 import { Repayment_todayServices } from './sme-repayment-today-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
   invoiceRef: String;
@@ -56,35 +53,25 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class Repayment_todayComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef', 'invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  repaymentTableHeaders: string[] = ['invoiceRef', 'invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  repaymentDataList = new MatTableDataSource(ELEMENT_DATA);
 
 
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
+  goodsTableHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsDetailsTableData = new MatTableDataSource(GOODS_DATA); //data
 
+  invoiceTableData = new MatTableDataSource(INVOICE_DATA); //data
+  invoiceTableHeaders: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
 
-
-  dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-
-  dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
+  biddingTableData = new MatTableDataSource(BIDDING_DATA); //data
   displayedColumnsThree: string[] = [
     'id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate',
     'baseCcyNetAmtPayable', 'annualYeild']
 
 
-  isOpen = ""
   mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
   modalRef: BsModalRef;
-  color: ThemePalette = 'warn';
-  ischecked = "true"
-  bidpanelOpenState = false;
+  bidPanelOpenState = false;
   moment: any = moment;
 
 
@@ -119,52 +106,29 @@ export class Repayment_todayComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  Searchform: FormGroup;
+  searchForm: FormGroup;
   public getSmeName: any = []
 
-  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_todayServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
-
-
+  constructor(private fb: FormBuilder,public router: Router,
+     private modalService: BsModalService,
+      private AcceptedFinanceServices: Repayment_todayServices) { }
 
   ngOnInit() {
-    // this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.dataSource = new MatTableDataSource([{
-      invoiceRef: '12REF',
-      buyerAddr: "Singapore",
-      buyerName: "Tata Steel",
-      dispDate: "17/03/2021",
-      id: 2,
-      invAmt: "10000",
-      invCcy: "SGD",
-      invDate: "17/03/2021",
-      invDueDate: "17/06/2021",
-      invId: "INV102",
-      smeId: "SME101",
-      status: "I"
-    }]);
-
+    this.getRepaymentDueDatas()
+  }
+  //get repayment due data list
+  getRepaymentDueDatas(){
+    this.repaymentDataList = new MatTableDataSource([]);
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-
-      // resp.forEach(element1 => {
-      //   this.getSmeName.forEach(element2 => {
-      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-      //   element1.smeId = element2.smeName
-      //   }
-      //   });
-      //   });
-      const ELEMENT_DATA: financeForBiddingData[] = resp;
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+      if(resp && resp.length){
+      this.repaymentDataList = new MatTableDataSource(resp);
+      this.repaymentDataList.paginator = this.paginator
+    }
     })
   }
-  getsmeNameId() {
-    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
-    })
-}
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -172,8 +136,9 @@ export class Repayment_todayComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  buildform() {
-    this.Searchform = this.fb.group({
+  //function to build search filter form
+  buildSearchForm() {
+    this.searchForm = this.fb.group({
       invoiceRef: [''],
       invoiceId: [''],
       smeId:[''],
@@ -182,21 +147,24 @@ export class Repayment_todayComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  searchApi() {
-    this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+  //search click function
+  onSearch() {
+    this.AcceptedFinanceServices.searchFinanceFunded(this.searchForm.value).subscribe(resp => {
+      this.repaymentDataList = new MatTableDataSource(resp);
+      this.repaymentDataList.paginator = this.paginator
     })
   }
-  resetApi() {
-    this.buildform();
+  //reset filter/search function
+  onFilterReset() {
+    this.buildSearchForm();
     this.AcceptedFinanceServices.searchFinanceFunded('').subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+      this.repaymentDataList = new MatTableDataSource(resp);
+      this.repaymentDataList.paginator = this.paginator
 
     })
   }
-  searchDiv() {
+  //show /hide search section
+  enableSearchSection() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -204,7 +172,8 @@ export class Repayment_todayComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  //show /hide filter section
+  enableFilterSection() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -212,25 +181,29 @@ export class Repayment_todayComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
+  //popup function show invoice & good details for particular invoice
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-    this.AcceptedFinanceServices.getInvoiceRequestLists(data.id).subscribe(resp => {
-      this.dataSourceTwo = new MatTableDataSource([
+    this.getInvoiceDetails(data.id)
+    this.getFinancingDetails(data.invoiceId)
+  }
+  //get invoice details
+  getInvoiceDetails(invoiceId){
+    this.AcceptedFinanceServices.getInvoiceRequestLists(invoiceId).subscribe(resp => {
+      this.invoiceTableData = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
+      this.goodsDetailsTableData = new MatTableDataSource(resp.goodsDetails);
 
     })
-    this.AcceptedFinanceServices.getAcceptedFinanceDetails(data.invoiceId).subscribe(resp => {
+  }
+  //get financing details
+  getFinancingDetails(financeId){
+    this.AcceptedFinanceServices.getAcceptedFinanceDetails(financeId).subscribe(resp => {
       if (resp) {
-        this.dataSourceThree = new MatTableDataSource(resp);
+        this.biddingTableData = new MatTableDataSource(resp);
       }
     })
   }
 }
-
-
