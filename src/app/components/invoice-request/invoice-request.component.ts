@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Validators, FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { InvoiceRequestServices } from './invoice-service';
@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 import { IccCountryServices } from '../icc-country/icc-country.services'
 import { TranslateService } from '@ngx-translate/core';
 
-
 export interface invoiceData {
   invref: any;
   invDueDate: any;
@@ -25,16 +24,13 @@ export interface invoiceData {
   invoiceDate: String;
   buyerName: String;
   InvoiceAmount: String;
-
 }
 const INVOICE_ARRAY: invoiceData[] = [];
-
 @Component({
   selector: 'app-invoice-request',
   templateUrl: './invoice-request.component.html',
   styleUrls: ['./invoice-request.component.scss']
 })
-
 export class InvoiceRequestComponent implements OnInit {
   invoiceForm: FormGroup;
   tcode: string;
@@ -53,7 +49,6 @@ export class InvoiceRequestComponent implements OnInit {
     invDueDate: "",
     invref: ""
   };
-
   hide = true;
   dataSourceTwo = new MatTableDataSource(); //data
   displayedColumnsTwo: string[] = [
@@ -70,14 +65,10 @@ export class InvoiceRequestComponent implements OnInit {
     'Total',
     'status'
   ];
-
   public deletedRowedit: any = []
-
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
-
   displayedColumns: string[] = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   isOpen = ""
   mobileScreen = false;
   end = false;
@@ -87,7 +78,6 @@ export class InvoiceRequestComponent implements OnInit {
   limit = 7;
   formArray: any;
   tooltipPosition = "below";
-
   UpdateInvoiceLable: boolean;
   invoiceIdBoolean: boolean = false
   invoiceDetails: any;
@@ -98,7 +88,6 @@ export class InvoiceRequestComponent implements OnInit {
   invoiceRefNo
   isDisabled: boolean;
   currencyAMT: string;
-
   fundingTooltip = FUNDINGREQUESTCONSTANTS;
   currencyDropdownList = [
     {
@@ -138,7 +127,6 @@ export class InvoiceRequestComponent implements OnInit {
     this.invoiceFormBuild()
     this.dataSourceTwo = new MatTableDataSource();
   }
-
   ngOnInit() { //Initially works after constructor
     this.getAllCountry()
     this.addRow();
@@ -150,66 +138,12 @@ export class InvoiceRequestComponent implements OnInit {
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role: 'Authorise' }
     this.getInvDetailsLists()
   }
-  UpdateReposInvoice(item) {
-    console.log(item,"item")
+  UpdateReposInvoice(item) { //get invoice repos and set
     this.invoiceRequestServices.getInvRepositryDetailsLists(item.RUC, item.DocumentNumber).subscribe(resp => {
-      console.log(resp)
       let data = resp
-      // let data = {
-      //   "id": 0,
-      //   "smeId": null,
-      //   "invId": "001-019-000098259",
-      //   "invref": null,
-      //   "invAmt": "30.24",
-      //   "invCcy": "USD",
-      //   "buyerName": "GARCIA BENITEZ ANDREA MARIA",
-      //   "buyerAddr": null,
-      //   "addressLine1": null,
-      //   "addressLine2": null,
-      //   "city": null,
-      //   "companyName": null,
-      //   "email": "agb_andrea@yahoo.com.ar",
-      //   "phoneNo": "0995092960",
-      //   "postalCode": null,
-      //   "buyerScore": null,
-      //   "invDate": "15/06/2021",
-      //   "invDueDate": "6/16/2021 12 00 00 AM",
-      //   "billNo": null,
-      //   "dispDate": null,
-      //   "baseAmt": null,
-      //   "baseCcy": null,
-      //   "fxRate": null,
-      //   "source": null,
-      //   "smeRating": null,
-      //   "transactionRating": null,
-      //   "status": null,
-      //   "smeProfileId": null,
-      //   "financierProfileId": null,
-      //   "buyerUEN": "1709155632001",
-      //   "goodsDetails": [
-      //       {
-      //           "key97": 0,
-      //           "goodsId": "F792",
-      //           "descGoods": null,
-      //           "quantity": "1.00000",
-      //           "quantityType": null,
-      //           "rate": "27.00",
-      //           "amt": "27.00",
-      //           "amtCcy": null,
-      //           "discAmt": "0.00",
-      //           "netAmtPay": "27.00",
-      //           "taxRate": "12.00",
-      //           "taxAmt": "27.00",
-      //           "total": "3.24",
-      //           "status": "Active"
-      //       }
-      //   ]
-      // }
-      console.log(data, "data")
       this.invoiceIdBoolean = true;
       this.dateFormArray.controls = [];
       this.invoiceDetails = data
-      console.log(this.invoiceDetails, " this.invoiceDetails")
       this.invoiceForm.patchValue({
         invId: data.invId,
         billNo: data.billNo,
@@ -276,17 +210,15 @@ export class InvoiceRequestComponent implements OnInit {
         this.dateFormArray.push(row);
       }
       this.dataSourceTwo.data = this.dateFormArray.controls;
-    }, error => {
     })
   }
-  getInvDetailsLists() {
+  getInvDetailsLists() { //Get invoice details 
     this.invoiceRequestServices.getInvDetailsLists().subscribe(resp => {
       const INVOICE_ARRAY: invoiceData[] = resp;
       this.dataSource = new MatTableDataSource(INVOICE_ARRAY);
-    }, error => {
     })
   }
-  addRow() {
+  addRow() { //add extra row when click plus icon
     this.dataSourceTwo.filter = "";
     const row = this.fb.group({
       ID: this.invoiceID,
@@ -307,7 +239,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.dateFormArray.push(row);
     this.dataSourceTwo.data = this.dateFormArray.controls;
   }
-  repositoryFetch() {
+  repositoryFetch() {//navigate repository page with data
     let path = '/invoice-Repository'
     let data: NavigationExtras = {
       queryParams: {
@@ -317,13 +249,13 @@ export class InvoiceRequestComponent implements OnInit {
     }
     this.router.navigate([path], { state: { FileData: data } });
   }
-  public setTwoNumberDecimal($event, name) {
+  public setTwoNumberDecimal($event, name) { //number field validation for demimal restriction
     if (this.chkDecimalLength($event.target.value) >= 2) {
       $event.target.value = parseFloat($event.target.value).toFixed(2);
       this.invoiceForm.patchValue({ [name]: parseFloat($event.target.value).toFixed(2) })
     }
   }
-  public setGoodsDetails_TwoNumberDecimal($event, name, index) {
+  public setGoodsDetails_TwoNumberDecimal($event, name, index) { //decimal validation for goods number fields
     if (Number.isInteger(Number($event.target.value))) { // not an decimal
       this.invoiceForm.value.goodsDetails[index][name] = $event.target.value
       this.changeRowgrid(index)
@@ -333,11 +265,11 @@ export class InvoiceRequestComponent implements OnInit {
       this.changeRowgrid(index)
     }
   }
-  chkDecimalLength(value) {
+  chkDecimalLength(value) { //to check the decimal length
     if (Math.floor(value) === value) return 0;
     return value.toString().split(".")[1].length || 0;
   }
-  changeRowgrid(index) {
+  changeRowgrid(index) { //calls when changing input fields for calculation
     this.invoiceForm.value.goodsDetails[index]["ID"] = this.invoiceID
     this.invoiceForm.value.goodsDetails[index]["amt"] = parseInt(this.invoiceForm.value.goodsDetails[index]["rate"]) * parseInt(this.invoiceForm.value.goodsDetails[index]["quantity"]) ? Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["rate"])) * Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["quantity"])) : "0"
     this.invoiceForm.value.goodsDetails[index]["netAmtPay"] = parseInt(this.invoiceForm.value.goodsDetails[index]["amt"]) - parseInt(this.invoiceForm.value.goodsDetails[index]["discAmt"]) ? (Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["amt"])) - Number(parseFloat(this.invoiceForm.value.goodsDetails[index]["discAmt"]))).toFixed(2) : '0'
@@ -347,7 +279,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.dateFormArray.patchValue(this.invoiceForm.value.goodsDetails);
   }
 
-  getAllCountry() {
+  getAllCountry() { //To get all country list
     this.IccCountryServices.getAllcountry().subscribe(resp => {
       let countryArray = []
       resp && resp.map(item => {
@@ -358,11 +290,11 @@ export class InvoiceRequestComponent implements OnInit {
       this.nonFilterOptions = countryArray
     })
   }
-  onKey(value) {
+  onKey(value) { //to get searched value
     this.optionDatas = this.search(value);
   }
 
-  search(value: string) {
+  search(value: string) { //to get datas based on typing on search field
     if (value == "") {
       this.optionDatas = this.nonFilterOptions
       return this.optionDatas
@@ -384,7 +316,7 @@ export class InvoiceRequestComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  authoriseInvoice() {
+  authoriseInvoice() { //to update invoice with score check
     let invoiceIds = []
     let scoreCheck = false
     for (let i = 0; i < this.selection.selected.length; i++) {
@@ -408,13 +340,12 @@ export class InvoiceRequestComponent implements OnInit {
       this.selection.selected.length ? this.toastr.error('Your score is less to authorize') : this.toastr.error(this.translate.instant('Please select invoice details'))
     }
   }
-  updateInvoice(invoiceIds) {
+  updateInvoice(invoiceIds) {//update api call here
     this.toastr.success(this.translate.instant('Selected Invoices has been Authorized'));
     this.invoiceRequestServices.authoriseInvoice(invoiceIds.toString()).subscribe(resp => {
       this.getInvDetailsLists();
       this.dataSourceTwo.data = []
       this.invoiceFormBuild();
-    }, error => {
     })
 
     let reqParams = []
@@ -451,7 +382,7 @@ export class InvoiceRequestComponent implements OnInit {
       this.getInvDetailsLists();
     })
   }
-  UpdateInvoice(data) {
+  UpdateInvoice(data) { //good details handle with new rows
     this.invoiceIdBoolean = true;
     this.dateFormArray.controls = [];
     this.addRow()
@@ -524,10 +455,10 @@ export class InvoiceRequestComponent implements OnInit {
     this.dataSourceTwo.data = this.dateFormArray.controls;
     this.UpdateInvoiceLable = true
   }
-  delete(index) {
+  delete(index) { // remove row from goods details
     this.dateFormArray.removeAt(index)
   }
-  onSubmitInvoiceForm() {
+  onSubmitInvoiceForm() { //update invoice request with score update
     let grandtotal = 0;
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : {}
     this.invoiceForm.value.goodsDetails.forEach(element => {
@@ -563,7 +494,6 @@ export class InvoiceRequestComponent implements OnInit {
       }
       params['invoiceDetails'].goodsDetails[0].netAmtPay = parseInt(params['invoiceDetails'].goodsDetails[0].netAmtPay)
       params['invoiceDetails'].goodsDetails[0].total = parseInt(params['invoiceDetails'].goodsDetails[0].total)
-
       if (this.UpdateInvoiceLable === true) {
         let buyerDetails = this.sendBuyerDetails(this.invoiceRefNo)
         this.invoiceRequestServices.submitBuyerDetails(buyerDetails).subscribe(resp => {
@@ -584,7 +514,6 @@ export class InvoiceRequestComponent implements OnInit {
               this.UpdateInvoiceLable = false
               this.addRow()
               this.getInvDetailsLists();
-            }, error => {
             })
 
           }
@@ -697,7 +626,7 @@ export class InvoiceRequestComponent implements OnInit {
     }
   }
 
-  sendBuyerDetails(invoiceNo) {
+  sendBuyerDetails(invoiceNo) { //to send respective object based on invoice number
     let userCred = JSON.parse(localStorage.getItem('userCred'))
     let formValues = this.invoiceForm.value
     let buyerSubmitObj = {
@@ -723,15 +652,15 @@ export class InvoiceRequestComponent implements OnInit {
     }
     return buyerSubmitObj;
   }
-  replaceCommaLine(data) {
+  replaceCommaLine(data) { //remove comma seperator from data
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
-  get dateFormArray(): FormArray {
+  get dateFormArray(): FormArray { //geeting goods details
     return this.invoiceForm.get('goodsDetails') as FormArray;
   }
 
-  invoiceFormBuild() {
+  invoiceFormBuild() { //initially set formbuild for forms
     this.invoiceForm = this.fb.group({
       invDueDate: ['', Validators.required],
       invId: ['', Validators.required],
@@ -754,70 +683,19 @@ export class InvoiceRequestComponent implements OnInit {
       companyName: ['', Validators.required]
     });
   }
-  updateInvoiceId(event) {
+  updateInvoiceId(event) { //update respective value
     this.invoiceID = event.target.value;
   }
-  updateCurrency(event) {
+  updateCurrency(event) {//update respective value
     this.currencyName = event.target.value
   }
-  updateInvoicedate(event) {
+  updateInvoicedate(event) {//update respective value
     this.InvoiceFdate = event.target.value;
   }
-  invoiceId(Id) {
+  invoiceId(Id) {//update respective value
     this.invoiceID = Id
   }
-  // removeRow(index) {
-  //   let removeEntry = this.dataSourceTwo.data
-  //  this.invoiceForm.value.goodsDetails.splice(index, 1)
-  //    removeEntry.splice(index, 1)
-  //   this.dataSourceTwo.data = removeEntry
-  // }
-  // removeRow(index) {
-  //   if (this.invoiceIdBoolean) {
-  //     if (this.invoiceForm.value.goodsDetails[index].status) {
-  //       let removeEntry = this.dataSourceTwo.data
-  //       this.invoiceForm.value.goodsDetails[index]["status"] = "delete"
-  //       this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
-  //       removeEntry.splice(index, 1);
-  //       this.dataSourceTwo.data = removeEntry
-  //     } else {
-  //       let removeEntry = this.dataSourceTwo.data
-  //       this.invoiceForm.value.goodsDetails.splice(index, 1)
-  //       removeEntry.splice(index, 1)
-  //       this.dataSourceTwo.data = removeEntry
-  //     }
-
-  //   } else {
-  //     let removeEntry = this.dataSourceTwo.data
-  //     this.invoiceForm.value.goodsDetails.splice(index, 1)
-  //     removeEntry.splice(index, 1)
-  //     this.dataSourceTwo.data = removeEntry
-  //   }
-  // }
-  removeRo1w(index) {
-    if (this.invoiceIdBoolean) {
-      if (this.invoiceForm.value.goodsDetails[index].status == 'active') {
-        let removeEntry = this.dataSourceTwo.data
-        this.invoiceForm.value.goodsDetails[index]["status"] = "Deleted"
-        this.deletedRowedit.push(this.invoiceForm.value.goodsDetails[index]);
-        this.invoiceForm.value.goodsDetails.splice(index, 1)
-        removeEntry.splice(index, 1);
-        this.dataSourceTwo.data = removeEntry
-      } else {
-        let removeEntry = this.dataSourceTwo.data
-        this.invoiceForm.value.goodsDetails.splice(index, 1)
-        removeEntry.splice(index, 1)
-        this.dataSourceTwo.data = removeEntry
-      }
-
-    } else {
-      let removeEntry = this.dataSourceTwo.data
-      this.invoiceForm.value.goodsDetails.splice(index, 1)
-      removeEntry.splice(index, 1)
-      this.dataSourceTwo.data = removeEntry
-    }
-  }
-  removeRow(index) {
+  removeRow(index) { //remove row
     if (this.invoiceIdBoolean) {
       if (this.invoiceForm.value.goodsDetails[index].status == 'active' || this.invoiceForm.value.goodsDetails[index].status == 'Active') {
         let removeEntry = this.dataSourceTwo.data
@@ -840,7 +718,7 @@ export class InvoiceRequestComponent implements OnInit {
       this.dataSourceTwo.data = removeEntry
     }
   }
-  clear() {
+  clear() { //to clear filled data and reset like new form
     this.currencyName = ''
     this.invoiceID = ''
     this.InvoiceFdate = ''

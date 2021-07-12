@@ -16,7 +16,8 @@
                       class="mat-focus-indicator mat-badge mat-raised-button mat-button-base mat-primary mat-badge-accent mat-badge-overlap mat-badge-above mat-badge-before mat-badge-medium matButton"><span
                         class="mat-button-wrapper"> Score </span><span matripple=""
                         class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span><span
-                        id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score :0}}</span>
+                        id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score
+                        :0}}</span>
                     </button>
                   </p>
                 </div>
@@ -71,7 +72,9 @@
                       <mat-label>{{'Funding Request Date' | translate}} </mat-label>
                       <input matInput readonly="true" [matDatepicker]="picker" formControlName="invDate"
                         (dateInput)="updateInvoicedate($event)">
-                      <mat-datepicker-toggle [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false" matSuffix [for]="picker">
+                      <mat-datepicker-toggle
+                        [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false"
+                        matSuffix [for]="picker">
                       </mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -82,7 +85,9 @@
                     <mat-form-field dense>
                       <mat-label>{{'Funding Request Due Date' | translate}} </mat-label>
                       <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" />
-                      <mat-datepicker-toggle [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false" matSuffix [for]="pickers">
+                      <mat-datepicker-toggle
+                        [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false"
+                        matSuffix [for]="pickers">
                       </mat-datepicker-toggle>
                       <mat-datepicker #pickers></mat-datepicker>
                     </mat-form-field>
@@ -91,8 +96,9 @@
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.billNo && this.isDisabled }">
                       <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false" matInput
-                        formControlName="billNo" />
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false"
+                        matInput formControlName="billNo" />
                       <mat-icon class="info_icon" matSuffix #tooltip="matTooltip"
                         matTooltip="{{fundingTooltip.billInfo | translate}}" [matTooltipPosition]="'below'">info
                       </mat-icon>
@@ -102,7 +108,9 @@
                     <mat-form-field dense>
                       <mat-label>{{'Date of Dispatch' | translate}}</mat-label>
                       <input matInput [matDatepicker]="picker1" formControlName="dispDate" />
-                      <mat-datepicker-toggle [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false" matSuffix [for]="picker1">
+                      <mat-datepicker-toggle
+                        [disabled]="this.invoiceDetails && this.invoiceDetails.billNo ? this.isDisabled : false"
+                        matSuffix [for]="picker1">
                       </mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
@@ -122,33 +130,40 @@
               <tbody>
                 <tr>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.buyerName && this.isDisabled}">
+                    <mat-form-field dense
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.buyerName && this.isDisabled}">
                       <mat-label> {{'Buyer Name' | translate}} </mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.buyerName ? this.isDisabled : false" matInput
-                        formControlName="buyerName" />
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.buyerName ? this.isDisabled : false"
+                        matInput formControlName="buyerName" />
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.buyerUEN && this.isDisabled}">
+                    <mat-form-field dense
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.buyerUEN && this.isDisabled}">
                       <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.buyerUEN ? this.isDisabled : false" matInput
-                        formControlName="buyerUEN" />
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.buyerUEN ? this.isDisabled : false"
+                        matInput formControlName="buyerUEN" />
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.companyName && this.isDisabled}">
                       <mat-label>Contact Name</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.companyName ? this.isDisabled : false" matInput
-                        formControlName="companyName" />
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.companyName ? this.isDisabled : false"
+                        matInput formControlName="companyName" />
                     </mat-form-field>
                   </td>
                 </tr>
                 <tr>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.email && this.isDisabled}">
+                    <mat-form-field dense
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.email && this.isDisabled}">
                       <mat-label>{{'Email' | translate}}</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.email ? this.isDisabled : false" matInput
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.email ? this.isDisabled : false" matInput
                         formControlName="email" />
                     </mat-form-field>
                   </td>
@@ -157,7 +172,8 @@
                     <mat-form-field floatLabel="never" dense appearance="fill" class=""
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.phoneNo && this.isDisabled}">
                       <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
-                      <input type="number" matInput [readonly]="this.invoiceDetails && this.invoiceDetails.phoneNo ? this.isDisabled : false"
+                      <input type="number" matInput
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.phoneNo ? this.isDisabled : false"
                         formControlName="phoneNo" />
                     </mat-form-field>
                   </td>
@@ -166,7 +182,8 @@
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.addressLine1 && this.isDisabled}">
                       <mat-label>Address Line 1</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails &&this.invoiceDetails.addressLine1 ? this.isDisabled : false"
+                      <input type="text"
+                        [readonly]="this.invoiceDetails &&this.invoiceDetails.addressLine1 ? this.isDisabled : false"
                         matInput formControlName="addressLine1" />
                     </mat-form-field>
                   </td>
@@ -176,7 +193,8 @@
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.addressLine2 && this.isDisabled}">
                       <mat-label>Address Line 2</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.addressLine1 ? this.isDisabled : false"
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.addressLine1 ? this.isDisabled : false"
                         matInput formControlName="addressLine2" />
                     </mat-form-field>
                   </td>
@@ -184,14 +202,17 @@
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.postalCode && this.isDisabled}">
                       <mat-label>Postal Code</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.postalCode ? this.isDisabled : false" matInput
-                        formControlName="postalCode" />
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.postalCode ? this.isDisabled : false"
+                        matInput formControlName="postalCode" />
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
-                    <mat-form-field dense [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.city && this.isDisabled}">
+                    <mat-form-field dense
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.city && this.isDisabled}">
                       <mat-label>City</mat-label>
-                      <input type="text" [readonly]="this.invoiceDetails && this.invoiceDetails.city ? this.isDisabled : false" matInput
+                      <input type="text"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.city ? this.isDisabled : false" matInput
                         formControlName="city" />
                     </mat-form-field>
                   </td>
@@ -217,10 +238,10 @@
           <mat-card-content>
             <div id="container">
               <span class="uxg-h6" id=grid>{{'Goods Details' | translate}}</span>
-                <form [formGroup]="invoiceForm">
-                  <div class="mat-elevation-z8">
-                  <table class="table-responsive inv-detail-table" mat-table [dataSource]="dataSourceTwo" summary="table of APIs" style="width: 101%;"
-                    formArrayName="goodsDetails">
+              <form [formGroup]="invoiceForm">
+                <div class="mat-elevation-z8">
+                  <table class="table-responsive inv-detail-table" mat-table [dataSource]="dataSourceTwo"
+                    summary="table of APIs" style="width: 101%;" formArrayName="goodsDetails">
                     <ng-container matColumnDef="goodsId">
                       <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                         matTooltip="{{fundingTooltip.goodsId | translate}}" [matTooltipPosition]="tooltipPosition">
@@ -230,20 +251,6 @@
                           required>
                       </td>
                     </ng-container>
-                    <!-- <ng-container matColumnDef="ID" >
-                    <th mat-header-cell *matHeaderCellDef scope="column"  #tooltip="matTooltip"
-                    matTooltip="{{fundingTooltip.id | translate}}"
-                    [matTooltipPosition]="tooltipPosition"> ID</th>
-                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index" >
-                      <input matInput 
-                      type="text" 
-                      formControlName="ID" 
-                      placeholder="ID" 
-                      readonly
-                      value="{{invoiceID}}"
-                      >
-                    </td>
-                  </ng-container> -->
                     <ng-container matColumnDef="DescGoods">
                       <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                         matTooltip="{{fundingTooltip.desc | translate}}" [matTooltipPosition]="tooltipPosition">
@@ -350,10 +357,7 @@
                       <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                         matTooltip="{{fundingTooltip.total | translate}}" [matTooltipPosition]="tooltipPosition">
                         {{'Total' | translate}}
-                        <!-- <span class="add-good-plusbtn" mat-flat-button color="primary" (click)=addRow() id=grid
-                          #tooltip="matTooltip" matTooltip="{{fundingTooltip.addGoods | translate}}"
-                          [matTooltipPosition]="tooltipPosition">+</span> -->
-                        </th>
+                      </th>
                       <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index"
                         class="table-md">
                         <div>
@@ -373,7 +377,7 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
                   </table>
                 </div>
-                </form>
+              </form>
             </div>
             <mat-card-actions class="ebtn">
               <span class="fill-remaining-space"></span>
@@ -430,7 +434,7 @@
 
               <td mat-cell *matCellDef="let element">
                 {{element && element.invId}}
-          
+
               </td>
             </ng-container>
             <mat-checkbox name="box"></mat-checkbox>
@@ -438,7 +442,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
                 matTooltip="{{fundingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="tooltipPosition">
                 {{'Invoice Date' | translate}}</th>
-              <td mat-cell *matCellDef="let element">{{element.invDate  | date: 'dd/MM/yyyy'}}</td>
+              <td mat-cell *matCellDef="let element">{{element.invDate | date: 'dd/MM/yyyy'}}</td>
             </ng-container>
             <ng-container matColumnDef="Seller">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
