@@ -195,7 +195,7 @@ export const INVOICEDETAILSCONSTANTS={
     'invoiceDueDate':'Invoice Due Date',
     'authorize':'Authorize Invoice'
 }
-
+//Static page tooltips
 export const StaicDataMaintenance={
     'groupCode' : 'Group Code',
     'group' : 'Group',
@@ -209,11 +209,19 @@ export const StaicDataMaintenance={
     'countrycode3':'countrycode3',
     'numeric':'numeric'
 }
-
-
+//country module tooltips
 export const CountryModule={
     'country' : 'Country',
     'countrycode2' : 'countrycode(2 digit)',
     'countrycode3' : 'countrycode(3 digit)',
     'numeric' : 'numeric'
+}
+export const SMEUSERCREATIONCONSTANTS={
+    'userId':'User Id',
+    'firstName':'First Name',
+    'lastName':'LastName',
+    'companyName':'Company Name',
+    'emailId':'Email Id',
+    'phoneNumber':'Phone Number',
+    'action':'Action'
 }

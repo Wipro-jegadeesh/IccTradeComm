@@ -1,198 +1,192 @@
-
-
-
-<div class="app-content {{isOpen}} ">
-    <header>
-      <div class="data-section">
-        <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitUserForm()">
-            <div class="row dis-block">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="National ID​">Company Register ID​
-                      </label> -->
-                      <mat-form-field dense>
-                        <mat-label> {{'UserCreation.CompanyRegisterId' | translate}}</mat-label>
-                        <input type="text" (blur)="blurFunction()" onblur="blurFunction()" placeholder="{{'UserCreation.CompanyRegisterId' | translate}}" matInput formControlName="nationalId" />
-                        <mat-error *ngIf="hasError('nationalId', 'required')"> {{'UserCreation.EnterRegisterId' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="First name​">Company name​
-                      </label> -->
-                      <mat-form-field dense>
-                        <mat-label> {{'UserCreation.CompanyName' | translate}}</mat-label>
-                        <mat-icon matPrefix>business</mat-icon>
-                        <input type="text" matInput placeholder="{{'UserCreation.CompanyName' | translate}}" formControlName="companyName" />
-                        <mat-error *ngIf="hasError('companyName', 'required')"> {{'UserCreation.EnterCompanyName' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <!-- <label for="Country​">Country
-                      </label> -->
-                      <mat-form-field dense>
-                        <mat-label> {{'UserCreation.Country' | translate}}</mat-label>
-                        <mat-icon matPrefix>flag</mat-icon>
-                        <input type="text" matInput placeholder="{{'UserCreation.Country' | translate}}" formControlName="country" />
-                        <mat-error *ngIf="hasError('country', 'required')">{{'EnterCountry.EnterCompanyName' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-            </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-                <div class="form-group">
-                  <!-- <label for="National ID​">Email Id
-                  </label> -->
-                  <mat-form-field dense>
-                    <mat-label> {{'UserCreation.EmailId' | translate}}</mat-label>
-                    <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.EmailId' | translate}}" formControlName="email" name="emailId" />
-                    <mat-error *ngIf="hasError('email', 'required')">{{'UserCreation.EnterEmail' | translate}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="First name​">First name​
-                </label> -->
-                <mat-form-field dense>
-                  <mat-label>{{'UserCreation.FirstName' | translate}}</mat-label>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" placeholder="{{'UserCreation.FirstName' | translate}}" matInput formControlName="firstName" name="firstName" />
-                  <mat-error *ngIf="hasError('firstName', 'required')">{{'UserCreation.EnterFirstName' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="First name​">Last name​
-                </label> -->
-                <mat-form-field dense>
-                  <mat-label> {{'UserCreation.LastName' | translate}}</mat-label>
-                  <mat-icon matPrefix>person</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.LastName' | translate}}" formControlName="lastName" name="lastName" />
-                  <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.Enterlastname' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
-  
+<div class="app-content">
+  <header>
+    <div class="data-section">
+      <form [formGroup]="userForm" autocomplete="off" (ngSubmit)="onSubmitUserForm()">
+        <div class="row dis-block">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.CompanyRegisterId' | translate}}</mat-label>
+                <input type="text" (blur)="onLoadCmpyDetail()" onblur="onLoadCmpyDetail()"
+                  placeholder="{{'UserCreation.CompanyRegisterId' | translate}}" matInput
+                  formControlName="nationalId" />
+                <mat-error *ngIf="hasError('nationalId', 'required')"> {{'UserCreation.EnterRegisterId' | translate}}
+                </mat-error>
+              </mat-form-field>
             </div>
           </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <!-- <label for="National ID​">Phone Number</label> -->
-                <mat-form-field dense>
-                  <mat-label> {{'UserCreation.PhoneNumber' | translate}}</mat-label>
-                  <mat-icon matPrefix>call</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.PhoneNumber' | translate}}" formControlName="contactNo" name="phoneNo" />
-                  <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNumber' | translate}}</mat-error>
-                </mat-form-field>
-              </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.CompanyName' | translate}}</mat-label>
+                <mat-icon matPrefix>business</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.CompanyName' | translate}}"
+                  formControlName="companyName" />
+                <mat-error *ngIf="hasError('companyName', 'required')"> {{'UserCreation.EnterCompanyName' | translate}}
+                </mat-error>
+              </mat-form-field>
             </div>
-            <div class="col-sm-4">
-                <!-- <label for="Address">Address 1</label> -->
-                <div class="form-group">
-                <mat-form-field dense>
-                  <mat-label> {{'UserCreation.Addr1' | translate}}</mat-label>
-                  <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.Addr1' | translate}}" formControlName="address" name="address" />
-                  <mat-error *ngIf="hasError('address', 'required')"> {{'UserCreation.EnterAddr1' | translate}}</mat-error>
-                </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.Country' | translate}}</mat-label>
+                <mat-icon matPrefix>flag</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.Country' | translate}}"
+                  formControlName="country" />
+                <mat-error *ngIf="hasError('country', 'required')">{{'EnterCountry.EnterCompanyName' | translate}}
+                </mat-error>
+              </mat-form-field>
             </div>
-              </div>
-              <div class="col-sm-4">
-                <!-- <label for="Address">Address 2</label> -->
-                <div class="form-group">
-                <mat-form-field dense>
-                  <mat-label> {{'UserCreation.Addr2' | translate}}</mat-label>
-                  <mat-icon matPrefix>home</mat-icon>
-                  <input type="text" matInput placeholder="{{'UserCreation.Addr2' | translate}}" formControlName="address1" name="address1" />
-                  <mat-error *ngIf="hasError('address1', 'required')"> {{'UserCreation.EnterAddr2' | translate}}</mat-error>
-                </mat-form-field>
+          </div>
+        </div>
+        <div class="row dis-block">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.EmailId' | translate}}</mat-label>
+                <mat-icon matPrefix>email</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.EmailId' | translate}}" formControlName="email"
+                  name="emailId" />
+                <mat-error *ngIf="hasError('email', 'required')">{{'UserCreation.EnterEmail' | translate}}</mat-error>
+              </mat-form-field>
             </div>
-              </div>
           </div>
-          <div class="row dis-block">
-            <div class="col-sm-4">
-                <div class="form-group">
-                  <!-- <label for="Locale">State</label> -->
-                  <mat-form-field dense>
-                    <mat-label> {{'UserCreation.State' | translate}}</mat-label>
-                    <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.State' | translate}}" formControlName="state" name="state" />
-                    <mat-error *ngIf="hasError('state', 'required')"> {{'UserCreation.EnterState' | translate}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <!-- <label for="Locale">City</label> -->
-                  <mat-form-field dense>
-                    <mat-label> {{'UserCreation.City' | translate}}</mat-label>
-                    <mat-icon matPrefix>add_location</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.City' | translate}}" formControlName="city" name="city" />
-                    <mat-error *ngIf="hasError('city', 'required')"> {{'UserCreation.EnterCity' | translate}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <!-- <label for="Locale">Postal Code</label> -->
-                  <mat-form-field dense>
-                    <mat-label> {{'UserCreation.PostalCode' | translate}}</mat-label>
-                    <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput placeholder="{{'UserCreation.PostalCode' | translate}}" formControlName="postalCode" name="postalCode" />
-                    <mat-error *ngIf="hasError('postalCode', 'required')"> {{'UserCreation.EnterPostalCode' | translate}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label>{{'UserCreation.FirstName' | translate}}</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input type="text" placeholder="{{'UserCreation.FirstName' | translate}}" matInput
+                  formControlName="firstName" name="firstName" />
+                <mat-error *ngIf="hasError('firstName', 'required')">{{'UserCreation.EnterFirstName' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
-          <div class="row dis-block">
-                 
-                     <div class="col-sm-4">
-                        <div class="form-group">
-                           <!-- <label for="First name​">Group
-                           </label> -->
-                           <mat-form-field dense>
-                               <mat-label> {{'UserCreation.Group' | translate}}</mat-label>
-                              <mat-select formControlName="profileType">
-                                <mat-option>None</mat-option>
-                                <mat-option value="SME">SME</mat-option>
-                                <mat-option value="ICC">ICC</mat-option>
-                                <mat-option value="FINANCE">FINANCE</mat-option>
-                              </mat-select>
-                              <mat-error *ngIf="hasError('profileType', 'required')"> {{'UserCreation.EnterGroup' | translate}}</mat-error>
-                           </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                           <!-- <label for="First name​">Role
-                           </label> -->
-                           <mat-form-field dense>
-                               <mat-label> {{'UserCreation.Role' | translate}}</mat-label>
-                              <mat-select formControlName="role">
-                                <mat-option>None</mat-option>
-                                <mat-option value="Input">Input</mat-option>
-                                <mat-option value="Authorise">Authorise</mat-option>
-                              </mat-select>
-                              <mat-error *ngIf="hasError('role', 'required')"> {{'UserCreation.EnterRole' | translate}}</mat-error>
-                           </mat-form-field>
-                        </div>
-                   
-                    </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.LastName' | translate}}</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.LastName' | translate}}"
+                  formControlName="lastName" name="lastName" />
+                <mat-error *ngIf="hasError('email', 'required')"> {{'UserCreation.Enterlastname' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
-                <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
-                        <button mat-raised-button color="primary" name="submit"> {{'Submit' | translate}}</button>
-                        <button type="button" mat-raised-button color="warn" routerLink='/sme-user-creation'> {{'Cancel' | translate}}</button>
-                </div>
+        </div>
+        <div class="row dis-block">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.PhoneNumber' | translate}}</mat-label>
+                <mat-icon matPrefix>call</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.PhoneNumber' | translate}}"
+                  formControlName="contactNo" name="phoneNo" />
+                <mat-error *ngIf="hasError('contactNo', 'required')"> {{'UserCreation.EnterPhoneNumber' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.Addr1' | translate}}</mat-label>
+                <mat-icon matPrefix>home</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.Addr1' | translate}}" formControlName="address"
+                  name="address" />
+                <mat-error *ngIf="hasError('address', 'required')"> {{'UserCreation.EnterAddr1' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.Addr2' | translate}}</mat-label>
+                <mat-icon matPrefix>home</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.Addr2' | translate}}"
+                  formControlName="address1" name="address1" />
+                <mat-error *ngIf="hasError('address1', 'required')"> {{'UserCreation.EnterAddr2' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row dis-block">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.State' | translate}}</mat-label>
+                <mat-icon matPrefix>add_location</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.State' | translate}}" formControlName="state"
+                  name="state" />
+                <mat-error *ngIf="hasError('state', 'required')"> {{'UserCreation.EnterState' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.City' | translate}}</mat-label>
+                <mat-icon matPrefix>add_location</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.City' | translate}}" formControlName="city"
+                  name="city" />
+                <mat-error *ngIf="hasError('city', 'required')"> {{'UserCreation.EnterCity' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.PostalCode' | translate}}</mat-label>
+                <mat-icon matPrefix>local_shipping</mat-icon>
+                <input type="text" matInput placeholder="{{'UserCreation.PostalCode' | translate}}"
+                  formControlName="postalCode" name="postalCode" />
+                <mat-error *ngIf="hasError('postalCode', 'required')"> {{'UserCreation.EnterPostalCode' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row dis-block">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.Group' | translate}}</mat-label>
+                <mat-select formControlName="profileType">
+                  <mat-option>None</mat-option>
+                  <mat-option value="SME">SME</mat-option>
+                  <mat-option value="ICC">ICC</mat-option>
+                  <mat-option value="FINANCE">FINANCE</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('profileType', 'required')"> {{'UserCreation.EnterGroup' | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <mat-form-field dense>
+                <mat-label> {{'UserCreation.Role' | translate}}</mat-label>
+                <mat-select formControlName="role">
+                  <mat-option>None</mat-option>
+                  <mat-option value="Input">Input</mat-option>
+                  <mat-option value="Authorise">Authorise</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('role', 'required')"> {{'UserCreation.EnterRole' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="padding-bottom: inherit;justify-content: flex-end;">
+          <button mat-raised-button color="primary" name="submit"> {{'Submit' | translate}}</button>
+          <button type="button" mat-raised-button color="warn" routerLink='/sme-user-creation'> {{'Cancel' |
+            translate}}</button>
+        </div>
       </form>
-  
-      </div>
-    </header>
-  </div>
-  
+    </div>
+  </header>
+</div>
