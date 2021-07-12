@@ -5,6 +5,7 @@ import { SmeDashboardServices } from './sme-dashboard-service';
 import { DASHBOARDCONSTANTS } from '../../shared/constants/constants';
 import { COMMONCONSTANTS } from '../../shared/constants/constants';
 import { TranslateService } from '@ngx-translate/core';
+import { MatTableDataSource } from '@angular/material/table';
 import * as XLSX from "xlsx";
 import * as Papa from 'papaparse';
 
@@ -25,7 +26,10 @@ export class SmeDashboardComponent implements OnInit {
   tooltipPosition = "below"
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-
+  dataSource;
+  dataSourcetwo;
+  displayedColumnstwo: string[] = ['INVOICE_SIZE', 'NUMBER', 'AMOUNT'];
+  displayedColumns: string[] = ['PERIOD', 'NUMBER', 'AMOUNT'];
   dashboardTooltips = DASHBOARDCONSTANTS;
   commonTooltips = COMMONCONSTANTS;
   getSumOfOpenFinBidding;
@@ -153,12 +157,15 @@ export class SmeDashboardComponent implements OnInit {
   getFinMatData() {
     this.smeDashboardServices.getFinMatData().subscribe(resp => {
       this.getFinMaturityData = resp;
+      this.dataSource = new MatTableDataSource(resp);
+
     })
   }
   // get data for Finance size table data
   getFinSizeData() {
     this.smeDashboardServices.getFinSizeData().subscribe(resp => {
       this.getFinnSizeData = resp;
+      this.dataSourcetwo = new MatTableDataSource(resp);
     })
   }
   //multiple line chart
