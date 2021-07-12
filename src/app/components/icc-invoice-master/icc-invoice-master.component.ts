@@ -1,17 +1,16 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { IccInvoiceMasterServices } from './icc-invoice-master-service';
-import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
+import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 export interface financeForBiddingData {
-  invoiceRef : String;
+  invoiceRef: String;
   invId: String;
   invAmt: String;
   smeId: String;
@@ -21,7 +20,6 @@ export interface financeForBiddingData {
   status: String;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
-
 export interface goodsDetails {
   descGoods: String;
   idNo: String;
@@ -36,41 +34,27 @@ export interface goodsDetails {
   total: String;
 }
 const GOODS_DATA: goodsDetails[] = [];
-
-
-export interface invoiceDetails {'invId': String,'invDate': String,'buyerName': String,'invAmt': String,'status': String}
+export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
 const INVOICE_DATA: invoiceDetails[] = [];
-
-
 export interface biddingDetails {
-  'financeOfferAmt' : String, 'ccy' : String, 'fxRate' : String, 'margin' : String, 'netAmtDisc' : String,'discAmt' : String,'discRate' : String,'offerExpPeriod' : String}
+  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
+}
 const BIDDING_DATA: biddingDetails[] = [];
-     
 @Component({
   selector: 'app-icc-invoice-master',
   templateUrl: './icc-invoice-master.component.html',
   styleUrls: ['./icc-invoice-master.component.scss']
 })
-
 export class IccInvoiceMasterComponent implements OnInit {
-
-  displayedColumns: string[] = ['invoiceRef','invId','invRefNo','invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status','action'];
+  displayedColumns: string[] = ['invoiceRef', 'invId', 'invRefNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
- 
-
-  displayedColumnsOne: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
+  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-
   dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
   displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-
   dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
-  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc','discAmt','discRate','offerExpPeriod'];
-
-
+  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
   isOpen = ""
   mobileScreen = false;
   currentPage = 0;
@@ -110,12 +94,9 @@ export class IccInvoiceMasterComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   Searchform: FormGroup;
-
-
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -124,10 +105,8 @@ export class IccInvoiceMasterComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService,
-   private IccInvoiceMasterServices: IccInvoiceMasterServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
-
-
+  constructor(private fb: FormBuilder, public router: Router, private modalService: BsModalService,
+    private IccInvoiceMasterServices: IccInvoiceMasterServices, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
   ngOnInit() {
     // this.getsmeNameId()
     this.buildform()
@@ -135,7 +114,7 @@ export class IccInvoiceMasterComponent implements OnInit {
       this.mobileScreen = true;
     }
     this.dataSource = new MatTableDataSource([{
-      invoiceRef : 'TR123',
+      invoiceRef: 'TR123',
       buyerAddr: "Singapore",
       buyerName: "Tata Steel",
       dispDate: "17/03/2021",
@@ -148,9 +127,8 @@ export class IccInvoiceMasterComponent implements OnInit {
       smeId: "SME101",
       status: "A"
     }]);
-
+    /** Getting the list to display all invoice master list **/
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
-
       // resp.forEach(element1 => {
       //   this.getSmeName.forEach(element2 => {
       //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
@@ -158,49 +136,52 @@ export class IccInvoiceMasterComponent implements OnInit {
       //   }
       //   });
       //   });
-
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
-
   }
+  /** Get list to display the sme name in the table **/
   getsmeNameId() {
     this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
+      this.getSmeName = resp;
     })
-}
-buildform() {
-  this.Searchform = this.fb.group({
-    invoiceRef: [''],
-    smeId: [''],
-    buyerName: [''],
-    invoiceDate: [''],
-    invoiceDueDate: ['']
-  })
-}
-  searchApi(){
+  }
+  /** Constructing the empty search form ,invoked while performing search**/
+  buildform() {
+    this.Searchform = this.fb.group({
+      invoiceRef: [''],
+      smeId: [''],
+      buyerName: [''],
+      invoiceDate: [''],
+      invoiceDueDate: ['']
+    })
+  }
+  /** Passing search parameter to get the search list  **/
+  searchApi() {
     this.IccInvoiceMasterServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-  resetApi(){
+  /** To reset the searched value and get back the list  **/
+  resetApi() {
     this.Searchform.reset();
     this.buildform()
     this.IccInvoiceMasterServices.getInvoiceMasterLists().subscribe(resp => {
       resp.forEach(element1 => {
         this.getSmeName.forEach(element2 => {
-        if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-        element1.smeId = element2.smeName
-        }
+          if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
+            element1.smeId = element2.smeName
+          }
         });
-        });
+      });
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
 
     })
   }
+  /** To Hide the filter field and display the search field ,while event performed on search icon **/
   searchDiv() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -209,6 +190,7 @@ buildform() {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
+  /** To Hide the search field and display the filter field, while event performed on filter icon **/
   filterDiv() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -217,32 +199,21 @@ buildform() {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
+  /** Model to view all funding requests **/
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-   
     this.IccInvoiceMasterServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
- 
       this.dataSourceTwo = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
-
       this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-      
     })
-
- 
-
     this.IccInvoiceMasterServices.getFinanceBiddingLists(data.invoiceId).subscribe(resp => {
-      if(resp){
+      if (resp) {
         this.dataSourceThree = new MatTableDataSource(resp);
       }
     })
   }
-
-
-
 }
 

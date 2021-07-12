@@ -4,6 +4,7 @@
     <h5> {{'Offer For Acceptance' | translate}} </h5>
     <div class="mat-elevation-z8 table-responsive table-post">
       <div class="table-res">
+        <!--offer for acceptancce start  -->
         <table mat-table [dataSource]="dataSource" (mouseenter)="isHover=true" (mouseleave)="isHover=false">
           <ng-container matColumnDef="invoiceRef">
             <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
@@ -71,7 +72,8 @@
               matTooltip="{{biddingTooltip.status | translate}}" [matTooltipPosition]="'below'">
               {{'Status' | translate}}</th>
             <td mat-cell *matCellDef="let element">
-              {{element.status == "APR"  || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
+              {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by
+              SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
             </td>
           </ng-container>
           <ng-container matColumnDef="action">
@@ -95,54 +97,54 @@
             <th colspan="10" mat-header-cell *matHeaderCellDef>
               <h6>{{'Search By' | translate}}</h6>
               <form [formGroup]="Searchform">
-              <div class="row">
-                <div class="col-sm-3 col-xl-2">
+                <div class="row">
+                  <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'invoice Id' | translate}}</mat-label>
-                        <input type="text" formControlName="invoiceRef"  matInput />
+                      <mat-label>{{'invoice Id' | translate}}</mat-label>
+                      <input type="text" formControlName="invoiceRef" matInput />
                     </mat-form-field>
-                </div>
+                  </div>
 
-                <div class="col-sm-3 col-xl-2">
+                  <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'SME Name' | translate}} </mat-label>
-                        <input type="text"  formControlName="smeId" matInput />
+                      <mat-label>{{'SME Name' | translate}} </mat-label>
+                      <input type="text" formControlName="smeId" matInput />
                     </mat-form-field>
-                </div>
-                <div class="col-sm-3 col-xl-2">
+                  </div>
+                  <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Buyer Name' | translate}} </mat-label>
-                        <input type="text" formControlName="buyerName" matInput />
+                      <mat-label>{{'Buyer Name' | translate}} </mat-label>
+                      <input type="text" formControlName="buyerName" matInput />
                     </mat-form-field>
-                </div>
-                <div class="col-sm-3 col-xl-2">
+                  </div>
+                  <div class="col-sm-3 col-xl-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Inv Date' | translate}}</mat-label>
-                        <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                      <mat-label>{{'Inv Date' | translate}}</mat-label>
+                      <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                </div>
-                <div class="col-sm-2 col-xl-2">
+                  </div>
+                  <div class="col-sm-2 col-xl-2">
                     <mat-form-field appearance="outline">
-                        <mat-label>{{'Inv Due date' | translate}}</mat-label>
-                        <input matInput readonly="true" formControlName="invoiceDueDate"
-                            [matDatepicker]="picker1">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
+                      <mat-label>{{'Inv Due date' | translate}}</mat-label>
+                      <input matInput readonly="true" formControlName="invoiceDueDate" [matDatepicker]="picker1">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
+                  </div>
                 </div>
-            </div>
-              <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                <button mat-raised-button style="color: #5e52a1;" (click)="searchApi()">
-                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}" [matTooltipPosition]="'below'">
-                    done</mat-icon> {{'Search' | translate}}
-                </button>&nbsp;
-                <button mat-raised-button style="color: #5e52a1;" (click)="resetApi()">
-                  <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">
-                    restart_alt</mat-icon> {{'Reset' | translate}}
-                </button>
-              </div>
+                <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                  <button mat-raised-button style="color: #5e52a1;" (click)="searchApi()">
+                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                      [matTooltipPosition]="'below'">
+                      done</mat-icon> {{'Search' | translate}}
+                  </button>&nbsp;
+                  <button mat-raised-button style="color: #5e52a1;" (click)="resetApi()">
+                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}" [matTooltipPosition]="'below'">
+                      restart_alt</mat-icon> {{'Reset' | translate}}
+                  </button>
+                </div>
               </form>
             </th>
           </ng-container>
@@ -181,11 +183,13 @@
             </th>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumnsload"></tr>
-          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch"></tr>
+          <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row *matHeaderRowDef="displayedColumnsearch">
+          </tr>
           <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
           <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#694ed6e0"></tr>
           <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <!--offer for acceptancce end  -->
       </div>
       <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
     </div>

@@ -1,32 +1,17 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params,NavigationExtras,NavigationStart } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
+import { Router, NavigationExtras } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { IccListSmeServices } from './icc-list-smes.service';
-import { BIDDINGCONSTANTS} from '../../shared/constants/constants'
+import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import { map,filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
-// const ELEMENT_DATA: any[] = [
-//   {
-//     Name: '',
-//     Position: '',
-//     Address: '',
-//     TelephoneNo: '',
-//     Email: ''
-//   }
-// ];
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface financeForBiddingData {
-  invoiceRef : String;
+  invoiceRef: String;
   invId: String;
   invAmt: String;
   smeId: String;
@@ -36,11 +21,9 @@ export interface financeForBiddingData {
   status: String;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
-
 export interface goodsDetails {
   descGoods: String;
   idNo: String;
-  // dateOfInvoice: String;
   quantity: String;
   rate: String;
   amt: String;
@@ -51,42 +34,20 @@ export interface goodsDetails {
   total: String;
 }
 const GOODS_DATA: goodsDetails[] = [];
-
-
-export interface invoiceDetails {'invId': String,'invDate': String,'buyerName': String,'invAmt': String,'status': String}
+export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
 const INVOICE_DATA: invoiceDetails[] = [];
-
-
 export interface biddingDetails {
-  'financeOfferAmt' : String, 'ccy' : String, 'fxRate' : String, 'margin' : String, 'netAmtDisc' : String,'discAmt' : String,'discRate' : String,'offerExpPeriod' : String}
+  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
+}
 const BIDDING_DATA: biddingDetails[] = [];
-     
 @Component({
   selector: 'app-icc-list-smes',
   templateUrl: './icc-list-smes.component.html',
   styleUrls: ['./icc-list-smes.component.scss']
 })
-
 export class IccListSmesComponent implements OnInit {
-  // appstate$: Observable<object>;
-
-  displayedColumns: string[] = ['smeprofileID','registrationNumber','companyId','cmpName', 'smeRating','status','action'];
+  displayedColumns: string[] = ['smeprofileID', 'registrationNumber', 'companyId', 'cmpName', 'smeRating', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
- 
-
-  displayedColumnsOne: string[] = ['descGoods', 'quantity','taxRate','amt','rate','total'];
-  dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
-
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-
-
-  dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-
-  dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
-  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc','discAmt','discRate','offerExpPeriod'];
-
-
   isOpen = ""
   mobileScreen = false;
   end = false;
@@ -100,56 +61,17 @@ export class IccListSmesComponent implements OnInit {
   bidpanelOpenState = false;
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
-  // // displayedColumnsload: string[] = [
-  // //   'TopBar',
-  // // ]
-  // // displayedColumnsearch: string[] = [
-  // //   'Search',
-  // // ]
-  // // displayedColumnFilter: string[] = [
-  // //   'Filter',
-  // // ]
-  // SearchModel = {}
-  // value: number = 0;
-  // highValue: number = 50;
-  // options: Options = {
-  //   floor: 0,
-  //   ceil: 5000,
-  //   translate: (value: number, label: LabelType): string => {
-  //     switch (label) {
-  //       case LabelType.Low:
-  //         return "<b>Min</b> $" + value;
-  //       case LabelType.High:
-  //         return "<b>Max</b> $" + value;
-  //       default:
-  //         return "$" + value;
-  //     }
-  //   }
-  // };
-  // filterDivOpen: boolean;
-  // searchDivOpen: boolean;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  displayedColumnsload: string[] = [
-    'TopBar',
-  ]
-  displayedColumnsearch: string[] = [
-    'Search',
-  ]
-  displayedColumnFilter: string[] = [
-    'Filter',
-  ]
+  displayedColumnsload: string[] = ['TopBar']
+  displayedColumnsearch: string[] = ['Search']
+  displayedColumnFilter: string[] = ['Filter']
   SearchModel = {
     'smeprofileID': String,
     'registrationNumber': String,
-      'companyId': String,
-      'name': String,
-      'smeRating': String,
-      'status': String,
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
+    'companyId': String,
+    'name': String,
+    'smeRating': String,
+    'status': String,
   }
   value: number = 0;
   highValue: number = 50;
@@ -170,12 +92,10 @@ export class IccListSmesComponent implements OnInit {
   filterDivOpen: boolean;
   searchDivOpen: boolean;
   Searchform: FormGroup;
-  
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
   message: string;
   userValue: any;
-
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (window.innerWidth < 415) {
@@ -184,50 +104,23 @@ export class IccListSmesComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private authenticationService: AuthenticationService, private iccListSmeServices: IccListSmeServices,private fb: FormBuilder) { }
-
-
+  constructor(public router: Router, private iccListSmeServices: IccListSmeServices, private fb: FormBuilder, private modalService: BsModalService,) { }
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    // this.appstate$ = this.router.events.pipe(
-    //   filter(e => e instanceof NavigationStart),
-    //   map(() => {
-    //   const currentState = this.router.getCurrentNavigation();
-    //   return currentState.extras.state;
-    //   })
-    //   );
-
-   this.getList()
+    this.getList()
     this.buildform()
-
   }
-
-  getList(){
-    // this.dataSource = new MatTableDataSource([{
-    //   invoiceRef : 'TR123',
-    //   buyerAddr: "Singapore",
-    //   buyerName: "Tata Steel",
-    //   dispDate: "17/03/2021",
-    //   id: 2,
-    //   invAmt: "10000",
-    //   invCcy: "SGD",
-    //   invDate: "17/03/2021",
-    //   invDueDate: "17/06/2021",
-    //   invId: "INV102",
-    //   smeId: "SME101",
-    //   status: "A"
-    // }]);
-
+  /** Getting the list to display all sme profile details **/
+  getList() {
     this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
       const ELEMENT_DATA: financeForBiddingData[] = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.paginator = this.paginator
     })
   }
-
+  /** Constructing the empty search form ,invoked while performing search**/
   buildform() {
     this.Searchform = this.fb.group({
       smeprofileID: [''],
@@ -238,33 +131,25 @@ export class IccListSmesComponent implements OnInit {
       status: [''],
     })
   }
-
-  getSearchList(){ 
+  /** To display the list after passing search value **/
+  getSearchList() {
     this.iccListSmeServices.search_getallSmeProfileDetails(this.Searchform.value).subscribe(listResp => {
-      if (listResp) { 
+      if (listResp) {
         this.dataSource = new MatTableDataSource(listResp);
         this.dataSource.paginator = this.paginator
       }
     })
   }
-
+  /** Invoking the search function to get the search list  **/
   searchApi() {
-    // this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-    // })
     this.getSearchList()
   }
+  /** To reset the searched value and get back the list  **/
   resetApi() {
     this.buildform();
     this.getList();
-    // this.getSearchList()
-    // this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-    //   this.dataSource = new MatTableDataSource(resp);
-    //   this.dataSource.paginator = this.paginator
-
-    // })
   }
+  /** To Hide the filter field and display the search field ,while event performed on search icon **/
   searchDiv() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -273,6 +158,7 @@ export class IccListSmesComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
+  /** To Hide the search field and display the filter field, while event performed on filter icon **/
   filterDiv() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
@@ -281,132 +167,55 @@ export class IccListSmesComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
- displayMessage(e,template,regNumb){
-  console.log(e,"uii")
- if(e.checked){
-   this.message = 'A'
- }
- else{
-   this.message = 'R'
- }
- // nationalId
- this.openModal(e,template,regNumb)
- // let obj={
- //   status : this.message
- // }
-
- // this.IccUserCreationsService.statusChange(regNumb,obj).subscribe(resp => {
- //     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
- //       this.dataSource = new MatTableDataSource(resp);
- //       this.dataSource.paginator = this.paginator
- //     })
- // })
-  
-}
-openModal(event, template, data) {
- this.userValue = data
- this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-}
-ActiveuserNo(){
- this.modalRef.hide();
- this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
-  const ELEMENT_DATA: financeForBiddingData[] = resp;
-  this.dataSource = new MatTableDataSource(resp);
-  this.dataSource.paginator = this.paginator
- })
-}
-Activeuser(data){
- let obj={
-   status : this.message
- }
- console.log(this.userValue,"this.userValue")
- this.modalRef.hide();
- this.iccListSmeServices.statusChange(this.userValue.registrationNumber,obj).subscribe(resp => {
-  this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
-    const ELEMENT_DATA: financeForBiddingData[] = resp;
-    this.dataSource = new MatTableDataSource(resp);
-    this.dataSource.paginator = this.paginator
-   })
- })
-}
-  // searchApi(){
-  //   // this.IccInvoiceMasterServices.searchFinanceFunded(this.SearchModel).subscribe(resp => {
-  //   //   this.dataSource = new MatTableDataSource(resp);
-  //   //   this.dataSource.paginator = this.paginator
-  //   // })
-  // }
- 
-  // searchDiv() {
-  //   if (this.filterDivOpen === true) {
-  //     this.searchDivOpen = !this.searchDivOpen
-  //     this.filterDivOpen = !this.filterDivOpen
-  //   } else {
-  //     this.searchDivOpen = !this.searchDivOpen
-  //   }
-  // }
-  // filterDiv() {
-  //   if (this.searchDivOpen === true) {
-  //     this.searchDivOpen = !this.searchDivOpen
-  //     this.filterDivOpen = !this.filterDivOpen
-  //   } else {
-  //     this.filterDivOpen = !this.filterDivOpen
-  //   }
-  // }
-  public scrollRight(): void {
-    this.start = false;
-    const scrollWidth =
-      this.accountList.nativeElement.scrollWidth -
-      this.accountList.nativeElement.clientWidth;
-
-    if (scrollWidth === Math.round(this.accountList.nativeElement.scrollLeft)) {
-      this.end = true;
+  /**To update the status activate and deactivate **/
+  displayMessage(e, template, regNumb) {
+    if (e.checked) {
+      this.message = 'A'
     } else {
-      this.accountList.nativeElement.scrollTo({
-        left: this.accountList.nativeElement.scrollLeft + 150,
-        behavior: 'smooth',
-      });
+      this.message = 'R'
     }
+    // nationalId
+    this.openModal(e, template, regNumb)
   }
-
-  public scrollLeft(): void {
-    this.end = false;
-    if (this.accountList.nativeElement.scrollLeft === 0) {
-      this.start = true;
-    }
-    this.accountList.nativeElement.scrollTo({
-      left: this.accountList.nativeElement.scrollLeft - 150,
-      behavior: 'smooth',
-    });
+  /**Model open for activate and deactivate **/
+  openModal(event, template, data) {
+    this.userValue = data
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
-
-  isOpenHandle(isTrue) {
-    this.isOpen = isTrue == "inActive" ? "active" : "inActive"
-  }
-
-  handleToggle(e, status) {
-    this.modalDialogService.confirm("Confirm Delete", "Do you really want to change the status ?", "Ok", "Cancel").subscribe(result => {
+  /**To get all sme profile details  **/
+  ActiveuserNo() {
+    this.modalRef.hide();
+    this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
+      const ELEMENT_DATA: financeForBiddingData[] = resp;
+      this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.paginator = this.paginator
     })
-
   }
-  goHome() {
-    this.router.navigateByUrl('/sme-dashboard');
+  /** Api hit to active and deactivate the user  **/
+  Activeuser(data) {
+    let obj = {
+      status: this.message
+    }
+    this.modalRef.hide();
+    this.iccListSmeServices.statusChange(this.userValue.registrationNumber, obj).subscribe(resp => {
+      this.iccListSmeServices.getallSmeProfileDetails().subscribe(resp => {
+        const ELEMENT_DATA: financeForBiddingData[] = resp;
+        this.dataSource = new MatTableDataSource(resp);
+        this.dataSource.paginator = this.paginator
+      })
+    })
   }
-  logout() {
-    this.authenticationService.logout()
-  }
-  navigateToSmeDetails(path,smeData){
+  /** To navigate to the sme  details with state data **/
+  navigateToSmeDetails(path, smeData) {
     let data: NavigationExtras = {
       queryParams: {
-      "companyId":smeData.registrationNumber, 
-      "companyName":smeData.name,
-      "country": "SGP"
+        "companyId": smeData.registrationNumber,
+        "companyName": smeData.name,
+        "country": "SGP"
       }
     }
     this.router.navigate([path], { state: { smeData: data } });
   }
-
 }
 
 
