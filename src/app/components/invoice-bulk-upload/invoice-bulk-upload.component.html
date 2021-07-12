@@ -9,25 +9,9 @@
                 <div class="upload-btn-wrapper col-md-3">
                   <h4>{{'Invoice Upload' | translate}}</h4>
                 </div>
-                <!-- <div class="upload-btn-wrapper col-md-3">
-                  <button class="filebtn">{{'Upload a file' | translate}}</button>
-                  <input type="file" accept=".xlsx,.xls,.csv,.pdf" class="dynamic-file-upload form"
-                    (change)="onFileChange($event)" />
-                </div>
-                <div class="upload-btn-wrapper col-md-3">
-                  <button type="button" class="btn btn-outline fundreq-btn" [matMenuTriggerFor]="menu">
-                    {{'Sample File Download' | translate}}
-                    <span class="material-icons">
-                      file_download
-                    </span>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button (click)="sampleDown();" mat-menu-item> {{'Download as XLSX' | translate}}</button>
-                    <button (click)="samplecsvDown();" mat-menu-item>{{'Download as CSV' | translate}}</button>
-                  </mat-menu>
-                </div> -->
                 <div *ngIf="pdfDivEnable" class="col-md-3 upload-btn-wrapper">
-                  <button (click)="openModal($event,template)" style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline fundreq-btn">
+                  <button (click)="openModal($event,template)" style="padding: 9px 26px 10px 8px;" type="button"
+                    class="btn btn-outline fundreq-btn">
                     {{'preview' | translate}}
                     <span style="position: absolute;" class="material-icons">
                       preview
@@ -44,14 +28,14 @@
           <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
             <mat-card>
               <mat-card-content>
-                <div id="container" class=" row col-md-12 col-12" >
+                <div id="container" class=" row col-md-12 col-12">
                   <div class="col-md-10 col-10">
-                  <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
-                </div>
-                <div class="col-md-2 col-2">
-                  <span class="uxg-h6 score-label" id=grid>Score : {{score ? score : 0}} </span>
-                </div>
+                    <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
                   </div>
+                  <div class="col-md-2 col-2">
+                    <span class="uxg-h6 score-label" id=grid>Score : {{score ? score : 0}} </span>
+                  </div>
+                </div>
                 <table class="table-responsive inv-table">
                   <tbody>
                     <tr>
@@ -66,7 +50,8 @@
                           <td rowspan="1" colspan="1">
                             <mat-form-field dense class="spilt-input">
                               <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
-                              <input type="number" matInput value="" autocomplete="on" formControlName="invAmt" (input)="setTwoNumberDecimal($event,'invAmt')"/>
+                              <input type="number" matInput value="" autocomplete="on" formControlName="invAmt"
+                                (input)="setTwoNumberDecimal($event,'invAmt')" />
                             </mat-form-field>
                           </td>
                           <td rowspan="1" colspan="1">
@@ -87,9 +72,10 @@
                       </table>
 
                       <td rowspan="1" colspan="1">
-                        <mat-form-field dense  class="readOnlyCls">
+                        <mat-form-field dense class="readOnlyCls">
                           <mat-label>{{'Funding Request Date' | translate}} </mat-label>
-                          <input matInput readonly="true"  [matDatepicker]="picker" formControlName="invDate" (dateInput)="updateInvoicedate($event)">
+                          <input matInput readonly="true" [matDatepicker]="picker" formControlName="invDate"
+                            (dateInput)="updateInvoicedate($event)">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -99,7 +85,7 @@
 
                     <tr>
                       <td rowspan="1" colspan="1">
-                        <mat-form-field dense  class="readOnlyCls">
+                        <mat-form-field dense class="readOnlyCls">
                           <mat-label>{{'Funding Request Due Date' | translate}} </mat-label>
                           <input matInput readonly="true" [matDatepicker]="pickers" formControlName="invDueDate" />
                           <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
@@ -108,63 +94,21 @@
                       </td>
                       <td rowspan="1" colspan="1">
                         <mat-form-field dense>
-                          <!-- <mat-icon dense color="primary" matPrefix>person_outline</mat-icon> -->
                           <mat-label>{{'BL/Roadway Bill No' | translate}} </mat-label>
                           <input type="text" matInput value="" formControlName="billNo" />
-                          <!-- <mat-hint>Please enter the BL/Roadway Bill No</mat-hint> -->
-                          <mat-icon class="info_icon" matSuffix  #tooltip="matTooltip"
-                          matTooltip="{{fundingTooltip.billInfo | translate}}"
-                          [matTooltipPosition]="'below'">info</mat-icon>
+                          <mat-icon class="info_icon" matSuffix #tooltip="matTooltip"
+                            matTooltip="{{fundingTooltip.billInfo | translate}}" [matTooltipPosition]="'below'">info
+                          </mat-icon>
                         </mat-form-field>
-    
-                      <!-- <mat-form-field dense class="listdown" (click)="myInput.focus()">
-                        <mat-label>{{'Buyer Location' | translate}}</mat-label>
-                        <mat-select panelClass="myPanelClass" formControlName="buyerAddr" >
-                          <input style="border: 1px solid #a59f9f;padding: 11px;" matInput  placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)" #myInput>
-                          <mat-option>None</mat-option>
-                          <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>  -->
-                      
-                      <!-- <mat-form-field>
-                        <mat-select placeholder="{{'Buyer Location' | translate}}">
-                          <mat-select-filter [array]="variables" (filteredReturn)="optionDatas =$event"></mat-select-filter>
-                          <mat-option *ngFor="let item of optionDatas" [value]="item">
-                            {{item.itemName}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field> -->
-    
-                      <!-- <mat-form-field>
-                        <mat-select placeholder="Basic">
-                          <mat-select-filter [array]="variables" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
-                          <mat-option *ngFor="let item of filteredList1" [value]="item">
-                            {{item}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field> -->
-    
-                      <!-- <ng-multiselect-dropdown
-                      [placeholder]="('Buyer Location' | translate)"
-                      [settings]="dropdownSettings"
-                      [data]="optionDatas"
-                      formControlName="country">
-                    </ng-multiselect-dropdown> -->
-    
-                      <!-- <div class="multiselect-dropdown-dsgn">                   
-                        <angular2-multiselect 
-                       
-                        [data]="optionDatas" formControlName="buyerAddr" [settings]="dropdownSettings"></angular2-multiselect> 
-                          </div> -->
-                    </td>
-                    <td rowspan="1" colspan="1">
-                      <mat-form-field dense>
-                        <mat-label>{{'Date of Dispatch' | translate}}</mat-label>
-                        <input  matInput [matDatepicker]="picker1" formControlName="dispDate" />
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                      </mat-form-field>
-                    </td>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>{{'Date of Dispatch' | translate}}</mat-label>
+                          <input matInput [matDatepicker]="picker1" formControlName="dispDate" />
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </td>
                     </tr>
 
                   </tbody>
@@ -172,121 +116,108 @@
               </mat-card-content>
             </mat-card>
 
-      <!-- BUYER DETAILS -->
+            <!-- BUYER DETAILS -->
 
-      <mat-card>
-        <mat-card-content>
-          <div id="container" >
-            <span class="uxg-h6" id=grid>{{'Buyer Details' | translate}}</span>
-          </div>
-          <table  class="table-responsive inv-table">
-            <tbody>
-            
-              <tr>
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label> {{'Buyer Name' | translate}} </mat-label>
-                    <input type="text" matInput value="" formControlName="buyerName"/>
-                  </mat-form-field>
-                </td>
-                 <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
-                    <input type="text" matInput value="" formControlName="buyerUEN" />
-                  </mat-form-field>
-                </td>
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>Contact Name</mat-label>
-                    <input type="text" matInput value="" formControlName="companyName" />
-                  </mat-form-field>
-                </td>
+            <mat-card>
+              <mat-card-content>
+                <div id="container">
+                  <span class="uxg-h6" id=grid>{{'Buyer Details' | translate}}</span>
+                </div>
+                <table class="table-responsive inv-table">
+                  <tbody>
+                    <tr>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label> {{'Buyer Name' | translate}} </mat-label>
+                          <input type="text" matInput value="" formControlName="buyerName" />
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label>
+                          <input type="text" matInput value="" formControlName="buyerUEN" />
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>Contact Name</mat-label>
+                          <input type="text" matInput value="" formControlName="companyName" />
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>{{'Email' | translate}}</mat-label>
+                          <input type="text" matInput value="" formControlName="email" />
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
+                          <input type="number" matInput formControlName="phoneNo" />
+                        </mat-form-field>
+                      </td>
 
-              </tr>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>Address Line 1</mat-label>
+                          <input type="text" matInput formControlName="addressLine1" />
+                        </mat-form-field>
+                      </td>
 
-              <tr>
-                  
-                
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>{{'Email' | translate}}</mat-label>
-                    <input type="text" matInput value="" formControlName="email" />
-                    <!-- <mat-hint>Please enter Buyer Address </mat-hint> -->
-                  </mat-form-field>
-                </td>
-               
-                <td rowspan="1" colspan="1">
-                  <mat-form-field floatLabel="never"
-                                  dense
-                                  appearance="fill"
-                                  class="example-full-width">
-                    <mat-icon color="primary"
-                              dense
-                              matPrefix>person_outline</mat-icon>
-                    <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
-                    <input type="number"
-                           matInput
-                           formControlName="phoneNo"
-                             />
-                  </mat-form-field>
-                </td>
-               
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>Address Line 1</mat-label>
-                    <input type="text" matInput formControlName="addressLine1" />
-                  </mat-form-field>
-                </td>
-                
-              </tr>
-              
-              <tr>
-                
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>Address Line 2</mat-label>
-                    <input type="text" matInput formControlName="addressLine2" />
-                  </mat-form-field>
-                </td>
-                
-              <td rowspan="1" colspan="1">
-                <mat-form-field dense>
-                  <mat-label>Postal Code</mat-label>
-                  <input type="text" matInput formControlName="postalCode" />
-                </mat-form-field>
-              </td>
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense>
-                    <mat-label>City</mat-label>
-                    <input type="text" matInput formControlName="city" />
-                  </mat-form-field>
-                </td>
-                
+                    </tr>
 
-              </tr>
+                    <tr>
 
-              <tr>
-                
-              <td rowspan="1" colspan="1">
-                <mat-form-field dense class="listdown" (click)="myInput.focus()">
-                  <mat-label>{{'Country' | translate}}</mat-label>
-                  <mat-select panelClass="myPanelClass" formControlName="buyerAddr" >
-                    <input style="border: 1px solid #a59f9f;padding: 11px;" matInput  placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)" #myInput>
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}</mat-option>
-                  </mat-select>
-                </mat-form-field> 
-              </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>Address Line 2</mat-label>
+                          <input type="text" matInput formControlName="addressLine2" />
+                        </mat-form-field>
+                      </td>
 
-              </tr>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>Postal Code</mat-label>
+                          <input type="text" matInput formControlName="postalCode" />
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-label>City</mat-label>
+                          <input type="text" matInput formControlName="city" />
+                        </mat-form-field>
+                      </td>
 
-            </tbody>
-          </table>
 
-        </mat-card-content>
-      </mat-card>
+                    </tr>
 
-      <!-- GOODS DETAILS -->
+                    <tr>
+
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense class="listdown" (click)="myInput.focus()">
+                          <mat-label>{{'Country' | translate}}</mat-label>
+                          <mat-select panelClass="myPanelClass" formControlName="buyerAddr">
+                            <input style="border: 1px solid #a59f9f;padding: 11px;" matInput
+                              placeholder="{{'Search' | translate}}" (keyup)="onKey($event.target.value)" #myInput>
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let item of optionDatas" [value]="item.id">{{item.itemName}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </mat-card-content>
+            </mat-card>
+
+            <!-- GOODS DETAILS -->
             <mat-card>
               <mat-card-content>
                 <div id="container">
@@ -333,7 +264,8 @@
                             {{'rate' | translate}}%</th>
                           <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                             <input matInput min="0" type="number" formControlName="rate"
-                              placeholder="{{'Rate' | translate}}" required (keyup)="changeRowgrid(index)" (input)="setTwoNumberDecimal($event,'rate')">
+                              placeholder="{{'Rate' | translate}}" required (keyup)="changeRowgrid(index)"
+                              (input)="setTwoNumberDecimal($event,'rate')">
                           </td>
                         </ng-container>
                         <ng-container matColumnDef="Amt">
@@ -361,7 +293,8 @@
                             [matTooltipPosition]="tooltipPosition">{{'discAmount' | translate}}</th>
                           <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                             <input matInput min="0" type="number" formControlName="discAmt"
-                              placeholder="{{'Disc Amount' | translate}}" required (keyup)="changeRowgrid(index)" (input)="setTwoNumberDecimal($event,'discAmt')">
+                              placeholder="{{'Disc Amount' | translate}}" required (keyup)="changeRowgrid(index)"
+                              (input)="setTwoNumberDecimal($event,'discAmt')">
                           </td>
                         </ng-container>
 
@@ -371,7 +304,8 @@
                             [matTooltipPosition]="tooltipPosition">{{'netAmount' | translate}}</th>
                           <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                             <input matInput type="number" formControlName="netAmtPay"
-                              placeholder="{{'Net Amount' | translate}}" required readonly (input)="setTwoNumberDecimal($event,'netAmtPay')">
+                              placeholder="{{'Net Amount' | translate}}" required readonly
+                              (input)="setTwoNumberDecimal($event,'netAmtPay')">
                           </td>
                         </ng-container>
 
@@ -382,7 +316,8 @@
                             {{'for Particular Good' | translate}}%</th>
                           <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                             <input matInput min="0" type="number" formControlName="taxRate"
-                              placeholder="{{'Tax Rate' | translate}}" required (keyup)="changeRowgrid(index)" (input)="setTwoNumberDecimal($event,'taxRate')">
+                              placeholder="{{'Tax Rate' | translate}}" required (keyup)="changeRowgrid(index)"
+                              (input)="setTwoNumberDecimal($event,'taxRate')">
                           </td>
                         </ng-container>
 
@@ -403,13 +338,15 @@
                             <span *ngIf="!UpdateInvoiceLable" class="add-good-plusbtn" mat-flat-button color="primary"
                               (click)=addRow() id=grid #tooltip="matTooltip"
                               matTooltip="{{fundingTooltip.addGoods | translate}}"
-                              [matTooltipPosition]="tooltipPosition">+</span></th>
+                              [matTooltipPosition]="tooltipPosition">+</span>
+                          </th>
                           <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                             <input matInput type="number" formControlName="total" placeholder="{{'Total' | translate}}"
                               required readonly (input)="setTwoNumberDecimal($event,'total')">
                           </td>
                         </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0">
+                        </tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
 
                       </table>
@@ -451,36 +388,30 @@
               </td>
             </ng-container>
 
-           
+
             <ng-container matColumnDef="InvoiceRefNo">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-              matTooltip="{{fundingTooltip.refno | translate}}" [matTooltipPosition]="tooltipPosition">{{'Invoice Ref No' | translate}}</th>
+                matTooltip="{{fundingTooltip.refno | translate}}" [matTooltipPosition]="tooltipPosition">{{'Invoice RefNo' | translate}}</th>
               <td mat-cell *matCellDef="let element">
-                <!-- {{element && element.invref}} -->
                 <mat-chip-list>
                   <mat-chip color="primary" selected (click)="UpdateInvoice(element)">{{element.invref}} </mat-chip>
-              </mat-chip-list>
+                </mat-chip-list>
               </td>
-             </ng-container>
-             <ng-container matColumnDef="DateTime">
+            </ng-container>
+            <ng-container matColumnDef="DateTime">
               <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
-              matTooltip="{{fundingTooltip.invoiceNumber | translate}}"
-              [matTooltipPosition]="tooltipPosition">{{'Invoice No' | translate}}</th>
-              
+                matTooltip="{{fundingTooltip.invoiceNumber | translate}}" [matTooltipPosition]="tooltipPosition">
+                {{'Invoice No' | translate}}</th>
               <td mat-cell *matCellDef="let element">
                 {{element && element.invId}}
-                <!-- <mat-chip-list>
-                  <mat-chip color="primary" selected (click)="UpdateInvoice(element)">{{element.invId}} </mat-chip>
-              </mat-chip-list> -->
-
               </td>
             </ng-container>
             <mat-checkbox name="box"></mat-checkbox>
             <ng-container matColumnDef="DateOfInvoice">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
-                matTooltip="{{fundingTooltip.invoiceCreateDate | translate}}"
-                [matTooltipPosition]="tooltipPosition">{{'Invoice Date' | translate}}</th>
-              <td mat-cell *matCellDef="let element">{{element.invDate  | date: 'dd/MM/yyyy'}}</td>
+                matTooltip="{{fundingTooltip.invoiceCreateDate | translate}}" [matTooltipPosition]="tooltipPosition">
+                {{'Invoice Date' | translate}}</th>
+              <td mat-cell *matCellDef="let element">{{element.invDate | date: 'dd/MM/yyyy'}}</td>
             </ng-container>
             <ng-container matColumnDef="Seller">
               <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" #tooltip="matTooltip"
@@ -505,7 +436,7 @@
               <td mat-cell *matCellDef="let element">{{ element.invCcy }}</td>
             </ng-container>
             <ng-container matColumnDef="Score">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column" >Score </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header scope="column">Score </th>
               <td mat-cell *matCellDef="let element">{{ element.buyerScore ? element.buyerScore : 0 }}</td>
             </ng-container>
             <ng-container matColumnDef="Status">
@@ -524,10 +455,9 @@
       </div>
       <mat-card-actions class="ebtn">
         <span class="fill-remaining-space"></span>
-        <button mat-flat-button color="primary" #tooltip="matTooltip"
-          matTooltip="{{fundingTooltip.submit | translate}}"
-          [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'"
-          [matTooltipPosition]="tooltipPosition" disabled>
+        <button mat-flat-button color="primary" #tooltip="matTooltip" matTooltip="{{fundingTooltip.submit | translate}}"
+          [disabled]="this.userDeatils && this.userDeatils.role === 'Authorise'" [matTooltipPosition]="tooltipPosition"
+          disabled>
 
           {{'Submit' | translate}}
         </button>
