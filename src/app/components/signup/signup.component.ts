@@ -117,7 +117,7 @@ export class SignupComponent implements OnInit {
       }
       let RegDetailObj = {
         name: formValues.name,
-        country: formValues.country,
+        country: formValues.country[0].itemName,
         registrationNumber: formValues.countryPin,
       }
       localStorage.setItem("signUpDetails", JSON.stringify(signUpDetailsObj))
