@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IccCountryServices } from '../icc-country/icc-country.services'
 import { TranslateService } from '@ngx-translate/core';
+import * as XLSX from "xlsx";
+import * as Papa from 'papaparse';
 
 export interface invoiceData {
   invref: any;
@@ -118,6 +120,8 @@ export class InvoiceRequestComponent implements OnInit {
   public variables = ['One', 'Two', 'County', 'Three', 'Zebra', 'XiOn'];
   type: any
   FileData: any;
+  FileType: any;
+  PDFData: any;
   constructor(private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe, private toastr: ToastrService
@@ -728,6 +732,78 @@ export class InvoiceRequestComponent implements OnInit {
     this.dataSourceTwo = new MatTableDataSource();
     this.addRow();
     this.toastr.success("Data cleared successfully")
+  }
+  onFileChange(ev) {
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    console.log(file, "file")
+    console.log(file.type, "file")
+    this.FileType = file.type
+
+    if (file.type === "text/csv") {
+      this.PDFData = ''
+      this.onChangess(file)
+    } else if (file.type === "application/pdf") {
+      this.getBase64(<File>ev.target.files[0]).then((data) => {
+        let flName = file.name
+        console.log(flName, "flName")
+        // console.log(ev.target.files, "ev.target.files")
+        this.PDFData = data
+        console.log(data, "data")
+        let fileName = {
+          'fileName': file.name,
+          'data': (<string>data).split(',')[1],
+          'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
+        }
+        // this.invoicedata = fileName
+        // console.log(this.invoicedata, "this.fileNames")
+      });
+
+    } else {
+      this.PDFData = ''
+      reader.onload = event => {
+        const data = reader.result;
+        workBook = XLSX.read(data, { type: "binary" });
+        console.log(workBook);
+        jsonData = workBook.SheetNames.reduce((initial, name) => {
+          console.log(name)
+          const sheet = workBook.Sheets[name];
+          console.log(sheet, "sheet")
+          initial['invoice'] = XLSX.utils.sheet_to_json(sheet);
+          return initial;
+        }, {});
+        console.log(jsonData, "jsonData")
+        this.invoicedata = jsonData.invoice
+      };
+      reader.readAsBinaryString(file);
+    }
+  }
+  // function to change file format
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+  onChangess(files: File[]) {
+    console.log(files, "files")
+    if (files) {
+      console.log(files);
+      Papa.parse(files, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (result, file) => {
+          console.log(result, "sksksk");
+          this.invoicedata = result.data
+          // this.dataSource = new MatTableDataSource(result);
+          // this.dataList = result.data;
+        }
+      });
+    }
   }
 }
 

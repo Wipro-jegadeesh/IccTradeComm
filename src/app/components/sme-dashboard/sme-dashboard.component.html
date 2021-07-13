@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-12 space-p">
+                            <!-- <div class="col-md-3 col-12 space-p">
                                 <div class="trans-table">
                                     <div class="">
                                         <div class="row">
@@ -179,7 +179,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <table class="table-bordered table" id="customers">
+                                    <table class="table-bordered table" id="customers">
                                         <tr>
                                             <th style="text-align: center;" #tooltip="matTooltip"
                                                 matTooltip="{{dashboardTooltips.financeNo | translate}}"
@@ -201,10 +201,8 @@
                                             <td style="text-align: center;" colspan="3">{{'No Records Found' |
                                                 translate}}</td>
                                         </tr>
-                                    </table> -->
-
+                                    </table>
                                     <div class="mat-elevation-z8 table-responsive table-post">
-                                        <!-- finance size table start -->
                                         <table mat-table [dataSource]="dataSourcetwo" matSort>
                                             <ng-container matColumnDef="INVOICE_SIZE">
                                                 <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
@@ -241,15 +239,14 @@
                                             <tr mat-row class="BID-Details"
                                                 *matRowDef="let row; columns: displayedColumnstwo;"></tr>
                                         </table>
-                                        <!-- *ngIf="!getFinMaturityData?.length" -->
+                                        *ngIf="!getFinMaturityData?.length"
                                         <ng-container *ngIf="!getFinnSizeData?.length">
                                             <p style="text-align: center;">{{'No Records Found' |
                                                 translate}}</p>
                                         </ng-container>
-                                        <!-- finance size table end -->
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-12 col-xl-6">
                             <div class="row">

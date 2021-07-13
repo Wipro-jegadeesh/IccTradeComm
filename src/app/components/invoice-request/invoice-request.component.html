@@ -4,13 +4,27 @@
       <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
         <mat-card>
           <mat-card-content>
-            <div id="container" class=" row col-md-12 col-12">
-              <div class="col-md-8 col-xl-10 col-lg-9 col-12">
+            <div id="container" class="row col-md-12 col-12">
+              <div class="col-md-7 col-xl-6 col-lg-6 col-12">
                 <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
               </div>
-              <div class="col-md-4 col-xl-2 col-lg-3 col-12">
-                <div class="score-margin">
-                  <p class="matPara">
+              <div class="col-md-3 col-xl-4 col-lg-4 col-12">
+              <div class="card-form-container">
+                <div class="dynamic-radio-btn file-input">
+                  <h6>{{'Invoice Upload' | translate}}</h6>
+                  <div style="text-align: center;">
+                    <div class="upload-btn-wrapper">
+                      <button class="filebtn">{{'Upload a file' | translate}}</button>
+                      <input type="file" class="dynamic-file-upload form" (change)="onFileChange($event)"
+                      accept=".xlsx,.xls,.csv,.pdf" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="col-md-2 col-xl-2 col-lg-2 col-12" style="padding:32px 6px 6px 52px">
+                <!-- <div class="score-margin">
+                  <p class="matPara"> -->
                     <button mat-raised-button="" color="primary" matbadge="8" matbadgeposition="before"
                       matbadgecolor="accent"
                       class="mat-focus-indicator mat-badge mat-raised-button mat-button-base mat-primary mat-badge-accent mat-badge-overlap mat-badge-above mat-badge-before mat-badge-medium matButton"><span
@@ -19,10 +33,11 @@
                         id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score
                         :0}}</span>
                     </button>
-                  </p>
-                </div>
+                  <!-- </p>
+                </div> -->
               </div>
             </div>
+           
             <table class="table-responsive inv-table">
               <tbody>
                 <tr>
