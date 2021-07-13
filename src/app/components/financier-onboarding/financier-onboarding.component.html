@@ -72,7 +72,7 @@
                                   matPrefix>person_outline</mat-icon>
                         <mat-label>{{'FinancierOnboardingComponent.LocalRegNo' | translate}}</mat-label>
                         <input matInput
-                               type="text"
+                               type="number"
                                formControlName="regNum"
                                [readonly]="isView"
                                required />
@@ -88,7 +88,7 @@
                               matPrefix>person_outline</mat-icon>
                     <mat-label> {{'FinancierOnboardingComponent.TaxId' | translate}}</mat-label>
                     <input matInput
-                           type="text"
+                           type="number"
                            formControlName="taxIdNum"
                            [readonly]="isView"
                            required />
@@ -155,7 +155,7 @@
                                   matPrefix>person_outline</mat-icon>
                         <mat-label>{{'FinancierOnboardingComponent.PrincipalAc' | translate}}</mat-label>
                         <input matInput
-                               type="text"
+                               type="number"
                                formControlName="principalBankAccount"
                                [readonly]="isView" />
                         <mat-error *ngIf="hasError('principalBankAccount', 'required')">{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-error>
@@ -189,7 +189,7 @@
                                       dense
                                       matPrefix>person_outline</mat-icon>
                             <mat-label>{{'FinancierOnboardingComponent.AnnualSCF' | translate}}</mat-label>
-                            <input type="text"
+                            <input type="number"
                                    matInput
                                    formControlName="anlScfTrnOver"
                                    [readonly]="isView" 
@@ -313,9 +313,9 @@
                     <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
                     <input type="number"
                            matInput
-                           formControlName="headtelephoneNumber"
+                           formControlName="headtelephoneno"
                            [readonly]="isView" required />
-                    <mat-error *ngIf="hasError('headtelephoneNumber', 'required')">{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
+                    <mat-error *ngIf="hasError('headtelephoneno', 'required')">{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -610,9 +610,9 @@
                           <mat-label> {{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
                           <input type="number"
                                  matInput
-                                 formControlName="servtelephoneNumber"
+                                 formControlName="servtelephoneno"
                                  [readonly]="isView" required />
-                          <mat-error *ngIf="hasError('servtelephoneNumber', 'required')"> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
+                          <mat-error *ngIf="hasError('servtelephoneno', 'required')"> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
                         </mat-form-field>
                       </div>
                     </div>

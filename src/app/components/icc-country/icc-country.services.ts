@@ -26,6 +26,6 @@ export class IccCountryServices {
   /** Api to get search list **/
   search_getAllcountry(obj) {
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath + 'countrysearch?' + params);
+    return this.apiService.tempGet(environment.financierServicePath + 'countrylist/search?' + params);
   }
 }

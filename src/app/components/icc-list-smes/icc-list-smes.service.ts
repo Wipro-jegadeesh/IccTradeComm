@@ -28,6 +28,6 @@ export class IccListSmeServices {
   /** Api to get search list **/
   search_getallSmeProfileDetails(obj) {
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath + 'smesearch?' + params);
+    return this.apiService.tempGet(environment.financierServicePath + 'sme-profile/smesearch?' + params);
   }
 }

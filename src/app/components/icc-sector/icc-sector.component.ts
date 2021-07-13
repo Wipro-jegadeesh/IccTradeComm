@@ -32,7 +32,7 @@ export class IccSectorComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'code': String,
+    'codes': String,
     'description': String
   }
   value: number = 0;
@@ -72,7 +72,7 @@ export class IccSectorComponent implements OnInit {
   }
   buildForm() { //Set Search form basic fields
     this.searchForm = this.fb.group({
-      code: ['', Validators.required],
+      codes: ['', Validators.required],
       description: ['', Validators.required]
     })
   }

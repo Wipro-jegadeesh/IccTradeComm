@@ -34,7 +34,7 @@ export class IccRolesComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'code': String,
+    'codes': String,
     'roleDescription': String
   }
   value: number = 0;
@@ -75,7 +75,7 @@ export class IccRolesComponent implements OnInit {
 
   buildform() { //this function is to build search form group initially
     this.Searchform = this.fb.group({
-      code: [''],
+      codes: [''],
       roleDescription: ['']
     })
   }
