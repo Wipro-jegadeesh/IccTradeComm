@@ -201,3 +201,24 @@
     //     this.dataSourceCountryExposureTable = new MatTableDataSource(counrtytabledenpendData);
         
     //   }
+    // **************coriolis chips set sample***************
+//   <!-- <mat-form-field class="example-chip-list">
+//   <mat-label>Favorite Fruits</mat-label>
+//   <mat-chip-list #chipList aria-label="Fruit selection">
+//     <mat-chip
+//     *ngFor="let fruit of fruits"
+//     [selectable]="selectable"
+//     [removable]="removable"
+//     (removed)="remove(fruit)">
+//     {{fruit}}
+//     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+//   </mat-chip>
+//   <input
+//   placeholder="New fruit..."
+//   #fruitInput
+//   formControlName="fruitCtrl"
+//   [matChipInputFor]="chipList"
+//   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+//   (matChipInputTokenEnd)="add($event)">
+//   </mat-chip-list>
+// </mat-form-field> -->

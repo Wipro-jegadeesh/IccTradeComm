@@ -3,76 +3,54 @@
         <br>
         <h5 class="mmt20"> {{'Repayment Over Due' | translate}} </h5>
         <div class="table-res mat-elevation-z8 table-responsive table-post">
-            <table mat-table [dataSource]="dataSource">
+            <!-- Repayment due table section -->
+            <table mat-table [dataSource]="overdueDatas">
                 <ng-container matColumnDef="invId">
                     <th mat-header-cell *matHeaderCellDef> {{'Invoice Id' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                       
                         {{element.invoiceNo}}
-                 
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="invAmt">
                     <th mat-header-cell *matHeaderCellDef> {{'Invoice Amount' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.invoiceCcy}} {{element.invoiceAmt}}
-
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="smeId">
                     <th mat-header-cell *matHeaderCellDef> {{'SME Name' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-
                         {{element.smeName}}
-
                     </td>
                 </ng-container>
-
-
                 <ng-container matColumnDef="buyerName">
                     <th mat-header-cell *matHeaderCellDef> {{'Buyer Name' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-   
                         {{element.buyerName}}
-                    
                     </td>
                 </ng-container>
-
-
                 <ng-container matColumnDef="invDate">
                     <th mat-header-cell *matHeaderCellDef> {{'Inv Date' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                   
                         {{element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
-                 
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="invDueDate">
                     <th mat-header-cell *matHeaderCellDef> {{'Inv Due date' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                     
                         {{ element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}}
-                   
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef> {{'Status' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                     
-                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
-                      
+                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ?
+                        'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                 
                         <a href="javascript:void(0)" (click)="openModal($event,template,element)">
                             <mat-icon #tooltip="matTooltip" matTooltip="{{'view' | translate}}"
                                 [matTooltipPosition]="'below'">visibility</mat-icon>
@@ -82,70 +60,75 @@
                 <ng-container matColumnDef="TopBar">
                     <th colspan="10" mat-header-cell *matHeaderCellDef>
                         <div style="justify-content:flex-end;cursor: pointer;">
-                            <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-                            <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                            <span (click)="onEnableSearch()" class="material-icons">search</span>&nbsp;
+                            <span (click)="onEnableFilter()" class="material-icons">filter_list</span>
                         </div>
                     </th>
                 </ng-container>
+                <!-- Search Section -->
                 <ng-container matColumnDef="Search">
                     <th colspan="10" mat-header-cell *matHeaderCellDef>
                         <h6>{{'Search By' | translate}}</h6>
                         <form [formGroup]="Searchform">
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'Icc Reference' | translate}}</mat-label>
-                                    <input type="text" formControlName="invoiceRef" matInput />
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Icc Reference' | translate}}</mat-label>
+                                        <input type="text" formControlName="invoiceRef" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Invoice Amount' | translate}}</mat-label>
+                                        <input type="text" formControlName="invoiceId" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'SME Name' | translate}}</mat-label>
+                                        <input type="text" formControlName="smeId" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Buyer Name' | translate}}</mat-label>
+                                        <input type="text" formControlName="buyerName" matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Inv Due date' | translate}}</mat-label>
+                                        <input matInput readonly="true" formControlName="invoiceDate"
+                                            [matDatepicker]="picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
+                                        <input matInput readonly="true" formControlName="invoiceDueDate"
+                                            [matDatepicker]="picker1">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
                             </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'Invoice Amount' | translate}}</mat-label>
-                                    <input type="text" formControlName="invoiceId" matInput />
-                                </mat-form-field>
+                            <div class="row"
+                                style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
+                                <button mat-raised-button style="color: #5e52a1;" (click)="onSearch()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
+                                        [matTooltipPosition]="'below'">done</mat-icon> {{'Search' | translate}}
+                                </button>&nbsp;
+                                <button mat-raised-button style="color: #5e52a1;" (click)="onResetSearch()">
+                                    <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
+                                        [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
+                                </button>
                             </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'SME Name' | translate}}</mat-label>
-                                    <input type="text" formControlName="smeId" matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'Buyer Name' | translate}}</mat-label>
-                                    <input type="text" formControlName="buyerName" matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'Inv Due date' | translate}}</mat-label>
-                                    <input matInput readonly="true" formControlName="invoiceDate" [matDatepicker]="picker" >
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                  </mat-form-field>
-                            </div>
-                            <div class="col-sm-2">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>{{'Invoice Due Date' | translate}}</mat-label>
-                                    <input matInput readonly="true" formControlName="invoiceDueDate" [matDatepicker]="picker1" >
-                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker1></mat-datepicker>
-                                  </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                            <button mat-raised-button style="color: #5e52a1;" (click)="searchApi()">
-                                <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
-                                    [matTooltipPosition]="'below'">done</mat-icon> {{'Search' | translate}}
-                            </button>&nbsp;
-                            <button mat-raised-button style="color: #5e52a1;">
-                                <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
-                                    [matTooltipPosition]="'below'">restart_alt</mat-icon> {{'Reset' | translate}}
-                            </button>
-                        </div>
-                    </form>
+                        </form>
                     </th>
                 </ng-container>
+                <!-- filter section -->
                 <ng-container matColumnDef="Filter">
                     <th class="class2" colspan="10" mat-header-cell *matHeaderCellDef>
                         <div class="row">
@@ -167,7 +150,6 @@
                                     <mat-date-range-picker #picker></mat-date-range-picker>
                                 </mat-form-field>
                             </div>
-
                         </div>
                         <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                             <button mat-raised-button style="color: #5e52a1;">
@@ -185,8 +167,8 @@
                 <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
                     *matHeaderRowDef="displayedColumnsearch"></tr>
                 <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-                <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="overdueTableHeaders"></tr>
+                <tr mat-row class="BID-Details" *matRowDef="let row; columns: overdueTableHeaders;"></tr>
             </table>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
@@ -201,78 +183,55 @@
             </button>
         </div>
         <div class="modal-body">
-
-
             <!-- //Bidding Details -->
-
-
             <div style="overflow-x:auto;">
-               
-                <table mat-table [dataSource]="dataSourceThree">
+                <table mat-table [dataSource]="biddingDatas">
                     <ng-container matColumnDef="id">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Financie Ref No' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ 'FIN00'+data.fin_id }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="finId">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'FIN Id' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ data.finId }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="invoiceId">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Id' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ data.invoiceId }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="fxRate">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Fx Rate' | translate}} %</th>
                         <td mat-cell *matCellDef="let data">{{ data.fxRate }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="baseCcyAmt">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Base' | translate}} CCY</th>
                         <td mat-cell *matCellDef="let data">{{ data.baseCcyAmt }}</td>
                     </ng-container>
-
-
                     <ng-container matColumnDef="fundablePercent">
                         <th mat-header-cell *matHeaderCellDef scope="column">% {{'Funded' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ data.fundablePercent }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="baseCcyFundingAmt">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'BaseCCY Funding Amt' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ data.baseCcyFundingAmt }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="repaymentDate">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Repayment Date' | translate}}</th>
                         <td mat-cell *matCellDef="let data">
                             {{data.repaymentDate && moment(data.repaymentDate).format('DD/MM/YYYY')}}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="baseCcyNetAmtPayable">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Net Amount Received' | translate}}</th>
                         <td mat-cell *matCellDef="let data">{{ data.baseCcyNetAmtPayable }}</td>
                     </ng-container>
-
                     <ng-container matColumnDef="annualYeild">
                         <th mat-header-cell *matHeaderCellDef scope="column">{{'Annual Yield' | translate}} %</th>
                         <td mat-cell *matCellDef="let data">{{ data.annualYeild }}</td>
                     </ng-container>
-
-                  
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsThree" style="background-color:#694ed6e0"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsThree"></tr>
+                    <tr mat-header-row *matHeaderRowDef="biddingTableHeaders" style="background-color:#694ed6e0"></tr>
+                    <tr mat-row *matRowDef="let row; columns: biddingTableHeaders"></tr>
                 </table>
-
             </div>
-
-
-
-            <!-- Table 2 -->
-
+            <!-- Invoice details Section -->
             <mat-accordion>
                 <mat-expansion-panel>
                 </mat-expansion-panel>
@@ -283,48 +242,45 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="table-res">
-                      
-                        <table mat-table [dataSource]="dataSourceTwo">
+                        <table mat-table [dataSource]="invoiceDatas">
                             <ng-container matColumnDef="invId">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice No' | translate}}</th>
                                 <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invId }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="invDate">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Date' | translate}}</th>
                                 <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.invDate && moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
+                                    {{invoiceDetailsData.invDate &&
+                                    moment(invoiceDetailsData.invDate).format('DD/MM/YYYY')}}
                                 </td>
                             </ng-container>
-
                             <ng-container matColumnDef="buyerName">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Buyer' | translate}}</th>
                                 <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.buyerName }}
                                 </td>
                             </ng-container>
-
                             <ng-container matColumnDef="invAmt">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Invoice Amount' | translate}}
                                 </th>
                                 <td mat-cell *matCellDef="let invoiceDetailsData">{{ invoiceDetailsData.invAmt }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="status">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Status' | translate}}</th>
                                 <td mat-cell *matCellDef="let invoiceDetailsData">
-                                    {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':invoiceDetailsData.status == "CAN" ? 'Cancelled':'Financed'}}
+                                    {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ?
+                                    'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by
+                                    SME':invoiceDetailsData.status == "CAN" ? 'Cancelled':'Financed'}}
                                 </td>
                             </ng-container>
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0">
+                            <tr mat-header-row *matHeaderRowDef="invoiceTableHeaders"
+                                style="background-color:#694ed6e0">
                             </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                            <tr mat-row *matRowDef="let row; columns: invoiceTableHeaders"></tr>
                         </table>
                     </div>
-
                 </mat-expansion-panel>
             </mat-accordion>
-
+            <!-- Goods details Section -->
             <mat-accordion>
                 <mat-expansion-panel>
                 </mat-expansion-panel>
@@ -335,36 +291,28 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div style="overflow-x:auto;">
-                        <table mat-table [dataSource]="dataSourceOne">
-
+                        <table mat-table [dataSource]="goodsDetailDatas">
                             <ng-container matColumnDef="descGoods">
                                 <th mat-header-cell *matHeaderCellDef scope="column">
                                     {{'Description of Goods' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.descGoods }}</td>
                             </ng-container>
-
-                           
-
                             <ng-container matColumnDef="quantity">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Quantity' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="rate">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Amt Ccy' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.amtCcy }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="amt">
                                 <th mat-header-cell *matHeaderCellDef scope="column"> {{'Amount' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.amt }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="taxRate">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Rate' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxRate }}</td>
                             </ng-container>
-
                             <ng-container matColumnDef="taxAmount">
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amount' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxAmt }}</td>
@@ -373,17 +321,14 @@
                                 <th mat-header-cell *matHeaderCellDef scope="column">{{'Tax Amt Ccy' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.taxAmtCcy }}</td>
                             </ng-container>
-
-
                             <ng-container matColumnDef="total">
                                 <th mat-header-cell *matHeaderCellDef scope="column"> {{'Total' | translate}}</th>
                                 <td mat-cell *matCellDef="let element">{{ element.total }}</td>
                             </ng-container>
-
-
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0">
+                            <tr mat-header-row *matHeaderRowDef="goodsDetailsHeaders"
+                                style="background-color:#694ed6e0">
                             </tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+                            <tr mat-row *matRowDef="let row; columns: goodsDetailsHeaders"></tr>
                         </table>
                     </div>
                 </mat-expansion-panel>

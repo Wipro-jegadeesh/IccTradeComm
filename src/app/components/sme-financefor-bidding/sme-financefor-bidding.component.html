@@ -1,9 +1,10 @@
-<div class="app-content {{isOpen}} ">
+<div class="app-content">
     <header>
         <br>
         <h5>{{'Finance Requests' | translate}}</h5>
+       <!-- created funding request section  -->
         <div class="mat-elevation-z8 table-responsive table-post">
-            <table mat-table [dataSource]="dataSource" matSort class="table-responsive">
+            <table mat-table [dataSource]="financeRequestDatas" matSort class="table-responsive">
                 <ng-container matColumnDef="invoiceRef">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{biddingTooltip.tradecommRef | translate}}" [matTooltipPosition]="'below'">
@@ -12,7 +13,6 @@
                         {{element.invoiceRef}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="invoiceNo">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{biddingTooltip.invoiceId | translate}}" [matTooltipPosition]="'below'">
@@ -21,7 +21,6 @@
                         {{element.invoiceNo}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="invAmt">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{biddingTooltip.invoiceAmount | translate}}" [matTooltipPosition]="'below'">
@@ -31,7 +30,6 @@
                         {{element.invoiceCcy}} {{element.invoiceAmt}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="smeId">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" matTooltip="{{biddingTooltip.smeName}}"
                         [matTooltipPosition]="'below'" mat-sort-header> {{'SME Name' | translate}} </th>
@@ -39,8 +37,6 @@
                         {{element.smeName}}
                     </td>
                 </ng-container>
-
-
                 <ng-container matColumnDef="buyerName">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip" mat-sort-header
                         matTooltip="{{biddingTooltip.buyerName | translate}}" [matTooltipPosition]="'below'">
@@ -57,7 +53,6 @@
                         {{ element.invoiceDate && moment(element.invoiceDate).format('DD/MM/YYYY')}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="invDueDate">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.invoiceDueDate | translate}}" [matTooltipPosition]="'below'">
@@ -67,16 +62,15 @@
                         {{element.invDueDate && moment(element.invDueDate).format('DD/MM/YYYY')}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef #tooltip="matTooltip"
                         matTooltip="{{biddingTooltip.status | translate}}" [matTooltipPosition]="'below'">
                         {{'Status' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ? 'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
+                        {{element.status == "APR" || element.status == "A" ? 'Approved' : element.status == "SUB" ?
+                        'Submitted by SME':element.status == "CAN" ? 'Cancelled':'Financed'}}
                     </td>
                 </ng-container>
-
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
                     <td mat-cell *matCellDef="let element">
@@ -90,8 +84,8 @@
                 <ng-container matColumnDef="TopBar">
                     <th colspan="10" mat-header-cell *matHeaderCellDef>
                         <div style="justify-content:flex-end;cursor: pointer;">
-                            <span (click)="searchDiv()" class="material-icons">search</span>&nbsp;
-                            <span (click)="filterDiv()" class="material-icons">filter_list</span>
+                            <span (click)="onEnableSearch()" class="material-icons">search</span>&nbsp;
+                            <span (click)="onEnableFilter()" class="material-icons">filter_list</span>
                         </div>
                     </th>
                 </ng-container>
@@ -139,12 +133,12 @@
                             </div>
                             <div class="row"
                                 style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
-                                <button mat-raised-button style="color: #5e52a1;" (click)="searchApi()">
+                                <button mat-raised-button style="color: #5e52a1;" (click)="onSearch()">
                                     <mat-icon #tooltip="matTooltip" matTooltip="{{'Search' | translate}}"
                                         [matTooltipPosition]="'below'">done
                                     </mat-icon> {{'Search' | translate}}
                                 </button>&nbsp;
-                                <button mat-raised-button style="color: #5e52a1;" (click)="resetApi()">
+                                <button mat-raised-button style="color: #5e52a1;" (click)="onReset()">
                                     <mat-icon #tooltip="matTooltip" matTooltip="{{'Reset' | translate}}"
                                         [matTooltipPosition]="'below'">
                                         restart_alt</mat-icon> {{'Reset' | translate}}
@@ -174,7 +168,6 @@
                                     <mat-date-range-picker #picker></mat-date-range-picker>
                                 </mat-form-field>
                             </div>
-
                         </div>
                         <div class="row" style="justify-content: flex-end;padding-bottom: 20px;padding-right: 20px;">
                             <button mat-raised-button style="color: #5e52a1;">
@@ -194,14 +187,14 @@
                 <tr [hidden]="!searchDivOpen" class="searchInput" mat-header-row
                     *matHeaderRowDef="displayedColumnsearch"></tr>
                 <tr [hidden]="!filterDivOpen" mat-header-row *matHeaderRowDef="displayedColumnFilter"></tr>
-                <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row style="background-color:#694ed6e0" *matHeaderRowDef="financeReqHeaders"></tr>
+                <tr mat-row class="BID-Details" *matRowDef="let row; columns: financeReqHeaders;"></tr>
             </table>
             <mat-paginator [hidePageSize]="true" showFirstLastButtons></mat-paginator>
         </div>
     </header>
 </div>
-
+<!-- Modal /popup section for invoice & goods details -->
 <div>
     <ng-template #template>
         <div class="modal-header">
@@ -212,11 +205,11 @@
             </button>
         </div>
         <div class="modal-body">
-            <!-- Table 2 -->
+            <!-- Invoice Details -->
             <div style="overflow-x:auto;">
                 <p style="font-weight: 500;
             color: #a899e4;margin-left: 14px;">{{'Invoice Details' | translate}} </p>
-                <table mat-table [dataSource]="dataSourceTwo" class="table-responsive">
+                <table mat-table [dataSource]="invoiceDetailDatas" class="table-responsive">
                     <ng-container matColumnDef="invId">
                         <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
                             matTooltip="{{biddingTooltip.invoiceNumber | translate}}" [matTooltipPosition]="'below'">
@@ -252,15 +245,17 @@
                             matTooltip="{{biddingTooltip.invoiceStatus | translate}}" [matTooltipPosition]="'below'">
                             {{'Status' | translate}}</th>
                         <td mat-cell *matCellDef="let invoiceDetailsData">
-                            {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' : invoiceDetailsData.status == "SUB" ? 'Submitted by SME':invoiceDetailsData.status == "CAN" ? 'Cancelled':'Financed'}}
+                            {{invoiceDetailsData.status == "APR" || invoiceDetailsData.status == "A" ? 'Approved' :
+                            invoiceDetailsData.status == "SUB" ? 'Submitted by SME':invoiceDetailsData.status == "CAN" ?
+                            'Cancelled':'Financed'}}
                         </td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsTwo" style="background-color:#694ed6e0"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsTwo"></tr>
+                    <tr mat-header-row *matHeaderRowDef="invoiceTableHeaders" style="background-color:#694ed6e0"></tr>
+                    <tr mat-row *matRowDef="let row; columns: invoiceTableHeaders"></tr>
                 </table>
             </div>
-
+            <!-- Goods Details -->
             <mat-accordion>
                 <mat-expansion-panel>
                 </mat-expansion-panel>
@@ -270,7 +265,7 @@
                             {{'Goods Details' | translate}}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <table mat-table [dataSource]="dataSourceOne" class="table-responsive">
+                    <table mat-table [dataSource]="goodsDetailDatas" class="table-responsive">
 
                         <ng-container matColumnDef="descGoods">
                             <th mat-header-cell *matHeaderCellDef scope="column" #tooltip="matTooltip"
@@ -333,8 +328,9 @@
                         </ng-container>
 
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOne" style="background-color:#694ed6e0"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsOne"></tr>
+                        <tr mat-header-row *matHeaderRowDef="goodsTableHeaders" style="background-color:#694ed6e0">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: goodsTableHeaders"></tr>
                     </table>
                 </mat-expansion-panel>
             </mat-accordion>

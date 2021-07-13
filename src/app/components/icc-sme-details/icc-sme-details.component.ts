@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
 import { TranslateService } from "@ngx-translate/core";
 import * as moment from 'moment';
+import { QuestionaireScoreServices } from "../questionaire-score/questionaire-score-services";
 @Component({
   selector: 'app-icc-sme-details',
   templateUrl: './icc-sme-details.component.html',
@@ -64,7 +65,8 @@ export class IccSmeDetailsComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   sectors: any;
   constructor(private toastr: ToastrService,private iccListSmeServices: IccListSmeServices,private fb: FormBuilder,public router: Router,
-    private apiService:ApiService,public IccUserCreationService:IccUserCreationService,public translate: TranslateService) { 
+    private apiService:ApiService,public IccUserCreationService:IccUserCreationService,public translate: TranslateService,
+    private questionnaireService:QuestionaireScoreServices) { 
     const smeData= this.router.getCurrentNavigation().extras.state;
     this.smeData = smeData
     this.invoiceFormBuild()
@@ -232,7 +234,12 @@ export class IccSmeDetailsComponent implements OnInit {
         })
     }
     getscore(){  //Get score data from api call
-      this.apiService.generalServiceget( environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(listResp=>{
+      let paramsObj={
+        'companyId':this.smeData.smeData.queryParams.companyId,
+        'companyName':this.smeData.smeData.queryParams.companyName,
+        'country':this.smeData.smeData.queryParams.country
+      }
+      this.questionnaireService.getScore(paramsObj).subscribe(listResp=>{
         if(listResp){
           this.dataSource2 = new MatTableDataSource(listResp.scores);
            this.groupsForm.patchValue({  
