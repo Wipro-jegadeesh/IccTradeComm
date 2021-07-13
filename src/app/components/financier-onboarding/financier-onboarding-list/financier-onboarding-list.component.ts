@@ -60,7 +60,7 @@ export class FinancierOnboardingListComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'profileID': String,
+    'profileId': String,
     'financierNameConstitution': String,
     'locregno' : String
     // 'buyerName': String,
@@ -170,7 +170,7 @@ export class FinancierOnboardingListComponent implements OnInit {
 
   buildform() {
     this.Searchform = this.fb.group({
-      profileID: [''],
+      profileId: [''],
       financierNameConstitution: [''],
       locregno : ['']
       // buyerName: [''],
@@ -225,8 +225,8 @@ export class FinancierOnboardingListComponent implements OnInit {
   getFilteredData(){
     
     let obj = {
-      fromexp : this.value,
-      toexp : this.highValue,
+      // fromexp : this.value,
+      // toexp : this.highValue,
       fromdate : moment(this.fromdate).format('YYYY/MM/DD'),
       todate : moment(this.todate).format('YYYY/MM/DD') 
     }

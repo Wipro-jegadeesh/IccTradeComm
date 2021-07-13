@@ -42,11 +42,11 @@ export class IccDashboardServices {
   /** To get search financier list **/
   search_getFinancierList(obj) {
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath + 'financiersearch?' + params);
+    return this.apiService.tempGet(environment.financierServicePath + 'financier-details/financiersearch?' + params);
   }
   /** To get filter financier list **/
   getFilteredData(obj) {
     let params = queryString.stringify(obj);
-    return this.apiService.tempGet(environment.financierServicePath + 'financierfilter?' + params);
+    return this.apiService.tempGet(environment.financierServicePath + 'financier-details/financierfilter?' + params);
   }
 }

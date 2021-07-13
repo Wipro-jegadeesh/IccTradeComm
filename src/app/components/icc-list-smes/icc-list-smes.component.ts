@@ -66,7 +66,7 @@ export class IccListSmesComponent implements OnInit {
   displayedColumnsearch: string[] = ['Search']
   displayedColumnFilter: string[] = ['Filter']
   SearchModel = {
-    'smeprofileID': String,
+    'smeprofileId': String,
     'registrationNumber': String,
     'companyId': String,
     'name': String,
@@ -123,7 +123,7 @@ export class IccListSmesComponent implements OnInit {
   /** Constructing the empty search form ,invoked while performing search**/
   buildform() {
     this.Searchform = this.fb.group({
-      smeprofileID: [''],
+      smeprofileId: [''],
       registrationNumber: [''],
       companyId: [''],
       name: [''],

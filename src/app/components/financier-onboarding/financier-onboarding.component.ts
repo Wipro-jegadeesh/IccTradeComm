@@ -231,7 +231,7 @@ export class FinancierOnboardingComponent implements OnInit {
 // "city": "cit1",
 // "state": "state1",
 // "postalCode": "ha37td",
-// "telephoneNumber": "123456",
+// "telephoneno": "123456",
 // "country": "countr1",
 // "email": "email1",
 // "swiftBic": "swftbic1",
@@ -251,7 +251,7 @@ export class FinancierOnboardingComponent implements OnInit {
 // "city": "cit1",
 // "state": "state1",
 // "postalCode": "ha37td",
-// "telephoneNumber": "123456",
+// "telephoneno": "123456",
 // "country": "countr1",
 // "email": "email1",
 // "swiftBic": "swftbic1",
@@ -312,7 +312,7 @@ export class FinancierOnboardingComponent implements OnInit {
         headcity: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].city],
         headstate: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].state],
         headpostalCode: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].postalCode],
-        headtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneNumber,Validators.required],
+        headtelephoneno: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneno,Validators.required],
         headcountry: [[]],
         heademail: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].email,Validators.required],
       
@@ -328,7 +328,7 @@ export class FinancierOnboardingComponent implements OnInit {
         servstate: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].state],
         paymentCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].paymentCode],
         servpostalCode: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].postalCode],
-        servtelephoneNumber: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].telephoneNumber,Validators.required],
+        servtelephoneno: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].telephoneno,Validators.required],
         servemail: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].email,Validators.required],
         servswiftBic: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].swiftBic],
         servfaxNo: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].faxno],
@@ -339,7 +339,7 @@ export class FinancierOnboardingComponent implements OnInit {
       })
 
       //head & service address 
-      respObj.finAdressLst && respObj.finAdressLst.length && respObj.finAdressLst.map((item) => {
+      respObj.addrlst && respObj.addrlst.length && respObj.addrlst.map((item) => {
         if (item.addressType == 'H') {
           item.faxno && this.financierForm.controls['headfaxNo'].setValue(item.faxno)
           item.addressLine1 && this.financierForm.controls['headAddrLine1'].setValue(item.addressLine1)
@@ -363,7 +363,7 @@ export class FinancierOnboardingComponent implements OnInit {
           item.state && this.financierForm.controls['headstate'].setValue(item.state)
           item.city && this.financierForm.controls['headcity'].setValue(item.city)
           item.postalCode && this.financierForm.controls['headpostalCode'].setValue(item.postalCode)
-          item.telephoneNumber && this.financierForm.controls['headtelephoneNumber'].setValue(item.telephoneNumber)
+          item.telephoneno && this.financierForm.controls['headtelephoneno'].setValue(item.telephoneno)
           item.email && this.financierForm.controls['heademail'].setValue(item.email)
           item.swiftBic && this.financierForm.controls['headswiftBic'].setValue(item.swiftBic)
         }
@@ -387,7 +387,7 @@ export class FinancierOnboardingComponent implements OnInit {
           item.state && this.financierForm.controls['servstate'].setValue(item.state)
           item.city && this.financierForm.controls['servcity'].setValue(item.city)
           item.postalCode && this.financierForm.controls['servpostalCode'].setValue(item.postalCode)
-          item.telephoneNumber && this.financierForm.controls['servtelephoneNumber'].setValue(item.telephoneNumber)
+          item.telephoneno && this.financierForm.controls['servtelephoneno'].setValue(item.telephoneno)
           item.email && this.financierForm.controls['servemail'].setValue(item.email)
           item.swiftBic && this.financierForm.controls['servswiftBic'].setValue(item.swiftBic)
         }
@@ -400,7 +400,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            phoneNo: [item.telephoneno ? item.telephoneno : ''],
             email: [ item.email ? item.email : '']
           })
           this.partnerFormArray.push(partnerRow);
@@ -411,7 +411,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            phoneNo: [item.telephoneno ? item.telephoneno : ''],
             email: [ item.email ? item.email : '']
           })
           this.authoriseFormArray.push(authRow);
@@ -422,7 +422,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
+            phoneNo: [item.telephoneno ? item.telephoneno : ''],
             email: [ item.email ? item.email : ''] 
           })
           this.entityFormArray.push(entityRow)
@@ -488,7 +488,7 @@ export class FinancierOnboardingComponent implements OnInit {
       headcity: ['',Validators.required],
       headstate: ['',Validators.required],
       headpostalCode: ['',Validators.required],
-      headtelephoneNumber: ['',Validators.required],
+      headtelephoneno: ['',Validators.required],
       headcountry: [[],Validators.required],
       heademail: ['',[Validators.email,Validators.required]],
       headswiftBic: ['',[Validators.required, Validators.pattern(/^[0-9a-zA-Z]+$/),Validators.maxLength(11)]],
@@ -500,7 +500,7 @@ export class FinancierOnboardingComponent implements OnInit {
       servstate: [''],
       paymentCode: [''],
       servpostalCode: ['',Validators.required],
-      servtelephoneNumber: ['',Validators.required],
+      servtelephoneno: ['',Validators.required],
       servemail: ['',[Validators.email,Validators.required]],
       servswiftBic: ['',Validators.required],
       servfaxNo: ['',Validators.required],
@@ -613,7 +613,7 @@ if(data && data.itemName){
       'city': formValues.headcity,
       'state': formValues.headstate,
       'country': formValues.headcountry && formValues.headcountry[0] && formValues.headcountry[0].itemName,
-      'telephoneNumber': formValues.headtelephoneNumber,
+      'telephoneno': formValues.headtelephoneno,
       'email': formValues.heademail,
       'faxno': formValues.headfaxNo,
       'postalCode':formValues.headpostalCode,
@@ -627,7 +627,7 @@ if(data && data.itemName){
       'city': formValues.servcity,
       'state': formValues.servstate,
       'country': formValues.servCountry && formValues.servCountry[0] && formValues.servCountry[0].itemName,
-      'telephoneNumber': formValues.servtelephoneNumber,
+      'telephoneno': formValues.servtelephoneno,
       'email': formValues.servemail,
       'faxno': formValues.servfaxNo,
       'postalCode':formValues.servpostalCode, 
@@ -646,7 +646,7 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Director/Partner",
         // 'addressLine1': item.address,
-        'telephoneNumber': item.phoneNo,
+        'telephoneno': item.phoneNo,
         'email': item.email
       }
       hasValue.length && associatePartyArr.push(partnerObj)
@@ -659,7 +659,7 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Authorised Signat",
         // 'addressLine1': item.address,
-        'telephoneNumber': item.phoneNo,
+        'telephoneno': item.phoneNo,
         'email': item.email
 
       }
@@ -673,12 +673,12 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Entity Admin",
         // 'addressLine1': item.address,
-        'telephoneNumber': item.phoneNo,
+        'telephoneno': item.phoneNo,
         'email': item.email
       }
       hasValue.length && associatePartyArr.push(partnerObj)
     }))
-    let finAdressLst = [headAddr, serviceAddr]
+    let addrlst = [headAddr, serviceAddr]
     let findetobj = {
       // 'userlst' : userlst,
       'locregno': formValues.regNum,
@@ -693,7 +693,7 @@ if(data && data.itemName){
       'transactionLimit': formValues.transLimit,
       // 'postalCode': formValues.postalCode,
       'currency': formValues.currency,
-      'finAdressLst': finAdressLst,
+      'addrlst': addrlst,
       'asocpartylst': associatePartyArr
     }
     if (this.financierId) {

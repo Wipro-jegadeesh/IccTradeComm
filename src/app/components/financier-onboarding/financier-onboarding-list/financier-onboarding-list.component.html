@@ -8,7 +8,7 @@
         <ng-container matColumnDef="financierId">
           <th mat-header-cell *matHeaderCellDef>
             {{'FinancierOnboardingComponent.FinancierId' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> FIN {{element.namedPKKey}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.profileId}} </td>
         </ng-container>
       
         <!-- Name Column -->
@@ -53,7 +53,7 @@
                                 <div class="col-sm-2">
                                     <mat-form-field appearance="outline">
                                         <mat-label>{{'FinancierOnboardingComponent.FinancierId' | translate}}</mat-label>
-                                        <input type="number" formControlName="profileID" matInput />
+                                        <input type="number" formControlName="profileId" matInput />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-2">
