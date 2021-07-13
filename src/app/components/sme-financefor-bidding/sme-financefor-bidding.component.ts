@@ -1,20 +1,16 @@
 import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
-import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { SmeFinancierForBiddingServices } from './sme-financefor-bidding-service';
 import { BIDDINGCONSTANTS } from '../../shared/constants/constants'
-// import * as moment from 'moment';
-declare var require: any
-const moment = require('moment');
-
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { MatSort } from '@angular/material/sort';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+declare var require: any
+const moment = require('moment');
 
 export interface goodsDetails {
   descGoods: String;
@@ -29,11 +25,8 @@ export interface goodsDetails {
   total: String;
 }
 const GOODS_DATA: goodsDetails[] = [];
-
-
 export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
 const INVOICE_DATA: invoiceDetails[] = [];
-
 
 @Component({
   selector: 'app-sme-financefor-bidding',
@@ -43,32 +36,16 @@ const INVOICE_DATA: invoiceDetails[] = [];
 
 export class SmeFinanceforBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
-  dataSource;
-
-
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
-
-
-
-  dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-
+  financeReqHeaders: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  financeRequestDatas;
+  goodsTableHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsDetailDatas = new MatTableDataSource(GOODS_DATA); //data
+  invoiceDetailDatas = new MatTableDataSource(INVOICE_DATA); //data
+  invoiceTableHeaders: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
   dataSourceThree; //data
   displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
-
-
-  isOpen = ""
   mobileScreen = false;
-  end = false;
-  start = true;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
   modalRef: BsModalRef;
-  color: ThemePalette = 'warn';
-  ischecked = "true"
   bidpanelOpenState = false;
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
@@ -98,7 +75,7 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     'invoiceDueDate': String
 
   }
-  Searchform: FormGroup;
+  searchForm: FormGroup;
   value: number = 0;
   highValue: number = 50;
   options: Options = {
@@ -117,35 +94,29 @@ export class SmeFinanceforBiddingComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
-    private fb: FormBuilder, private authenticationService: AuthenticationService, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
+  constructor(public router: Router, private modalService: BsModalService,
+    private fb: FormBuilder, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
 
   ngOnInit() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-
-    this.dataSource = new MatTableDataSource([{ 'invoiceRef': "22", 'invoiceNo': "22", 'invAmt': "22", 'smeId': "22", 'buyerName': "22", 'invDate': "2021-07-24T05:30:00.000+0000", 'invDueDate': "2021-07-24T05:30:00.000+0000", 'status': "A" }]);
-    this.dataSource.paginator = this.paginator
-
+    this.getFinanceReqData()
+    this.searchFormBuild()
+  }
+  //get open funding request table datas
+  getFinanceReqData() {
+    this.financeRequestDatas = new MatTableDataSource([{ 'invoiceRef': "22", 'invoiceNo': "22", 'invAmt': "22", 'smeId': "22", 'buyerName': "22", 'invDate': "2021-07-24T05:30:00.000+0000", 'invDueDate': "2021-07-24T05:30:00.000+0000", 'status': "A" }]);
+    this.financeRequestDatas.paginator = this.paginator
     // this.getsmeNameId();
-
     this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
-
-    // resp.forEach(element1 => {
-    // this.getSmeName.forEach(element2 => {
-    // if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-    // element1.smeId = element2.smeName
-    // }
-    // });
-    // });
-
-    this.dataSource = new MatTableDataSource(resp);
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort;
+      if (resp && resp.length) {
+        this.financeRequestDatas = new MatTableDataSource(resp);
+        this.financeRequestDatas.paginator = this.paginator
+        this.financeRequestDatas.sort = this.sort;
+      }
     })
-    this.buildform()
   }
   onResize() {
     if (window.innerWidth < 415) {
@@ -154,8 +125,9 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  buildform() {
-    this.Searchform = this.fb.group({
+  //search filter form build function
+  searchFormBuild() {
+    this.searchForm = this.fb.group({
       invoiceRef: [''],
       smeId: [''],
       buyerName: [''],
@@ -163,32 +135,22 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  searchApi() {
-    this.SmeFinancierForBiddingServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort;
+  //Search api call
+  onSearch() {
+    this.SmeFinancierForBiddingServices.searchFinanceFunded(this.searchForm.value).subscribe(resp => {
+      this.financeRequestDatas = new MatTableDataSource(resp);
+      this.financeRequestDatas.paginator = this.paginator
+      this.financeRequestDatas.sort = this.sort;
     })
   }
-  resetApi() {
-      this.Searchform.reset();
-    this.buildform();
-    this.SmeFinancierForBiddingServices.getFinanceForBiddingLists().subscribe(resp => {
-
-      // resp.forEach(element1 => {
-      //   this.getSmeName.forEach(element2 => {
-      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-      //   element1.smeId = element2.smeName
-      //   }
-      //   });
-      //   });
-
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort;
-    })
+  //Reset search /filter datas
+  onReset() {
+    this.searchForm.reset();
+    this.searchFormBuild();
+    this.getFinanceReqData();
   }
-  searchDiv() {
+  //function to show /hide search section
+  onEnableSearch() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -196,7 +158,8 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  //function to show /hide filter section
+  onEnableFilter() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -204,32 +167,32 @@ export class SmeFinanceforBiddingComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
+  //Currently not in use (****future purpose****)
   getsmeNameId() {
     this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
+      this.getSmeName = resp;
     })
-    }
-    
-
+  }
+  //popup function to show a invoice & goods details
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg sme-fin-modal' });
-
-    this.SmeFinancierForBiddingServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
-
-      this.dataSourceTwo = new MatTableDataSource([
-        { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'invCcy': resp.invCcy, 'status': resp.status }
-      ]);
-
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
-
-    })
+    this.getInvoiceDetails(data)
     this.SmeFinancierForBiddingServices.getFinanceBiddingLists(data.invoiceNo).subscribe(resp => {
       if (resp) {
         this.dataSourceThree = new MatTableDataSource(resp);
       }
     })
   }
-
+  //get invoice & goods details for particular invoice request
+  getInvoiceDetails(data) {
+    this.SmeFinancierForBiddingServices.getInvoiceRequestLists(data.invoiceId).subscribe(resp => {
+      if (resp) {
+        this.invoiceDetailDatas = new MatTableDataSource([
+          { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'invCcy': resp.invCcy, 'status': resp.status }
+        ]);
+        this.goodsDetailDatas = new MatTableDataSource(resp.goodsDetails);
+      }
+    })
+  }
 }
-

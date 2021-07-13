@@ -1,18 +1,14 @@
 
-import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ModalDialogService } from '../../service/modal-dialog.service';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MatTableDataSource } from '@angular/material/table';
-import { ThemePalette } from '@angular/material/core';
-import { AuthenticationService } from '../../service/authentication/authentication.service';
 import { Repayment_overdueServices } from './sme-repayment-overdue-service'
 import * as moment from 'moment';
 import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
-
 
 export interface financeForBiddingData {
   invId: String;
@@ -24,7 +20,6 @@ export interface financeForBiddingData {
   status: String;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
-
 export interface goodsDetails {
   descGoods: String;
   idNo: String;
@@ -39,13 +34,8 @@ export interface goodsDetails {
   total: String;
 }
 const GOODS_DATA: goodsDetails[] = [];
-
-
 export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
-const INVOICE_DATA: invoiceDetails[] = [];
-
-
-export interface biddingDetails {
+const INVOICE_DATA: invoiceDetails[] = [];export interface biddingDetails {
   'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
 }
 const BIDDING_DATA: biddingDetails[] = [];
@@ -57,27 +47,23 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class Repayment_overdueComponent implements OnInit {
 
-  displayedColumns: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  overdueTableHeaders: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  overdueDatas = new MatTableDataSource(ELEMENT_DATA);
 
 
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
+  goodsDetailsHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsDetailDatas = new MatTableDataSource(GOODS_DATA); //data
 
-  dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  invoiceDatas = new MatTableDataSource(INVOICE_DATA); //data
+  invoiceTableHeaders: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
 
-  dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
-  displayedColumnsThree: string[] = [
+  biddingDatas = new MatTableDataSource(BIDDING_DATA); //data
+  biddingTableHeaders: string[] = [
     'id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate',
     'baseCcyNetAmtPayable', 'annualYeild']
 
 
-  isOpen = ""
   mobileScreen = false;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
   modalRef: BsModalRef;
 
   bidpanelOpenState = false;
@@ -118,48 +104,33 @@ export class Repayment_overdueComponent implements OnInit {
   searchDivOpen: boolean;
   Searchform: FormGroup;
 
-  constructor(private fb: FormBuilder,public router: Router, private modalService: BsModalService, private AcceptedFinanceServices: Repayment_overdueServices,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
-
+  constructor(private fb: FormBuilder, public router: Router,
+    private modalService: BsModalService, private AcceptedFinanceServices: Repayment_overdueServices
+    , private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
   ngOnInit() {
     // this.getsmeNameId()
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
-    this.buildform()
-    this.dataSource = new MatTableDataSource([{
-      buyerAddr: "Singapore",
-      buyerName: "Tata Steel",
-      dispDate: "17/03/2021",
-      id: 2,
-      invAmt: "10000",
-      invCcy: "SGD",
-      invDate: "17/03/2021",
-      invDueDate: "17/06/2021",
-      invId: "INV102",
-      smeId: "SME101",
-      status: "A"
-    }]);
-
+    this.buildSearchForm()
+    this.getRepaymentOverdueData()
+  }
+  //get repayment overdue data
+  getRepaymentOverdueData() {
+    this.overdueDatas = new MatTableDataSource([]);
     this.AcceptedFinanceServices.getFinanceForBiddingLists().subscribe(resp => {
-
-      // resp.forEach(element1 => {
-      //   this.getSmeName.forEach(element2 => {
-      //   if (element1.smeId.toLowerCase() == element2.userId.toLowerCase()) {
-      //   element1.smeId = element2.smeName
-      //   }
-      //   });
-      //   });
-      const ELEMENT_DATA: financeForBiddingData[] = resp;
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
-    }) 
+      if (resp) {
+        this.overdueDatas = new MatTableDataSource(resp);
+        this.overdueDatas.paginator = this.paginator
+      }
+    })
   }
   getsmeNameId() {
     this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
-    this.getSmeName = resp;
+      this.getSmeName = resp;
     })
-}
+  }
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
@@ -167,7 +138,8 @@ export class Repayment_overdueComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  buildform() {
+  //build form for search filters
+  buildSearchForm() {
     this.Searchform = this.fb.group({
       invoiceRef: [''],
       invoiceId: [''],
@@ -176,21 +148,26 @@ export class Repayment_overdueComponent implements OnInit {
       invoiceDueDate: ['']
     })
   }
-  searchApi() {
+  //search api call
+  onSearch() {
     this.AcceptedFinanceServices.searchFinanceFunded(this.Searchform.value).subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+      if (resp) {
+        this.overdueDatas = new MatTableDataSource(resp);
+        this.overdueDatas.paginator = this.paginator;
+      }
     })
   }
-  resetApi() {
-    this.buildform();
+  //reset search data..
+  onResetSearch() {
+    this.buildSearchForm();
     this.AcceptedFinanceServices.searchFinanceFunded('').subscribe(resp => {
-      this.dataSource = new MatTableDataSource(resp);
-      this.dataSource.paginator = this.paginator
+      this.overdueDatas = new MatTableDataSource(resp);
+      this.overdueDatas.paginator = this.paginator
 
     })
   }
-  searchDiv() {
+  //function to show /hide a search section
+  onEnableSearch() {
     if (this.filterDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -198,7 +175,8 @@ export class Repayment_overdueComponent implements OnInit {
       this.searchDivOpen = !this.searchDivOpen
     }
   }
-  filterDiv() {
+  //function to show /hide a filter section
+  onEnableFilter() {
     if (this.searchDivOpen === true) {
       this.searchDivOpen = !this.searchDivOpen
       this.filterDivOpen = !this.filterDivOpen
@@ -206,28 +184,29 @@ export class Repayment_overdueComponent implements OnInit {
       this.filterDivOpen = !this.filterDivOpen
     }
   }
-
-
+  //modal /popup to show invoice & goods details
   openModal(event, template, data) {
     event.preventDefault();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-
-    this.AcceptedFinanceServices.getInvoiceRequestLists(data.id).subscribe(resp => {
-
-      this.dataSourceTwo = new MatTableDataSource([
+    this.getInvoiceDetails(data.id)
+    this.getFinancingDetails(data.invoiceId)
+  }
+  //get invoice details
+  getInvoiceDetails(invoiceId) {
+    this.AcceptedFinanceServices.getInvoiceRequestLists(invoiceId).subscribe(resp => {
+      this.invoiceDatas = new MatTableDataSource([
         { 'invId': resp.invId, 'invDate': resp.invDate, 'buyerName': resp.buyerName, 'invAmt': resp.invAmt, 'status': resp.status }
       ]);
-
-      this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
+      this.goodsDetailDatas = new MatTableDataSource(resp.goodsDetails);
 
     })
-
-    this.AcceptedFinanceServices.getAcceptedFinanceDetails(data.invoiceId).subscribe(resp => {
+  }
+  //get financing details
+  getFinancingDetails(financeId) {
+    this.AcceptedFinanceServices.getAcceptedFinanceDetails(financeId).subscribe(resp => {
       if (resp) {
-        this.dataSourceThree = new MatTableDataSource(resp);
+        this.biddingDatas = new MatTableDataSource(resp);
       }
     })
   }
 }
-
-
