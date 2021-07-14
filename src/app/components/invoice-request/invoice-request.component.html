@@ -4,9 +4,12 @@
       <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
         <mat-card>
           <mat-card-content>
+            <div id="container">
+              <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
+            </div>
             <div id="container" class="row col-md-12 col-12">
               <div class="col-md-7 col-xl-6 col-lg-6 col-12">
-                <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
+                <!-- <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span> -->
               </div>
               <div class="col-md-3 col-xl-4 col-lg-4 col-12">
               <div class="card-form-container" *ngIf="this.isDisabled">
@@ -59,11 +62,11 @@
                       <mat-label> {{'Currency' | translate}}</mat-label>
                       <mat-select matNativeControl [disabled]="disableSelect.value || this.isDisabled"
                         formControlName="invCcy" (change)="updateCurrency($event)">
-                        <mat-option value="SGD">SGD</mat-option>
-                        <mat-option value="USD">USD</mat-option>
-                        <mat-option value="GBP">GBP</mat-option>
-                        <mat-option value="EUR">EUR</mat-option>
-                        <mat-option value="JPY">JPY</mat-option>
+                        <mat-option value="SGD">$&nbsp;SGD</mat-option>
+                        <mat-option value="USD">$&nbsp;USD</mat-option>
+                        <mat-option value="GBP">£&nbsp;GBP</mat-option>
+                        <mat-option value="EUR">€&nbsp;EUR</mat-option>
+                        <mat-option value="JPY">¥&nbsp;JPY</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </td>
@@ -71,7 +74,7 @@
                     <mat-form-field dense 
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.invAmt && this.isDisabled}">
                       <mat-label>{{'Funding Request Amount' | translate}}</mat-label>
-                      <input type="number"  matInput autocomplete="on" formControlName="invAmt" [readonly]="this.invoiceDetails && this.invoiceDetails.invAmt ? this.isDisabled : false"/>
+                      <input type="number"  matInput autocomplete="on" formControlName="invAmt" class="example-right-align" [readonly]="this.invoiceDetails && this.invoiceDetails.invAmt ? this.isDisabled : false"/>
                       <span *ngIf="this.invoiceForm.value.invCcy === 'USD' || this.invoiceForm.value.invCcy === 'SGD'" matPrefix>$&nbsp;&nbsp;</span>
                       <span *ngIf="this.invoiceForm.value.invCcy === 'EUR'" matPrefix>€&nbsp;&nbsp;</span>
                       <span *ngIf="this.invoiceForm.value.invCcy === 'GBP'" matPrefix>£&nbsp;&nbsp;</span>
