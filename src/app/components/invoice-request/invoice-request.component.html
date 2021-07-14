@@ -9,7 +9,7 @@
                 <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
               </div>
               <div class="col-md-3 col-xl-4 col-lg-4 col-12">
-              <div class="card-form-container">
+              <div class="card-form-container" *ngIf="this.isDisabled">
                 <div class="dynamic-radio-btn file-input">
                   <h6>{{'Invoice Upload' | translate}}</h6>
                   <div style="text-align: center;">
@@ -25,14 +25,15 @@
               <div class="col-md-2 col-xl-2 col-lg-2 col-12" style="padding:32px 6px 6px 52px">
                 <!-- <div class="score-margin">
                   <p class="matPara"> -->
-                    <button mat-raised-button="" color="primary" matbadge="8" matbadgeposition="before"
-                      matbadgecolor="accent"
+                    <!-- <h6 matBadge="18" class="uxg-subtitle-2 uxg-side-badge">Folders</h6> -->
+                    <span class="uxg-h6" style="color: rgb(170, 101, 235);" id=grid>{{'Score' | translate}} : {{score ? score:0}}</span>
+
+                    <!-- <button mat-raised-button="" color="primary" matbadge="8" matbadgeposition="before" matbadgecolor="accent"
                       class="mat-focus-indicator mat-badge mat-raised-button mat-button-base mat-primary mat-badge-accent mat-badge-overlap mat-badge-above mat-badge-before mat-badge-medium matButton"><span
                         class="mat-button-wrapper"> Score </span><span matripple=""
                         class="mat-ripple mat-button-ripple"></span><span class="mat-button-focus-overlay"></span><span
-                        id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score
-                        :0}}</span>
-                    </button>
+                        id="mat-badge-content-37" class="mat-badge-content mat-badge-active matBadge">{{score ? score:0}}</span>
+                    </button> -->
                   <!-- </p>
                 </div> -->
               </div>
@@ -54,34 +55,65 @@
                     </mat-form-field>
                   </td>
                   <td rowspan="1" colspan="1">
+                    <mat-form-field dense>
+                      <mat-label> {{'Currency' | translate}}</mat-label>
+                      <mat-select matNativeControl [disabled]="disableSelect.value || this.isDisabled"
+                        formControlName="invCcy" (change)="updateCurrency($event)">
+                        <mat-option value="SGD">SGD</mat-option>
+                        <mat-option value="USD">USD</mat-option>
+                        <mat-option value="GBP">GBP</mat-option>
+                        <mat-option value="EUR">EUR</mat-option>
+                        <mat-option value="JPY">JPY</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <mat-form-field dense 
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.invAmt && this.isDisabled}">
+                      <mat-label>{{'Funding Request Amount' | translate}}</mat-label>
+                      <input type="number"  matInput autocomplete="on" formControlName="invAmt" [readonly]="this.invoiceDetails && this.invoiceDetails.invAmt ? this.isDisabled : false"/>
+                      <span *ngIf="this.invoiceForm.value.invCcy === 'USD' || this.invoiceForm.value.invCcy === 'SGD'" matPrefix>$&nbsp;&nbsp;</span>
+                      <span *ngIf="this.invoiceForm.value.invCcy === 'EUR'" matPrefix>€&nbsp;&nbsp;</span>
+                      <span *ngIf="this.invoiceForm.value.invCcy === 'GBP'" matPrefix>£&nbsp;&nbsp;</span>
+                      <span *ngIf="this.invoiceForm.value.invCcy === 'JPY'" matPrefix>¥&nbsp;&nbsp;</span>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field appearance="fill">
+                      <mat-label>Account amount</mat-label>
+                      <input matInput type="number" value="7285" class="example-right-align" />
+                      <span matPrefix>$&nbsp;</span>
+                      <span matSuffix>.00</span>
+                    </mat-form-field> -->
+                  </td>
+                  <!-- <td rowspan="1" colspan="1">
                     <table class="fun-table">
                       <tr>
-                        <td rowspan="1" colspan="1">
-                          <mat-form-field dense class="spilt-input"
-                            [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.invAmt && this.isDisabled}">
-                            <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
-                            <input type="number" matInput autocomplete="on" formControlName="invAmt"
-                              [readonly]="this.invoiceDetails && this.invoiceDetails.invAmt ? this.isDisabled : false"
-                              (input)="setTwoNumberDecimal($event,'invAmt')" />
-                          </mat-form-field>
-                        </td>
-                        <td rowspan="1" colspan="1">
-                          <mat-form-field dense class="select-split-input">
-                            <mat-label> {{'Currency' | translate}}</mat-label>
-                            <select matNativeControl [disabled]="disableSelect.value || this.isDisabled"
-                              formControlName="invCcy" (change)="updateCurrency($event)">
-                              <option value=""></option>
-                              <option value="SGD">SGD</option>
-                              <option value="USD">USD</option>
-                              <option value="GBP">GBP</option>
-                              <option value="EUR">EUR</option>
-                              <option value="JPY">JPY</option>
-                            </select>
-                          </mat-form-field>
-                        </td>
+                          <td rowspan="1" colspan="1">
+                    <mat-form-field dense class="select-split-input">
+                      <mat-label> {{'Currency' | translate}}</mat-label>
+                      <mat-select matNativeControl [disabled]="disableSelect.value || this.isDisabled"
+                        formControlName="invCcy" (change)="updateCurrency($event)">
+                        <mat-option value="SGD">SGD</mat-option>
+                        <mat-option value="USD">USD</mat-option>
+                        <mat-option value="GBP">GBP</mat-option>
+                        <mat-option value="EUR">EUR</mat-option>
+                        <mat-option value="JPY">JPY</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <mat-form-field dense class="spilt-input"
+                      [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.invAmt && this.isDisabled}">
+                      <mat-label> {{'Funding Request Amount' | translate}}</mat-label>
+                      <input type="number" matInput autocomplete="on" formControlName="invAmt"
+                        [readonly]="this.invoiceDetails && this.invoiceDetails.invAmt ? this.isDisabled : false"
+                        (input)="setTwoNumberDecimal($event,'invAmt')" />
+                    </mat-form-field>
+                  </td>
+                       
                       </tr>
                     </table>
-                  </td>
+                  </td> -->
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense>
                       <mat-label>{{'Funding Request Date' | translate}} </mat-label>
@@ -171,8 +203,6 @@
                         matInput formControlName="companyName" />
                     </mat-form-field>
                   </td>
-                </tr>
-                <tr>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.email && this.isDisabled}">
@@ -182,7 +212,8 @@
                         formControlName="email" />
                     </mat-form-field>
                   </td>
-
+                </tr>
+                <tr>
                   <td rowspan="1" colspan="1">
                     <mat-form-field floatLabel="never" dense appearance="fill" class=""
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.phoneNo && this.isDisabled}">
@@ -192,7 +223,6 @@
                         formControlName="phoneNo" />
                     </mat-form-field>
                   </td>
-
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.addressLine1 && this.isDisabled}">
@@ -202,8 +232,6 @@
                         matInput formControlName="addressLine1" />
                     </mat-form-field>
                   </td>
-                </tr>
-                <tr>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.addressLine2 && this.isDisabled}">
@@ -222,6 +250,8 @@
                         matInput formControlName="postalCode" />
                     </mat-form-field>
                   </td>
+                </tr>
+                <tr>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense
                       [ngClass]="{'readOnlyCls': this.invoiceDetails && this.invoiceDetails.city && this.isDisabled}">
@@ -231,8 +261,6 @@
                         formControlName="city" />
                     </mat-form-field>
                   </td>
-                </tr>
-                <tr>
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense class="listdown" (click)="myInput.focus()">
                       <mat-label>{{'Country' | translate}}</mat-label>

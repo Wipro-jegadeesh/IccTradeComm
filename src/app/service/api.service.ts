@@ -35,7 +35,7 @@ export class ApiService {
 	get(path: any, params: HttpParams = new HttpParams()): Observable<any> {
 		this.loaderService.showLoadingIcon(true);
 		this.setToken();
-		return this.http.get(`${this.baseUrl}${path}`, { params, headers: headers }).pipe(
+		return this.http.get(`${path}`, { params, headers: headers }).pipe(
 			map((res: Response) => {
 				this.loaderService.showLoadingIcon(false);
 				return res;
