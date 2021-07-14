@@ -182,9 +182,9 @@ table{
             }
         }
     }
-    .score-margin {
-        margin : 10px 0; 
-    }
+    // .score-margin {
+    //     margin : 10px 0; 
+    // }
     table{
         &.table-responsive{
             display: block;
@@ -313,6 +313,9 @@ table{
         }
     }
 }
+.example-right-align {
+    text-align: right;
+  }
 
 /* Desktop Styles */
 @media only screen and (min-width: 1025px) {
@@ -334,7 +337,7 @@ table{
     .table-responsive.inv-table{
         width: 100%;
         td{
-            padding-right: 3px;
+            padding-right: 12px;
         }
         mat-form-field,
         .spilt-input,
@@ -431,7 +434,7 @@ mat-form-field {
     align-self: stretch;
     margin-bottom: $uxg-spacing-2;
     // margin-left: $uxg-spacing-3 * 6;
-    width: 400px;
+    // width: 400px;
 }
 
 .uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
@@ -488,15 +491,15 @@ mat-form-field {
   .example-full-width {
     width: 100%;
   }
-  .spilt-input{
-    width: 195px;
-    right: 14px;
-    // top: 7px;
-  }
-  .select-split-input{
-    width: 200px;
+//   .spilt-input{
+//     width: 195px;
+//     right: 14px;
+//     // top: 7px;
+//   }
+//   .select-split-input{
+//     width: 200px;
 
-  }
+//   }
   .mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
     height: 48px !important;
     padding-top: 7px;
