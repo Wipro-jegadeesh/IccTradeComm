@@ -7,16 +7,16 @@ export class InvoiceRequestServices {
   public baseUrl: string;
   constructor(private apiService: ApiService) { this.baseUrl = "http://localhost:8080/ "; }
   getInvDetailsLists(){
-    return this.apiService.get('invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
+    return this.apiService.get(environment.api_url+'invoice-request/initiatedinvoicesbysmeid/'+localStorage.getItem("userId"));
   }
   getInvRepositryDetailsLists(ruc,​​​​​​​documentnumber){
-    return this.apiService.get('invoice-request/doceinvoicedetails/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
+    return this.apiService.get(environment.api_url +'invoice-request/doceinvoicedetails/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
   }
   getInvoice(​​​​​​​ruc,​​​​​​​documentnumber){
-    return this.apiService.get('invoice-request/invoicefromdoce/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
+    return this.apiService.get(environment.api_url+'invoice-request/invoicefromdoce/'+​​​​​​​​​​​​​​ruc+'/'+​​​​​​​documentnumber);
   }
   getInvDetailsLists_ForFinanceBidding(id){
-    return this.apiService.get('invoice-request/invoice/'+id);
+    return this.apiService.get(environment.api_url+'invoice-request/invoice/'+id);
   }
 
 
