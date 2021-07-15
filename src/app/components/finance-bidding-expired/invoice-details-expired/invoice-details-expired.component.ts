@@ -11,6 +11,21 @@ import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
+const DATA_TWO: any[] = [
+  {
+    BidID: 'BID03456',
+    FinOffAmt: 102700,
+    Ccy: 'SGD',
+    FxRateDiff: '1.35',
+    Margin: 10,
+    DiscRate: 3,
+    DiscAmt: 760,
+    NetAmtPay: 101940,
+    DueDate: '90D/10Mar21',
+    OffExpPrd: '4 PM',
+    Status: 'A'
+  }
+];
 @Component({
   selector: 'app-invoice-details-expired',
   templateUrl: './invoice-details-expired.component.html',
@@ -27,7 +42,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
 
   dataSourceOne = new MatTableDataSource(); //Good Details
   displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  dataSourceTwo = new MatTableDataSource(); //Funding Details
+  dataSourceTwo = new MatTableDataSource(DATA_TWO); //Funding Details
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',

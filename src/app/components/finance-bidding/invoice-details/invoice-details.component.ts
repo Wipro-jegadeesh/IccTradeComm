@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { InvoiceRequestServices } from '../../invoice-request/invoice-service';
@@ -9,6 +9,26 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
+
+
+
+const DATA_TWO: any[] = [
+  {
+    BidID: 'BID03456',
+    FinOffAmt: 102700,
+    Ccy: 'SGD',
+    FxRateDiff: '1.35',
+    Margin: 10,
+    DiscRate: 3,
+    DiscAmt: 760,
+    NetAmtPay: 101940,
+    DueDate: '90D/10Mar21',
+    OffExpPrd: '4 PM',
+    Status: 'A'
+  }
+];
+
 @Component({
   selector: 'app-invoice-details',
   templateUrl: './invoice-details.component.html',
@@ -18,21 +38,31 @@ import { TranslateService } from '@ngx-translate/core';
 export class InvoiceDetailsComponent implements OnInit {
   finBidform: FormGroup;
   modalRef: BsModalRef;
+
   detailsTooltip = INVOICEDETAILSCONSTANTS
   limitDetails: any;
-  currentPage = 0;
-  pageCount = 1;
-  limit = 7;
-  bidpanelOpenState = false;
-  id: any
-  invoiceDetails: any
-  moment: any = moment;
-  public smeRatingDetails: any = [];
+  public getSmeName: any = []
 
-  dataSourceOne = new MatTableDataSource(); //Good Details
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];//Good Details
+  constructor(public translate: TranslateService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService,
+    private router: Router,
+    private fb: FormBuilder, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices, private invoiceRequestServices: InvoiceRequestServices, private toastr: ToastrService) { }
 
-  dataSourceTwo = new MatTableDataSource(); //Funding Details 
+  dataSourceOne = new MatTableDataSource(); //data
+  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne1: string[] = [
+    'SNo',
+    'DescGoods',
+    'IdNo',
+    'Qty',
+    'Rate',
+    'Amt',
+    'DiscAmt',
+    'NetAmt',
+    'TaxRate',
+    'TaxAmt',
+    'Total'
+  ];
+  dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',
@@ -42,7 +72,6 @@ export class InvoiceDetailsComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  //second Row
   displayedInvoiceTwo: string[] = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
@@ -55,7 +84,6 @@ export class InvoiceDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
-  //popup Table
   launchBidPopup: string[] = [
     'Funding CCY',
     'Base CCY Amount',
@@ -64,7 +92,6 @@ export class InvoiceDetailsComponent implements OnInit {
     'Repayment Date'
   ]
   launchBid_Popup: any
-  //popup Table column second
   launchBidTableTwo_Popup: any
   launchBidTableTwoPopup: string[] = [
     'Inv Discount Rate',
@@ -74,30 +101,73 @@ export class InvoiceDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ]
+  displayInvDatas = new MatTableDataSource(); //data
 
-  constructor(public translate: TranslateService, private datePipe: DatePipe, private activatedRoute: ActivatedRoute, private modalService: BsModalService,
-    private router: Router, private fb: FormBuilder, private invoiceRequestServices: InvoiceRequestServices, private toastr: ToastrService) { }
+  displayedInvoiceFormsColumns: string[] = [
+    'billNo',
+    'invId',
+    'invDate',
+    'invDueDate',
+    'invAmt',
+    'buyerName',
+    'smeId',
+  ];
+  mobileScreen = false;
+  end = false;
+  start = true;
+  currentPage = 0;
+  pageCount = 1;
+  limit = 7;
+  isOpen = '';
+  bidpanelOpenState = false;
+  id: any
+  invoiceDetails: any
+  moment: any = moment;
+
+  public smeRatingDetails: any = [];
+
 
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    this.buildform() //From Invoice Details 
+    if (window.innerWidth < 415) {
+      this.mobileScreen = true;
+    }
+    this.buildform()
     this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(this.id).subscribe(resp => {
       if (resp) {
         this.invoiceDetails = resp
         this.getuserProfile();
-        this.buildfinBidform() //From set to Value 
-        this.calculationRate() //calculation
+        this.buildfinBidform()
+        this.changeRowgrid()
+        this.displayInvDatas = new MatTableDataSource([
+          {
+            billNo: resp.billNo,
+            invId: resp.invId,
+            invDate: resp.invDate,
+            invDueDate: resp.invDueDate,
+            invAmt: resp.invAmt,
+            buyerName: resp.buyerName,
+            smeId: resp.smeId,
+          }
+
+        ])
         this.dataSourceOne = new MatTableDataSource(resp.goodsDetails);
       } else {
-        this.buildfinBidform() //From set to Value
+        this.buildfinBidform()
       }
     })
+
     this.invoiceRequestServices.getMainlimitScreenDatas().subscribe(resp => {
       this.limitDetails = resp
     })
   }
-  //SME Rate Getting 
+
+  getsmeNameId() {
+    this.SmeFinancierForBiddingServices.getsmeNameId().subscribe(resp => {
+      this.getSmeName = resp;
+    })
+  }
   getuserProfile() {
     this.invoiceRequestServices.getuserProfile(this.invoiceDetails.smeProfileId).subscribe(resp => {
       if (resp) {
@@ -130,7 +200,6 @@ export class InvoiceDetailsComponent implements OnInit {
       invoiceAmt: ['']
     })
   }
-  //Form set to Value
   buildfinBidform() {
     var ddatae = new Date();
     console.log(this.datePipe.transform(this.invoiceDetails.invDueDate), "this.datePipe.transform(this.invoiceDetails.invDueDate)")
@@ -158,7 +227,6 @@ export class InvoiceDetailsComponent implements OnInit {
       invoiceAmt: ['']
     })
   }
-  //Dates calculation In B/W
   dateMinus(repaymentDate, cureentday) {
     var date1, date2;
     console.log(repaymentDate, cureentday)
@@ -170,7 +238,7 @@ export class InvoiceDetailsComponent implements OnInit {
     console.log(days_difference, "days_difference")
     return days_difference
   }
-  //popup Open 
+
   openModal(event, template) {
     console.log(this.limitDetails, "this.limitDetails")
     if (Number(this.limitDetails && this.limitDetails.OverallAvailable) < this.finBidform.value.baseCcyNetAmtPayable) {
@@ -193,7 +261,7 @@ export class InvoiceDetailsComponent implements OnInit {
       }
     }
   }
-  //Submit Function 
+
   onSubmitBidForm() {
     try {
       if (this.finBidform.status === "INVALID") {
@@ -234,13 +302,11 @@ export class InvoiceDetailsComponent implements OnInit {
     catch (err) {
     }
   }
-  //Comma Replacement 
   replaceCommaLine(data) {
     let dataToArray = data.split(',').map(item => item.trim());
     return dataToArray.join("</br>");
   }
-  //calculationRate For FX rate 
-  calculationRate() {
+  changeRowgrid() {
     this.finBidform.value.baseCcyAmt = Number(this.invoiceDetails.invAmt) * Number(this.finBidform.value.fxRate)
     this.finBidform.value.baseCcyFundingAmt = Number(this.finBidform.value.baseCcyAmt) * Number(this.finBidform.value.fundablePercent) / 100;
     this.finBidform.value.baseCcyDiscAmt = (this.finBidform.value.baseCcyFundingAmt * this.finBidform.value.tenor * (this.finBidform.value.annualYeild / 100) / 360)

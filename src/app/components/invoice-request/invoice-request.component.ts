@@ -127,6 +127,7 @@ export class InvoiceRequestComponent implements OnInit {
   pdfSrc
   XMLdata
   Previewtype
+  bidpanelOpenState = false;
   constructor(private modalService: BsModalService,private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe, private toastr: ToastrService
