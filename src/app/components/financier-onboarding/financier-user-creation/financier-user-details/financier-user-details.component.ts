@@ -169,7 +169,8 @@ export class FinancierUserDetailsComponent implements OnInit {
 
       let values = this.userForm.value
       values.nationalId = this.nationalId
-
+      values.contactNo = Number(values.contactNo)
+      values.finDetailId = Number(values.finDetailId)
       
 
                  if(this.id){

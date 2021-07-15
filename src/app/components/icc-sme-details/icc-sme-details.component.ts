@@ -149,7 +149,7 @@ export class IccSmeDetailsComponent implements OnInit {
     }
       getQuestionnaireSection(){  //Get questionare details
         let data=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget(environment.coriolisServicePath +'coriolis/getallquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
+      this.apiService.generalServiceget(environment.coriolisServicePath +'allquestionaire/'+this.smeData.smeData.queryParams.companyId + '/' + this.smeData.smeData.queryParams.companyName + '/' + this.smeData.smeData.queryParams.country).subscribe(resp=>{
           if(resp){
             this.questionnaireSections=resp.sectionDtoList
             localStorage.setItem('uuid',resp.uuid)
@@ -536,7 +536,7 @@ onSave(type) { //when submitting coriolis part
          this.toastr.success('Questionnaire Section Submitted Successfully')
 
         let data=JSON.parse(localStorage.getItem('userCred'))
-        this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
+        this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp=>{
           let obj={
               "smeRating":resp.score,
           }

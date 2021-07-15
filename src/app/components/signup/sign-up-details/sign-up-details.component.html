@@ -101,7 +101,7 @@
                   <mat-form-field dense>
                     <mat-label>{{'Phone Number' | translate}}</mat-label>
                     <mat-icon matPrefix>call</mat-icon>
-                    <input type="text" matInput formControlName="contactNo" />
+                    <input type="number" matInput formControlName="contactNo" />
                     <mat-error *ngIf="hasError('contactNo', 'required')">{{'phoneNumber is required' | translate}}
                     </mat-error>
                   </mat-form-field>
@@ -155,7 +155,7 @@
                   <mat-form-field dense>
                     <mat-label>{{'Postal Code' | translate}}</mat-label>
                     <mat-icon matPrefix>local_shipping</mat-icon>
-                    <input type="text" matInput formControlName="postalCode" />
+                    <input type="number" matInput formControlName="postalCode" />
                     <mat-error *ngIf="hasError('postalCode', 'required')">{{'postalCode is required' | translate}}
                     </mat-error>
                   </mat-form-field>

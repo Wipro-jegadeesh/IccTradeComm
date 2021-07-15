@@ -242,9 +242,9 @@ export class SignUpDetailsComponent implements OnInit {
         addressLine4: '',
         city: this.signupForm.value.city,
         state: this.signupForm.value.state,
-        postalCode: this.signupForm.value.postalCode,
+        postalCode: Number(this.signupForm.value.postalCode),
         country: this.signupForm.value.country && this.signupForm.value.country[0] && this.signupForm.value.country[0].itemName,
-        telephoneno: this.signupForm.value.contactNo,
+        telephoneno: Number(this.signupForm.value.contactNo),
         email: this.signupForm.value.email,
         swiftBic: '',
         addressType: ''
@@ -252,7 +252,7 @@ export class SignUpDetailsComponent implements OnInit {
 
       let userDetailObj = [{
         userId: this.signupForm.value.userId,
-        nationalId: this.signupForm.value.nationalId,
+        nationalId: Number(this.signupForm.value.nationalId),
         firstName: this.signupForm.value.firstName,
         lastName: this.signupForm.value.lastName,
         companyName: this.signupForm.value.companyName,
@@ -261,14 +261,14 @@ export class SignUpDetailsComponent implements OnInit {
         role: this.signupForm.value.role,
         profileType: this.signupForm.value.profileType,
         email: this.signupForm.value.email,
-        contactNo: this.signupForm.value.contactNo,
+        contactNo: Number(this.signupForm.value.contactNo),
         country: this.signupForm.value.country && this.signupForm.value.country[0] && this.signupForm.value.country[0].itemName,
         language: this.signupForm.value.language && this.signupForm.value.language[0] && this.signupForm.value.language[0].itemName
       }]
       let smeboard = {
         corporateCode: '',
         name: this.signupForm.value.companyName,
-        registrationNumber: this.signupForm.value.nationalId,
+        registrationNumber: Number(this.signupForm.value.nationalId),
         taxNo: '',
         rating: '',
         sector: this.signupForm.value.sector,

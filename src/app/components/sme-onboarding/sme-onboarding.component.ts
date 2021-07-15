@@ -483,7 +483,7 @@ export class SmeOnboardingComponent implements OnInit {
         this.toastr.success('Questionnaire Section Submitted Successfully')
 
         let data = JSON.parse(localStorage.getItem('userCred'))
-        this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp => {
+        this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp => {
           let obj = {
             "smeRating": resp.score,
           }

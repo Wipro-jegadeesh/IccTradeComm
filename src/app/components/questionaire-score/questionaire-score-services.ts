@@ -6,7 +6,7 @@ export class QuestionaireScoreServices  {
   constructor(private apiService: ApiService) { }
 
   getScore(data){
-    return this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
+    return this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + data.companyId + '/' + data.companyName + '/' + data.country);
   }
   submitScore(body: any) {
     return this.apiService.post(environment.serviePath_1+'groupinfo', body);

@@ -275,7 +275,7 @@ export class AuthConfigService {
   }
   updateScore(){
     let userCred=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/fetchScoreByCompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
+      this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
         let obj={
             "smeRating":resp.score,
         }
