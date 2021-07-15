@@ -15,6 +15,7 @@ import { IccCountryServices } from '../icc-country/icc-country.services'
 import { TranslateService } from '@ngx-translate/core';
 import * as XLSX from "xlsx";
 import * as Papa from 'papaparse';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 export interface invoiceData {
   invref: any;
@@ -51,6 +52,7 @@ export class InvoiceRequestComponent implements OnInit {
     invDueDate: "",
     invref: ""
   };
+  modalRef: BsModalRef;
   hide = true;
   dataSourceTwo = new MatTableDataSource(); //data
   displayedColumnsTwo: string[] = [
@@ -122,7 +124,10 @@ export class InvoiceRequestComponent implements OnInit {
   FileData: any;
   FileType: any;
   PDFData: any;
-  constructor(private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
+  pdfSrc
+  XMLdata
+  Previewtype
+  constructor(private modalService: BsModalService,private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe, private toastr: ToastrService
   ) {
@@ -137,10 +142,35 @@ export class InvoiceRequestComponent implements OnInit {
     this.isDisabled = this.type === 'repository' ? true : this.type === 'manual' ? false : false
     if (this.type === 'repository') {
       this.isDisabled = true
+      console.log(this.FileData,'this.FileData')
       this.UpdateReposInvoice(this.FileData.FileData.queryParams.invoicedata)
     }
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role: 'Authorise' }
     this.getInvDetailsLists()
+  }
+  openModal(event, template, type) { //prview modal popup to view data
+    this.pdfSrc = ""
+    this.XMLdata = ""
+    this.Previewtype = type
+    if(this.FileData.FileData.queryParams.invoicedata.EncryptedFilePDF && type === 'PDF'){
+      this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.EncryptedFilePDF
+    }
+    if(this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML && type === 'XML'){
+      this.XMLdata = this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML
+    }
+    // else{
+    // }
+    // console.log(this.pdfSrc ,"XMLdata")
+    // console.log(this.XMLdata,"pdf")
+    // if (type === 'PDF' && !this.PDFData) {
+    //   this.pdfSrc = 'data:application/pdf;base64,' +this.FileData.FileData.queryParams.invoicedata.EncryptedFile
+    // }else if(this.PDFData){
+    //   this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.EncryptedFile
+    // } else {
+    //   this.XMLdata = atob(this.FileData.FileData.queryParams.invoicedata.EncryptedFile)
+    // }
+    event.preventDefault();
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
   UpdateReposInvoice(item) { //get invoice repos and set
     this.invoiceRequestServices.getInvRepositryDetailsLists(item.RUC, item.DocumentNumber).subscribe(resp => {
@@ -270,6 +300,7 @@ export class InvoiceRequestComponent implements OnInit {
     }
   }
   chkDecimalLength(value) { //to check the decimal length
+    console.log(value,"value")
     if (Math.floor(value) === value) return 0;
     return value.toString().split(".")[1].length || 0;
   }
@@ -573,6 +604,7 @@ export class InvoiceRequestComponent implements OnInit {
           }
           this.addRow()
           this.getInvDetailsLists();
+
         }, error => {
           if (error.status != 200) {
             let availableData = error.error
@@ -627,6 +659,7 @@ export class InvoiceRequestComponent implements OnInit {
         })
       }
     } catch (err) {
+      this.getInvDetailsLists();
     }
   }
 
