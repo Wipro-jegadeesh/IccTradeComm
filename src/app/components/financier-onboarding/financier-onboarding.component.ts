@@ -19,17 +19,21 @@ const ELEMENT_DATA: any[] = [
     Name: '',
     Position: '',
     // Address: '',
-    TelephoneNo: '', 
+    telephoneNumber: '', 
     Email: ''
   }
 ];
 
-interface ICity {
-  // item_id: number;
-  // item_text: string;
 
+
+interface ICity {
   id: number;
   itemName: string;
+}
+
+interface IRegion {
+  id : number;
+  itemName : string
 }
 @Component({
   selector: 'app-financier-onboarding',
@@ -47,6 +51,7 @@ export class FinancierOnboardingComponent implements OnInit {
   companyid;
   errorColor = ""
   errorColor1 = ""
+  regionDDError = ""
 
 
   constructor(public translate: TranslateService,private route: ActivatedRoute, private router: Router, private datePipe: DatePipe, private fb: FormBuilder,
@@ -55,21 +60,53 @@ export class FinancierOnboardingComponent implements OnInit {
     private IccCountryServices:IccCountryServices) {
   }
 
+   FEES_DATA: any[] = [
+    {
+      standardPrice : '',discountOption : '',discountPrice : '', totalFees : ''
+    },
+    {
+      standardPrice : '',discountOption : '',discountPrice : '', totalFees : ''
+    },
+    {
+      chargeBasics : ''
+    }
+  ];
+
+   TRANSACTION_FEES_DATA: any[] = [
+    {
+      checkFieldtext : this.translate.instant("FinancierOnboardingComponent.SellerInvDiscount"),checkField : '',discountOption : '',discountPrice : '',minimumOption : '', minimumFees : '',maximumOption : '',maximumFees : ''
+    },
+    {
+      checkFieldtext : this.translate.instant("FinancierOnboardingComponent.BuyerInvDiscount"),checkField : '',discountOption : '',discountPrice : '', minimumOption : '', minimumFees : '',maximumOption : '',maximumFees : ''
+    },
+    {
+      checkFieldtext : this.translate.instant("FinancierOnboardingComponent.SupplyChainFin"), checkField : '',discountOption : '',discountPrice : '', minimumOption : '', minimumFees : '',maximumOption : '',maximumFees : ''
+    }
+  ];
+
   dataSource1 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
+  feesDataSource = new MatTableDataSource(this.FEES_DATA); //data
+  transaction_feesDataSource = new MatTableDataSource(this.TRANSACTION_FEES_DATA); //data
+  
 
   // , 'Address'
   displayedColumns: string[] = ['uniqueId','name','Position', 'TelephoneNo', 'Email'];
   displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
 
 
+  feesColumns: string[] = ['feeText','standardPrice','discountPrice', 'totalFees'];
+  transaction_feesColumns : string[] = ['productSelection','flat','min','max']
+
   name = "Angular";
   cities: Array<ICity> = [];
   selectedItems: Array<ICity> = [];
-  dropdownSettings = {
-  };
+  regionDatas : Array<ICity> = [];
+  dropdownSettings = {};
+  regionSettings= {}
   isView = false
+  headerFeeText = this.translate.instant("FinancierOnboardingComponent.EcutorMemberShip")
 
   ngOnInit() {
     this.cities = [
@@ -78,6 +115,13 @@ export class FinancierOnboardingComponent implements OnInit {
       { id: 3, itemName: "America" },
       { id: 4, itemName: "Singapore" }
     ];
+
+    this.regionDatas = [
+      { id: 1, itemName: "Eucador" },
+      { id: 2, itemName: "Mexico" },
+      { id: 3, itemName: "Columbia" }
+    ];
+
     this.selectedItems = [];
     this.dropdownSettings = {
       singleSelection: true,
@@ -90,15 +134,17 @@ export class FinancierOnboardingComponent implements OnInit {
       autoPosition : false,
       maxHeight	: 170
     };
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   // this.financierId=params.id
-    //   // let id = params.id && params.id.split('FIN')
-    //   // this.financierId = id && id[1] ? id[1] : ''
-    //   
-    //   this.financierId = params.id
-    //   this.isView = params.edit == 'view' ? true : false
-    // })
-
+    this.regionSettings = {
+      singleSelection: true,
+      defaultOpen: false,
+      idField: "item_id",
+      textField: "item_text",
+      allowSearchFilter: true,
+      enableSearchFilter : true,
+      text: 'Region',
+      autoPosition : false,
+      maxHeight	: 170
+    };
 
     this.financierId = this.activatedRoute.snapshot.paramMap.get("id")
     this.isView = this.activatedRoute.snapshot.paramMap.get("edit") == 'view' ? true : false
@@ -107,22 +153,6 @@ export class FinancierOnboardingComponent implements OnInit {
     this.buildFinancierForm()
     this.isView && this.disableFields()
     this.financierId && this.getSpecificFinancier()
-
-    // this.userDataSource = new MatTableDataSource([{'userId':1,
-    // 'firstName':"11",
-    // 'lastName':"980",
-    // 'companyName':"lkjlk",
-    // 'email':"jklk",
-    // 'contactNo':"ipoip",
-    // 'status':'A'
-    // },{'userId':1,
-    // 'firstName':"11",
-    // 'lastName':"980",
-    // 'companyName':"lkjlk",
-    // 'email':"jklk",
-    // 'contactNo':"ipoip",
-    // 'status':'R'
-    // }])
     this.getAllCountry()
   }
 
@@ -163,9 +193,6 @@ export class FinancierOnboardingComponent implements OnInit {
     })
   }
 
-
-
-
   disableFields() {
     // this.financierForm.controls['fName'].disable();
     this.dropdownSettings['disabled'] = true
@@ -192,97 +219,6 @@ export class FinancierOnboardingComponent implements OnInit {
     }
   }
   getSpecificFinancier() {
-
-   
-    
-
-// let respObj = {​​​​​​​​
-// "profileID": 2,
-// "namedPKKey": 1,
-// "companyid": 1,
-// "financierNameConstitution": 1,
-// "taxIdentificationNumber": 1,
-// "principalBankAccount": 1,
-// "registerDate": 1,
-// "financierType": 1,
-// "annualSCFTurnOver": 50000,
-// "annualSCFTurnOverCCY": 1,
-// "transactionLimit": 1,
-// "transactionLimitCCY": 1,
-// "hQLimit": 1,
-// "serviceAddress": 1,
-// "financeexpyears": 1,
-// "locregno": 1,
-// "typeofact": 1,
-// "prncbankbranch": 1,
-// "finseq": 1,
-// "asocpartylst": [
-//         {​​​​​​​​
-// "partyKey": 3,
-// "profileID": 7654,
-// "name": "preethi",
-// "position": "gtyu",
-// "assocType": "type",
-// "addressType": "S",
-// "addressLine1": "add1",
-// "addressLine2": "add2",
-// "addressLine3": "add3",
-// "addressLine4": "add4",
-// "city": "cit1",
-// "state": "state1",
-// "postalCode": "ha37td",
-// "telephoneno": "123456",
-// "country": "countr1",
-// "email": "email1",
-// "swiftBic": "swftbic1",
-// "faxno": 765
-//         }​​​​​​​​,
-//         {​​​​​​​​
-// "partyKey": 4,
-// "profileID": 7654,
-// "name": "preethi",
-// "position": "gtyu",
-// "assocType": "type",
-// "addressType": "H",
-// "addressLine1": "add1",
-// "addressLine2": "add2",
-// "addressLine3": "add3",
-// "addressLine4": "add4",
-// "city": "cit1",
-// "state": "state1",
-// "postalCode": "ha37td",
-// "telephoneno": "123456",
-// "country": "countr1",
-// "email": "email1",
-// "swiftBic": "swftbic1",
-// "faxno": 765
-//         }​​​​​​​​
-//     ],
-// "userlst": [
-//         {​​​​​​​​
-// "userKey": 5,
-// "userId": "SMEUSER5",
-// "nationalId": "7865",
-// "firstName": "priya",
-// "lastName": "reddy",
-// "companyName": "xyz",
-// "address": "fdrew",
-// "locale": "ghtyr",
-// "role": "admin",
-// "profileType": "rtew",
-// "identifierKey": "frew",
-// "userName": "ayisha",
-// "userCreationDate": "2020-03-04",
-// "email": "fgrte",
-// "contactNo": 9765433452,
-// "country": "india",
-// "language": "tamil",
-// "groupname": "sme"
-//         }​​​​​​​​
-//     ]
-// }​​​​​​​​
-
-
     this.financierService.getSpecificFinancierData(this.financierId).subscribe(resp => {
       let respObj = resp
        this.getUserList(respObj.companyid)
@@ -301,11 +237,6 @@ export class FinancierOnboardingComponent implements OnInit {
         transLimit: [respObj.transactionLimit],
         currency: [respObj.currency],
 
-
-        // userName : [respObj.userlst[0] && respObj.userlst[0].userName], email : [respObj.userlst[0] && respObj.userlst[0].email],contactNo: [respObj.userlst[0] && respObj.userlst[0].contactNo], 
-        // companyName : [respObj.userlst[0] && respObj.userlst[0].companyName],userCreationDate: [respObj.userlst[0] && respObj.userlst[0].userCreationDate],
-        //  address: [respObj.userlst[0] && respObj.userlst[0].address], language: [respObj.userlst[0] && respObj.userlst[0].language], country: [respObj.userlst[0] && respObj.userlst[0].country],
-
         headAddrLine1: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine1,Validators.required],
         headAddrLine2: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine2],
         headAddrLine3: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].addressLine3],
@@ -315,12 +246,8 @@ export class FinancierOnboardingComponent implements OnInit {
         headtelephoneno: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].telephoneno,Validators.required],
         headcountry: [[]],
         heademail: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].email,Validators.required],
-      
-        // postalCode: [respObj.postalCode],
-
         headswiftBic: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].swiftBic],
         headfaxNo: [resp.asocpartylst && resp.asocpartylst[0] && resp.asocpartylst[0].faxno],
-
         servAddrLine1: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine1,Validators.required],
         servAddrLine2: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine2],
         servAddrLine3: [resp.asocpartylst && resp.asocpartylst[1] && resp.asocpartylst[1].addressLine3],
@@ -335,7 +262,7 @@ export class FinancierOnboardingComponent implements OnInit {
         servCountry: [[],Validators.required],
         partnerDetails: this.fb.array([]),
         authSign: this.fb.array([]),
-        entityAdmin: this.fb.array([])
+        entityAdmin: this.fb.array([]),
       })
 
       //head & service address 
@@ -349,17 +276,10 @@ export class FinancierOnboardingComponent implements OnInit {
             let obj = {
               'itemName': item.country
             }
-
             const result = this.cities && this.cities.filter(country => country.itemName == item.country);
             obj['id'] = result['id']
-
-
-            // item.country == 'India' ? obj['id'] = 1 :
-            //   item.country == 'Australia' ? obj['id'] = 2 :
-            //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
             this.financierForm.controls['headcountry'].setValue([obj])
           }
-          // item.country && this.financierForm.controls['headcountry'].setValue([{'id':1,itemName:item.country}])
           item.state && this.financierForm.controls['headstate'].setValue(item.state)
           item.city && this.financierForm.controls['headcity'].setValue(item.city)
           item.postalCode && this.financierForm.controls['headpostalCode'].setValue(item.postalCode)
@@ -378,12 +298,8 @@ export class FinancierOnboardingComponent implements OnInit {
             }
             const result = this.cities && this.cities.filter(country => country.itemName == item.country);
             obj['id'] = result['id']
-            // item.country == 'India' ? obj['id'] = 1 :
-            //   item.country == 'Australia' ? obj['id'] = 2 :
-            //     item.country == 'America' ? obj['id'] = 3 : obj['id'] = 4
             this.financierForm.controls['servCountry'].setValue([obj])
           }
-          // item.country && this.financierForm.controls['servCountry'].setValue([{'id':1,itemName:item.country}])
           item.state && this.financierForm.controls['servstate'].setValue(item.state)
           item.city && this.financierForm.controls['servcity'].setValue(item.city)
           item.postalCode && this.financierForm.controls['servpostalCode'].setValue(item.postalCode)
@@ -400,7 +316,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneno ? item.telephoneno : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : '']
           })
           this.partnerFormArray.push(partnerRow);
@@ -411,7 +327,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneno ? item.telephoneno : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : '']
           })
           this.authoriseFormArray.push(authRow);
@@ -422,7 +338,7 @@ export class FinancierOnboardingComponent implements OnInit {
             name: [item.name ? item.name : ''],
             position: [item.position ? item.position : ''],
             // address: [ item.addressLine1 ? item.addressLine1 : ''],
-            phoneNo: [item.telephoneno ? item.telephoneno : ''],
+            phoneNo: [item.telephoneNumber ? item.telephoneNumber : ''],
             email: [ item.email ? item.email : ''] 
           })
           this.entityFormArray.push(entityRow)
@@ -460,6 +376,26 @@ export class FinancierOnboardingComponent implements OnInit {
     }
     })
   }
+
+  getRowtext(i){
+    if(i == 0){
+      return this.translate.instant("FinancierOnboardingComponent.OnboardingFees")
+    } else if(i == 1){
+      return this.translate.instant("FinancierOnboardingComponent.MemberShipFee")
+    } else if(i == 2){
+      return this.translate.instant("FinancierOnboardingComponent.ChargeBasics")
+    }
+  }
+
+  getFeeRowtext(i){
+    if(i == 0){
+      return this.translate.instant("FinancierOnboardingComponent.SellerInvDiscount")
+    } else if(i == 1){
+      return this.translate.instant("FinancierOnboardingComponent.BuyerInvDiscount")
+    } else if(i == 2){
+      return this.translate.instant("FinancierOnboardingComponent.SupplyChainFin")
+    }
+  }
   buildFinancierForm() {
     this.financierForm = this.fb.group({
       financierId: [''],
@@ -473,15 +409,7 @@ export class FinancierOnboardingComponent implements OnInit {
       prncbankbranch: ['',Validators.required],
       anlScfTrnOver: ['',Validators.required],
       transLimit: ['',Validators.required],
-      // postalCode: [''],
       currency: ['',Validators.required],
-
-
-      // userName : ['',Validators.required], email : ['',[Validators.email,Validators.required]],contactNo: ['',Validators.required], 
-      // companyName : [''],userCreationDate: [''],
-      //  address: [''], language: [''], country: [''],
-
-
       headAddrLine1: ['',Validators.required],
       headAddrLine2: [''],
       headAddrLine3: [''],
@@ -507,8 +435,50 @@ export class FinancierOnboardingComponent implements OnInit {
       servCountry: [[],Validators.required],
       partnerDetails: this.fb.array([]),
       authSign: this.fb.array([]),
-      entityAdmin: this.fb.array([])
+      entityAdmin: this.fb.array([]),
+      region : [[],Validators.required],
+      feesDetails: this.fb.array([]),
+      transaction_feesDetails : this.fb.array([])
     })
+
+    this.FEES_DATA && this.FEES_DATA.map((item,index) => {
+      let feesRow;
+      if(index == 2){
+         feesRow = this.fb.group({
+          chargeBasics: ["",Validators.required]
+        })
+      }else{
+         feesRow = this.fb.group({
+          standardPrice: ["",Validators.required],
+          discountOption: ["",Validators.required],
+          discountPrice: ["",Validators.required],
+          totalFees: ["",Validators.required]
+      })
+      }
+     
+    this.feesFormArray.push(feesRow);
+    this.feesDataSource.data = this.feesFormArray.controls;
+  })
+
+  this.TRANSACTION_FEES_DATA && this.TRANSACTION_FEES_DATA.map((item,index) => {
+    let transaction_feesRow;
+       transaction_feesRow = this.fb.group({
+        checkField: ["",Validators.required],
+        discountOption: ["",Validators.required],
+        discountPrice: ["",Validators.required],
+        minimumOption: ["",Validators.required],
+        minimumFees: ["",Validators.required],
+        maximumOption: ["",Validators.required],
+        maximumFees: ["",Validators.required]
+    })
+   
+  this.transaction_feesFormArray.push(transaction_feesRow);
+  this.transaction_feesDataSource.data = this.transaction_feesFormArray.controls;
+})
+
+  
+    
+    
     const partnerRow = this.fb.group({
       uniqueId: ["",Validators.required],
       name: ["",Validators.required],
@@ -533,6 +503,9 @@ export class FinancierOnboardingComponent implements OnInit {
       phoneNo: ["",Validators.required],
       email: ["",Validators.required]
     })
+
+  
+    
     this.partnerFormArray.push(partnerRow);
     this.authoriseFormArray.push(authRow);
     this.entityFormArray.push(entityRow)
@@ -550,6 +523,15 @@ export class FinancierOnboardingComponent implements OnInit {
   get entityFormArray(): FormArray {
     return this.financierForm.get('entityAdmin') as FormArray;
   }
+
+  get feesFormArray(): FormArray {
+    return this.financierForm.get('feesDetails') as FormArray;
+  }
+
+  get transaction_feesFormArray(): FormArray {
+    return this.financierForm.get('transaction_feesDetails') as FormArray;
+  }
+
   onHeadCountrySelect(item: any) {
     this.errorColor = ""
   }
@@ -566,10 +548,22 @@ export class FinancierOnboardingComponent implements OnInit {
     this.errorColor1 = "error-color"
   }
 
-  // onClose(item : any){
-  //   debugger
-  //   this.checkHeadCountryData(this.financierForm.value && this.financierForm.value.headcountry && this.financierForm.value.headcountry[0])
-  // } 
+  onRegionSelect(item: any) {
+    this.regionDDError = ""
+    if(item.itemName == "Eucador"){
+      this.headerFeeText = this.translate.instant("FinancierOnboardingComponent.EcutorMemberShip")
+    }
+    if(item.itemName == "Mexico"){
+      this.headerFeeText = this.translate.instant("FinancierOnboardingComponent.MexicoMemberShip")
+    }
+    if(item.itemName == "Columbia"){
+      this.headerFeeText = this.translate.instant("FinancierOnboardingComponent.ColumbiaMemberShip")
+    }
+  }
+
+  onRegionDeSelect(item : any){
+    this.regionDDError = "error-color"
+  }
 
   checkHeadCountryData(data){
 if(data && data.itemName){
@@ -586,12 +580,21 @@ if(data && data.itemName){
     }
       }
 
+      checkRegionDDError(data){
+        if(data && data.itemName){
+          this.regionDDError = ""
+        }else{
+          this.regionDDError = "error-color"
+        }
+          }
+
    check() {
     if(this.financierForm.valid){
       this.onSubmit()
     }else{
       this.checkHeadCountryData(this.financierForm.value && this.financierForm.value.headcountry && this.financierForm.value.headcountry[0])
       this.checkServeCountryData(this.financierForm.value && this.financierForm.value.servCountry && this.financierForm.value.servCountry[0])
+      this.checkServeCountryData(this.financierForm.value && this.financierForm.value.region && this.financierForm.value.region[0])
 
       this.toastr.error(this.translate.instant("Please fill Mandatory fields"))
     }
@@ -646,7 +649,7 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Director/Partner",
         // 'addressLine1': item.address,
-        'telephoneno': item.phoneNo,
+        'telephoneNumber': item.phoneNo,
         'email': item.email
       }
       hasValue.length && associatePartyArr.push(partnerObj)
@@ -659,7 +662,7 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Authorised Signat",
         // 'addressLine1': item.address,
-        'telephoneno': item.phoneNo,
+        'telephoneNumber': item.phoneNo,
         'email': item.email
 
       }
@@ -673,7 +676,7 @@ if(data && data.itemName){
         'position': item.position,
         'assocType': "Entity Admin",
         // 'addressLine1': item.address,
-        'telephoneno': item.phoneNo,
+        'telephoneNumber': item.phoneNo,
         'email': item.email
       }
       hasValue.length && associatePartyArr.push(partnerObj)

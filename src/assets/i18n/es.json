@@ -417,7 +417,33 @@
       "Submit": "Enviar",
       "Edit": "Editar",
       "goodsId": "ID de bienes",
-      "clear":"clara"
+      "clear":"clara",
+
+      "EcutorMemberShip" : "Eucador Membership Fees and Transaction Fees",
+			"MexicoMemberShip" : "Mexico Membership Fees and Transaction Fees",
+			"ColumbiaMemberShip" : "Columbia Membership Fees and Transaction Fees",
+			"OnboardMemberShip" : "Onboarding and Membership Fees",
+			"StandardPrice" : "Standard Price",
+			"DiscountPrice" : "Discount Price",
+			"FeeOrPercentage" : "Fees or Percentage",
+			"TotalFees" : "Total Fees",
+			"FlatCharges" : "Flat Charges",
+			"PercentBasics" : "Percent basics",
+			"Quaterly" : "Quaterly",
+			"HalfYearly" : "Half-Yearly",
+			"Yearly" : "Yearly",
+
+			"TransactionFee" : "Transaction Fees",
+			"OnboardingFees" : "Onboarding Fees(One Time Fee)",
+			"MemberShipFee" : "Membership Fee(Recurring Fees)",
+			"ChargeBasics" : "Charge Basis",
+
+			"SellerInvDiscount" : "Seller Invoice Discounting",
+			"BuyerInvDiscount" : "Buyer Invoice Discounting",
+			"SupplyChainFin" : "Supply Chain Financing",
+			"Minimum" : "Minimum",
+			"Maximum" : "Maximum",
+			"FlatFees" : "Flat fees" 
     },
     "FinancieruserCreation":{
       "AddUser": "Agregar usuario",

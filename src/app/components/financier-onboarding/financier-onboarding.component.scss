@@ -126,6 +126,32 @@ header {
    }
 }
 
+.eucador-head{
+    margin-bottom: 5px;
+    h4{
+        text-align: center;
+        margin-left: 0;
+        margin-bottom: 17px;
+    }
+    h5{
+        text-align: left;
+        padding-left: 40px
+    }
+}
+
+.discount-box{
+    margin-top: 15px;
+    >div{
+        flex-direction: column;
+    }
+}
+
+.space-top{
+    margin-top: 28px;
+}
+.mat-radio-button{
+    margin-right: 10px;
+}
 @media only screen and (max-width: 575px) {
     .app-content{
         left: -12px;
