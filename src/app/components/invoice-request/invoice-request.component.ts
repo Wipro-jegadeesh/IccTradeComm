@@ -156,7 +156,9 @@ export class InvoiceRequestComponent implements OnInit {
       this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.EncryptedFilePDF
     }
     if(this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML && type === 'XML'){
-      this.XMLdata = this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML
+      var base64Img = this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML;
+      base64Img = base64Img.replace("data:text/xml;base64,","");
+      this.XMLdata = atob(base64Img)
     }
     // else{
     // }
