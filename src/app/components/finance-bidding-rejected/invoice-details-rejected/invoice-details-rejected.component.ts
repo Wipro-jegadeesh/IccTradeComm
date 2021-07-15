@@ -11,6 +11,21 @@ import { FinanceBiddingRejectedServices } from '../finance-bidding-rejected-serv
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
+const DATA_TWO: any[] = [
+  {
+    BidID: 'BID03456',
+    FinOffAmt: 102700,
+    Ccy: 'SGD',
+    FxRateDiff: '1.35',
+    Margin: 10,
+    DiscRate: 3,
+    DiscAmt: 760,
+    NetAmtPay: 101940,
+    DueDate: '90D/10Mar21',
+    OffExpPrd: '4 PM',
+    Status: 'A'
+  }
+];
 @Component({
   selector: 'app-invoice-details-rejected',
   templateUrl: './invoice-details-rejected.component.html',
@@ -38,7 +53,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
     'TaxAmt',
     'Total'
   ];
-  dataSourceTwo = new MatTableDataSource(); //Bidding Details 
+  dataSourceTwo = new MatTableDataSource(DATA_TWO); //Bidding Details 
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',

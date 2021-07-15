@@ -212,7 +212,7 @@ table#financBidding {
     //     background-image: linear-gradient(to bottom right, #d706dafa, #790cdc,#4d00e4) !important;
     // }
     .mat-ripple.mat-tab-label.mat-focus-indicator{
-        border-right: 1px solid #fff!important; 
+        // border-right: 1px solid rgb(37, 35, 35)!important; 
         border-bottom: 2px solid transparent;
         transition: .3s ease;
         &:hover{
@@ -224,10 +224,16 @@ table#financBidding {
     //     border-bottom: 4px solid #fff!important;    
     // }
     .mat-tab-label-active {
+        border: 1px solid transparent;
+        border-top-left-radius: .75rem;
+        border-top-right-radius: .75rem;
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+        box-shadow: #CCC 0 0 2em 1px;
         // background-image: linear-gradient(to bottom right, #d706dafa, #790cdc, #4d00e4) !important;
-      background-image: linear-gradient(to bottom right, #d706daad, #790cdc, #4e07dba6) !important;
+    //   background-image: linear-gradient(to bottom right, #d706daad, #790cdc, #4e07dba6) !important;
         .mat-tab-label-content{
-            color: #fff !important;
+            color: #7c49cb !important;
         }
     }
 .mat-card {
@@ -757,9 +763,9 @@ mat-card[_nghost-tcy-c194] mat-card[_ngcontent-tcy-c194]
 .selected-list .c-list .c-token .c-remove svg {
     fill: #0e0d0d !important;
 }
-.mat-tab-label .mat-tab-label-content{
-    color:#694ed6;
-}
+// .mat-tab-label .mat-tab-label-content{
+//     // color:#694ed6;
+// }
 .fundreq-btn{
     float: right;
     margin-right: 100px;

@@ -13,7 +13,21 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
-
+const DATA_TWO: any[] = [
+  {
+    BidID: 'BID03456',
+    FinOffAmt: 102700,
+    Ccy: 'SGD',
+    FxRateDiff: '1.35',
+    Margin: 10,
+    DiscRate: 3,
+    DiscAmt: 760,
+    NetAmtPay: 101940,
+    DueDate: '90D/10Mar21',
+    OffExpPrd: '4 PM',
+    Status: 'A'
+  }
+];
 @Component({
   selector: 'app-finance-bids-accept-details',
   templateUrl: './finance-bids-accept-details.component.html',
@@ -44,7 +58,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'TaxAmt',
     'Total'
   ];
-  dataSourceTwo = new MatTableDataSource(); //data
+  dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
   displayedColumnsTwo: string[] = [
     'Funding CCY',
     'FX rate Base CCY',
