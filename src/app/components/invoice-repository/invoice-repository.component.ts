@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import * as XLSX from "xlsx";
+import * as Papa from 'papaparse';
 
 @Component({
   selector: 'app-invoice-repository',
@@ -54,7 +56,7 @@ export class InvoiceRepositoryComponent implements OnInit {
   dataSource
   tooltipPosition = "below";
   modalRef: BsModalRef;
-  displayedColumns: string[] = ['DocumentNumber', 'RUC', 'AuthorizationDate', 'InvoiceDate', 'IdentificatioNumberBuyer', 'PDF', 'XML'];
+  displayedColumns: string[] = ['DocumentNumber', 'RUC', 'AuthorizationDate', 'InvoiceDate', 'IdentificatioNumberBuyer', 'PDF'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   userDeatils: any;
   isDisabled: boolean;
@@ -64,6 +66,9 @@ export class InvoiceRepositoryComponent implements OnInit {
   FileData: any;
   pdfSrc
   XMLdata
+  FileType: any;
+  PDFData: any;
+  FileXMLType
   constructor(private modalService: BsModalService, private activatedRoute: ActivatedRoute, public translate: TranslateService, public router: Router,
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private toastr: ToastrService
@@ -83,7 +88,7 @@ export class InvoiceRepositoryComponent implements OnInit {
   }
   invoiceFormBuild() {//form build in initial stage
     this.invoiceForm = this.fb.group({
-      invId: ['', Validators.required],
+      invId: [''],
       billNo: [''],
       buyerName: [''],
       invFromDate: [''],
@@ -103,8 +108,10 @@ export class InvoiceRepositoryComponent implements OnInit {
   openModal(event, template, EncryptedFile, type) { //prview modal popup to view data
     this.pdfSrc = ""
     this.XMLdata = ""
-    if (type === 'PDF') {
+    if (type === 'PDF' && !this.PDFData) {
       this.pdfSrc = 'data:application/pdf;base64,' + EncryptedFile
+    }else if(this.PDFData){
+      this.pdfSrc = EncryptedFile
     } else {
       this.XMLdata = atob(EncryptedFile)
     }
@@ -125,6 +132,29 @@ export class InvoiceRepositoryComponent implements OnInit {
   SearchInovice() { //to search invoice details
     this.getInvDetailsLists()
   }
+  UploadInovice(){
+    if(this.PDFData && this.XMLdata){
+      this.dataSource = new MatTableDataSource([{
+        "RUC": "1790899780001",
+        "DocumentCode": "01",
+        "DocumentNumber": "001-019-000098259",
+        "DoceStatusID": "5",
+        "ClaveAcceso": "1506202101179089978000120010190000982590009825913",
+        "AuthorizationNumber": "1506202101179089978000120010190000982590009825913",
+        "AuthorizationDate": "2021-06-15T09:00:56",
+        "InvoiceDate": "2021-06-15T00:00:00",
+        "DoceMessage": "El documento fue recibido y pasó todas las validaciones de autorización. El documento tiene el estatus de AUTORIZADO.",
+        "RazonSocialBuyer": "GARCIA BENITEZ ANDREA MARIA",
+        "IdentificatioNumberBuyer": "1709155632001",
+        "ErrorCode": "0",
+        "ErrorMessage": "",
+        "EncryptedFilePDF": this.PDFData,
+        "EncryptedFileXML": this.XMLdata
+      }]);
+    }else{
+      this.toastr.error('Please Upload PDF and XML Files')
+    }
+  }
   navigateToSmeDetails(datas) { //get navigate page with data
     let path = '/invoice-request/repository'
     let data: NavigationExtras = {
@@ -135,5 +165,90 @@ export class InvoiceRepositoryComponent implements OnInit {
       }
     }
     this.router.navigate([path], { state: { FileData: data } });
+  }
+  onFileChange(ev) {
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    console.log(file, "file")
+    console.log(file.type, "file")
+    // setTimeout(() => {
+    // }, 500);
+    if (file.type === "application/pdf") {
+      this.FileType = file
+      this.getBase64(<File>ev.target.files[0]).then((data) => {
+        let flName = file.name
+        console.log(flName, "flName")
+        // console.log(ev.target.files, "ev.target.files")
+        this.PDFData = data
+        console.log(data, "data")
+        let fileName = {
+          'fileName': file.name,
+          'data': (<string>data).split(',')[1],
+          'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
+        }
+      });
+
+    } 
+    else if(file.type === "text/xml"){
+      this.FileXMLType = file
+      this.getBase64(<File>ev.target.files[0]).then((data) => {
+        let flName = file.name
+        console.log(flName, "flName")
+        // console.log(ev.target.files, "ev.target.files")
+        this.XMLdata = data
+        console.log(data, "data")
+        let fileName = {
+          'fileName': file.name,
+          'data': (<string>data).split(',')[1],
+          'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
+        }
+      });
+    }
+    
+    // else {
+    //   this.PDFData = ''
+    //   reader.onload = event => {
+    //     const data = reader.result;
+    //     workBook = XLSX.read(data, { type: "binary" });
+    //     console.log(workBook);
+    //     jsonData = workBook.SheetNames.reduce((initial, name) => {
+    //       console.log(name)
+    //       const sheet = workBook.Sheets[name];
+    //       console.log(sheet, "sheet")
+    //       initial['invoice'] = XLSX.utils.sheet_to_json(sheet);
+    //       return initial;
+    //     }, {});
+    //     console.log(jsonData, "jsonData")
+    //     this.invoicedata = jsonData.invoice
+    //   };
+    //   reader.readAsBinaryString(file);
+    // }
+  }
+  // function to change file format
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+  onChangess(files: File[]) {
+    console.log(files, "files")
+    if (files) {
+      console.log(files);
+      Papa.parse(files, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (result, file) => {
+          console.log(result, "sksksk");
+          this.invoicedata = result.data
+          // this.dataSource = new MatTableDataSource(result);
+          // this.dataList = result.data;
+        }
+      });
+    }
   }
 }

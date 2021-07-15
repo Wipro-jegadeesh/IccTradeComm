@@ -4,7 +4,7 @@
       <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
         <mat-card>
           <mat-card-content>
-            <div id="container">
+            <div id="container" *ngIf="this.isDisabled === false">
               <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
             </div>
             <div id="container" class="row col-md-12 col-12">
@@ -12,7 +12,7 @@
                 <!-- <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span> -->
               </div>
               <div class="col-md-3 col-xl-4 col-lg-4 col-12">
-              <div class="card-form-container" *ngIf="this.isDisabled">
+              <!-- <div class="card-form-container" *ngIf="this.isDisabled">
                 <div class="dynamic-radio-btn file-input">
                   <h6>{{'Invoice Upload' | translate}}</h6>
                   <div style="text-align: center;">
@@ -23,7 +23,13 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+              <!-- <div class="upload-btn-wrapper"> -->
+                <!-- <button (click)="openModal($event,template,'PDF')" style="padding: 9px 26px 10px 8px;" type="button" class="btn btn-outline fundreq-btn">
+                  {{'PDF preview' | translate}}
+                  <span style="position: absolute;" class="material-icons">preview</span>
+                </button> -->
+              <!-- </div> -->
               </div>
               <div class="col-md-2 col-xl-2 col-lg-2 col-12" style="padding:32px 6px 6px 52px">
                 <!-- <div class="score-margin">
@@ -60,7 +66,7 @@
                   <td rowspan="1" colspan="1">
                     <mat-form-field dense>
                       <mat-label> {{'Currency' | translate}}</mat-label>
-                      <mat-select matNativeControl [disabled]="disableSelect.value || this.isDisabled"
+                      <mat-select matNativeControl 
                         formControlName="invCcy" (change)="updateCurrency($event)">
                         <mat-option value="SGD">$&nbsp;SGD</mat-option>
                         <mat-option value="USD">$&nbsp;USD</mat-option>
@@ -164,6 +170,16 @@
                       </mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
+                  </td>
+                  <td style="padding:0px 0px 22px 41px">
+                    <button (click)="openModal($event,template,'PDF')"  style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline">
+                      {{'Inovice PDF' | translate}}
+                      <span style="position: absolute;" class="material-icons">preview</span>
+                    </button>
+                    <button (click)="openModal($event,template,'XML')"  style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline">
+                      {{'Invoice XML' | translate}}
+                      <span style="position: absolute;" class="material-icons">preview</span>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -545,4 +561,28 @@
       </mat-card-actions>
     </div>
   </header>
+  <div>
+    <ng-template #template>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{'Invoice Preview' | translate}}</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 400px; overflow-y: scroll;">
+          <div *ngIf="XMLdata && Previewtype === 'XML'">
+              {{XMLdata}}
+          </div>
+          <div *ngIf="pdfSrc && Previewtype === 'PDF'">
+            <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="modalRef.hide()"> {{'Close' | translate}}</button>
+        </div>
+      </div>
+
+    </ng-template>
+  </div>
 </div>
