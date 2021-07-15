@@ -4,7 +4,7 @@
       <form [formGroup]="invoiceForm" autocomplete="off" (ngSubmit)="onSubmitInvoiceForm()">
         <mat-card>
           <mat-card-content>
-            <div id="container" *ngIf="this.isDisabled === false">
+            <div id="container">
               <span class="uxg-h6" id=grid>{{'Basic Invoice Details' | translate}}</span>
             </div>
             <div id="container" class="row col-md-12 col-12">
@@ -173,7 +173,7 @@
                   </td>
                   <td style="padding:0px 0px 22px 41px">
                     <button (click)="openModal($event,template,'PDF')"  style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline">
-                      {{'Inovice PDF' | translate}}
+                      {{'Invoice PDF' | translate}}
                       <span style="position: absolute;" class="material-icons">preview</span>
                     </button>
                     <button (click)="openModal($event,template,'XML')"  style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline">
