@@ -7,21 +7,18 @@
   </ul>
 </mat-toolbar> -->
 
-    <form  
-          [formGroup]="financierForm">
-      <mat-horizontal-stepper linear="true"
-                              #stepper
-                              class="fin-stepper">
+    <form [formGroup]="financierForm">
+      <mat-horizontal-stepper linear="true" #stepper class="fin-stepper">
         <mat-step completed="true">
 
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.FinancierOnBoarding' | translate}}</ng-template>
           <mat-card>
             <mat-card-content>
               <div class="table-responsive">
-              <table style="width: 100%;">
-                <tbody>
+                <table style="width: 100%;">
+                  <tbody>
 
-                  <!-- <tr *ngIf="financierId">
+                    <!-- <tr *ngIf="financierId">
                 <td rowspan="1" colspan="1" *ngIf="financierId">
                   <mat-form-field dense>
                     <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
@@ -33,230 +30,164 @@
                 </td>
               </tr> -->
 
-                  <tr *ngIf="financierId">
-                    <td rowspan="1"
-                        colspan="1"
-                        *ngIf="financierId">
-                      <mat-form-field dense class="readOnlyCls">
-                        <mat-label>{{'FinancierOnboardingComponent.FinancierId' | translate}}</mat-label>
-                        <input matInput
-                               type="text"
-                               value="{{'FIN' + financierId}}"
-                               readonly />
-                        <!-- <mat-error *ngIf="hasError('contactNo', 'required')">Please Enter Financier Name Constitution</mat-error> -->
-                      </mat-form-field>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label> {{'FinancierOnboardingComponent.FinancierNameConstitution' | translate}}</mat-label>
-                        <input matInput
-                               type="text"
-                               formControlName="fName"
-                               [readonly]="isView"
-                               required />
-                        <mat-error *ngIf="hasError('fName', 'required')">{{'FinancierOnboardingComponent.EnterNameConstution' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.LocalRegNo' | translate}}</mat-label>
-                        <input matInput
-                               type="number"
-                               formControlName="regNum"
-                               [readonly]="isView"
-                               required />
-                        <mat-error *ngIf="hasError('regNum', 'required')">{{'FinancierOnboardingComponent.EnterLocalRegNo' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-
-                    <td rowspan="1"
-                    colspan="1">
-                  <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                    <mat-icon dense
-                              color="primary"
-                              matPrefix>person_outline</mat-icon>
-                    <mat-label> {{'FinancierOnboardingComponent.TaxId' | translate}}</mat-label>
-                    <input matInput
-                           type="number"
-                           formControlName="taxIdNum"
-                           [readonly]="isView"
-                           required />
-                    <mat-error *ngIf="hasError('taxIdNum', 'required')"> {{'FinancierOnboardingComponent.EnterTaxNo' | translate}}</mat-error>
-                  </mat-form-field>
-                </td>
-                  </tr>
-
-                  <tr>
-                  
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense>
-                        <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.RegDate' | translate}}</mat-label>
-                        <input matInput
-                               formControlName="regDate"
-                               [matDatepicker]="pickers"
-                               readonly="true" required/>
-                        <mat-datepicker-toggle matSuffix
-                                               [for]="pickers"></mat-datepicker-toggle>
-                        <mat-datepicker #pickers></mat-datepicker>
-                        <mat-error *ngIf="hasError('regDate', 'required')"> {{'FinancierOnboardingComponent.EnterRegDate' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                 
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.SCFYears' | translate}} </mat-label>
-                        <input matInput
-                               type="number"
-                               formControlName="fExpYears"
-                               required
-                               [readonly]="isView" />
-                        <mat-error *ngIf="hasError('fExpYears', 'required')">{{'FinancierOnboardingComponent.EnterSCFyears' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.TypeOfActivity' | translate}}</mat-label>
-                        <input matInput
-                               type="text"
-                               formControlName="activity"
-                               [readonly]="isView" />
-                        <mat-error *ngIf="hasError('activity', 'required')">{{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.PrincipalAc' | translate}}</mat-label>
-                        <input matInput
-                               type="number"
-                               formControlName="principalBankAccount"
-                               [readonly]="isView" />
-                        <mat-error *ngIf="hasError('principalBankAccount', 'required')">{{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                    <td rowspan="1"
-                        colspan="1">
-                      <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon dense
-                                  color="primary"
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.PrincipalBankBrn' | translate}}</mat-label>
-                        <input matInput
-                               type="text"
-                               formControlName="prncbankbranch"
-                               [readonly]="isView" />
-                        <mat-error *ngIf="hasError('prncbankbranch', 'required')">{{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-error>
-                      </mat-form-field>
-                    </td>
-                  
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.AnnualSCF' | translate}}</mat-label>
-                            <input type="number"
-                                   matInput
-                                   formControlName="anlScfTrnOver"
-                                   [readonly]="isView" 
-                                   (input)="setTwoNumberDecimal($event,'anlScfTrnOver')"
-                                   />
-                            <mat-error *ngIf="hasError('anlScfTrnOver', 'required')">{{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-error>
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </td>
+                    <tr *ngIf="financierId">
+                      <td rowspan="1" colspan="1" *ngIf="financierId">
+                        <mat-form-field dense class="readOnlyCls">
+                          <mat-label>{{'FinancierOnboardingComponent.FinancierId' | translate}}</mat-label>
+                          <input matInput type="text" value="{{'FIN' + financierId}}" readonly />
+                          <!-- <mat-error *ngIf="hasError('contactNo', 'required')">Please Enter Financier Name Constitution</mat-error> -->
+                        </mat-form-field>
+                      </td>
                     </tr>
 
                     <tr>
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.TransactionLimit' | translate}}</mat-label>
-                            <input type="number"
-                                   matInput
-                                   formControlName="transLimit"
-                                   [readonly]="isView" 
-                                   (input)="setTwoNumberDecimal($event,'transLimit')"
-                                   />
-                            <mat-error *ngIf="hasError('transLimit', 'required')">{{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-error>
-                          </mat-form-field>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label> {{'FinancierOnboardingComponent.FinancierNameConstitution' | translate}}
+                          </mat-label>
+                          <input matInput type="text" formControlName="fName" [readonly]="isView" required />
+                          <mat-error *ngIf="hasError('fName', 'required')">
+                            {{'FinancierOnboardingComponent.EnterNameConstution' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.LocalRegNo' | translate}}</mat-label>
+                          <input matInput type="number" formControlName="regNum" [readonly]="isView" required />
+                          <mat-error *ngIf="hasError('regNum', 'required')">
+                            {{'FinancierOnboardingComponent.EnterLocalRegNo' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label> {{'FinancierOnboardingComponent.TaxId' | translate}}</mat-label>
+                          <input matInput type="number" formControlName="taxIdNum" [readonly]="isView" required />
+                          <mat-error *ngIf="hasError('taxIdNum', 'required')">
+                            {{'FinancierOnboardingComponent.EnterTaxNo' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+
+                    <tr>
+
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense>
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.RegDate' | translate}}</mat-label>
+                          <input matInput formControlName="regDate" [matDatepicker]="pickers" readonly="true"
+                            required />
+                          <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                          <mat-datepicker #pickers></mat-datepicker>
+                          <mat-error *ngIf="hasError('regDate', 'required')">
+                            {{'FinancierOnboardingComponent.EnterRegDate' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.SCFYears' | translate}} </mat-label>
+                          <input matInput type="number" formControlName="fExpYears" required [readonly]="isView" />
+                          <mat-error *ngIf="hasError('fExpYears', 'required')">
+                            {{'FinancierOnboardingComponent.EnterSCFyears' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.TypeOfActivity' | translate}}</mat-label>
+                          <input matInput type="text" formControlName="activity" [readonly]="isView" />
+                          <mat-error *ngIf="hasError('activity', 'required')">
+                            {{'FinancierOnboardingComponent.EnterTypeOfActivity' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.PrincipalAc' | translate}}</mat-label>
+                          <input matInput type="number" formControlName="principalBankAccount" [readonly]="isView" />
+                          <mat-error *ngIf="hasError('principalBankAccount', 'required')">
+                            {{'FinancierOnboardingComponent.EnterPrincipalAc' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon dense color="primary" matPrefix>person_outline</mat-icon>
+                          <mat-label>{{'FinancierOnboardingComponent.PrincipalBankBrn' | translate}}</mat-label>
+                          <input matInput type="text" formControlName="prncbankbranch" [readonly]="isView" />
+                          <mat-error *ngIf="hasError('prncbankbranch', 'required')">
+                            {{'FinancierOnboardingComponent.EnterPrincipalBankBrn' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.AnnualSCF' | translate}}</mat-label>
+                              <input type="number" matInput formControlName="anlScfTrnOver" [readonly]="isView"
+                                (input)="setTwoNumberDecimal($event,'anlScfTrnOver')" />
+                              <mat-error *ngIf="hasError('anlScfTrnOver', 'required')">
+                                {{'FinancierOnboardingComponent.EnterAnnualSCF' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-                    </td>
+                      </td>
+                    </tr>
 
-                <td rowspan="1" colspan="1">
-                  <mat-form-field dense class="select-split-input">
-                    <mat-label> {{'Currency' | translate}}</mat-label>
-                    <select matNativeControl formControlName="currency" >
-                      <option value="SGD">SGD</option>
-                      <option value="USD">USD</option>
-                      <option value="GBP">GBP</option>
-                      <option value="EUR">EUR</option>
-                      <option value="JPY">JPY</option>
-                    </select>
-                    <mat-error *ngIf="hasError('currency', 'required')">{{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-error>
-                  </mat-form-field>
-                </td>
+                    <tr>
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.TransactionLimit' | translate}}</mat-label>
+                              <input type="number" matInput formControlName="transLimit" [readonly]="isView"
+                                (input)="setTwoNumberDecimal($event,'transLimit')" />
+                              <mat-error *ngIf="hasError('transLimit', 'required')">
+                                {{'FinancierOnboardingComponent.EntertransactionLimit' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td rowspan="1" colspan="1">
+                        <mat-form-field dense class="select-split-input">
+                          <mat-label> {{'Currency' | translate}}</mat-label>
+                          <select matNativeControl formControlName="currency">
+                            <option value="SGD">SGD</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="EUR">EUR</option>
+                            <option value="JPY">JPY</option>
+                          </select>
+                          <mat-error *ngIf="hasError('currency', 'required')">
+                            {{'FinancierOnboardingComponent.EnterCurrency' | translate}}</mat-error>
+                        </mat-form-field>
+                      </td>
 
 
-              
-              </tr>
-              <!-- =========== -->
-                </tbody>
-              </table>
+
+                    </tr>
+                    <!-- =========== -->
+                  </tbody>
+                </table>
               </div>
             </mat-card-content>
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
 
-              <button type="button"
-                      matStepperNext
-                      mat-flat-button
-                      color="primary">
+              <button type="button" matStepperNext mat-flat-button color="primary">
                 <mat-icon>arrow_forward</mat-icon>
                 {{'FinancierOnboardingComponent.Next' | translate}}
               </button>
@@ -269,284 +200,189 @@
           <mat-card>
             <mat-card-content>
               <div class="table-responsive">
-              <table style="width: 100%;">
-                <tbody>
-                  <tr class="form-group"
-                      data-always-visible="false">
-          
-
-                    <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div>
-                      <mat-form-field floatLabel="never"
-                                      dense
-                                      appearance="fill"
-                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon color="primary"
-                                  dense
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.EmailDomain' | translate}}</mat-label>
-                        <input type="email"
-                               matInput
-                               formControlName="heademail"
-                               [readonly]="isView" required />
-                        <mat-error *ngIf="hasError('heademail', 'required')">{{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </td>
-
-                <td class="T1"
-                rowspan="1"
-                colspan="1">
-              <div class="card-form-container">
-                <div>
-                  <mat-form-field floatLabel="never"
-                                  dense
-                                  appearance="fill"
-                                  class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                    <mat-icon color="primary"
-                              dense
-                              matPrefix>person_outline</mat-icon>
-                    <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
-                    <input type="number"
-                           matInput
-                           formControlName="headtelephoneno"
-                           [readonly]="isView" required />
-                    <mat-error *ngIf="hasError('headtelephoneno', 'required')">{{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-            </td>
-
-            <td class="T1"
-            rowspan="1"
-            colspan="1">
-          <div class="card-form-container">
-            <div>
-              <mat-form-field floatLabel="never"
-                              dense
-                              appearance="fill"
-                              class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                <mat-icon color="primary"
-                          dense
-                          matPrefix>person_outline</mat-icon>
-                <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
-                <input type="number"
-                       matInput
-                       formControlName="headfaxNo"
-                       [readonly]="isView" />
-                <mat-error *ngIf="hasError('headfaxNo', 'required')">{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-        </td>
-        </tr>
+                <table style="width: 100%;">
+                  <tbody>
+                    <tr class="form-group" data-always-visible="false">
 
 
-                    <tr class="form-group"
-                    data-always-visible="false">
-                    <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div>
-                      <mat-form-field floatLabel="never"
-                                      dense
-                                      appearance="fill"
-                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon color="primary"
-                                  dense
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
-                        <input type="text"
-                               matInput
-                               formControlName="headAddrLine1"
-                               [readonly]="isView" required/>
-                        <mat-error *ngIf="hasError('headAddrLine1', 'required')">{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </td>
-                 
-                    <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div>
-                      <mat-form-field floatLabel="never"
-                                      dense
-                                      appearance="fill"
-                                      class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon color="primary"
-                                  dense
-                                  matPrefix>person_outline</mat-icon>
-                        <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
-                        <input type="text"
-                               matInput
-                               formControlName="headAddrLine2"
-                               [readonly]="isView" />
-                        <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </td>
-
-                <td class="T1"
-                rowspan="1"
-                colspan="1">
-              <div class="card-form-container">
-                <div>
-                  <mat-form-field floatLabel="never"
-                                  dense
-                                  appearance="fill"
-                                  class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                    <mat-icon color="primary"
-                              dense
-                              matPrefix>person_outline</mat-icon>
-                    <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
-                    <input type="text"
-                           matInput
-                           formControlName="headAddrLine3"
-                           [readonly]="isView" />
-                    <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
-                  </mat-form-field>
-                </div>
-              </div>
-            </td>
-                  </tr>
-
-
-                  <tr class="form-group"
-                      data-always-visible="false">
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.City' | translate}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headcity"
-                                   [readonly]="isView" />
-                            <mat-error *ngIf="hasError('headcity', 'required')">{{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
-                          </mat-form-field>
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.EmailDomain' | translate}}</mat-label>
+                              <input type="email" matInput formControlName="heademail" [readonly]="isView" required />
+                              <mat-error *ngIf="hasError('heademail', 'required')">
+                                {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  
-                    <td class="T1"
-                    rowspan="1"
-                    colspan="1">
-                  <div class="card-form-container">
-                    <div class="multiselect-dropdown-dsgn {{errorColor}}">                   
-                      <angular2-multiselect [data]="cities"
-                                            formControlName="headcountry"
-                                            [settings]="dropdownSettings"
-                                            (onSelect)="onHeadCountrySelect($event)" 
-                                            (onDeSelect)="onHeadCountryDeSelect($event)"
-                                            ></angular2-multiselect>                         
-                    </div>
-                  </div>
-                </td>
+                      </td>
 
-
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                  <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label>{{'FinancierOnboardingComponent.PostalCode' | translate}}</mat-label>
-                      <input type="number"
-                             matInput
-                             formControlName="headpostalCode"
-                             [readonly]="isView" />
-                      <mat-error *ngIf="hasError('headpostalCode', 'required')">{{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                  </div>
-                  </td>
-
-                  <tr class="form-group"
-                  data-always-visible="false">
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label>{{'FinancierOnboardingComponent.State' | translate}}</mat-label>
-                      <input type="text"
-                             matInput
-                             formControlName="headstate"
-                             [readonly]="isView" />
-                      <mat-error *ngIf="hasError('headstate', 'required')">{{'FinancierOnboardingComponent.EnterState' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            
-                    <td class="T1"
-                        rowspan="1"
-                        colspan="1">
-                      <div class="card-form-container">
-                        <div>
-                          <mat-form-field floatLabel="never"
-                                          dense
-                                          appearance="fill"
-                                          class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary"
-                                      dense
-                                      matPrefix>person_outline</mat-icon>
-                            <mat-label>{{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
-                            <input type="text"
-                                   matInput
-                                   formControlName="headswiftBic"
-                                   [readonly]="isView" />
-                            <mat-error *ngIf="hasError('headswiftBic', 'required')">{{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
-                          </mat-form-field>
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
+                              <input type="number" matInput formControlName="headtelephoneno" [readonly]="isView"
+                                required />
+                              <mat-error *ngIf="hasError('headtelephoneno', 'required')">
+                                {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
+                              <input type="number" matInput formControlName="headfaxNo" [readonly]="isView" />
+                              <mat-error *ngIf="hasError('headfaxNo', 'required')">
+                                {{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr class="form-group" data-always-visible="false">
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headAddrLine1" [readonly]="isView"
+                                required />
+                              <mat-error *ngIf="hasError('headAddrLine1', 'required')">
+                                {{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headAddrLine2" [readonly]="isView" />
+                              <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headAddrLine3" [readonly]="isView" />
+                              <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr class="form-group" data-always-visible="false">
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.City' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headcity" [readonly]="isView" />
+                              <mat-error *ngIf="hasError('headcity', 'required')">
+                                {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div class="multiselect-dropdown-dsgn {{errorColor}}">
+                            <angular2-multiselect [data]="cities" formControlName="headcountry"
+                              [settings]="dropdownSettings" (onSelect)="onHeadCountrySelect($event)"
+                              (onDeSelect)="onHeadCountryDeSelect($event)"></angular2-multiselect>
+                          </div>
+                        </div>
+                      </td>
+
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.PostalCode' | translate}}</mat-label>
+                              <input type="number" matInput formControlName="headpostalCode" [readonly]="isView" />
+                              <mat-error *ngIf="hasError('headpostalCode', 'required')">
+                                {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                    <tr class="form-group" data-always-visible="false">
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.State' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headstate" [readonly]="isView" />
+                              <mat-error *ngIf="hasError('headstate', 'required')">
+                                {{'FinancierOnboardingComponent.EnterState' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td class="T1" rowspan="1" colspan="1">
+                        <div class="card-form-container">
+                          <div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                              <mat-label>{{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
+                              <input type="text" matInput formControlName="headswiftBic" [readonly]="isView" />
+                              <mat-error *ngIf="hasError('headswiftBic', 'required')">
+                                {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <mat-card-actions>
                 <span class="fill-remaining-space"></span>
-                <button type="button"
-                        mat-stroked-button
-                        color="primary"
-                        matStepperPrevious>
+                <button type="button" mat-stroked-button color="primary" matStepperPrevious>
                   <mat-icon>arrow_back</mat-icon>
                   {{'FinancierOnboardingComponent.BackToFinancier' | translate}}
                 </button>
-                <button mat-flat-button
-                        color="primary"
-                        type="button"
-                        matStepperNext>
+                <button mat-flat-button color="primary" type="button" matStepperNext>
                   <mat-icon>arrow_forward</mat-icon>
                   {{'FinancierOnboardingComponent.Next' | translate}}
                 </button>
@@ -560,272 +396,177 @@
         <mat-step completed="true">
           <ng-template matStepLabel>{{'FinancierOnboardingComponent.FinancierTradecommSer' | translate}}</ng-template>
           <mat-card>
-            <!-- <mat-card-title>
-          <h4 class="uxg-h4"></h4>
-        </mat-card-title> -->
-          <div class="table-responsive">
-            <table style="width: 100%;">
-              <tbody>
-
-
-                <tr class="form-group"
-                    data-always-visible="false">
-               
-
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label> {{'FinancierOnboardingComponent.EmailDomain' | translate}}</mat-label>
-                      <input type="email"
-                             matInput
-                             formControlName="servemail"
-                             [readonly]="isView" required/>
-                      <mat-error *ngIf="hasError('servemail', 'required')"> {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-
-              <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
-                          <input type="number"
-                                 matInput
-                                 formControlName="servtelephoneno"
-                                 [readonly]="isView" required />
-                          <mat-error *ngIf="hasError('servtelephoneno', 'required')"> {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
-                        </mat-form-field>
+            <div class="table-responsive">
+              <table style="width: 100%;">
+                <tbody>
+                  <tr class="form-group" data-always-visible="false">
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.EmailDomain' | translate}}</mat-label>
+                            <input type="email" matInput formControlName="servemail" [readonly]="isView" required />
+                            <mat-error *ngIf="hasError('servemail', 'required')">
+                              {{'FinancierOnboardingComponent.EnterEmailDomain' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label> {{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
-                      <input type="number"
-                             matInput
-                             formControlName="servfaxNo"
-                             [readonly]="isView" />
-                      <mat-error *ngIf="hasError('servfaxNo', 'required')">{{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.TelNo' | translate}}</mat-label>
+                            <input type="number" matInput formControlName="servtelephoneno" [readonly]="isView"
+                              required />
+                            <mat-error *ngIf="hasError('servtelephoneno', 'required')">
+                              {{'FinancierOnboardingComponent.EnterTelNo' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
 
-              </tr>
-                 
-           
-                
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.FaxNo' | translate}}</mat-label>
+                            <input type="number" matInput formControlName="servfaxNo" [readonly]="isView" />
+                            <mat-error *ngIf="hasError('servfaxNo', 'required')">
+                              {{'FinancierOnboardingComponent.EnterFaxNo' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
 
-                  <tr class="form-group"
-                  data-always-visible="false">
-                  
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
-                      <input type="text"
-                             matInput
-                             formControlName="servAddrLine1"
-                             [readonly]="isView" required/>
-                      <mat-error *ngIf="hasError('servAddrLine1', 'required')">{{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
+                  </tr>
 
-              <td class="T1"
-              rowspan="1"
-              colspan="1">
-            <div class="card-form-container">
-              <div>
-                <mat-form-field floatLabel="never"
-                                dense
-                                appearance="fill"
-                                class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                  <mat-icon color="primary"
-                            dense
-                            matPrefix>person_outline</mat-icon>
-                  <mat-label> {{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
-                  <input type="text"
-                         matInput
-                         formControlName="servAddrLine2"
-                         [readonly]="isView" />
-                  <!-- <mat-error *ngIf="hasError('contactNo', 'required')"> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
-                </mat-form-field>
-              </div>
+
+
+
+                  <tr class="form-group" data-always-visible="false">
+
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label>{{'FinancierOnboardingComponent.Addr1' | translate}}</mat-label>
+                            <input type="text" matInput formControlName="servAddrLine1" [readonly]="isView" required />
+                            <mat-error *ngIf="hasError('servAddrLine1', 'required')">
+                              {{'FinancierOnboardingComponent.EnterAddr1' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.Addr2' | translate}}</mat-label>
+                            <input type="text" matInput formControlName="servAddrLine2" [readonly]="isView" />
+                            <!-- <mat-error *ngIf="hasError('contactNo', 'required')"> {{'FinancierOnboardingComponent.EnterAddr2' | translate}}</mat-error> -->
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
+                            <input type="text" matInput formControlName="servAddrLine3" [readonly]="isView" />
+                            <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                  </tr>
+                  <tr class="form-group" data-always-visible="false">
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.City' | translate}}</mat-label>
+                            <input type="text" matInput formControlName="servcity" [readonly]="isView" />
+                            <mat-error *ngIf="hasError('servcity', 'required')">
+                              {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div class="multiselect-dropdown-dsgn {{errorColor1}}">
+
+                          <angular2-multiselect [data]="cities" formControlName="servCountry"
+                            [settings]="dropdownSettings" (onSelect)="onServeCountrySelect($event)"
+                            (onDeSelect)="onServeCountryDeSelect($event)"></angular2-multiselect>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.PostalCode' | translate}}</mat-label>
+                            <input type="number" matInput formControlName="servpostalCode" [readonly]="isView" />
+                            <mat-error *ngIf="hasError('servpostalCode', 'required')">
+                              {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+
+                  <tr class="form-group" data-always-visible="false">
+                    <td class="T1" rowspan="1" colspan="1">
+                      <div class="card-form-container">
+                        <div>
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <mat-label> {{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
+                            <input type="text" matInput formControlName="servswiftBic" [readonly]="isView" />
+                            <mat-error *ngIf="hasError('servswiftBic', 'required')">
+                              {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
             </div>
-          </td>
-         
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.Addr3' | translate}}</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="servAddrLine3"
-                                 [readonly]="isView" />
-                          <!-- <mat-error *ngIf="hasError('contactNo', 'required')">{{'FinancierOnboardingComponent.EnterAddr3' | translate}}</mat-error> -->
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
-                
-                </tr>
-                <tr class="form-group"
-                    data-always-visible="false">
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.City' | translate}}</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="servcity"
-                                 [readonly]="isView" />
-                          <mat-error *ngIf="hasError('servcity', 'required')"> {{'FinancierOnboardingComponent.EnterCity' | translate}}</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>                 
-
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                <div class="card-form-container">
-                  <div class="multiselect-dropdown-dsgn {{errorColor1}}">
-
-                    <angular2-multiselect [data]="cities"
-                                          formControlName="servCountry"
-                                          [settings]="dropdownSettings"
-                                          (onSelect)="onServeCountrySelect($event)" 
-                                          (onDeSelect)="onServeCountryDeSelect($event)"
-                                          ></angular2-multiselect>
-                  </div>
-                </div>
-              </td>
-               
-                  <td class="T1"
-                  rowspan="1"
-                  colspan="1">
-                  <div class="card-form-container">
-                  <div>
-                    <mat-form-field floatLabel="never"
-                                    dense
-                                    appearance="fill"
-                                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                      <mat-icon color="primary"
-                                dense
-                                matPrefix>person_outline</mat-icon>
-                      <mat-label> {{'FinancierOnboardingComponent.PostalCode' | translate}}</mat-label>
-                      <input type="number"
-                             matInput
-                             formControlName="servpostalCode"
-                             [readonly]="isView" />
-                      <mat-error *ngIf="hasError('servpostalCode', 'required')"> {{'FinancierOnboardingComponent.EnterPostalCode' | translate}}</mat-error>
-                    </mat-form-field>
-                  </div>
-                  </div>
-                  </td>   
-
-                  <tr class="form-group"
-                  data-always-visible="false">        
-                  <td class="T1"
-                      rowspan="1"
-                      colspan="1">
-                    <div class="card-form-container">
-                      <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                          <mat-label> {{'FinancierOnboardingComponent.SWIFT_BIC' | translate}}</mat-label>
-                          <input type="text"
-                                 matInput
-                                 formControlName="servswiftBic"
-                                 [readonly]="isView" />
-                          <mat-error *ngIf="hasError('servswiftBic', 'required')"> {{'FinancierOnboardingComponent.EnterSWIFT_BIC' | translate}}</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
 
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
-              <button mat-stroked-button
-                      color="primary"
-                      type="button"
-                      matStepperPrevious>
+              <button mat-stroked-button color="primary" type="button" matStepperPrevious>
                 <mat-icon>arrow_back</mat-icon>
                 {{'FinancierOnboardingComponent.BackFinReg' | translate}}
               </button>
-              <button mat-flat-button
-                      type="button"
-                      color="primary"
-                      matStepperNext>
+              <button mat-flat-button type="button" color="primary" matStepperNext>
                 <mat-icon>arrow_forward</mat-icon>
                 {{'FinancierOnboardingComponent.Next' | translate}}
               </button>
@@ -834,79 +575,57 @@
         </mat-step>
 
 
+
+
+
         <mat-step completed="true">
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.MoreDetails' | translate}}</ng-template>
           <mat-card>
 
-            <span class="uxg-h6"
-                  id=grid> {{'FinancierOnboardingComponent.DirPartner' | translate}}</span>
+            <span class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.DirPartner' | translate}}</span>
             <div class="table-responsive more-table">
-            <table mat-table
-                   [dataSource]="dataSource1"
-                   style="width: 90%;"
-                   id=right
-                   formArrayName="partnerDetails">
+              <table mat-table [dataSource]="dataSource1" style="width: 90%;" id=right formArrayName="partnerDetails">
 
-                   
-                   <ng-container matColumnDef="uniqueId">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
-                        
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="uniqueId"
-                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
-                             [readonly]="isView">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                    </td>
-                  </ng-container>
-                  
-                   <ng-container matColumnDef="name">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column"> {{'FinancierOnboardingComponent.Name' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
-                        <!-- ========== -->
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="name"
-                             placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
-                             [readonly]="isView">
 
-                            </mat-form-field>
-                          </div>
-                        </div>
+                <ng-container matColumnDef="uniqueId">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.UniqueId' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
 
-                        <!-- ========= -->
-                    </td>
-                  </ng-container>
-              <!-- <ng-container matColumnDef="LastName">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="uniqueId"
+                            placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}" [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Name' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <!-- ========== -->
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="name"
+                            placeholder="{{'FinancierOnboardingComponent.Name' | translate}}" [readonly]="isView">
+
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <!-- ========= -->
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column">LAST NAME</th>
@@ -920,33 +639,23 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="Position">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.Position' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="Position">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Position' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="text"
-                         formControlName="position"
-                         placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="position"
+                            placeholder="{{'FinancierOnboardingComponent.Position' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <!-- <ng-container matColumnDef="Address">
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column">{{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -960,144 +669,92 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="TelephoneNo">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="TelephoneNo">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="number"
-                         formControlName="phoneNo"
-                         placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="number" formControlName="phoneNo"
+                            placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
+                            [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="Email">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.Email' | translate}}<span class="add-good-plusbtn"
-                        mat-flat-button
-                        color="primary"
-                        (click)="addRow('partner')">
-                    +
-                  </span></th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index" class="input-pos">
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Email' |
+                    translate}}<span class="add-good-plusbtn" mat-flat-button color="primary"
+                      (click)="addRow('partner')">
+                      +
+                    </span></th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index"
+                    class="input-pos">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="email"
-                         formControlName="email"
-                         placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="email" formControlName="email"
+                            placeholder="{{'FinancierOnboardingComponent.Email' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                  <span class="minus-btn"
-                        *ngIf="this.dataSource1.data.length > 1 && index >= 1"
-                        mat-flat-button
-                        color="primary"
-                        (click)="removeRow('partner',index)">
-                    <mat-icon (click)="removeRow('partner',index)"
-                              style="cursor: pointer;">cancel</mat-icon>
-                  </span>
-                </td>
-              </ng-container>
-              <tr mat-header-row
-                  *matHeaderRowDef="displayedColumns"
-                  style="background-color:#694ed6e0"></tr>
-              <tr mat-row
-                  *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+                    <span class="minus-btn" *ngIf="this.dataSource1.data.length > 1 && index >= 1" mat-flat-button
+                      color="primary" (click)="removeRow('partner',index)">
+                      <mat-icon (click)="removeRow('partner',index)" style="cursor: pointer;">cancel</mat-icon>
+                    </span>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
             </div>
-            <span class="uxg-h6"
-                  id=grid> {{'FinancierOnboardingComponent.AuthorisedSign' | translate}}</span>
+            <span class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.AuthorisedSign' | translate}}</span>
             <div class="table-responsive more-table">
-            <table mat-table
-                   [dataSource]="dataSource2"
-                   style="width: 90%;"
-                   id=right
-                   formArrayName="authSign">
+              <table mat-table [dataSource]="dataSource2" style="width: 90%;" id=right formArrayName="authSign">
 
-                   
-                   <ng-container matColumnDef="uniqueId">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
-                        
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="uniqueId"
-                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
-                             [readonly]="isView">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                    </td>
-                  </ng-container>
-                  
-                   <ng-container matColumnDef="name">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column">{{'FinancierOnboardingComponent.Name' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
 
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="name"
-                             placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
-                             [readonly]="isView">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                    </td>
-                  </ng-container>
-              <!-- <ng-container matColumnDef="LastName">
+                <ng-container matColumnDef="uniqueId">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.UniqueId' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="uniqueId"
+                            placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}" [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef scope="column">{{'FinancierOnboardingComponent.Name' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="name"
+                            placeholder="{{'FinancierOnboardingComponent.Name' | translate}}" [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column">LAST NAME</th>
@@ -1111,33 +768,23 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="Position">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.Position' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="Position">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Position' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
-  <div>
-    <mat-form-field floatLabel="never"
-                    dense
-                    appearance="fill"
-                    class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-      <mat-icon color="primary"
-                dense
-                matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="text"
-                         formControlName="position"
-                         placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
-                         [readonly]="isView">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="position"
+                            placeholder="{{'FinancierOnboardingComponent.Position' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <!-- <ng-container matColumnDef="Address">
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column"> {{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -1151,146 +798,93 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="TelephoneNo">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="TelephoneNo">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="number"
-                         formControlName="phoneNo"
-                         placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="number" formControlName="phoneNo"
+                            placeholder="{{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
+                            [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="Email">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column">{{'FinancierOnboardingComponent.Email' | translate}}<span class="add-good-plusbtn"
-                        mat-flat-button
-                        color="primary"
-                        (click)="addRow('auth')">
-                    +
-                  </span></th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index" class="input-pos">
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef scope="column">{{'FinancierOnboardingComponent.Email' |
+                    translate}}<span class="add-good-plusbtn" mat-flat-button color="primary" (click)="addRow('auth')">
+                      +
+                    </span></th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index"
+                    class="input-pos">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="email"
-                         formControlName="email"
-                         placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="email" formControlName="email"
+                            placeholder="{{'FinancierOnboardingComponent.Email' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                  <span class="minus-btn"
-                        *ngIf="this.dataSource2.data.length > 1 && index >= 1"
-                        mat-flat-button
-                        color="primary"
-                        (click)="removeRow('auth',index)">
-                    <mat-icon (click)="removeRow('auth',index)"
-                              style="cursor: pointer;">cancel</mat-icon>
-                  </span>
-                </td>
-              </ng-container>
-              <tr mat-header-row
-                  *matHeaderRowDef="displayedColumns"
-                  style="background-color:#694ed6e0"></tr>
-              <tr mat-row
-                  *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+                    <span class="minus-btn" *ngIf="this.dataSource2.data.length > 1 && index >= 1" mat-flat-button
+                      color="primary" (click)="removeRow('auth',index)">
+                      <mat-icon (click)="removeRow('auth',index)" style="cursor: pointer;">cancel</mat-icon>
+                    </span>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
             </div>
-            <span class="uxg-h6"
-                  id=grid>{{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
+            <span class="uxg-h6" id=grid>{{'FinancierOnboardingComponent.EnterAdmin' | translate}}</span>
             <div class="table-responsive more-table">
-            <table mat-table
-                   [dataSource]="dataSource3"
-                   style="width: 90%;"
-                   id=right
-                   formArrayName="entityAdmin">
+              <table mat-table [dataSource]="dataSource3" style="width: 90%;" id=right formArrayName="entityAdmin">
 
-                   <ng-container matColumnDef="uniqueId">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column"> {{'FinancierOnboardingComponent.UniqueId' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
-                        
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="uniqueId"
-                             placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}"
-                             [readonly]="isView">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="uniqueId">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.UniqueId' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="uniqueId"
+                            placeholder="{{'FinancierOnboardingComponent.UniqueId' | translate}}" [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
 
 
 
-                   <ng-container matColumnDef="name">
-                    <th mat-header-cell
-                        *matHeaderCellDef
-                        scope="column"> {{'FinancierOnboardingComponent.Name' | translate}}</th>
-                    <td mat-cell
-                        *matCellDef="let element;let row; let index = index"
-                        [formGroupName]="index">
-                        
-                        <div class="card-form-container">
-                          <div>
-                            <mat-form-field floatLabel="never"
-                                            dense
-                                            appearance="fill"
-                                            class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                              <mat-icon color="primary"
-                                        dense
-                                        matPrefix>person_outline</mat-icon>
-                      <input matInput
-                             type="text"
-                             formControlName="name"
-                             placeholder="{{'FinancierOnboardingComponent.Name' | translate}}"
-                             [readonly]="isView">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                    </td>
-                  </ng-container>
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Name' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
 
-              <!-- <ng-container matColumnDef="LastName">
+                    <div class="card-form-container">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="name"
+                            placeholder="{{'FinancierOnboardingComponent.Name' | translate}}" [readonly]="isView">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="LastName">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column">LAST NAME</th>
@@ -1304,33 +898,23 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="Position">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.Position' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="Position">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Position' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="text"
-                         formControlName="position"
-                         placeholder="{{'FinancierOnboardingComponent.Position' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="position"
+                            placeholder="{{'FinancierOnboardingComponent.Position' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <!-- <ng-container matColumnDef="Address">
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Address">
                 <th mat-header-cell
                     *matHeaderCellDef
                     scope="column"> {{'FinancierOnboardingComponent.Address' | translate}}</th>
@@ -1344,220 +928,393 @@
                          [readonly]="isView">
                 </td>
               </ng-container> -->
-              <ng-container matColumnDef="TelephoneNo">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' | translate}}</th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index">
+                <ng-container matColumnDef="TelephoneNo">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TelephoneNo' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="number"
-                         formControlName="phoneNo"
-                         placeholder=" {{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="number" formControlName="phoneNo"
+                            placeholder=" {{'FinancierOnboardingComponent.TelephoneNo' | translate}}"
+                            [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="Email">
-                <th mat-header-cell
-                    *matHeaderCellDef
-                    scope="column"> {{'FinancierOnboardingComponent.Email' | translate}}<span class="add-good-plusbtn"
-                        mat-flat-button
-                        color="primary"
-                        (click)="addRow('entity')">
-                    +
-                  </span></th>
-                <td mat-cell
-                    *matCellDef="let element;let row; let index = index"
-                    [formGroupName]="index" class="input-pos">
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.Email' |
+                    translate}}<span class="add-good-plusbtn" mat-flat-button color="primary"
+                      (click)="addRow('entity')">
+                      +
+                    </span></th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index"
+                    class="input-pos">
                     <div class="card-form-container">
                       <div>
-                        <mat-form-field floatLabel="never"
-                                        dense
-                                        appearance="fill"
-                                        class="example-full-width" [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary"
-                                    dense
-                                    matPrefix>person_outline</mat-icon>
-                  <input matInput
-                         type="email"
-                         formControlName="email"
-                         placeholder="{{'FinancierOnboardingComponent.Email' | translate}}"
-                         [readonly]="isView">
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="email" formControlName="email"
+                            placeholder="{{'FinancierOnboardingComponent.Email' | translate}}" [readonly]="isView">
                         </mat-form-field>
                       </div>
                     </div>
-                  <span class="minus-btn"
-                        *ngIf="this.dataSource3.data.length > 1 && index >= 1"
-                        mat-flat-button
-                        color="primary"
-                        (click)="removeRow('entity',index)">
-                    <mat-icon (click)="removeRow('entity',index)"
-                              style="cursor: pointer;">cancel</mat-icon>
-                  </span>
-                </td>
-              </ng-container>
-              <tr mat-header-row
-                  *matHeaderRowDef="displayedColumns"
-                  style="background-color:#694ed6e0"></tr>
-              <tr mat-row
-                  *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+                    <span class="minus-btn" *ngIf="this.dataSource3.data.length > 1 && index >= 1" mat-flat-button
+                      color="primary" (click)="removeRow('entity',index)">
+                      <mat-icon (click)="removeRow('entity',index)" style="cursor: pointer;">cancel</mat-icon>
+                    </span>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
             </div>
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
-              <button mat-stroked-button
-                      color="primary"
-                      type="button"
-                      matStepperPrevious>
+              <button mat-stroked-button color="primary" type="button" matStepperPrevious>
                 <mat-icon>arrow_back</mat-icon>
                 {{'FinancierOnboardingComponent.BackToFintradecom' | translate}}
               </button>
               <button mat-flat-button type="button" color="primary" matStepperNext>
                 <mat-icon>arrow_forward</mat-icon>
-                 {{'FinancierOnboardingComponent.Next' | translate}}
-               </button>
+                {{'FinancierOnboardingComponent.Next' | translate}}
+              </button>
             </mat-card-actions>
           </mat-card>
         </mat-step>
 
 
 
-        
-                <!-- ===================== -->
-                <mat-step completed="true" *ngIf='this.financierId'>
-                  <ng-template matStepLabel>  {{'FinancierOnboardingComponent.UserDetails' | translate}}</ng-template>
-                  <mat-card>
-                    <!-- <mat-tab-group dynamicHeight>
+
+
+
+
+
+
+
+
+
+
+        <mat-step completed="true">
+          <ng-template matStepLabel>{{'FinancierOnboardingComponent.EcutorMemberShip' | translate}}</ng-template>
+          <mat-card>            
+            <div>
+              <td class="T1" rowspan="1" colspan="1">
+                <div class="card-form-container">
+                  <div class="multiselect-dropdown-dsgn {{regionDDError}}">
+                    <angular2-multiselect [data]="regionDatas" formControlName="region"
+                      [settings]="regionSettings" (onSelect)="onRegionSelect($event)"
+                      (onDeSelect)="onRegionDeSelect($event)"></angular2-multiselect>
+                  </div>
+                </div>
+              </td>
+            </div>
+            <div class="eucador-head">
+              <h4> {{headerFeeText}}</h4>
+              <h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.OnboardMemberShip' | translate}}</h5>
+            </div>
+            <div class="table-responsive more-table">
+              <table mat-table [dataSource]="feesDataSource" style="width: 90%;" id=right formArrayName="feesDetails">
+                <ng-container matColumnDef="feeText">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container" >
+                      <div>
+                        <label>&nbsp;{{getRowtext(index)}}</label>                   
+                      </div>
+                    </div>
+
+                  </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="standardPrice">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.StandardPrice' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container space-top" *ngIf="index !== 2">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="standardPrice" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                        </mat-form-field>                    
+                      </div>
+                    </div>
+
+                    <div class="card-form-container" *ngIf="index == 2">
+                      <div>
+                        <mat-radio-group aria-label="Select an option" formControlName="chargeBasics">
+                          <mat-radio-button value="1">{{'FinancierOnboardingComponent.Quaterly' | translate}}</mat-radio-button>
+                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.HalfYearly' | translate}}</mat-radio-button>
+                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.Yearly' | translate}}</mat-radio-button>
+                        </mat-radio-group>                
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="discountPrice" >
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.DiscountPrice' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container discount-box" *ngIf="index !== 2">
+                      <div>  
+                        <mat-radio-group aria-label="Select an option" formControlName="discountOption" >
+                          <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatCharges' | translate}}</mat-radio-button>
+                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}</mat-radio-button>
+                        </mat-radio-group>
+
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                        [ngClass]="{'readOnlyCls': isView}">
+                        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                        <input matInput type="text" formControlName="discountPrice" placeholder="{{'FinancierOnboardingComponent.DiscountPrice' | translate}}">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="totalFees">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TotalFees' |
+                    translate}}</th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container space-top" *ngIf="index !== 2">
+                      <div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="number" formControlName="totalFees" placeholder="{{'FinancierOnboardingComponent.TotalFees' | translate}}">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>                          
+                
+                <tr mat-header-row *matHeaderRowDef="feesColumns" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: feesColumns"></tr>
+              </table>
+            </div>
+
+
+
+            <div class="eucador-head"><h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.TransactionFee' | translate}}</h5></div>
+            <div class="table-responsive more-table">
+              <table mat-table [dataSource]="transaction_feesDataSource" style="width: 90%;" id=right formArrayName="transaction_feesDetails">
+
+                <ng-container matColumnDef="productSelection">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container" >
+                      <div>
+                        <mat-checkbox formControlName="checkField"></mat-checkbox>
+                        <label>&nbsp;{{getFeeRowtext(index)}}</label>                   
+                      </div>
+                    </div>
+
+                  </td>
+                </ng-container> 
+
+                <ng-container matColumnDef="flat">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                    <div class="card-form-container discount-box" >
+                      <div>
+                        <div>
+                          <mat-radio-group aria-label="Select an option" formControlName="discountOption">
+                            <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatFees' | translate}}</mat-radio-button>
+                            <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}</mat-radio-button>
+                          </mat-radio-group>                
+                        </div>
+                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                          [ngClass]="{'readOnlyCls': isView}">
+                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                          <input matInput type="text" formControlName="discountPrice" placeholder="{{'FinancierOnboardingComponent.FeeOrPercentage' | translate}}">
+                        </mat-form-field>                    
+                      </div>
+                    </div>
+
+                  </td>
+                </ng-container> 
+
+                <ng-container matColumnDef="min">
+                  <th mat-header-cell *matHeaderCellDef scope="column"></th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                      <div class="card-form-container discount-box" >
+                        <div>
+                          <div><mat-checkbox formControlName="minimumOption"></mat-checkbox>&nbsp;{{'FinancierOnboardingComponent.Minimum' | translate}}</div>
+
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <input matInput type="text" formControlName="minimumFees" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                          </mat-form-field>                    
+                        </div>
+                      </div>
+  
+                    </td>
+                </ng-container> 
+
+                <ng-container matColumnDef="max">
+                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                      <div class="card-form-container discount-box" >
+                        <div>
+                          <div><mat-checkbox formControlName="maximumOption"></mat-checkbox>&nbsp;{{'FinancierOnboardingComponent.Maximum' | translate}}</div>
+
+                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                            [ngClass]="{'readOnlyCls': isView}">
+                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
+                            <input matInput type="text" formControlName="maximumFees" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                          </mat-form-field>                    
+                        </div>
+                      </div>
+  
+                    </td>
+                </ng-container>
+               
+
+                
+                                       
+                
+                <tr mat-header-row *matHeaderRowDef="transaction_feesColumns" style="background-color:#694ed6e0"></tr>
+                <tr mat-row *matRowDef="let row; columns: transaction_feesColumns"></tr>
+              </table>
+            </div>
+
+
+
+
+
+
+            <mat-card-actions>
+              <span class="fill-remaining-space"></span>
+              <button mat-stroked-button color="primary" type="button" matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+                {{'FinancierOnboardingComponent.BackToMoreInfo' | translate}}
+              </button>
+              <button *ngIf='this.financierId' mat-flat-button type="button" color="primary" matStepperNext>
+                <mat-icon>arrow_forward</mat-icon>
+                {{'FinancierOnboardingComponent.Next' | translate}}
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-step>
+
+
+
+
+
+
+
+
+        <!-- ===================== -->
+        <mat-step completed="true" *ngIf='this.financierId'>
+          <ng-template matStepLabel> {{'FinancierOnboardingComponent.UserDetails' | translate}}</ng-template>
+          <mat-card>
+            <!-- <mat-tab-group dynamicHeight>
 
                 <mat-tab label="Related Users">  -->
 
-                  <div class="links">
-                    <button mat-button type="button" mat-stroked-button color="primary" class="onboard-btn" 
-                
-                    (click)="this.navigateUserAdd()"                  
-                    >{{'FinancierOnboardingComponent.AddUser' | translate}}</button>
-                  </div>
-                  <div class="table-responsive">
-                  <table mat-table [dataSource]="userDataSource" >
-                  
-                  
-                    <ng-container matColumnDef="userId">
-                        <th mat-header-cell *matHeaderCellDef 
-                        >  {{'FinancierOnboardingComponent.UserId' | translate}}</th>
-                        <td mat-cell *matCellDef="let element">
-                                    {{element.userId}}
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="firstName">
-                        <th mat-header-cell *matHeaderCellDef 
-                             >   {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.firstName}}
-                        </td>
-                    </ng-container>
-              
-                    <ng-container matColumnDef="lastName">
-                        <th mat-header-cell *matHeaderCellDef 
-                           >    {{'FinancierOnboardingComponent.LastName' | translate}}
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.lastName}}
-                        </td>
-                    </ng-container>
-              
-                    <!-- <ng-container matColumnDef="companyName">
+            <div class="links">
+              <button mat-button type="button" mat-stroked-button color="primary" class="onboard-btn"
+                (click)="this.navigateUserAdd()">{{'FinancierOnboardingComponent.AddUser' | translate}}</button>
+            </div>
+            <div class="table-responsive">
+              <table mat-table [dataSource]="userDataSource">
+
+
+                <ng-container matColumnDef="userId">
+                  <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.UserId' | translate}}</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.userId}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="firstName">
+                  <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.FirstName' | translate}} </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.firstName}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                  <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.LastName' | translate}}
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.lastName}}
+                  </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="companyName">
                         <th mat-header-cell *matHeaderCellDef  matTooltip="{{biddingTooltip.smeName}}"
                             > Company Name </th>
                         <td mat-cell *matCellDef="let element">
                             {{element.companyName}}
                         </td>
                     </ng-container> -->
-              
-                    <ng-container matColumnDef="emailId">
-                        <th mat-header-cell *matHeaderCellDef 
-                           >  {{'FinancierOnboardingComponent.EmailId' | translate}} </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.emailId}}
-                        </td>
-                    </ng-container>
-              
-                    <ng-container matColumnDef="phoneNumber">
-                        <th mat-header-cell *matHeaderCellDef 
-                            >   {{'FinancierOnboardingComponent.PhoneNo' | translate}}  </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.phoneNumber }}
-                        </td>
-                    </ng-container>
-                   
-                    <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
-                        <td mat-cell *matCellDef="let element">
-                            <a  href="javascript:void(0)" (click)="navigateUserEdit(element)">
-                                <mat-icon  #tooltip="matTooltip"
-                                matTooltip="{{'edit' | translate}}" [matTooltipPosition]="'below'">edit</mat-icon>
-                              </a>&nbsp;
-                        </td>
-                    </ng-container>
-                  
-                  
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsUser" style="background-color:#694ed6e0"></tr>
-                    <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumnsUser"></tr>
-                </table>
-              </div>
-                 <!-- </mat-tab>
-                </mat-tab-group> -->
-                 <mat-card-actions>
-                  <span class="fill-remaining-space"></span>
-                  <button mat-stroked-button color="primary" type="button" matStepperPrevious>
-                    <mat-icon>arrow_back</mat-icon>
-                      {{'FinancierOnboardingComponent.BackToMoreInfo' | translate}}
-                  </button>
-                </mat-card-actions>
-              </mat-card>
-            </mat-step>
 
-                <!-- =========================== -->
+                <ng-container matColumnDef="emailId">
+                  <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.EmailId' | translate}} </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.emailId}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phoneNumber">
+                  <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.PhoneNo' | translate}} </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.phoneNumber }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> {{'Action' | translate}} </th>
+                  <td mat-cell *matCellDef="let element">
+                    <a href="javascript:void(0)" (click)="navigateUserEdit(element)">
+                      <mat-icon #tooltip="matTooltip" matTooltip="{{'edit' | translate}}"
+                        [matTooltipPosition]="'below'">edit</mat-icon>
+                    </a>&nbsp;
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsUser" style="background-color:#694ed6e0"></tr>
+                <tr mat-row class="BID-Details" *matRowDef="let row; columns: displayedColumnsUser"></tr>
+              </table>
+            </div>
+            <!-- </mat-tab>
+                </mat-tab-group> -->
+            <mat-card-actions>
+              <span class="fill-remaining-space"></span>
+              <button mat-stroked-button color="primary" type="button" matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+                {{'FinancierOnboardingComponent.BackToMoreInfo' | translate}}
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-step>
+
+        <!-- =========================== -->
 
       </mat-horizontal-stepper>
       <div class="submit">
         <button mat-flat-button color="primary" (click)="cancel()">
           {{'cancel' | translate}}
-</button> &nbsp; &nbsp;
-        <button mat-flat-button
-                color="primary"
-                (click)="check()"                
-                >
+        </button> &nbsp; &nbsp;
+        <button mat-flat-button color="primary" (click)="check()">
           <!-- [disabled]="!check" -->
           <mat-icon>arrow_right_alt</mat-icon>
           {{'FinancierOnboardingComponent.Submit' | translate}}
         </button>
-        <button *ngIf="isView"
-                type="button"
-                (click)="editPath()"
-                mat-flat-button
-                color="primary">
+        <button *ngIf="isView" type="button" (click)="editPath()" mat-flat-button color="primary">
           <mat-icon>arrow_right_alt</mat-icon>
           {{'FinancierOnboardingComponent.Edit' | translate}}
         </button>
       </div>
-      
+
     </form>
 
   </header>
 </div>
-
-
