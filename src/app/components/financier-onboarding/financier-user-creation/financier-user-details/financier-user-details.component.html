@@ -58,7 +58,7 @@
                     <label for="National ID​"> {{'FinancieruserCreation.PhoneNo' | translate}}</label>
                     <mat-form-field dense>
                       <mat-icon matPrefix>call</mat-icon>
-                      <input type="text" matInput placeholder="{{'FinancieruserCreation.PhoneNo' | translate}}" formControlName="contactNo" />
+                      <input type="number" matInput placeholder="{{'FinancieruserCreation.PhoneNo' | translate}}" formControlName="contactNo" />
                       <mat-error *ngIf="hasError('contactNo', 'required')"> {{'FinancieruserCreation.EnterPhoneNo' | translate}}</mat-error>
                     </mat-form-field>
                   </div>

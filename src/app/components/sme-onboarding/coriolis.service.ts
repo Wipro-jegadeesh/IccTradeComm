@@ -7,7 +7,7 @@ export class CoriolisService {
     constructor(private apiService:ApiService) { }
 
     getQuestionnaireSection(params){
-      return this.apiService.get(environment.coriolisServicePath + 'coriolis/getallquestionaire/' + params.companyId + '/' + params.companyName + '/' + params.country)
+      return this.apiService.get(environment.coriolisServicePath + 'allquestionaire/' + params.companyId + '/' + params.companyName + '/' + params.country)
     }
     getScoreSection(params){
 
