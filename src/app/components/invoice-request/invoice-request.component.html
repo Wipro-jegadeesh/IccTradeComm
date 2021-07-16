@@ -334,14 +334,14 @@
                               <div class="col-sm-4">
                                 <div class="card-form-container">
                                   <div class="dynamic-radio-btn file-input">
-                                    <h6>{{'Invoice Document' | translate}}</h6>
+                                    <!-- <h6>{{'Invoice Document' | translate}}</h6> -->
                                     <div class="file-upload">
                                       <div class="upload-btn-wrapper">
                                         <button class="filebtn">{{'Upload a file' | translate}}</button>
                                         <input type="file" class="dynamic-file-upload form" (change)="onDocumentChange($event,address.id)" multiple/>
                                       </div>
                                       <div class="file-label">
-                                        <label *ngFor="let file of fileNames;let i=index" style="cursor: pointer;" (click)="PreviewForDocumenUpload($event,template,file)">{{file.fileName}}
+                                        <label *ngFor="let file of addresses[i].FileDatas;let i=index" style="cursor: pointer;" (click)="PreviewForDocumenUpload($event,template,file)">{{file.fileName}}
                                         </label>
                                       </div>
                                     </div>
