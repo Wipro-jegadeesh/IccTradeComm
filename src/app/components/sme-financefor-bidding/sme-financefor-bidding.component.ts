@@ -53,9 +53,9 @@ export class SmeFinanceforBiddingComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('accountList', { read: ElementRef })
-  @HostListener('window:resize', ['$event'])
-  public accountList: ElementRef<any>;
+  // @ViewChild('accountList', { read: ElementRef })
+  @HostListener('window:resize', [])
+  // public accountList: ElementRef<any>;
 
 
   displayedColumnsload: string[] = [

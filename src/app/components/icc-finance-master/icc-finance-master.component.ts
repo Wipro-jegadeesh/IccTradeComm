@@ -63,7 +63,7 @@ export class IccFinanceMasterComponent implements OnInit {
   moment: any = moment;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

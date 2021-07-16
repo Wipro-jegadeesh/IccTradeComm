@@ -41,8 +41,8 @@ export class FinancierUserCreationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  @HostListener('window:resize', ['$event'])
-  displayedColumns: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
+  @HostListener('window:resize', [])
+  displayedColumns: Array<string> = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
   dataSource;
   isOpen = ""
   mobileScreen = false;
@@ -60,13 +60,13 @@ export class FinancierUserCreationComponent implements OnInit {
   isHover: boolean = false;
   finDetailId = "";
   companyId;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {

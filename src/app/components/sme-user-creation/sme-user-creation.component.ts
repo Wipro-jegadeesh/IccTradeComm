@@ -20,8 +20,8 @@ export class SmeUserCreationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  @HostListener('window:resize', ['$event'])
-  userTableHeaders: string[] = ['userId', 'firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
+  @HostListener('window:resize', [])
+  userTableHeaders: Array<string> = ['userId', 'firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
   userLists;
   isOpen = ""
   modalRef: BsModalRef;
@@ -29,13 +29,13 @@ export class SmeUserCreationComponent implements OnInit {
   userCreationToolTip = SMEUSERCREATIONCONSTANTS;
   moment: any = moment;
   isHover: boolean = false;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {

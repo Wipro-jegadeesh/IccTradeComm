@@ -42,7 +42,7 @@ export class FinancierUserDetailsComponent implements OnInit {
   invoiceDetails: any;
   id: string;
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

@@ -42,7 +42,7 @@ export class IccUserDetailsComponent implements OnInit {
   isImageSavedKYC: boolean;
   sectors: any;
   type: string;
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
