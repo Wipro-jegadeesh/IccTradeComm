@@ -574,10 +574,6 @@
           </mat-card>
         </mat-step>
 
-
-
-
-
         <mat-step completed="true">
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.MoreDetails' | translate}}</ng-template>
           <mat-card>
@@ -987,206 +983,220 @@
           </mat-card>
         </mat-step>
 
-
-
-
-
-
-
-
-
-
-
-
-
         <mat-step completed="true">
           <ng-template matStepLabel>{{'FinancierOnboardingComponent.EcutorMemberShip' | translate}}</ng-template>
-          <mat-card>            
+          <mat-card>
             <div>
               <td class="T1" rowspan="1" colspan="1">
                 <div class="card-form-container">
                   <div class="multiselect-dropdown-dsgn {{regionDDError}}">
-                    <angular2-multiselect [data]="regionDatas" formControlName="region"
-                      [settings]="regionSettings" (onSelect)="onRegionSelect($event)"
-                      (onDeSelect)="onRegionDeSelect($event)"></angular2-multiselect>
+                    <angular2-multiselect [data]="regionDatas" formControlName="region" [settings]="regionSettings"
+                      (onSelect)="onRegionSelect($event)" (onDeSelect)="onRegionDeSelect($event)">
+                    </angular2-multiselect>
                   </div>
                 </div>
               </td>
             </div>
-            <div class="eucador-head">
-              <h4> {{headerFeeText}}</h4>
-              <h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.OnboardMemberShip' | translate}}</h5>
-            </div>
-            <div class="table-responsive more-table">
-              <table mat-table [dataSource]="feesDataSource" style="width: 90%;" id=right formArrayName="feesDetails">
-                <ng-container matColumnDef="feeText">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container" >
-                      <div>
-                        <label>&nbsp;{{getRowtext(index)}}</label>                   
-                      </div>
-                    </div>
 
-                  </td>
-                </ng-container>
-               
-                <ng-container matColumnDef="standardPrice">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.StandardPrice' |
-                    translate}}</th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container space-top" *ngIf="index !== 2">
-                      <div>
-                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                          [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                          <input matInput type="text" formControlName="standardPrice" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
-                        </mat-form-field>                    
-                      </div>
-                    </div>
+            <div *ngFor="let item of this.financierForm.value.region">
 
-                    <div class="card-form-container" *ngIf="index == 2">
-                      <div>
-                        <mat-radio-group aria-label="Select an option" formControlName="chargeBasics">
-                          <mat-radio-button value="1">{{'FinancierOnboardingComponent.Quaterly' | translate}}</mat-radio-button>
-                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.HalfYearly' | translate}}</mat-radio-button>
-                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.Yearly' | translate}}</mat-radio-button>
-                        </mat-radio-group>                
-                      </div>
-                    </div>
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="discountPrice" >
-                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.DiscountPrice' |
-                    translate}}</th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container discount-box" *ngIf="index !== 2">
-                      <div>  
-                        <mat-radio-group aria-label="Select an option" formControlName="discountOption" >
-                          <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatCharges' | translate}}</mat-radio-button>
-                          <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}</mat-radio-button>
-                        </mat-radio-group>
+            
+            <mat-accordion>
+              <mat-expansion-panel>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title style="font-weight:500;color: #a899e4;">
+                    {{item && item.headerText | translate}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
 
-                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                        [ngClass]="{'readOnlyCls': isView}">
-                        <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                        <input matInput type="text" formControlName="discountPrice" placeholder="{{'FinancierOnboardingComponent.DiscountPrice' | translate}}">
-                      </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="totalFees">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TotalFees' |
-                    translate}}</th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container space-top" *ngIf="index !== 2">
-                      <div>
-                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                          [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                          <input matInput type="number" formControlName="totalFees" placeholder="{{'FinancierOnboardingComponent.TotalFees' | translate}}">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </td>
-                </ng-container>                          
-                
-                <tr mat-header-row *matHeaderRowDef="feesColumns" style="background-color:#694ed6e0"></tr>
-                <tr mat-row *matRowDef="let row; columns: feesColumns"></tr>
-              </table>
-            </div>
+                <div class="label-align">
+                  <div class="eucador-head">
+                    <!-- <h4> {{headerFeeText}}</h4> -->
+                    <h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.OnboardMemberShip' | translate}}</h5>
+                  </div>
+                  <div class="table-responsive more-table ">
+                    <table mat-table [dataSource]="feesDataSource" style="width: 90%;" id=right
+                      formArrayName="feesDetails">
+                      <ng-container matColumnDef="feeText">
+                        <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                          <div class="card-form-container">
+                            <div>
+                              <label class="label-top">&nbsp;{{getRowtext(index)}}</label>
+                            </div>
+                          </div>
 
+                        </td>
+                      </ng-container>
 
+                      <ng-container matColumnDef="standardPrice">
+                        <th mat-header-cell *matHeaderCellDef scope="column">
+                          {{'FinancierOnboardingComponent.StandardPrice' |
+                          translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                          <div class="card-form-container space-top" *ngIf="index !== 2">
+                            <div>
+                              <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                                [ngClass]="{'readOnlyCls': isView}">
+                                <input matInput type="text" formControlName="standardPrice"
+                                  placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                              </mat-form-field>
+                            </div>
+                          </div>
 
-            <div class="eucador-head"><h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.TransactionFee' | translate}}</h5></div>
-            <div class="table-responsive more-table">
-              <table mat-table [dataSource]="transaction_feesDataSource" style="width: 90%;" id=right formArrayName="transaction_feesDetails">
+                          <div class="card-form-container label-top" *ngIf="index == 2">
+                            <div>
+                              <mat-radio-group aria-label="Select an option" formControlName="chargeBasics">
+                                <mat-radio-button value="1">{{'FinancierOnboardingComponent.Quaterly' | translate}}
+                                </mat-radio-button>
+                                <mat-radio-button value="2">{{'FinancierOnboardingComponent.HalfYearly' | translate}}
+                                </mat-radio-button>
+                                <mat-radio-button value="2">{{'FinancierOnboardingComponent.Yearly' | translate}}
+                                </mat-radio-button>
+                              </mat-radio-group>
+                            </div>
+                          </div>
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="discountPrice">
+                        <th mat-header-cell *matHeaderCellDef scope="column">
+                          {{'FinancierOnboardingComponent.DiscountPrice' |
+                          translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                          <div class="card-form-container discount-box" *ngIf="index !== 2">
+                            <div>
+                              <mat-radio-group aria-label="Select an option" formControlName="discountOption">
+                                <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatCharges' | translate}}
+                                </mat-radio-button>
+                                <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}
+                                </mat-radio-button>
+                              </mat-radio-group>
 
-                <ng-container matColumnDef="productSelection">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container" >
-                      <div>
-                        <mat-checkbox formControlName="checkField"></mat-checkbox>
-                        <label>&nbsp;{{getFeeRowtext(index)}}</label>                   
-                      </div>
-                    </div>
+                              <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                                [ngClass]="{'readOnlyCls': isView}">
+                                <input matInput type="text" formControlName="discountPrice"
+                                  placeholder="{{'FinancierOnboardingComponent.DiscountPrice' | translate}}">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="totalFees">
+                        <th mat-header-cell *matHeaderCellDef scope="column"> {{'FinancierOnboardingComponent.TotalFees'
+                          |
+                          translate}}</th>
+                        <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                          <div class="card-form-container space-top" *ngIf="index !== 2">
+                            <div>
+                              <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                                [ngClass]="{'readOnlyCls': isView}">
+                                <input matInput type="number" formControlName="totalFees"
+                                  placeholder="{{'FinancierOnboardingComponent.TotalFees' | translate}}">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </td>
+                      </ng-container>
 
-                  </td>
-                </ng-container> 
+                      <tr mat-header-row *matHeaderRowDef="feesColumns" style="background-color:#694ed6e0"></tr>
+                      <tr mat-row *matRowDef="let row; columns: feesColumns"></tr>
+                    </table>
+                  </div>
+                </div>
 
-                <ng-container matColumnDef="flat">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
-                  <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                    <div class="card-form-container discount-box" >
-                      <div>
-                        <div>
-                          <mat-radio-group aria-label="Select an option" formControlName="discountOption">
-                            <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatFees' | translate}}</mat-radio-button>
-                            <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}</mat-radio-button>
-                          </mat-radio-group>                
+                <div class="eucador-head">
+                  <h5 class="uxg-h6" id=grid> {{'FinancierOnboardingComponent.TransactionFee' | translate}}</h5>
+                </div>
+                <div class="table-responsive more-table">
+                  <table mat-table [dataSource]="transaction_feesDataSource" style="width: 90%;" id=right
+                    formArrayName="transaction_feesDetails">
+
+                    <ng-container matColumnDef="productSelection">
+                      <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                        <div class="card-form-container">
+                          <div class="label-top">
+                            <mat-checkbox formControlName="checkField"></mat-checkbox>
+                            <label>&nbsp;{{getFeeRowtext(index)}}</label>
+                          </div>
                         </div>
-                        <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                          [ngClass]="{'readOnlyCls': isView}">
-                          <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                          <input matInput type="text" formControlName="discountPrice" placeholder="{{'FinancierOnboardingComponent.FeeOrPercentage' | translate}}">
-                        </mat-form-field>                    
-                      </div>
-                    </div>
+                      </td>
+                    </ng-container>
 
-                  </td>
-                </ng-container> 
-
-                <ng-container matColumnDef="min">
-                  <th mat-header-cell *matHeaderCellDef scope="column"></th>
-                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                      <div class="card-form-container discount-box" >
-                        <div>
-                          <div><mat-checkbox formControlName="minimumOption"></mat-checkbox>&nbsp;{{'FinancierOnboardingComponent.Minimum' | translate}}</div>
-
-                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                            [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                            <input matInput type="text" formControlName="minimumFees" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
-                          </mat-form-field>                    
+                    <ng-container matColumnDef="flat">
+                      <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                        <div class="card-form-container discount-box">
+                          <div>
+                            <div>
+                              <mat-radio-group aria-label="Select an option" formControlName="discountOption">
+                                <mat-radio-button value="1">{{'FinancierOnboardingComponent.FlatFees' | translate}}
+                                </mat-radio-button>
+                                <mat-radio-button value="2">{{'FinancierOnboardingComponent.PercentBasics' | translate}}
+                                </mat-radio-button>
+                              </mat-radio-group>
+                            </div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <input matInput type="text" formControlName="discountPrice"
+                                placeholder="{{'FinancierOnboardingComponent.FeeOrPercentage' | translate}}">
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-  
-                    </td>
-                </ng-container> 
+                      </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="max">
-                  <th mat-header-cell *matHeaderCellDef scope="column"> </th>
-                    <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
-                      <div class="card-form-container discount-box" >
-                        <div>
-                          <div><mat-checkbox formControlName="maximumOption"></mat-checkbox>&nbsp;{{'FinancierOnboardingComponent.Maximum' | translate}}</div>
-
-                          <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
-                            [ngClass]="{'readOnlyCls': isView}">
-                            <mat-icon color="primary" dense matPrefix>person_outline</mat-icon>
-                            <input matInput type="text" formControlName="maximumFees" placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
-                          </mat-form-field>                    
+                    <ng-container matColumnDef="min">
+                      <th mat-header-cell *matHeaderCellDef scope="column"></th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                        <div class="card-form-container discount-box">
+                          <div>
+                            <div>
+                              <mat-checkbox formControlName="minimumOption"></mat-checkbox>
+                              &nbsp;{{'FinancierOnboardingComponent.Minimum' | translate}}
+                            </div>
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <input matInput type="text" formControlName="minimumFees"
+                                placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-  
-                    </td>
-                </ng-container>
-               
 
-                
-                                       
-                
-                <tr mat-header-row *matHeaderRowDef="transaction_feesColumns" style="background-color:#694ed6e0"></tr>
-                <tr mat-row *matRowDef="let row; columns: transaction_feesColumns"></tr>
-              </table>
-            </div>
+                      </td>
+                    </ng-container>
 
+                    <ng-container matColumnDef="max">
+                      <th mat-header-cell *matHeaderCellDef scope="column"> </th>
+                      <td mat-cell *matCellDef="let element;let row; let index = index" [formGroupName]="index">
+                        <div class="card-form-container discount-box">
+                          <div>
+                            <div>
+                              <mat-checkbox formControlName="maximumOption"></mat-checkbox>
+                              &nbsp;{{'FinancierOnboardingComponent.Maximum' | translate}}
+                            </div>
 
+                            <mat-form-field floatLabel="never" dense appearance="fill" class="example-full-width"
+                              [ngClass]="{'readOnlyCls': isView}">
+                              <input matInput type="text" formControlName="maximumFees"
+                                placeholder="{{'FinancierOnboardingComponent.StandardPrice' | translate}}">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="transaction_feesColumns" style="background-color:#694ed6e0">
+                    </tr>
+                    <tr mat-row *matRowDef="let row; columns: transaction_feesColumns"></tr>
+                  </table>
+                </div>
 
+              </mat-expansion-panel>
+            </mat-accordion>
 
-
+          </div>
 
             <mat-card-actions>
               <span class="fill-remaining-space"></span>
@@ -1213,17 +1223,12 @@
         <mat-step completed="true" *ngIf='this.financierId'>
           <ng-template matStepLabel> {{'FinancierOnboardingComponent.UserDetails' | translate}}</ng-template>
           <mat-card>
-            <!-- <mat-tab-group dynamicHeight>
-
-                <mat-tab label="Related Users">  -->
-
             <div class="links">
               <button mat-button type="button" mat-stroked-button color="primary" class="onboard-btn"
                 (click)="this.navigateUserAdd()">{{'FinancierOnboardingComponent.AddUser' | translate}}</button>
             </div>
             <div class="table-responsive">
               <table mat-table [dataSource]="userDataSource">
-
 
                 <ng-container matColumnDef="userId">
                   <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.UserId' | translate}}</th>
@@ -1246,14 +1251,6 @@
                     {{element.lastName}}
                   </td>
                 </ng-container>
-
-                <!-- <ng-container matColumnDef="companyName">
-                        <th mat-header-cell *matHeaderCellDef  matTooltip="{{biddingTooltip.smeName}}"
-                            > Company Name </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{element.companyName}}
-                        </td>
-                    </ng-container> -->
 
                 <ng-container matColumnDef="emailId">
                   <th mat-header-cell *matHeaderCellDef> {{'FinancierOnboardingComponent.EmailId' | translate}} </th>

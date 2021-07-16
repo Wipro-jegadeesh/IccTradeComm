@@ -102,7 +102,7 @@ export class FinancierOnboardingComponent implements OnInit {
   name = "Angular";
   cities: Array<ICity> = [];
   selectedItems: Array<ICity> = [];
-  regionDatas : Array<ICity> = [];
+  regionDatas = [];
   dropdownSettings = {};
   regionSettings= {}
   isView = false
@@ -117,9 +117,9 @@ export class FinancierOnboardingComponent implements OnInit {
     ];
 
     this.regionDatas = [
-      { id: 1, itemName: "Eucador" },
-      { id: 2, itemName: "Mexico" },
-      { id: 3, itemName: "Columbia" }
+      { id: 1, itemName: "Eucador",headerText : this.translate.instant("FinancierOnboardingComponent.EcuatorHeader") },
+      { id: 2, itemName: "Mexico",headerText : this.translate.instant("FinancierOnboardingComponent.MexicoMemberShip")},
+      { id: 3, itemName: "Columbia",headerText : this.translate.instant("FinancierOnboardingComponent.ColumbiaMemberShip")}
     ];
 
     this.selectedItems = [];
@@ -135,13 +135,13 @@ export class FinancierOnboardingComponent implements OnInit {
       maxHeight	: 170
     };
     this.regionSettings = {
-      singleSelection: true,
+      singleSelection: false,
       defaultOpen: false,
       idField: "item_id",
       textField: "item_text",
       allowSearchFilter: true,
       enableSearchFilter : true,
-      text: 'Region',
+      text: 'Select Country',
       autoPosition : false,
       maxHeight	: 170
     };
@@ -263,6 +263,7 @@ export class FinancierOnboardingComponent implements OnInit {
         partnerDetails: this.fb.array([]),
         authSign: this.fb.array([]),
         entityAdmin: this.fb.array([]),
+        region : [[],Validators.required],
       })
 
       //head & service address 

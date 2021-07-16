@@ -147,8 +147,19 @@ header {
 }
 
 .space-top{
-    margin-top: 28px;
+    margin-top: 41px;
 }
+.label-top{
+    margin-top : 38px
+}
+
+.label-align{
+    .table-responsive{
+        overflow-y: hidden
+    }
+}
+
+
 .mat-radio-button{
     margin-right: 10px;
 }
@@ -165,12 +176,25 @@ header {
     .more-table .add-good-plusbtn{
         float: right;
     }
+
+    #right {
+        margin-left: 15px;
+    }
+    .eucador-head h5{
+        padding-left: 16px;
+    }
 }
 @media only screen and (min-width:768px) and (max-width:991px){
     header{
         padding: 10px;
         margin: 0;
         margin-top: 20px;
+    }
+    .eucador-head h5{
+        padding-left: 15px;
+    }
+    #right{
+        margin-left: 14px;
     }
 
 }

@@ -494,7 +494,8 @@
 			"Submit": "Submit",
 			"Edit": "Edit",
 
-			"EcutorMemberShip" : "Eucador Membership Fees and Transaction Fees",
+			"EcutorMemberShip" : "Membership and Transaction Fees",
+			"EcuatorHeader" : "Eucador Membership Fees and Transaction Fees",
 			"MexicoMemberShip" : "Mexico Membership Fees and Transaction Fees",
 			"ColumbiaMemberShip" : "Columbia Membership Fees and Transaction Fees",
 			"OnboardMemberShip" : "Onboarding and Membership Fees",
@@ -511,7 +512,7 @@
 			"TransactionFee" : "Transaction Fees",
 			"OnboardingFees" : "Onboarding Fees(One Time Fee)",
 			"MemberShipFee" : "Membership Fee(Recurring Fees)",
-			"ChargeBasics" : "Charge Basis",
+			"ChargeBasics" : "Charge Basis on membership fee",
 
 			"SellerInvDiscount" : "Seller Invoice Discounting",
 			"BuyerInvDiscount" : "Buyer Invoice Discounting",
