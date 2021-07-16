@@ -9,7 +9,10 @@ export class CoriolisService {
     getQuestionnaireSection(params){
       return this.apiService.get(environment.coriolisServicePath + 'allquestionaire/' + params.companyId + '/' + params.companyName + '/' + params.country)
     }
-    getScoreSection(params){
-
+    getScore(params){
+      return this.apiService.get(environment.coriolisServicePath + 'coriolis/scorebycompany/' + params)
+    }
+    submitQuestionnaire(params){
+     return this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire', params)
     }
 }

@@ -1,13 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { HttpHeaders, HttpClient, HttpParams, HttpClientModule } from "@angular/common/http";
-// import { HttpModule } from '@angular/http';
+import { HttpHeaders, HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-// import { DeviceDetectorService } from 'ngx-device-detector';
 import { throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
-// import { ToastrManager } from 'ng6-toastr-notifications';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoaderService } from "../service/loader.service";
 
 let headers = new HttpHeaders();
@@ -188,7 +185,6 @@ export class ApiService {
 	}
 
 	downloadFile(url) {
-		;
 		return this.http.get(url, { responseType: "blob" }).pipe(
 			map((res: any) => {
 				return res;

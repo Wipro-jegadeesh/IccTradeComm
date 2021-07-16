@@ -476,14 +476,16 @@ export class SmeOnboardingComponent implements OnInit {
       'sectionList': onboardingResp,
       'uuid': localStorage.getItem('uuid')
     }
-    this.apiService.post(environment.coriolisServicePath + 'coriolis/submitquestionaire', obj).subscribe(resp => {
+    this.coriolisService.submitQuestionnaire(obj).subscribe(resp => {
       if (resp) {
         // alert('Questionnaire Section Submitted Successfully')
         // type &&
         this.toastr.success('Questionnaire Section Submitted Successfully')
 
         let data = JSON.parse(localStorage.getItem('userCred'))
-        this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + data.companyId + '/' + data.companyName + '/' + data.country).subscribe(resp => {
+        let reqData=data.companyId + '/' + data.companyName + '/' + data.country
+        this.coriolisService.getScore(reqData).subscribe(resp => {
+          if(resp){
           let obj = {
             "smeRating": resp.score,
           }
@@ -507,6 +509,7 @@ export class SmeOnboardingComponent implements OnInit {
             !type && this.toastr.info(this.translate.instant('Kindly check your questionnaire section.'))
             this.router.navigateByUrl('/score-received')
           }
+        }
         }, error => {
           this.toastr.error('Error')
         })

@@ -1,4 +1,4 @@
-// //General Service
+//General Service
 // let BASE_PATH = "http://localhost:8080/";
 
 // // Invoice Service Url 8080
@@ -132,6 +132,7 @@ let serviePath_5 = "https://tradecomm-invoice.ffdcdev.fusionfabric.io/";
 // Coriolis service path
 let coriolisServicePath="https://tradecomm-common.ffdcdev.fusionfabric.io/"
 
+ 
 
 //Redirect URL
 let SMEURL = "https://tradecomm-ui.ffdcdev.fusionfabric.io/sme-dashboard"
@@ -147,27 +148,25 @@ let dboardServerPath5 ="http://dboardServPath5/";
 let dboardServerPath6 ="http://dboardServPath6/";
  
 export const environment = {​​​​​​​
-  production: true,
-  api_url: `${​​​​​​​BASE_PATH}​​​​​​​`,
-  serviePath_1: `${​​​​​​​serviePath_1}​​​​​​​`,
-  serviePath_2: `${​​​​​​​serviePath_2}​​​​​​​`,
-  serviePath_3: `${​​​​​​​serviePath_3}​​​​​​​`,
-  serviePath_4: `${​​​​​​​serviePath_4}​​​​​​​`,
-  serviePath_5: `${​​​​​​​serviePath_5}​​​​​​​`,
+production: true,
+api_url: `${BASE_PATH}`,
+serviePath_1: `${serviePath_1}`,
+serviePath_2: `${serviePath_2}`,
+serviePath_3: `${serviePath_3}`,
+serviePath_4: `${serviePath_4}`,
+serviePath_5: `${serviePath_5}`,
 
-
-  
-  dboardServerPath1: `${​​​​​​​dboardServerPath1}​​​​​​​`,
-  getSumOfOpenFinBidding: `${​​​​​​​getSumOfOpenFinBidding}​​​​​​​`,
-  dboardServerPath3: `${​​​​​​​dboardServerPath3}​​​​​​​`,
-  dboardServerPath4: `${​​​​​​​dboardServerPath4}​​​​​​​`,
-  dboardServerPath5: `${​​​​​​​dboardServerPath5}​​​​​​​`,
-  dboardServerPath6: `${​​​​​​​dboardServerPath6}​​​​​​​`,
-  financierServicePath: `${​​​​​​​financierServicePath}​​​​​​​`,
-  coriolisServicePath:`${​​​​​​​coriolisServicePath}​​​​​​​`,
-  SMEURL : `${​​​​​​​SMEURL}​​​​​​​`,
-  FINANCEURL:`${​​​​​​​FINANCEURL}​​​​​​​`,
-  ICCURL:`${​​​​​​​ICCURL}​​​​​​​`,
+dboardServerPath1: `${dboardServerPath1}`,
+getSumOfOpenFinBidding: `${getSumOfOpenFinBidding}`,
+dboardServerPath3: `${dboardServerPath3}`,
+dboardServerPath4: `${dboardServerPath4}`,
+dboardServerPath5: `${dboardServerPath5}`,
+dboardServerPath6: `${dboardServerPath6}`,
+financierServicePath: `${financierServicePath}`,
+coriolisServicePath:`${coriolisServicePath}`,
+SMEURL : `${SMEURL}`,
+FINANCEURL:`${FINANCEURL}`,
+ICCURL:`${ICCURL}`,
  
   keycloak : {​​​​​​​
     // Url of the Identity Provider
@@ -213,11 +212,3 @@ export const environment = {​​​​​​​
     disableAtHashCheck: true
   }​​​​​​​
 }​​​​​​​;
- 
- 
-
-
-
-
-
-
