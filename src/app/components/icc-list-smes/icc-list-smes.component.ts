@@ -96,7 +96,7 @@ export class IccListSmesComponent implements OnInit {
   public accountList: ElementRef<any>;
   message: string;
   userValue: any;
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

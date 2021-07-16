@@ -25,7 +25,7 @@ export class FinancierDashboardComponent implements OnInit {
   getSumofexpeireOffer: any;
   getSumofrejectrOffer: any;
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

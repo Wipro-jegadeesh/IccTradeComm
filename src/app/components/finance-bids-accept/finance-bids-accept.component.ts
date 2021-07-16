@@ -45,7 +45,7 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   private modalService: BsModalService,private FinanceRequestServices : FinancebidsRequestServices) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   @ViewChild('accountList', { read: ElementRef })
  
   

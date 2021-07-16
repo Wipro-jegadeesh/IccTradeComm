@@ -21,8 +21,8 @@ export class IccUserCreationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  @HostListener('window:resize', ['$event'])
-  displayedColumns: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber','status', 'action'];
+  @HostListener('window:resize', [])
+  displayedColumns: Array<string> = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber','status', 'action'];
   dataSource;
   isOpen = ""
   mobileScreen = false;
@@ -38,13 +38,13 @@ export class IccUserCreationComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
   isHover: boolean = false;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {

@@ -35,7 +35,7 @@ export class SmeBiddingComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

@@ -83,7 +83,7 @@ export class FinancierFundedComponent implements OnInit {
   public getSmeName: any = []
   Searchform: FormGroup;
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

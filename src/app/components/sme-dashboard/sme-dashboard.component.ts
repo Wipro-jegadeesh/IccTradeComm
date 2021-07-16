@@ -41,7 +41,7 @@ export class SmeDashboardComponent implements OnInit {
   FileType: any;
   PDFData: any;
   userDetails: any;
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

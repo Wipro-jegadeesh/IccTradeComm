@@ -47,18 +47,18 @@ const BIDDING_DATA: biddingDetails[] = [];
 })
 export class Repayment_overdueComponent implements OnInit {
 
-  overdueTableHeaders: string[] = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  overdueTableHeaders: Array<string> = ['invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   overdueDatas = new MatTableDataSource(ELEMENT_DATA);
 
 
-  goodsDetailsHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsDetailsHeaders: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   goodsDetailDatas = new MatTableDataSource(GOODS_DATA); //data
 
   invoiceDatas = new MatTableDataSource(INVOICE_DATA); //data
-  invoiceTableHeaders: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  invoiceTableHeaders: Array<string> = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
 
   biddingDatas = new MatTableDataSource(BIDDING_DATA); //data
-  biddingTableHeaders: string[] = [
+  biddingTableHeaders: Array<string> = [
     'id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate',
     'baseCcyNetAmtPayable', 'annualYeild']
 
@@ -73,14 +73,14 @@ export class Repayment_overdueComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @HostListener('window:resize', ['$event'])
-  displayedColumnsload: string[] = [
+  @HostListener('window:resize', [])
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {}
