@@ -228,18 +228,17 @@
          <!--  Invoice Upload -->
         <mat-card>
           <mat-card-content>
-            <div id="container">
-              <span class="uxg-h6" id=grid>{{'Invoice Upload' | translate}}</span>
-            </div>
         <mat-accordion>
           <mat-expansion-panel (opened)="bidpanelOpenState = true" (closed)="bidpanelOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title class="mat-panel-title">
-                {{'Invoice Upload' | translate}}
+                <div id="container">
+                  <span class="uxg-h6" id=grid>{{'Document Upload' | translate}}</span>
+                </div>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="row dis-block">
-              <div class="col-sm-4">
+            <!-- <div class="row dis-block"> -->
+              <!-- <div class="col-sm-4">
                 <div class="card-form-container">
                   <div class="dynamic-radio-btn file-input">
                     <h6>{{'Invoice Document' | translate}}</h6>
@@ -301,8 +300,66 @@
                     </div>
                   </div>
                 </div>
+              </div> -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="container" style="text-align: end;">
+                    <button type="button" style="background-color:#694ed6e0" class="btn btn-primary" (click)="addAddress()">Add Document</button>
+                  </div>
+                </div>
+                &nbsp;
+                <div class="col-12">
+                  <section class="container border mb-4 p-3" *ngFor="let address of addresses; let i = index;">
+                     <div class="row">
+                      <div class="col-6">
+                          <h6>Document {{i + 1}}</h6>
+                      </div>
+                      <div class="col-6 text-right">
+                          <button type="button"  class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3" style="padding: 27px 3px 1px 26px;">
+                              <mat-form-field dense>
+                                <mat-label> {{'Category' | translate}}</mat-label>
+                                <mat-select name="address_{{address.id}}"[(ngModel)]="address.category" [ngModelOptions]="{standalone: true}">
+                                  <mat-option value="ID">Invoice Document </mat-option>
+                                  <mat-option value="BD">Buyer Document </mat-option>
+                                  <mat-option value="SD">Seller Document </mat-option>
+                                  <mat-option value="BD">DOCE Document </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                              <div class="col-sm-4">
+                                <div class="card-form-container">
+                                  <div class="dynamic-radio-btn file-input">
+                                    <h6>{{'Invoice Document' | translate}}</h6>
+                                    <div class="file-upload">
+                                      <div class="upload-btn-wrapper">
+                                        <button class="filebtn">{{'Upload a file' | translate}}</button>
+                                        <input type="file" class="dynamic-file-upload form" (change)="onDocumentChange($event,address.id)" multiple/>
+                                      </div>
+                                      <div class="file-label">
+                                        <label *ngFor="let file of fileNames;let i=index" style="cursor: pointer;" (click)="PreviewForDocumenUpload($event,template,file)">{{file.fileName}}
+                                        </label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                      </div>
+                       <div class="col-3" style="padding: 33px 0px 0px 0px;">
+                              <!-- <button   style="padding: 9px 26px 10px 8px;"  type="button" class="btn btn-outline">
+                                {{'Invoice PDF' | translate}}
+                                <span style="position: absolute;" class="material-icons">preview</span>
+                              </button> -->
+                        </div>
+                      </div>
+                  </section>
+                </div>
               </div>
-            </div>
+            <!-- </div> -->
           </mat-expansion-panel>
         </mat-accordion>
           </mat-card-content>
@@ -587,6 +644,12 @@
               {{XMLdata}}
           </div>
           <div *ngIf="pdfSrc && Previewtype === 'PDF'">
+            <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
+          </div>
+          <div *ngIf="ImageSrc && Previewtype === 'image/png'">
+            <img [src]="ImageSrc" />
+          </div>
+          <div *ngIf="pdfSrc && Previewtype === 'application/pdf'">
             <pdf-viewer [src]="pdfSrc" [original-size]="true" [fit-to-page]="false" [show-borders]="true"></pdf-viewer>
           </div>
         </div>

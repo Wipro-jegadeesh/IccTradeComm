@@ -127,8 +127,14 @@ export class InvoiceRequestComponent implements OnInit {
   pdfSrc
   XMLdata
   Previewtype
+  ImageSrc
+  fileNames=[]
   bidpanelOpenState = false;
-  constructor(private modalService: BsModalService,private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
+  public addresses: any[] = [{
+    id: 1,
+    category: '',
+    FileDatas: ''
+  }];  constructor(private modalService: BsModalService,private activatedRoute: ActivatedRoute, public translate: TranslateService, private IccCountryServices: IccCountryServices, public router: Router,
     private invoiceRequestServices: InvoiceRequestServices, private fb: FormBuilder,
     private datePipe: DatePipe, private toastr: ToastrService
   ) {
@@ -148,6 +154,66 @@ export class InvoiceRequestComponent implements OnInit {
     }
     this.userDeatils = JSON.parse(localStorage.getItem('userCred')) ? JSON.parse(localStorage.getItem('userCred')) : { role: 'Authorise' }
     this.getInvDetailsLists()
+  }
+  PreviewForDocumenUpload(event, template,file){
+    this.pdfSrc = ""
+    this.XMLdata = ""
+    this.Previewtype = file.FileType
+    console.log(file,"this.file")
+    console.log(this.Previewtype,"this.Previewtype")
+    if(this.Previewtype === "image/png"){
+      this.ImageSrc = 'data:image/png;base64,' + file.data
+    }
+    if(this.Previewtype === "application/pdf"){
+      this.pdfSrc = 'data:application/pdf;base64,' + file.data
+    }
+    // if(this.FileData.FileData.queryParams.invoicedata.EncryptedFilePDF && type === 'PDF'){
+    //   this.pdfSrc = this.FileData.FileData.queryParams.invoicedata.EncryptedFilePDF
+    // }
+    // if(this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML && type === 'XML'){
+    //   var base64Img = this.FileData.FileData.queryParams.invoicedata.EncryptedFileXML;
+    //   base64Img = base64Img.replace("data:text/xml;base64,","");
+    //   this.XMLdata = atob(base64Img)
+    // }
+    event.preventDefault();
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  }
+  addAddress() {
+    this.addresses.push({
+      id: this.addresses.length + 1,
+      category: '',
+      FileDatas: ''
+    });
+  }
+  removeAddress(i: number) {
+    this.addresses.splice(i, 1);
+  }
+  logValue() {
+    console.log(this.addresses);
+  }
+  onDocumentChange(ev,id) {
+    console.log(id,"id")
+    const file = ev.target.files[0];
+    console.log(file, "file")
+    console.log(file.type, "file")
+      // this.FileType = file
+      this.getBase64(<File>ev.target.files[0]).then((data) => {
+        let flName = file.name
+        let fileName = {
+          'fileName': file.name,
+          'data': (<string>data).split(',')[1],
+          'FileType':file.type,
+          'extension': flName.substring(flName.lastIndexOf('.') + 1, flName.length) || flName
+        }
+        this.fileNames.push(fileName)
+        console.log(this.fileNames,"this.fileNames")
+      });
+      setTimeout(() => {
+        let objIndex = this.addresses.findIndex((obj => obj.id == id));
+        console.log(objIndex,"objIndex")
+        this.addresses[objIndex]['FileDatas'] = this.fileNames;
+        console.log(this.addresses,"this.addresses")
+      }, 2000);
   }
   openModal(event, template, type) { //prview modal popup to view data
     this.pdfSrc = ""
@@ -769,6 +835,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.addRow();
     this.toastr.success("Data cleared successfully")
   }
+ 
   onFileChange(ev) {
     let workBook = null;
     let jsonData = null;
