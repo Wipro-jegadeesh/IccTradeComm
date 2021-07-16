@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, NullValidationHandler, OAuthService, OAuthErrorEvent } from 'angular-oauth2-oidc';
-import { filter } from 'rxjs/operators';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
 import { DialogDataExampleService } from '../shared/dialogBox/dialogBox.component';
 import { UserIdleService } from 'angular-user-idle';
 import {Idle, DEFAULT_INTERRUPTSOURCES} from '@ng-idle/core';
 import {Keepalive} from '@ng-idle/keepalive';
+import { CoriolisService } from '../components/sme-onboarding/coriolis.service';
+import { SignupService } from '../components/signup/signup.service';
 
 @Injectable()
 export class AuthConfigService {
@@ -27,7 +28,9 @@ export class AuthConfigService {
     private apiService: ApiService,
     private dialogBox: DialogDataExampleService,
     private userIdle: UserIdleService,
-    private idle: Idle, private keepalive: Keepalive
+    private idle: Idle, private keepalive: Keepalive,
+    private coriolisService:CoriolisService,
+    private signupService:SignupService
   ) {
     // sets an idle timeout of 5 seconds, for testing purposes.
     idle.setIdle(5);
@@ -175,7 +178,7 @@ export class AuthConfigService {
 
             sameCaseArray && sameCaseArray.map(item => {
               if (item.match(/^.*sme$/) || item.match(/^sme.*$/)) {
-                this.apiService.generalServiceget(environment.financierServicePath + 'sme-custom/' + claims['preferred_username']).subscribe(resp => {
+                this.signupService.checkSmeAuth(claims['preferred_username']).subscribe(resp =>{
                   if (resp.length) {
                     let userObj = {
                       'smeProfileId': resp[0].companyid,
@@ -217,7 +220,7 @@ export class AuthConfigService {
                 })
               }
               if (item.match(/^.*financier$/) || item.match(/^financier.*$/)) {
-                this.apiService.generalServiceget(environment.financierServicePath + 'financier-custom/' + claims['preferred_username']).subscribe(resp => {
+                this.signupService.checkFinancierAuth(claims['preferred_username']).subscribe(resp =>{
                   if (resp.length) {
                     let userObj = {
                       'financierProfileId': resp[0].companyid,
@@ -275,13 +278,16 @@ export class AuthConfigService {
   }
   updateScore(){
     let userCred=JSON.parse(localStorage.getItem('userCred'))
-      this.apiService.generalServiceget(environment.coriolisServicePath + 'coriolis/scorebycompany/' + userCred.companyId + '/' + userCred.name + '/' + userCred.country).subscribe(resp=>{
+    let reqData=userCred.companyId + '/' + userCred.name + '/' + userCred.country
+    this.coriolisService.getScore(reqData).subscribe(resp =>{
+      if(resp){
         let obj={
             "smeRating":resp.score,
         }
           this.apiService.put(environment.financierServicePath + 'sme-profile/smeRating/' + userCred.companyId , obj).subscribe(scoreUpdateResp=>{
 
           })
+        }
       })
   }
 }

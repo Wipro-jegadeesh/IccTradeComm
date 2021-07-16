@@ -25,4 +25,12 @@ export class SignupService {
     getAllSectorList(){
         return this.apiService.tempGet(environment.financierServicePath+'sector/allsector');
       }
+
+    //  AFTER LOGIN API CALLS(SERVICES )
+    checkSmeAuth(userName){
+        return this.apiService.generalServiceget(environment.financierServicePath + 'sme-custom/' + userName);
+    }
+    checkFinancierAuth(userName){
+        return this.apiService.generalServiceget(environment.financierServicePath + 'financier-custom/' + userName);
+    }
 }
