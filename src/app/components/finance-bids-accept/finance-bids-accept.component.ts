@@ -47,13 +47,7 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @HostListener('window:resize', [])
   @ViewChild('accountList', { read: ElementRef })
- 
-  
-  // SearchModel = {
-  //   'invoiceRef': String,
-  //   'invoiceAmt': Number,
-  //   'smeId': String
-  // }
+
   value = 0;
   highValue = 50;
   options: Options = {

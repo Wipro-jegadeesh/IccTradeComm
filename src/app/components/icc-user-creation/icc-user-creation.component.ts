@@ -48,9 +48,9 @@ export class IccUserCreationComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef': '',
+    'invoiceDate': '',
+    'invoiceDueDate': ''
 
   }
   value = 0;
@@ -182,9 +182,9 @@ Activeuser(data){
   }
   resetApi(){
     this.SearchModel={
-      'invoiceRef': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
+      'invoiceRef': '',
+      'invoiceDate': '',
+      'invoiceDueDate': ''
 
     };
     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {

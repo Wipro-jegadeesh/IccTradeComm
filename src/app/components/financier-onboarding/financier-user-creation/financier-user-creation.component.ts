@@ -70,9 +70,9 @@ export class FinancierUserCreationComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef': '',
+    'invoiceDate': '',
+    'invoiceDueDate': ''
 
   }
   value = 0;
@@ -152,9 +152,9 @@ constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute
   }
   resetApi(){
     this.SearchModel={
-      'invoiceRef': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
+      'invoiceRef': '',
+      'invoiceDate': '',
+      'invoiceDueDate': ''
     };
     // this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);
