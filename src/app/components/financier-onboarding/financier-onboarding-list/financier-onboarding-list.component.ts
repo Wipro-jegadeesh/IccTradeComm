@@ -30,10 +30,10 @@ const ELEMENT_DATA: any[] = [
 
 interface ICity {
   // item_id;
-  // item_text: string;
+  // item_text;
 
   id;
-  itemName: string;
+  itemName;
 }
 @Component({
   selector: 'app-financier-onboarding-list',
@@ -60,19 +60,19 @@ export class FinancierOnboardingListComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'profileId': String,
+    'profileId',
     'financierNameConstitution': String,
-    'locregno' : String
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
+    'locregno' 
+    // 'buyerName',
+    // 'invoiceDate',
+    // 'invoiceDueDate'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -21,12 +21,12 @@ export interface invoiceData {
   invref: any;
   invDueDate: any;
   invId: any;
-  id: String;
-  RefNo: String;
-  invoiceId: String;
-  invoiceDate: String;
-  buyerName: String;
-  InvoiceAmount: String;
+  id;
+  RefNo;
+  invoiceId;
+  invoiceDate;
+  buyerName;
+  InvoiceAmount;
 }
 const INVOICE_ARRAY: invoiceData[] = [];
 @Component({
@@ -36,7 +36,7 @@ const INVOICE_ARRAY: invoiceData[] = [];
 })
 export class InvoiceRequestComponent implements OnInit {
   invoiceForm: FormGroup;
-  tcode: string;
+  tcode;
   invoiceID: any;
   currencyName: any;
   InvoiceFdate: any
@@ -91,7 +91,7 @@ export class InvoiceRequestComponent implements OnInit {
   score: any;
   invoiceRefNo
   isDisabled: boolean;
-  currencyAMT: string;
+  currencyAMT;
   fundingTooltip = FUNDINGREQUESTCONSTANTS;
   currencyDropdownList = [
     {
@@ -398,7 +398,7 @@ export class InvoiceRequestComponent implements OnInit {
     this.optionDatas = this.search(value);
   }
 
-  search(value: string) { //to get datas based on typing on search field
+  search(value) { //to get datas based on typing on search field
     if (value == "") {
       this.optionDatas = this.nonFilterOptions
       return this.optionDatas

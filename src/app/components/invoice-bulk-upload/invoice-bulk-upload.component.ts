@@ -18,13 +18,13 @@ export interface invoiceData {
   invref: any;
   invDueDate: any;
   invId: any;
-  id: String;
-  RefNo: String;
-  invoiceId: String;
-  invoiceDate: String;
-  buyerName: String;
-  buyerUEN: string;
-  InvoiceAmount: String;
+  id;
+  RefNo;
+  invoiceId;
+  invoiceDate;
+  buyerName;
+  buyerUEN;
+  InvoiceAmount;
 }
 const INVOICE_ARRAY: invoiceData[] = [];
 @Component({
@@ -71,7 +71,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
   optionDatas: any;
   userDeatils: any;
   UpdateInvoiceLable: boolean;
-  message: string;
+  message;
   FileData: any;
   score;
   invoiceRefNo;
@@ -589,7 +589,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
   invoiceId(Id) { //to update invoiceid
     this.invoiceID = Id
   }
-  search(value: string) { //used to filter datas from array for search
+  search(value) { //used to filter datas from array for search
     let filter = value.toLowerCase();
     return this.optionDatas.filter(option => option.itemName.toLowerCase().startsWith(filter));
   }

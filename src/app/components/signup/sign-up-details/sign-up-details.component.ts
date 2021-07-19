@@ -16,9 +16,9 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class SignUpDetailsComponent implements OnInit {
   signupForm: FormGroup;
   signUpDetails: any;
-  imageError: string;
+  imageError;
   isImageSaved: boolean;
-  cardImageBase64: string;
+  cardImageBase64;
   bidpanelOpenState = false;
   sectors: any;
   languages = [{ "id": "en", "itemName": "English", "nativeName": "English" },
@@ -81,7 +81,7 @@ export class SignUpDetailsComponent implements OnInit {
   onKey(value) {
     this.languages = this.search(value);
   }
-  search(value: string) {
+  search(value) {
     let filter = value.toLowerCase();
     return this.languages.filter(option => option.itemName.toLowerCase().startsWith(filter));
   }
@@ -163,7 +163,7 @@ export class SignUpDetailsComponent implements OnInit {
       this.signupForm.controls['country'].setValue([obj])
     }
   }
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName, errorName) => {
     return this.signupForm.controls[controlName].hasError(errorName);
   }
   //Image upload functionality

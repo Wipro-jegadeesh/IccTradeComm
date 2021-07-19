@@ -13,19 +13,19 @@ declare var require: any
 const moment = require('moment');
 
 export interface goodsDetails {
-  descGoods: String;
-  idNo: String;
-  quantity: String;
-  rate: String;
-  amt: String;
-  discAmt: String;
-  netAmtPay: String;
-  taxRate: String;
-  taxAmount: String;
-  total: String;
+  descGoods;
+  idNo;
+  quantity;
+  rate;
+  amt;
+  discAmt;
+  netAmtPay;
+  taxRate;
+  taxAmount;
+  total;
 }
 const GOODS_DATA: goodsDetails[] = [];
-export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
+export interface invoiceDetails { 'invId', 'invDate', 'buyerName', 'invAmt', 'status' }
 const INVOICE_DATA: invoiceDetails[] = [];
 
 @Component({
@@ -68,11 +68,11 @@ export class SmeFinanceforBiddingComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
-    'buyerName': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef',
+    'smeId',
+    'buyerName',
+    'invoiceDate',
+    'invoiceDueDate'
 
   }
   searchForm: FormGroup;

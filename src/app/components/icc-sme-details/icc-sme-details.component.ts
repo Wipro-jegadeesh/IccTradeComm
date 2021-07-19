@@ -128,7 +128,7 @@ export class IccSmeDetailsComponent implements OnInit {
       sector:['']
     });
   }
-  public hasError = (controlName: string, errorName: string) =>{ //Checking Validation for forms
+  public hasError = (controlName, errorName) =>{ //Checking Validation for forms
     return this.userForm.controls[controlName].hasError(errorName);
   }
   onSubmitInvoiceForm() { // Form submit for sme-details

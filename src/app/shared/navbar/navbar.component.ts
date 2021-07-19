@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   headerPaths = [];
   isHide = false;
   userDeatils: any;
-  roleName: string;
+  roleName;
   // languages = LANGUAGES
   languages = [{ "id": "en", "itemName": "English", "nativeName": "English" },
   { "id": "es", "itemName": "Espano", "nativeName": "Español" }

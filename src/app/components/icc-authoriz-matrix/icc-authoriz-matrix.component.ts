@@ -39,26 +39,26 @@ export class IccAuthorizMatrixComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    // 'invoiceRef': String,
-    // 'smeId': String,
+    // 'invoiceRef',
+    // 'smeId',
 
-    'slab': String,
-    'smefin': String,
-    'currency': String,
-    'fromAmt': String,
-    'toAmt': String,
-    'noofPersons': String
+    'slab',
+    'smefin',
+    'currency',
+    'fromAmt',
+    'toAmt',
+    'noofPersons'
 
-    // 'buyerName': String,
-    // 'invoiceDate': String,
-    // 'invoiceDueDate': String
+    // 'buyerName',
+    // 'invoiceDate',
+    // 'invoiceDueDate'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
 
   countryForm: FormGroup;
 
-  countryPin: string;
+  countryPin;
   invalidLogin = false
   selectedItem;
   countryPinLabel;

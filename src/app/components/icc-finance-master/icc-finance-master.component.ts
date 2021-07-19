@@ -10,31 +10,31 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { FormGroup, FormBuilder } from '@angular/forms';
 export interface financeForBiddingData {
-  invoiceNo: String;
-  baseCcyAmt: String;
-  smeId: String;
-  fundablePercent: String;
-  baseCcyFundingAmt: String;
-  baseCcyNetAmtPayable: String;
+  invoiceNo;
+  baseCcyAmt;
+  smeId;
+  fundablePercent;
+  baseCcyFundingAmt;
+  baseCcyNetAmtPayable;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
 export interface goodsDetails {
-  descGoods: String;
-  idNo: String;
-  quantity: String;
-  rate: String;
-  amt: String;
-  discAmt: String;
-  netAmtPay: String;
-  taxRate: String;
-  taxAmount: String;
-  total: String;
+  descGoods;
+  idNo;
+  quantity;
+  rate;
+  amt;
+  discAmt;
+  netAmtPay;
+  taxRate;
+  taxAmount;
+  total;
 }
 const GOODS_DATA: goodsDetails[] = [];
-export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
+export interface invoiceDetails { 'invId', 'invDate', 'buyerName', 'invAmt', 'status' }
 const INVOICE_DATA: invoiceDetails[] = [];
 export interface biddingDetails {
-  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
+  'financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'
 }
 const BIDDING_DATA: biddingDetails[] = [];
 @Component({
@@ -82,18 +82,18 @@ export class IccFinanceMasterComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    'invoiceRef',
+    'smeId',
     'NetAmt': Number,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceDate',
+    'invoiceDueDate'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

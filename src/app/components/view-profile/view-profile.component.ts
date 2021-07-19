@@ -18,7 +18,7 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profileDetails()
   }
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName, errorName) => {
     return this.profileDetailForm.controls[controlName].hasError(errorName);
   }
   // set/patch profile details

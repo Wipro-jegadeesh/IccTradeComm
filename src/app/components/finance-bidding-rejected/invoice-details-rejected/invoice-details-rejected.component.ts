@@ -99,7 +99,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
   invoiceDetails: any
   moment: any = moment;
   FinancebiddingDetails: any;
-  type: string;
+  type;
   isView: boolean;
   Rejectform: FormGroup;
   //Remarks Looping 

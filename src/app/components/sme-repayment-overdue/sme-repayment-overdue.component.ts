@@ -11,32 +11,32 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-financefor-bidding-service';
 
 export interface financeForBiddingData {
-  invId: String;
-  invAmt: String;
-  smeId: String;
-  buyerName: String;
-  invDate: String;
-  invDueDate: String;
-  status: String;
+  invId;
+  invAmt;
+  smeId;
+  buyerName;
+  invDate;
+  invDueDate;
+  status;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
 export interface goodsDetails {
-  descGoods: String;
-  idNo: String;
-  dateOfInvoice: String;
-  quantity: String;
-  rate: String;
-  amt: String;
-  discAmt: String;
-  netAmtPay: String;
-  taxRate: String;
-  taxAmount: String;
-  total: String;
+  descGoods;
+  idNo;
+  dateOfInvoice;
+  quantity;
+  rate;
+  amt;
+  discAmt;
+  netAmtPay;
+  taxRate;
+  taxAmount;
+  total;
 }
 const GOODS_DATA: goodsDetails[] = [];
-export interface invoiceDetails { 'invId': String, 'invDate': String, 'buyerName': String, 'invAmt': String, 'status': String }
+export interface invoiceDetails { 'invId', 'invDate', 'buyerName', 'invAmt', 'status' }
 const INVOICE_DATA: invoiceDetails[] = [];export interface biddingDetails {
-  'financeOfferAmt': String, 'ccy': String, 'fxRate': String, 'margin': String, 'netAmtDisc': String, 'discAmt': String, 'discRate': String, 'offerExpPeriod': String
+  'financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'
 }
 const BIDDING_DATA: biddingDetails[] = [];
 
@@ -89,7 +89,7 @@ export class Repayment_overdueComponent implements OnInit {
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

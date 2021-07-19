@@ -35,7 +35,7 @@ const DATA_TWO: any[] = [
   providers: [DatePipe]
 })
 export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
-  type: string;
+  type;
   isView: boolean;
   FinancebiddingDetails: any;
 

@@ -20,7 +20,7 @@ import * as Papa from 'papaparse';
 
 export class InvoiceRepositoryComponent implements OnInit {
   invoiceForm: FormGroup;
-  tcode: string;
+  tcode;
   invoiceID: any;
   currencyName: any;
   InvoiceFdate: any
@@ -60,7 +60,7 @@ export class InvoiceRepositoryComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   userDeatils: any;
   isDisabled: boolean;
-  currencyAMT: string;
+  currencyAMT;
   fundingTooltip = FUNDINGREQUESTCONSTANTS;
   type: any
   FileData: any;

@@ -13,7 +13,7 @@ import { IccCountryServices } from '../../icc-country/icc-country.services'
 
 interface ICity {
   id;
-  itemName: string;
+  itemName;
 }
 @Component({
   selector: 'app-icc-user-details',
@@ -33,15 +33,15 @@ export class IccUserDetailsComponent implements OnInit {
   tooltipPosition = "below";
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  id: string;
-  imageError: string;
+  id;
+  imageError;
   isImageSaved: boolean;
-  cardImageBase64: string;
+  cardImageBase64;
   assignRoles = [];
   cardImageKYCBase64: any;
   isImageSavedKYC: boolean;
   sectors: any;
-  type: string;
+  type;
   @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth < 415) {
@@ -371,7 +371,7 @@ export class IccUserDetailsComponent implements OnInit {
     obj['id'] = result['id']
     this.userForm.controls['language'].setValue([obj])
   }
-  public hasError = (controlName: string, errorName: string) => { //validation error throw when field is empty
+  public hasError = (controlName, errorName) => { //validation error throw when field is empty
     return this.userForm.controls[controlName].hasError(errorName);
   }
 }

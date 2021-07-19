@@ -10,13 +10,13 @@ import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 export interface financeForBiddingData {
-  invId: String;
-  invAmt: String;
-  smeId: String;
-  buyerName: String;
-  invDate: String;
-  invDueDate: String;
-  status: String;
+  invId;
+  invAmt;
+  smeId;
+  buyerName;
+  invDate;
+  invDueDate;
+  status;
 }
 const ELEMENT_DATA: financeForBiddingData[] = [];
 @Component({
@@ -41,18 +41,18 @@ export class IccFinanceTodayComponent implements OnInit {
   displayedColumnsearch: Array<string> = ['Search']
   displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
-    'invoiceRef': String,
-    'smeId': String,
+    'invoiceRef',
+    'smeId',
     'NetAmt': Number,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceDate',
+    'invoiceDueDate'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

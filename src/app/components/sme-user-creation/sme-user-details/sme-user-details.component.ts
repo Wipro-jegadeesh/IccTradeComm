@@ -20,7 +20,7 @@ export class SmeUserDetailsComponent implements OnInit {
   tooltipPosition = "below";
   @ViewChild('accountList', { read: ElementRef })
   public accountList: ElementRef<any>;
-  id: string;
+  id;
   companyId;
 
   @HostListener('window:resize', [])
@@ -153,7 +153,7 @@ export class SmeUserDetailsComponent implements OnInit {
     this.onLoadCmpyDetail()
   }
   //validation function
-  public hasError = (controlName: string, errorName: string) => {
+  public hasError = (controlName, errorName) => {
     return this.userForm.controls[controlName].hasError(errorName);
   }
 }

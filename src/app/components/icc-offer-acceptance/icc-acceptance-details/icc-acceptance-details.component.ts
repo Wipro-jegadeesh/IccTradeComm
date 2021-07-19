@@ -16,8 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { SmeFinancierForBiddingServices } from '../../sme-financefor-bidding/sme-financefor-bidding-service';
 
 interface Status {
-  value: string;
-  viewValue: string;
+  value;
+  viewValue;
 }
 
 const DATA_ONE: any[] = [
@@ -187,18 +187,18 @@ export class ICCacceptancedetailsComponent implements OnInit {
   id:any
 
   // invoiceDetails = {
-  //   billNo : String,
-  //         invId : String,
-  //         invDate : String,
-  //         invDueDate : String,
-  //         invAmt : String,
-  //         buyerName : String,
-  //         smeId : String,  
+  //   billNo ,
+  //         invId ,
+  //         invDate ,
+  //         invDueDate ,
+  //         invAmt ,
+  //         buyerName ,
+  //         smeId ,  
   // }
   invoiceDetails:any
   moment: any = moment;
   FinancebiddingDetails: any;
-  type: string;
+  type;
   isView: boolean;
   public getSmeName: any = []
 

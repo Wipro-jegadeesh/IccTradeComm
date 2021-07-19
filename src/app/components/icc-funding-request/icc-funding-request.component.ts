@@ -56,16 +56,16 @@ export class IccFundingRequestComponent implements OnInit {
   displayedColumnsearch: Array<string> = ['Search']
   displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
-    'invoiceRef': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef',
+    'invoiceDate',
+    'invoiceDueDate'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

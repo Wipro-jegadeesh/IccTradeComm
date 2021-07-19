@@ -70,9 +70,9 @@ export class FinancierUserCreationComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef',
+    'invoiceDate',
+    'invoiceDueDate'
 
   }
   value = 0;
@@ -80,7 +80,7 @@ export class FinancierUserCreationComponent implements OnInit {
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
@@ -152,9 +152,9 @@ constructor(private route: ActivatedRoute,private activatedRoute: ActivatedRoute
   }
   resetApi(){
     this.SearchModel={
-      'invoiceRef': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
+      'invoiceRef',
+      'invoiceDate',
+      'invoiceDueDate'
     };
     // this.IccUserCreationsService.getAllFundingList().subscribe(resp => {
     //   this.dataSource = new MatTableDataSource(resp);

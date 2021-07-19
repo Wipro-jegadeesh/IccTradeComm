@@ -40,7 +40,7 @@ export class FinancierUserDetailsComponent implements OnInit {
   public accountList: ElementRef<any>;
   UpdateInvoiceLable: boolean;
   invoiceDetails: any;
-  id: string;
+  id;
 
   @HostListener('window:resize', [])
   onResize() {
@@ -251,7 +251,7 @@ export class FinancierUserDetailsComponent implements OnInit {
     });
   
   }
-  public hasError = (controlName: string, errorName: string) =>{
+  public hasError = (controlName, errorName) =>{
     return this.userForm.controls[controlName].hasError(errorName);
   }
 

@@ -49,8 +49,8 @@ export class SmeBiddingComponent implements OnInit {
   financierTooltip = SMEDASHBOARDCONSTANTS;
 
   constructor(public router: Router, private fb: FormBuilder, private smeBiddingServices: SmeBiddingServices) { }
-  invoiceId: string;
-  buyerName: string;
+  invoiceId;
+  buyerName;
   amount;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -66,18 +66,18 @@ export class SmeBiddingComponent implements OnInit {
     'Filter',
   ]
   searchModel = {
-    'invoiceRef': String,
-    'invoiceId': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String,
-    'buyerName': String
+    'invoiceRef',
+    'invoiceId',
+    'invoiceDate',
+    'invoiceDueDate',
+    'buyerName'
   }
   value = 0;
   highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

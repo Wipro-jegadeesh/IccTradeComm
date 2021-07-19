@@ -48,9 +48,9 @@ export class IccUserCreationComponent implements OnInit {
     'Filter',
   ]
   SearchModel = {
-    'invoiceRef': String,
-    'invoiceDate': String,
-    'invoiceDueDate': String
+    'invoiceRef',
+    'invoiceDate',
+    'invoiceDueDate'
 
   }
   value = 0;
@@ -58,7 +58,7 @@ export class IccUserCreationComponent implements OnInit {
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
@@ -71,7 +71,7 @@ export class IccUserCreationComponent implements OnInit {
   };
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  message: string;
+  message;
   isChecked = true;
   userValue: any;
 constructor(public router: Router, private modalService: BsModalService, private modalDialogService: ModalDialogService,
@@ -182,9 +182,9 @@ Activeuser(data){
   }
   resetApi(){
     this.SearchModel={
-      'invoiceRef': String,
-      'invoiceDate': String,
-      'invoiceDueDate': String
+      'invoiceRef',
+      'invoiceDate',
+      'invoiceDueDate'
 
     };
     this.IccUserCreationsService.getAllFundingList().subscribe(resp => {

@@ -13,8 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  username;
+  password;
   invalidLogin = false;
   hide = true;
   loginTooltip = LOGINCONSTANTS;

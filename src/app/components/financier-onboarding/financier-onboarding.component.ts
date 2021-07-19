@@ -28,12 +28,12 @@ const ELEMENT_DATA: any[] = [
 
 interface ICity {
   id;
-  itemName: string;
+  itemName;
 }
 
 interface IRegion {
   id ;
-  itemName : string
+  itemName 
 }
 @Component({
   selector: 'app-financier-onboarding',
@@ -156,7 +156,7 @@ export class FinancierOnboardingComponent implements OnInit {
     this.getAllCountry()
   }
 
-  public hasError = (controlName: string, errorName: string) =>{
+  public hasError = (controlName, errorName) =>{
     return this.financierForm.controls[controlName].hasError(errorName);
   }
 

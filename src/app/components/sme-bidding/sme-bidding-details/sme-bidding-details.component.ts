@@ -186,7 +186,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
     }
   }
   //Error validation function
-  public errorHandling = (control: string, error: string) => {
+  public errorHandling = (control, error) => {
     return this.rejectForm.controls[control].hasError(error);
   }
   //Accept bid functionality

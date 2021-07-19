@@ -37,7 +37,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
   FinancebiddingDetails: any;
-  type: string;
+  type;
   isView: boolean;
 
   dataSourceOne = new MatTableDataSource(); //Good Details
