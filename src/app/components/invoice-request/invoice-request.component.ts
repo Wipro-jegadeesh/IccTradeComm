@@ -55,7 +55,7 @@ export class InvoiceRequestComponent implements OnInit {
   modalRef: BsModalRef;
   hide = true;
   dataSourceTwo = new MatTableDataSource(); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'goodsId',
     'DescGoods',
     'Quantity',
@@ -71,7 +71,7 @@ export class InvoiceRequestComponent implements OnInit {
   ];
   public deletedRowedit: any = []
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
-  displayedColumns: string[] = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
+  displayedColumns: Array<string> = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   isOpen = ""
   mobileScreen = false;
@@ -116,7 +116,7 @@ export class InvoiceRequestComponent implements OnInit {
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
-  options: string[] = ['One', 'Two', 'Three'];
+  options: Array<string> = ['One', 'Two', 'Three'];
   disableSelect = new FormControl(false);
   states = COUNTRYNAMES
   public variables = ['One', 'Two', 'County', 'Three', 'Zebra', 'XiOn'];

@@ -48,8 +48,8 @@ export class InvoiceDetailsComponent implements OnInit {
     private fb: FormBuilder, private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices, private invoiceRequestServices: InvoiceRequestServices, private toastr: ToastrService) { }
 
   dataSourceOne = new MatTableDataSource(); //data
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  displayedColumnsOne1: string[] = [
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne1: Array<string> = [
     'SNo',
     'DescGoods',
     'IdNo',
@@ -63,7 +63,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Total'
   ];
   dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -72,7 +72,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  displayedInvoiceTwo: string[] = [
+  displayedInvoiceTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -84,7 +84,7 @@ export class InvoiceDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
-  launchBidPopup: string[] = [
+  launchBidPopup: Array<string> = [
     'Funding CCY',
     'Base CCY Amount',
     'Fundable percentage',
@@ -93,7 +93,7 @@ export class InvoiceDetailsComponent implements OnInit {
   ]
   launchBid_Popup: any
   launchBidTableTwo_Popup: any
-  launchBidTableTwoPopup: string[] = [
+  launchBidTableTwoPopup: Array<string> = [
     'Inv Discount Rate',
     'Disc Amt (Base CCY)',
     'Net Amt payable (Base CCY)',
@@ -103,7 +103,7 @@ export class InvoiceDetailsComponent implements OnInit {
   ]
   displayInvDatas = new MatTableDataSource(); //data
 
-  displayedInvoiceFormsColumns: string[] = [
+  displayedInvoiceFormsColumns: Array<string> = [
     'billNo',
     'invId',
     'invDate',

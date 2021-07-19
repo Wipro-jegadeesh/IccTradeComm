@@ -28,7 +28,7 @@ export class IccOfferAcceptanceComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  displayedColumns: string[] = ['invoiceRef', 'invNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  displayedColumns: Array<string> = ['invoiceRef', 'invNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   dataSource;
   financierTooltip = SMEDASHBOARDCONSTANTS;
   isOpen = ""
@@ -47,9 +47,9 @@ export class IccOfferAcceptanceComponent implements OnInit {
   isHover: boolean = false;
   AllFundingOpen: boolean;
   data2Source: any;
-  displayedColumnsload: string[] = ['TopBar']
-  displayedColumnsearch: string[] = ['Search']
-  displayedColumnFilter: string[] = ['Filter']
+  displayedColumnsload: Array<string> = ['TopBar']
+  displayedColumnsearch: Array<string> = ['Search']
+  displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
@@ -57,12 +57,12 @@ export class IccOfferAcceptanceComponent implements OnInit {
     'invoiceDate': String,
     'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -16,20 +16,20 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class IccCountryComponent implements OnInit {
   countryForm: FormGroup;
-  displayedColumns: string[] = ['country', 'countrycode2', 'countrycode3', 'numeric', 'action'];
+  displayedColumns: Array<string> = ['country', 'countrycode2', 'countrycode3', 'numeric', 'action'];
   dataSource;
   countryTooltip = CountryModule;
   isEdit: boolean
   id: any
   @ViewChild('formDirective') private formDirective: NgForm;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -38,12 +38,12 @@ export class IccCountryComponent implements OnInit {
     'countrycode3': String,
     'numeric': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 import { IccCountryServices } from '../../icc-country/icc-country.services'
 
 interface ICity {
-  id: number;
+  id;
   itemName: string;
 }
 @Component({
@@ -55,7 +55,7 @@ export class IccUserDetailsComponent implements OnInit {
   fileNames = []
   baseFileData
   selectedProducts: any
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  typesOfShoes: Array<string> = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers', 'Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   RolesType: any;
   constructor(private iccRolesServices: IccRolesServices, private activatedRoute: ActivatedRoute, public router: Router,
     private authenticationService: AuthenticationService, private iccUserCreationService: IccUserCreationService, private fb: FormBuilder,

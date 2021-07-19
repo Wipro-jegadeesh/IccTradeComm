@@ -20,7 +20,7 @@ export class FinanceBiddingComponent implements OnInit {
   constructor(private fb: FormBuilder, public router: Router, public authenticationService: AuthenticationService, private FinanceRequestServices: FinanceRequestServices) { }
 
   dataSource;//Bidding Finanince
-  displayedColumns: string[] = [
+  displayedColumns: Array<string> = [
     'invoiceRef',
     'invId',
     'invoiceAmt',
@@ -29,22 +29,22 @@ export class FinanceBiddingComponent implements OnInit {
     'invDate',
     'action'
   ];
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

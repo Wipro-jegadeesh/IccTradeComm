@@ -4,7 +4,7 @@ import { BsModalRef } from "ngx-bootstrap/modal";
 import { MatTableDataSource } from "@angular/material/table";
 import { IccFinanceTodayServices } from "./icc-finance-today-service";
 import { BIDDINGCONSTANTS } from "../../shared/constants/constants";
-import * as moment from "moment";
+import * as moment from 'moment';
 import { MatPaginator } from "@angular/material/paginator";
 import { Options, LabelType } from '@angular-slider/ngx-slider';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -25,7 +25,7 @@ const ELEMENT_DATA: financeForBiddingData[] = [];
   styleUrls: ["./icc-finance-today.component.scss"],
 })
 export class IccFinanceTodayComponent implements OnInit {
-  displayedColumns: string[] = [
+  displayedColumns: Array<string> = [
     "invoiceRef",
     "invoiceNo",
     "smeId",
@@ -37,9 +37,9 @@ export class IccFinanceTodayComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = ['TopBar']
-  displayedColumnsearch: string[] = ['Search']
-  displayedColumnFilter: string[] = ['Filter']
+  displayedColumnsload: Array<string> = ['TopBar']
+  displayedColumnsearch: Array<string> = ['Search']
+  displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
     'invoiceRef': String,
     'smeId': String,
@@ -47,12 +47,12 @@ export class IccFinanceTodayComponent implements OnInit {
     'invoiceDate': String,
     'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
@@ -74,7 +74,7 @@ export class IccFinanceTodayComponent implements OnInit {
   moment: any = moment;
   Searchform: FormGroup;
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener("window:resize", [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

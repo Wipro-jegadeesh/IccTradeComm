@@ -41,9 +41,9 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   isView: boolean;
 
   dataSourceOne = new MatTableDataSource(); //Good Details
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   dataSourceTwo = new MatTableDataSource(DATA_TWO); //Funding Details
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -52,7 +52,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  displayedInvoiceTwo: string[] = [
+  displayedInvoiceTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -65,7 +65,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
     'Off Exp date /time'
   ];
   //launchBidPopup Funding Popup
-  launchBidPopup: string[] = [
+  launchBidPopup: Array<string> = [
     'Funding CCY',
     'Base CCY Amount',
     'Fundable percentage',
@@ -74,7 +74,7 @@ export class InvoiceDetailsExpiredComponent implements OnInit {
   ]
   launchBid_Popup: any
   launchBidTableTwo_Popup: any
-  launchBidTableTwoPopup: string[] = [
+  launchBidTableTwoPopup: Array<string> = [
     'Inv Discount Rate',
     'Disc Amt (Base CCY)',
     'Net Amt payable (Base CCY)',

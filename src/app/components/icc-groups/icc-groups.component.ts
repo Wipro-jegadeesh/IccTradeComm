@@ -15,30 +15,30 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class IccGroupsComponent implements OnInit {
   groupsForm: FormGroup;
-  displayedColumns: string[] = ['groupCode', 'groupName', 'groupDescription', 'action'];
+  displayedColumns: Array<string> = ['groupCode', 'groupName', 'groupDescription', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean
   groupId: any
   @ViewChild('formDirective') private formDirective: NgForm;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = ['TopBar',
+  displayedColumnsload: Array<string> = ['TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
     'groupCode': String, 'groupName': String, 'groupDescription': String,
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

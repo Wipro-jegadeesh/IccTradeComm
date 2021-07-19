@@ -43,14 +43,14 @@ const BIDDING_DATA: biddingDetails[] = [];
   styleUrls: ['./icc-finance-master.component.scss']
 })
 export class IccFinanceMasterComponent implements OnInit {
-  displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'baseCcyNetAmtPayable', 'smeId', 'action'];
+  displayedColumns: Array<string> = ['invoiceRef', 'invoiceNo', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'baseCcyNetAmtPayable', 'smeId', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   dataSourceOne = new MatTableDataSource(GOODS_DATA); //data
   dataSourceTwo = new MatTableDataSource(INVOICE_DATA); //data
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  displayedColumnsTwo: Array<string> = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
   dataSourceThree = new MatTableDataSource(BIDDING_DATA); //data
-  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
+  displayedColumnsThree: Array<string> = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
   mobileScreen = false;
   currentPage = 0;
   pageCount = 1;
@@ -72,13 +72,13 @@ export class IccFinanceMasterComponent implements OnInit {
     }
   }
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -88,12 +88,12 @@ export class IccFinanceMasterComponent implements OnInit {
     'invoiceDate': String,
     'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

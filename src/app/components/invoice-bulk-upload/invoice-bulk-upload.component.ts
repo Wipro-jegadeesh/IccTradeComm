@@ -35,7 +35,7 @@ const INVOICE_ARRAY: invoiceData[] = [];
 export class InvoiceBulkUploadComponent implements OnInit {
   tooltipPosition = "below";
   fundingTooltip = FUNDINGREQUESTCONSTANTS;
-  displayedColumns: string[] = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
+  displayedColumns: Array<string> = ['select', 'InvoiceRefNo', 'DateTime', 'DateOfInvoice', 'Seller', 'buyerName', 'InvoiceAmount', 'Ccy', 'Score', 'Status'];
   selection = new SelectionModel(true, []);
   dataSource = new MatTableDataSource(INVOICE_ARRAY);
   fileNames
@@ -54,7 +54,7 @@ export class InvoiceBulkUploadComponent implements OnInit {
   moment: any = moment;
   disableSelect = new FormControl(false);
   dataSourceTwo = new MatTableDataSource(); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'ID',
     'DescGoods',
     'Quantity',

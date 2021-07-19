@@ -17,32 +17,32 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class IccRolesComponent implements OnInit {
   groupsForm: FormGroup;
-  displayedColumns: string[] = ['code', 'roleDescription', 'action'];
+  displayedColumns: Array<string> = ['code', 'roleDescription', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean
   roleId: any
   @ViewChild('formDirective') private formDirective: NgForm;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
     'codes': String,
     'roleDescription': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

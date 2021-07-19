@@ -29,10 +29,10 @@ const ELEMENT_DATA: any[] = [
 ];
 
 interface ICity {
-  // item_id: number;
+  // item_id;
   // item_text: string;
 
-  id: number;
+  id;
   itemName: string;
 }
 @Component({
@@ -50,13 +50,13 @@ export class FinancierOnboardingListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -67,12 +67,12 @@ export class FinancierOnboardingListComponent implements OnInit {
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
@@ -100,9 +100,9 @@ export class FinancierOnboardingListComponent implements OnInit {
   dataSource1 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource2 = new MatTableDataSource(ELEMENT_DATA); //data
   dataSource3 = new MatTableDataSource(ELEMENT_DATA); //data
-  displayedColumns1: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
-  displayedColumns: string[] = ['Name', 'Position',  'TelephoneNo', 'Email']; //'Address',
-  displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber'];
+  displayedColumns1: Array<string> = ['financierId', 'financierName', 'regNumber', 'action'];
+  displayedColumns: Array<string> = ['Name', 'Position',  'TelephoneNo', 'Email']; //'Address',
+  displayedColumnsUser: Array<string> = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber'];
 
   name = "Angular";
   cities: Array<ICity> = [];

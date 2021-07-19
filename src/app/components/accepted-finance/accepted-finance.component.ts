@@ -18,21 +18,21 @@ import { SmeFinancierForBiddingServices } from '../sme-financefor-bidding/sme-fi
 })
 export class AcceptedFinanceComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];//Accept Finance Table
+  displayedColumns: Array<string> = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];//Accept Finance Table
   dataSource = new MatTableDataSource();//Accept Fianace Table
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   modalRef: BsModalRef;
   moment: any = moment;
-  displayedColumnsload: string[] = ['TopBar',]
-  displayedColumnsearch: string[] = ['Search',]
-  displayedColumnFilter: string[] = ['Filter',]
-  value: number = 0;
-  highValue: number = 50;
+  displayedColumnsload: Array<string> = ['TopBar',]
+  displayedColumnsearch: Array<string> = ['Search',]
+  displayedColumnFilter: Array<string> = ['Filter',]
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

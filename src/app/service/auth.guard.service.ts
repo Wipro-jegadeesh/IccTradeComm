@@ -92,7 +92,8 @@ export class AuthConfigService {
               // this.oauthService.tryLogin().then((arg) => {
               //   console.log("this.oauthService.tryLogin()",arg)
               // });
-              this.oauthService.refreshToken();
+              // this.oauthService.refreshToken();
+             window.location.reload();
             }
             if (e instanceof OAuthErrorEvent) {
               console.error(event, "error");

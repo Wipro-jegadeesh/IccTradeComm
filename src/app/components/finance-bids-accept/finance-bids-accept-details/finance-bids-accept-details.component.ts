@@ -44,8 +44,8 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   modalRef: BsModalRef;
   detailsTooltip = INVOICEDETAILSCONSTANTS
   dataSourceOne = new MatTableDataSource(); //data
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  displayedColumnsOne1: string[] = [
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne1: Array<string> = [
     'SNo',
     'DescGoods',
     'IdNo',
@@ -59,7 +59,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'Total'
   ];
   dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -68,7 +68,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  displayedInvoiceTwo: string[] = [
+  displayedInvoiceTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -80,7 +80,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
-  launchBidPopup: string[] = [
+  launchBidPopup: Array<string> = [
     'Funding CCY',
     'Base CCY Amount',
     'Fundable percentage',
@@ -89,7 +89,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
   ]
   launchBid_Popup: any
   launchBidTableTwo_Popup: any
-  launchBidTableTwoPopup: string[] = [
+  launchBidTableTwoPopup: Array<string> = [
     'Inv Discount Rate',
     'Disc Amt (Base CCY)',
     'Net Amt payable (Base CCY)',
@@ -98,7 +98,7 @@ export class FinanceBiddingAcceptsDetailsComponent implements OnInit {
     'Off Exp date /time'
   ]
 
-  displayedInvoiceFormsColumns: string[] = [
+  displayedInvoiceFormsColumns: Array<string> = [
     'billNo',
     'invId',
     'invDate',

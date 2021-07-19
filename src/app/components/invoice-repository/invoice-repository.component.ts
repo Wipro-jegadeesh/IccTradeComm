@@ -38,7 +38,7 @@ export class InvoiceRepositoryComponent implements OnInit {
   };
 
   dataSourceTwo = new MatTableDataSource(); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'goodsId',
     'DescGoods',
     'Quantity',
@@ -56,7 +56,7 @@ export class InvoiceRepositoryComponent implements OnInit {
   dataSource
   tooltipPosition = "below";
   modalRef: BsModalRef;
-  displayedColumns: string[] = ['DocumentNumber', 'RUC', 'AuthorizationDate', 'InvoiceDate', 'IdentificatioNumberBuyer', 'PDF'];
+  displayedColumns: Array<string> = ['DocumentNumber', 'RUC', 'AuthorizationDate', 'InvoiceDate', 'IdentificatioNumberBuyer', 'PDF'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   userDeatils: any;
   isDisabled: boolean;

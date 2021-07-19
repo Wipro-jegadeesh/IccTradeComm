@@ -16,8 +16,8 @@ export class IccDashboardComponent implements OnInit {
   pageCount = 1;
   limit = 7;
   isOpen = "active";
-  displayedColumns: string[] = ['financierId', 'financierName', 'regNumber', 'action'];
-  displayedSMEColumns: string[] = ['smeprofileID', 'registrationNumber', 'companyId', 'action'];
+  displayedColumns: Array<string> = ['financierId', 'financierName', 'regNumber', 'action'];
+  displayedSMEColumns: Array<string> = ['smeprofileID', 'registrationNumber', 'companyId', 'action'];
   dataSource;
   dataSMESource;
   @ViewChild("accountList", { read: ElementRef })
@@ -25,7 +25,7 @@ export class IccDashboardComponent implements OnInit {
   fundingRequestObj;
   OfferAcceptanceObj;
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener("window:resize", [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

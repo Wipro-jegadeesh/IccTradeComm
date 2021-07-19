@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class QuestionaireScoreComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['scoreName', 'score', 'information'];
+  displayedColumns: Array<string> = ['scoreName', 'score', 'information'];
   dataSource: any;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean

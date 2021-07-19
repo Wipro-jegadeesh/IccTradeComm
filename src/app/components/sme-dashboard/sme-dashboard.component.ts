@@ -28,8 +28,8 @@ export class SmeDashboardComponent implements OnInit {
   public accountList: ElementRef<any>;
   dataSource;
   dataSourcetwo;
-  displayedColumnstwo: string[] = ['INVOICE_SIZE', 'NUMBER', 'AMOUNT'];
-  displayedColumns: string[] = ['PERIOD', 'NUMBER', 'AMOUNT'];
+  displayedColumnstwo: Array<string> = ['INVOICE_SIZE', 'NUMBER', 'AMOUNT'];
+  displayedColumns: Array<string> = ['PERIOD', 'NUMBER', 'AMOUNT'];
   dashboardTooltips = DASHBOARDCONSTANTS;
   commonTooltips = COMMONCONSTANTS;
   getSumOfOpenFinBidding;

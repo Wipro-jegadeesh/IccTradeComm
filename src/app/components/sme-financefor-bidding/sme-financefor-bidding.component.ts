@@ -36,14 +36,14 @@ const INVOICE_DATA: invoiceDetails[] = [];
 
 export class SmeFinanceforBiddingComponent implements OnInit {
 
-  financeReqHeaders: string[] = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  financeReqHeaders: Array<string> = ['invoiceRef', 'invoiceNo', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
   financeRequestDatas;
-  goodsTableHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsTableHeaders: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   goodsDetailDatas = new MatTableDataSource(GOODS_DATA); //data
   invoiceDetailDatas = new MatTableDataSource(INVOICE_DATA); //data
-  invoiceTableHeaders: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  invoiceTableHeaders: Array<string> = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
   dataSourceThree; //data
-  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
+  displayedColumnsThree: Array<string> = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
   mobileScreen = false;
   modalRef: BsModalRef;
   bidpanelOpenState = false;
@@ -58,13 +58,13 @@ export class SmeFinanceforBiddingComponent implements OnInit {
   // public accountList: ElementRef<any>;
 
 
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -76,12 +76,12 @@ export class SmeFinanceforBiddingComponent implements OnInit {
 
   }
   searchForm: FormGroup;
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType) => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
