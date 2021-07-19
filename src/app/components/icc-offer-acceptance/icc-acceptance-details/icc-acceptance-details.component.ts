@@ -95,15 +95,15 @@ export class ICCacceptancedetailsComponent implements OnInit {
   ];
   AllFundingOpen: boolean;
   detailsTooltip=INVOICEDETAILSCONSTANTS
-  displayed2Columns: string[] = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
+  displayed2Columns: Array<string> = ['refNo', 'invoiceId', 'invoiceAmt','invDate','invDueDate', 'buyer', 'financiercount','action'];
   financierTooltip=SMEDASHBOARDCONSTANTS;
   data2Source: MatTableDataSource<unknown>;
   constructor(public translate: TranslateService,private IccOfferAcceptServices:IccOfferAcceptServices,private datePipe: DatePipe,private activatedRoute: ActivatedRoute,private modalService: BsModalService,private authenticationService:AuthenticationService,private router :Router,
     private modalDialogService:ModalDialogService,private fb: FormBuilder,private invoiceRequestServices:InvoiceRequestServices,private toastr: ToastrService,private SmeFinancierForBiddingServices: SmeFinancierForBiddingServices) { }
 
   dataSourceOne = new MatTableDataSource(DATA_ONE); //data
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
-  displayedColumnsOne1: string[] = [
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate','amt','rate','total'];
+  displayedColumnsOne1: Array<string> = [
     'SNo',
     'DescGoods',
     'IdNo',
@@ -117,7 +117,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
     'Total'
   ];
   dataSourceTwo = new MatTableDataSource(DATA_TWO); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -126,7 +126,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  displayedInvoiceTwo: string[] = [
+  displayedInvoiceTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -138,7 +138,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
     'Offer Exp period',
     'Off Exp date /time'
   ];
-  launchBidPopup :string[] = [
+  launchBidPopup :Array<string> = [
     'Funding CCY',
     'Base CCY Amount',
     'Fundable percentage',
@@ -147,7 +147,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
   ]
   launchBid_Popup:any
   launchBidTableTwo_Popup:any
-  launchBidTableTwoPopup :string[] = [
+  launchBidTableTwoPopup :Array<string> = [
     'Inv Discount Rate',
     'Disc Amt (Base CCY)',
     'Net Amt payable (Base CCY)',
@@ -157,7 +157,7 @@ export class ICCacceptancedetailsComponent implements OnInit {
   ]
   displayInvDatas = new MatTableDataSource(displayInvDatas); //data
 
-  displayedInvoiceFormsColumns: string[] = [
+  displayedInvoiceFormsColumns: Array<string> = [
     // 'invRefNumber',
     // 'invId',
     // 'invDate',

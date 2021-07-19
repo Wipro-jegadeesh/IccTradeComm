@@ -17,7 +17,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface financeForBiddingData {
   invoiceRef: String;
-  invoiceAmt: Number;
+  invoiceAmt;
   smeId: String;
   buyerName: String;
   invoiceDate: String;
@@ -33,16 +33,16 @@ const ELEMENT_DATA: financeForBiddingData[] = [];
 })
 export class FinancierFundedComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef', 'invoiceAmt', 'smeId', 'buyerName', 'invoiceDate', 'invDueDate', 'status', 'action'];
+  displayedColumns: Array<string> = ['invoiceRef', 'invoiceAmt', 'smeId', 'buyerName', 'invoiceDate', 'invDueDate', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -53,12 +53,12 @@ export class FinancierFundedComponent implements OnInit {
     'invDueDate': String,
 
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

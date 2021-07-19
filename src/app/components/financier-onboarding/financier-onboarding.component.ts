@@ -27,12 +27,12 @@ const ELEMENT_DATA: any[] = [
 
 
 interface ICity {
-  id: number;
+  id;
   itemName: string;
 }
 
 interface IRegion {
-  id : number;
+  id ;
   itemName : string
 }
 @Component({
@@ -92,12 +92,12 @@ export class FinancierOnboardingComponent implements OnInit {
   
 
   // , 'Address'
-  displayedColumns: string[] = ['uniqueId','name','Position', 'TelephoneNo', 'Email'];
-  displayedColumnsUser: string[] = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
+  displayedColumns: Array<string> = ['uniqueId','name','Position', 'TelephoneNo', 'Email'];
+  displayedColumnsUser: Array<string> = ['userId','firstName', 'lastName', 'emailId', 'phoneNumber', 'action'];
 
 
-  feesColumns: string[] = ['feeText','standardPrice','discountPrice', 'totalFees'];
-  transaction_feesColumns : string[] = ['productSelection','flat','min','max']
+  feesColumns: Array<string> = ['feeText','standardPrice','discountPrice', 'totalFees'];
+  transaction_feesColumns : Array<string> = ['productSelection','flat','min','max']
 
   name = "Angular";
   cities: Array<ICity> = [];

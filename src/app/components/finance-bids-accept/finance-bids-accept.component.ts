@@ -21,7 +21,7 @@ import { SmeBiddingServices } from '../sme-bidding/sme-bidding-services';
 export class FinanceBiddingAcceptsComponent implements OnInit {
 
   dataSource ;//data
-  displayedColumns: string[] = [
+  displayedColumns: Array<string> = [
     'invoiceRef',
     'invoiceNo',
     'id',
@@ -30,13 +30,13 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
     'offerExpDateTime',
     'action'
   ];
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   datafinancier: any;
@@ -54,12 +54,12 @@ export class FinanceBiddingAcceptsComponent implements OnInit {
   //   'invoiceAmt': Number,
   //   'smeId': String
   // }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

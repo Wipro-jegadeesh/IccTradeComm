@@ -30,10 +30,10 @@ export class IccFundingRequestComponent implements OnInit {
       this.mobileScreen = false;
     }
   }
-  displayedColumns: string[] = ['invoiceRef', 'invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
-  displayedColumnsThree: string[] = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
+  displayedColumns: Array<string> = ['invoiceRef', 'invId', 'invAmt', 'smeId', 'buyerName', 'invDate', 'invDueDate', 'status', 'action'];
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsTwo: Array<string> = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  displayedColumnsThree: Array<string> = ['financeOfferAmt', 'ccy', 'fxRate', 'margin', 'netAmtDisc', 'discAmt', 'discRate', 'offerExpPeriod'];
   dataSource;
   dataSourceOne;
   dataSourceTwo;
@@ -52,20 +52,20 @@ export class IccFundingRequestComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
   isHover: boolean = false;
-  displayedColumnsload: string[] = ['TopBar']
-  displayedColumnsearch: string[] = ['Search']
-  displayedColumnFilter: string[] = ['Filter']
+  displayedColumnsload: Array<string> = ['TopBar']
+  displayedColumnsearch: Array<string> = ['Search']
+  displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
     'invoiceRef': String,
     'invoiceDate': String,
     'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -21,7 +21,7 @@ export class FinanceBiddingRejectedComponent implements OnInit {
     private modalService: BsModalService, private FinanceBiddingRejectedServices: FinanceBiddingRejectedServices) { }
 
   dataSource;//Table showing For Bidding 
-  displayedColumns: string[] = [
+  displayedColumns: Array<string> = [
     'BIDID',
     'Invoice Amount',
     'BIDing Amount',
@@ -43,22 +43,22 @@ export class FinanceBiddingRejectedComponent implements OnInit {
   modalRef: BsModalRef;
   isHover: boolean = false;
   Rejectform: FormGroup;
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   Searchform: FormGroup;
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -46,7 +46,7 @@ const BIDDING_DATA: biddingDetails[] = [];
   styleUrls: ['./icc-list-smes.component.scss']
 })
 export class IccListSmesComponent implements OnInit {
-  displayedColumns: string[] = ['smeprofileID', 'registrationNumber', 'companyId', 'cmpName', 'smeRating', 'status', 'action'];
+  displayedColumns: Array<string> = ['smeprofileID', 'registrationNumber', 'companyId', 'cmpName', 'smeRating', 'status', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   isOpen = ""
   mobileScreen = false;
@@ -62,9 +62,9 @@ export class IccListSmesComponent implements OnInit {
   biddingTooltip = BIDDINGCONSTANTS;
   moment: any = moment;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumnsload: string[] = ['TopBar']
-  displayedColumnsearch: string[] = ['Search']
-  displayedColumnFilter: string[] = ['Filter']
+  displayedColumnsload: Array<string> = ['TopBar']
+  displayedColumnsearch: Array<string> = ['Search']
+  displayedColumnFilter: Array<string> = ['Filter']
   SearchModel = {
     'smeprofileId': String,
     'registrationNumber': String,
@@ -73,12 +73,12 @@ export class IccListSmesComponent implements OnInit {
     'smeRating': String,
     'status': String,
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

@@ -39,8 +39,8 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
   TextAreaDiv: boolean;
   FinancebiddingDetailsRemarks: any;
   dataSourceOne = new MatTableDataSource(); //Good Details
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
-  displayedColumnsOne1: string[] = [
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne1: Array<string> = [
     'SNo',
     'DescGoods',
     'IdNo',
@@ -54,7 +54,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
     'Total'
   ];
   dataSourceTwo = new MatTableDataSource(DATA_TWO); //Bidding Details 
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -63,7 +63,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
     'Funding Amount / Repay Amount (Inv CCY)',
     'Repayment Date'
   ];
-  displayedInvoiceTwo: string[] = [
+  displayedInvoiceTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -76,7 +76,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
     'Off Exp date /time'
   ];
   //LaunchPopup Table
-  launchBidPopup: string[] = [
+  launchBidPopup: Array<string> = [
     'Funding CCY',
     'Base CCY Amount',
     'Fundable percentage',
@@ -85,7 +85,7 @@ export class InvoiceDetailsRejectedComponent implements OnInit {
   ]
   launchBid_Popup: any
   launchBidTableTwo_Popup: any
-  launchBidTableTwoPopup: string[] = [
+  launchBidTableTwoPopup: Array<string> = [
     'Inv Discount Rate',
     'Disc Amt (Base CCY)',
     'Net Amt payable (Base CCY)',

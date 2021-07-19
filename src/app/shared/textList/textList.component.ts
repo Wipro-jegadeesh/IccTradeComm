@@ -17,7 +17,7 @@ export class TextListComponent implements OnInit {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   respValue=new FormControl
-  listData: string[] = [];
+  listData: Array<string> = [];
 
   @Input() questionDatas
   @Output("formChange") change: EventEmitter<any> = new EventEmitter();

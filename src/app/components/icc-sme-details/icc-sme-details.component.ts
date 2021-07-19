@@ -34,15 +34,15 @@ export class IccSmeDetailsComponent implements OnInit {
   isOpen = "active";
   filterDivOpen: boolean;
   searchDivOpen: boolean;
-  displayedColumns: string[] = ['scoreName', 'score', 'information'];
-  displayedColumns1: string[] = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
+  displayedColumns: Array<string> = ['scoreName', 'score', 'information'];
+  displayedColumns1: Array<string> = ['userId','firstName', 'lastName', 'companyName', 'emailId', 'phoneNumber', 'action'];
   dataSource = [];
   @ViewChild("accountList", { read: ElementRef })
   public accountList: ElementRef<any>;
   fundingRequestObj;
   OfferAcceptanceObj;
   companyid: any;
-  @HostListener("window:resize", ["$event"])
+  @HostListener("window:resize", [])
   onResize() {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;

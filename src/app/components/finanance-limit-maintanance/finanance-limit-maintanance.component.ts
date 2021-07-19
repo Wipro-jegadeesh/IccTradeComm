@@ -37,32 +37,32 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   smeoverAllLimit;
   countryoverLimitval;
   countrysmeoverAllLimitVal;
-  totalExposure: number = 0;
-  countrytotalExposure: number = 0;
+  totalExposure = 0;
+  countrytotalExposure = 0;
   isOpen = '';
   bidpanelOpenState
   moment: any = moment;
 
-  displayedColumns: string[] = ['Exposure', 'Modified', 'Available Exposure', 'Created'];
+  displayedColumns: Array<string> = ['Exposure', 'Modified', 'Available Exposure', 'Created'];
   dataSource: any;
 
 
   dataSourceTwo = new MatTableDataSource(); //data
-  displayedColumnsTwo: string[] = [
+  displayedColumnsTwo: Array<string> = [
     'sme',
     'country',
     'utilizedAmt',
     'balAmt'
   ];
   dataSourceThree = new MatTableDataSource(); //data
-  displayedColumnsThree: string[] = [
+  displayedColumnsThree: Array<string> = [
     'country',
     'utzAmt',
     'avlAmt'
   ];
   //data source 4 start
   dataSourceFour = new MatTableDataSource();
-  displayedColumnsFour: string[] = [
+  displayedColumnsFour: Array<string> = [
     'smeId',
     'utilPercent',
     'exposureAmt',
@@ -148,7 +148,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
 
   //over_all transaction limt start
   dataSourceOverAllTransactionLimit = new MatTableDataSource(); //data
-  displayedColumnsOverAllTransactionLimit: string[] = [
+  displayedColumnsOverAllTransactionLimit: Array<string> = [
     'invoice',
     'invoicedate',
     'invoiceamount',
@@ -163,7 +163,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //over_all transaction Limit end 
   //Sme Exposure main start
   dataSourceSmeExposureTable = new MatTableDataSource(); //data
-  displayedColumnsSmeExposureTable: string[] = [
+  displayedColumnsSmeExposureTable: Array<string> = [
     'smename',
     'LIMIT_PERCENT',
     'bidvalue'
@@ -171,7 +171,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //sme Exposure main end
   //sector Exposure main start
   dataSourceSectorExposureTable = new MatTableDataSource(); //data
-  displayedColumnsSectorExposureTable: string[] = [
+  displayedColumnsSectorExposureTable: Array<string> = [
     'invoice',
     'invoicedate',
     'invoiceamount',
@@ -188,7 +188,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //country Exposure start
   public countryTableDatas: any = []
   dataSourceCountryExposureTable = new MatTableDataSource(); //data
-  displayedColumnsCounrtyExposureTable: string[] = [
+  displayedColumnsCounrtyExposureTable: Array<string> = [
     'invoice',
     'invoicedate',
     'invoiceamount',
@@ -206,7 +206,7 @@ export class FinananceLimitMaintananceComponent implements OnInit {
   //Buyer Exposure start
   public buyerTableDatas: any = []
   dataSourcebuyerExposureTable = new MatTableDataSource(); //data
-  displayedColumnsbuyerExposureTable: string[] = [
+  displayedColumnsbuyerExposureTable: Array<string> = [
     'invoice',
     'invoicedate',
     'invoiceamount',

@@ -19,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class IccAuthorizMatrixComponent implements OnInit {
   groupsForm: FormGroup;
 
-  displayedColumns: string[] = ['slab', 'smefin', 'currency', 'fromAmt', 'toAmt', 'noofPersons', 'action'];
+  displayedColumns: Array<string> = ['slab', 'smefin', 'currency', 'fromAmt', 'toAmt', 'noofPersons', 'action'];
   dataSource;
   groupTooltip = StaicDataMaintenance;
   isEdit: boolean
@@ -29,13 +29,13 @@ export class IccAuthorizMatrixComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   SearchModel = {
@@ -53,12 +53,12 @@ export class IccAuthorizMatrixComponent implements OnInit {
     // 'invoiceDate': String,
     // 'invoiceDueDate': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;

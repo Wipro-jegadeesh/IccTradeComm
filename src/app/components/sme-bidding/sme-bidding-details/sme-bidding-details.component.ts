@@ -48,9 +48,9 @@ export class SmeBiddingDetailsComponent implements OnInit {
   invoiceListData = new MatTableDataSource(DATA_INV_DETAILS); //data
 
   // Goods table header
-  goodsTableHeaders: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  goodsTableHeaders: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   //Bid details table headers - 1
-  bidDetailsHeaderOne: string[] = [
+  bidDetailsHeaderOne: Array<string> = [
     'Funding CCY',
     'FX rate Base CCY',
     'Base CCY Amount',
@@ -61,7 +61,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Penal ROI'
   ];
   //Bid details table headers - 2
-  bidDetailsHeaderTwo: string[] = [
+  bidDetailsHeaderTwo: Array<string> = [
     'Inv Discount  Rate',
     'Disc Amt (Base CCY)',
     'Disc Amt (Inv CCY)',
@@ -73,7 +73,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
     'Off Exp date /time'
   ];
   //main bid table header
-  bidTableHeaders: string[] = [
+  bidTableHeaders: Array<string> = [
     // 'Funding CCY',
     'Bid ID',
     'Financier Name',
@@ -95,7 +95,7 @@ export class SmeBiddingDetailsComponent implements OnInit {
     // 'Status'
   ];
   //Invoice detail table header
-  invoiceTableHeader: string[] = [
+  invoiceTableHeader: Array<string> = [
     'InvoiceID',
     'InvoiceDate',
     'smeId',

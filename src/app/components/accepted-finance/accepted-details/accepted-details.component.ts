@@ -12,19 +12,19 @@ import * as moment from 'moment';
 export class AcceptedDetailsComponent implements OnInit {
 
   //Goods Details
-  displayedColumnsOne: string[] = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
+  displayedColumnsOne: Array<string> = ['descGoods', 'quantity', 'taxRate', 'amt', 'rate', 'total'];
   //Invoice Details
-  displayedColumnsTwo: string[] = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
+  displayedColumnsTwo: Array<string> = ['invId', 'invDate', 'buyerName', 'invAmt', 'status'];
   //Finance Details
-  displayedColumnsThree: string[] = ['id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate', 'baseCcyNetAmtPayable', 'annualYeild'];
+  displayedColumnsThree: Array<string> = ['id', 'finId', 'invoiceId', 'fxRate', 'baseCcyAmt', 'fundablePercent', 'baseCcyFundingAmt', 'repaymentDate', 'baseCcyNetAmtPayable', 'annualYeild'];
   //Interest Details
-  displayedColumnsFour: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate', 'RepaymentAmount'];
+  displayedColumnsFour: Array<string> = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate', 'RepaymentAmount'];
   //Amortization Details
-  displayedColumnsFive: string[] = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate'];
+  displayedColumnsFive: Array<string> = ['FromDate', 'ToDate', 'NoDays', 'FinanceCurrency', 'TotalAmount', 'ActualRate', 'InterestAmount', 'RepaymentDate'];
   //Amortization Details On Daily Basis
-  displayedColumnsSix: string[] = ['Day', 'Date', 'InterestCurrency', 'InterestDay', 'InterestDate'];
+  displayedColumnsSix: Array<string> = ['Day', 'Date', 'InterestCurrency', 'InterestDay', 'InterestDate'];
   //Payment Details
-  displayedColumnsSeven: string[] = ['Payment Id', 'Payment Type', 'Payment Date', 'Payment Amount', 'Ben Name', 'Ben Account', 'Ben IFSC', 'Net Amount'];
+  displayedColumnsSeven: Array<string> = ['Payment Id', 'Payment Type', 'Payment Date', 'Payment Amount', 'Ben Name', 'Ben Account', 'Ben IFSC', 'Net Amount'];
 
   dataSourceOne = new MatTableDataSource(); //Goods Details
   dataSourceTwo = new MatTableDataSource(); //Invoice Details

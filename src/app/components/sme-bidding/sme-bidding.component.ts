@@ -19,7 +19,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 export class SmeBiddingComponent implements OnInit {
 
-  displayedColumns: string[] = ['invoiceRef', 'invoiceId', 'invoiceAmt', 'invDate',
+  displayedColumns: Array<string> = ['invoiceRef', 'invoiceId', 'invoiceAmt', 'invDate',
     'invDueDate', 'buyer', 'financiercount', 'action'];
   smeBiddingList;
   isOpen = ""
@@ -51,18 +51,18 @@ export class SmeBiddingComponent implements OnInit {
   constructor(public router: Router, private fb: FormBuilder, private smeBiddingServices: SmeBiddingServices) { }
   invoiceId: string;
   buyerName: string;
-  amount: Number;
+  amount;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   //filter options &  variables
-  displayedColumnsload: string[] = [
+  displayedColumnsload: Array<string> = [
     'TopBar',
   ]
-  displayedColumnsearch: string[] = [
+  displayedColumnsearch: Array<string> = [
     'Search',
   ]
-  displayedColumnFilter: string[] = [
+  displayedColumnFilter: Array<string> = [
     'Filter',
   ]
   searchModel = {
@@ -72,12 +72,12 @@ export class SmeBiddingComponent implements OnInit {
     'invoiceDueDate': String,
     'buyerName': String
   }
-  value: number = 0;
-  highValue: number = 50;
+  value = 0;
+  highValue = 50;
   options: Options = {
     floor: 0,
     ceil: 5000,
-    translate: (value: number, label: LabelType): string => {
+    translate: (value, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
           return "<b>Min</b> $" + value;
