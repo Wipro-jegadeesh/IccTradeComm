@@ -258,7 +258,12 @@ button+button {
 mat-form-field {
     align-self: stretch;
     margin-bottom: $uxg-spacing-2;
-    width: 400px;
+    width: 313px;
+}
+.formfeild{
+    .mat-form-field {
+    width: 150px;
+}
 }
 
 .uxg-toolbar.mat-toolbar.mat-toolbar-single-row {
