@@ -5,70 +5,80 @@
         <tbody>
           <tr>
             <td rowspan="1" colspan="1">
-           <label>
-           {{'Invoice Reference No' | translate}}
-           </label>
+           <label>{{'Invoice Reference No' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'Invoice Reference No' | translate}}</mat-label> -->
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invId : ''"  [disabled]="invoiceDetails && invoiceDetails.invId ? true : false"/>
               </mat-form-field>
             </td>
             <td rowspan="1" colspan="1">
-                     <label>
-           {{'SME Name' | translate}}
-           </label>
+                     <label>{{'SME Name' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'SME Name' | translate}}</mat-label> -->
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.smeName : ''" [disabled]="invoiceDetails && invoiceDetails.smeName ? true : false" />
               </mat-form-field>
             </td>
             <td rowspan="1" colspan="1">
-                     <label>
-           {{'Buyer Name' | translate}}
-           </label>
+                     <label>{{'Buyer Name' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'Buyer Name' | translate}}</mat-label> -->
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerName : ''" [disabled]="invoiceDetails && invoiceDetails.buyerName ? true : false" />
               </mat-form-field>
             </td>
-          </tr>
-          <tr>
-            <td rowspan="1" colspan="1">
-                     <label>
-{{'Buyer Unique Identifier' | translate}}           </label>
+                <td rowspan="1" colspan="1">
+                     <label>{{'Buyer Unique Identifier' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'Buyer Unique Identifier' | translate}}</mat-label> -->
                 <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.buyerUEN : ''" [disabled]="invoiceDetails && invoiceDetails.buyerUEN ? true : false" />
               </mat-form-field>
             </td>
-            <td rowspan="1" colspan="1">
-                     <label>
-           {{'SME Rating' | translate}}
-           </label>
+          </tr>
+ 
+
+          <tr>
+       
+             <td rowspan="1" colspan="1">
+                     <label>{{'Invoice Amount' | translate}}</label>
               <mat-form-field dense>
+                <!-- <mat-label>{{'Invoice Amount' | translate}}</mat-label> -->
+                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" [disabled]="invoiceDetails && invoiceDetails.invAmt ? true : false" />
+              </mat-form-field>
+            </td>
+            <td rowspan="1" colspan="1">
+            <tr>
+              <td>
+               <label>{{'SME Rating' | translate}}</label>
+              <div class="formfeild">
+                  <mat-form-field dense>
                 <!-- <mat-label>{{'SME Rating' | translate}}</mat-label> -->
                 <input type="text" matInput
                   [value]="smeRatingDetails && smeRatingDetails.SMERATING ? smeRatingDetails.SMERATING : '0'"
                   [disabled]="invoiceDetails && invoiceDetails.SMERATING ? true : false" />
-
               </mat-form-field>
-            </td>
-            <td rowspan="1" colspan="1">
-                     <label>
-           {{'Transaction Rating' | translate}}
-           </label>
+              </div>
+              </td>
+              
+                            <td>
+              <label>{{'Transaction Rating' | translate}}</label>
+                <div class="formfeild">
               <mat-form-field dense>
                 <!-- <mat-label>{{'Transaction Rating' | translate}}</mat-label> -->
                 <input type="text" matInput
                   [value]="invoiceDetails && invoiceDetails.buyerScore ? invoiceDetails.buyerScore : '0'" [disabled]="invoiceDetails && invoiceDetails.buyerScore ? true : false" />
               </mat-form-field>
+              </div>
+                            </td>
+
+
+            </tr>
+
+
+             
+         
             </td>
-          </tr>
-          <tr>
-            <td rowspan="1" colspan="1">
-                     <label>
-{{'Invoice Date' | translate}}
-</label>
+           
+   <td rowspan="1" colspan="1">
+                     <label>{{'Invoice Date' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'Invoice Date' | translate}} </mat-label> -->
                 <input type="text" matInput
@@ -77,9 +87,7 @@
               </mat-form-field>
             </td>
             <td rowspan="1" colspan="1">
-                     <label>
-           {{'Inv Due Date' | translate}}
-           </label>
+                     <label>{{'Inv Due Date' | translate}}</label>
               <mat-form-field dense>
                 <!-- <mat-label>{{'Inv Due Date' | translate}}</mat-label> -->
                 <input type="text" matInput
@@ -87,15 +95,7 @@
                   [disabled]="invoiceDetails && invoiceDetails.invDueDate ? true : false" />
               </mat-form-field>
             </td>
-            <td rowspan="1" colspan="1">
-                     <label>
-           {{'Invoice Amount' | translate}}
-           </label>
-              <mat-form-field dense>
-                <!-- <mat-label>{{'Invoice Amount' | translate}}</mat-label> -->
-                <input type="text" matInput [value]="invoiceDetails ? invoiceDetails.invAmt : ''" [disabled]="invoiceDetails && invoiceDetails.invAmt ? true : false" />
-              </mat-form-field>
-            </td>
+          
           </tr>
         </tbody>
       </table>
