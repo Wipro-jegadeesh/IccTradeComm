@@ -133,10 +133,11 @@ export class InvoiceDetailsComponent implements OnInit {
     if (window.innerWidth < 415) {
       this.mobileScreen = true;
     }
+            // this.invoiceDetails = { invId :'3456789'}
+
     this.buildform()
     this.invoiceRequestServices.getInvDetailsLists_ForFinanceBidding(this.id).subscribe(resp => {
       if (resp) {
-        this.invoiceDetails = resp
         this.getuserProfile();
         this.buildfinBidform()
         this.changeRowgrid()
